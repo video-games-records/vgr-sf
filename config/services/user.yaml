@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # User Domain Services
+    App\BoundedContext\User\:
+        resource: '../../src/BoundedContext/User/*'
+
+    pnu.event.authentication_success_listener:
+        class: App\BoundedContext\User\Infrastructure\Event\Listener\AuthenticationSuccessListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+

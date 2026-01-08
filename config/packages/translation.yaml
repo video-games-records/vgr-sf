@@ -2,4 +2,13 @@ framework:
     default_locale: en
     translator:
         default_path: '%kernel.project_dir%/translations'
+        paths:
+            - '%kernel.project_dir%/src/BoundedContext/User/Resources/translations'
+            #- '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/translations'
+            #- '%kernel.project_dir%/src/BoundedContext/Message/Presentation/Resources/translations'
+            #- '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/translations'
+            #- '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Proof/Presentation/Resources/translations'
+            #- '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Team/Presentation/Resources/translations'
+        fallbacks:
+            - en
         providers:

@@ -1,0 +1,36 @@
+# Read the documentation at https://github.com/thephpleague/flysystem-bundle/blob/master/docs/1-getting-started.md
+flysystem:
+    storages:
+        default.storage:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/var/storage/default'
+                permissions:
+                    file:
+                        public: 0o777
+                        private: 0o777
+                    dir:
+                        public: 0o777
+                        private: 0o777
+        s3.storage:
+            adapter: 'aws'
+            options:
+                client: 'Aws\S3\S3Client'
+                bucket: '%env(AWS_S3_STORAGE_BUCKET)%'
+                prefix: ''
+                streamReads: true
+        proof.s3.storage:
+            adapter: 'aws'
+            options:
+                client: 'Aws\S3\S3Client'
+                bucket: '%env(AWS_S3_BUCKET_PROOF)%'
+                prefix: ''
+                streamReads: true
+        app.storage:
+            adapter: 'lazy'
+            options:
+                source: '%env(APP_STORAGE)%'
+        proof.storage:
+            adapter: 'lazy'
+            options:
+                source: '%env(PROOF_STORAGE)%'

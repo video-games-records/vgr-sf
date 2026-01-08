@@ -1,0 +1,52 @@
+# translations/email.de.yaml
+email_change:
+  subject: 'E-Mail-Adresse geändert'
+  notification_old_email: |
+    Hallo %username%,
+    
+    Wir informieren Sie darüber, dass Ihre E-Mail-Adresse geändert wurde.
+    
+    Alte Adresse: %old_email%
+    Neue Adresse: %new_email%
+    
+    Falls Sie diese Änderung nicht beantragt haben, kontaktieren Sie bitte umgehend unseren Support.
+    
+    Mit freundlichen Grüßen,
+    Das Team
+  notification_new_email: |
+    Hallo %username%,
+    
+    Willkommen bei Ihrer neuen E-Mail-Adresse!
+    
+    Ihr Konto wurde mit dieser neuen E-Mail-Adresse aktualisiert.
+    
+    Alte Adresse: %old_email%
+    Neue Adresse: %new_email%
+    
+    Mit freundlichen Grüßen,
+    Das Team
+
+password_change:
+  subject: 'Passwort geändert'
+  notification: |
+    Hallo %username%,
+    
+    Wir informieren Sie darüber, dass das Passwort Ihres Kontos am %date% geändert wurde.
+    
+    Falls Sie diese Änderung nicht vorgenommen haben, kontaktieren Sie bitte umgehend unseren Support, da Ihr Konto möglicherweise kompromittiert ist.
+    
+    Aus Sicherheitsgründen empfehlen wir Ihnen, zu überprüfen, dass alle Ihre persönlichen Daten noch aktuell sind.
+    
+    Mit freundlichen Grüßen,
+    Das Team
+    
+
+password_reset:
+  subject: 'Passwort zurücksetzen'
+  message: |
+    Hallo %s!
+    
+    Um Ihr Passwort zurückzusetzen, besuchen Sie bitte %s
+    
+    Mit freundlichen Grüßen,
+    Das Team

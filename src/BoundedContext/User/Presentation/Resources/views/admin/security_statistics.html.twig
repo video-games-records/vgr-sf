@@ -1,0 +1,146 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+{% trans_default_domain 'PnUser' %}
+
+{% block title %}{{ 'statistics.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-shield-alt"></i>
+                        {{ 'statistics.title'|trans }} ({{ 'statistics.subtitle'|trans }})
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ admin.generateUrl('list') }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-list"></i> {{ 'statistics.back_to_list'|trans }}
+                        </a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                {% for stat in statistics %}
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="info-box bg-{{ stat.severity == 'success' ? 'green' : (stat.severity == 'warning' ? 'yellow' : (stat.severity == 'error' ? 'red' : 'blue')) }}">
+                                            <span class="info-box-icon">
+                                                <i class="fa {{ stat.icon }}"></i>
+                                            </span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{ stat.label }}</span>
+                                                <span class="info-box-number">{{ stat.count }}</span>
+                                                <span class="progress-description">
+                                                    {% if stat.count > 0 %}
+                                                        {{ 'statistics.events_recorded'|trans }}
+                                                    {% else %}
+                                                        {{ 'statistics.no_events'|trans }}
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">{{ 'statistics.weekly_trend'|trans }}</h4>
+                                </div>
+                                <div class="box-body">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>{{ 'statistics.week'|trans }}</th>
+                                                <th>{{ 'statistics.total'|trans }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for trend in trends %}
+                                                {% set total = 0 %}
+                                                {% for value in trend.data %}
+                                                    {% set total = total + value %}
+                                                {% endfor %}
+                                                <tr>
+                                                    <td>
+                                                        S{{ trend.week }}/{{ trend.year }}
+                                                        <br>
+                                                        <small class="text-muted">
+                                                            {{ trend.start_date|date('d/m') }} - {{ trend.end_date|date('d/m') }}
+                                                        </small>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-blue">{{ total }}</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-success">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">{{ 'statistics.detail_by_type'|trans }}</h4>
+                                </div>
+                                <div class="box-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ 'statistics.event_type'|trans }}</th>
+                                                    {% for trend in trends %}
+                                                        <th class="text-center">
+                                                            S{{ trend.week }}
+                                                            <br>
+                                                            <small>{{ trend.start_date|date('d/m') }}</small>
+                                                        </th>
+                                                    {% endfor %}
+                                                    <th class="text-center"><strong>{{ 'statistics.total'|trans }}</strong></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for eventTypeKey, eventTypeEnum in eventTypes %}
+                                                    <tr>
+                                                        <td>
+                                                            <i class="fa {{ eventTypeEnum.icon }} text-muted"></i>
+                                                            {{ eventTypeEnum.label }}
+                                                        </td>
+                                                        {% set totalForType = 0 %}
+                                                        {% for trend in trends %}
+                                                            {% set value = trend.data[eventTypeKey] ?? 0 %}
+                                                            {% set totalForType = totalForType + value %}
+                                                            <td class="text-center">
+                                                                {% if value > 0 %}
+                                                                    <span class="badge bg-{{ eventTypeEnum.severity == 'success' ? 'green' : (eventTypeEnum.severity == 'warning' ? 'yellow' : 'blue') }}">
+                                                                        {{ value }}
+                                                                    </span>
+                                                                {% else %}
+                                                                    <span class="text-muted">-</span>
+                                                                {% endif %}
+                                                            </td>
+                                                        {% endfor %}
+                                                        <td class="text-center">
+                                                            <strong>{{ totalForType }}</strong>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

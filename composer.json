@@ -4,14 +4,26 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
+        "ext-gd": "*",
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "api-platform/doctrine-orm": "*",
+        "api-platform/symfony": "*",
+        "aws/aws-sdk-php-symfony": "*",
         "doctrine/doctrine-bundle": "^3.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6",
+        "gedmo/doctrine-extensions": "*",
+        "gesdinet/jwt-refresh-token-bundle": "2.0.0-beta",
+        "league/flysystem-aws-s3-v3": "*",
+        "league/flysystem-bundle": "*",
+        "lexik/jwt-authentication-bundle": "*",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.3",
+        "sonata-project/admin-bundle": "*",
+        "sonata-project/doctrine-orm-admin-bundle": "*",
+        "sonata-project/translation-bundle": "*",
         "symfony/asset": "8.0.*",
         "symfony/asset-mapper": "8.0.*",
         "symfony/console": "8.0.*",
@@ -110,6 +122,7 @@
         "symfony/debug-bundle": "8.0.*",
         "symfony/maker-bundle": "^1.0",
         "symfony/stopwatch": "8.0.*",
-        "symfony/web-profiler-bundle": "8.0.*"
+        "symfony/web-profiler-bundle": "8.0.*",
+        "zenstruck/foundry": "^2.8"
     }
 }

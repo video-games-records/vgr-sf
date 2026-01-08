@@ -1,0 +1,210 @@
+security_event:
+    label: Eventi di sicurezza
+    list:
+        id: ID
+        user: Utente
+        event_type: Tipo di evento
+        ip_address: Indirizzo IP
+        date_time: Data/Ora
+    filter:
+        id: ID
+        user: Utente
+        event_type: Tipo di evento
+        ip_address: Indirizzo IP
+        user_agent: User agent
+        date_time: Data/Ora
+    show:
+        event_information: Informazioni sull'evento
+        user_information: Informazioni sull'utente
+        event_data: Dati dell'evento
+        ip_information: Informazioni sull'indirizzo IP
+        loading_ip_info: Caricamento informazioni IP...
+        ip_info_not_available: Informazioni IP non disponibili per indirizzi locali o sconosciuti
+        error_fetching_ip: Errore nel recupero delle informazioni IP
+        check_ip_reputation: Controlla reputazione IP
+        no_additional_data: Nessun dato aggiuntivo
+        event_data_title: Dati dell'evento
+        property: Proprietà
+        value: Valore
+
+security_event_type:
+    password_change: Password modificata
+    password_reset_request: Richiesta reimpostazione password
+    password_reset_complete: Reimpostazione password completata
+    email_change: Email modificata
+    email_verify: Email verificata
+    login_success: Accesso riuscito
+    login_failure: Accesso fallito
+    logout: Disconnessione
+    account_locked: Account bloccato
+    registration: Registrazione
+    account_activate: Account attivato
+    account_deactivate: Account disattivato
+    profile_update: Profilo aggiornato
+    admin_login: Accesso admin
+    role_change: Ruolo modificato
+    user_impersonate: Utente impersonato
+    suspicious_activity: Attività sospetta
+    brute_force_attempt: Tentativo di forza bruta
+    api_key_created: Chiave API creata
+    api_key_revoked: Chiave API revocata
+    two_factor_enabled: Autenticazione a due fattori abilitata
+    two_factor_disabled: Autenticazione a due fattori disabilitata
+
+breadcrumb:
+    link_security_event_list: 'Lista eventi di sicurezza'
+    link_user_list: 'Lista utenti'
+    link_group_list: 'Lista gruppi'
+
+show:
+    group_security_event_show_event_information: 'Informazioni sull''evento'
+    group_security_event_show_user_information: 'Informazioni sull''utente'
+    group_security_event_show_event_data: 'Dati dell''evento'
+    group_group_show_group: 'Gruppo'
+    group_user: 'Utente'
+    group_connexion: 'Connessione'
+
+change_password:
+    current_password_invalid: 'La password attuale non è valida'
+    success: 'Password modificata con successo'
+
+avatar_upload:
+    extension_not_allowed: 'I formati consentiti sono png e jpg'
+
+
+user:
+    label: Utente
+    list:
+        id: ID
+        username: Username
+        email: Email
+        groups: Gruppi
+        enabled: Attivo?
+    form:
+        id: ID
+        username: Username
+        email: Email
+        groups: Gruppi
+        enabled: Attivo?
+        comment: Commento
+    filter:
+        username: Username
+        email: Email
+        groups: Gruppi
+        enabled: Attivo?
+    show:
+        id: ID
+        username: Username
+        email: Email
+        groups: Gruppi
+        enabled: Attivo?
+        comment: Commento
+        language: Lingua
+        avatar: Avatar
+        nb_connexion: Numero di connessioni
+        extra_data: Dati Extra
+        last_login: Ultimo accesso
+        password: Password
+        confirmation_token: Token
+        password_requested_at: Password richiesta il
+
+group:
+    label: Gruppo
+    list:
+        id: ID
+        name: Nome
+        roles: Ruoli
+    form:
+        name: Nome
+        roles: Ruoli
+    filter:
+        name: Nome
+    show:
+        id: ID
+        name: Nome
+        roles: Ruoli
+
+user_ban:
+    label: Bannimenti
+    list:
+        id: ID
+        username: Utente
+        start_date: Data di inizio
+        end_date: Data di fine
+        reason: Motivo
+        active: Attivo
+        banned_by: Bannato da
+    form:
+        user: Utente
+        start_date: Data di inizio
+        end_date: Data di fine
+        end_date_help: Lasciare vuoto per un bannimento permanente
+        reason: Motivo del bannimento
+        active: Attivo
+    filter:
+        username: Utente
+        active: Attivo
+        start_date: Data di inizio
+        end_date: Data di fine
+        banned_by: Bannato da
+    show:
+        id: ID
+        username: Utente
+        email: Email
+        start_date: Data di inizio
+        end_date: Data di fine
+        reason: Motivo
+        active: Attivo
+        banned_by: Bannato da
+        created_at: Creato il
+        updated_at: Aggiornato il
+
+ban:
+    form:
+        user: Utente
+        start_date: Data di inizio
+        end_date: Data di fine
+        end_date_help: Lasciare vuoto per un bannimento permanente
+        reason: Motivo del bannimento
+        active: Attivo
+    filter:
+        username: Utente
+        active: Attivo
+        start_date: Data di inizio
+        end_date: Data di fine
+        banned_by: Bannato da
+    list:
+        id: ID
+        username: Utente
+        start_date: Data di inizio
+        end_date: Data di fine
+        reason: Motivo
+        active: Attivo
+        banned_by: Bannato da
+    show:
+        id: ID
+        username: Utente
+        email: Email
+        start_date: Data di inizio
+        end_date: Data di fine
+        reason: Motivo
+        active: Attivo
+        banned_by: Bannato da
+        created_at: Creato il
+        updated_at: Aggiornato il
+
+list:
+    label__action: 'Azione'
+
+statistics:
+    title: 'Statistiche di sicurezza'
+    subtitle: 'Settimana corrente + 4 settimane precedenti'
+    button: 'Statistiche di sicurezza'
+    weekly_trend: 'Tendenza settimanale'
+    detail_by_type: 'Dettaglio per tipo di evento e settimana'
+    week: 'Settimana'
+    total: 'Totale'
+    event_type: 'Tipo di evento'
+    events_recorded: 'eventi registrati'
+    no_events: 'nessun evento'
+    back_to_list: 'Torna alla lista'

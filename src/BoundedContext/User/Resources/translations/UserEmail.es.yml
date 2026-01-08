@@ -1,0 +1,52 @@
+# translations/email.es.yaml
+email_change:
+  subject: 'Cambio de dirección de correo electrónico'
+  notification_old_email: |
+    Hola %username%,
+    
+    Te informamos que tu dirección de correo electrónico ha sido cambiada.
+    
+    Dirección anterior: %old_email%
+    Nueva dirección: %new_email%
+    
+    Si no has solicitado este cambio, contacta inmediatamente a nuestro soporte.
+    
+    Atentamente,
+    El equipo
+  notification_new_email: |
+    Hola %username%,
+    
+    ¡Bienvenido a tu nueva dirección de correo electrónico!
+    
+    Tu cuenta ha sido actualizada con esta nueva dirección de correo.
+    
+    Dirección anterior: %old_email%
+    Nueva dirección: %new_email%
+    
+    Atentamente,
+    El equipo
+
+password_change:
+  subject: 'Cambio de contraseña'
+  notification: |
+    Hola %username%,
+    
+    Te informamos que la contraseña de tu cuenta ha sido modificada el %date%.
+    
+    Si no has realizado esta modificación, contacta inmediatamente a nuestro soporte ya que tu cuenta podría estar comprometida.
+    
+    Por medida de seguridad, te aconsejamos verificar que toda tu información personal esté actualizada.
+    
+    Atentamente,
+    El equipo
+    
+
+password_reset:
+  subject: 'Restablecimiento de tu contraseña'
+  message: |
+    ¡Hola %s!
+    
+    Para restablecer tu contraseña, visita %s
+    
+    Atentamente,
+    El equipo

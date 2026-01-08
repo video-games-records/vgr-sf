@@ -1,0 +1,52 @@
+# translations/email.it.yaml
+email_change:
+  subject: 'Modifica indirizzo email'
+  notification_old_email: |
+    Ciao %username%,
+    
+    Ti informiamo che il tuo indirizzo email è stato modificato.
+    
+    Vecchio indirizzo: %old_email%
+    Nuovo indirizzo: %new_email%
+    
+    Se non hai richiesto questa modifica, contatta immediatamente il nostro supporto.
+    
+    Cordiali saluti,
+    Il team
+  notification_new_email: |
+    Ciao %username%,
+    
+    Benvenuto nel tuo nuovo indirizzo email!
+    
+    Il tuo account è stato aggiornato con questo nuovo indirizzo email.
+    
+    Vecchio indirizzo: %old_email%
+    Nuovo indirizzo: %new_email%
+    
+    Cordiali saluti,
+    Il team
+
+password_change:
+  subject: 'Modifica password'
+  notification: |
+    Ciao %username%,
+    
+    Ti informiamo che la password del tuo account è stata modificata il %date%.
+    
+    Se non hai effettuato questa modifica, contatta immediatamente il nostro supporto in quanto il tuo account potrebbe essere compromesso.
+    
+    Per sicurezza, ti consigliamo di verificare che tutte le tue informazioni personali siano ancora aggiornate.
+    
+    Cordiali saluti,
+    Il team
+    
+
+password_reset:
+  subject: 'Reimpostazione della tua password'
+  message: |
+    Ciao %s!
+    
+    Per reimpostare la tua password, vai su %s
+    
+    Cordiali saluti,
+    Il team

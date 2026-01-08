@@ -1,0 +1,17 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+
+    {% if value %}
+        <div class="ban-reason">
+            {% if value|length > 50 %}
+                <span title="{{ value }}">{{ value|slice(0, 50) }}...</span>
+            {% else %}
+                {{ value }}
+            {% endif %}
+        </div>
+    {% else %}
+        <em class="text-muted">Aucune raison spécifiée</em>
+    {% endif %}
+
+{% endblock %}

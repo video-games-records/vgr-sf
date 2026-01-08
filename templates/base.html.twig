@@ -1,17 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Video Games Records{% endblock %}</title>
+
+        {# SEO Meta Tags #}
+        <meta name="description" content="{% block meta_description %}World Crash Rankings - The ultimate resource for Burnout 3: Takedown Crash Mode rankings, player statistics, zone records, and competitive leaderboards.{% endblock %}">
+        <meta name="keywords" content="{% block meta_keywords %}burnout 3, crash mode, rankings, leaderboards, world records{% endblock %}">
+        <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
+
+        {# Canonical URL #}
+        <link rel="canonical" href="{% block canonical_url %}{{ app.request.schemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo }}{% endblock %}">
+
+        {# Open Graph Meta Tags #}
+        <meta property="og:site_name" content="World Crash Rankings">
+        <meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}{{ block('meta_description') }}{% endblock %}">
+        <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+        <meta property="og:url" content="{% block og_url %}{{ block('canonical_url') }}{% endblock %}">
+        <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('img/banner.png')) }}{% endblock %}">
+
+        {# Twitter Card Meta Tags #}
+        <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+        <meta name="twitter:title" content="{% block twitter_title %}{{ block('og_title') }}{% endblock %}">
+        <meta name="twitter:description" content="{% block twitter_description %}{{ block('og_description') }}{% endblock %}">
+        <meta name="twitter:image" content="{% block twitter_image %}{{ block('og_image') }}{% endblock %}">
+
+        {# Sitemap and Performance #}
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ asset('sitemap.xml') }}">
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
+
+        {# Google Analytics - Production only #}
+        {% if app.environment == 'prod' %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '');
+            </script>
+        {% endif %}
+
         {% block stylesheets %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
 
         {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+
+        {# JSON-LD Structured Data #}
+        {% block structured_data %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {# Navigation #}
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path('home') }}">
+                    🎮 Video Games Records
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('home') }}">Home</a>
+                        </li>
+                        {% if app.user %}
+                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SONATA_ADMIN') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('sonata_admin_dashboard') }}">
+                                        <i class="bi bi-speedometer2"></i> Admin
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="user-badge">{{ app.user.username }}</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary text-white px-3" href="{{ path('app_login') }}">Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {# Main Content #}
+        <main class="container py-4">
+            {% block body %}{% endblock %}
+        </main>
+
+        {# Footer #}
+        <footer class="py-4 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; {{ 'now'|date('Y') }} Video Games Records. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="#" class="me-3">About</a>
+                        <a href="#" class="me-3">Contact</a>
+                        <a href="#" class="me-3">Terms</a>
+                        <a href="#">Privacy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>

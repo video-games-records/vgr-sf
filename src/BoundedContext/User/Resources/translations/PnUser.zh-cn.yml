@@ -1,0 +1,210 @@
+security_event:
+    label: 安全事件
+    list:
+        id: ID
+        user: 用户
+        event_type: 事件类型
+        ip_address: IP地址
+        date_time: 日期/时间
+    filter:
+        id: ID
+        user: 用户
+        event_type: 事件类型
+        ip_address: IP地址
+        user_agent: 用户代理
+        date_time: 日期/时间
+    show:
+        event_information: 事件信息
+        user_information: 用户信息
+        event_data: 事件数据
+        ip_information: IP地址信息
+        loading_ip_info: 正在加载IP信息...
+        ip_info_not_available: 本地或未知地址的IP信息不可用
+        error_fetching_ip: 获取IP信息时出错
+        check_ip_reputation: 检查IP声誉
+        no_additional_data: 无其他数据
+        event_data_title: 事件数据
+        property: 属性
+        value: 值
+
+security_event_type:
+    password_change: 密码已修改
+    password_reset_request: 密码重置请求
+    password_reset_complete: 密码重置完成
+    email_change: 邮箱已修改
+    email_verify: 邮箱已验证
+    login_success: 登录成功
+    login_failure: 登录失败
+    logout: 注销
+    account_locked: 账户已锁定
+    registration: 注册
+    account_activate: 账户已激活
+    account_deactivate: 账户已停用
+    profile_update: 个人资料已更新
+    admin_login: 管理员登录
+    role_change: 角色已更改
+    user_impersonate: 用户冒充
+    suspicious_activity: 可疑活动
+    brute_force_attempt: 暴力破解尝试
+    api_key_created: API密钥已创建
+    api_key_revoked: API密钥已撤销
+    two_factor_enabled: 已启用双因子认证
+    two_factor_disabled: 已禁用双因子认证
+
+breadcrumb:
+    link_security_event_list: '安全事件列表'
+    link_user_list: '用户列表'
+    link_group_list: '组列表'
+
+show:
+    group_security_event_show_event_information: '事件信息'
+    group_security_event_show_user_information: '用户信息'
+    group_security_event_show_event_data: '事件数据'
+    group_group_show_group: '组'
+    group_user: '用户'
+    group_connexion: '连接'
+
+change_password:
+    current_password_invalid: '当前密码无效'
+    success: '密码修改成功'
+
+avatar_upload:
+    extension_not_allowed: '允许的格式为png和jpg'
+
+
+user:
+    label: 用户
+    list:
+        id: ID
+        username: 用户名
+        email: 邮箱
+        groups: 组
+        enabled: 已启用？
+    form:
+        id: ID
+        username: 用户名
+        email: 邮箱
+        groups: 组
+        enabled: 已启用？
+        comment: 备注
+    filter:
+        username: 用户名
+        email: 邮箱
+        groups: 组
+        enabled: 已启用？
+    show:
+        id: ID
+        username: 用户名
+        email: 邮箱
+        groups: 组
+        enabled: 已启用？
+        comment: 备注
+        language: 语言
+        avatar: 头像
+        nb_connexion: 连接次数
+        extra_data: 额外数据
+        last_login: 最后登录
+        password: 密码
+        confirmation_token: 令牌
+        password_requested_at: 密码请求时间
+
+group:
+    label: 组
+    list:
+        id: ID
+        name: 名称
+        roles: 角色
+    form:
+        name: 名称
+        roles: 角色
+    filter:
+        name: 名称
+    show:
+        id: ID
+        name: 名称
+        roles: 角色
+
+user_ban:
+    label: 封禁
+    list:
+        id: ID
+        username: 用户
+        start_date: 开始日期
+        end_date: 结束日期
+        reason: 原因
+        active: 激活
+        banned_by: 封禁者
+    form:
+        user: 用户
+        start_date: 开始日期
+        end_date: 结束日期
+        end_date_help: 留空表示永久封禁
+        reason: 封禁原因
+        active: 激活
+    filter:
+        username: 用户
+        active: 激活
+        start_date: 开始日期
+        end_date: 结束日期
+        banned_by: 封禁者
+    show:
+        id: ID
+        username: 用户
+        email: 邮箱
+        start_date: 开始日期
+        end_date: 结束日期
+        reason: 原因
+        active: 激活
+        banned_by: 封禁者
+        created_at: 创建时间
+        updated_at: 更新时间
+
+ban:
+    form:
+        user: 用户
+        start_date: 开始日期
+        end_date: 结束日期
+        end_date_help: 留空表示永久封禁
+        reason: 封禁原因
+        active: 激活
+    filter:
+        username: 用户
+        active: 激活
+        start_date: 开始日期
+        end_date: 结束日期
+        banned_by: 封禁者
+    list:
+        id: ID
+        username: 用户
+        start_date: 开始日期
+        end_date: 结束日期
+        reason: 原因
+        active: 激活
+        banned_by: 封禁者
+    show:
+        id: ID
+        username: 用户
+        email: 邮箱
+        start_date: 开始日期
+        end_date: 结束日期
+        reason: 原因
+        active: 激活
+        banned_by: 封禁者
+        created_at: 创建时间
+        updated_at: 更新时间
+
+list:
+    label__action: '操作'
+
+statistics:
+    title: '安全统计'
+    subtitle: '当前周 + 过去4周'
+    button: '安全统计'
+    weekly_trend: '周趋势'
+    detail_by_type: '按事件类型和周的详细信息'
+    week: '周'
+    total: '总计'
+    event_type: '事件类型'
+    events_recorded: '已记录事件'
+    no_events: '无事件'
+    back_to_list: '返回列表'

@@ -1,0 +1,196 @@
+security_event:
+    label: Sicherheitsereignisse
+    list:
+        id: ID
+        user: Benutzer
+        event_type: Ereignistyp
+        ip_address: IP-Adresse
+        date_time: Datum/Zeit
+    filter:
+        id: ID
+        user: Benutzer
+        event_type: Ereignistyp
+        ip_address: IP-Adresse
+        user_agent: Benutzer-Agent
+        date_time: Datum/Zeit
+    show:
+        event_information: Ereignisinformationen
+        user_information: Benutzerinformationen
+        event_data: Ereignisdaten
+        ip_information: IP-Adressinformationen
+        loading_ip_info: Lade IP-Informationen...
+        ip_info_not_available: IP-Informationen nicht verfügbar für lokale oder unbekannte IPs
+        error_fetching_ip: Fehler beim Abrufen der IP-Informationen
+        check_ip_reputation: IP-Reputation prüfen
+        no_additional_data: Keine zusätzlichen Daten
+        event_data_title: Ereignisdaten
+        property: Eigenschaft
+        value: Wert
+
+security_event_type:
+    password_change: Passwort geändert
+    password_reset_request: Passwort-Reset angefordert
+    password_reset_complete: Passwort-Reset abgeschlossen
+    email_change: E-Mail geändert
+    email_verify: E-Mail verifiziert
+    login_success: Login erfolgreich
+    login_failure: Login fehlgeschlagen
+    logout: Abmelden
+    account_locked: Konto gesperrt
+    registration: Registrierung
+    account_activate: Konto aktiviert
+    account_deactivate: Konto deaktiviert
+    profile_update: Profil aktualisiert
+    admin_login: Admin-Login
+    role_change: Rolle geändert
+    user_impersonate: Benutzer imitiert
+    suspicious_activity: Verdächtige Aktivität
+    brute_force_attempt: Brute-Force-Versuch
+    api_key_created: API-Schlüssel erstellt
+    api_key_revoked: API-Schlüssel widerrufen
+    two_factor_enabled: Zwei-Faktor-Authentifizierung aktiviert
+    two_factor_disabled: Zwei-Faktor-Authentifizierung deaktiviert
+
+breadcrumb:
+    link_security_event_list: 'Sicherheitsereignis-Liste'
+    link_user_list: 'Benutzerliste'
+    link_group_list: 'Gruppenliste'
+
+show:
+    group_security_event_show_event_information: 'Ereignisinformationen'
+    group_security_event_show_user_information: 'Benutzerinformationen'
+    group_security_event_show_event_data: 'Ereignisdaten'
+    group_group_show_group: 'Gruppe'
+    group_user: 'Benutzer'
+    group_connexion: 'Verbindung'
+
+change_password:
+    current_password_invalid: 'Das aktuelle Passwort ist ungültig'
+    success: 'Passwort erfolgreich geändert'
+
+avatar_upload:
+    extension_not_allowed: 'Erlaubte Formate sind png und jpg'
+
+user:
+    label: Benutzer
+    list:
+        id: ID
+        username: Benutzername
+        email: E-Mail
+        groups: Gruppen
+        enabled: Aktiviert?
+    form:
+        id: ID
+        username: Benutzername
+        email: E-Mail
+        groups: Gruppen
+        enabled: Aktiviert?
+        comment: Kommentar
+    filter:
+        username: Benutzername
+        email: E-Mail
+        groups: Gruppen
+        enabled: Aktiviert?
+    show:
+        id: ID
+        username: Benutzername
+        email: E-Mail
+        groups: Gruppen
+        enabled: Aktiviert?
+        comment: Kommentar
+        language: Sprache
+        avatar: Avatar
+        nb_connexion: Anzahl Verbindungen
+        extra_data: Zusätzliche Daten
+        last_login: Letzte Anmeldung
+        password: Passwort
+        confirmation_token: Token
+        password_requested_at: Passwort angefordert am
+
+group:
+    label: Gruppe
+    list:
+        id: ID
+        name: Name
+        roles: Rollen
+    form:
+        name: Name
+        roles: Rollen
+    filter:
+        name: Name
+    show:
+        id: ID
+        name: Name
+        roles: Rollen
+
+user_ban:
+    label: Benutzersperren
+    list:
+        id: ID
+        username: Benutzer
+        start_date: Startdatum
+        end_date: Enddatum
+        reason: Grund
+        active: Aktiv
+        banned_by: Gesperrt von
+    form:
+        user: Benutzer
+        start_date: Startdatum
+        end_date: Enddatum
+        end_date_help: Für permanente Sperre leer lassen
+        reason: Sperrgrund
+        active: Aktiv
+    filter:
+        username: Benutzer
+        active: Aktiv
+        start_date: Startdatum
+        end_date: Enddatum
+        banned_by: Gesperrt von
+    show:
+        id: ID
+        username: Benutzer
+        email: E-Mail
+        start_date: Startdatum
+        end_date: Enddatum
+        reason: Grund
+        active: Aktiv
+        banned_by: Gesperrt von
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+
+ban:
+    form:
+        user: Benutzer
+        start_date: Startdatum
+        end_date: Enddatum
+        end_date_help: Für permanente Sperre leer lassen
+        reason: Sperrgrund
+        active: Aktiv
+    filter:
+        username: Benutzer
+        active: Aktiv
+        start_date: Startdatum
+        end_date: Enddatum
+        banned_by: Gesperrt von
+    list:
+        id: ID
+        username: Benutzer
+        start_date: Startdatum
+        end_date: Enddatum
+        reason: Grund
+        active: Aktiv
+        banned_by: Gesperrt von
+    show:
+        id: ID
+        username: Benutzer
+        email: E-Mail
+        start_date: Startdatum
+        end_date: Enddatum
+        reason: Grund
+        active: Aktiv
+        banned_by: Gesperrt von
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+
+list:
+    label__action: 'Aktion'

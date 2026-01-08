@@ -1,0 +1,52 @@
+# translations/email.pt-br.yaml
+email_change:
+  subject: 'Alteração de endereço de email'
+  notification_old_email: |
+    Olá %username%,
+    
+    Informamos que seu endereço de email foi alterado.
+    
+    Endereço anterior: %old_email%
+    Novo endereço: %new_email%
+    
+    Se você não solicitou esta alteração, entre em contato imediatamente com nosso suporte.
+    
+    Atenciosamente,
+    A equipe
+  notification_new_email: |
+    Olá %username%,
+    
+    Bem-vindo ao seu novo endereço de email!
+    
+    Sua conta foi atualizada com este novo endereço de email.
+    
+    Endereço anterior: %old_email%
+    Novo endereço: %new_email%
+    
+    Atenciosamente,
+    A equipe
+
+password_change:
+  subject: 'Alteração de senha'
+  notification: |
+    Olá %username%,
+    
+    Informamos que a senha da sua conta foi modificada em %date%.
+    
+    Se você não fez esta modificação, entre em contato imediatamente com nosso suporte, pois sua conta pode estar comprometida.
+    
+    Por medida de segurança, recomendamos que você verifique se todas as suas informações pessoais ainda estão atualizadas.
+    
+    Atenciosamente,
+    A equipe
+    
+
+password_reset:
+  subject: 'Redefinição da sua senha'
+  message: |
+    Olá %s!
+    
+    Para redefinir sua senha, acesse %s
+    
+    Atenciosamente,
+    A equipe

@@ -1,0 +1,196 @@
+security_event:
+    label: セキュリティイベント
+    list:
+        id: ID
+        user: ユーザー
+        event_type: イベントタイプ
+        ip_address: IPアドレス
+        date_time: 日付/時刻
+    filter:
+        id: ID
+        user: ユーザー
+        event_type: イベントタイプ
+        ip_address: IPアドレス
+        user_agent: ユーザーエージェント
+        date_time: 日付/時刻
+    show:
+        event_information: イベント情報
+        user_information: ユーザー情報
+        event_data: イベントデータ
+        ip_information: IPアドレス情報
+        loading_ip_info: IP情報を読み込み中...
+        ip_info_not_available: ローカルまたは不明なIPアドレスのIP情報は利用できません
+        error_fetching_ip: IP情報の取得エラー
+        check_ip_reputation: IP評価をチェック
+        no_additional_data: 追加データなし
+        event_data_title: イベントデータ
+        property: プロパティ
+        value: 値
+
+security_event_type:
+    password_change: パスワード変更
+    password_reset_request: パスワードリセット要求
+    password_reset_complete: パスワードリセット完了
+    email_change: メール変更
+    email_verify: メール認証
+    login_success: ログイン成功
+    login_failure: ログイン失敗
+    logout: ログアウト
+    account_locked: アカウントロック
+    registration: 登録
+    account_activate: アカウント有効化
+    account_deactivate: アカウント無効化
+    profile_update: プロフィール更新
+    admin_login: 管理者ログイン
+    role_change: ロール変更
+    user_impersonate: ユーザーなりすまし
+    suspicious_activity: 疑わしいアクティビティ
+    brute_force_attempt: ブルートフォース攻撃
+    api_key_created: APIキー作成
+    api_key_revoked: APIキー取り消し
+    two_factor_enabled: 二要素認証有効化
+    two_factor_disabled: 二要素認証無効化
+
+breadcrumb:
+    link_security_event_list: 'セキュリティイベント一覧'
+    link_user_list: 'ユーザー一覧'
+    link_group_list: 'グループ一覧'
+
+show:
+    group_security_event_show_event_information: 'イベント情報'
+    group_security_event_show_user_information: 'ユーザー情報'
+    group_security_event_show_event_data: 'イベントデータ'
+    group_group_show_group: 'グループ'
+    group_user: 'ユーザー'
+    group_connexion: '接続'
+
+change_password:
+    current_password_invalid: '現在のパスワードが無効です'
+    success: 'パスワードが正常に変更されました'
+
+avatar_upload:
+    extension_not_allowed: '許可されている形式はpngとjpgです'
+
+user:
+    label: ユーザー
+    list:
+        id: ID
+        username: ユーザー名
+        email: メール
+        groups: グループ
+        enabled: 有効？
+    form:
+        id: ID
+        username: ユーザー名
+        email: メール
+        groups: グループ
+        enabled: 有効？
+        comment: コメント
+    filter:
+        username: ユーザー名
+        email: メール
+        groups: グループ
+        enabled: 有効？
+    show:
+        id: ID
+        username: ユーザー名
+        email: メール
+        groups: グループ
+        enabled: 有効？
+        comment: コメント
+        language: 言語
+        avatar: アバター
+        nb_connexion: 接続回数
+        extra_data: 追加データ
+        last_login: 最終ログイン
+        password: パスワード
+        confirmation_token: トークン
+        password_requested_at: パスワード要求日時
+
+group:
+    label: グループ
+    list:
+        id: ID
+        name: 名前
+        roles: ロール
+    form:
+        name: 名前
+        roles: ロール
+    filter:
+        name: 名前
+    show:
+        id: ID
+        name: 名前
+        roles: ロール
+
+user_ban:
+    label: ユーザーBAN
+    list:
+        id: ID
+        username: ユーザー
+        start_date: 開始日
+        end_date: 終了日
+        reason: 理由
+        active: アクティブ
+        banned_by: BAN実行者
+    form:
+        user: ユーザー
+        start_date: 開始日
+        end_date: 終了日
+        end_date_help: 永久BANの場合は空にしてください
+        reason: BAN理由
+        active: アクティブ
+    filter:
+        username: ユーザー
+        active: アクティブ
+        start_date: 開始日
+        end_date: 終了日
+        banned_by: BAN実行者
+    show:
+        id: ID
+        username: ユーザー
+        email: メール
+        start_date: 開始日
+        end_date: 終了日
+        reason: 理由
+        active: アクティブ
+        banned_by: BAN実行者
+        created_at: 作成日時
+        updated_at: 更新日時
+
+ban:
+    form:
+        user: ユーザー
+        start_date: 開始日
+        end_date: 終了日
+        end_date_help: 永久BANの場合は空にしてください
+        reason: BAN理由
+        active: アクティブ
+    filter:
+        username: ユーザー
+        active: アクティブ
+        start_date: 開始日
+        end_date: 終了日
+        banned_by: BAN実行者
+    list:
+        id: ID
+        username: ユーザー
+        start_date: 開始日
+        end_date: 終了日
+        reason: 理由
+        active: アクティブ
+        banned_by: BAN実行者
+    show:
+        id: ID
+        username: ユーザー
+        email: メール
+        start_date: 開始日
+        end_date: 終了日
+        reason: 理由
+        active: アクティブ
+        banned_by: BAN実行者
+        created_at: 作成日時
+        updated_at: 更新日時
+
+list:
+    label__action: 'アクション'

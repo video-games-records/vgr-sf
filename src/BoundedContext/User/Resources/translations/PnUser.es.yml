@@ -1,0 +1,196 @@
+security_event:
+    label: Eventos de Seguridad
+    list:
+        id: ID
+        user: Usuario
+        event_type: Tipo de Evento
+        ip_address: Dirección IP
+        date_time: Fecha/Hora
+    filter:
+        id: ID
+        user: Usuario
+        event_type: Tipo de Evento
+        ip_address: Dirección IP
+        user_agent: Agente de Usuario
+        date_time: Fecha/Hora
+    show:
+        event_information: Información del Evento
+        user_information: Información del Usuario
+        event_data: Datos del Evento
+        ip_information: Información de la Dirección IP
+        loading_ip_info: Cargando información de IP...
+        ip_info_not_available: Información de IP no disponible para direcciones locales o desconocidas
+        error_fetching_ip: Error al obtener información de IP
+        check_ip_reputation: Verificar Reputación de IP
+        no_additional_data: Sin datos adicionales
+        event_data_title: Datos del Evento
+        property: Propiedad
+        value: Valor
+
+security_event_type:
+    password_change: Contraseña Cambiada
+    password_reset_request: Solicitud de Restablecimiento de Contraseña
+    password_reset_complete: Restablecimiento de Contraseña Completado
+    email_change: Email Cambiado
+    email_verify: Email Verificado
+    login_success: Inicio de Sesión Exitoso
+    login_failure: Fallo de Inicio de Sesión
+    logout: Cerrar Sesión
+    account_locked: Cuenta Bloqueada
+    registration: Registro
+    account_activate: Cuenta Activada
+    account_deactivate: Cuenta Desactivada
+    profile_update: Perfil Actualizado
+    admin_login: Inicio de Sesión de Administrador
+    role_change: Rol Cambiado
+    user_impersonate: Usuario Suplantado
+    suspicious_activity: Actividad Sospechosa
+    brute_force_attempt: Intento de Fuerza Bruta
+    api_key_created: Clave API Creada
+    api_key_revoked: Clave API Revocada
+    two_factor_enabled: Autenticación de Dos Factores Habilitada
+    two_factor_disabled: Autenticación de Dos Factores Deshabilitada
+
+breadcrumb:
+    link_security_event_list: 'Lista de Eventos de Seguridad'
+    link_user_list: 'Lista de Usuarios'
+    link_group_list: 'Lista de Grupos'
+
+show:
+    group_security_event_show_event_information: 'Información del Evento'
+    group_security_event_show_user_information: 'Información del Usuario'
+    group_security_event_show_event_data: 'Datos del Evento'
+    group_group_show_group: 'Grupo'
+    group_user: 'Usuario'
+    group_connexion: 'Conexión'
+
+change_password:
+    current_password_invalid: 'La contraseña actual es inválida'
+    success: 'Contraseña cambiada exitosamente'
+
+avatar_upload:
+    extension_not_allowed: 'Los formatos permitidos son png y jpg'
+
+user:
+    label: Usuario
+    list:
+        id: ID
+        username: Nombre de Usuario
+        email: Email
+        groups: Grupos
+        enabled: ¿Activo?
+    form:
+        id: ID
+        username: Nombre de Usuario
+        email: Email
+        groups: Grupos
+        enabled: ¿Activo?
+        comment: Comentario
+    filter:
+        username: Nombre de Usuario
+        email: Email
+        groups: Grupos
+        enabled: ¿Activo?
+    show:
+        id: ID
+        username: Nombre de Usuario
+        email: Email
+        groups: Grupos
+        enabled: ¿Activo?
+        comment: Comentario
+        language: Idioma
+        avatar: Avatar
+        nb_connexion: Número de conexiones
+        extra_data: Datos Adicionales
+        last_login: Último inicio de sesión
+        password: Contraseña
+        confirmation_token: Token
+        password_requested_at: Contraseña solicitada el
+
+group:
+    label: Grupo
+    list:
+        id: ID
+        name: Nombre
+        roles: Roles
+    form:
+        name: Nombre
+        roles: Roles
+    filter:
+        name: Nombre
+    show:
+        id: ID
+        name: Nombre
+        roles: Roles
+
+user_ban:
+    label: Prohibiciones
+    list:
+        id: ID
+        username: Usuario
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        reason: Razón
+        active: Activo
+        banned_by: Prohibido por
+    form:
+        user: Usuario
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        end_date_help: Dejar vacío para prohibición permanente
+        reason: Razón de la prohibición
+        active: Activo
+    filter:
+        username: Usuario
+        active: Activo
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        banned_by: Prohibido por
+    show:
+        id: ID
+        username: Usuario
+        email: Email
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        reason: Razón
+        active: Activo
+        banned_by: Prohibido por
+        created_at: Creado el
+        updated_at: Actualizado el
+
+ban:
+    form:
+        user: Usuario
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        end_date_help: Dejar vacío para prohibición permanente
+        reason: Razón de la prohibición
+        active: Activo
+    filter:
+        username: Usuario
+        active: Activo
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        banned_by: Prohibido por
+    list:
+        id: ID
+        username: Usuario
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        reason: Razón
+        active: Activo
+        banned_by: Prohibido por
+    show:
+        id: ID
+        username: Usuario
+        email: Email
+        start_date: Fecha de Inicio
+        end_date: Fecha de Fin
+        reason: Razón
+        active: Activo
+        banned_by: Prohibido por
+        created_at: Creado el
+        updated_at: Actualizado el
+
+list:
+    label__action: 'Acción'

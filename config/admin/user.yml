@@ -1,0 +1,46 @@
+services:
+  sonata.admin.user.user:
+    class: App\BoundedContext\User\Presentation\Admin\UserAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\User\Domain\Entity\User'
+        manager_type: orm
+        group: "group.users"
+        label: "user.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'PnUser' ] ]
+
+  sonata.admin.user.group:
+    class: App\BoundedContext\User\Presentation\Admin\GroupAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\User\Domain\Entity\Group'
+        manager_type: orm
+        group: "group.users"
+        label: "group.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'PnUser' ] ]
+
+  # Service pour l'extension des statistiques
+  App\BoundedContext\User\Infrastructure\Admin\Extension\SecurityEventStatisticsExtension:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  # Controller pour les statistiques
+  App\BoundedContext\User\Presentation\Web\Controller\Admin\SecurityEventStatisticsController:
+    arguments:
+      - '@App\BoundedContext\User\Infrastructure\Admin\Extension\SecurityEventStatisticsExtension'
+
+  sonata.admin.user.security_event:
+    class: App\BoundedContext\User\Presentation\Admin\SecurityEventAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\User\Domain\Entity\SecurityEvent
+        manager_type: orm
+        group: "group.users"
+        label: "security_event.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'PnUser' ] ]

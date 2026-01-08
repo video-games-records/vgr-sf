@@ -1,0 +1,6 @@
+services:
+    # Shared Domain Services
+    App\SharedKernel\Domain\:
+        resource: '../../src/SharedKernel/Domain/*'
+        exclude: '../../src/SharedKernel/Domain/{Entity,ValueObject,Exception,Event,Security}'
+

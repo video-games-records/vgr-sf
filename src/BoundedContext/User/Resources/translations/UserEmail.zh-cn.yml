@@ -1,0 +1,52 @@
+# translations/email.zh-cn.yaml
+email_change:
+  subject: '邮箱地址变更'
+  notification_old_email: |
+    您好 %username%，
+    
+    我们通知您，您的邮箱地址已被更改。
+    
+    旧地址：%old_email%
+    新地址：%new_email%
+    
+    如果您没有要求此更改，请立即联系我们的支持团队。
+    
+    此致敬礼，
+    团队
+  notification_new_email: |
+    您好 %username%，
+    
+    欢迎使用您的新邮箱地址！
+    
+    您的账户已更新为此新邮箱地址。
+    
+    旧地址：%old_email%
+    新地址：%new_email%
+    
+    此致敬礼，
+    团队
+
+password_change:
+  subject: '密码变更'
+  notification: |
+    您好 %username%，
+    
+    我们通知您，您的账户密码已于 %date% 被修改。
+    
+    如果您没有进行此修改，请立即联系我们的支持团队，因为您的账户可能已被泄露。
+    
+    为了安全起见，我们建议您检查所有个人信息是否仍然是最新的。
+    
+    此致敬礼，
+    团队
+    
+
+password_reset:
+  subject: '重置您的密码'
+  message: |
+    您好 %s！
+    
+    要重置您的密码，请访问 %s
+    
+    此致敬礼，
+    团队
