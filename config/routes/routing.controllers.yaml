@@ -1,0 +1,6 @@
+# Import controllers from the src/BoundedContext directory
+controllers:
+    resource:
+        path: ../../src/BoundedContext/
+        namespace: App\BoundedContext
+    type: attribute

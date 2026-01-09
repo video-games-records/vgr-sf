@@ -1,0 +1,176 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - User Context
+# ========================================
+#
+# STRUCTURE HIÉRARCHIQUE :
+# - Niveau 1 : Domaine fonctionnel (profile, account, security)
+# - Niveau 2 : Type de contenu (navigation, form, message, title, action)
+# - Niveau 3 : Clé spécifique
+#
+# CONVENTIONS DE NOMMAGE :
+# - snake_case pour les clés
+# - Éviter les répétitions (ex: profile.form.password au lieu de profile.password_form.password)
+# - Regrouper les éléments similaires (labels, placeholders, errors ensemble)
+#
+# AVANTAGES :
+# ✓ Réutilisable : clés communes partagées
+# ✓ Maintenable : structure prévisible
+# ✓ Scalable : facile à étendre
+# ✓ DRY : évite les duplications
+#
+# ========================================
+
+# === COMMUN (Réutilisable dans tout le contexte User) ===
+common:
+  close: "Close"
+  save: "Save"
+  cancel: "Cancel"
+  submit: "Submit"
+  delete: "Delete"
+  edit: "Edit"
+  back: "Back"
+  confirm: "Confirm"
+
+# === PROFILE (Gestion du profil utilisateur) ===
+profile:
+  # Titres et en-têtes généraux
+  title:
+    main: "Profile Settings"
+    subtitle: "Manage your account settings and preferences"
+
+  # Navigation entre les sections du profil
+  navigation:
+    personal_info: "Personal Information"
+    picture: "Profile Picture"
+    player: "Player Profile"
+    password: "Password"
+
+  # Section : Informations personnelles
+  personal_info:
+    title: "Personal Information"
+    description: "This section will allow you to update your personal information (username, email, language, etc.)."
+    form:
+      username:
+        label: "Username"
+        placeholder: "Enter your username"
+      email:
+        label: "Email address"
+        placeholder: "Enter your email"
+      language:
+        label: "Language"
+        placeholder: "Select your language"
+      timezone:
+        label: "Timezone"
+        placeholder: "Select your timezone"
+    message:
+      success: "Your personal information has been updated successfully"
+      error: "An error occurred while updating your information"
+
+  # Section : Photo de profil
+  picture:
+    title: "Profile Picture"
+    description: "This section will allow you to upload and update your profile picture/avatar."
+    form:
+      upload:
+        label: "Choose a picture"
+        button: "Upload"
+        requirements: "Maximum size: 2MB. Allowed formats: JPG, PNG, GIF"
+      current:
+        label: "Current picture"
+      remove:
+        button: "Remove picture"
+        confirm: "Are you sure you want to remove your profile picture?"
+    message:
+      success: "Your profile picture has been updated successfully"
+      removed: "Your profile picture has been removed"
+      error: "An error occurred while uploading your picture"
+      invalid_format: "Invalid file format. Please use JPG, PNG or GIF"
+      too_large: "File is too large. Maximum size is 2MB"
+
+  # Section : Profil joueur
+  player:
+    title: "Player Profile"
+    description: "This section will display your player statistics, achievements, and gaming activity."
+    stats:
+      total_games: "Total games"
+      total_records: "Total records"
+      achievements: "Achievements"
+      rank: "Global rank"
+    message:
+      no_stats: "No statistics available yet. Start playing to see your progress!"
+
+  # Section : Mot de passe
+  password:
+    title: "Change Your Password"
+    subtitle: "Password must be at least 8 characters with letters and numbers"
+    form:
+      current_password:
+        label: "Current Password"
+        placeholder: "Enter your current password"
+      new_password:
+        label: "New Password"
+        placeholder: "Enter your new password"
+      confirm_password:
+        label: "Confirm New Password"
+        placeholder: "Confirm your new password"
+      submit: "Change Password"
+    error:
+      current_required: "Please enter your current password"
+      current_invalid: "Wrong value for your current password"
+      new_required: "Please enter a new password"
+      new_too_short: "Your password should be at least {{ limit }} characters"
+      new_invalid_format: "Password must be at least 8 characters with letters and numbers"
+      mismatch: "The password fields must match."
+    message:
+      success: "Your password has been changed successfully"
+      error: "An error occurred while changing your password"
+
+# === ACCOUNT (Gestion du compte) ===
+account:
+  # Paramètres du compte
+  settings:
+    title: "Account Settings"
+    privacy:
+      title: "Privacy"
+      public_profile: "Make my profile public"
+      show_email: "Show my email address"
+      show_activity: "Show my gaming activity"
+    notifications:
+      title: "Notifications"
+      email_notifications: "Receive email notifications"
+      news_updates: "Receive news and updates"
+    danger_zone:
+      title: "Danger Zone"
+      delete_account: "Delete my account"
+      delete_confirm: "Are you sure? This action cannot be undone."
+
+# === SECURITY (Événements de sécurité, logs) ===
+security:
+  events:
+    title: "Security Events"
+    types:
+      login_success: "Successful login"
+      login_failure: "Failed login attempt"
+      logout: "Logout"
+      password_change: "Password change"
+      email_change: "Email change"
+    list:
+      date: "Date"
+      type: "Type"
+      ip_address: "IP Address"
+      user_agent: "Device/Browser"
+      no_events: "No security events recorded"
+
+# === FLASH MESSAGES (Messages système) ===
+flash:
+  success:
+    generic: "Operation completed successfully"
+    saved: "Changes saved successfully"
+  error:
+    generic: "An error occurred. Please try again."
+    unauthorized: "You are not authorized to perform this action"
+    validation: "Please check the form for errors"
+  info:
+    processing: "Your request is being processed..."
+  warning:
+    unsaved_changes: "You have unsaved changes. Are you sure you want to leave?"

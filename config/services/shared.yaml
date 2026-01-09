@@ -4,3 +4,12 @@ services:
         resource: '../../src/SharedKernel/Domain/*'
         exclude: '../../src/SharedKernel/Domain/{Entity,ValueObject,Exception,Event,Security}'
 
+    # Infrastructure Services
+    App\SharedKernel\Infrastructure\:
+        resource: '../../src/SharedKernel/Infrastructure/*'
+        exclude: '../../src/SharedKernel/Infrastructure/{Entity}'
+
+    # Event Dispatcher
+    App\SharedKernel\Domain\Interface\EventDispatcherInterface:
+        alias: App\SharedKernel\Infrastructure\Event\SymfonyEventDispatcher
+

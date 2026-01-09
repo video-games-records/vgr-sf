@@ -3,6 +3,8 @@ twig:
     paths:
         '%kernel.project_dir%/src/SharedKernel/Presentation/Resources/views': 'SharedKernel'
         '%kernel.project_dir%/src/BoundedContext/User/Presentation/Resources/views': 'User'
+    form_themes:
+        - 'bootstrap_5_layout.html.twig'
 
 when@test:
     twig:

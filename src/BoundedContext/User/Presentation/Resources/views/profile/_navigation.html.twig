@@ -1,0 +1,60 @@
+{% trans_default_domain 'User' %}
+
+{# Profile Navigation Tabs #}
+<ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'app_profile_personal_info' %} active{% endif %}"
+           href="{{ path('app_profile_personal_info') }}">
+            <i class="bi bi-person"></i> {{ 'profile.navigation.personal_info'|trans }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'app_profile_picture' %} active{% endif %}"
+           href="{{ path('app_profile_picture') }}">
+            <i class="bi bi-image"></i> {{ 'profile.navigation.picture'|trans }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'app_profile_player' %} active{% endif %}"
+           href="{{ path('app_profile_player') }}">
+            <i class="bi bi-controller"></i> {{ 'profile.navigation.player'|trans }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'app_profile_password' %} active{% endif %}"
+           href="{{ path('app_profile_password') }}">
+            <i class="bi bi-key"></i> {{ 'profile.navigation.password'|trans }}
+        </a>
+    </li>
+</ul>
+
+<style>
+    .profile-settings .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .profile-settings .nav-tabs .nav-item .nav-link {
+        color: #6c757d;
+        border: none;
+        padding: 1rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .profile-settings .nav-tabs .nav-item .nav-link:hover {
+        color: #495057;
+        border-color: transparent;
+        background-color: #f8f9fa;
+    }
+
+    .profile-settings .nav-tabs .nav-item .nav-link.active {
+        color: #0d6efd;
+        border-bottom: 3px solid #0d6efd;
+        background-color: #e7f1ff;
+    }
+
+    .profile-settings .nav-tabs .nav-item .nav-link i {
+        margin-right: 0.5rem;
+    }
+</style>

@@ -9,7 +9,7 @@ services:
         label: "user.label"
         label_translator_strategy: "sonata.admin.label.strategy.underscore"
     calls:
-      - [ setTranslationDomain, [ 'PnUser' ] ]
+      - [ setTranslationDomain, [ 'UserAdmin' ] ]
 
   sonata.admin.user.group:
     class: App\BoundedContext\User\Presentation\Admin\GroupAdmin
@@ -21,7 +21,7 @@ services:
         label: "group.label"
         label_translator_strategy: "sonata.admin.label.strategy.underscore"
     calls:
-      - [ setTranslationDomain, [ 'PnUser' ] ]
+      - [ setTranslationDomain, [ 'UserAdmin' ] ]
 
   # Service pour l'extension des statistiques
   App\BoundedContext\User\Infrastructure\Admin\Extension\SecurityEventStatisticsExtension:
@@ -43,4 +43,4 @@ services:
         label: "security_event.label"
         label_translator_strategy: "sonata.admin.label.strategy.underscore"
     calls:
-      - [ setTranslationDomain, [ 'PnUser' ] ]
+      - [ setTranslationDomain, [ 'UserAdmin' ] ]
