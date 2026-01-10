@@ -1,0 +1,246 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - User Context
+# ========================================
+#
+# STRUCTURE HIÉRARCHIQUE :
+# - Niveau 1 : Domaine fonctionnel (profile, account, security)
+# - Niveau 2 : Type de contenu (navigation, form, message, title, action)
+# - Niveau 3 : Clé spécifique
+#
+# CONVENTIONS DE NOMMAGE :
+# - snake_case pour les clés
+# - Éviter les répétitions (ex: profile.form.password au lieu de profile.password_form.password)
+# - Regrouper les éléments similaires (labels, placeholders, errors ensemble)
+#
+# AVANTAGES :
+# ✓ Réutilisable : clés communes partagées
+# ✓ Maintenable : structure prévisible
+# ✓ Scalable : facile à étendre
+# ✓ DRY : évite les duplications
+#
+# ========================================
+
+# === COMMUN (Réutilisable dans tout le contexte User) ===
+common:
+  close: "Fermer"
+  save: "Enregistrer"
+  cancel: "Annuler"
+  submit: "Soumettre"
+  delete: "Supprimer"
+  edit: "Modifier"
+  back: "Retour"
+  confirm: "Confirmer"
+
+# === PROFILE (Gestion du profil utilisateur) ===
+profile:
+  # Titres et en-têtes généraux
+  title:
+    main: "Paramètres du profil"
+    subtitle: "Gérez les paramètres et préférences de votre compte"
+
+  # Navigation entre les sections du profil
+  navigation:
+    personal_info: "Informations personnelles"
+    picture: "Photo de profil"
+    player: "Profil joueur"
+    password: "Mot de passe"
+
+  # Section : Informations personnelles
+  personal_info:
+    title: "Informations personnelles"
+    description: "Cette section vous permettra de mettre à jour vos informations personnelles (nom d'utilisateur, email, langue, etc.)."
+    form:
+      username:
+        label: "Nom d'utilisateur"
+        placeholder: "Entrez votre nom d'utilisateur"
+      email:
+        label: "Adresse email"
+        placeholder: "Entrez votre email"
+      language:
+        label: "Langue"
+        placeholder: "Sélectionnez votre langue"
+      timezone:
+        label: "Fuseau horaire"
+        placeholder: "Sélectionnez votre fuseau horaire"
+    message:
+      success: "Vos informations personnelles ont été mises à jour avec succès"
+      error: "Une erreur s'est produite lors de la mise à jour de vos informations"
+
+  # Section : Photo de profil
+  picture:
+    title: "Photo de profil"
+    description: "Cette section vous permettra de télécharger et mettre à jour votre photo de profil/avatar."
+    form:
+      upload:
+        label: "Choisir une photo"
+        button: "Télécharger"
+        requirements: "Taille maximale : 2 Mo. Formats autorisés : JPG, PNG, GIF"
+      current:
+        label: "Photo actuelle"
+      remove:
+        button: "Supprimer la photo"
+        confirm: "Êtes-vous sûr de vouloir supprimer votre photo de profil ?"
+    message:
+      success: "Votre photo de profil a été mise à jour avec succès"
+      removed: "Votre photo de profil a été supprimée"
+      error: "Une erreur s'est produite lors du téléchargement de votre photo"
+      invalid_format: "Format de fichier invalide. Veuillez utiliser JPG, PNG ou GIF"
+      too_large: "Le fichier est trop volumineux. La taille maximale est de 2 Mo"
+
+  # Section : Profil joueur
+  player:
+    title: "Profil joueur"
+    description: "Cette section affichera vos statistiques de joueur, vos succès et votre activité de jeu."
+    stats:
+      total_games: "Jeux totaux"
+      total_records: "Records totaux"
+      achievements: "Succès"
+      rank: "Rang mondial"
+    message:
+      no_stats: "Aucune statistique disponible pour le moment. Commencez à jouer pour voir votre progression !"
+
+  # Section : Mot de passe
+  password:
+    title: "Changer votre mot de passe"
+    subtitle: "Le mot de passe doit contenir au moins 8 caractères avec des lettres et des chiffres"
+    form:
+      current_password:
+        label: "Mot de passe actuel"
+        placeholder: "Entrez votre mot de passe actuel"
+      new_password:
+        label: "Nouveau mot de passe"
+        placeholder: "Entrez votre nouveau mot de passe"
+      confirm_password:
+        label: "Confirmer le nouveau mot de passe"
+        placeholder: "Confirmez votre nouveau mot de passe"
+      submit: "Changer le mot de passe"
+    error:
+      current_required: "Veuillez entrer votre mot de passe actuel"
+      current_invalid: "Valeur incorrecte pour votre mot de passe actuel"
+      new_required: "Veuillez entrer un nouveau mot de passe"
+      new_too_short: "Votre mot de passe doit contenir au moins {{ limit }} caractères"
+      new_invalid_format: "Le mot de passe doit contenir au moins 8 caractères avec des lettres et des chiffres"
+      mismatch: "Les champs de mot de passe doivent correspondre."
+    message:
+      success: "Votre mot de passe a été changé avec succès"
+      error: "Une erreur s'est produite lors du changement de votre mot de passe"
+
+# === ACCOUNT (Gestion du compte) ===
+account:
+  # Paramètres du compte
+  settings:
+    title: "Paramètres du compte"
+    privacy:
+      title: "Confidentialité"
+      public_profile: "Rendre mon profil public"
+      show_email: "Afficher mon adresse email"
+      show_activity: "Afficher mon activité de jeu"
+    notifications:
+      title: "Notifications"
+      email_notifications: "Recevoir des notifications par email"
+      news_updates: "Recevoir les actualités et mises à jour"
+    danger_zone:
+      title: "Zone de danger"
+      delete_account: "Supprimer mon compte"
+      delete_confirm: "Êtes-vous sûr ? Cette action ne peut pas être annulée."
+
+# === SECURITY (Événements de sécurité, logs) ===
+security:
+  events:
+    title: "Événements de sécurité"
+    types:
+      login_success: "Connexion réussie"
+      login_failure: "Tentative de connexion échouée"
+      logout: "Déconnexion"
+      password_change: "Changement de mot de passe"
+      email_change: "Changement d'email"
+    list:
+      date: "Date"
+      type: "Type"
+      ip_address: "Adresse IP"
+      user_agent: "Appareil/Navigateur"
+      no_events: "Aucun événement de sécurité enregistré"
+
+# === LOGIN (User login) ===
+login:
+  title: "Connexion"
+  subtitle: "Connectez-vous à votre compte"
+
+  # Formulaire de connexion
+  form:
+    username_or_email:
+      label: "Email ou Username"
+      placeholder: "Entrez votre email ou nom d'utilisateur"
+    password:
+      label: "Mot de passe"
+      placeholder: "Entrez votre mot de passe"
+    submit: "Se connecter"
+
+  # Messages flash
+  flash:
+    success: "Vous êtes maintenant connecté. Bon retour !"
+    error: "Échec de la connexion. Veuillez vérifier vos identifiants."
+
+  # Liens
+  link:
+    no_account: "Vous n'avez pas de compte ?"
+    register: "S'inscrire"
+    forgot_password: "Mot de passe oublié ?"
+
+# === REGISTRATION (User registration) ===
+registration:
+  title: "Créer un compte"
+  subtitle: "Inscrivez-vous pour rejoindre notre communauté"
+
+  # Formulaire d'inscription
+  form:
+    email:
+      label: "Email"
+      placeholder: "Entrez votre adresse email"
+    username:
+      label: "Nom d'utilisateur"
+      placeholder: "magicbart"
+    password:
+      label: "Mot de passe"
+      placeholder: "••••••••••••••••"
+    confirm_password:
+      label: "Confirmer le mot de passe"
+      placeholder: "Confirmez votre mot de passe"
+    submit: "Créer un compte"
+
+  # Messages d'erreur
+  error:
+    email_required: "L'email est requis"
+    email_invalid: "Veuillez entrer une adresse email valide"
+    username_required: "Le nom d'utilisateur est requis"
+    username_too_short: "Le nom d'utilisateur doit contenir au moins {{ limit }} caractères"
+    username_too_long: "Le nom d'utilisateur ne peut pas dépasser {{ limit }} caractères"
+    username_invalid_format: "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres, des underscores et des tirets"
+    password_required: "Le mot de passe est requis"
+    password_too_short: "Le mot de passe doit contenir au moins {{ limit }} caractères"
+    password_invalid_format: "Le mot de passe doit contenir au moins une lettre et un chiffre"
+    password_mismatch: "Les champs de mot de passe doivent correspondre"
+
+  # Messages flash
+  flash:
+    success: "Votre compte a été créé avec succès ! Bienvenue sur Video Games Records !"
+    error: "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
+
+  # Liens
+  link:
+    have_account: "Vous avez déjà un compte ?"
+    login: "Connexion"
+
+# === FLASH MESSAGES (Messages système) ===
+flash:
+  success:
+    generic: "Opération effectuée avec succès"
+    saved: "Modifications enregistrées avec succès"
+  error:
+    generic: "Une erreur s'est produite. Veuillez réessayer."
+    unauthorized: "Vous n'êtes pas autorisé à effectuer cette action"
+    validation: "Veuillez vérifier le formulaire pour les erreurs"
+  info:
+    processing: "Votre demande est en cours de traitement..."
+  warning:
+    unsaved_changes: "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir partir ?"

@@ -1,0 +1,414 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À Propos de Nous - VGR{% endblock %}
+
+{% block meta_description %}Découvrez l'histoire, la mission et l'équipe derrière Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# Header #}
+    <div class="text-center mb-5">
+        <div class="d-flex justify-content-center mb-3">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                <i class="bi bi-heart-fill h1 text-primary mb-0"></i>
+            </div>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">À Propos de Nous</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 600px;">
+            Découvrez l'histoire, la mission et l'équipe derrière cette plateforme qui réunit une communauté passionnée autour de l'excellence gaming.
+        </p>
+    </div>
+
+    {# Mission, Story, Values #}
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="row g-4 mb-5">
+                {# Mission #}
+                <div class="col-md-4">
+                    <div class="card h-100 border-2">
+                        <div class="card-header bg-primary bg-opacity-10">
+                            <h2 class="h5 mb-0">
+                                <i class="bi bi-bullseye me-2"></i>
+                                Notre Mission
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Créer la référence mondiale des records de jeux vidéo en rassemblant une communauté passionnée autour de l'excellence gaming.</p>
+                            <p>Nous offrons une plateforme où chaque joueur peut immortaliser ses exploits, partager ses stratégies et célébrer les performances exceptionnelles qui repoussent les limites du possible.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {# Story #}
+                <div class="col-md-4">
+                    <div class="card h-100 border-2">
+                        <div class="card-header bg-danger bg-opacity-10">
+                            <h2 class="h5 mb-0">
+                                <i class="bi bi-heart-fill me-2"></i>
+                                Notre Histoire
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Fondé en 2003 par magicbart, Video Games Records est né de la frustration de voir tant d'exploits extraordinaires se perdre dans l'oubli.</p>
+                            <p>Ce qui a commencé comme un projet personnel s'est rapidement transformé en une aventure collective grâce à l'enthousiasme de notre communauté grandissante.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {# Values #}
+                <div class="col-md-4">
+                    <div class="card h-100 border-2">
+                        <div class="card-header bg-success bg-opacity-10">
+                            <h2 class="h5 mb-0">
+                                <i class="bi bi-shield-check me-2"></i>
+                                Nos Valeurs
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Nos valeurs fondamentales guident chaque décision :</p>
+                            <ul class="mb-0">
+                                <li><strong>Authenticité :</strong> Chaque record est vérifié avec rigueur</li>
+                                <li><strong>Inclusivité :</strong> Tous les joueurs méritent reconnaissance</li>
+                                <li><strong>Passion :</strong> L'amour du jeu vidéo nous guide</li>
+                                <li><strong>Communauté :</strong> Ensemble nous construisons l'histoire</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Statistics #}
+            <div class="card mb-5 border-2">
+                <div class="card-header text-center">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-graph-up-arrow me-2"></i>
+                        Notre Impact
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4 text-center">
+                        <div class="col-6 col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-people-fill display-4 text-primary mb-2"></i>
+                                <div class="fs-2 fw-bold text-primary">5K+</div>
+                                <div class="text-muted small fw-medium">Joueurs</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-trophy-fill display-4 text-primary mb-2"></i>
+                                <div class="fs-2 fw-bold text-primary">1,5M+</div>
+                                <div class="text-muted small fw-medium">Records</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-controller display-4 text-primary mb-2"></i>
+                                <div class="fs-2 fw-bold text-primary">6K+</div>
+                                <div class="text-muted small fw-medium">Jeux</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-image-fill display-4 text-primary mb-2"></i>
+                                <div class="fs-2 fw-bold text-primary">500K+</div>
+                                <div class="text-muted small fw-medium">Records prouvés</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Team #}
+            <div class="card mb-5 border-2">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-people me-2"></i>
+                        Notre Équipe
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        {# magicbart #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/1/avatar" alt="magicbart" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">magicbart</h3>
+                                <p class="text-primary small mb-2">Fondateur & Développeur</p>
+                                <p class="text-muted small mb-2">Passionné de développement web et d'UX design</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-secondary">Vue.js</span>
+                                    <span class="badge bg-secondary">Symfony</span>
+                                    <span class="badge bg-secondary">UI/UX</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# foxof #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/1132/avatar" alt="foxof" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">foxof</h3>
+                                <p class="text-primary small mb-2">Ajouteur de jeux</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                    <span class="badge bg-secondary">Marketing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# daftpunk #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/3377/avatar" alt="daftpunk" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">daftpunk</h3>
+                                <p class="text-primary small mb-2">Gestionnaire de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# zephyraz #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/3412/avatar" alt="zephyraz" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">zephyraz</h3>
+                                <p class="text-primary small mb-2">Administrateur en chef des preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Communication</span>
+                                    <span class="badge bg-secondary">Modération</span>
+                                    <span class="badge bg-secondary">Marketing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Djon #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/3589/avatar" alt="Djon" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">Djon</h3>
+                                <p class="text-primary small mb-2">Administrateur de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Dark Eon Master #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/3778/avatar" alt="Dark Eon Master" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">Dark Eon Master</h3>
+                                <p class="text-primary small mb-2">Administrateur de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Yuri #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/6094/avatar" alt="Yuri" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">Yuri</h3>
+                                <p class="text-primary small mb-2">Administrateur</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# BlackCydonia #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/6325/avatar" alt="BlackCydonia" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">BlackCydonia</h3>
+                                <p class="text-primary small mb-2">Administrateur de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# TheRubyMoon #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/7364/avatar" alt="TheRubyMoon" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">TheRubyMoon</h3>
+                                <p class="text-primary small mb-2">Administrateur de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# ThePandaEmperor #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/8152/avatar" alt="ThePandaEmperor" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">ThePandaEmperor</h3>
+                                <p class="text-primary small mb-2">Administrateur de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Tseko #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/8288/avatar" alt="Tseko" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">Tseko</h3>
+                                <p class="text-primary small mb-2">Administrateur de preuves</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# TJ7 #}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="text-center p-3 border rounded h-100">
+                                <img src="https://backoffice.video-games-records.com/users/10848/avatar" alt="TJ7" class="rounded-circle mb-3" width="80" height="80">
+                                <h3 class="h6 fw-bold mb-1">TJ7</h3>
+                                <p class="text-primary small mb-2">Administrateur</p>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center mt-3">
+                                    <span class="badge bg-secondary">Modération</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Acknowledgments #}
+            <div class="card mb-5 border-2">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-heart me-2"></i>
+                        Remerciements
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted text-center mb-4">
+                        Nous remercions toutes les personnes qui ont contribué au développement de cette plateforme dans le passé.
+                    </p>
+                    <div class="row g-3">
+                        {% for contributor in [
+                            {'username': '33Tails', 'role': 'Modérateur'},
+                            {'username': 'Arcade', 'role': 'Modérateur'},
+                            {'username': 'Arvain', 'role': 'Modérateur'},
+                            {'username': 'Asep', 'role': 'Modérateur'},
+                            {'username': 'Basile', 'role': 'Modérateur'},
+                            {'username': 'BlackShark', 'role': 'Modérateur'},
+                            {'username': 'Delgan', 'role': 'Modérateur'},
+                            {'username': 'Denetorn', 'role': 'Modérateur'},
+                            {'username': 'earlcash05', 'role': 'Modérateur'},
+                            {'username': 'kloh', 'role': 'Designer'},
+                            {'username': 'laoulou', 'role': 'Modérateur'},
+                            {'username': 'Lucario', 'role': 'Modérateur'},
+                            {'username': 'MBAcymru', 'role': 'Modérateur'},
+                            {'username': 'Mike-soad', 'role': 'Modérateur'},
+                            {'username': 'MTC', 'role': 'Modérateur'},
+                            {'username': 'narutokyuby', 'role': 'Modérateur'},
+                            {'username': 'niconoe', 'role': 'Développeur'},
+                            {'username': 'NintendoPlayers', 'role': 'Modérateur'},
+                            {'username': 'OkamiAma77', 'role': 'Administrateur'},
+                            {'username': 'Smoka', 'role': 'Modérateur'},
+                            {'username': 'speedruntrainer', 'role': 'Modérateur'},
+                            {'username': 'super_toon_link', 'role': 'Modérateur'},
+                            {'username': 'thelegendarypsr', 'role': 'Modérateur'},
+                            {'username': 'thewebinator', 'role': 'Modérateur'},
+                            {'username': 'tomgeek', 'role': 'Modérateur'},
+                            {'username': 'Ultim\'D', 'role': 'Modérateur'},
+                            {'username': 'viviengaetan', 'role': 'Développeur'},
+                            {'username': 'xdman', 'role': 'Modérateur'}
+                        ] %}
+                            <div class="col-6 col-md-4 col-lg-2">
+                                <div class="text-center p-3 border rounded small">
+                                    <div class="fw-medium mb-1">{{ contributor.username }}</div>
+                                    <div class="text-muted" style="font-size: 0.75rem;">{{ contributor.role }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            {# Features #}
+            <div class="card mb-5 border-2">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-award me-2"></i>
+                        Ce qui nous rend uniques
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 border rounded h-100">
+                                <div class="bg-light rounded p-3 mb-3 d-inline-block">
+                                    <i class="bi bi-code-square fs-3 text-purple"></i>
+                                </div>
+                                <h3 class="h6 fw-bold mb-2">Open Source</h3>
+                                <p class="text-muted small mb-0">Code source ouvert et contributions communautaires</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 border rounded h-100">
+                                <div class="bg-light rounded p-3 mb-3 d-inline-block">
+                                    <i class="bi bi-globe fs-3 text-primary"></i>
+                                </div>
+                                <h3 class="h6 fw-bold mb-2">Multilingue</h3>
+                                <p class="text-muted small mb-0">Interface disponible en français et anglais</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 border rounded h-100">
+                                <div class="bg-light rounded p-3 mb-3 d-inline-block">
+                                    <i class="bi bi-shield-check fs-3 text-success"></i>
+                                </div>
+                                <h3 class="h6 fw-bold mb-2">Sécurisé</h3>
+                                <p class="text-muted small mb-0">Protection des données et authentification robuste</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 border rounded h-100">
+                                <div class="bg-light rounded p-3 mb-3 d-inline-block">
+                                    <i class="bi bi-graph-up-arrow fs-3 text-warning"></i>
+                                </div>
+                                <h3 class="h6 fw-bold mb-2">Évolutif</h3>
+                                <p class="text-muted small mb-0">Nouvelles fonctionnalités basées sur vos retours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Call to Action #}
+            <div class="card border-2">
+                <div class="card-body text-center py-5">
+                    <div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block mb-4">
+                        <i class="bi bi-people-fill display-4 text-primary"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">Rejoignez notre communauté</h3>
+                    <p class="text-muted mb-4 mx-auto" style="max-width: 600px;">
+                        Que vous soyez développeur, gamer, créateur de contenu ou simplement passionné de technologie,
+                        il y a une place pour vous dans notre communauté. Partagez vos connaissances,
+                        apprenez de nouvelles choses et connectez-vous avec des personnes qui partagent vos passions.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-4">
+                            Créer un compte
+                        </a>
+                        <a href="mailto:support@videogamesrecords.net" class="btn btn-outline-secondary btn-lg px-4">
+                            Nous contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

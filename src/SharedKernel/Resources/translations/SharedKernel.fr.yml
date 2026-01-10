@@ -1,0 +1,101 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+#
+# Ce fichier contient les traductions pour les éléments transversaux
+# partagés entre tous les contextes (navigation, footer, messages communs)
+#
+# ========================================
+
+# === NAVIGATION (Menu principal) ===
+navigation:
+  # Menu principal
+  home: "Accueil"
+  games: "Jeux"
+  leaderboards: "Classements"
+  community: "Communauté"
+  admin: "Admin"
+
+  # Dropdown Games
+  games_dropdown:
+    by_letter: "Par lettre"
+    by_platform: "Par plateforme"
+    by_series: "Par série"
+    featured_games: "Jeux mis en avant"
+    latest_games: "Derniers jeux"
+
+  # Dropdown Leaderboards
+  leaderboards_dropdown:
+    game_points: "Points de jeu"
+    record_points: "Points de record"
+    medals: "Médailles"
+    cups: "Coupes"
+    badges: "Badges"
+    proofs: "Preuves"
+    country: "Pays"
+
+  # Dropdown Community
+  community_dropdown:
+    forum: "Forum"
+    players: "Joueurs"
+    teams: "Équipes"
+
+  # User menu (when logged in)
+  user_menu:
+    profile: "Profil"
+    settings: "Paramètres"
+    logout: "Déconnexion"
+
+  # Login (when not logged in)
+  login: "Connexion"
+
+  # Language switcher
+  language:
+    english: "English"
+    french: "Français"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. Tous droits réservés."
+  links:
+    faq: "FAQ"
+    rules: "Règles"
+    privacy: "Confidentialité"
+    terms: "Conditions"
+    contact: "Contact"
+    about: "À propos"
+    legal: "Mentions légales"
+
+# === THEME ===
+theme:
+  toggle: "Changer le thème"
+  light: "Mode clair"
+  dark: "Mode sombre"
+
+# === COMMON (Éléments communs réutilisables) ===
+common:
+  close: "Fermer"
+  save: "Enregistrer"
+  cancel: "Annuler"
+  submit: "Soumettre"
+  delete: "Supprimer"
+  edit: "Modifier"
+  back: "Retour"
+  confirm: "Confirmer"
+  search: "Rechercher"
+  loading: "Chargement..."
+  no_results: "Aucun résultat trouvé"
+
+# === FLASH MESSAGES (Messages système communs) ===
+flash:
+  success:
+    generic: "Opération effectuée avec succès"
+    saved: "Modifications enregistrées avec succès"
+  error:
+    generic: "Une erreur s'est produite. Veuillez réessayer."
+    unauthorized: "Vous n'êtes pas autorisé à effectuer cette action"
+    validation: "Veuillez vérifier le formulaire pour les erreurs"
+  info:
+    processing: "Votre demande est en cours de traitement..."
+  warning:
+    unsaved_changes: "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir partir ?"

@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\User\Presentation\Web\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class Login extends AbstractController
+#[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
+class SecurityController extends AbstractLocalizedController
 {
     #[Route('/login', name: 'app_login')]
-    public function __invoke(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -23,5 +24,14 @@ class Login extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+    }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+        // This method can be blank - it will be intercepted by the logout key on your firewall
+        throw new \LogicException(
+            'This method can be blank - it will be intercepted by the logout key on your firewall.'
+        );
     }
 }

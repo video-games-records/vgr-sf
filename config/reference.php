@@ -2189,6 +2189,70 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     return_expiration_parameter_name?: scalar|null|Param, // The default response parameter name containing the refresh token expiration timestamp // Default: "refresh_token_expiration"
  *     default_invalid_batch_size?: int|Param, // The default batch size when clearing invalid tokens // Default: 1000
  * }
+ * @psalm-type WebpackEncoreConfig = array{
+ *     output_path: scalar|null|Param, // The path where Encore is building the assets - i.e. Encore.setOutputPath()
+ *     crossorigin?: false|"anonymous"|"use-credentials"|Param, // crossorigin value when Encore.enableIntegrityHashes() is used, can be false (default), anonymous or use-credentials // Default: false
+ *     preload?: bool|Param, // preload all rendered script and link tags automatically via the http2 Link header. // Default: false
+ *     cache?: bool|Param, // Enable caching of the entry point file(s) // Default: false
+ *     strict_mode?: bool|Param, // Throw an exception if the entrypoints.json file is missing or an entry is missing from the data // Default: true
+ *     builds?: array<string, scalar|null|Param>,
+ *     script_attributes?: array<string, scalar|null|Param>,
+ *     link_attributes?: array<string, scalar|null|Param>,
+ * }
+ * @psalm-type StofDoctrineExtensionsConfig = array{
+ *     orm?: array<string, array{ // Default: []
+ *         translatable?: scalar|null|Param, // Default: false
+ *         timestampable?: scalar|null|Param, // Default: false
+ *         blameable?: scalar|null|Param, // Default: false
+ *         sluggable?: scalar|null|Param, // Default: false
+ *         tree?: scalar|null|Param, // Default: false
+ *         loggable?: scalar|null|Param, // Default: false
+ *         ip_traceable?: scalar|null|Param, // Default: false
+ *         sortable?: scalar|null|Param, // Default: false
+ *         softdeleteable?: scalar|null|Param, // Default: false
+ *         uploadable?: scalar|null|Param, // Default: false
+ *         reference_integrity?: scalar|null|Param, // Default: false
+ *     }>,
+ *     mongodb?: array<string, array{ // Default: []
+ *         translatable?: scalar|null|Param, // Default: false
+ *         timestampable?: scalar|null|Param, // Default: false
+ *         blameable?: scalar|null|Param, // Default: false
+ *         sluggable?: scalar|null|Param, // Default: false
+ *         tree?: scalar|null|Param, // Default: false
+ *         loggable?: scalar|null|Param, // Default: false
+ *         ip_traceable?: scalar|null|Param, // Default: false
+ *         sortable?: scalar|null|Param, // Default: false
+ *         softdeleteable?: scalar|null|Param, // Default: false
+ *         uploadable?: scalar|null|Param, // Default: false
+ *         reference_integrity?: scalar|null|Param, // Default: false
+ *     }>,
+ *     class?: array{
+ *         translatable?: scalar|null|Param, // Default: "Gedmo\\Translatable\\TranslatableListener"
+ *         timestampable?: scalar|null|Param, // Default: "Gedmo\\Timestampable\\TimestampableListener"
+ *         blameable?: scalar|null|Param, // Default: "Gedmo\\Blameable\\BlameableListener"
+ *         sluggable?: scalar|null|Param, // Default: "Gedmo\\Sluggable\\SluggableListener"
+ *         tree?: scalar|null|Param, // Default: "Gedmo\\Tree\\TreeListener"
+ *         loggable?: scalar|null|Param, // Default: "Gedmo\\Loggable\\LoggableListener"
+ *         sortable?: scalar|null|Param, // Default: "Gedmo\\Sortable\\SortableListener"
+ *         softdeleteable?: scalar|null|Param, // Default: "Gedmo\\SoftDeleteable\\SoftDeleteableListener"
+ *         uploadable?: scalar|null|Param, // Default: "Gedmo\\Uploadable\\UploadableListener"
+ *         reference_integrity?: scalar|null|Param, // Default: "Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener"
+ *     },
+ *     softdeleteable?: array{
+ *         handle_post_flush_event?: bool|Param, // Default: false
+ *     },
+ *     uploadable?: array{
+ *         default_file_path?: scalar|null|Param, // Default: null
+ *         mime_type_guesser_class?: scalar|null|Param, // Default: "Stof\\DoctrineExtensionsBundle\\Uploadable\\MimeTypeGuesserAdapter"
+ *         default_file_info_class?: scalar|null|Param, // Default: "Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo"
+ *         validate_writable_directory?: bool|Param, // Default: true
+ *     },
+ *     default_locale?: scalar|null|Param, // Default: "en"
+ *     translation_fallback?: bool|Param, // Default: false
+ *     persist_default_translation?: bool|Param, // Default: false
+ *     skip_translation_on_load?: bool|Param, // Default: false
+ *     metadata_cache_pool?: scalar|null|Param, // Default: null
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2215,6 +2279,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     flysystem?: FlysystemConfig,
  *     aws?: AwsConfig,
  *     gesdinet_jwt_refresh_token?: GesdinetJwtRefreshTokenConfig,
+ *     webpack_encore?: WebpackEncoreConfig,
+ *     stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2245,6 +2311,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         aws?: AwsConfig,
  *         zenstruck_foundry?: ZenstruckFoundryConfig,
  *         gesdinet_jwt_refresh_token?: GesdinetJwtRefreshTokenConfig,
+ *         webpack_encore?: WebpackEncoreConfig,
+ *         stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2272,6 +2340,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         flysystem?: FlysystemConfig,
  *         aws?: AwsConfig,
  *         gesdinet_jwt_refresh_token?: GesdinetJwtRefreshTokenConfig,
+ *         webpack_encore?: WebpackEncoreConfig,
+ *         stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2301,6 +2371,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         aws?: AwsConfig,
  *         zenstruck_foundry?: ZenstruckFoundryConfig,
  *         gesdinet_jwt_refresh_token?: GesdinetJwtRefreshTokenConfig,
+ *         webpack_encore?: WebpackEncoreConfig,
+ *         stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

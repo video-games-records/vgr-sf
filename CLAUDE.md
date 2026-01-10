@@ -590,3 +590,108 @@ IgdbStory::load([
 3. **Notes et reviews agrégées**
 4. **Données de vente et popularité**
 5. **Support multilingue** des descriptions
+
+---
+
+# Bonnes Pratiques de Développement Frontend
+
+## CSS et Styling
+
+### Règle Principale : Utiliser Bootstrap Uniquement
+
+Le projet utilise **Bootstrap 5** comme framework CSS. Toutes les interfaces doivent être stylées en utilisant exclusivement les classes Bootstrap.
+
+#### ❌ À NE PAS FAIRE
+
+1. **NE PAS** ajouter de CSS inline dans les templates Twig
+   ```twig
+   {# MAUVAIS #}
+   <div style="color: red; margin: 20px;">Contenu</div>
+   ```
+
+2. **NE PAS** ajouter de balises `<style>` dans les templates
+   ```twig
+   {# MAUVAIS #}
+   {% block stylesheets %}
+       <style>
+           .my-class { color: blue; }
+       </style>
+   {% endblock %}
+   ```
+
+3. **NE PAS** créer de fichiers SCSS personnalisés pour des pages spécifiques (sauf exception validée)
+   ```scss
+   // MAUVAIS - Éviter de créer des fichiers comme _register.scss, _login.scss, etc.
+   ```
+
+#### ✅ À FAIRE
+
+1. **Utiliser les classes Bootstrap** pour tous les besoins de styling
+   ```twig
+   {# BON #}
+   <div class="text-danger mt-4">Contenu</div>
+   ```
+
+2. **Utiliser les composants Bootstrap** (cards, forms, alerts, etc.)
+   ```twig
+   {# BON #}
+   <div class="card shadow-sm">
+       <div class="card-body p-4">
+           <h1 class="card-title text-center mb-4">Title</h1>
+       </div>
+   </div>
+   ```
+
+3. **Utiliser les utilitaires Bootstrap** pour le spacing, les couleurs, la typographie, etc.
+   ```twig
+   {# BON #}
+   <div class="container py-5">
+       <div class="row justify-content-center">
+           <div class="col-md-6 col-lg-5">
+               <!-- Contenu -->
+           </div>
+       </div>
+   </div>
+   ```
+
+### Ressources Bootstrap
+
+- [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/)
+- [Bootstrap Utilities](https://getbootstrap.com/docs/5.3/utilities/)
+- [Bootstrap Components](https://getbootstrap.com/docs/5.3/components/)
+
+### Exceptions
+
+Si un besoin de styling personnalisé est vraiment nécessaire et ne peut pas être résolu avec Bootstrap :
+
+1. **Consulter** d'abord s'il existe une classe utilitaire Bootstrap
+2. **Documenter** la raison de l'exception
+3. **Ajouter** le CSS dans `assets/styles/app.scss` (pas dans les templates)
+4. **Utiliser** une classe sémantique réutilisable
+
+### Structure des Assets
+
+```
+assets/
+├── styles/
+│   ├── config/
+│   │   └── _variables.scss    # Variables personnalisées
+│   ├── utilities/
+│   │   └── _base.scss          # Styles de base globaux
+│   ├── views/
+│   │   └── _home.scss          # Styles spécifiques (si vraiment nécessaire)
+│   └── app.scss                # Point d'entrée principal
+```
+
+### Formulaires Symfony
+
+Les formulaires Symfony utilisent automatiquement les thèmes Bootstrap :
+
+```yaml
+# config/packages/twig.yaml
+twig:
+    form_themes:
+        - 'bootstrap_5_layout.html.twig'
+```
+
+Cela signifie que tous les formulaires générés avec `form_widget()`, `form_label()`, etc. utilisent déjà les classes Bootstrap.

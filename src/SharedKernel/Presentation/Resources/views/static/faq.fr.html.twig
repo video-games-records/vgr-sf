@@ -1,0 +1,507 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Foire Aux Questions - VGR{% endblock %}
+
+{% block meta_description %}Trouvez rapidement les réponses à vos questions les plus fréquentes sur Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# Header #}
+    <div class="text-center mb-5">
+        <div class="d-flex justify-content-center mb-3">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                <i class="bi bi-question-circle h1 text-primary mb-0"></i>
+            </div>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">Foire Aux Questions</h1>
+        <p class="lead text-muted">
+            Trouvez rapidement les réponses à vos questions les plus fréquentes
+        </p>
+    </div>
+
+    {# FAQ Sections #}
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            {# À propos de VGR #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        À propos de VGR
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="aboutVGR">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#whatIsVGR">
+                                    Qu'est-ce que c'est VGR ?
+                                </button>
+                            </h3>
+                            <div id="whatIsVGR" class="accordion-collapse collapse" data-bs-parent="#aboutVGR">
+                                <div class="accordion-body">
+                                    <p>VGR (ou Video Games Records) est un site où vous pouvez poster vos records de jeux vidéo, qu'ils soient de console, ordinateur ou smartphone.</p>
+                                    <p>Chacun poste ses propres records et un classement est réalisé pour définir le ou la meilleur(e) selon le nombre de points/Records qu'il aura obtenu en fonction de son classement et selon le nombre de premières places obtenues (les médailles d'or).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Records et Scores #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-trophy me-2"></i>
+                        Records et Scores
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="recordsScores">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#submitScores">
+                                    Je veux envoyer mes scores !
+                                </button>
+                            </h3>
+                            <div id="submitScores" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>Comment poster un record ?</strong></p>
+                                    <ol>
+                                        <li>Cliquez sur l'onglet principal "Jeux" : la liste de tous les jeux disponibles s'affiche.</li>
+                                        <li>Choisissez le jeu sur lequel vous posterez vos records. (Si votre jeu n'est pas dans la liste, consultez la rubrique "Comment proposer un nouveau jeu ?").</li>
+                                        <li>Vous pouvez également taper le nom de votre jeu dans la partie "Rechercher" du site.</li>
+                                        <li>Cette nouvelle page est la page des records de votre jeu. Cliquez sur un groupe de records (ex: Meilleurs Temps) puis sur le niveau auquel vous voulez ajouter votre record.</li>
+                                        <li>Vous arrivez alors sur une page avec plein de pseudos et plein de scores, temps ou autres. Cliquez sur le bouton "poster mes scores" puis écrivez les records dans les bonnes proportions (si on vous demande un score, ne tapez pas 1:15.86).</li>
+                                        <li>Validez, vos records apparaissent et vous êtes déjà classé !</li>
+                                    </ol>
+                                    <p><strong>Pour poster plusieurs records en même temps :</strong> cliquez simplement sur le groupe de records puis sur le bouton "Poster mes scores". Vous aurez alors à saisir vos scores de la même manière que pour un record seul. Vous ne devez remplir que les champs dans lesquels vous avez effectué un score, pour les autres, vous devez laisser blanc. Ceci fait, cliquez sur "envoyer" et tous vos scores seront classés.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editScore">
+                                    Zut ! Je me suis trompé en écrivant mon score !
+                                </button>
+                            </h3>
+                            <div id="editScore" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>Comment éditer un record ?</strong></p>
+                                    <p>Si vous vous êtes trompé ou si vous avez amélioré votre record, vous pouvez l'éditer en allant directement sur le record (comme pour le poster) puis cliquez sur le bouton "Editer ou prouver mon score".</p>
+                                    <p>Votre record sera alors instantanément édité puis classé !</p>
+                                    <p>Vous pouvez aussi éditer plusieurs records en même temps en cliquant sur le bouton "Poster mes scores".</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#deleteScore">
+                                    Comment supprimer son score ?
+                                </button>
+                            </h3>
+                            <div id="deleteScore" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p>Vous ne pouvez pas supprimer vous-même un score envoyé sur VGR, mais juste l'éditer, uniquement lorsqu'il est en statut "carré gris" (non prouvé) ou "carré vert" (preuve validée).</p>
+                                    <p><strong>Rappel du Règlement :</strong> il est interdit de poster un score de 0 (zéro).</p>
+                                    <p>Vous pouvez demander à un Administrateur de supprimer votre (ou vos) score(s), mais cela doit rester extrêmement occasionnel, et biensûr pas lorsqu'une procédure de demande de preuve est en cours. Merci donc de rester vigilant et responsable.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#recordDisappears">
+                                    Euh, j'avais pas mis un score à ce niveau y'a un mois ?
+                                </button>
+                            </h3>
+                            <div id="recordDisappears" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>Pourquoi mon record a disparu ?</strong></p>
+                                    <p>Suite à une demande de preuve, si le membre n'a pas prouvé son record dans le délai de deux semaines qui lui est accordé, le score sera considéré comme invalide et sera désactivé.</p>
+                                    <p>Toutefois, cela n'empêchera pas de pouvoir poster un autre score, mais cette fois il devra être obligatoirement accompagné d'une preuve.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proposeGame">
+                                    Il y a plein de jeux, mais pas le mien !
+                                </button>
+                            </h3>
+                            <div id="proposeGame" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>Comment proposer un nouveau jeu ?</strong></p>
+                                    <ol>
+                                        <li>Tout d'abord, assurez-vous que le jeu que vous demandez n'est pas déjà sur le site, cela évitera une perte de temps pour tout le monde.</li>
+                                        <li>S'il n'y est pas, allez dans le forum puis, dans le topic Suggestion du groupe Record, lisez le règlement pour comprendre quelle sera la mise en forme de la présentation de ce nouveau jeu (n'hésitez pas à regarder la présentation des autres personnes pour avoir des exemples).</li>
+                                        <li>Une fois votre demande faite, les ajouteurs, designers et traducteurs s'occuperont d'ajouter votre nouveau jeu sur le site.</li>
+                                    </ol>
+                                    <p>Les jeux sont ajoutés à un rythme d'un jeu par jour, parfois plus, suivant le nombre de demandes d'ajout en attente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Système de Preuves #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-shield-check me-2"></i>
+                        Système de Preuves
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="proofSystem">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#askProof">
+                                    Ouais ouais... Moi, son record, au premier, j'y crois pas !
+                                </button>
+                            </h3>
+                            <div id="askProof" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>Comment demander une preuve ?</strong></p>
+                                    <p>Pour demander une preuve sur un record, allez sur la page des scores comme si vous éditiez ou postiez le vôtre et en face du record qui vous semble louche, cliquez sur le petit carré gris. Justifiez alors votre demande de preuve puis envoyez-la.</p>
+                                    <p><strong>Afin d'éviter le spam, vous ne pouvez demander que 3 preuves par jours.</strong></p>
+                                    <p>Le carré pourra prendre les couleurs suivantes :</p>
+                                    <ul>
+                                        <li><strong>Gris :</strong> ni demande de preuve ni preuve n'ont été envoyées.</li>
+                                        <li><strong>Bleu :</strong> une preuve, envoyée spontanément, est en attente de validation par un admin.</li>
+                                        <li><strong>Orange :</strong> une demande de preuve est en cours de validation par un admin.</li>
+                                        <li><strong>Jaune :</strong> une preuve, envoyée suite à la demande d'un autre joueur validée par un admin, est en attente de validation.</li>
+                                        <li><strong>Rouge :</strong> une demande de preuve est validée par un admin, elle a été transmise au membre qui a 14 jours pour prouver son record.</li>
+                                        <li><strong>Vert :</strong> le record est prouvé; cliquez sur l'icône à côté pour afficher la preuve.</li>
+                                        <li><strong>Noir :</strong> le délai de 14 jours pour répondre à une demande de preuve n'a pas été respecté : le score est désactivé.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reactivateRecord">
+                                    Mon record est désactivé !
+                                </button>
+                            </h3>
+                            <div id="reactivateRecord" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>Comment réactiver un score ?</strong></p>
+                                    <p>Pour réactiver un score, il suffit tout simplement d'envoyer une preuve valide pour ce score.</p>
+                                    <p>Vous pouvez lire le paragraphe suivant si vous ne savez pas comment envoyer une preuve.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proveRecord">
+                                    Personne ne me croira, il faut que je prouve ce record !
+                                </button>
+                            </h3>
+                            <div id="proveRecord" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>Comment prouver mon record ?</strong></p>
+                                    <p>Cela se présente sous la forme d'un bouton "Prouver mon record" semblable à celui pour poster un record ou en cliquant sur le "+" vert, et qui est affiché sur les pages dans lesquelles nous avons déjà posté un record.</p>
+                                    <p>Vous allez arriver sur une page ou vous choisirez entre une preuve photo (type *.jpg - 250ko max) ou vidéo (les vidéos utilisent désormais un lien Youtube).</p>
+                                    <p><strong>Pour mettre la photo en *.jpg :</strong> Pour la mettre en *.jpg, rien de plus simple, exécutez l'image puis cliquez sur Fichier → Enregistrer sous... puis choisissez le format *.jpg pour l'enregistrement.</p>
+                                    <p>Si la photo est trop volumineuse, utilisez un logiciel qui va vous créer un aperçu réduit de votre photo (tel que l'Aperçu des images et des télécopies Windows ou autre) puis appuyez sur la touche "Impr écran" de votre clavier. Allez ensuite dans un logiciel d'édition d'image (Paint, Photoshop, Gimp, etc...) puis collez l'image que vous aviez copiée en appuyant sur "Impr écran". Découpez l'image pour n'obtenir que la version de l'aperçu puis enregistrez-la. Elle doit maintenant être de la bonne taille.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proveRecordDetailed">
+                                    Comment prouver mon record ?
+                                </button>
+                            </h3>
+                            <div id="proveRecordDetailed" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>Deux méthodes pour prouver votre record :</strong></p>
+                                    <p><strong>Méthode 1 :</strong> Dans la zone Mes preuves: Sélectionnez votre jeu et cliquez sur le nom du jeu. Vous pouvez ouvrir tous les groupes du jeu, ou en sélectionner un en particulier, à l'aide de la flèche déroulante. Ensuite le plus simple est de déplacer le fichier de votre preuve en le faisant coulisser vers la case correspondante ou sinon de cliquer sur le bouton "Charger fichier", puis sélectionnez votre fichier</p>
+                                    <p><strong>Méthode 2 :</strong> Depuis la page du record. Vous avez un lien direct vers une page pour le prouver, cela vous dirige vers une nouvelle page, où vous pouvez prouver par photo (Parcourir vos fichiers), ou par vidéo (dans ce cas, copiez le lien URL de YouTube dans la case correspondante. N'oubliez pas de valider votre envoi.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#respondProofRequest">
+                                    Comment répondre à une demande de preuve ?
+                                </button>
+                            </h3>
+                            <div id="respondProofRequest" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p>Si vous avez un score (ou plusieurs) en statut "carré orange" (preuve demandée), vous devez attendre qu'un Contrôleur vérifie cette demande de preuve, puis soit la valide (passage du statut en "carré rouge") soit la refuse (retour au statut "carré gris").</p>
+                                    <p>Vous ne pouvez pas modifier votre score quand une preuve vous est demandée (ni demander à le supprimer).</p>
+                                    <p>Après vérification de la demande de preuve (carré rouge ou gris), vous pouvez alors envoyer votre preuve (voir "Comment prouver mon record ?").</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Points et Badges #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-award me-2"></i>
+                        Points et Badges
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="pointsBadges">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pointSystem">
+                                    Explications sur le système de points
+                                </button>
+                            </h3>
+                            <div id="pointSystem" class="accordion-collapse collapse" data-bs-parent="#pointsBadges">
+                                <div class="accordion-body">
+                                    <p>Sur VGR, il y a plusieurs sortes de points :</p>
+                                    <p><strong>Les Points Records :</strong> Ce sont les points gagnés lorsque vous avez des records sur un jeu. L'algorithme mis en place pour le calcul de ces points fonctionne ainsi : le 1er a 100 x le nombre de posts sur ce record, le 2ème 80% du 1er, le 3ème 80% du 2ème, le 4ème 81% du 3ème et ainsi de suite en incrémentant le pourcentage toutes les deux positions.</p>
+                                    <p><strong>Les Points Jeux :</strong> Vous gagnez des points sur chaque jeu. Plus il y'a de participant sur un jeu, plus celui-ci rapporte des points. Vers 25 participants, le maximum de point peut être atteint.</p>
+                                    <p><strong>Les Points Badges :</strong> Vous gagnez des points grâce aux badges que vous obtenez sur le site. <em>(Les badges Master rapportent des points selon le nombre de joueurs sur le jeu)</em></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#badges">
+                                    Que sont les badges ?
+                                </button>
+                            </h3>
+                            <div id="badges" class="accordion-collapse collapse" data-bs-parent="#pointsBadges">
+                                <div class="accordion-body">
+                                    <p>Les Badges sont divisés en 9 catégories :</p>
+                                    <p><strong>Les Badges "Spécial" :</strong> délivrés par le webmaster ou un administrateur s'ils jugent que vous avez profondément aidé le site et que vous continuerez de le faire. Est compris dans cette catégorie le badge de membre, offert dès votre première connexion au site.</p>
+                                    <p><strong>Les Badges "Master" :</strong> délivrés automatiquement lorsque vous êtes le premier au classement général d'un jeu. Les badges Master sont les seuls badges que vous pouvez perdre puisqu'il suffit que vous perdiez votre place de premier.</p>
+                                    <p><strong>Les Badges "Série" :</strong> délivrés automatiquement lorsque vous êtes le premier au classement d'une série, similaire aux badges Master mais pour les séries.</p>
+                                    <p><strong>Les Badges "Plateforme" :</strong> délivrés automatiquement lorsque vous êtes le premier au classement d'une plateforme, similaire aux badges Master mais pour les plateformes.</p>
+                                    <p><strong>Les Badges "Record" :</strong> délivrés dès que vous postez un certain nombre de records sur tout le site (20, 50, 100, 250, 500, 750, 1000, 1500, 2500, 5000, 7500, 10000)</p>
+                                    <p><strong>Les Badges "Preuves" :</strong> délivrés dès que vous envoyez un certain nombre de preuves sur tout le site (20, 50, 100, 250, 500, 750, 1000, 1500, 2500, 5000, 7500, 10000)</p>
+                                    <p><strong>Les Badges "Forum" :</strong> délivrés dès que vous postez un certain nombre de messages sur le forum (20, 50, 100, 250, 500, 750, 1000, 1500, 2500, 5000, 7500, 10000)</p>
+                                    <p><strong>Les Badges "Donations" :</strong> délivrés lorsque vous faites des dons au site.</p>
+                                    <p><strong>Les Badges "Connexion" :</strong> délivrés pour chaque connexion sur le site, dans la limite d'une connexion par jour (5, 10, 25, 50, 75, 100, 150, 200, 350, 500, 750, 1000)</p>
+                                    <p>Vous pouvez consulter vos badges en cliquant sur le lien "Mon profil" dans votre zone personnelle en haut du site.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#medals">
+                                    A quoi correspond une médaille d'or ? Et une médaille de platine ?
+                                </button>
+                            </h3>
+                            <div id="medals" class="accordion-collapse collapse" data-bs-parent="#pointsBadges">
+                                <div class="accordion-body">
+                                    <p>Une <strong>médaille d'or</strong> est attribuée lorsque vous êtes 1er sur un score, seul ou à égalité.</p>
+                                    <p>Une <strong>médaille de platine</strong> est attribuée lorsque vous êtes 1er sur un score, mais devant au moins un autre membre, et donc pas égalé. Les médailles de platines peuvent ainsi être considérées comme des "records".</p>
+                                    <p>Dans votre profil, chaque médaille de platine est aussi comptée (additionnée) comme une médaille d'or.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Équipes #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-people me-2"></i>
+                        Équipes
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="teams">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#joinTeam">
+                                    Comment rejoindre l'équipe de son choix ?
+                                </button>
+                            </h3>
+                            <div id="joinTeam" class="accordion-collapse collapse" data-bs-parent="#teams">
+                                <div class="accordion-body">
+                                    <p>Vous devez demander à rejoindre une équipe via le profil de l'équipe, puis attendre que le leader accepte ou refuse votre demande.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#teamBadges">
+                                    Comment ordonner les master badges d'équipe?
+                                </button>
+                            </h3>
+                            <div id="teamBadges" class="accordion-collapse collapse" data-bs-parent="#teams">
+                                <div class="accordion-body">
+                                    <p>Notez que seul le chef d'équipe peut classer les Master Badges d'équipe, et valider leur place dans le tableau des MB d'équipe.</p>
+                                    <ol>
+                                        <li>Allez dans vle profil d'équipe.</li>
+                                        <li>Allers sur l'onglet "Badges"</li>
+                                        <li>Déplacez les badges comme vous le souhaitez</li>
+                                        <li>Confirmez vos choix en cliquant sur "Ordonner les badges" (tout en bas)</li>
+                                        <li>Attendez environ 1 min qu'un bandeau vert "Confirmation: OK" apparaisse (ne déplacez rien durant ce temps de sauvegarde)</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Forum et Communauté #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-chat-dots me-2"></i>
+                        Forum et Communauté
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="forumCommunity">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#forumRules">
+                                    Les règles du forum
+                                </button>
+                            </h3>
+                            <div id="forumRules" class="accordion-collapse collapse" data-bs-parent="#forumCommunity">
+                                <div class="accordion-body">
+                                    <p>Comme dans tous les forums, il faut :</p>
+                                    <ul>
+                                        <li>Lire les règlements, s'il y en a un, dans chaque rubrique.</li>
+                                        <li>Expliquer clairement ce que l'on veut dire et ceci passe par l'interdiction du langage dit "SMS" ou "MSN".</li>
+                                        <li>Ne pas faire de double, triple, quadruple, quintuple... ou plus de posts.</li>
+                                        <li>Dès qu'on en a la possibilité, éditer son message plutôt que de re-créer un post.</li>
+                                        <li>Respecter les autres et ne pas écrire d'insultes ou de mots à caractère "choquant".</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#communityGuidelines">
+                                    Soyez cool et respectueux
+                                </button>
+                            </h3>
+                            <div id="communityGuidelines" class="accordion-collapse collapse" data-bs-parent="#forumCommunity">
+                                <div class="accordion-body">
+                                    <p><strong>REMARQUE :</strong> L'association Video Games Records refuse d'admettre sa responsabilité en cas de messages, images ou vidéos, posté(es) sur le-dit forum, qui seraient à caractère pornographique, pédophile, zoophile, racistes, ou autres pouvant heurter à la sensibilité des personnes.</p>
+                                    <p>En cas de messages, images ou vidéos posté(es), les modérateurs auront pour tâche de supprimer le-dit message ainsi que d'appliquer une sanction sévère envers la personne rédactrice du post.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Gestion du Compte #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-person-gear me-2"></i>
+                        Gestion du Compte
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="accountManagement">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#changeNickname">
+                                    Mon pseudo ne me correspond pas
+                                </button>
+                            </h3>
+                            <div id="changeNickname" class="accordion-collapse collapse" data-bs-parent="#accountManagement">
+                                <div class="accordion-body">
+                                    <p><strong>Est-il possible de changer de pseudo ?</strong></p>
+                                    <p>Il est bien entendu possible de modifier son pseudo mais seulement pour une bonne raison. En effet, le changement de pseudo implique un recalcul de beaucoup de données sur le site.</p>
+                                    <p>C'est pourquoi pour changer de pseudo, vous devez contacter par MP un webmaster du site afin d'expliquer les raisons de ce changement. Votre demande sera traitée rapidement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Anti-Triche et Règles #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-shield-exclamation me-2"></i>
+                        Anti-Triche et Règles
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="antiCheating">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emulationBan">
+                                    Pourquoi l'émulation reste-t-elle interdite sur VGR ?
+                                </button>
+                            </h3>
+                            <div id="emulationBan" class="accordion-collapse collapse" data-bs-parent="#antiCheating">
+                                <div class="accordion-body">
+                                    <p>Sauf exceptions autorisées (Console Virtuelle Wii, Nintendo eShop WiiU/3DS, consoles rétro-compatibles, consoles mini/classic), l'émulation reste interdite sur VGR car la diversité des émulateurs existants rend la chose beaucoup trop difficile à gérer et contrôler.</p>
+                                    <p>Avec un émulateur non-officiel, on peut en effet configurer des filtres graphiques, des niveaux personnalisables, des codes de triche, des sauvegardes rapides et d'autres fonctions qui modifient profondément l'expérience de jeu et le gameplay.</p>
+                                    <p>La volonté de VGR a toujours été de proposer des records légitimes, comparables dans les mêmes conditions, sur les divers jeux et consoles disponibles dans le commerce.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cheatingAccusation">
+                                    Pourquoi suis-je accusé de triche ?
+                                </button>
+                            </h3>
+                            <div id="cheatingAccusation" class="accordion-collapse collapse" data-bs-parent="#antiCheating">
+                                <div class="accordion-body">
+                                    <p>S'il existe au moins un record pour lequel il y a un doute ou une présomption que vous n'avez pas respecté ni les règles spécifiques du jeu (dans la page principale du jeu), ni le Règlement de VGR, un topic de triche potentielle pourra être ouvert.</p>
+                                    <p>Le sujet Tricherie a un « ? », ce qui signifie qu'il est là pour montrer et discuter des tricheurs potentiels. Un message personnel sera envoyé au membre accusé.</p>
+                                    <p>Celui-ci doit répondre dans le forum, dans un délai de 15 jours, avec les arguments les plus détaillés possibles, et répondre à toute question possible des accusateurs, dans une position respectueuse envers eux.</p>
+                                    <p>Si nécessaire, n'hésitez pas à demander aux accusateurs de clarifier leurs propos, afin d'éviter les incompréhensions, ou autres commentaires trop rapides ou partiels.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Contact Section #}
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h3 class="h5 mb-2">Vous ne trouvez pas votre réponse ?</h3>
+                        <p class="text-muted mb-4">
+                            Notre équipe de support est là pour vous aider
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3">
+                            <a href="mailto:support@videogamesrecords.net" class="text-decoration-none fw-medium">
+                                <i class="bi bi-envelope me-1"></i> support@videogamesrecords.net
+                            </a>
+                            <span class="d-none d-sm-inline text-muted">•</span>
+                            <a href="#" class="text-decoration-none fw-medium">
+                                <i class="bi bi-chat-dots me-1"></i> Contactez-nous
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

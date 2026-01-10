@@ -1,0 +1,41 @@
+{#
+    Language Switcher Component
+
+    This component displays a language switcher that allows users to switch between
+    available locales (English and French).
+
+    Usage in your template:
+    {% include '@SharedKernel/components/language_switcher.html.twig' %}
+
+    You can also customize the style by passing a 'class' parameter:
+    {% include '@SharedKernel/components/language_switcher.html.twig' with {class: 'my-custom-class'} %}
+#}
+
+{% set currentRoute = app.request.attributes.get('_route') %}
+{% set routeParams = app.request.attributes.get('_route_params') %}
+
+<div class="language-switcher {{ class|default('') }}">
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if app.request.locale == 'fr' %}
+                🇫🇷 Français
+            {% else %}
+                🇬🇧 English
+            {% endif %}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'en' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'en'})) }}">
+                    🇬🇧 English
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'fr' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'fr'})) }}">
+                    🇫🇷 Français
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

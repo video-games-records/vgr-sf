@@ -1,0 +1,101 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+#
+# Ce fichier contient les traductions pour les éléments transversaux
+# partagés entre tous les contextes (navigation, footer, messages communs)
+#
+# ========================================
+
+# === NAVIGATION (Menu principal) ===
+navigation:
+  # Menu principal
+  home: "Home"
+  games: "Games"
+  leaderboards: "Leaderboards"
+  community: "Community"
+  admin: "Admin"
+
+  # Dropdown Games
+  games_dropdown:
+    by_letter: "By Letter"
+    by_platform: "By Platform"
+    by_series: "By Series"
+    featured_games: "Featured Games"
+    latest_games: "Latest Games"
+
+  # Dropdown Leaderboards
+  leaderboards_dropdown:
+    game_points: "Game Points"
+    record_points: "Record Points"
+    medals: "Medals"
+    cups: "Cups"
+    badges: "Badges"
+    proofs: "Proofs"
+    country: "Country"
+
+  # Dropdown Community
+  community_dropdown:
+    forum: "Forum"
+    players: "Players"
+    teams: "Teams"
+
+  # User menu (when logged in)
+  user_menu:
+    profile: "Profile"
+    settings: "Settings"
+    logout: "Logout"
+
+  # Login (when not logged in)
+  login: "Login"
+
+  # Language switcher
+  language:
+    english: "English"
+    french: "Français"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. All rights reserved."
+  links:
+    faq: "FAQ"
+    rules: "Rules"
+    privacy: "Privacy"
+    terms: "Terms"
+    contact: "Contact"
+    about: "About"
+    legal: "Legal"
+
+# === THEME ===
+theme:
+  toggle: "Toggle theme"
+  light: "Light mode"
+  dark: "Dark mode"
+
+# === COMMON (Éléments communs réutilisables) ===
+common:
+  close: "Close"
+  save: "Save"
+  cancel: "Cancel"
+  submit: "Submit"
+  delete: "Delete"
+  edit: "Edit"
+  back: "Back"
+  confirm: "Confirm"
+  search: "Search"
+  loading: "Loading..."
+  no_results: "No results found"
+
+# === FLASH MESSAGES (Messages système communs) ===
+flash:
+  success:
+    generic: "Operation completed successfully"
+    saved: "Changes saved successfully"
+  error:
+    generic: "An error occurred. Please try again."
+    unauthorized: "You are not authorized to perform this action"
+    validation: "Please check the form for errors"
+  info:
+    processing: "Your request is being processed..."
+  warning:
+    unsaved_changes: "You have unsaved changes. Are you sure you want to leave?"

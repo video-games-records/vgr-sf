@@ -1,0 +1,508 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Frequently Asked Questions - VGR{% endblock %}
+
+{% block meta_description %}Find quick answers to your most common questions about Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# Header #}
+    <div class="text-center mb-5">
+        <div class="d-flex justify-content-center mb-3">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                <i class="bi bi-question-circle h1 text-primary mb-0"></i>
+            </div>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">Frequently Asked Questions</h1>
+        <p class="lead text-muted">
+            Find quick answers to your most common questions
+        </p>
+    </div>
+
+    {# FAQ Sections #}
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            {# About VGR #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        About VGR
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="aboutVGR">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#whatIsVGR">
+                                    What is VGR?
+                                </button>
+                            </h3>
+                            <div id="whatIsVGR" class="accordion-collapse collapse" data-bs-parent="#aboutVGR">
+                                <div class="accordion-body">
+                                    <p>VGR (or Video Games Records) is a website where you can post your video games records, whatever there is on computer, game console or smartphone.</p>
+                                    <p>Everyone posts his own records. A ranking is made to tell who is the best depending on the number of points/records he will have got according to his rank, and number of first place got (the gold medals).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Records and Scores #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-trophy me-2"></i>
+                        Records and Scores
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="recordsScores">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#submitScores">
+                                    I want to send my scores!
+                                </button>
+                            </h3>
+                            <div id="submitScores" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>How to post a record?</strong></p>
+                                    <ol>
+                                        <li>Click the main tab "Games": the website display a list of all available games.</li>
+                                        <li>Choose the game where you'll post your records. (If your game is not in the list, please read "How to propose a new game?").</li>
+                                        <li>You can also search your game by using the "Search" part on the site.</li>
+                                        <li>This new page is the page of your game records. Click on a record's group (ex: Best Time) and then, on the level at which you want to add your record.</li>
+                                        <li>You arrive on a page with lots of nicknames and scores, time or others. Click the "Submit my scores" button and then write the records in the proper proportions (if a score is requested, do not type 1:15.86).</li>
+                                        <li>Confirm your record and you are already ranked!</li>
+                                    </ol>
+                                    <p><strong>To submit multiple records simultaneously:</strong> simply click on the group of records and then click the "Submit my scores" button. You will then enter your scores in the same way as for a single record. You must fill in the fields you have score for, and let the others blank. Once done, click "send" button and your scores will be ranked.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editScore">
+                                    Damn! I made a mistake by writing my score!
+                                </button>
+                            </h3>
+                            <div id="editScore" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>How to edit a record?</strong></p>
+                                    <p>If you make a mistake or if you have improved your record, you can edit it by going on the record (like to post it) and then click "Edit or prove my record."</p>
+                                    <p>Your record will then be edited and classified instantly!</p>
+                                    <p>You can also edit multiple records at the same time by clicking on "Submit my scores"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#deleteScore">
+                                    How to delete your score?
+                                </button>
+                            </h3>
+                            <div id="deleteScore" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p>You can't delete a score posted on VGR yourself, but just edit it, only when it is in "grey square" status (no proof) or "green square" status (proof validated).</p>
+                                    <p><strong>Rules reminder:</strong> it's forbidden to set your scores to 0.</p>
+                                    <p>You can ask to an admin to delete your score(s), but this should be extremely occasional, and of course not when there is an ongoing proof ask procedure. So, please be vigilant and responsible.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#recordDisappears">
+                                    Hum, did I not send a score one month ago?
+                                </button>
+                            </h3>
+                            <div id="recordDisappears" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>Why my record disappears?</strong></p>
+                                    <p>Following to an asking proof, if the member has not proved his record within the two weeks allowed, his score will be considered invalid and will be deactivated.</p>
+                                    <p>However, this will not prevent you from posting another score, but now it must be necessarily accompanied by a proof.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proposeGame">
+                                    There are lots of games, but not mine!
+                                </button>
+                            </h3>
+                            <div id="proposeGame" class="accordion-collapse collapse" data-bs-parent="#recordsScores">
+                                <div class="accordion-body">
+                                    <p><strong>How to propose a new game?</strong></p>
+                                    <ol>
+                                        <li>First, make sure that the game you are asking is not already on the site, this will avert a waste of time for everyone.</li>
+                                        <li>If it is not in the site, go on forum, in Suggestion's topic in Record's group, read the rules to understand what the formatting of the presentation of the new game (feel free to watch the presentation of other people for examples).</li>
+                                        <li>Once you made you ask, adders, designers, translators and editors work to add your new game on the site.</li>
+                                    </ol>
+                                    <p>Games are added with a one by day rhythm, sometimes more. It depends on number of games that are in waiting to be added.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Proof System #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-shield-check me-2"></i>
+                        Proof System
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="proofSystem">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#askProof">
+                                    Well, well I don't think the first player's score is true!
+                                </button>
+                            </h3>
+                            <div id="askProof" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>How to ask a proof?</strong></p>
+                                    <p>To ask a proof on a record, go to the same page on which you can edit or post a new record and to the right of the odd record, click on the little gray square. Then justify your asking for proof and send it!</p>
+                                    <p><strong>To avoid spamming, you can only ask 3 proofs a day.</strong></p>
+                                    <p>The little gray square can take the following colors:</p>
+                                    <ul>
+                                        <li><strong>Grey:</strong> neither proof or ask have been sent.</li>
+                                        <li><strong>Blue:</strong> a proof sent voluntarily is under investigation by an admin.</li>
+                                        <li><strong>Orange:</strong> an ask for proof is under investigation by an admin.</li>
+                                        <li><strong>Yellow:</strong> a proof, sent following an ask for proof, is under investigation by an admin.</li>
+                                        <li><strong>Red:</strong> an ask for proof is validated by an admin, it is sent to the member who has 14 days to prove his record.</li>
+                                        <li><strong>Green:</strong> the record is proven; you can click on the icon at the right of the little green square to see the proof.</li>
+                                        <li><strong>Black:</strong> the 14 days delay to answer to an ask for proof is over: the record is deactivated.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reactivateRecord">
+                                    My record is deactivated!
+                                </button>
+                            </h3>
+                            <div id="reactivateRecord" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>How reactivate a record?</strong></p>
+                                    <p>To reactivate a record, it is easy, you need to send a valid proof.</p>
+                                    <p>You can read the next paragraph if you don't know how to prove a record.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proveRecord">
+                                    Nobody will believe me, I have to prove this record!
+                                </button>
+                            </h3>
+                            <div id="proveRecord" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>How to prove my record?</strong></p>
+                                    <p>This takes the form of a button "edit/prove my record" similar to post a record or by clicking on the green "+", and is displayed on the pages where you have already posted a record.</p>
+                                    <p>You will arrive on a page where you can choose between a photo proof (type *.jpg - 250kb max) or video (videos are now using a YouTube link)</p>
+                                    <p><strong>To save the photo in *.jpg:</strong> To put it in *.jpg is simple: open the picture and then click File → Save As and select the *.jpg format for recording.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proveRecordDetailed">
+                                    How do I prove my record?
+                                </button>
+                            </h3>
+                            <div id="proveRecordDetailed" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p><strong>Two methods to prove your record:</strong></p>
+                                    <p><strong>Method 1:</strong> Go on "Proofs", by clicking on the upper right logo profile, and then the camera. Select your game and click on the underlined "Game name's". Open the right group, and find your score. Click on the button "Upload File". It is a link to your file. If you want to prove by video, then you need to use the second option.</p>
+                                    <p><strong>Method 2:</strong> Go on the existing score (so in the right game, group and record). If you click on the underlined score (underlined means it's a link), it's a direct link to the "proving window". If you click on the underlined name of the record, it's a link to the leaderboard of this score. Then, click on the underlined score to go on the proving window. If you click on the grey square, there's no link, but if you click on the green square, there's a link to the accepted proof.</p>
+                                    <p>In the proving window, you can prove by picture (then load your file), or by video (then copy the URL YouTube link). Video proofs are directly linked to YouTube, so if you want to link your videos, you need to create an account over there also.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#respondProofRequest">
+                                    How to respond to a request for proof?
+                                </button>
+                            </h3>
+                            <div id="respondProofRequest" class="accordion-collapse collapse" data-bs-parent="#proofSystem">
+                                <div class="accordion-body">
+                                    <p>If you have one score (or more) in "orange square" status (proof asked), you need to wait that a Proof Admin check this proof ask, and validate (then "red square" status) or refuse (then "grey square" again).</p>
+                                    <p>You can't modify your score when there is a proof asked (and can't ask for its deletion).</p>
+                                    <p>After proof ask checked (red or grey square), then you can send your proof (see "How to prove?").</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Points and Badges #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-award me-2"></i>
+                        Points and Badges
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="pointsBadges">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pointSystem">
+                                    Explanations about the point system
+                                </button>
+                            </h3>
+                            <div id="pointSystem" class="accordion-collapse collapse" data-bs-parent="#pointsBadges">
+                                <div class="accordion-body">
+                                    <p>On VGR, there are many kinds of point:</p>
+                                    <p><strong>The Records Points:</strong> They are points you win when you have a record on a game. The algorithm developed works like this: the 1st win 100 * number of posts at this record, the 2nd 80% from the 1st, the 3rd 80% from the 2nd, the 4th 81% from the 3rd and repeatedly by incrementing the percentage every two positions.</p>
+                                    <p><strong>The Game Points:</strong> You win point on each submitted game. You win more point if there is more participants on the game. With 25 participants, The max point can be reached.</p>
+                                    <p><strong>The Badge Points:</strong> You win points from badges you earn on the site. <em>(Master badges give you points based on the number of players on the game)</em></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#badges">
+                                    What are badges?
+                                </button>
+                            </h3>
+                            <div id="badges" class="accordion-collapse collapse" data-bs-parent="#pointsBadges">
+                                <div class="accordion-body">
+                                    <p>There are 9 kinds of badges:</p>
+                                    <p><strong>SpecialBadges:</strong> given by webmaster or an administrator if they think you have really help the site and you'll be able to continue to do it. In SpecialBadges, you have the member badge, won during your first connection to the site.</p>
+                                    <p><strong>MasterBadges:</strong> given automatically when you are the first in a general ranking of a game. MasterBadges can be lost just by becoming the second in a general ranking.</p>
+                                    <p><strong>SerieBadges:</strong> given automatically when you are the first in a series ranking, similar to master badges but for series.</p>
+                                    <p><strong>PlatformBadges:</strong> given automatically when you are the first in a platform ranking, similar to master badges but for platforms.</p>
+                                    <p><strong>RecordBadges:</strong> given when you post 20, 50, 100, 250, 500, 750, 1000, 1500, 2500, 5000, 7500 or 10000 records on the site.</p>
+                                    <p><strong>ProofsBadges:</strong> given when you submit 20, 50, 100, 250, 500, 750, 1000, 1500, 2500, 5000, 7500 or 10000 proofs on the site.</p>
+                                    <p><strong>ForumBadges:</strong> given when you post 20, 50, 100, 250, 500, 750, 1000, 1500, 2500, 5000, 7500 or 10000 messages on the site.</p>
+                                    <p><strong>DonationsBadges:</strong> given when you make donations to the site.</p>
+                                    <p><strong>ConnectionBadges:</strong> given for every connection on the site, where only one connection is counting a day (5, 10, 25, 50, 75, 100, 150, 200, 350, 500, 750, 1000).</p>
+                                    <p>You can see your badges by clicking on the link "My profile" in your personnel area, at the top on the right of the site.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#medals">
+                                    What does a gold medal mean? What about a platinum medal?
+                                </button>
+                            </h3>
+                            <div id="medals" class="accordion-collapse collapse" data-bs-parent="#pointsBadges">
+                                <div class="accordion-body">
+                                    <p>A <strong>gold medal</strong> is given when you are 1st on a score, alone or tied.</p>
+                                    <p>A <strong>platinum medal</strong> is given when you are 1st on a score, but in front of at least one other member, and so, not tied. Thus, platinum medals can be considered as "records".</p>
+                                    <p>In your profile, every platinum medal is also counted (added) as a gold medal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Teams #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-people me-2"></i>
+                        Teams
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="teams">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#joinTeam">
+                                    How to join the team of your choice?
+                                </button>
+                            </h3>
+                            <div id="joinTeam" class="accordion-collapse collapse" data-bs-parent="#teams">
+                                <div class="accordion-body">
+                                    <p>You need to request to join a team through the team's profile page. The team leader will then accept or refuse your request.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#teamBadges">
+                                    How do I order team badges?
+                                </button>
+                            </h3>
+                            <div id="teamBadges" class="accordion-collapse collapse" data-bs-parent="#teams">
+                                <div class="accordion-body">
+                                    <p>Note that only the team leader can classify the team Master Badges, and validate their place in the team MB board.</p>
+                                    <ol>
+                                        <li>Go to your team profile.</li>
+                                        <li>Select the tabs "Badges"</li>
+                                        <li>Move the badges as you want</li>
+                                        <li>Confirm your choices by clicking on "Order badges" (at the bottom)</li>
+                                        <li>Wait around 1 min that a "Confirmation: OK" green window appears (don't move anything during this saving time).</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Forum and Community #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-chat-dots me-2"></i>
+                        Forum and Community
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="forumCommunity">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#forumRules">
+                                    Forum rules
+                                </button>
+                            </h3>
+                            <div id="forumRules" class="accordion-collapse collapse" data-bs-parent="#forumCommunity">
+                                <div class="accordion-body">
+                                    <p>As you know in all forums, you have to:</p>
+                                    <ul>
+                                        <li>Read rules, if there are, in each category.</li>
+                                        <li>Clearly explain what you want. Use your real language and not an "SMS" language.</li>
+                                        <li>Avoid double, triple or more posts in the forum.</li>
+                                        <li>Edit your post instead of rewriting a new one.</li>
+                                        <li>Respect other and do not write insults or shocking words.</li>
+                                    </ul>
+                                    <p><strong>NOTE:</strong> The Video Games Records association refuses to admit its liability for messages, images or videos posted on the forum, if it said that would be pornographic, pedophile, zoophile, racist, or others may face the sensitivity of people. In case of messages, pictures or videos posted, the moderators will be tasked to remove the message and apply a severe punishment to the post editor.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#communityGuidelines">
+                                    Be cool and clear your mouth!
+                                </button>
+                            </h3>
+                            <div id="communityGuidelines" class="accordion-collapse collapse" data-bs-parent="#forumCommunity">
+                                <div class="accordion-body">
+                                    <p><strong>NB:</strong> The Video Games Records Association refuses to admit its liability for the pornographic, pedophile, zoophile, or others that may offend the sensibilities of people messages, pictures or videos posted on the forum or all every part of VGR site.</p>
+                                    <p>In case of messages, images, or videos posted, the moderators will apply a severe punishment to the post editor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Account Management #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-person-gear me-2"></i>
+                        Account Management
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="accountManagement">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#changeNickname">
+                                    My nickname does not look like to me
+                                </button>
+                            </h3>
+                            <div id="changeNickname" class="accordion-collapse collapse" data-bs-parent="#accountManagement">
+                                <div class="accordion-body">
+                                    <p><strong>Is it possible to change my nickname?</strong></p>
+                                    <p>Of course, it is possible to change your nickname but only for a good reason. Actually, changing your nickname include to make big calculations of lots of website data.</p>
+                                    <p>That's why to change your nickname, you have to contact by PM a webmaster in order to explain reasons of this modification.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Anti-Cheating and Rules #}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-shield-exclamation me-2"></i>
+                        Anti-Cheating and Rules
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="antiCheating">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emulationBan">
+                                    Why is emulation still banned on VGR?
+                                </button>
+                            </h3>
+                            <div id="emulationBan" class="accordion-collapse collapse" data-bs-parent="#antiCheating">
+                                <div class="accordion-body">
+                                    <p>Except for allowed exceptions (Wii Virtual Console, Nintendo eShop WiiU/3DS, retro-compatible systems, mini/classic systems), emulation remains prohibited on VGR because the diversity of existing emulators makes it too difficult to manage and control.</p>
+                                    <p>With a non-official emulator, you can set up graphic filters, custom levels, cheat codes, quick saves, and other features that deeply alter the gaming experience and gameplay.</p>
+                                    <p>VGR's will has always been to offer legitimate records, comparable under the same conditions, on the various games and consoles, commercially available.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cheatingAccusation">
+                                    Why am I accused of cheating?
+                                </button>
+                            </h3>
+                            <div id="cheatingAccusation" class="accordion-collapse collapse" data-bs-parent="#antiCheating">
+                                <div class="accordion-body">
+                                    <p>If there is at least a record for which there is a doubt or a presumption that you have neither respected the specific Game's Rules (in the main page of the game), nor the VGR Rules, then a potential cheating topic will be opened.</p>
+                                    <p>The topic Cheating has a "?" meaning it is there to show and discuss potential cheaters. A Personal Message can be sent to the accused members.</p>
+                                    <p>The accused members must answer within 15 days, with the most detailed arguments possible, and answer any possible questions of the accusers, in a respectful position towards them.</p>
+                                    <p>If necessary, do not hesitate to ask the accusers to clarify their remarks, in order to avoid misunderstandings, or other too fast or partial comments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Contact Section #}
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h3 class="h5 mb-2">Can't find your answer?</h3>
+                        <p class="text-muted mb-4">
+                            Our support team is here to help you
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3">
+                            <a href="mailto:support@videogamesrecords.net" class="text-decoration-none fw-medium">
+                                <i class="bi bi-envelope me-1"></i> support@videogamesrecords.net
+                            </a>
+                            <span class="d-none d-sm-inline text-muted">•</span>
+                            <a href="#" class="text-decoration-none fw-medium">
+                                <i class="bi bi-chat-dots me-1"></i> Contact us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

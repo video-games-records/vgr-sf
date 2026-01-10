@@ -80,8 +80,9 @@ assets-install: ## Installe les assets dans le répertoire public
 ## Serveur de développement
 ##---------------------------------------------------------------------------
 
-serve: ## Démarre le serveur Symfony
+serve: ## Démarre le serveur Symfony et compile les assets en mode watch
 	symfony server:start -d
+	npm run watch
 
 serve-stop: ## Arrête le serveur Symfony
 	symfony server:stop

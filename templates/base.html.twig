@@ -1,5 +1,6 @@
+{% trans_default_domain 'SharedKernel' %}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app.request.locale }}" data-bs-theme="light">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,15 +46,11 @@
         {% endif %}
 
         {% block stylesheets %}
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
 
         {# JSON-LD Structured Data #}
@@ -64,21 +61,93 @@
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ path('home') }}">
-                    🎮 Video Games Records
+                    <img src="{{ asset('img/logo/video-games-records-logo.png') }}" alt="Video Games Records" height="40">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('home') }}">Home</a>
+                            <a class="nav-link" href="{{ path('home') }}">{{ 'navigation.home'|trans }}</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="gamesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 'navigation.games'|trans }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="gamesDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-alphabet"></i> {{ 'navigation.games_dropdown.by_letter'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-controller"></i> {{ 'navigation.games_dropdown.by_platform'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-collection"></i> {{ 'navigation.games_dropdown.by_series'|trans }}</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-star"></i> {{ 'navigation.games_dropdown.featured_games'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-clock-history"></i> {{ 'navigation.games_dropdown.latest_games'|trans }}</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="leaderboardsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 'navigation.leaderboards'|trans }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="leaderboardsDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up-arrow"></i> {{ 'navigation.leaderboards_dropdown.game_points'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up-arrow"></i> {{ 'navigation.leaderboards_dropdown.record_points'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-award"></i> {{ 'navigation.leaderboards_dropdown.medals'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-trophy"></i> {{ 'navigation.leaderboards_dropdown.cups'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-patch-check"></i> {{ 'navigation.leaderboards_dropdown.badges'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-text"></i> {{ 'navigation.leaderboards_dropdown.proofs'|trans }}</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> {{ 'navigation.leaderboards_dropdown.country'|trans }}</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 'navigation.community'|trans }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-chat-dots"></i> {{ 'navigation.community_dropdown.forum'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> {{ 'navigation.community_dropdown.players'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> {{ 'navigation.community_dropdown.teams'|trans }}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        {# Language Switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if app.request.locale == 'fr' %}
+                                    🇫🇷 FR
+                                {% else %}
+                                    🇬🇧 EN
+                                {% endif %}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'en' ? 'active' : '' }}"
+                                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">
+                                        🇬🇧 {{ 'navigation.language.english'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'fr' ? 'active' : '' }}"
+                                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}">
+                                        🇫🇷 {{ 'navigation.language.french'|trans }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {# Theme Toggle #}
+                        <li class="nav-item">
+                            <button class="nav-link btn btn-link" id="theme-toggle" onclick="toggleTheme()" aria-label="{{ 'theme.toggle'|trans }}">
+                                <i class="bi bi-moon-fill"></i>
+                            </button>
+                        </li>
+
                         {% if app.user %}
                             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SONATA_ADMIN') %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('sonata_admin_dashboard') }}">
-                                        <i class="bi bi-speedometer2"></i> Admin
+                                        <i class="bi bi-speedometer2"></i> {{ 'navigation.admin'|trans }}
                                     </a>
                                 </li>
                             {% endif %}
@@ -87,15 +156,15 @@
                                     <span class="user-badge">{{ app.user.username }}</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}">Profile</a></li>
-                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}">Settings</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}">{{ 'navigation.user_menu.profile'|trans }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}">{{ 'navigation.user_menu.settings'|trans }}</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'navigation.user_menu.logout'|trans }}</a></li>
                                 </ul>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary text-white px-3" href="{{ path('app_login') }}">Login</a>
+                                <a class="nav-link btn btn-primary text-white px-3" href="{{ path('app_login') }}">{{ 'navigation.login'|trans }}</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -103,8 +172,23 @@
             </div>
         </nav>
 
+        {# Site Header with background image (V7 style) - Image only, no content #}
+        <div class="site-header d-none d-md-block"></div>
+
+        {# Flash Messages #}
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="container mt-3">
+                    <div class="alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible fade show" role="alert">
+                        {{ message|trans }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {# Main Content #}
-        <main class="container py-4">
+        <main class="container-fluid py-4">
             {% block body %}{% endblock %}
         </main>
 
@@ -113,13 +197,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <p class="mb-0">&copy; {{ 'now'|date('Y') }} Video Games Records. All rights reserved.</p>
+                        <p class="mb-0">&copy; {{ 'now'|date('Y') }} {{ 'footer.copyright'|trans }}</p>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        <a href="#" class="me-3">About</a>
-                        <a href="#" class="me-3">Contact</a>
-                        <a href="#" class="me-3">Terms</a>
-                        <a href="#">Privacy</a>
+                        <a href="{{ path('static_faq') }}" class="me-3"><i class="bi bi-question-circle"></i> {{ 'footer.links.faq'|trans }}</a>
+                        <a href="{{ path('static_rules') }}" class="me-3"><i class="bi bi-shield-check"></i> {{ 'footer.links.rules'|trans }}</a>
+                        <a href="{{ path('static_privacy') }}" class="me-3"><i class="bi bi-eye"></i> {{ 'footer.links.privacy'|trans }}</a>
+                        <a href="{{ path('static_terms') }}" class="me-3"><i class="bi bi-file-text"></i> {{ 'footer.links.terms'|trans }}</a>
+                        <a href="{{ path('static_contact') }}" class="me-3"><i class="bi bi-envelope"></i> {{ 'footer.links.contact'|trans }}</a>
+                        <a href="{{ path('static_about') }}" class="me-3"><i class="bi bi-info-circle"></i> {{ 'footer.links.about'|trans }}</a>
+                        <a href="#"><i class="bi bi-scale"></i> {{ 'footer.links.legal'|trans }}</a>
                     </div>
                 </div>
             </div>

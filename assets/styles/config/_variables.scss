@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/**
+ * @site            Video Games Records
+ * @note            Config - Variables (Version simplifiée pour Bootstrap)
+ */
+
+/* == @section Fonts ==================== */
+$font-stack-common      : system-ui;
+$font-stack-headings    : "League Gothic", system-ui;
+
+
+/* == @section Colors ==================== */
+/**
+ * Couleurs principales VGR
+ * Format HSL pour faciliter les ajustements
+ */
+$base-color             : hsl(218, 15%, 15%);
+$base-background        : hsl(35, 88%, 52%);   // Orange VGR
+$base-background-2      : hsl(27, 100%, 44%);  // Orange plus foncé pour dégradé
+
+$primary-color          : hsl(223, 88%, 16%);  // Bleu foncé
+$secondary-color        : hsl(252, 82%, 37%);  // Violet
+
+$content-background     : hsl(0, 0%, 100%);    // Blanc
+$secondary-background   : hsl(0, 0%, 93%);     // Gris clair
+
+// Couleurs des badges/médailles
+$platinum               : hsl(197, 100%, 85%);
+$gold                   : hsl(51, 100%, 50%);
+$silver                 : hsl(0, 0%, 75%);
+$bronze                 : hsl(30, 61%, 50%);
+
+$gold-gradient          : linear-gradient(135deg, #ea8100 0%, $gold 10%, #f5ec6b 40%, #f5ec6b 60%, $gold 90%, #ea8100 100%);
+$silver-gradient        : linear-gradient(135deg, #757474 0%, $silver 10%, #d4d1d1  40%, #d4d1d1 60%, $silver 90%, #757474 100%);
+$bronze-gradient        : linear-gradient(135deg, #914707 0%, $bronze 10%, #da8f4d 40%, #da8f4d 60%, $bronze 90%, #914707 100%);
+
+
+/* == @section Breakpoints ==================== */
+/**
+ * Breakpoints personnalisés VGR
+ * Utilisés pour les media queries
+ */
+$small-screen           : 480;   // small screens
+$medium-screen          : 768;   // medium screens
+$large-screen           : 1024;  // large screens
+$extra-large-screen     : 1280;  // extra large screens
+$ultra-large-screen     : 1600;  // ultra large screens
+
+
+/* == @section Bootstrap overrides ==================== */
+/**
+ * Variables Bootstrap que nous surchargeons
+ */
+$primary                : $primary-color;
+$secondary              : $secondary-color;
+
+// Customisation des card-headers
+// $card-cap-bg est géré dans app.scss selon le thème (light/dark)
+// $card-cap-bg            : $base-background;
+$card-cap-padding-y     : 0.75rem;
+$card-cap-padding-x     : 1.25rem;

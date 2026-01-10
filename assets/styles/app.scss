@@ -1,0 +1,137 @@
+// 1. Variables VGR
+@import 'config/variables';
+
+// 2. Import de Bootstrap depuis vendor/twbs/bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// 3. Import de Bootstrap Icons
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+// 4. Utilities (styles de base)
+@import 'utilities/base';
+
+// 5. Import des vues
+@import 'views/home';
+
+// 4. Variables CSS personnalisées pour VGR
+:root {
+    --vgr-primary: #3498db;
+    --vgr-dark: #2c3e50;
+    --vgr-footer: #34495e;
+}
+
+// 5. Styles personnalisés
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+// 6. Styles spécifiques au thème light
+[data-bs-theme="light"] {
+    // Card headers en orange uniquement en mode light
+    .card-header {
+        background-color: $base-background !important;
+        font-weight: 500;
+    }
+}
+
+// 7. Styles spécifiques au thème dark
+[data-bs-theme="dark"] {
+    // En mode dark, les card-headers utilisent le style par défaut de Bootstrap
+    .card-header {
+        background-color: var(--bs-dark-bg-subtle);
+        color: var(--bs-dark-color);
+    }
+}
+
+.navbar {
+    background: var(--vgr-dark) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+
+    img {
+        height: 40px !important; // Force la hauteur du logo
+        width: auto;
+    }
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background: var(--vgr-footer);
+    color: white;
+    margin-top: auto;
+}
+
+footer a {
+    color: var(--vgr-primary);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.user-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+// Site header avec image en arrière-plan (style V7)
+// L'image est en position absolute et ne doit pas déplacer le contenu
+.site-header {
+    position: relative;
+    height: 0; // Ne prend pas d'espace dans le layout
+
+    &::after {
+        position: absolute; // Position absolute pour ne pas affecter le layout
+        content: "";
+        display: block;
+        background: url("../img/background/header-banner.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        z-index: -1;
+        pointer-events: none;
+
+        // Base/Medium
+        top: -60px;
+        right: -200px;
+        width: 722px;
+        height: 431px;
+    }
+}
+
+// Large screens (≥1024px)
+@media (min-width: #{$large-screen}px) {
+    .site-header::after {
+        right: -150px;
+        top: -60px;
+    }
+}
+
+// Extra large screens (≥1280px)
+@media (min-width: #{$extra-large-screen}px) {
+    .site-header::after {
+        top: -60px;
+        width: 810px;
+        height: 484px;
+    }
+}
+
+// Ultra large screens (≥1600px)
+@media (min-width: #{$ultra-large-screen}px) {
+    .site-header::after {
+        right: -100px;
+    }
+}
+
+

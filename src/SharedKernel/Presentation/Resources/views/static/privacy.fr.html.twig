@@ -1,0 +1,265 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de Confidentialité - VGR{% endblock %}
+
+{% block meta_description %}Comment nous collectons, utilisons et protégeons vos données personnelles{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# Header #}
+    <div class="text-center mb-5">
+        <div class="d-flex justify-content-center mb-3">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                <i class="bi bi-shield-fill h1 text-primary mb-0"></i>
+            </div>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">Politique de Confidentialité</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 600px;">
+            Comment nous collectons, utilisons et protégeons vos données personnelles
+        </p>
+    </div>
+
+    {# Important Notice #}
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="alert alert-primary mb-5" role="alert">
+                <div class="d-flex align-items-start">
+                    <i class="bi bi-exclamation-triangle-fill fs-4 me-3 flex-shrink-0"></i>
+                    <div>
+                        <h5 class="alert-heading">Engagement de transparence</h5>
+                        <p class="mb-0">
+                            Cette politique de confidentialité vous explique en détail comment nous traitons vos données personnelles
+                            conformément au Règlement Général sur la Protection des Données (RGPD).
+                            Nous nous engageons à protéger votre vie privée et à vous donner le contrôle sur vos informations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {# Data Collection #}
+            <div class="card mb-4 border-2">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-database me-2 text-primary"></i>
+                        Collecte des Données
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-4 mb-4">
+                        <h4 class="h6 fw-bold mb-3">Données personnelles collectées</h4>
+                        <p>Nous collectons les données suivantes lors de votre inscription et utilisation :</p>
+                        <ul>
+                            <li><strong>Données d'identification :</strong> nom d'utilisateur, adresse email</li>
+                            <li><strong>Données de connexion :</strong> mot de passe (hashé), adresse IP, tokens de session</li>
+                            <li><strong>Données d'utilisation :</strong> commentaires, articles consultés, préférences de langue</li>
+                            <li><strong>Données techniques :</strong> type de navigateur, système d'exploitation, résolution d'écran</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h4 class="h6 fw-bold mb-3">Finalités de la collecte</h4>
+                        <p>Vos données sont collectées pour :</p>
+                        <ul>
+                            <li>Créer et gérer votre compte utilisateur</li>
+                            <li>Vous permettre de commenter les articles</li>
+                            <li>Personnaliser votre expérience (langue, préférences)</li>
+                            <li>Assurer la sécurité de la plateforme</li>
+                            <li>Améliorer nos services grâce aux statistiques d'usage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# Data Usage #}
+            <div class="card mb-4 border-2">
+                <div class="card-header bg-success bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-eye me-2 text-success"></i>
+                        Utilisation des Données
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-4 mb-4">
+                        <h4 class="h6 fw-bold mb-3">Traitement des données</h4>
+                        <p>Nous utilisons vos données de manière transparente :</p>
+                        <ul>
+                            <li><strong>Authentification :</strong> identification sécurisée via JWT tokens</li>
+                            <li><strong>Personnalisation :</strong> affichage dans votre langue préférée</li>
+                            <li><strong>Communication :</strong> notifications importantes sur votre compte</li>
+                            <li><strong>Modération :</strong> vérification du respect des règles communautaires</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h4 class="h6 fw-bold mb-3">Partage des données</h4>
+                        <p><strong>Nous ne vendons jamais vos données personnelles.</strong></p>
+                        <p>Vos données peuvent être partagées uniquement dans les cas suivants :</p>
+                        <ul>
+                            <li>Avec votre consentement explicite</li>
+                            <li>Pour répondre à des obligations légales</li>
+                            <li>Pour protéger nos droits et ceux des autres utilisateurs</li>
+                            <li>En cas de fusion ou acquisition d'entreprise (avec notification préalable)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# Cookies and Tracking #}
+            <div class="card mb-4 border-2">
+                <div class="card-header bg-warning bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-cookie me-2 text-warning"></i>
+                        Cookies et Tracking
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-4 mb-4">
+                        <h4 class="h6 fw-bold mb-3">Utilisation des cookies</h4>
+                        <p>Nous utilisons un minimum de cookies pour les fonctionnalités essentielles :</p>
+                        <ul>
+                            <li><strong>Cookies d'analyse :</strong> Google Analytics pour des statistiques d'usage anonymisées (cookies _ga, _gid)</li>
+                        </ul>
+                        <p>La plupart des préférences utilisateur et données applicatives sont stockées localement dans votre navigateur (localStorage) plutôt qu'en cookies, réduisant le pistage et améliorant la confidentialité.<br>
+                        Vous pouvez désactiver les cookies analytiques dans les paramètres de votre navigateur sans affecter le fonctionnement du site.</p>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h4 class="h6 fw-bold mb-3">Services tiers</h4>
+                        <p>Nous utilisons des services tiers qui peuvent collecter des données :</p>
+                        <ul>
+                            <li><strong>Google Analytics :</strong> statistiques d'usage anonymisées</li>
+                            <li><strong>Hébergement :</strong> serveurs sécurisés en Europe (RGPD compliant)</li>
+                            <li><strong>CDN :</strong> flagcdn.com (drapeaux de pays), static-cdn.jtvnw.net (contenu Twitch), fonts.googleapis.com (Google Fonts)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# Your GDPR Rights #}
+            <div class="card mb-4 border-2">
+                <div class="card-header" style="background-color: rgba(128, 0, 128, 0.1);">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-shield-check me-2" style="color: purple;"></i>
+                        Vos Droits RGPD
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-4 mb-4">
+                        <h4 class="h6 fw-bold mb-3">Droits garantis</h4>
+                        <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+                        <ul>
+                            <li><strong>Droit d'accès :</strong> consulter toutes les données que nous avons sur vous</li>
+                            <li><strong>Droit de rectification :</strong> corriger vos données personnelles</li>
+                            <li><strong>Droit à l'effacement :</strong> supprimer votre compte et vos données</li>
+                            <li><strong>Droit à la portabilité :</strong> récupérer vos données dans un format standard</li>
+                            <li><strong>Droit d'opposition :</strong> s'opposer au traitement des données, sauf lorsqu'il est nécessaire au fonctionnement du service (maintien des classements, cohérence du forum) ou à nos intérêts légitimes dans la fourniture de la plateforme de records de jeux vidéo.</li>
+                            <li><strong>Droit de limitation :</strong> limiter l'utilisation de vos données, sous réserve de l'intégrité des classements</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h4 class="h6 fw-bold mb-3">Exercer vos droits</h4>
+                        <p>Pour exercer vos droits, plusieurs options :</p>
+                        <ul>
+                            <li>Directement dans votre profil pour la modification des données</li>
+                            <li>En nous contactant à : <strong>privacy@videogamesrecords.net</strong></li>
+                        </ul>
+                        <p>Nous nous engageons à répondre dans un délai de <strong>30 jours maximum</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            {# Security and Retention #}
+            <div class="card mb-4 border-2">
+                <div class="card-header bg-danger bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-check-circle me-2 text-danger"></i>
+                        Sécurité et Conservation
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-4 mb-4">
+                        <h4 class="h6 fw-bold mb-3">Mesures de sécurité</h4>
+                        <p>Vos données sont protégées par :</p>
+                        <ul>
+                            <li><strong>Chiffrement :</strong> HTTPS pour toutes les communications</li>
+                            <li><strong>Authentification :</strong> tokens JWT sécurisés avec expiration</li>
+                            <li><strong>Mots de passe :</strong> hashage bcrypt, jamais stockés en clair</li>
+                            <li><strong>Serveurs :</strong> hébergement sécurisé avec sauvegardes chiffrées</li>
+                            <li><strong>Accès :</strong> strictement limité aux personnes autorisées</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h4 class="h6 fw-bold mb-3">Durée de conservation</h4>
+                        <p>Nous conservons vos données selon les durées suivantes :</p>
+                        <ul>
+                            <li><strong>Compte actif :</strong> tant que votre compte existe</li>
+                            <li><strong>Compte supprimé :</strong> 30 jours (pour permettre la récupération)</li>
+                            <li><strong>Logs de sécurité :</strong> 12 mois maximum</li>
+                            <li><strong>Statistiques anonymisées :</strong> sans limite (non personnelles)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# Contact and Updates #}
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-2">
+                        <div class="card-header">
+                            <h3 class="h6 mb-0">
+                                <i class="bi bi-envelope me-2"></i>
+                                Contact DPO
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="small text-muted mb-3">
+                                Pour toute question concernant vos données personnelles :
+                            </p>
+                            <p class="small mb-2"><strong>Email :</strong> dpo@videogamesrecords.net</p>
+                            <p class="small mb-2"><strong>Courrier :</strong></p>
+                            <address class="ms-4 small text-muted">
+                                DPO - Protection des Données<br>
+                                123 Rue de la Privacy<br>
+                                75000 Paris, France
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-2">
+                        <div class="card-header">
+                            <h3 class="h6 mb-0">
+                                <i class="bi bi-calendar me-2"></i>
+                                Mise à jour
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="small text-muted mb-3">
+                                Cette politique a été mise à jour le :
+                            </p>
+                            <p class="fw-bold">29 août 2025</p>
+                            <p class="small text-muted">
+                                Nous vous notifierons par email en cas de modification importante.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Footer #}
+            <div class="card border-2">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-check-circle-fill text-success display-4 mb-3"></i>
+                    <h3 class="h5 fw-bold mb-3">Vos données, vos droits</h3>
+                    <p class="text-muted mb-4">
+                        Nous nous engageons à respecter votre vie privée et à vous donner le contrôle total sur vos données personnelles.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <span class="badge bg-secondary">RGPD Compliant</span>
+                        <span class="badge bg-secondary">Hébergement Europe</span>
+                        <span class="badge bg-secondary">Chiffrement SSL</span>
+                        <span class="badge bg-secondary">Accès Sécurisé</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

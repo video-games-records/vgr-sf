@@ -3,6 +3,7 @@ framework:
     translator:
         default_path: '%kernel.project_dir%/translations'
         paths:
+            - '%kernel.project_dir%/src/SharedKernel/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/User/Resources/translations'
             #- '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/translations'
             #- '%kernel.project_dir%/src/BoundedContext/Message/Presentation/Resources/translations'

@@ -161,6 +161,76 @@ security:
       user_agent: "Device/Browser"
       no_events: "No security events recorded"
 
+# === LOGIN (User login) ===
+login:
+  title: "Login"
+  subtitle: "Sign in to your account"
+
+  # Formulaire de connexion
+  form:
+    username_or_email:
+      label: "Email or Username"
+      placeholder: "Enter your email or username"
+    password:
+      label: "Password"
+      placeholder: "Enter your password"
+    submit: "Login"
+
+  # Messages flash
+  flash:
+    success: "You are now logged in. Welcome back!"
+    error: "Login failed. Please check your credentials."
+
+  # Liens
+  link:
+    no_account: "Don't have an account?"
+    register: "Sign up"
+    forgot_password: "Forgot your password?"
+
+# === REGISTRATION (User registration) ===
+registration:
+  title: "Create Account"
+  subtitle: "Sign up to join our community"
+
+  # Formulaire d'inscription
+  form:
+    email:
+      label: "Email"
+      placeholder: "Enter your email address"
+    username:
+      label: "Username"
+      placeholder: "magicbart"
+    password:
+      label: "Password"
+      placeholder: "••••••••••••••••"
+    confirm_password:
+      label: "Confirm Password"
+      placeholder: "Confirm your password"
+    submit: "Create Account"
+
+  # Messages d'erreur
+  error:
+    email_required: "Email is required"
+    email_invalid: "Please enter a valid email address"
+    username_required: "Username is required"
+    username_too_short: "Username must be at least {{ limit }} characters"
+    username_too_long: "Username cannot exceed {{ limit }} characters"
+    username_invalid_format: "Username can only contain letters, numbers, underscores and hyphens"
+    password_required: "Password is required"
+    password_too_short: "Password must be at least {{ limit }} characters"
+    password_invalid_format: "Password must contain at least one letter and one number"
+    password_mismatch: "The password fields must match"
+
+  # Messages flash
+  flash:
+    success: "Your account has been created successfully! Welcome to Video Games Records!"
+    error: "An error occurred during registration. Please try again."
+
+  # Liens
+  link:
+    have_account: "Already have an account?"
+    login: "Login"
+
 # === FLASH MESSAGES (Messages système) ===
 flash:
   success:

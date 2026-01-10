@@ -1,60 +1,75 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'User' %}
 
-{% block title %}Connexion - Video Games Records{% endblock %}
-
-{% block stylesheets %}
-{{ parent() }}
-<style>
-    .login-container { max-width: 400px; margin: 3rem auto; }
-    .login-form { background: #f8f9fa; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .login-form h1 { text-align: center; margin-bottom: 2rem; color: #2c3e50; }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #555; }
-    .form-group input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
-    .form-group input:focus { outline: none; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.1); }
-    .btn { width: 100%; padding: 0.75rem; background: #3498db; color: white; border: none; border-radius: 4px; font-size: 1rem; font-weight: bold; cursor: pointer; }
-    .btn:hover { background: #2980b9; }
-</style>
+{% block title %}
+    {{ 'login.title'|trans }} - Video Games Records
 {% endblock %}
 
 {% block body %}
-<div class="login-container">
-    <div class="login-form">
-        <h1>Connexion</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h1 class="card-title text-center mb-4">
+                        {{ 'login.title'|trans }}
+                    </h1>
 
-        {% if error %}
-            <div class="alert alert-danger">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+
+                    <form method="post" action="{{ path(admin|default(false) ? 'sonata_user_admin_security_check' : 'app_login') }}" data-turbo="false">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                {{ 'login.form.username_or_email.label'|trans }}
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="_username"
+                                value="{{ last_username }}"
+                                required
+                                autofocus
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                {{ 'login.form.password.label'|trans }}
+                            </label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="_password"
+                                required
+                            >
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                {{ 'login.form.submit'|trans }}
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p class="mb-0">
+                            {{ 'login.link.no_account'|trans }}
+                            <a href="{{ path('app_register') }}" class="text-decoration-none fw-bold">
+                                {{ 'login.link.register'|trans }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
-        {% endif %}
-
-        <form method="post" action="{{ path(admin|default(false) ? 'sonata_user_admin_security_check' : 'app_login') }}">
-            <div class="form-group">
-                <label for="username">Email ou Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="_username"
-                    value="{{ last_username }}"
-                    required
-                    autofocus
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="_password"
-                    required
-                >
-            </div>
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            <button type="submit" class="btn">Se connecter</button>
-        </form>
+        </div>
     </div>
 </div>
 {% endblock %}

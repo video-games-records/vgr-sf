@@ -1,0 +1,490 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Règlement de la Communauté - VGR{% endblock %}
+
+{% block meta_description %}Règles et directives de la communauté Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# Header #}
+    <div class="text-center mb-5">
+        <div class="d-flex justify-content-center mb-3">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                <i class="bi bi-shield-check h1 text-primary mb-0"></i>
+            </div>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">Règlement de la Communauté</h1>
+        <p class="lead text-muted">
+            Ensemble, construisons une communauté respectueuse et bienveillante
+        </p>
+    </div>
+
+    {# Important Notice #}
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="alert alert-warning mb-5" role="alert">
+                <div class="d-flex align-items-start">
+                    <i class="bi bi-exclamation-triangle-fill fs-4 me-3 flex-shrink-0"></i>
+                    <div>
+                        <h5 class="alert-heading">Important à savoir</h5>
+                        <p class="mb-0">
+                            Ce règlement s'applique à tous les utilisateurs de la plateforme. En créant un compte,
+                            vous acceptez de respecter ces règles. Toute violation peut entraîner des sanctions
+                            allant de l'avertissement au bannissement définitif.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {# Règles Générales #}
+            <div class="card mb-4">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-shield me-2"></i>
+                        Règles Générales
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="generalRules">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#respect">
+                                    Respect et courtoisie <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="respect" class="accordion-collapse collapse show" data-bs-parent="#generalRules">
+                                <div class="accordion-body">
+                                    Traitez tous les membres de la communauté avec respect et courtoisie. Les insultes, le harcèlement ou tout comportement hostile ne sont pas tolérés.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noSpam">
+                                    Pas de spam ou de contenu répétitif <span class="badge bg-primary ms-2">Important</span>
+                                </button>
+                            </h3>
+                            <div id="noSpam" class="accordion-collapse collapse" data-bs-parent="#generalRules">
+                                <div class="accordion-body">
+                                    Évitez de poster le même contenu plusieurs fois ou de faire du spam. Chaque contribution doit apporter de la valeur à la discussion.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#appropriateContent">
+                                    Contenu approprié uniquement <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="appropriateContent" class="accordion-collapse collapse" data-bs-parent="#generalRules">
+                                <div class="accordion-body">
+                                    Le contenu doit être approprié pour tous les âges. Aucun contenu explicite, violent ou offensant n'est autorisé.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#authenticIdentity">
+                                    Identité authentique <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="authenticIdentity" class="accordion-collapse collapse" data-bs-parent="#generalRules">
+                                <div class="accordion-body">
+                                    Utilisez votre vraie identité ou un pseudonyme constant. Les faux comptes et l'usurpation d'identité sont interdits.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Vie Communautaire #}
+            <div class="card mb-4">
+                <div class="card-header bg-success bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-people me-2"></i>
+                        Vie Communautaire
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="communityLife">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#constructiveDiscussions">
+                                    Discussions constructives <span class="badge bg-secondary ms-2">Recommandé</span>
+                                </button>
+                            </h3>
+                            <div id="constructiveDiscussions" class="accordion-collapse collapse" data-bs-parent="#communityLife">
+                                <div class="accordion-body">
+                                    Participez à des discussions constructives et respectueuses. Les débats sont encouragés mais doivent rester civilisés.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#helpOthers">
+                                    Entraide communautaire <span class="badge bg-secondary ms-2">Recommandé</span>
+                                </button>
+                            </h3>
+                            <div id="helpOthers" class="accordion-collapse collapse" data-bs-parent="#communityLife">
+                                <div class="accordion-body">
+                                    Aidez les nouveaux membres et partagez vos connaissances. Une communauté forte se construit ensemble.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reportIssues">
+                                    Signalement des problèmes <span class="badge bg-primary ms-2">Important</span>
+                                </button>
+                            </h3>
+                            <div id="reportIssues" class="accordion-collapse collapse" data-bs-parent="#communityLife">
+                                <div class="accordion-body">
+                                    Signalez tout contenu ou comportement inapproprié aux modérateurs plutôt que de répondre de manière agressive.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stayOnTopic">
+                                    Restez dans le sujet <span class="badge bg-secondary ms-2">Recommandé</span>
+                                </button>
+                            </h3>
+                            <div id="stayOnTopic" class="accordion-collapse collapse" data-bs-parent="#communityLife">
+                                <div class="accordion-body">
+                                    Gardez vos contributions pertinentes par rapport au sujet de discussion ou à la catégorie de l'article.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Commentaires et Publications #}
+            <div class="card mb-4">
+                <div class="card-header" style="background-color: rgba(128, 0, 128, 0.1);">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-chat-dots me-2"></i>
+                        Commentaires et Publications
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="commentsPosts">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qualityComments">
+                                    Commentaires de qualité <span class="badge bg-secondary ms-2">Recommandé</span>
+                                </button>
+                            </h3>
+                            <div id="qualityComments" class="accordion-collapse collapse" data-bs-parent="#commentsPosts">
+                                <div class="accordion-body">
+                                    Rédigez des commentaires réfléchis et bien articulés. Évitez les commentaires d'un seul mot ou sans valeur ajoutée.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noPersonalAttacks">
+                                    Pas d'attaques personnelles <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="noPersonalAttacks" class="accordion-collapse collapse" data-bs-parent="#commentsPosts">
+                                <div class="accordion-body">
+                                    Critiquez les idées, pas les personnes. Les attaques personnelles et les insultes entraînent une sanction immédiate.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noHateSpeech">
+                                    Pas de discours de haine <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="noHateSpeech" class="accordion-collapse collapse" data-bs-parent="#commentsPosts">
+                                <div class="accordion-body">
+                                    Aucune forme de discrimination, racisme, sexisme ou discours de haine n'est tolérée sur la plateforme.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#factChecking">
+                                    Vérification des informations <span class="badge bg-primary ms-2">Important</span>
+                                </button>
+                            </h3>
+                            <div id="factChecking" class="accordion-collapse collapse" data-bs-parent="#commentsPosts">
+                                <div class="accordion-body">
+                                    Vérifiez vos sources avant de partager des informations. La désinformation volontaire est sanctionnée.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Gestion des Scores #}
+            <div class="card mb-4">
+                <div class="card-header bg-warning bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-trophy me-2"></i>
+                        Gestion des Scores
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="scoreManagement">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#legitimateScores">
+                                    Scores légitimes uniquement <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="legitimateScores" class="accordion-collapse collapse" data-bs-parent="#scoreManagement">
+                                <div class="accordion-body">
+                                    <p>Tous les scores soumis doivent être obtenus par un gameplay légitime. L'utilisation de cheats, hacks, exploits ou toute forme d'assistance est strictement interdite.</p>
+
+                                    <p>Pour être valable, un score doit correspondre exactement au niveau sur lequel il est posté : plateforme de jeu, nom du jeu, nom de la catégorie, nom du niveau.<br>
+                                    Le score envoyé doit correspondre exactement au score indiqué dans le jeu. Si le jeu sauvegarde les records, c'est le score sauvegardé qui prime sur le score affiché en cours de jeu.</p>
+
+                                    <p>Le score envoyé doit avoir été réalisé par vous et vous seul, le jeu multi-joueurs est interdit. Lorsque d'autres personnages ou éléments contrôlés par la console interviennent et que cela est possible, il est interdit de les remplacer par d'autres joueurs, actifs ou passifs.<br>
+                                    Les records des développeurs ou records de base enregistrés dans un jeu ne peuvent pas être postés comme vos propres scores.</p>
+
+                                    <p>Vous devez avoir terminé le niveau sur lequel vous voulez poster pour pouvoir envoyer un score.</p>
+
+                                    <p>Un score de 0 (zéro), sur un niveau que vous n'avez pas réalisé, est interdit.</p>
+
+                                    <p><strong><em>Cas des compilations</em></strong><br>
+                                    En particulier, si vous jouez sur une compilation (ensemble de jeux vendus conjointement sur un même support), vous DEVEZ poster par défaut sur cette compilation et non séparément sur les jeux originaux.<br>
+                                    Exceptions: Vous êtes autorisé à poster vos scores issus de ces compilations si et seulement si ces 3 conditions sont remplies:</p>
+                                    <ul>
+                                        <li>la compilation est strictement identique au jeu original (gameplay, options, personnages, bonus),</li>
+                                        <li>la compilation est sortie sur la même plateforme que le jeu original,</li>
+                                        <li>c'est spécifié comme autorisé dans les Règles spécifiques de ce jeu.</li>
+                                    </ul>
+
+                                    <p><strong><em>Cas de la console Virtuelle et des consoles Mini</em></strong><br>
+                                    Si vous jouez sur une version d'un jeu aux options de gameplay différentes du jeu original (comme dans les Mini-consoles ou Console Virtuelle), vous DEVEZ poster sur ces nouvelles versions, et non sur les jeux originaux.<br>
+                                    Si des sauvegardes ou des retours en arrière sont intégrés dans un jeu ou une plateforme, vendus tels quels et légalement, ils seront autorisés.<br>
+                                    Mais si ces jeux sont une émulation officielle (que VGR autorise) de jeux originaux plus anciens, alors VGR la séparera du jeu original, en raison de la différence de gameplay apportée par ces sauvegardes ou retours en arrière.</p>
+
+                                    <p>Merci de respecter strictement le type de plateforme/console du jeu sur lequel vous avez joué.<br>
+                                    Attention, les demandes de preuves (photo ou vidéo) pourraient être plus fréquentes, pour ces différentes versions.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#prohibitedPractices">
+                                    Pratiques interdites <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="prohibitedPractices" class="accordion-collapse collapse" data-bs-parent="#scoreManagement">
+                                <div class="accordion-body">
+                                    <p>Tout ce qui suit est interdit :</p>
+                                    <ul>
+                                        <li>Codes de triche</li>
+                                        <li>Action Replay ou système équivalent</li>
+                                        <li>Jeux émulés non officiels (jeux émulés : jeu repliqué sur une plateforme pour laquelle il n'avait pas été développé). L'émulation officielle (sur Virtual Console [Wii] et Nintendo eShop [Wii U, 3DS]) est autorisée, ainsi que les jeux sur console permettant la rétrocompatibilité</li>
+                                        <li>Continues (reprendre un niveau après un Game Over) s'ils ne remettent pas à zéro ou ne diminuent pas votre score</li>
+                                        <li>Patchs non officiels, mods ou autres éléments de jeu</li>
+                                        <li>Modifier un jeu, une manette (pad), une console ou un accessoire de jeu afin d'améliorer les scores ou faciliter leur réalisation</li>
+                                        <li>De manière générale, toute pratique qui n'est pas intégrée dans le jeu original ou qui rend la compétition entre joueurs déloyale</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#glitches">
+                                    Glitchs et exploits de jeu <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="glitches" class="accordion-collapse collapse" data-bs-parent="#scoreManagement">
+                                <div class="accordion-body">
+                                    <p>Glitch : bug dans un jeu vidéo permettant une action non prévue par l'éditeur du jeu, comme le passage à travers une paroi, l'apparition d'un objet, la manipulation d'un timer…</p>
+
+                                    <p>Sont interdits :</p>
+                                    <ul>
+                                        <li>les glitchs réalisables uniquement sur certaines versions d'un jeu ou sur certaines plateformes : un glitch doit être reproductible par tout joueur</li>
+                                        <li>les glitchs qui gèlent (bloquent) le chronomètre</li>
+                                    </ul>
+
+                                    <p>De par leur caractère imprévu, les glitchs et leurs implications sont très différents selon les jeux et il n'est pas possible de définir d'autre règle générale.<br>
+                                    Tout autre glitch est donc autorisé par défaut, sauf indication contraire sur la page du record. Les instructions données sur les pages des records sont prioritaires par rapport à ce règlement.<br>
+                                    Si aucune indication n'est donnée, demandez confirmation auprès d'un administrateur ou sur le forum du site. Il est en effet possible qu'un glitch ne soit pas connu de l'équipe et qu'il soit interdit après étude du cas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Preuves #}
+            <div class="card mb-4">
+                <div class="card-header" style="background-color: rgba(16, 185, 129, 0.1);">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-check-circle me-2"></i>
+                        Preuves
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="proof">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proofRequirement">
+                                    Recommandation de preuve <span class="badge bg-secondary ms-2">Recommandé</span>
+                                </button>
+                            </h3>
+                            <div id="proofRequirement" class="accordion-collapse collapse" data-bs-parent="#proof">
+                                <div class="accordion-body">
+                                    <p>Les scores devraient être accompagnés d'une preuve valide (capture d'écran, vidéo, fichier de replay) quand c'est possible. La preuve aide à valider les performances et est fortement recommandée.</p>
+                                    <ul>
+                                        <li>Une preuve ne contenant pas tous les éléments visibles pour identifier clairement et spécifiquement un record, sera refusée.</li>
+                                        <li>Quand les options du jeu ou de la console le permettent, les langages français et anglais sont à privilégier, ainsi que les unités du Système International (distances en m, vitesse en km/h, poids en kg).</li>
+                                        <li>Tout type de conversion ne provenant pas du jeu est interdite.</li>
+                                        <li>Vous pouvez à tout moment prouver un de vos scores en téléchargeant une photo ou une vidéo qui montre clairement le score et le niveau correspondant.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#percentageProof">
+                                    Pourcentage de preuve <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="percentageProof" class="accordion-collapse collapse" data-bs-parent="#proof">
+                                <div class="accordion-body">
+                                    <p>La soumission d'un record n'implique pas de prouver ce dernier immédiatement.<br>
+                                    Pour autant, à partir de 300 (trois cents) scores envoyés sur VGR, un minimum de 3% (trois pourcent) de scores prouvés est exigé pour pouvoir continuer à poster.<br>
+                                    Même si l'envoi de preuves n'est pas obligatoire sur VGR, tout membre doit pouvoir prouver chaque score envoyé, sur le long terme.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proofRequests">
+                                    Demandes de preuve <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="proofRequests" class="accordion-collapse collapse" data-bs-parent="#proof">
+                                <div class="accordion-body">
+                                    <p>Tout membre a la possibilité, à tout moment, de faire une demande de preuve à un autre membre s'il a des doutes sur ce dernier.</p>
+                                    <ul>
+                                        <li>Si la demande est justifiée et validée par un modérateur du site, le membre ayant reçu la demande a alors 2 semaines pour envoyer une preuve.</li>
+                                        <li>Tout score non prouvé dans ce délai imparti est désactivé, et ne peut être réactivé que lorsqu'une preuve aura été validée.</li>
+                                        <li>A partir de 30 (trente) scores désactivés, un membre n'a plus la possibilité d'ajouter de nouveaux scores.</li>
+                                        <li>Un score désactivé ne pourra pas être supprimé à la demande d'un membre, sauf exceptions très contraignantes, où un effort conséquent sur les preuves devra être fait (ceci sera à déterminer au cas par cas par plusieurs Administrateurs de VGR, dans l'intérêt mutuel « gagnant/gagnant »).</li>
+                                        <li>5 demandes de preuves par jour maximum sont possibles.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Sanctions et Modération #}
+            <div class="card mb-4">
+                <div class="card-header bg-danger bg-opacity-10">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-ban me-2"></i>
+                        Sanctions et Modération
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="sanctions">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#warningSystem">
+                                    Système d'avertissements <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="warningSystem" class="accordion-collapse collapse" data-bs-parent="#sanctions">
+                                <div class="accordion-body">
+                                    Premier manquement : avertissement. Deuxième manquement : suspension temporaire. Troisième manquement : bannissement.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#immediateBan">
+                                    Bannissement immédiat <span class="badge bg-danger ms-2">Strict</span>
+                                </button>
+                            </h3>
+                            <div id="immediateBan" class="accordion-collapse collapse" data-bs-parent="#sanctions">
+                                <div class="accordion-body">
+                                    Certains comportements (harcèlement grave, contenu illégal, spam massif) entraînent un bannissement immédiat.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#appealProcess">
+                                    Processus d'appel <span class="badge bg-primary ms-2">Important</span>
+                                </button>
+                            </h3>
+                            <div id="appealProcess" class="accordion-collapse collapse" data-bs-parent="#sanctions">
+                                <div class="accordion-body">
+                                    Vous pouvez contester une sanction en contactant l'équipe de modération avec des éléments justificatifs.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#repeatOffenses">
+                                    Récidive <span class="badge bg-primary ms-2">Important</span>
+                                </button>
+                            </h3>
+                            <div id="repeatOffenses" class="accordion-collapse collapse" data-bs-parent="#sanctions">
+                                <div class="accordion-body">
+                                    Les récidivistes font l'objet de sanctions plus sévères. L'historique des infractions est conservé.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Footer Card #}
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center mb-3">
+                            <i class="bi bi-check-circle fs-2 text-success"></i>
+                        </div>
+                        <h3 class="h5 mb-2">Merci de faire partie de notre communauté</h3>
+                        <p class="text-muted mb-4">
+                            En respectant ces règles, vous contribuez à créer un environnement positif pour tous.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 text-sm">
+                            <span class="text-muted">
+                                <strong>Dernière mise à jour :</strong> 01/09/2025
+                            </span>
+                            <span class="d-none d-sm-inline text-muted">•</span>
+                            <a href="mailto:support@videogamesrecords.net" class="text-decoration-none fw-medium">
+                                Une question ? Contactez-nous
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
