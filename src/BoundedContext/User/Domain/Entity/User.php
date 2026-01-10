@@ -29,10 +29,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected ?int $id = null;
 
     #[ORM\Column(length: 100, unique: true, nullable: false)]
-    protected string $username = '';
+    protected string $username;
 
     #[ORM\Column(length: 180, unique: true, nullable: false)]
-    private string $email = '';
+    private string $email;
 
     #[ORM\Column(nullable: false, options: ['default' => true])]
     protected bool $enabled = true;
@@ -44,12 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\Column(length: 255)]
-    private ?string $password;
+    private string $password;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
      */
-    #[Assert\NotBlank(groups: ['user:create'])]
     protected ?string $plainPassword = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -112,7 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->username = $username;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -329,9 +328,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeGroup(Group $group): void
     {
-        if (!isset($this->groups)) {
-            $this->groups = new ArrayCollection();
-        }
         $this->groups->removeElement($group);
     }
 
@@ -356,8 +352,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
 
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     * @return non-empty-string
+     */
     public function getUserIdentifier(): string
     {
+        assert($this->email !== '', 'Email cannot be empty');
         return $this->email;
     }
 }

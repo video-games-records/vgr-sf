@@ -50,9 +50,14 @@ class UserEntityListener
         $originalPassword = $user->getPassword();
         $this->generatePassword($user);
 
+        $userId = $user->getId();
+        if (null === $userId) {
+            return;
+        }
+
         // Check if password was actually changed
         if ($originalPassword !== $user->getPassword() && $user->getPlainPassword() !== null) {
-            $this->passwordChangeData[$user->getId()] = true;
+            $this->passwordChangeData[$userId] = true;
         }
 
         // Check if email changed
@@ -60,7 +65,11 @@ class UserEntityListener
             $oldEmail = $event->getOldValue('email');
             $newEmail = $event->getNewValue('email');
 
-            $this->emailChangeData[$user->getId()] = [
+            if (!is_string($oldEmail) || !is_string($newEmail)) {
+                return;
+            }
+
+            $this->emailChangeData[$userId] = [
                 'oldEmail' => $oldEmail,
                 'newEmail' => $newEmail
             ];
@@ -69,22 +78,27 @@ class UserEntityListener
 
     public function postUpdate(User $user, PostUpdateEventArgs $event): void
     {
+        $userId = $user->getId();
+        if (null === $userId) {
+            return;
+        }
+
         // Dispatch email changed event
-        if (isset($this->emailChangeData[$user->getId()])) {
-            $data = $this->emailChangeData[$user->getId()];
+        if (isset($this->emailChangeData[$userId])) {
+            $data = $this->emailChangeData[$userId];
 
             $emailChangedEvent = new EmailChangedEvent($user, $data['oldEmail'], $data['newEmail']);
             $this->eventDispatcher->dispatch($emailChangedEvent);
 
-            unset($this->emailChangeData[$user->getId()]);
+            unset($this->emailChangeData[$userId]);
         }
 
         // Dispatch password changed event
-        if (isset($this->passwordChangeData[$user->getId()])) {
+        if (isset($this->passwordChangeData[$userId])) {
             $passwordChangedEvent = new PasswordChangedEvent($user);
             $this->eventDispatcher->dispatch($passwordChangedEvent);
 
-            unset($this->passwordChangeData[$user->getId()]);
+            unset($this->passwordChangeData[$userId]);
         }
     }
 

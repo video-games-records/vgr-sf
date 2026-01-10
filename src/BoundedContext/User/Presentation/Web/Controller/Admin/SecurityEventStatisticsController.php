@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BoundedContext\User\Presentation\Web\Controller\Admin;
 
+use App\BoundedContext\User\Domain\Entity\SecurityEvent;
 use App\BoundedContext\User\Infrastructure\Admin\Extension\SecurityEventStatisticsExtension;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @extends CRUDController<SecurityEvent>
+ */
 class SecurityEventStatisticsController extends CRUDController
 {
     public function __construct(

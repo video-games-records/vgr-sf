@@ -13,6 +13,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @extends AbstractType<array<string, mixed>>
+ */
 class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

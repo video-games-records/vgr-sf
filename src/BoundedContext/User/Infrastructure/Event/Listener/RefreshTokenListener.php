@@ -32,6 +32,10 @@ class RefreshTokenListener
         $refreshToken = $event->getRefreshToken();
         $username = $refreshToken->getUsername();
 
+        if (null === $username) {
+            return;
+        }
+
         // Trouver l'utilisateur
         $user = $this->userManager->findUserByUsernameOrEmail($username);
 
