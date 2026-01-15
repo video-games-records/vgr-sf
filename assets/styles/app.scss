@@ -38,6 +38,10 @@ body {
 
 // 7. Styles spécifiques au thème dark
 [data-bs-theme="dark"] {
+    // Couleur primaire plus claire pour le mode dark (meilleur contraste)
+    --bs-primary: #5dade2;
+    --bs-primary-rgb: 93, 173, 226;
+
     // En mode dark, les card-headers utilisent le style par défaut de Bootstrap
     .card-header {
         background-color: var(--bs-dark-bg-subtle);

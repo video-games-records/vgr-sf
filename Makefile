@@ -76,6 +76,9 @@ test-coverage: ## Lance les tests avec couverture de code
 assets-install: ## Installe les assets dans le répertoire public
 	php bin/console assets:install
 
+assets-compile: ## Compile les assets dans le répertoire public
+	php bin/console asset-map:compile
+
 ##
 ## Serveur de développement
 ##---------------------------------------------------------------------------

@@ -231,6 +231,50 @@ registration:
     have_account: "Vous avez déjà un compte ?"
     login: "Connexion"
 
+# === RESET PASSWORD (Réinitialisation du mot de passe) ===
+reset_password:
+  # Page de demande de réinitialisation
+  request:
+    title: "Réinitialiser le mot de passe"
+    subtitle: "Saisissez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe"
+    help: "Nous vous enverrons un email avec les instructions pour réinitialiser votre mot de passe"
+    submit: "Envoyer le lien de réinitialisation"
+    back_to_login: "Retour à la connexion"
+
+  # Page de confirmation/création du nouveau mot de passe
+  confirm:
+    title: "Créer un nouveau mot de passe"
+    subtitle: "Saisissez votre nouveau mot de passe ci-dessous"
+    help: "Le mot de passe doit contenir au moins 6 caractères"
+    submit: "Réinitialiser le mot de passe"
+    back_to_login: "Retour à la connexion"
+
+  # Messages flash
+  flash:
+    request_success: "Si un compte avec cet email existe, vous recevrez un lien de réinitialisation sous peu."
+    request_error: "Une erreur s'est produite lors du traitement de votre demande. Veuillez réessayer."
+    invalid_token: "Jeton de réinitialisation invalide ou expiré. Veuillez demander une nouvelle réinitialisation de mot de passe."
+    expired_token: "Votre lien de réinitialisation de mot de passe a expiré. Veuillez en demander un nouveau."
+    success: "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+    error: "Une erreur s'est produite lors de la réinitialisation de votre mot de passe. Veuillez réessayer."
+
+# === FORM (Commun pour les formulaires) ===
+form:
+  email: "Email"
+  email.placeholder: "votre.email@example.com"
+  password: "Nouveau mot de passe"
+  password.placeholder: "Saisissez votre nouveau mot de passe"
+  password.confirm: "Confirmer le mot de passe"
+  password.confirm.placeholder: "Confirmez votre nouveau mot de passe"
+  error:
+    email:
+      required: "L'email est requis"
+      invalid: "Adresse email invalide"
+    password:
+      required: "Le mot de passe est requis"
+      min_length: "Le mot de passe doit contenir au moins {{ limit }} caractères"
+      mismatch: "Les mots de passe ne correspondent pas"
+
 # === FLASH MESSAGES (Messages système) ===
 flash:
   success:

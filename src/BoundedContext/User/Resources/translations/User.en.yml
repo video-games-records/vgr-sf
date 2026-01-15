@@ -231,6 +231,50 @@ registration:
     have_account: "Already have an account?"
     login: "Login"
 
+# === RESET PASSWORD (Password reset functionality) ===
+reset_password:
+  # Page de demande de réinitialisation
+  request:
+    title: "Reset Password"
+    subtitle: "Enter your email address and we'll send you a link to reset your password"
+    help: "We'll send you an email with instructions to reset your password"
+    submit: "Send Reset Link"
+    back_to_login: "Back to Login"
+
+  # Page de confirmation/création du nouveau mot de passe
+  confirm:
+    title: "Create New Password"
+    subtitle: "Enter your new password below"
+    help: "Password must be at least 6 characters long"
+    submit: "Reset Password"
+    back_to_login: "Back to Login"
+
+  # Messages flash
+  flash:
+    request_success: "If an account with that email exists, you will receive a password reset link shortly."
+    request_error: "An error occurred while processing your request. Please try again."
+    invalid_token: "Invalid or expired reset token. Please request a new password reset."
+    expired_token: "Your password reset link has expired. Please request a new one."
+    success: "Your password has been reset successfully. You can now log in with your new password."
+    error: "An error occurred while resetting your password. Please try again."
+
+# === FORM (Commun pour les formulaires) ===
+form:
+  email: "Email"
+  email.placeholder: "your.email@example.com"
+  password: "New password"
+  password.placeholder: "Enter your new password"
+  password.confirm: "Confirm password"
+  password.confirm.placeholder: "Confirm your new password"
+  error:
+    email:
+      required: "Email is required"
+      invalid: "Invalid email address"
+    password:
+      required: "Password is required"
+      min_length: "Password must be at least {{ limit }} characters"
+      mismatch: "Passwords do not match"
+
 # === FLASH MESSAGES (Messages système) ===
 flash:
   success:

@@ -42,11 +42,17 @@ password_change:
     
 
 password_reset:
-  subject: 'Réinitialisation de votre mot de passe'
+  subject: 'Demande de réinitialisation de mot de passe'
   message: |
-    Bonjour %s !
-    
-    Pour réinitialiser votre mot de passe, merci de vous rendre sur %s
-    
+    Bonjour %s,
+
+    Vous avez demandé à réinitialiser votre mot de passe. Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe :
+
+    %s
+
+    Si vous n'avez pas demandé cette réinitialisation de mot de passe, veuillez ignorer cet email.
+
+    Ce lien expirera dans 24 heures.
+
     Cordialement,
-    L'équipe
+    L'équipe Video Games Records

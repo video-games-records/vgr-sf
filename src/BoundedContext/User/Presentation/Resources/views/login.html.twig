@@ -60,6 +60,11 @@
                     </form>
 
                     <div class="text-center mt-3">
+                        <p class="mb-2">
+                            <a href="{{ path('app_reset_password_request') }}" class="text-decoration-none">
+                                {{ 'login.link.forgot_password'|trans }}
+                            </a>
+                        </p>
                         <p class="mb-0">
                             {{ 'login.link.no_account'|trans }}
                             <a href="{{ path('app_register') }}" class="text-decoration-none fw-bold">
