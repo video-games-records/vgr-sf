@@ -1,0 +1,84 @@
+breadcrumb:
+  link_article_list: 'Liste des Articles'
+  link_comment_list: 'Liste des Commentaires'
+
+show:
+  group_article_label: 'Article'
+  group_comment_label: 'Commentaire'
+
+form:
+  group_article_label: 'Article'
+  group_comment_label: 'Commentaire'
+
+article:
+  label: Article
+  list:
+    id: ID
+    title: Titre
+    author: Auteur
+    status: Statut
+    views: Vues
+    created_at: Créé le
+    published_at: Publié le
+  form:
+    id: ID
+    title: Titre
+    content: Texte
+    status: Statut
+    published_at: Publié le
+    updated_at: Modifié le
+  filter:
+    title: Titre
+    author: Auteur
+    status: Statut
+  show:
+    id: ID
+    title: Titre
+    content: Texte
+    status: Statut
+    views: Vues
+
+comment:
+  label: Commentaire
+  list:
+    id: ID
+    article: Article
+    user: Utilisateur
+    created_at: Créé le
+  form:
+    id: ID
+    article: Article
+    user: Utilisateur
+    content: Content
+  filter:
+    article: Article
+    title: Titre
+    user: Utilisateur
+  show:
+    id: ID
+    article: Article
+    user: Utilisateur
+    content: Content
+
+dashboard:
+  views_stats:
+    title: 'Statistiques des vues'
+    total_views: 'Total des vues'
+    published_articles: 'Articles publiés'
+    average_per_article: 'Moyenne par article'
+    article_of_day: 'Article du jour'
+    top_articles: 'Top articles'
+    trending: 'Tendances (7 derniers jours)'
+    table:
+      article: 'Article'
+      views: 'Vues'
+      views_per_day: 'Vues/jour'
+      total: 'Total'
+      actions: 'Actions'
+    actions:
+      view: 'Voir'
+      edit: 'Modifier'
+    no_articles: 'Aucun article trouvé.'
+    no_trends: 'Aucune tendance détectée.'
+    view_all_articles: 'Voir tous les articles'
+    last_update: 'Dernière mise à jour'

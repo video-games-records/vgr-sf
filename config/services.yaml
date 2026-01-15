@@ -4,7 +4,9 @@
 imports:
     - { resource: services/shared.yaml }
     - { resource: services/user.yaml }
+    - { resource: services/article.yaml }
     - { resource: admin/user.yml }
+    - { resource: admin/article.yml }
 
 services:
     # default configuration for services in *this* file

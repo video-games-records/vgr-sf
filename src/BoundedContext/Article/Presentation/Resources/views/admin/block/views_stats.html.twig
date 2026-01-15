@@ -1,0 +1,174 @@
+{% trans_default_domain translation_domain %}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <i class="fa fa-eye"></i>
+            {{ 'dashboard.views_stats.title'|trans }}
+        </h3>
+    </div>
+    <div class="box-body">
+        {# Statistiques globales #}
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-blue"><i class="fa fa-eye"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{ 'dashboard.views_stats.total_views'|trans }}</span>
+                        <span class="info-box-number">{{ stats.total_views|number_format }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-file-text"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{ 'dashboard.views_stats.published_articles'|trans }}</span>
+                        <span class="info-box-number">{{ stats.total_articles|number_format }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-bar-chart"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{ 'dashboard.views_stats.average_per_article'|trans }}</span>
+                        <span class="info-box-number">{{ stats.average_views_per_article }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-trophy"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{ 'dashboard.views_stats.article_of_day'|trans }}</span>
+                        <span class="info-box-number">
+                        {% if stats.most_viewed_today %}
+                            {{ stats.most_viewed_today.views }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {# Articles les plus vus #}
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-star"></i>
+                            {{ 'dashboard.views_stats.top_articles'|trans }}
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        {% if most_viewed %}
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>{{ 'dashboard.views_stats.table.article'|trans }}</th>
+                                    <th>{{ 'dashboard.views_stats.table.views'|trans }}</th>
+                                    <th>{{ 'dashboard.views_stats.table.actions'|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for article in most_viewed %}
+                                    <tr>
+                                        <td>
+                                            {{ article.title|slice(0, 30) }}{% if article.title|length > 30 %}...{% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-green">
+                                                {{ article.views|number_format }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('article_admin_show', {id: article.id}) }}"
+                                               class="btn btn-xs btn-primary"
+                                               title="{{ 'dashboard.views_stats.actions.view'|trans }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{ path('article_admin_edit', {id: article.id}) }}"
+                                               class="btn btn-xs btn-default"
+                                               title="{{ 'dashboard.views_stats.actions.edit'|trans }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="text-muted">{{ 'dashboard.views_stats.no_articles'|trans }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {# Articles tendance #}
+            <div class="col-md-6">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-trending-up"></i>
+                            {{ 'dashboard.views_stats.trending'|trans }}
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        {% if trending %}
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>{{ 'dashboard.views_stats.table.article'|trans }}</th>
+                                    <th>{{ 'dashboard.views_stats.table.views_per_day'|trans }}</th>
+                                    <th>{{ 'dashboard.views_stats.table.total'|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for article in trending %}
+                                    <tr>
+                                        <td>
+                                            {{ article.title|slice(0, 25) }}{% if article.title|length > 25 %}...{% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-orange">
+                                                {{ article.daily_avg_views|round(1) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {{ article.views|number_format }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="text-muted">{{ 'dashboard.views_stats.no_trends'|trans }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="{{ path('article_admin_list') }}" class="btn btn-primary">
+                    <i class="fa fa-list"></i>
+                    {{ 'dashboard.views_stats.view_all_articles'|trans }}
+                </a>
+            </div>
+            <div class="col-sm-6 text-right">
+                <small class="text-muted">
+                    {{ 'dashboard.views_stats.last_update'|trans }}: {{ "now"|date("d/m/Y H:i") }}
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

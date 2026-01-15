@@ -1,0 +1,90 @@
+breadcrumb:
+  link_article_list: 'Article List'
+  link_comment_list: 'Comment List'
+
+show:
+  group_article_lab: 'Article'
+  group_comment: 'Comment'
+
+form:
+  group_article_label: 'Article'
+  group_comment_label: 'Comment'
+
+article:
+  label: Article
+  list:
+    id: ID
+    title: Title
+    author: Author
+    status: Status
+    views: Views
+    created_at: Created at
+    published_at: Published at
+  form:
+    id: ID
+    title: Title
+    content: Content
+    status: Status
+    published_at: Published at
+    updated_at: Updated at
+  filter:
+    title: Title
+    author: Author
+    status: Status
+    views: Views
+  show:
+    id: ID
+    title: Title
+    content: Content
+    status: Status
+    views: Views
+
+comment:
+  label: Comment
+  list:
+    id: ID
+    article: Article
+    user: User
+    created_at: Created at
+  form:
+    id: ID
+    article: Article
+    user: User
+    content: Content
+  filter:
+    article: Article
+    title: Title
+    user: User
+  show:
+    id: ID
+    article: Article
+    user: User
+    content: Content
+
+list:
+  label__action: 'Action'
+
+
+dashboard:
+  views_stats:
+    title: 'View Statistics'
+    total_views: 'Total Views'
+    published_articles: 'Published Articles'
+    average_per_article: 'Average per Article'
+    article_of_day: 'Article of the Day'
+    top_articles: 'Top Articles'
+    trending: 'Trending (Last 7 days)'
+    table:
+      article: 'Article'
+      views: 'Views'
+      views_per_day: 'Views/day'
+      total: 'Total'
+      actions: 'Actions'
+    actions:
+      view: 'View'
+      edit: 'Edit'
+    no_articles: 'No articles found.'
+    no_trends: 'No trends detected.'
+    view_all_articles: 'View all articles'
+    last_update: 'Last update'
+

@@ -37,6 +37,12 @@ doctrine:
                         dir: '%kernel.project_dir%/src/BoundedContext/User/Domain'
                         prefix: 'App\BoundedContext\User\Domain'
                         alias: UserDomain
+                    ArticleDomain:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/BoundedContext/Article/Domain'
+                        prefix: 'App\BoundedContext\Article\Domain'
+                        alias: ArticleDomain
                     SharedKernel:
                         type: attribute
                         is_bundle: false

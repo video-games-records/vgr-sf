@@ -1,0 +1,34 @@
+services:
+  # Admin classes
+  sonata.admin.article.article:
+    class: App\BoundedContext\Article\Presentation\Admin\ArticleAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Article\Domain\Entity\Article'
+        manager_type: orm
+        group: "group.articles"
+        label: "article.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'ArticleAdmin' ] ]
+      - [ setSecurity, [ '@security.helper' ] ]
+
+  sonata.admin.article.comment:
+    class: App\BoundedContext\Article\Presentation\Admin\CommentAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Article\Domain\Entity\Comment'
+        manager_type: orm
+        group: "group.articles"
+        label: "comment.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'ArticleAdmin' ] ]
+
+  # Block Service for statistics
+  App\BoundedContext\Article\Infrastructure\Block\Service\ArticleViewsStatsBlockService:
+    arguments:
+      - '@twig'
+      - '@App\BoundedContext\Article\Application\Service\ArticleAnalyticsService'
+    tags:
+      - { name: sonata.block }

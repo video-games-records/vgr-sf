@@ -5,10 +5,67 @@
     {{ parent() }}
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/quill-emoji@0.1.8/dist/quill-emoji.css" rel="stylesheet">
+    <style>
+        /* A2lix Translation Tabs Styling */
+        .a2lix_translations {
+            margin: 20px 0;
+        }
+
+        .a2lix_translationsLocales.nav-tabs {
+            border-bottom: 2px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        .a2lix_translationsLocales .nav-item {
+            margin-bottom: -2px;
+        }
+
+        .a2lix_translationsLocales .nav-link {
+            border: 1px solid transparent;
+            border-radius: 0.375rem 0.375rem 0 0;
+            padding: 0.75rem 1.25rem;
+            color: #495057;
+            background-color: transparent;
+            transition: all 0.15s ease-in-out;
+            cursor: pointer;
+        }
+
+        .a2lix_translationsLocales .nav-link:hover {
+            border-color: #e9ecef #e9ecef #dee2e6;
+            background-color: #f8f9fa;
+            color: #0d6efd;
+        }
+
+        .a2lix_translationsLocales .nav-link.active {
+            color: #0d6efd;
+            background-color: #fff;
+            border-color: #dee2e6 #dee2e6 #fff;
+            border-bottom-width: 2px;
+            font-weight: 600;
+        }
+
+        .a2lix_translationsFields.tab-content {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 0.375rem 0.375rem;
+        }
+
+        .a2lix_translationsFields .tab-pane {
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quill-emoji@0.1.8/dist/quill-emoji.js"></script>
     <script>
@@ -18,14 +75,30 @@
 
             // Wait for Sonata to be loaded
             setTimeout(function() {
+                initTranslationTabs();
                 initQuillEditors();
             }, 100);
 
             // Reinitialize on dynamic additions (Sonata collections)
             document.addEventListener('sonata-collection-item-added', function() {
-                setTimeout(initQuillEditors, 100);
+                setTimeout(function() {
+                    initTranslationTabs();
+                    initQuillEditors();
+                }, 100);
             });
         });
+
+        function initTranslationTabs() {
+            // Initialize Bootstrap tabs for a2lix translations
+            document.querySelectorAll('[data-bs-toggle="tab"]').forEach(function(tabElement) {
+                tabElement.style.cursor = 'pointer';
+                tabElement.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tab = new bootstrap.Tab(tabElement);
+                    tab.show();
+                });
+            });
+        }
 
         function initQuillEditors() {
             document.querySelectorAll('textarea.rich-text-editor:not(.quill-initialized)').forEach(function(textarea) {

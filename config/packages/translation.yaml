@@ -5,7 +5,7 @@ framework:
         paths:
             - '%kernel.project_dir%/src/SharedKernel/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/User/Resources/translations'
-            #- '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/translations'
+            - '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/translations'
             #- '%kernel.project_dir%/src/BoundedContext/Message/Presentation/Resources/translations'
             #- '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/translations'
             #- '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Proof/Presentation/Resources/translations'

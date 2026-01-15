@@ -3,8 +3,10 @@ twig:
     paths:
         '%kernel.project_dir%/src/SharedKernel/Presentation/Resources/views': 'SharedKernel'
         '%kernel.project_dir%/src/BoundedContext/User/Presentation/Resources/views': 'User'
+        '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/views': 'Article'
     form_themes:
         - 'bootstrap_5_layout.html.twig'
+        - '@A2lixTranslationForm/bootstrap_5_layout.html.twig'
 
 when@test:
     twig:

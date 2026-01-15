@@ -1,0 +1,23 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% set views = object.views %}
+    {% set badge_class = 'badge-secondary' %}
+
+    {# Définir la couleur du badge selon le nombre de vues #}
+    {% if views > 1000 %}
+        {% set badge_class = 'badge-success' %}
+    {% elseif views > 100 %}
+        {% set badge_class = 'badge-warning' %}
+    {% elseif views > 10 %}
+        {% set badge_class = 'badge-info' %}
+    {% endif %}
+
+    <span class="badge {{ badge_class }}">
+        <i class="fa fa-eye"></i>
+        {{ views|number_format }}
+        {% if views > 1000 %}
+            <small>({{ (views/1000)|round(1) }}k)</small>
+        {% endif %}
+    </span>
+{% endblock %}
