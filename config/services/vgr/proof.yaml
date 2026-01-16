@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Article Domain Services
+    App\BoundedContext\VideoGamesRecords\Proof\:
+        resource: '../../../src/BoundedContext/VideoGamesRecords/Proof/*'
+
+
+    # Sonata Block Services
+    admin.block.service.proof.games:
+        class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Block\Service\ProofGamesBlockService
+        tags:
+            - { name: "sonata.block" }
+
+    admin.block.service.proof_requests:
+        class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Block\Service\ProofRequestBlockService
+        tags:
+            - { name: "sonata.block" }

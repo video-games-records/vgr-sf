@@ -11,6 +11,7 @@ imports:
     - { resource: services/vgr/core.yaml }
     - { resource: services/vgr/badge.yaml }
     - { resource: services/vgr/team.yaml }
+    - { resource: services/vgr/proof.yaml }
     - { resource: admin/user.yml }
     - { resource: admin/article.yml }
     - { resource: admin/forum.yml }
@@ -18,6 +19,7 @@ imports:
     - { resource: admin/vgr/core.yml }
     - { resource: admin/vgr/badge.yml }
     - { resource: admin/vgr/team.yml }
+    - { resource: admin/vgr/proof.yml }
 
 
 services:

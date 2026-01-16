@@ -1,0 +1,243 @@
+proof:
+  label: Preuves
+  form:
+    playerResponding: Joueur vérifiant
+    playerChart: Score joueur
+    status: Statut
+    response: Réponse
+  filter:
+    id: ID
+    player: Joueur
+    pseudo: Pseudo
+    platform: Plate-forme
+    game: Jeu
+    gameEn: Jeu (EN)
+    gameFr: Jeu (FR)
+    status: Statut
+    playerChartStatus: Statut du score
+    playerResponding: Joueur vérifiant
+    videoIsNull: Vidéo (vide)
+    pictureIsNull: Image (vide)
+  list:
+    id: ID
+    player: Joueur
+    game: Jeu
+    group: Groupe
+    chart: Record
+    status: Statut
+    type: Type
+    playerResponding: Joueur vérifiant
+    createdAt: Créé le
+  show:
+    id: ID
+    player: Joueur
+    game: Jeu
+    group: Groupe
+    chart: Record
+    createdAt: Créé le
+    updatedAt: Modifié le
+    checkedAt: Vérifié le
+    score: Score
+    picture: Image
+    video: Vidéo
+    playerResponding: Joueur vérifiant
+    status: Statut
+    message: Message
+    ranking: Classement
+  # Template-specific translations
+  chart:
+    information: Informations du record
+  submitted:
+    evidences: Preuves soumises
+  image:
+    evidence: Preuve image
+    alt: Image de preuve
+  video:
+    evidence: Preuve vidéo
+  no:
+    evidence:
+      title: Aucune preuve fournie
+      message: Aucune preuve image ou vidéo n'a été soumise pour cette preuve.
+    playerchart: Aucun score joueur associé trouvé
+    specific:
+      request: Aucune demande spécifique pour cette preuve
+  status:
+    title: Statut de la preuve
+    in_progress: En cours
+    awaiting_validation: En attente de validation
+    accepted: Acceptée
+    refused: Refusée
+    closed: Fermé
+  type:
+    picture: PICTURE
+    video: VIDEO
+    none: NONE
+  validated:
+    by: Validée par
+  refused:
+    by: Refusée par
+  edit:
+    for:
+      validation: Modifier pour validation
+  score:
+    information: Informations du score
+  request:
+    title: Demande de preuve
+    message: Message de la demande
+    requested:
+      by: Demandée par
+    date: Date de la demande
+  additional:
+    information: Informations supplémentaires
+  creation:
+    date: Date de création
+  last:
+    update: Dernière mise à jour
+  front:
+    chart: Voir le record
+  validation:
+    title: Validation de preuve
+    warning: Action définitive
+    examine: Veuillez examiner attentivement les preuves soumises ci-dessus avant de prendre une décision.
+    decision: Quelle est votre décision ?
+    form:
+      below: Vous pouvez également utiliser le formulaire ci-dessous pour modifier manuellement le statut et ajouter des commentaires.
+  action:
+    accept: ACCEPTER
+    accept_description: La preuve est valide
+    refuse: REFUSER
+    refuse_description: La preuve n'est pas valide
+  auto:
+    redirect:
+      info: Après validation, redirection automatique vers la prochaine preuve du même jeu
+  processing: Traitement...
+  error:
+    status:
+      not:
+        found: Champ statut non trouvé dans le formulaire
+  next:
+    redirect:
+      info: "Redirection vers la prochaine preuve du jeu %game%. Il reste %count% preuve(s) à valider (ID: #%next_id%)."
+  success:
+    accepted: "La preuve de %player% a été acceptée avec succès. Le score est maintenant validé."
+    refused: "La preuve de %player% a été refusée. Le joueur en sera notifié."
+  unknown:
+    player: "Joueur inconnu"
+
+proof_request:
+  label: Demandes de preuve
+  form:
+    playerRequesting: Joueur demandant
+    playerResponding: Joueur vérifiant
+    status: Statut
+    message: Message
+    response: Réponse
+  filter:
+    id: ID
+    status: Statut
+    player: Joueur
+    playerRequesting: Joueur demandant
+    playerResponding: Joueur vérifiant
+  list:
+    id: ID
+    createdAt: Créé le
+    playerRequesting: Joueur demandant
+    playerResponding: Joueur vérifiant
+    player: Joueur
+    game: Jeu
+    chart: Record
+    status: Statut
+  show:
+    id: ID
+    createdAt: Créé le
+    playerRequesting: Joueur demandant
+    playerResponding: Joueur vérifiant
+    playerChart: Score joueur
+    message: Message
+    status: Statut
+
+picture:
+  label: Images
+  form:
+    id: ID
+    path: Chemin
+    player: Joueur
+    game: Jeu
+  filter:
+    id: ID
+  list:
+    id: ID
+    path: Chemin
+    player: Joueur
+    game: Jeu
+  show:
+    id: ID
+    path: Chemin
+    player: Joueur
+    game: Jeu
+
+video:
+  label: Vidéos
+  form:
+    id: ID
+    player: Joueur
+    game: Jeu
+    name: Nom
+    type: Type
+    url: URL
+    isActive: Actif
+  filter:
+    id: ID
+    isActive: Actif
+    type: Type
+    player: Joueur
+  list:
+    id: ID
+    player: Joueur
+    game: Jeu
+    name: Nom
+    title: Titre
+    type: Type
+    videoId: ID vidéo
+    isActive: Actif
+  show:
+    id: ID
+    isActive: Actif
+    name: Nom
+    player: Joueur
+    game: Jeu
+    url: URL
+    nbComment: Nombre de commentaires
+    title: Titre
+    viewCount: Nombre de vues
+    likeCount: Nombre de likes
+    thumbnail: Miniature
+
+tag:
+  label: Tags
+  form:
+    id: ID
+    name: Nom
+    category: Catégorie
+    is_official: Officiel
+  filter:
+    id: ID
+    name: Nom
+    category: Catégorie
+    is_official: Officiel
+  list:
+    id: ID
+    name: Nom
+    category: Catégorie
+    is_official: Officiel
+  show:
+    id: ID
+    name: Nom
+    category: Catégorie
+    is_official: Officiel
+
+breadcrumb:
+  link_picture_list: 'Liste des images'
+  link_proof_request_list: 'Liste des demandes de preuve'
+  link_proof_list: 'Liste des preuves'
+  link_video_list: 'Liste des vidéos'

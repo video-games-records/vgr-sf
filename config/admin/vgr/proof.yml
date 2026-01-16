@@ -1,0 +1,71 @@
+services:
+  # Proof Request Admin
+  sonata.admin.vgr.proof_request:
+    class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin\ProofRequestAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\ProofRequest
+        manager_type: orm
+        group: "group.proofs"
+        label: "proof_request.label"
+    calls:
+      - [ setTemplate, [ 'edit', '@@VideoGamesRecordsProof/admin/object/proof_request/edit.html.twig' ] ]
+      - [ setSecurity, [ '@security.helper' ] ]
+      - [ setRequestStack, [ '@request_stack' ] ]
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+
+  # Proof Admin
+  sonata.admin.vgr.proof:
+    class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin\ProofAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof
+        controller: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Web\Controller\Admin\ProofAdminController
+        manager_type: orm
+        group: "group.proofs"
+        label: "proof.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsProof/admin/object/proof/show.html.twig' ] ]
+      - [ setTemplate, [ 'edit', '@@VideoGamesRecordsProof/admin/object/proof/edit.html.twig' ] ]
+      - [ setRequestStack, [ '@request_stack' ] ]
+      - [ setSecurity, [ '@security.helper' ] ]
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+
+  # Picture Admin
+  sonata.admin.vgr.picture:
+    class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin\PictureAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Picture
+        manager_type: orm
+        group: "group.proofs"
+        label: "picture.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsProof/admin/object/picture/show.html.twig' ] ]
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+
+  # Video Admin
+  sonata.admin.vgr.video:
+    class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin\VideoAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Video
+        controller: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Web\Controller\Admin\VideoAdminController
+        manager_type: orm
+        group: "group.proofs"
+        label: "video.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsProof/admin/object/video/show.html.twig' ] ]
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+
+  # Tag Admin
+  sonata.admin.vgr.tag:
+    class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin\TagAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Tag
+        manager_type: orm
+        group: "group.config"
+        label: "tag.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
