@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\BoundedContext\VideoGamesRecords\Team\:
+    resource: '../../../src/BoundedContext/VideoGamesRecords/Team/*'
+
+  App\BoundedContext\VideoGamesRecords\Team\Presentation\Web\Controller\Avatar\GetTeamAvatar:
+    arguments:
+      $teamAvatarManager: '@team_avatar_manager'

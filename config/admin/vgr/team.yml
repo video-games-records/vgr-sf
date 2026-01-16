@@ -1,0 +1,24 @@
+services:
+  # Team Admin
+  sonata.admin.vgr.team:
+    class: App\BoundedContext\VideoGamesRecords\Team\Presentation\Admin\TeamAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team
+        manager_type: orm
+        group: "group.players"
+        label: "team.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrTeamAdmin' ] ]
+
+  # Team Request Admin
+  sonata.admin.vgr.team_request:
+    class: App\BoundedContext\VideoGamesRecords\Team\Presentation\Admin\TeamRequestAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamRequest
+        manager_type: orm
+        group: "group.players"
+        label: "team_request.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrTeamAdmin' ] ]

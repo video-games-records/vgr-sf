@@ -10,12 +10,14 @@ imports:
     - { resource: services/vgr/igdb.yaml }
     - { resource: services/vgr/core.yaml }
     - { resource: services/vgr/badge.yaml }
+    - { resource: services/vgr/team.yaml }
     - { resource: admin/user.yml }
     - { resource: admin/article.yml }
     - { resource: admin/forum.yml }
     - { resource: admin/vgr/igdb.yml }
     - { resource: admin/vgr/core.yml }
     - { resource: admin/vgr/badge.yml }
+    - { resource: admin/vgr/team.yml }
 
 
 services:

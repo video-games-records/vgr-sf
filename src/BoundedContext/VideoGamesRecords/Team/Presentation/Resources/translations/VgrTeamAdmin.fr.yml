@@ -1,0 +1,46 @@
+team:
+  label: Équipes
+  form:
+    libTeam: Nom de l'équipe
+    leader: Chef
+    status: Statut
+  filter:
+    id: ID
+    libTeam: Nom de l'équipe
+  list:
+    id: ID
+    libTeam: Nom de l'équipe
+    leader: Chef
+    nbPlayer: Nombre de joueurs
+    status: Statut
+  show:
+    id: ID
+    libTeam: Nom de l'équipe
+    leader: Chef
+    status: Statut
+    nbPlayer: Nombre de joueurs
+    players: Joueurs
+
+team_request:
+  label: Demandes d'équipe
+  form:
+    team: Équipe
+    player: Joueur
+    status: Statut
+  filter:
+    id: ID
+    status: Statut
+  list:
+    id: ID
+    team: Équipe
+    player: Joueur
+    status: Statut
+  show:
+    id: ID
+    team: Équipe
+    player: Joueur
+    status: Statut
+
+breadcrumb:
+  link_team_list: 'Liste des équipes'
+  link_team_request_list: 'Liste des demandes d''équipe'

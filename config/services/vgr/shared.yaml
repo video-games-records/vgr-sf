@@ -5,3 +5,16 @@ services:
 
     App\BoundedContext\VideoGamesRecords\Shared\:
         resource: '../../../src/BoundedContext/VideoGamesRecords/Shared/*'
+
+    # Avatar Managers for different contexts
+    team_avatar_manager:
+        class: App\SharedKernel\Infrastructure\FileSystem\Manager\AvatarManager
+        arguments:
+            $appStorage: '@app.storage'
+            $prefix: 'team/'
+
+    user_avatar_manager:
+        class: App\SharedKernel\Infrastructure\FileSystem\Manager\AvatarManager
+        arguments:
+            $appStorage: '@app.storage'
+            $prefix: 'user/'

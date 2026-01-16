@@ -1,0 +1,46 @@
+team:
+  label: Teams
+  form:
+    libTeam: Team Name
+    leader: Leader
+    status: Status
+  filter:
+    id: ID
+    libTeam: Team Name
+  list:
+    id: ID
+    libTeam: Team Name
+    leader: Leader
+    nbPlayer: Players Count
+    status: Status
+  show:
+    id: ID
+    libTeam: Team Name
+    leader: Leader
+    status: Status
+    nbPlayer: Players Count
+    players: Players
+
+team_request:
+  label: Team Requests
+  form:
+    team: Team
+    player: Player
+    status: Status
+  filter:
+    id: ID
+    status: Status
+  list:
+    id: ID
+    team: Team
+    player: Player
+    status: Status
+  show:
+    id: ID
+    team: Team
+    player: Player
+    status: Status
+
+breadcrumb:
+  link_team_list: 'Teams List'
+  link_team_request_list: 'Team Requests List'
