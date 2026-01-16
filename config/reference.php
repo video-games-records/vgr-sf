@@ -2275,6 +2275,18 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     required_locales?: list<scalar|null|Param>,
  *     templating?: scalar|null|Param, // Set your own template path if required // Default: "@A2lixTranslationForm/native_layout.html.twig"
  * }
+ * @psalm-type ZenstruckMessengerMonitorConfig = array{
+ *     storage?: array{
+ *         exclude?: list<scalar|null|Param>,
+ *         orm?: array{
+ *             entity_class?: scalar|null|Param, // Your Doctrine entity class that extends "Zenstruck\Messenger\Monitor\History\Model\ProcessedMessage"
+ *         },
+ *     },
+ *     cache?: array{
+ *         pool?: scalar|null|Param, // Cache pool to use for worker cache. // Default: "cache.app"
+ *         expired_worker_ttl?: int|Param, // How long to keep expired workers in cache (in seconds). // Default: 3600
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2306,6 +2318,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     twig_component?: TwigComponentConfig,
  *     a2lix_auto_form?: A2lixAutoFormConfig,
  *     a2lix_translation_form?: A2lixTranslationFormConfig,
+ *     zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2341,6 +2354,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig_component?: TwigComponentConfig,
  *         a2lix_auto_form?: A2lixAutoFormConfig,
  *         a2lix_translation_form?: A2lixTranslationFormConfig,
+ *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2373,6 +2387,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig_component?: TwigComponentConfig,
  *         a2lix_auto_form?: A2lixAutoFormConfig,
  *         a2lix_translation_form?: A2lixTranslationFormConfig,
+ *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2407,6 +2422,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig_component?: TwigComponentConfig,
  *         a2lix_auto_form?: A2lixAutoFormConfig,
  *         a2lix_translation_form?: A2lixTranslationFormConfig,
+ *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

@@ -1,0 +1,24 @@
+services:
+  # Badge Admin
+  sonata.admin.vgr.badge:
+    class: App\BoundedContext\VideoGamesRecords\Badge\Presentation\Admin\BadgeAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge
+        manager_type: orm
+        group: "group.badge"
+        label: "badge.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Player Badge Admin
+  sonata.admin.vgr.playerbadge:
+    class: App\BoundedContext\VideoGamesRecords\Badge\Presentation\Admin\PlayerBadgeAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge
+        manager_type: orm
+        group: "group.badge"
+        label: "player_badge.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
