@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Team\Application\MessageHandler;
 
+use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -106,9 +107,12 @@ readonly class UpdateTeamGameRankHandler
                     $row,
                     'App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame'
                 );
-                $teamGame->setTeam(
-                    $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $row['id'])
+                /** @var Team $team */
+                $team =  $this->em->getReference(
+                    'App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team',
+                    $row['id']
                 );
+                $teamGame->setTeam($team);
                 $teamGame->setGame($game);
 
                 $this->em->persist($teamGame);
@@ -122,7 +126,7 @@ readonly class UpdateTeamGameRankHandler
 
         if ($game->getSerie()) {
             $this->bus->dispatch(
-                new UpdateTeamSerieRank($game->getSerie()->getId()),
+                new UpdateTeamSerieRank((int) $game->getSerie()->getId()),
                 [
                     new DelayStamp(self::DELAY_SERIE_UPDATE),
                     new DescriptionStamp(
@@ -140,19 +144,17 @@ readonly class UpdateTeamGameRankHandler
         $this->bus->dispatch(new UpdateTeamRank());
 
         // Update badges directly (was in TeamGameUpdatedSubscriber - now optimized)
-        if ($game->getBadge()) {
-            // Get first place teams from the ranking we just calculated
-            $firstPlaceTeams = [];
-            foreach ($list as $row) {
-                if ($row['rankPointChart'] === 1) {
-                    $firstPlaceTeams[$row['id']] = 0;
-                } else {
-                    break; // Rankings are ordered, so no more first places
-                }
+        // Get first place teams from the ranking we just calculated
+        $firstPlaceTeams = [];
+        foreach ($list as $row) {
+            if ($row['rankPointChart'] === 1) {
+                $firstPlaceTeams[$row['id']] = 0;
+            } else {
+                break; // Rankings are ordered, so no more first places
             }
-
-            $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge')
-                ->updateBadge($firstPlaceTeams, $game->getBadge());
         }
+
+        $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge')
+            ->updateBadge($firstPlaceTeams, $game->getBadge());
     }
 }

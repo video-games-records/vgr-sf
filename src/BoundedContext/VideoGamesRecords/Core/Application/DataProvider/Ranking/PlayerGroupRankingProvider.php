@@ -23,7 +23,7 @@ class PlayerGroupRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $player = $this->getPlayer($options['user'] ?? null);
+        $player = $this->getPlayer();
         $team = !empty($options['idTeam']) ? $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $options['idTeam']) : null;
 
         $query = $this->em->createQueryBuilder()
@@ -68,7 +68,7 @@ class PlayerGroupRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $player = $this->getPlayer($options['user'] ?? null);
+        $player = $this->getPlayer();
         $team = !empty($options['idTeam']) ? $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $options['idTeam']) : null;
 
         $query = $this->em->createQueryBuilder()

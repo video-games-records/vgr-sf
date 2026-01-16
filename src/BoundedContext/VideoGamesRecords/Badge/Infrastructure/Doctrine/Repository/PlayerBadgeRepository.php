@@ -15,6 +15,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 
+/**
+ * @extends DefaultRepository<PlayerBadge>
+ */
 class PlayerBadgeRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -98,11 +101,6 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
-     * @param array $players
-     * @param Badge $badge
-     * @throws Exception|ORMException
-     */
-    /**
      * @param array<int, int> $players
      * @param Badge $badge
      * @throws Exception|ORMException
@@ -116,19 +114,22 @@ class PlayerBadgeRepository extends DefaultRepository
         foreach ($list as $playerBadge) {
             $idPlayer = $playerBadge->getPlayer()->getId();
             //----- Remove badge
-            if (!array_key_exists($idPlayer, $players)) {
+            if ($idPlayer !== null && !array_key_exists($idPlayer, $players)) {
                 $playerBadge->setEndedAt(new DateTime());
                 $this->getEntityManager()->persist($playerBadge);
             }
-            $players[$idPlayer] = 1;
+            if ($idPlayer !== null) {
+                $players[$idPlayer] = 1;
+            }
         }
         //----- Add badge
         foreach ($players as $idPlayer => $value) {
             if (0 === $value) {
                 $playerBadge = new PlayerBadge();
-                $playerBadge->setPlayer(
-                    $this->getEntityManager()->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $idPlayer)
-                );
+                /** @var Player $player */
+                $player = $this->getEntityManager()
+                    ->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $idPlayer);
+                $playerBadge->setPlayer($player);
                 $playerBadge->setBadge($badge);
                 $this->getEntityManager()->persist($playerBadge);
             }

@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\Doctrine\Eve
 
 use Datetime;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Exception\ORMException;
@@ -26,17 +27,15 @@ class ProofRequestListener
 {
     /** @var array<string, array{0: mixed, 1: mixed}> */
     private array $changeSet = [];
-    private UserProvider $userProvider;
     private EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserProvider $userProvider, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
-        $this->userProvider = $userProvider;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
-     * @param ProofRequest       $proofRequest
+     * @param ProofRequest $proofRequest
      * @param PreUpdateEventArgs $event
      */
     public function preUpdate(ProofRequest $proofRequest, PreUpdateEventArgs $event): void
@@ -45,9 +44,9 @@ class ProofRequestListener
     }
 
     /**
-     * @param ProofRequest       $proofRequest
+     * @param ProofRequest $proofRequest
      * @param LifecycleEventArgs $event
-     * @throws OptimisticLockException
+     * @phpstan-param LifecycleEventArgs<EntityManagerInterface> $event
      */
     public function postPersist(ProofRequest $proofRequest, LifecycleEventArgs $event): void
     {
@@ -61,16 +60,15 @@ class ProofRequestListener
     /**
      * @param ProofRequest $proofRequest
      * @param LifecycleEventArgs $event
+     * @phpstan-param LifecycleEventArgs<EntityManagerInterface> $event
      * @throws ORMException
      */
     public function postUpdate(ProofRequest $proofRequest, LifecycleEventArgs $event): void
     {
-        $em = $event->getObjectManager();
 
         if ($this->isAccepted()) {
             $proofRequest->getPlayerChart()->setStatus(PlayerChartStatusEnum::REQUEST_VALIDATED);
 
-            $proofRequest->setPlayerResponding($this->userProvider->getPlayer());
             $proofRequest->setDateAcceptance(new DateTime());
             $this->eventDispatcher->dispatch(new ProofRequestAccepted($proofRequest));
         }
@@ -78,7 +76,6 @@ class ProofRequestListener
         if ($this->isRefused()) {
             $proofRequest->getPlayerChart()->setStatus(PlayerChartStatusEnum::NONE);
 
-            $proofRequest->setPlayerResponding($this->userProvider->getPlayer());
             $proofRequest->setDateAcceptance(new DateTime());
             $this->eventDispatcher->dispatch(new ProofRequestRefused($proofRequest));
         }

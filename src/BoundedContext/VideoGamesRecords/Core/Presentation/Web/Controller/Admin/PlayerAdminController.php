@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin;
 
-use Sonata\AdminBundle\Controller\CRUDController;
+use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Dispatcher\RankingUpdateDispatcher;
-use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerData;
 
-class PlayerAdminController extends CRUDController
+/**
+ * @extends AbstractCRUDController<Player>
+ */
+class PlayerAdminController extends AbstractCRUDController
 {
     public function __construct(private readonly RankingUpdateDispatcher $rankingUpdateDispatcher)
     {
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return RedirectResponse
      * @throws ExceptionInterface
      */

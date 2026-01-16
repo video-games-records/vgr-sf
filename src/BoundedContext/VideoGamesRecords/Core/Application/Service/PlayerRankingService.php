@@ -97,7 +97,7 @@ class PlayerRankingService
 
     /**
      * Core method to generate rankings for any period
-     * @return array<string, mixed>
+     * @return list<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerTopRanking>
      */
     private function generateRankingsForPeriod(
         string $periodType,

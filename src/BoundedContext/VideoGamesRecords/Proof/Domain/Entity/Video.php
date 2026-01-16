@@ -45,13 +45,13 @@ class Video
     #[ORM\Column(length: 50, nullable: false)]
     private string $type = VideoType::YOUTUBE;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $externalId = null;
+    #[ORM\Column(length: 50, nullable: false)]
+    private string $externalId;
 
     #[Assert\NotBlank]
     #[Assert\Length(min: 5, max: 255)]
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $url = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $url;
 
 
     #[ORM\Column(nullable: false, options: ['default' => 0])]
@@ -121,19 +121,19 @@ class Video
     }
 
 
-    public function getExternalId(): ?string
+    public function getExternalId(): string
     {
         return $this->externalId;
     }
 
 
-    public function setUrl(?string $url): void
+    public function setUrl(string $url): void
     {
         $this->url = $url;
         $this->majTypeAndVideoId();
     }
 
-    public function getUrl(): ?string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -163,11 +163,13 @@ class Video
         return $this->game;
     }
 
+    /** @return Collection<int, VideoComment> */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
+    /** @return Collection<int, Tag> */
     public function getTags(): Collection
     {
         return $this->tags;
@@ -198,7 +200,13 @@ class Video
             $this->setExternalId($explode[1]);
         } elseif (strpos($this->getUrl(), 'youtu.be')) {
             $this->setType(VideoType::YOUTUBE);
-            $this->setExternalId(substr($this->getUrl(), strripos($this->getUrl(), '/') + 1, strlen($this->getUrl()) - 1));
+            $this->setExternalId(
+                substr(
+                    $this->getUrl(),
+                    strripos($this->getUrl(), '/') + 1,
+                    strlen($this->getUrl()) - 1
+                )
+            );
         } elseif (strpos($this->getUrl(), 'twitch')) {
             $this->setType(VideoType::TWITCH);
             $explode = explode('/', $this->getUrl());

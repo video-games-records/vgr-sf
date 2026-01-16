@@ -49,7 +49,7 @@ class ProofRequestStatus
 
 
     /**
-     * @return array<int, int>
+     * @return array<string, string>
      */
     public static function getStatusChoices(): array
     {

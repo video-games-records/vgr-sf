@@ -59,7 +59,7 @@ class GameStatus
     }
 
     /**
-     * @return array<string, int>
+     * @return array<string, string>
      */
     public static function getStatusChoices(): array
     {
@@ -74,7 +74,7 @@ class GameStatus
     }
 
     /**
-     * @return array<int, string>
+     * @return array<string, string>
      */
     public static function getReverseStatusChoices(): array
     {

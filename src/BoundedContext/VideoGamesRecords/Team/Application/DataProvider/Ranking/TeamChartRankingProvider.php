@@ -23,7 +23,7 @@ class TeamChartRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $team = $this->getTeam($options['user'] ?? null);
+        $team = $this->getTeam();
 
         $query = $this->em->createQueryBuilder()
             ->select('tc')

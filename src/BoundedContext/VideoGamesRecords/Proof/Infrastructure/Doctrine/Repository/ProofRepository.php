@@ -12,6 +12,9 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 
+/**
+ * @extends DefaultRepository<Proof>
+ */
 class ProofRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

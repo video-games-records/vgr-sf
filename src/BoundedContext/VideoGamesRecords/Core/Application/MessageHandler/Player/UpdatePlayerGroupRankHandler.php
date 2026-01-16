@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\MessageHandler\Player;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -28,7 +29,7 @@ readonly class UpdatePlayerGroupRankHandler
     ) {
     }
 
-    public function __invoke(UpdatePlayerGroupRank $updatePlayerGroupRank): array
+    public function __invoke(UpdatePlayerGroupRank $updatePlayerGroupRank): void
     {
         /** @var Group|null $group */
         $group = $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group')
@@ -146,8 +147,19 @@ readonly class UpdatePlayerGroupRankHandler
 
         //----- add some data
         $list = RankingTools::addRank($list, 'rankPointChart', ['pointChart']);
-        $list = RankingTools::order($list, ['chartRank0' => SORT_DESC, 'chartRank1' => SORT_DESC, 'chartRank2' => SORT_DESC, 'chartRank3' => SORT_DESC]);
-        $list = RankingTools::addRank($list, 'rankMedal', ['chartRank0', 'chartRank1', 'chartRank2', 'chartRank3', 'chartRank4', 'chartRank5']);
+        $list = RankingTools::order(
+            $list,
+            [
+                'chartRank0' => SORT_DESC,
+                'chartRank1' => SORT_DESC,
+                'chartRank2' => SORT_DESC,
+                'chartRank3' => SORT_DESC]
+        );
+        $list = RankingTools::addRank(
+            $list,
+            'rankMedal',
+            ['chartRank0', 'chartRank1', 'chartRank2', 'chartRank3', 'chartRank4', 'chartRank5']
+        );
 
         $normalizer = new ObjectNormalizer();
         $serializer = new Serializer([$normalizer]);
@@ -157,7 +169,12 @@ readonly class UpdatePlayerGroupRankHandler
                 $row,
                 'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGroup'
             );
-            $playerGroup->setPlayer($this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $row['id']));
+            /** @var Player $player */
+            $player = $this->em->getReference(
+                'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player',
+                $row['id']
+            );
+            $playerGroup->setPlayer($player);
             $playerGroup->setGroup($group);
 
             $this->em->persist($playerGroup);
@@ -165,14 +182,12 @@ readonly class UpdatePlayerGroupRankHandler
         $this->em->flush();
 
         $this->bus->dispatch(
-            new UpdatePlayerGameRank($group->getGame()->getId()),
+            new UpdatePlayerGameRank((int) $group->getGame()->getId()),
             [
                 new DescriptionStamp(
                     sprintf('Update player-ranking for game [%d]', $group->getGame()->getId())
                 )
             ]
         );
-
-        return ['success' => true];
     }
 }

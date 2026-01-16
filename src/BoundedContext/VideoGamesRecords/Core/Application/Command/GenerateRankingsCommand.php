@@ -42,16 +42,16 @@ This command generates rankings for the specified type and period.
 Examples:
   # Generate current week game rankings
   php bin/console vgr:rankings:generate game week
-  
+
   # Generate game rankings for specific week
   php bin/console vgr:rankings:generate game week --year=2025 --week=35
-  
+
   # Generate current month player rankings
   php bin/console vgr:rankings:generate player month
-  
+
   # Generate player rankings for specific month
   php bin/console vgr:rankings:generate player month --year=2025 --month=8
-  
+
   # Generate current year game rankings and clean old data
   php bin/console vgr:rankings:generate game year --clean
             ');
@@ -202,14 +202,13 @@ Examples:
                 default => '➡️ 0'
             };
 
+            $metricLabel = 'Posts';
             if ($type === 'game') {
                 $name = $ranking->getGame()->getName() ?? 'N/A';
                 $metric = $ranking->getNbPost();
-                $metricLabel = 'Posts';
             } else {
                 $name = $ranking->getPlayer()->getPseudo() ?? 'N/A';
                 $metric = $ranking->getNbPost();
-                $metricLabel = 'Posts';
             }
 
             $tableData[] = [
@@ -221,7 +220,7 @@ Examples:
         }
 
         $io->table(
-            ['Rank', ucfirst($type), $metricLabel, 'Change'],
+            ['Rank', ucfirst($type), 'Posts', 'Change'],
             $tableData
         );
     }

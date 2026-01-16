@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Team\Application\MessageHandler;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
+use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -96,9 +97,12 @@ readonly class UpdateTeamGroupRankHandler
                 $row,
                 'App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGroup'
             );
-            $teamGroup->setTeam(
-                $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $row['id'])
+            /** @var Team $team */
+            $team = $this->em->getReference(
+                'App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team',
+                $row['id']
             );
+            $teamGroup->setTeam($team);
             $teamGroup->setGroup($group);
 
             $this->em->persist($teamGroup);
@@ -106,7 +110,7 @@ readonly class UpdateTeamGroupRankHandler
         $this->em->flush();
 
         $this->bus->dispatch(
-            new UpdateTeamGameRank($group->getGame()->getId()),
+            new UpdateTeamGameRank((int) $group->getGame()->getId()),
             [
                 new DescriptionStamp(
                     sprintf('Update team-ranking for game [%d]', $group->getGame()->getId())

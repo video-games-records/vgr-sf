@@ -11,6 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\User\Domain\Entity\User;
 
+/**
+ * @extends DefaultRepository<Player>
+ */
 class PlayerRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

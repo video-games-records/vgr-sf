@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Player\Gamercard;
 
-use Exception;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGame;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Typography\FontFactory;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\Routing\Attribute\Route;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
-use App\SharedKernel\Domain\File\Picture;
-use App\SharedKernel\Domain\File\PictureCreatorFactory;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerGameRepository;
 use App\SharedKernel\Domain\Traits\GetOrdinalSuffixTrait;
 use App\SharedKernel\Domain\Traits\NumberFormatTrait;
@@ -34,26 +35,49 @@ class Classic extends AbstractController
         $this->playerGameRepository = $playerGameRepository;
     }
 
+    /**
+     * @throws FilesystemException
+     */
     #[Route(
         '/gamercard/{id}/classic',
         name: 'vgr_core_player_gamercard_classic',
         methods: ['GET'],
         requirements: ['id' => '[1-9]\d*']
     )]
-    #[Cache(public: true, maxage: 3600, mustRevalidate: true)]
-    public function __invoke(Player $player): void
+    #[Cache(maxage: 3600, public: true, mustRevalidate: true)]
+    public function __invoke(Player $player): Response
     {
-        chdir(__DIR__);
+        $manager = ImageManager::gd();
+        $gamercard = $manager->create(210, 135);
 
-        $gamercard = new Picture(210, 135);
-        $gamercard->addColor('black', 13, 14, 15)
-            ->addRectangle(0, 0, 210, 24)
-            ->addColor('grey', 58, 56, 56)
-            ->addRectangle(0, 25, 210, 135)
-            ->addColor('lightGrayLine', 196, 196, 196)
-            ->addRectangle(78, 52, 204, 53)
-            ->addColor('darkGrayLine', 86, 86, 86)
-            ->addRectangle(78, 52, 203, 52);
+        // Background rectangles
+        $gamercard->drawRectangle(0, 0, function ($rectangle) {
+            $rectangle->size(210, 24);
+            $rectangle->background('rgb(13, 14, 15)');
+        });
+
+        $gamercard->drawRectangle(0, 25, function ($rectangle) {
+            $rectangle->size(210, 110);
+            $rectangle->background('rgb(58, 56, 56)');
+        });
+
+        // Lines
+        $gamercard->drawRectangle(78, 52, function ($rectangle) {
+            $rectangle->size(126, 1);
+            $rectangle->background('rgb(196, 196, 196)');
+        });
+
+        $gamercard->drawRectangle(78, 52, function ($rectangle) {
+            $rectangle->size(125, 1);
+            $rectangle->background('rgb(86, 86, 86)');
+        });
+
+        // Fonts paths
+        $projectDir = $this->getParameter('kernel.project_dir');
+        assert(is_string($projectDir));
+        $fontPath = $projectDir . '/src/SharedKernel/Resources/fonts/';
+        $segoeUILight = $fontPath . 'segoeuil.ttf';
+        $segoeUISemiBold = $fontPath . 'seguisb.ttf';
 
         // Pseudo
         if ($player->getTeam() !== null) {
@@ -61,55 +85,85 @@ class Classic extends AbstractController
         } else {
             $pseudo = $player->getPseudo();
         }
-        $gamercard->addColor('orange', 246, 162, 83)
-            ->addFont('segoeUILight', '../../../../../../../../SharedKernel/Resources/fonts/segoeuil.ttf')
-            ->write($pseudo, 12.375, 9, 17);
+
+        $gamercard->text($pseudo, 9, 8, function (FontFactory $font) use ($segoeUILight) {
+            $font->filename($segoeUILight);
+            $font->size(12.375);
+            $font->color('rgb(246, 162, 83)');
+            $font->valign('top');
+            $font->align('left');
+        });
 
         // Ranking
-        $fontSize = 7.5;
+        $fontSize = 9;
         $rankMedal = '/' . $player->getRankMedal();
         if ($player->getRankMedal() <= 999) {
             $rankMedal .= $this->getOrdinalSuffix($player->getRankMedal());
         }
         $pointGame = $this->numberFormat($player->getPointGame()) . ' Pts / ';
         $pointGame .= $player->getRankPointGame() . $this->getOrdinalSuffix($player->getRankPointGame());
-        $gamercard
-            ->addColor('white', 255, 255, 255)
-            ->addFont('segoeUISemiBold', '../../../../../../../../SharedKernel/Resources/fonts/seguisb.ttf')
-            ->write((string) $player->getChartRank0(), $fontSize, 96, 70)
-            ->write((string) $player->getChartRank1(), $fontSize, 145, 70)
-            ->write((string) $player->getChartRank2(), $fontSize, 96, 90)
-            ->write((string) $player->getChartRank3(), $fontSize, 145, 90)
-            ->write($rankMedal, $fontSize, 175, 80)
-            ->write($pointGame, $fontSize, 82, 45);
+
+        $textData = [
+            [(string) $player->getChartRank0(), 96, 63],
+            [(string) $player->getChartRank1(), 145, 63],
+            [(string) $player->getChartRank2(), 96, 83],
+            [(string) $player->getChartRank3(), 145, 83],
+            [$rankMedal, 175, 73],
+            [$pointGame, 82, 40],
+        ];
+
+        foreach ($textData as [$text, $x, $y]) {
+            $gamercard->text($text, $x, $y, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+                $font->filename($segoeUISemiBold);
+                $font->size($fontSize);
+                $font->color('rgb(255, 255, 255)');
+                $font->valign('top');
+                $font->align('left');
+            });
+        }
 
         // Add sprites pictures medals
-        $sprite = PictureCreatorFactory::fromFile('../../../../../../../../SharedKernel/Resources/img/sprite.png');
-        $gamercard
-            ->copyResized($sprite, 78, 59, 126, 160, 16, 16, 16, 16)
-            ->copyResized($sprite, 127, 59, 108, 160, 16, 16, 16, 16)
-            ->copyResized($sprite, 78, 79, 92, 160, 16, 16, 16, 16)
-            ->copyResized($sprite, 127, 79, 74, 160, 16, 16, 16, 16);
+        $spritePath = $projectDir . '/src/SharedKernel/Resources/img/sprite.png';
+        $sprite = $manager->read($spritePath);
+
+        $medals = [
+            [126, 160, 78, 59],
+            [108, 160, 127, 59],
+            [92, 160, 78, 79],
+            [74, 160, 127, 79],
+        ];
+
+        foreach ($medals as [$srcX, $srcY, $dstX, $dstY]) {
+            $medalIcon = clone $sprite;
+            $medalIcon->crop(16, 16, $srcX, $srcY);
+            $gamercard->place($medalIcon, 'top-left', $dstX, $dstY);
+        }
 
         // Add avatar
-        $avatar = PictureCreatorFactory::fromStream($this->getAvatar($player));
-        $gamercard->copyResized($avatar, 9, 30, 0, 0, 64, 64);
+        $avatarData = $this->getAvatar($player);
+        $avatar = $manager->read($avatarData);
+        $avatar->resize(64, 64);
+        $gamercard->place($avatar, 'top-left', 9, 30);
 
+        /** @var array<PlayerGame> $playerGames */
         $playerGames = $this->playerGameRepository->findBy(['player' => $player], ['lastUpdate' => 'DESC'], 5);
 
         $startX = 9;
         foreach ($playerGames as $playerGame) {
-            $picture = PictureCreatorFactory::fromStream($this->getBadge($playerGame->getGame()->getBadge()));
-            $gamercard->copyResized($picture, $startX, 99);
+            $badge = $playerGame->getGame()->getBadge();
+            $badgeData = $this->getBadge($badge);
+            $badgeImage = $manager->read($badgeData);
+            $gamercard->place($badgeImage, 'top-left', $startX, 99);
             $startX += 38;
         }
 
-        try {
-            $gamercard->downloadPicture('png', 'VGR-GamerCard-Classic-' . $player->getSlug() . '.png');
-        } catch (Exception $e) {
-            exit;
-        }
-        exit;
+        return new Response(
+            (string) $gamercard->toPng(),
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'image/png',
+            ]
+        );
     }
 
 

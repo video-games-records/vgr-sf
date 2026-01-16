@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\EventListener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Persistence\Event\LifecycleEventArgs as BaseLifecycleEventArgs;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,10 +32,9 @@ class SerieListener
     }
 
     /**
-     * @param Serie                   $serie
-     * @param BaseLifecycleEventArgs $event
+     * @param Serie $serie
      */
-    public function prePersist(Serie $serie, BaseLifecycleEventArgs $event): void
+    public function prePersist(Serie $serie): void
     {
         $badge = new Badge();
         $badge->setType(BadgeType::SERIE);
@@ -44,7 +43,7 @@ class SerieListener
     }
 
     /**
-     * @param Serie              $serie
+     * @param Serie $serie
      * @param PreUpdateEventArgs $event
      */
     public function preUpdate(Serie $serie, PreUpdateEventArgs $event): void
@@ -54,10 +53,11 @@ class SerieListener
 
     /**
      * @param Serie $serie
-     * @param BaseLifecycleEventArgs $event
+     * @param LifecycleEventArgs $event
+     * @phpstan-param LifecycleEventArgs<EntityManagerInterface> $event
      * @throws ExceptionInterface
      */
-    public function postUpdate(Serie $serie, BaseLifecycleEventArgs $event): void
+    public function postUpdate(Serie $serie, LifecycleEventArgs $event): void
     {
         $em = $event->getObjectManager();
 
@@ -65,7 +65,7 @@ class SerieListener
             array_key_exists('status', $this->changeSet)
             && $this->changeSet['status'][1] == SerieStatus::ACTIVE
         ) {
-            $this->bus->dispatch(new UpdatePlayerSerieRank($serie->getId()));
+            $this->bus->dispatch(new UpdatePlayerSerieRank((int) $serie->getId()));
         }
 
         $em->flush();
@@ -73,9 +73,8 @@ class SerieListener
 
     /**
      * @param Serie $serie
-     * @param LifecycleEventArgs $event
      */
-    public function postLoad(Serie $serie, LifecycleEventArgs $event): void
+    public function postLoad(Serie $serie): void
     {
         $request = $this->requestStack->getCurrentRequest();
         if ($request) {

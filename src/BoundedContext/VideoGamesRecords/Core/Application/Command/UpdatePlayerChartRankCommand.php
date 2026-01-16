@@ -77,6 +77,7 @@ class UpdatePlayerChartRankCommand extends Command
             return Command::FAILURE;
         }
 
+        /** @var array<int> $chartIds */
         $chartIds = [];
 
         if ($chartId) {
@@ -94,8 +95,16 @@ class UpdatePlayerChartRankCommand extends Command
                 return Command::FAILURE;
             }
             $charts = $group->getCharts();
-            $chartIds = $charts->map(fn($chart) => $chart->getId())->toArray();
-            $io->info(sprintf('Found %d charts in group "%s" (ID: %d)', count($chartIds), $group->getDefaultName(), $groupId));
+            $chartIds = array_filter(
+                $charts->map(fn($chart) => $chart->getId())->toArray(),
+                fn($id) => $id !== null
+            );
+            $io->info(sprintf(
+                'Found %d charts in group "%s" (ID: %d)',
+                count($chartIds),
+                $group->getDefaultName(),
+                $groupId
+            ));
         } elseif ($gameId) {
             $game = $this->gameRepository->find((int) $gameId);
             if (!$game) {
@@ -105,10 +114,18 @@ class UpdatePlayerChartRankCommand extends Command
             $chartIds = [];
             foreach ($game->getGroups() as $group) {
                 foreach ($group->getCharts() as $chart) {
-                    $chartIds[] = $chart->getId();
+                    $id = $chart->getId();
+                    if ($id !== null) {
+                        $chartIds[] = $id;
+                    }
                 }
             }
-            $io->info(sprintf('Found %d charts in game "%s" (ID: %d)', count($chartIds), $game->getDefaultName(), $gameId));
+            $io->info(sprintf(
+                'Found %d charts in game "%s" (ID: %d)',
+                count($chartIds),
+                $game->getDefaultName(),
+                $gameId
+            ));
         } elseif ($lastUpdate) {
             // Validate date format
             if (!preg_match('/^\d{8}$/', $lastUpdate)) {
@@ -124,7 +141,11 @@ class UpdatePlayerChartRankCommand extends Command
 
             // Get unique chart IDs from PlayerChart with lastUpdate >= date
             $chartIds = $this->chartRepository->findChartIdsByLastUpdate($date);
-            $io->info(sprintf('Found %d unique charts with player updates after %s', count($chartIds), $date->format('Y-m-d')));
+            $io->info(sprintf(
+                'Found %d unique charts with player updates after %s',
+                count($chartIds),
+                $date->format('Y-m-d')
+            ));
         }
 
         if (empty($chartIds)) {

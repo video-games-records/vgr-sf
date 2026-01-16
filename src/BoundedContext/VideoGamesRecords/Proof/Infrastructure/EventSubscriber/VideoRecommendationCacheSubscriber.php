@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\EventSubscriber;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Video;
-use App\BoundedContext\VideoGamesRecords\Core\Application\Service\VideoRecommendationService;
+use App\BoundedContext\VideoGamesRecords\Proof\Application\Service\VideoRecommendationService;
 
 class VideoRecommendationCacheSubscriber implements EventSubscriber
 {
@@ -25,6 +26,9 @@ class VideoRecommendationCacheSubscriber implements EventSubscriber
         ];
     }
 
+    /**
+     * @param LifecycleEventArgs<EntityManagerInterface> $args
+     */
     public function postUpdate(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
@@ -34,6 +38,9 @@ class VideoRecommendationCacheSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param LifecycleEventArgs<EntityManagerInterface> $args
+     */
     public function postRemove(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();

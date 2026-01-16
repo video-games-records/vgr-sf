@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin;
 
+use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
+use Doctrine\ORM\Exception\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,14 +17,16 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
-use App\SharedKernel\Domain\Contracts\SecurityInterface;
 use App\SharedKernel\Presentation\Form\DefaultForm;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\ImportCsv;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\VideoProofOnly;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Manager\GameManager;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Dispatcher\RankingUpdateDispatcher;
 
-class GameAdminController extends CRUDController implements SecurityInterface
+/**
+ * @extends AbstractCRUDController<Game>
+ */
+class GameAdminController extends AbstractCRUDController
 {
     public function __construct(
         private readonly GameManager $gameManager,
@@ -91,7 +95,6 @@ class GameAdminController extends CRUDController implements SecurityInterface
         /** @var Game $game */
         $game = $this->admin->getSubject();
 
-        $em = $this->admin->getModelManager()->getEntityManager($this->admin->getClass());
         $form = $this->createForm(VideoProofOnly::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -116,11 +119,14 @@ class GameAdminController extends CRUDController implements SecurityInterface
     }
 
 
+    /**
+     * @throws ORMException
+     */
     public function importCsvAction(int $id, Request $request): Response
     {
         /** @var Game $game */
         $game = $this->admin->getSubject();
-        $em = $this->admin->getModelManager()->getEntityManager($this->admin->getClass());
+        $em = $this->getEntityManager();
 
         $form = $this->createForm(ImportCsv::class);
         $form->handleRequest($request);
@@ -130,13 +136,13 @@ class GameAdminController extends CRUDController implements SecurityInterface
 
             $rows = str_getcsv($csvFile->getContent(), "\n");
 
-            /** @var Group $group */
+            /** @var Group|null $group */
             $group = null;
             foreach ($rows as $index => $row) {
                 if ($index === 0) {
                     continue;
                 }
-                $data = str_getcsv($row, ";");
+                $data = str_getcsv((string) $row, ";");
                 if (count($data) !== 5) {
                     throw new \RuntimeException('Invalid number of rows.');
                 }
@@ -147,20 +153,23 @@ class GameAdminController extends CRUDController implements SecurityInterface
                 if ($group === null || $group->getLibGroupEn() !== $data[0]) {
                     $group = new Group();
                     $group->setGame($game);
-                    $group->setLibGroupEn($data[0]);
+                    $group->setLibGroupEn((string) $data[0]);
                     $group->setLibGroupFr($data[1]);
                     $em->persist($group);
                 }
 
                 $chart = new Chart();
                 $chart->setGroup($group);
-                $chart->setLibChartEn($data[2]);
+                $chart->setLibChartEn((string) $data[2]);
                 $chart->setLibChartFr($data[3]);
                 $em->persist($chart);
 
                 $chartLib = new ChartLib();
                 $chartLib->setChart($chart);
-                $chartLib->setType($em->getReference(ChartType::class, $data[4]));
+
+                /** @var ChartType $chartType */
+                $chartType = $em->getReference(ChartType::class, $data[4]);
+                $chartLib->setType($chartType);
                 $em->persist($chartLib);
             }
             $em->flush();

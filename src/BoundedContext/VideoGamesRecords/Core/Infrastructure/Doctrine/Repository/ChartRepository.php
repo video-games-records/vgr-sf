@@ -15,6 +15,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use DateTime;
 
+/**
+ * @extends DefaultRepository<Chart>
+ */
 class ChartRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -71,6 +74,35 @@ class ChartRepository extends DefaultRepository
             ->setMaxResults($itemsPerPage);
         $doctrinePaginator = new DoctrinePaginator($query);
         return new Paginator($doctrinePaginator);
+    }
+
+    /*************************************/
+    /************  PRIVATE  **************/
+    /*************************************/
+
+    /**
+     * Find unique chart IDs that have player updates after a specific date
+     * @param DateTime $date
+     * @return array<int>
+     */
+    public function findChartIdsByLastUpdate(DateTime $date): array
+    {
+        $result = $this->createQueryBuilder('ch')
+            ->select('DISTINCT ch.id')
+            ->join('ch.playerCharts', 'pc')
+            ->where('pc.lastUpdate >= :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+
+        // Extract IDs from result array and filter out nulls
+        $chartIds = [];
+        foreach ($result as $item) {
+            if ($item['id'] !== null) {
+                $chartIds[] = $item['id'];
+            }
+        }
+        return $chartIds;
     }
 
     /*************************************/

@@ -8,6 +8,9 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\VideoComment;
 
+/**
+ * @extends DefaultRepository<VideoComment>
+ */
 class VideoCommentRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

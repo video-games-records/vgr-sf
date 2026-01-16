@@ -175,7 +175,9 @@ readonly class UpdatePlayerGameRankHandler
                 $row,
                 'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGame'
             );
-            $playerGame->setPlayer($this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $row['id']));
+            /** @var \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player $player */
+            $player = $this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $row['id']);
+            $playerGame->setPlayer($player);
             $playerGame->setGame($game);
 
             $this->em->persist($playerGame);
@@ -186,24 +188,26 @@ readonly class UpdatePlayerGameRankHandler
 
         $this->em->flush();
 
-        if ($game->getSerie()) {
-            $this->bus->dispatch(
-                new UpdatePlayerSerieRank(
-                    $game->getSerie()->getId(),
-                ),
-                [
-                    new DelayStamp(self::DELAY_SERIE_UPDATE),
-                    new DescriptionStamp(
-                        sprintf('Update player-ranking for serie [%d]', $game->getSerie()->getId())
-                    )
-                ]
-            );
+        $serie = $game->getSerie();
+        if ($serie) {
+            $serieId = $serie->getId();
+            if ($serieId !== null) {
+                $this->bus->dispatch(
+                    new UpdatePlayerSerieRank($serieId),
+                    [
+                        new DelayStamp(self::DELAY_SERIE_UPDATE),
+                        new DescriptionStamp(
+                            sprintf('Update player-ranking for serie [%d]', $serieId)
+                        )
+                    ]
+                );
+            }
         }
 
         /** @var Platform $platform */
         foreach ($game->getPlatforms() as $platform) {
             $this->bus->dispatch(
-                new UpdatePlayerPlatformRank($platform->getId()),
+                new UpdatePlayerPlatformRank((int) $platform->getId()),
                 [
                     new DelayStamp(self::DELAY_PLATFORM_UPDATE),
                     new DescriptionStamp(
@@ -216,7 +220,7 @@ readonly class UpdatePlayerGameRankHandler
         /** @var PlayerGame $playerGame */
         foreach ($game->getPlayerGame() as $playerGame) {
             $this->bus->dispatch(
-                new UpdatePlayerData($playerGame->getPlayer()->getId()),
+                new UpdatePlayerData((int) $playerGame->getPlayer()->getId()),
                 [
                     new DescriptionStamp(
                         sprintf('Update player-data for player [%d]', $playerGame->getPlayer()->getId())
@@ -228,19 +232,17 @@ readonly class UpdatePlayerGameRankHandler
         $this->bus->dispatch(new UpdatePlayerRank());
 
         // Update badges directly (was in PlayerGameUpdatedSubscriber - now optimized)
-        if ($game->getBadge()) {
-            // Get first place players from the ranking we just calculated
-            $firstPlacePlayers = [];
-            foreach ($list as $row) {
-                if ($row['rankPointChart'] === 1) {
-                    $firstPlacePlayers[$row['id']] = 0;
-                } else {
-                    break; // Rankings are ordered, so no more first places
-                }
+        // Get first place players from the ranking we just calculated
+        $firstPlacePlayers = [];
+        foreach ($list as $row) {
+            if ($row['rankPointChart'] === 1) {
+                $firstPlacePlayers[$row['id']] = 0;
+            } else {
+                break; // Rankings are ordered, so no more first places
             }
-
-            $this->em->getRepository(PlayerBadge::class)
-                ->updateBadge($firstPlacePlayers, $game->getBadge());
         }
+
+        $this->em->getRepository(PlayerBadge::class)
+            ->updateBadge($firstPlacePlayers, $game->getBadge());
     }
 }

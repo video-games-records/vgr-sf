@@ -41,7 +41,7 @@ readonly class RankingUpdateDispatcher
     public function updatePlayerRankFromGroup(Group $group): void
     {
         foreach ($group->getCharts() as $chart) {
-            $this->bus->dispatch(new UpdatePlayerChartRank($chart->getId()));
+            $this->bus->dispatch(new UpdatePlayerChartRank((int) $chart->getId()));
         }
     }
 
@@ -53,7 +53,7 @@ readonly class RankingUpdateDispatcher
     {
         /** @var PlayerChart $playerChart */
         foreach ($player->getPlayerCharts() as $playerChart) {
-            $this->bus->dispatch(new UpdateTeamChartRank($playerChart->getChart()->getId()));
+            $this->bus->dispatch(new UpdateTeamChartRank((int) $playerChart->getChart()->getId()));
         }
     }
 
@@ -64,7 +64,7 @@ readonly class RankingUpdateDispatcher
     public function updatePlayerRankFromPlayer(Player $player): void
     {
         $this->bus->dispatch(
-            new UpdatePlayerData($player->getId()),
+            new UpdatePlayerData((int) $player->getId()),
             [
                 new DescriptionStamp(
                     sprintf('Update player-data for player [%d]', $player->getId())

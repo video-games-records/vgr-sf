@@ -8,6 +8,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
 
+/**
+ * @extends DefaultRepository<ChartType>
+ */
 class ChartTypeRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

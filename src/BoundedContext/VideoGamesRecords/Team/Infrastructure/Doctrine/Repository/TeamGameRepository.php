@@ -8,6 +8,9 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame;
 
+/**
+ * @extends DefaultRepository<TeamGame>
+ */
 class TeamGameRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

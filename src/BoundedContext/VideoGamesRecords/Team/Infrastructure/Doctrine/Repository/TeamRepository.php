@@ -9,6 +9,9 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 
+/**
+ * @extends DefaultRepository<Team>
+ */
 class TeamRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

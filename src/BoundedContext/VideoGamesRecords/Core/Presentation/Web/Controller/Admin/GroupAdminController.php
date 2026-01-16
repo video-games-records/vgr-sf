@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin;
 
-use Sonata\AdminBundle\Controller\CRUDController;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
+use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,13 @@ use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\CopyGroupForm;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\Type\ChartTypeType;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\VideoProofOnly;
 
-class GroupAdminController extends CRUDController
+/**
+ * @extends AbstractCRUDController<Group>
+ */
+class GroupAdminController extends AbstractCRUDController
 {
     /**
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return Response
      */
@@ -26,12 +30,13 @@ class GroupAdminController extends CRUDController
         /** @var Group $group */
         $group = $this->admin->getSubject();
 
-        $em = $this->admin->getModelManager()->getEntityManager($this->admin->getClass());
+        $em = $this->getEntityManager();
+
         $form = $this->createForm(CopyGroupForm::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $em->getRepository(Group::class)->copy($group, $data['withLibs']);
+            $em->getRepository(Group::class)->copy($group, $data['withLibs'] ?? true);
 
             $this->addFlash('sonata_flash_success', 'Group was successfully copied.');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $group->getId()]));
@@ -51,7 +56,7 @@ class GroupAdminController extends CRUDController
     }
 
     /**
-     * @param         $id
+     * @param int $id
      * @param Request $request
      * @return RedirectResponse|Response
      */
@@ -70,13 +75,15 @@ class GroupAdminController extends CRUDController
             );
         }
 
-        $em = $this->admin->getModelManager()->getEntityManager($this->admin->getClass());
+        $em = $this->getEntityManager();
         $form = $this->createForm(ChartTypeType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $type = $data['type'];
-            $chartType = $em->getRepository(\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType::class)->find($type);
+            $type = $data['type'] ?? null;
+
+            /** @var ChartType $chartType */
+            $chartType = $em->getRepository(ChartType::class)->find($type);
 
             foreach ($group->getCharts() as $chart) {
                 $libChart = new ChartLib();
@@ -104,7 +111,7 @@ class GroupAdminController extends CRUDController
     }
 
     /**
-     * @param         $id
+     * @param int $id
      * @param Request $request
      * @return RedirectResponse|Response
      */
@@ -113,7 +120,7 @@ class GroupAdminController extends CRUDController
         /** @var Group $group */
         $group = $this->admin->getSubject();
 
-        $em = $this->admin->getModelManager()->getEntityManager($this->admin->getClass());
+        $em = $this->getEntityManager();
         $form = $this->createForm(VideoProofOnly::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

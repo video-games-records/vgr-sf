@@ -57,7 +57,6 @@ class TeamGroup
         return $this->team;
     }
 
-    #[ApiProperty(identifier: true)]
     public function getId(): string
     {
         return sprintf('team=%d;group=%d', $this->team->getId(), $this->group->getId());

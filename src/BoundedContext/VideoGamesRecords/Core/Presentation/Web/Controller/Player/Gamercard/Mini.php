@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Player\Gamercard;
 
-use Exception;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Typography\FontFactory;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\Routing\Attribute\Route;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
-use App\SharedKernel\Domain\File\PictureCreatorFactory;
 use App\SharedKernel\Domain\Traits\GetOrdinalSuffixTrait;
 use App\SharedKernel\Domain\Traits\NumberFormatTrait;
 
@@ -31,68 +32,123 @@ class Mini extends AbstractController
     #[Route(
         '/gamercard/{id}/mini',
         name: 'vgr_core_player_gamercard_mini',
-        methods: ['GET'],
-        requirements: ['id' => '[1-9]\d*']
+        requirements: ['id' => '[1-9]\d*'],
+        methods: ['GET']
     )]
-    #[Cache(public: true, maxage: 3600, mustRevalidate: true)]
-    public function __invoke(Player $player): void
+    #[Cache(maxage: 3600, public: true, mustRevalidate: true)]
+    public function __invoke(Player $player): Response
     {
-        chdir(__DIR__);
-        $gamercard = PictureCreatorFactory::fromFile('../../../../../../../../SharedKernel/Resources/img/gamercard/mini.png');
+        $manager = ImageManager::gd();
+
+        // Load base gamercard image
+        $projectDir = $this->getParameter('kernel.project_dir');
+        assert(is_string($projectDir));
+        $baseImagePath = $projectDir . '/src/SharedKernel/Resources/img/gamercard/mini.png';
+        $gamercard = $manager->read($baseImagePath);
+
+        // Fonts paths
+        $fontPath = $projectDir . '/src/SharedKernel/Resources/fonts/';
+        $segoeUISemiBold = $fontPath . 'seguisb.ttf';
 
         // Ranking Points
-        $fontSize = 8;
-        $gamercard
-            ->addColor('lightBrown', 255, 218, 176)
-            ->addFont('segoeUISemiBold', '../../../../../../../../SharedKernel/Resources/fonts/seguisb.ttf')
-            ->write($this->numberFormat($player->getPointGame()) . ' Pts', $fontSize, 40, 20)
-            ->write('/', $fontSize, 124, 20)
-            ->addColor('darkYellow', 255, 191, 1)
-            ->write($player->getRankPointGame() . ' ' . $this->getOrdinalSuffix($player->getRankPointGame()), $fontSize, 130, 20);
+        $fontSize = 10;
+        $textY = 17;
+        $pointsText = $this->numberFormat($player->getPointGame()) . ' Pts';
 
+        $gamercard->text($pointsText, 40, $textY, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+            $font->filename($segoeUISemiBold);
+            $font->size($fontSize);
+            $font->color('rgb(255, 218, 176)');
+            $font->valign('middle');
+            $font->align('left');
+        });
 
-        // Ranking Medals
-        $sprite = PictureCreatorFactory::fromFile('../../../../../../../../SharedKernel/Resources/img/sprite.png');
-        $gamercard
-            ->copyResized($sprite, 164, 8, 126, 160, 16, 16, 16, 16)
-            ->copyResized($sprite, 211, 8, 108, 160, 16, 16, 16, 16)
-            ->copyResized($sprite, 258, 8, 92, 160, 16, 16, 16, 16)
-            ->copyResized($sprite, 305, 8, 74, 160, 16, 16, 16, 16);
+        $gamercard->text('/', 124, $textY, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+            $font->filename($segoeUISemiBold);
+            $font->size($fontSize);
+            $font->color('rgb(255, 218, 176)');
+            $font->valign('middle');
+            $font->align('left');
+        });
 
-        $gamercard->getColor('lightBrown');
-        $gamercard
-            ->write((string) $player->getChartRank0(), $fontSize, 180, 20)
-            ->write((string) $player->getChartRank1(), $fontSize, 227, 20)
-            ->write((string) $player->getChartRank2(), $fontSize, 274, 20)
-            ->write((string) $player->getChartRank3(), $fontSize, 321, 20);
-        $gamercard->write('/', $fontSize, 350, 20);
-        $gamercard->getColor('darkYellow');
+        $rankText = $player->getRankPointGame() . ' ' . $this->getOrdinalSuffix($player->getRankPointGame());
+        $gamercard->text($rankText, 130, $textY, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+            $font->filename($segoeUISemiBold);
+            $font->size($fontSize);
+            $font->color('rgb(255, 191, 1)');
+            $font->valign('middle');
+            $font->align('left');
+        });
+
+        // Ranking Medals - Add sprite icons
+        $spritePath = $projectDir . '/src/SharedKernel/Resources/img/sprite.png';
+        $sprite = $manager->read($spritePath);
+
+        $medals = [
+            [126, 160, 164, 8],
+            [108, 160, 211, 8],
+            [92, 160, 258, 8],
+            [74, 160, 305, 8],
+        ];
+
+        foreach ($medals as [$srcX, $srcY, $dstX, $dstY]) {
+            $medalIcon = clone $sprite;
+            $medalIcon->crop(16, 16, $srcX, $srcY);
+            $gamercard->place($medalIcon, 'top-left', $dstX, $dstY);
+        }
+
+        // Medal counts
+        $medalTexts = [
+            [(string) $player->getChartRank0(), 180],
+            [(string) $player->getChartRank1(), 227],
+            [(string) $player->getChartRank2(), 274],
+            [(string) $player->getChartRank3(), 321],
+        ];
+
+        foreach ($medalTexts as [$text, $x]) {
+            $gamercard->text($text, $x, $textY, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+                $font->filename($segoeUISemiBold);
+                $font->size($fontSize);
+                $font->color('rgb(255, 218, 176)');
+                $font->valign('middle');
+                $font->align('left');
+            });
+        }
+
+        $gamercard->text('/', 350, $textY, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+            $font->filename($segoeUISemiBold);
+            $font->size($fontSize);
+            $font->color('rgb(255, 218, 176)');
+            $font->valign('middle');
+            $font->align('left');
+        });
+
         $rank = $player->getRankMedal();
         if ($rank <= 99) {
             $rank .= $this->getOrdinalSuffix($rank);
         }
-        $gamercard->write((string) $rank, $fontSize, 356, 20);
+
+        $gamercard->text((string) $rank, 356, $textY, function (FontFactory $font) use ($segoeUISemiBold, $fontSize) {
+            $font->filename($segoeUISemiBold);
+            $font->size($fontSize);
+            $font->color('rgb(255, 191, 1)');
+            $font->valign('middle');
+            $font->align('left');
+        });
 
         // Add avatar
-        $avatar = PictureCreatorFactory::fromStream($this->getAvatar($player));
-        $gamercard->copyResized($avatar, 4, 2, 0, 0, 26, 26);
+        $avatarData = $this->getAvatar($player);
+        $avatar = $manager->read($avatarData);
+        $avatar->resize(26, 26);
+        $gamercard->place($avatar, 'top-left', 4, 2);
 
-        try {
-            $gamercard->downloadPicture('png', 'VGR-GamerCard-Mini-' . $player->getSlug() . '.png');
-        } catch (Exception $e) {
-            exit;
-        }
-        exit;
-    }
-
-
-    /**
-     * @param      $value
-     * @return string
-     */
-    private function numberFormat(int|float $value): string
-    {
-        return number_format($value);
+        return new Response(
+            (string) $gamercard->toPng(),
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'image/png',
+            ]
+        );
     }
 
     /**

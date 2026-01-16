@@ -79,7 +79,7 @@ class Chart
     private Collection $proofs;
 
     /**
-     * @var Collection<LostPosition>
+     * @var Collection<int, LostPosition>
      */
     #[ORM\OneToMany(targetEntity: LostPosition::class, mappedBy: 'chart')]
     private Collection $lostPositions;
@@ -171,6 +171,9 @@ class Chart
         $this->isProofVideoOnly = $isProofVideoOnly;
     }
 
+    /**
+     * @return Collection<int, PlayerChart>
+     */
     public function getPlayerCharts(): Collection
     {
         return $this->playerCharts;
@@ -202,6 +205,9 @@ class Chart
         $this->libs->removeElement($lib);
     }
 
+    /**
+     * @return Collection<int, ChartLib>
+     */
     public function getLibs(): Collection
     {
         return $this->libs;

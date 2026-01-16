@@ -15,10 +15,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
 class GroupListener
 {
     /**
-     * @param Group       $group
-     * @param LifecycleEventArgs $event
+     * @param Group $group
      */
-    public function prePersist(Group $group, LifecycleEventArgs $event): void
+    public function prePersist(Group $group): void
     {
         if (null == $group->getLibGroupFr()) {
             $group->setLibGroupFr($group->getLibGroupEn());
@@ -26,10 +25,9 @@ class GroupListener
     }
 
     /**
-     * @param Group       $group
-     * @param PreUpdateEventArgs $event
+     * @param Group $group
      */
-    public function preUpdate(Group $group, PreUpdateEventArgs $event): void
+    public function preUpdate(Group $group): void
     {
         if (null == $group->getLibGroupFr()) {
             $group->setLibGroupFr($group->getLibGroupEn());

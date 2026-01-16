@@ -78,7 +78,7 @@ class Badge
         $this->picture = $picture;
     }
 
-    public function getPicture(): ?string
+    public function getPicture(): string
     {
         return $this->picture;
     }
@@ -139,13 +139,20 @@ class Badge
         if (BadgeType::MASTER !== $this->type) {
             return;
         }
+
+        $game = $this->getGame();
+        if ($game === null) {
+            $this->value = 0;
+            return;
+        }
+
         if (0 === $this->getNbPlayer()) {
             $this->value = 0;
         } else {
-            $this->value = (int) floor(
-                100 * (6250 * (-1 / (100 + $this->getGame()
-                                ->getNbPlayer() - $this->nbPlayer) + 0.0102) / (pow($this->nbPlayer, 1 / 3)))
-            );
+            $nbPlayerDiff = 100 + $game->getNbPlayer() - $this->nbPlayer;
+            $factor = 6250 * (-1 / $nbPlayerDiff + 0.0102);
+            $divisor = pow($this->nbPlayer, 1 / 3);
+            $this->value = (int) floor(100 * $factor / $divisor);
         }
     }
 

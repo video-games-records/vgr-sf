@@ -23,6 +23,7 @@ class RankingTools
             $arrayMultisortParameters[] = $order;
         }
         $arrayMultisortParameters[] = &$array;
+        /** @phpstan-ignore argument.type */
         array_multisort(...$arrayMultisortParameters);
 
         return $array;

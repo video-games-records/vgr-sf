@@ -161,6 +161,9 @@ class Group
         $this->charts->removeElement($chart);
     }
 
+    /**
+     * @return Collection<int, Chart>
+     */
     public function getCharts(): Collection
     {
         return $this->charts;

@@ -34,6 +34,7 @@ class PlayerChartListener
     /**
      * @param PlayerChart $playerChart
      * @param LifecycleEventArgs $event
+     * @phpstan-param LifecycleEventArgs<EntityManagerInterface> $event
      * @throws ORMException
      */
     public function prePersist(PlayerChart $playerChart, LifecycleEventArgs $event): void
@@ -137,11 +138,9 @@ class PlayerChartListener
     }
 
     /**
-    /**
      * @param PlayerChart $playerChart
-     * @param LifecycleEventArgs $event
      */
-    public function preRemove(PlayerChart $playerChart, LifecycleEventArgs $event): void
+    public function preRemove(PlayerChart $playerChart): void
     {
         // Chart
         $chart = $playerChart->getChart();
@@ -199,10 +198,7 @@ class PlayerChartListener
                     ],
                     ['createdAt' => 'DESC']
                 );
-
-            if ($proofRequest) {
-                $playerChart->getProof()->setProofRequest($proofRequest);
-            }
+            $playerChart->getProof()?->setProofRequest($proofRequest);
         }
     }
 

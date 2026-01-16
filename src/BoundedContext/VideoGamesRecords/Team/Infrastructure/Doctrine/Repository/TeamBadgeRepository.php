@@ -14,6 +14,9 @@ use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 
+/**
+ * @extends DefaultRepository<TeamBadge>
+ */
 class TeamBadgeRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -115,9 +118,9 @@ class TeamBadgeRepository extends DefaultRepository
         foreach ($teams as $idTeam => $value) {
             if ($value == 0) {
                 $teamBadge = new TeamBadge();
-                $teamBadge->setTeam(
-                    $this->getEntityManager()->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $idTeam)
-                );
+                /** @var Team $team */
+                $team = $this->getEntityManager()->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $idTeam);
+                $teamBadge->setTeam($team);
                 $teamBadge->setBadge($badge);
                 $this->getEntityManager()->persist($teamBadge);
             }

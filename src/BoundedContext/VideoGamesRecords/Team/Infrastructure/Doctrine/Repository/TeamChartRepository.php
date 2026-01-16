@@ -8,6 +8,9 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamChart;
 
+/**
+ * @extends DefaultRepository<TeamChart>
+ */
 class TeamChartRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

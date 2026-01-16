@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartLibRepository;
@@ -19,7 +20,7 @@ class PlayerChartLib
 
     #[Assert\NotNull]
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'bigint', nullable: false)]
+    #[ORM\Column(type: Types::BIGINT, nullable: false)]
     private string $value;
 
     #[ORM\ManyToOne(targetEntity: ChartLib::class)]
@@ -122,7 +123,6 @@ class PlayerChartLib
         }
     }
 
-    #[Groups(['player-chart-lib:read'])]
     public function getFormatValue(): string
     {
         return ScoreTools::formatScore(

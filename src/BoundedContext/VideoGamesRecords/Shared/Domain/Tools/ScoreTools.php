@@ -109,11 +109,11 @@ class ScoreTools
     }
 
     /**
-     * @param        $value
+     * @param string|int|null $value
      * @param string $mask
      * @return string
      */
-    public static function formatScore(string|int $value, string $mask): string
+    public static function formatScore(string|int|null $value, string $mask): string
     {
         $parse = self::parseChartMask($mask);
 

@@ -19,7 +19,7 @@ readonly class YoutubeProvider
     }
 
     /**
-     * @param $videoId
+     * @param string $videoId
      * @return VideoListResponse
      * @throws Exception
      */

@@ -38,7 +38,9 @@ class Rule
     #[Orm\ManyToMany(targetEntity: Game::class, mappedBy: 'rules')]
     private Collection $games;
 
-    /** @var Collection<RuleTranslation> */
+    /**
+     * @var Collection<string, RuleTranslation>
+     */
     #[ORM\OneToMany(
         targetEntity: RuleTranslation::class,
         mappedBy: 'translatable',
@@ -89,11 +91,17 @@ class Rule
         return $this->player;
     }
 
+    /**
+     * @return Collection<string, RuleTranslation>
+     */
     public function getTranslations(): Collection
     {
         return $this->translations;
     }
 
+    /**
+     * @param Collection<string, RuleTranslation> $translations
+     */
     public function setTranslations(Collection $translations): void
     {
         $this->translations = $translations;
@@ -157,7 +165,7 @@ class Rule
             $this->translations->set($locale, $translation);
         }
 
-        $this->translations->get($locale)->setContent($content);
+        $this->translations->get($locale)?->setContent($content);
     }
 
     public function getContent(?string $locale = null): ?string
@@ -167,7 +175,7 @@ class Rule
     }
 
     /**
-     * @return Collection
+     * @return Collection<int, Game>
      */
     public function getGames(): Collection
     {

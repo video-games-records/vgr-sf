@@ -8,10 +8,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @template TEntity of object
+ * @extends ServiceEntityRepository<TEntity>
+ */
 abstract class DefaultRepository extends ServiceEntityRepository
 {
+    /** @var class-string<TEntity> */
     protected string $entityClass;
 
+    /**
+     * @param class-string<TEntity> $entityClass
+     */
     public function __construct(ManagerRegistry $registry, string $entityClass)
     {
         $this->entityClass = $entityClass;
@@ -19,7 +27,7 @@ abstract class DefaultRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $object
+     * @param TEntity $object
      */
     public function save(object $object): void
     {
@@ -34,10 +42,12 @@ abstract class DefaultRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return TEntity|null
      * @throws ORMException
      */
-    public function getReference(int|string $id): object
+    public function getReference(int|string $id): ?object
     {
+        /** @var TEntity|null */
         return $this->getEntityManager()->getReference($this->entityClass, $id);
     }
 }

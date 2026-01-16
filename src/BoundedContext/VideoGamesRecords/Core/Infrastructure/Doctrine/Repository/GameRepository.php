@@ -14,19 +14,17 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
-use App\BoundedContext\VideoGamesRecords\igdb\Domain\Entity\Game as IgdbGame;
+use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Game as IgdbGame;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 
+/**
+ * @extends DefaultRepository<Game>
+ */
 class GameRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Game::class);
-    }
-
-    public function findById(int $id): ?Game
-    {
-        return $this->find($id);
     }
 
     /**
@@ -142,7 +140,7 @@ class GameRepository extends DefaultRepository
      * @param string $letter
      * @param string $locale
      *
-     * @return Query
+     * @return Query<int, Game>
      */
     public function findWithLetter(string $letter, string $locale = 'en'): Query
     {
@@ -390,10 +388,8 @@ class GameRepository extends DefaultRepository
     public function updateIgdbGame(int $vgrGameId, ?IgdbGame $igdbGame): bool
     {
         try {
+            /** @var Game $game */
             $game = $this->find($vgrGameId);
-            if (!$game) {
-                return false;
-            }
 
             $game->setIgdbGame($igdbGame);
             $this->getEntityManager()->flush();

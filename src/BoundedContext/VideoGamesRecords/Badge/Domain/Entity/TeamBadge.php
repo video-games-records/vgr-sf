@@ -63,7 +63,7 @@ class TeamBadge
         return $this->mbOrder;
     }
 
-    public function setBadge(?Badge $badge = null): void
+    public function setBadge(Badge $badge): void
     {
         $this->badge = $badge;
     }

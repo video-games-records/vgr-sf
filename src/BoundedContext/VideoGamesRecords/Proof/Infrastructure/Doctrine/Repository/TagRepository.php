@@ -8,6 +8,9 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Tag;
 
+/**
+ * @extends DefaultRepository<Tag>
+ */
 class TagRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

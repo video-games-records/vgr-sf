@@ -36,7 +36,7 @@ class ProofRequest
     private ?Datetime $dateAcceptance = null;
 
     #[ORM\ManyToOne(targetEntity: PlayerChart::class)]
-    #[ORM\JoinColumn(name:'player_chart_id', referencedColumnName:'id', nullable:true, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'player_chart_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
     private PlayerChart $playerChart;
 
     #[ORM\ManyToOne(targetEntity: Player::class)]

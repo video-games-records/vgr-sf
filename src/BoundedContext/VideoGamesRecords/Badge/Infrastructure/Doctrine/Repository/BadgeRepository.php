@@ -8,6 +8,9 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 
+/**
+ * @extends DefaultRepository<Badge>
+ */
 class BadgeRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

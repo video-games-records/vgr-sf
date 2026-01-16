@@ -6,46 +6,38 @@ namespace App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\Doctrine\Eve
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
-use Doctrine\ORM\Exception\ORMException;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Google\Service\Exception;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\DataProvider\YoutubeProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Video;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\VideoType;
 
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Video::class)]
 #[AsEntityListener(event: Events::preRemove, method: 'preRemove', entity: Video::class)]
 class VideoListener
 {
-    private UserProvider $userProvider;
     private YoutubeProvider $youtubeProvider;
     private TranslatorInterface $translator;
 
     /**
-     * @param UserProvider        $userProvider
      * @param YoutubeProvider     $youtubeProvider
      * @param TranslatorInterface $translator
      */
     public function __construct(
-        UserProvider $userProvider,
         YoutubeProvider $youtubeProvider,
         TranslatorInterface $translator
     ) {
-        $this->userProvider = $userProvider;
         $this->youtubeProvider = $youtubeProvider;
         $this->translator = $translator;
     }
 
     /**
-     * @param Video              $video
-     * @param LifecycleEventArgs $event
-     * @throws ORMException
+     * @param Video $video
+     * @throws Exception
      */
-    public function prePersist(Video $video, LifecycleEventArgs $event): void
+    public function prePersist(Video $video): void
     {
-        $video->setPlayer($this->userProvider->getPlayer());
         $video->getPlayer()->setNbVideo($video->getPlayer()->getNbVideo() + 1);
 
         $video->getGame()
@@ -77,10 +69,9 @@ class VideoListener
     }
 
     /**
-     * @param Video              $video
-     * @param LifecycleEventArgs $event
+     * @param Video $video
      */
-    public function preRemove(Video $video, LifecycleEventArgs $event): void
+    public function preRemove(Video $video): void
     {
         $video->getPlayer()->setNbVideo($video->getPlayer()->getNbVideo() - 1);
 

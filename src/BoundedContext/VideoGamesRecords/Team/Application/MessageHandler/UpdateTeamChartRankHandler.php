@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Team\Application\MessageHandler;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
+use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -108,9 +109,12 @@ readonly class UpdateTeamChartRankHandler
                 $row,
                 'App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamChart'
             );
-            $teamChart->setTeam(
-                $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $row['idTeam'])
+            /** @var Team $team */
+            $team =  $this->em->getReference(
+                'App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team',
+                $row['idTeam']
             );
+            $teamChart->setTeam($team);
             $teamChart->setChart($chart);
 
             $this->em->persist($teamChart);
@@ -119,7 +123,7 @@ readonly class UpdateTeamChartRankHandler
         $this->em->flush();
 
         $this->bus->dispatch(
-            new UpdateTeamGroupRank($chart->getGroup()->getId()),
+            new UpdateTeamGroupRank((int) $chart->getGroup()->getId()),
             [
                 new DescriptionStamp(
                     sprintf('Update team-ranking for group [%d]', $chart->getGroup()->getId())

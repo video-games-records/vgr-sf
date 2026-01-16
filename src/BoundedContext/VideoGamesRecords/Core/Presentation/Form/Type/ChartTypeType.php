@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
 
+/**
+ * @extends AbstractType<array<string, mixed>>
+ */
 class ChartTypeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

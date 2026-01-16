@@ -60,7 +60,9 @@ class Serie
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
     private ?Badge $badge;
 
-    /** @var Collection<SerieTranslation> */
+    /**
+     * @var Collection<string, SerieTranslation>
+     */
     #[ORM\OneToMany(
         targetEntity: SerieTranslation::class,
         mappedBy: 'translatable',
@@ -131,6 +133,9 @@ class Serie
         return $this->slug;
     }
 
+    /**
+     * @return Collection<int, Game>
+     */
     public function getGames(): Collection
     {
         return $this->games;
@@ -146,11 +151,17 @@ class Serie
         return $this->badge;
     }
 
+    /**
+     * @return Collection<string, SerieTranslation>
+     */
     public function getTranslations(): Collection
     {
         return $this->translations;
     }
 
+    /**
+     * @param Collection<string, SerieTranslation> $translations
+     */
     public function setTranslations(Collection $translations): void
     {
         $this->translations = $translations;
@@ -210,7 +221,7 @@ class Serie
             $this->translations->set($locale, $translation);
         }
 
-        $this->translations->get($locale)->setDescription($description);
+        $this->translations->get($locale)?->setDescription($description);
     }
 
     public function getDescription(?string $locale = null): ?string

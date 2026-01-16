@@ -4,15 +4,20 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Proof\Presentation\Web\Controller\Admin;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Doctrine\ORM\EntityManagerInterface;
-use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 
-class ProofAdminController extends CRUDController
+/**
+ * @extends AbstractCRUDController<Proof>
+ */
+class ProofAdminController extends AbstractCRUDController
 {
     public function __construct(private readonly EntityManagerInterface $em)
     {
@@ -23,7 +28,7 @@ class ProofAdminController extends CRUDController
      */
     public function statsAction(): Response
     {
-        $stats = $this->em->getRepository(\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player::class)->getProofStats();
+        $stats = $this->em->getRepository(Player::class)->getProofStats();
 
         // Formatage
         $months = [];
@@ -47,6 +52,7 @@ class ProofAdminController extends CRUDController
      */
     public function editAction(Request $request): Response
     {
+        /** @var Proof $object */
         $object = $this->assertObjectExists($request, true);
         $this->checkParentChildAssociation($request, $object);
 
@@ -88,16 +94,16 @@ class ProofAdminController extends CRUDController
                     );
 
                     // Redirection après succès vers la prochaine preuve
-                    $nextProofRedirect = $this->getNextProofRedirect($submittedObject);
-                    if ($nextProofRedirect) {
-                        return $nextProofRedirect;
-                    }
-
-                    if (null !== ($response = $this->redirectTo($request, $submittedObject))) {
-                        return $response;
-                    }
-                } catch (\Throwable $e) {
+                    return $this->getNextProofRedirect($submittedObject);
+                } catch (ModelManagerThrowable $e) {
                     $this->handleModelManagerThrowable($e);
+
+                    $isFormValid = false;
+                } catch (\Throwable $e) {
+                    $this->addFlash(
+                        'sonata_flash_error',
+                        $e->getMessage()
+                    );
 
                     $isFormValid = false;
                 }
@@ -254,16 +260,21 @@ class ProofAdminController extends CRUDController
     /**
      * Trouve la prochaine preuve à valider dans le même jeu
      */
-    private function getNextProofRedirect(Proof $currentProof): ?RedirectResponse
+    private function getNextProofRedirect(Proof $currentProof): RedirectResponse
     {
         // Récupère le jeu de la preuve actuelle
         $currentGame = $currentProof->getChart()->getGroup()->getGame();
 
         $proofRepository = $this->em->getRepository(\App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof::class);
 
+        $proofId = $currentProof->getId();
+        if ($proofId === null) {
+            return new RedirectResponse($this->admin->generateUrl('list'));
+        }
+
         $nextProof = $proofRepository->findNextInProgressByGame(
             $currentGame,
-            $currentProof->getId()
+            $proofId
         );
 
         if ($nextProof) {

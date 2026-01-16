@@ -13,6 +13,7 @@ class TeamGameRankingProvider extends AbstractRankingProvider
      * @param int|null $id
      * @param array<string, mixed> $options
      * @return array<\App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame>
+     * @throws ORMException
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
     {
@@ -22,7 +23,7 @@ class TeamGameRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $team = $this->getTeam($options['user'] ?? null);
+        $team = $this->getTeam();
 
         $query = $this->em->createQueryBuilder()
             ->select('tg')
@@ -62,7 +63,7 @@ class TeamGameRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $team = $this->getTeam($options['user'] ?? null);
+        $team = $this->getTeam();
 
         $query = $this->em->createQueryBuilder()
             ->select('tg')

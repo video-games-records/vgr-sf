@@ -16,10 +16,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 class ChartListener
 {
     /**
-     * @param Chart       $chart
-     * @param LifecycleEventArgs $event
+     * @param Chart $chart
      */
-    public function prePersist(Chart $chart, LifecycleEventArgs $event): void
+    public function prePersist(Chart $chart): void
     {
         if (null == $chart->getLibChartFr()) {
             $chart->setLibChartFr($chart->getLibChartEn());
@@ -30,10 +29,9 @@ class ChartListener
 
 
     /**
-     * @param Chart       $chart
-     * @param PreUpdateEventArgs $event
+     * @param Chart $chart
      */
-    public function preUpdate(Chart $chart, PreUpdateEventArgs $event): void
+    public function preUpdate(Chart $chart): void
     {
         if (null == $chart->getLibChartFr()) {
             $chart->setLibChartFr($chart->getLibChartEn());
@@ -42,10 +40,9 @@ class ChartListener
 
 
     /**
-     * @param Chart       $chart
-     * @param LifecycleEventArgs $event
+     * @param Chart $chart
      */
-    public function preRemove(Chart $chart, LifecycleEventArgs $event): void
+    public function preRemove(Chart $chart): void
     {
         $chart->getGroup()->setNbChart($chart->getGroup()->getNbChart() - 1);
         $chart->getGroup()->getGame()->setNbChart($chart->getGroup()->getGame()->getNbChart() - 1);

@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Rep
 
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use DateTime;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
@@ -14,6 +15,9 @@ use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 
+/**
+ * @extends DefaultRepository<TeamBadge>
+ */
 class TeamBadgeRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -104,6 +108,7 @@ class TeamBadgeRepository extends DefaultRepository
      * @param array<int, int> $teams
      * @param Badge $badge
      * @throws Exception
+     * @throws ORMException
      */
     public function updateBadge(array $teams, Badge $badge): void
     {
@@ -124,9 +129,10 @@ class TeamBadgeRepository extends DefaultRepository
         foreach ($teams as $idTeam => $value) {
             if ($value == 0) {
                 $teamBadge = new TeamBadge();
-                $teamBadge->setTeam(
-                    $this->getEntityManager()->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $idTeam)
-                );
+                /** @var Team $team */
+                $team = $this->getEntityManager()
+                    ->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $idTeam);
+                $teamBadge->setTeam($team);
                 $teamBadge->setBadge($badge);
                 $this->getEntityManager()->persist($teamBadge);
             }

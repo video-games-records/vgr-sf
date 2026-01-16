@@ -45,6 +45,6 @@ class PictureShow extends AbstractController
     private function getMimeType(string $file): string
     {
         $infos = pathinfo($file);
-        return $this->extensions[$infos['extension']] ?? 'image/png';
+        return $this->extensions[$infos['extension'] ?? 'png'] ?? 'image/png';
     }
 }

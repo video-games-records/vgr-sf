@@ -9,6 +9,9 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerTopRanking;
 
+/**
+ * @extends DefaultRepository<PlayerTopRanking>
+ */
 class PlayerTopRankingRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

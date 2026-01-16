@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\BoundedContext\VideoGamesRecords\Core\Presentation\Api\Controller\Platform\AutocompletePlatform;
-use App\BoundedContext\VideoGamesRecords\Core\Presentation\Api\Controller\Platform\GetPlayerPlatformRankingPoints;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlatformRepository;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 
@@ -50,11 +49,11 @@ class Platform
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
     private ?Badge $badge;
 
-    /**
-     * @var Collection<int, PlayerPlatform>
-     */
-    #[ORM\OneToMany(targetEntity: PlayerPlatform::class, mappedBy: 'platform')]
-    private Collection $playerPlatform;
+    public function __construct()
+    {
+        $this->games = new ArrayCollection();
+    }
+
 
     public function __toString()
     {
@@ -106,6 +105,9 @@ class Platform
         return $this->slug;
     }
 
+    /**
+     * @return Collection<int, Game>
+     */
     public function getGames(): Collection
     {
         return $this->games;
@@ -119,10 +121,5 @@ class Platform
     public function getBadge(): ?Badge
     {
         return $this->badge;
-    }
-
-    public function getPlayerPlatform(): Collection
-    {
-        return $this->playerPlatform;
     }
 }

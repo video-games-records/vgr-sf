@@ -8,6 +8,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 
+/**
+ * @extends DefaultRepository<ChartLib>
+ */
 class ChartLibRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

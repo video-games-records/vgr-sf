@@ -15,6 +15,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\LostPosition;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 
+/**
+ * @extends DefaultRepository<LostPosition>
+ */
 class LostPositionRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

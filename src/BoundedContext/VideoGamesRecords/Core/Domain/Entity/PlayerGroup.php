@@ -66,7 +66,6 @@ class PlayerGroup
         return $this->player;
     }
 
-    #[ApiProperty(identifier: true)]
     public function getId(): string
     {
         return sprintf('player=%d;group=%d', $this->player->getId(), $this->group->getId());

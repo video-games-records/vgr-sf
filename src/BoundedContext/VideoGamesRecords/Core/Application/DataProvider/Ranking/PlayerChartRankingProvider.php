@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -20,7 +21,7 @@ class PlayerChartRankingProvider extends AbstractRankingProvider
     /**
      * @param int|null $id
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart>
+     * @return array<PlayerChart>
      * @throws ORMException
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
@@ -31,7 +32,7 @@ class PlayerChartRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $player = $this->getPlayer($options['user'] ?? null);
+        $player = $this->getPlayer();
         $team = !empty($options['idTeam']) ? $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $options['idTeam']) : null;
 
         $query = $this->em->createQueryBuilder()
@@ -75,13 +76,13 @@ class PlayerChartRankingProvider extends AbstractRankingProvider
     /**
      * @param Chart $chart
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart>
+     * @return array<PlayerChart>
      * @throws ORMException
      */
     public function getRanking(Chart $chart, array $options = []): array
     {
         $maxRank = $options['maxRank'] ?? null;
-        $player = $this->getPlayer($options['user'] ?? null);
+        $player = $this->getPlayer();
 
         $orderBy = $options['orderBy'] ?? self::ORDER_BY_RANK;
         $queryBuilder = $this->getRankingBaseQuery($chart, $orderBy);
@@ -123,7 +124,7 @@ class PlayerChartRankingProvider extends AbstractRankingProvider
 
     /**
      * @param Chart $chart
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart>
+     * @return array<PlayerChart>
      */
     public function getRankingDisabled(Chart $chart): array
     {
@@ -197,7 +198,7 @@ class PlayerChartRankingProvider extends AbstractRankingProvider
             ->setParameter('chart', $chart);
 
         try {
-            return $query->getQuery()->getSingleScalarResult();
+            return (int) $query->getQuery()->getSingleScalarResult();
         } catch (NoResultException | NonUniqueResultException $e) {
             return null;
         }

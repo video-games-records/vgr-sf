@@ -10,6 +10,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
 
+/**
+ * @extends DefaultRepository<Group>
+ */
 class GroupRepository extends DefaultRepository
 {
     public function __construct(ManagerRegistry $registry)

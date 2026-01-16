@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\Doctrine\Eve
 
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Exception\ORMException;
@@ -34,7 +35,7 @@ class ProofListener
     }
 
     /**
-     * @param Proof              $proof
+     * @param Proof $proof
      * @param PreUpdateEventArgs $event
      */
     public function preUpdate(Proof $proof, PreUpdateEventArgs $event): void
@@ -45,6 +46,7 @@ class ProofListener
     /**
      * @param Proof $proof
      * @param LifecycleEventArgs $event
+     * @phpstan-param LifecycleEventArgs<EntityManagerInterface> $event
      * @throws ORMException
      */
     public function postUpdate(Proof $proof, LifecycleEventArgs $event): void
@@ -54,7 +56,7 @@ class ProofListener
 
         // ACCEPTED
         if ($this->isAccepted()) {
-            $proof->getPlayerChart()->setStatus(PlayerChartStatusEnum::PROVED);
+            $proof->getPlayerChart()?->setStatus(PlayerChartStatusEnum::PROVED);
 
             $proof->setPlayerResponding($this->userProvider->getPlayer());
             $proof->setCheckedAt(new DateTime());
@@ -64,12 +66,14 @@ class ProofListener
         // REFUSED
         if ($this->isRefused()) {
             $playerChart = $proof->getPlayerChart();
-            if ($playerChart->getStatus() === PlayerChartStatusEnum::PROVED) {
-                $playerChart->setStatus(PlayerChartStatusEnum::NONE);
-            } else {
-                $status = ($playerChart->getStatus() === PlayerChartStatusEnum::PROOF_SENT)
-                   ? PlayerChartStatusEnum::NONE : PlayerChartStatusEnum::REQUEST_VALIDATED;
-                $playerChart->setStatus($status);
+            if ($playerChart) {
+                if ($playerChart->getStatus() === PlayerChartStatusEnum::PROVED) {
+                    $playerChart->setStatus(PlayerChartStatusEnum::NONE);
+                } else {
+                    $status = ($playerChart->getStatus() === PlayerChartStatusEnum::PROOF_SENT)
+                        ? PlayerChartStatusEnum::NONE : PlayerChartStatusEnum::REQUEST_VALIDATED;
+                    $playerChart->setStatus($status);
+                }
             }
 
             $proof->setPlayerResponding($this->userProvider->getPlayer());

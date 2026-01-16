@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\Service;
 
 use DateTime;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\GameTopRanking;
@@ -97,7 +98,7 @@ readonly class GameRankingService
 
     /**
      * Core method to generate rankings for any period
-     * @return array<string, mixed>
+     * @return list<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\GameTopRanking>
      */
     private function generateRankingsForPeriod(
         string $periodType,
@@ -162,6 +163,7 @@ readonly class GameRankingService
     /**
      * Get games post data for a specific period
      * @return array<array{game: Game, nbPost: int}>
+     * @throws Exception
      */
     private function getGamesPostData(string $periodType, string $periodValue): array
     {
@@ -170,7 +172,7 @@ readonly class GameRankingService
         $sql = "
             SELECT dg.id as game_id, SUM(dg.nb_post_day) as total_posts
             FROM dwh_game dg
-            WHERE dg.date >= :startDate 
+            WHERE dg.date >= :startDate
             AND dg.date <= :endDate
             AND dg.nb_post_day > 0
             GROUP BY dg.id

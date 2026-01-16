@@ -7,7 +7,6 @@ namespace App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Eve
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Event\TeamBadgeLost;
@@ -18,7 +17,7 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\Event\TeamBadgeObtained;
 #[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: TeamBadge::class)]
 class TeamBadgeListener
 {
-    /** @var array<string, array<mixed>> */
+    /** @var array<string, mixed> */
     private array $changeSet = [];
 
     private EventDispatcherInterface $eventDispatcher;
@@ -39,9 +38,8 @@ class TeamBadgeListener
 
     /**
      * @param TeamBadge $teamBadge
-     * @param LifecycleEventArgs $event
      */
-    public function postUpdate(TeamBadge $teamBadge, LifecycleEventArgs $event): void
+    public function postUpdate(TeamBadge $teamBadge): void
     {
         if ($teamBadge->getBadge()->isTypeMaster() && array_key_exists('endedAt', $this->changeSet)) {
             $this->eventDispatcher->dispatch(new TeamBadgeLost($teamBadge));
@@ -50,9 +48,8 @@ class TeamBadgeListener
 
     /**
      * @param TeamBadge $teamBadge
-     * @param LifecycleEventArgs $event
      */
-    public function postPersist(TeamBadge $teamBadge, LifecycleEventArgs $event): void
+    public function postPersist(TeamBadge $teamBadge): void
     {
         $this->eventDispatcher->dispatch(new TeamBadgeObtained($teamBadge));
     }

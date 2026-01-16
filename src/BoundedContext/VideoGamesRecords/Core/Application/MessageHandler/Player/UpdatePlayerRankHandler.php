@@ -71,6 +71,9 @@ readonly class UpdatePlayerRankHandler
         $this->em->flush();
     }
 
+    /**
+     * @return EntityRepository<Player>
+     */
     private function getPlayerRepository(): EntityRepository
     {
         return $this->em->getRepository(Player::class);

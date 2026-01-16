@@ -174,7 +174,7 @@ readonly class UpdatePlayerChartRankHandler
         $this->em->flush();
 
         $this->bus->dispatch(
-            new UpdatePlayerGroupRank($chart->getGroup()->getId()),
+            new UpdatePlayerGroupRank((int) $chart->getGroup()->getId()),
             [
                 new DescriptionStamp(
                     sprintf('Update player-ranking for group [%d]', $chart->getGroup()->getId())
@@ -182,7 +182,7 @@ readonly class UpdatePlayerChartRankHandler
             ]
         );
         $this->bus->dispatch(
-            new UpdateTeamChartRank($chart->getId()),
+            new UpdateTeamChartRank((int) $chart->getId()),
             [
                 new DescriptionStamp(
                     sprintf('Update team-ranking for chart [%d]', $chart->getId())

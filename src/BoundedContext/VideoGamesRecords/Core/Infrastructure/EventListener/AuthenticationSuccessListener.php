@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\EventListener;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use Doctrine\ORM\Exception\ORMException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\DataTransformer\UserToPlayerTransformer;
@@ -23,6 +24,7 @@ readonly class AuthenticationSuccessListener
         $data = $event->getData();
         $user = $event->getUser();
 
+        /** @var Player $player */
         $player = $this->userToPlayerTransformer->transform($user);
         $data['player'] = [
             'id' => $player->getId(),

@@ -18,7 +18,7 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\Event\PlayerBadgeObtained;
 #[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: PlayerBadge::class)]
 class PlayerBadgeListener
 {
-    /** @var array<string, array<mixed>> */
+    /** @var array<string, mixed> */
     private array $changeSet = [];
 
     private EventDispatcherInterface $eventDispatcher;
@@ -39,9 +39,8 @@ class PlayerBadgeListener
 
     /**
      * @param PlayerBadge $playerBadge
-     * @param LifecycleEventArgs $event
      */
-    public function postUpdate(PlayerBadge $playerBadge, LifecycleEventArgs $event): void
+    public function postUpdate(PlayerBadge $playerBadge): void
     {
         if ($playerBadge->getBadge()->isTypeMaster() && array_key_exists('endedAt', $this->changeSet)) {
             $this->eventDispatcher->dispatch(new PlayerBadgeLost($playerBadge));
@@ -50,9 +49,8 @@ class PlayerBadgeListener
 
     /**
      * @param PlayerBadge $playerBadge
-     * @param LifecycleEventArgs $event
      */
-    public function postPersist(PlayerBadge $playerBadge, LifecycleEventArgs $event): void
+    public function postPersist(PlayerBadge $playerBadge): void
     {
         $this->eventDispatcher->dispatch(new PlayerBadgeObtained($playerBadge));
     }

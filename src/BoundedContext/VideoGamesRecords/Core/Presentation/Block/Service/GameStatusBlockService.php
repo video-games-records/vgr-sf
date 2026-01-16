@@ -87,7 +87,7 @@ class GameStatusBlockService extends AbstractBlockService
      * Récupère des statistiques supplémentaires sur les jeux
      */
     /**
-     * @param array<int> $statusOrder
+     * @param array<int, string> $statusOrder
      * @return array<string, mixed>
      */
     private function getGameStatistics(array $statusOrder): array

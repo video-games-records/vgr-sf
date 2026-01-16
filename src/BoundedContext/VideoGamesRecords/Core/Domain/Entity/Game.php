@@ -75,8 +75,8 @@ class Game implements GameInfoInterface
     private ?Serie $serie = null;
 
     #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'], inversedBy: 'game')]
-    #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
-    private ?Badge $badge = null;
+    #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:false)]
+    private Badge $badge;
 
     /**
      * @var Collection<int, Group>
@@ -94,8 +94,8 @@ class Game implements GameInfoInterface
     private Collection $platforms;
 
     #[ORM\OneToOne(targetEntity: Forum::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(name:'forum_id', referencedColumnName:'id', nullable:true)]
-    private $forum;
+    #[ORM\JoinColumn(name:'forum_id', referencedColumnName:'id', nullable:false)]
+    private Forum $forum;
 
     #[ORM\OneToOne(targetEntity: PlayerChart::class)]
     #[ORM\JoinColumn(name:'last_score_id', referencedColumnName:'id', nullable:true)]
@@ -259,12 +259,12 @@ class Game implements GameInfoInterface
         return $this->serie;
     }
 
-    public function setBadge(?Badge $badge = null): void
+    public function setBadge(Badge $badge): void
     {
         $this->badge = $badge;
     }
 
-    public function getBadge(): ?Badge
+    public function getBadge(): Badge
     {
         return $this->badge;
     }
@@ -280,6 +280,9 @@ class Game implements GameInfoInterface
         $this->groups->removeElement($group);
     }
 
+    /**
+     * @return Collection<int, Group>
+     */
     public function getGroups(): Collection
     {
         return $this->groups;
@@ -295,17 +298,20 @@ class Game implements GameInfoInterface
         $this->platforms->removeElement($platform);
     }
 
-    public function getPlatforms(): ArrayCollection|Collection
+    /**
+     * @return Collection<int, Platform>
+     */
+    public function getPlatforms(): Collection
     {
         return $this->platforms;
     }
 
-    public function getForum(): ?Forum
+    public function getForum(): Forum
     {
         return $this->forum;
     }
 
-    public function setForum(?Forum $forum): void
+    public function setForum(Forum $forum): void
     {
         $this->forum = $forum;
     }
@@ -344,16 +350,25 @@ class Game implements GameInfoInterface
         $this->rules->removeElement($rule);
     }
 
+    /**
+     * @return Collection<int, PlayerGame>
+     */
     public function getPlayerGame(): Collection
     {
         return $this->playerGame;
     }
 
+    /**
+     * @return Collection<int, TeamGame>
+     */
     public function getTeamGame(): Collection
     {
         return $this->teamGame;
     }
 
+    /**
+     * @return Collection<int, Rule>
+     */
     public function getRules(): Collection
     {
         return $this->rules;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\MessageHandler\Player;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -105,12 +106,12 @@ readonly class UpdatePlayerSerieRankHandler
                 $row,
                 'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie'
             );
-            $playerSerie->setPlayer(
-                $this->em->getReference(
-                    'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player',
-                    $row['idPlayer']
-                )
+            /** @var Player $player */
+            $player = $this->em->getReference(
+                'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player',
+                $row['idPlayer']
             );
+            $playerSerie->setPlayer($player);
             $playerSerie->setSerie($serie);
 
             $this->em->persist($playerSerie);

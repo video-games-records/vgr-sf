@@ -171,14 +171,14 @@ readonly class UpdatePlayerDataHandler
         $query->setParameter('player', $player);
 
         $nb = $query->getSingleScalarResult();
-        $player->setNbChartWithPlatform($nb);
+        $player->setNbChartWithPlatform((int) $nb);
 
         $this->em->persist($player);
         $this->em->flush();
 
         if ($player->getCountry()) {
             $this->bus->dispatch(
-                new UpdatePlayerCountryRank($player->getCountry()->getId()),
+                new UpdatePlayerCountryRank((int) $player->getCountry()->getId()),
                 [
                     new DescriptionStamp(
                         sprintf('Update country-ranking for country [%d]', $player->getCountry()->getId())

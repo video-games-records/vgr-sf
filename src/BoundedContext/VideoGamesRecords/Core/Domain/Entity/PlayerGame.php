@@ -115,7 +115,6 @@ class PlayerGame
         return $this->statuses;
     }
 
-    #[ApiProperty(identifier: true)]
     public function getId(): string
     {
         return sprintf('player=%d;game=%d', $this->player->getId(), $this->game->getId());

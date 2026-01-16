@@ -39,9 +39,13 @@ readonly class UpdatePlayerCountryRankHandler
         if ($country->getBadge()) {
             // Get first place players from the ranking we just calculated
             $firstPlacePlayers = [];
+            /** @var Player $player */
             foreach ($players as $player) {
                 if ($player->getRankCountry() === 1) {
-                    $firstPlacePlayers[$player->getId()] = 0;
+                    $playerId = $player->getId();
+                    if ($playerId !== null) {
+                        $firstPlacePlayers[$playerId] = 0;
+                    }
                 } else {
                     break; // Rankings are ordered, so no more first places
                 }

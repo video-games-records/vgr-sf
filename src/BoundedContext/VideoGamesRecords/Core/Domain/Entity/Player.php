@@ -140,12 +140,6 @@ class Player
 
 
     /**
-     * @var Collection<int, Proof>
-     */
-    #[ORM\OneToMany(targetEntity: Proof::class, mappedBy: 'playerResponding')]
-    private Collection $proofRespondings;
-
-    /**
      * @var Collection<int, PlayerGame>
      */
     #[ORM\OneToMany(targetEntity: PlayerGame::class, mappedBy: 'player')]
@@ -438,11 +432,17 @@ class Player
         return ($this->getTeam() !== null) && ($this->getTeam()->getLeader()->getId() === $this->getId());
     }
 
+    /**
+     * @return Collection<int, PlayerChart>
+     */
     public function getPlayerCharts(): Collection
     {
         return $this->playerCharts;
     }
 
+    /**
+     * @return Collection<int, Player>
+     */
     public function getFriends(): Collection
     {
         return $this->friends;

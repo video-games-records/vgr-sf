@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\EventSubscriber;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -42,10 +44,18 @@ final readonly class LostPositionSubscriber implements EventSubscriberInterface
             $lostPosition = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\LostPosition();
             $lostPosition->setNewRank($newRank);
             $lostPosition->setOldRank(($oldNbEqual == 1 && $oldRank == 1) ? 0 : $oldRank);
-            $lostPosition->setPlayer(
-                $this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $playerChart->getPlayer()->getId())
+            /** @var Player $player */
+            $player = $this->em->getReference(
+                'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player',
+                $playerChart->getPlayer()->getId()
             );
-            $lostPosition->setChart($this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart', $playerChart->getChart()->getId()));
+            $lostPosition->setPlayer($player);
+            /** @var Chart $chart */
+            $chart = $this->em->getReference(
+                'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart',
+                $playerChart->getChart()->getId()
+            );
+            $lostPosition->setChart($chart);
             $this->em->persist($lostPosition);
         }
     }

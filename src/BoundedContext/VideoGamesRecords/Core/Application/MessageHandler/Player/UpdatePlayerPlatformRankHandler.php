@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\MessageHandler\Player;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -23,6 +24,10 @@ readonly class UpdatePlayerPlatformRankHandler
     ) {
     }
 
+    /**
+     * @throws EntityNotFoundException
+     * @throws ORMException
+     */
     public function __invoke(UpdatePlayerPlatformRank $updatePlayerPlatformRank): void
     {
         /** @var Platform|null $platform */
@@ -71,9 +76,10 @@ readonly class UpdatePlayerPlatformRankHandler
                 $row,
                 'App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerPlatform'
             );
-            $playerPlatform->setPlayer(
-                $this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $row['id'])
-            );
+            /** @var Player $player */
+            $player = $this->em
+                ->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $row['id']);
+            $playerPlatform->setPlayer($player);
             $playerPlatform->setPlatform($platform);
 
             $this->em->persist($playerPlatform);

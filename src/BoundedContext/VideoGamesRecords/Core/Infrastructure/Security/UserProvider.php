@@ -32,9 +32,6 @@ class UserProvider
      */
     public function getPlayer(): ?Player
     {
-        if (!$this->security->getUser()) {
-            return null;
-        }
         return $this->userToPlayerTransformer->transform($this->security->getUser());
     }
 
@@ -44,6 +41,6 @@ class UserProvider
     public function getTeam(): ?Team
     {
         $player = $this->userToPlayerTransformer->transform($this->security->getUser());
-        return $player->getTeam();
+        return $player?->getTeam();
     }
 }

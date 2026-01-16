@@ -9,7 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGroup;
 
 /**
- * TeamGroupRepository
+ * @extends DefaultRepository<TeamGroup>
  */
 class TeamGroupRepository extends DefaultRepository
 {

@@ -32,7 +32,7 @@ class Country
     private int $codeIsoNumeric;
 
     #[Assert\Length(max: 100)]
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: false)]
     private string $slug;
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
@@ -42,7 +42,7 @@ class Country
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
     private ?Badge $badge;
 
-    /** @var Collection<CountryTranslation> */
+    /** @var Collection<string, CountryTranslation> */
     #[ORM\OneToMany(
         targetEntity: CountryTranslation::class,
         mappedBy: 'translatable',
@@ -127,14 +127,21 @@ class Country
 
     public function getDefaultName(): string
     {
-        return $this->translate('en', false)->getName();
+        $translation = $this->translate('en', false);
+        return $translation ? $translation->getName() : '';
     }
 
+    /**
+     * @return Collection<string, CountryTranslation>
+     */
     public function getTranslations(): Collection
     {
         return $this->translations;
     }
 
+    /**
+     * @param Collection<string, CountryTranslation> $translations
+     */
     public function setTranslations(Collection $translations): void
     {
         $this->translations = $translations;
@@ -194,7 +201,10 @@ class Country
             $this->translations->set($locale, $translation);
         }
 
-        $this->translations->get($locale)->setDescription($name);
+        $translation = $this->translations->get($locale);
+        if ($translation) {
+            $translation->setName($name);
+        }
     }
 
     public function getName(?string $locale = null): ?string

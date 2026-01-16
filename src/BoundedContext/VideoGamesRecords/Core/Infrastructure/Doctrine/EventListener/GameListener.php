@@ -6,10 +6,10 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Even
 
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Persistence\Event\LifecycleEventArgs as BaseLifecycleEventArgs;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
@@ -30,25 +30,22 @@ class GameListener
     }
 
     /**
-     * @param Game                   $game
-     * @param BaseLifecycleEventArgs $event
+     * @param Game $game
      */
-    public function prePersist(Game $game, BaseLifecycleEventArgs $event): void
+    public function prePersist(Game $game): void
     {
         if (null == $game->getLibGameFr()) {
             $game->setLibGameFr($game->getLibGameEn());
         }
 
-        if ($game->getBadge() === null) {
-            $badge = new Badge();
-            $badge->setType(BadgeType::MASTER);
-            $badge->setPicture('master_default.gif');
-            $game->setBadge($badge);
-        }
+        $badge = new Badge();
+        $badge->setType(BadgeType::MASTER);
+        $badge->setPicture('master_default.gif');
+        $game->setBadge($badge);
     }
 
     /**
-     * @param Game               $game
+     * @param Game $game
      * @param PreUpdateEventArgs $event
      */
     public function preUpdate(Game $game, PreUpdateEventArgs $event): void
@@ -61,10 +58,11 @@ class GameListener
     }
 
     /**
-     * @param Game                   $game
-     * @param BaseLifecycleEventArgs $event
+     * @param Game $game
+     * @param LifecycleEventArgs $event
+     * @phpstan-param LifecycleEventArgs<EntityManagerInterface> $event
      */
-    public function postUpdate(Game $game, BaseLifecycleEventArgs $event): void
+    public function postUpdate(Game $game, LifecycleEventArgs $event): void
     {
         $em = $event->getObjectManager();
 
@@ -78,9 +76,8 @@ class GameListener
 
     /**
      * @param Game $game
-     * @param LifecycleEventArgs $event
      */
-    public function postLoad(Game $game, LifecycleEventArgs $event): void
+    public function postLoad(Game $game): void
     {
         $request = $this->requestStack->getCurrentRequest();
         if ($request) {

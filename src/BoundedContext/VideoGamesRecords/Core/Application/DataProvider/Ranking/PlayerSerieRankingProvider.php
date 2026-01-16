@@ -20,13 +20,14 @@ class PlayerSerieRankingProvider extends AbstractRankingProvider
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
     {
+        /** @var Serie $serie */
         $serie = $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie')->find($id);
         if (null == $serie) {
             return [];
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $player = $this->getPlayer($options['user'] ?? null);
+        $player = $this->getPlayer();
         $limit = $options['limit'] ?? null;
 
         $query = $this->em->createQueryBuilder()
@@ -39,11 +40,11 @@ class PlayerSerieRankingProvider extends AbstractRankingProvider
         $query->where('ps.serie = :serie')
             ->setParameter('serie', $serie);
 
-        /** @var PlayerSerie $row */
+        /** @var PlayerSerie|null $row */
         $row = (null !== $player) ? $this->getRow($serie, $player) : null;
 
         if (null !== $maxRank) {
-            if (null !== $row) {
+            if (null !== $row && null !== $player) {
                 $query->andWhere('(ps.rankPointChart <= :maxRank OR ps.rankPointChart BETWEEN :min AND :max OR p.id IN (:friends))')
                     ->setParameter('min', $row->getRankPointChart() - 5)
                     ->setParameter('max', $row->getRankPointChart() + 5)
@@ -75,7 +76,7 @@ class PlayerSerieRankingProvider extends AbstractRankingProvider
         }
 
         $maxRank = $options['maxRank'] ?? null;
-        $player = $this->getPlayer($options['user'] ?? null);
+        $player = $this->getPlayer();
         $limit = $options['limit'] ?? null;
 
         $query = $this->em->createQueryBuilder()
@@ -91,7 +92,7 @@ class PlayerSerieRankingProvider extends AbstractRankingProvider
         $row = (null !== $player) ? $this->getRow($serie, $player) : null;
 
         if (null !== $maxRank) {
-            if (null !== $row) {
+            if (null !== $row && null !== $player) {
                 $query->andWhere('(ps.rankMedal <= :maxRank OR ps.rankMedal BETWEEN :min AND :max OR p.id IN (:friends))')
                     ->setParameter('min', $row->getRankMedal() - 5)
                     ->setParameter('max', $row->getRankMedal() + 5)
