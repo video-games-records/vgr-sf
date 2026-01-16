@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\BoundedContext\VideoGamesRecords\Core\:
+        resource: '../../../src/BoundedContext/VideoGamesRecords/Core/*'
+
+    # Sonata Block Services
+    admin.block.service.game.status:
+        class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Block\Service\GameStatusBlockService
+        tags:
+            - { name: "sonata.block" }
+
+    vgr.core.event.authentication_success_listener:
+        class: App\BoundedContext\VideoGamesRecords\Core\Infrastructure\EventListener\AuthenticationSuccessListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+
+

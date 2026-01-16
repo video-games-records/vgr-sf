@@ -1,0 +1,126 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Player\Gamercard;
+
+use Exception;
+use League\Flysystem\FilesystemException;
+use League\Flysystem\FilesystemOperator;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Attribute\Cache;
+use Symfony\Component\Routing\Attribute\Route;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\SharedKernel\Domain\File\PictureCreatorFactory;
+use App\SharedKernel\Domain\Traits\GetOrdinalSuffixTrait;
+use App\SharedKernel\Domain\Traits\NumberFormatTrait;
+
+class Mini extends AbstractController
+{
+    use GetOrdinalSuffixTrait;
+    use NumberFormatTrait;
+
+    private FilesystemOperator $appStorage;
+
+    public function __construct(FilesystemOperator $appStorage)
+    {
+        $this->appStorage = $appStorage;
+    }
+
+    #[Route(
+        '/gamercard/{id}/mini',
+        name: 'vgr_core_player_gamercard_mini',
+        methods: ['GET'],
+        requirements: ['id' => '[1-9]\d*']
+    )]
+    #[Cache(public: true, maxage: 3600, mustRevalidate: true)]
+    public function __invoke(Player $player): void
+    {
+        chdir(__DIR__);
+        $gamercard = PictureCreatorFactory::fromFile('../../../../../../../../SharedKernel/Resources/img/gamercard/mini.png');
+
+        // Ranking Points
+        $fontSize = 8;
+        $gamercard
+            ->addColor('lightBrown', 255, 218, 176)
+            ->addFont('segoeUISemiBold', '../../../../../../../../SharedKernel/Resources/fonts/seguisb.ttf')
+            ->write($this->numberFormat($player->getPointGame()) . ' Pts', $fontSize, 40, 20)
+            ->write('/', $fontSize, 124, 20)
+            ->addColor('darkYellow', 255, 191, 1)
+            ->write($player->getRankPointGame() . ' ' . $this->getOrdinalSuffix($player->getRankPointGame()), $fontSize, 130, 20);
+
+
+        // Ranking Medals
+        $sprite = PictureCreatorFactory::fromFile('../../../../../../../../SharedKernel/Resources/img/sprite.png');
+        $gamercard
+            ->copyResized($sprite, 164, 8, 126, 160, 16, 16, 16, 16)
+            ->copyResized($sprite, 211, 8, 108, 160, 16, 16, 16, 16)
+            ->copyResized($sprite, 258, 8, 92, 160, 16, 16, 16, 16)
+            ->copyResized($sprite, 305, 8, 74, 160, 16, 16, 16, 16);
+
+        $gamercard->getColor('lightBrown');
+        $gamercard
+            ->write((string) $player->getChartRank0(), $fontSize, 180, 20)
+            ->write((string) $player->getChartRank1(), $fontSize, 227, 20)
+            ->write((string) $player->getChartRank2(), $fontSize, 274, 20)
+            ->write((string) $player->getChartRank3(), $fontSize, 321, 20);
+        $gamercard->write('/', $fontSize, 350, 20);
+        $gamercard->getColor('darkYellow');
+        $rank = $player->getRankMedal();
+        if ($rank <= 99) {
+            $rank .= $this->getOrdinalSuffix($rank);
+        }
+        $gamercard->write((string) $rank, $fontSize, 356, 20);
+
+        // Add avatar
+        $avatar = PictureCreatorFactory::fromStream($this->getAvatar($player));
+        $gamercard->copyResized($avatar, 4, 2, 0, 0, 26, 26);
+
+        try {
+            $gamercard->downloadPicture('png', 'VGR-GamerCard-Mini-' . $player->getSlug() . '.png');
+        } catch (Exception $e) {
+            exit;
+        }
+        exit;
+    }
+
+
+    /**
+     * @param      $value
+     * @return string
+     */
+    private function numberFormat(int|float $value): string
+    {
+        return number_format($value);
+    }
+
+    /**
+     * @param Player $player
+     * @return string
+     * @throws FilesystemException
+     */
+    public function getAvatar(Player $player): string
+    {
+        $path = 'user' . DIRECTORY_SEPARATOR . $player->getAvatar();
+        if (!$this->appStorage->fileExists($path)) {
+            $path = 'user' . DIRECTORY_SEPARATOR . 'default.png';
+        }
+        return $this->appStorage->read($path);
+    }
+
+
+    /**
+     * @param Badge $badge
+     * @return string
+     * @throws FilesystemException
+     */
+    public function getBadge(Badge $badge): string
+    {
+        $path = $badge->getType()->getDirectory() . DIRECTORY_SEPARATOR . $badge->getPicture();
+        if (!$this->appStorage->fileExists($path)) {
+            $path = 'badge' . DIRECTORY_SEPARATOR . 'default.gif';
+        }
+        return $this->appStorage->read($path);
+    }
+}

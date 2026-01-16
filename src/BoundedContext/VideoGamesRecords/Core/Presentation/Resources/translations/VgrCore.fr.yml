@@ -1,0 +1,25 @@
+video:
+  type_not_found: "Impossible de déterminer l'origine de la vidéo"
+  youtube:
+    not_found: "Cette vidéo youtube n'existe pas"
+
+avatar:
+  extension_not_allowed: 'Les format autorisés sont png et jpg'
+  success: "L'avatar a bien été chargé"
+
+team:
+  request:
+    exists: 'Vous avez déjà envoyé une demande en cours'
+    has_team: 'Ce joueur a déjà une équipe'
+
+
+workflow_transitions: 'Workflow'
+workflow:
+  transition_add_score: 'Ajout de score'
+  transition_add_picture: 'Ajout des images'
+  transition_completed: 'Complet'
+  transition_activate: 'Activer'
+  transition_desactivate: 'Désactiver'
+
+playerChart:
+  bulk_upsert_success: '%total% scores traités avec succès (%created% créés, %updated% mis à jour)'

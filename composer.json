@@ -59,7 +59,8 @@
         "symfony/yaml": "8.0.*",
         "twbs/bootstrap": "^5.3.8",
         "twig/extra-bundle": "^2.12|^3.22.2",
-        "twig/twig": "^2.12|^3.22.2"
+        "twig/twig": "^2.12|^3.22.2",
+        "zenstruck/messenger-monitor-bundle": "*"
     },
     "config": {
         "allow-plugins": {

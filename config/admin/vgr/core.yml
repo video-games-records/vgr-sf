@@ -1,0 +1,171 @@
+services:
+  # Serie Admin
+  sonata.admin.vgr.serie:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\SerieAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie
+        controller: App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin\SerieAdminController
+        manager_type: orm
+        group: "group.games"
+        label: "serie.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/serie/show.html.twig' ] ]
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Platform Admin  
+  sonata.admin.vgr.platform:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\PlatformAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform
+        manager_type: orm
+        group: "group.games"
+        label: "platform.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/platform/show.html.twig' ] ]
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Game Admin
+  sonata.admin.vgr.game:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\GameAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game
+        controller: App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin\GameAdminController
+        manager_type: orm
+        group: "group.games"
+        label: "game.label"
+        default: true
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/game/show.html.twig' ] ]
+      - [ setSecurity, [ '@security.helper' ] ]
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Group Admin
+  sonata.admin.vgr.group:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\GroupAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group
+        controller: App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin\GroupAdminController
+        manager_type: orm
+        group: "group.games"
+        label: "group.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Chart Admin
+  sonata.admin.vgr.chart:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\ChartAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart
+        manager_type: orm
+        group: "group.games"
+        label: "chart.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Chart Type Admin
+  sonata.admin.vgr.chart_type:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\ChartTypeAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType
+        manager_type: orm
+        group: "group.games"
+        label: "chart_type.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Chart Lib Admin
+  sonata.admin.vgr.chart_lib:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\ChartLibAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib
+        manager_type: orm
+        group: "group.games"
+        label: "label.chart.lib"
+        show_in_dashboard: false
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Player Admin
+  sonata.admin.vgr.player:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\PlayerAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player
+        controller: App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin\PlayerAdminController
+        manager_type: orm
+        group: "group.players"
+        label: "player.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/player/show.html.twig' ] ]
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Player Chart Admin
+  sonata.admin.vgr.playerchart:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\PlayerChartAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart
+        manager_type: orm
+        group: "group.scores"
+        label: "player_chart.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/player_chart/show.html.twig' ] ]
+      - [ setEventDispatcher, [ '@event_dispatcher' ] ]
+      - [ setRequestStack, [ '@request_stack' ] ]
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Player Chart Lib Admin
+  sonata.admin.vgr.playerchart_lib:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\PlayerChartLibAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChartLib
+        manager_type: orm
+        group: "group.games"
+        label: "label.playerChartLib"
+        show_in_dashboard: false
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Country Admin
+  sonata.admin.vgr.country:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\CountryAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Country
+        manager_type: orm
+        group: "group.players"
+        label: "country.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Rule Admin
+  sonata.admin.vgr.rule:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\RuleAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Rule
+        manager_type: orm
+        group: "group.games"
+        label: "rule.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Discord Admin
+  sonata.admin.vgr.discord:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\DiscordAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Discord
+        manager_type: orm
+        group: "group.community"
+        label: "discord.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]

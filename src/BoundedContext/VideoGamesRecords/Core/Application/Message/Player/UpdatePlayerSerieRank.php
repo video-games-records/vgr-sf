@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player;
+
+readonly class UpdatePlayerSerieRank
+{
+    public function __construct(
+        private int $serieId,
+    ) {
+    }
+
+    public function getSerieId(): int
+    {
+        return $this->serieId;
+    }
+
+    public function getUniqueIdentifier(): string
+    {
+        return 'UpdatePlayerSerieRank' . $this->serieId;
+    }
+}

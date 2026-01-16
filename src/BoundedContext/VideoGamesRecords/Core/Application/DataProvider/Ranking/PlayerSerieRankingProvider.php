@@ -1,0 +1,121 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking;
+
+use Doctrine\ORM\Exception\ORMException;
+use App\BoundedContext\VideoGamesRecords\Shared\Application\DataProvider\Ranking\AbstractRankingProvider;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
+
+class PlayerSerieRankingProvider extends AbstractRankingProvider
+{
+    /**
+     * @param int|null $id
+     * @param array<string, mixed> $options
+     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie>
+     * @throws ORMException
+     */
+    public function getRankingPoints(?int $id = null, array $options = []): array
+    {
+        $serie = $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie')->find($id);
+        if (null == $serie) {
+            return [];
+        }
+
+        $maxRank = $options['maxRank'] ?? null;
+        $player = $this->getPlayer($options['user'] ?? null);
+        $limit = $options['limit'] ?? null;
+
+        $query = $this->em->createQueryBuilder()
+            ->select('ps')
+            ->from('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie', 'ps')
+            ->join('ps.player', 'p')
+            ->addSelect('p')
+            ->orderBy('ps.rankPointChart');
+
+        $query->where('ps.serie = :serie')
+            ->setParameter('serie', $serie);
+
+        /** @var PlayerSerie $row */
+        $row = (null !== $player) ? $this->getRow($serie, $player) : null;
+
+        if (null !== $maxRank) {
+            if (null !== $row) {
+                $query->andWhere('(ps.rankPointChart <= :maxRank OR ps.rankPointChart BETWEEN :min AND :max OR p.id IN (:friends))')
+                    ->setParameter('min', $row->getRankPointChart() - 5)
+                    ->setParameter('max', $row->getRankPointChart() + 5)
+                    ->setParameter('friends', $player->getFriends());
+            } else {
+                $query->andWhere('ps.rankPointChart <= :maxRank');
+            }
+            $query->setParameter('maxRank', $maxRank);
+        }
+
+        if (null !== $limit) {
+            $query->setMaxResults($limit);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param int|null $id
+     * @param array<string, mixed> $options
+     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie>
+     * @throws ORMException
+     */
+    public function getRankingMedals(?int $id = null, array $options = []): array
+    {
+        $serie = $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie')->find($id);
+        if (null === $serie) {
+            return [];
+        }
+
+        $maxRank = $options['maxRank'] ?? null;
+        $player = $this->getPlayer($options['user'] ?? null);
+        $limit = $options['limit'] ?? null;
+
+        $query = $this->em->createQueryBuilder()
+            ->select('ps')
+            ->from('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie', 'ps')
+            ->join('ps.player', 'p')
+            ->addSelect('p')
+            ->orderBy('ps.rankMedal');
+
+        $query->where('ps.serie = :serie')
+            ->setParameter('serie', $serie);
+
+        $row = (null !== $player) ? $this->getRow($serie, $player) : null;
+
+        if (null !== $maxRank) {
+            if (null !== $row) {
+                $query->andWhere('(ps.rankMedal <= :maxRank OR ps.rankMedal BETWEEN :min AND :max OR p.id IN (:friends))')
+                    ->setParameter('min', $row->getRankMedal() - 5)
+                    ->setParameter('max', $row->getRankMedal() + 5)
+                    ->setParameter('friends', $player->getFriends());
+            } else {
+                $query->andWhere('ps.rankMedal <= :maxRank');
+            }
+            $query->setParameter('maxRank', $maxRank);
+        }
+
+        if (null !== $limit) {
+            $query->setMaxResults($limit);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    private function getRow(Serie $serie, Player $player): ?PlayerSerie
+    {
+        return $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerSerie')->findOneBy(
+            [
+                'serie' => $serie,
+                'player' => $player,
+            ]
+        );
+    }
+}
