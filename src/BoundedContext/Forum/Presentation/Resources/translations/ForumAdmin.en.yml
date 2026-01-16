@@ -1,0 +1,39 @@
+label:
+    id: 'ID'
+    name: 'Name'
+    forum: 'Forum'
+    forumFr: 'Forum FR'
+    category: 'Category'
+    status: 'Status'
+    position: 'Position'
+    displayOnHome: 'Display on home'
+    nbTopic: 'Number of topics'
+    nbMessage: 'Number of messages'
+    lastMessage: 'Last message'
+    topic: 'Topic'
+    type: 'Type'
+    message: 'Message'
+    user: 'User'
+    createdAt: 'Created at'
+
+category:
+    label: 'Category'
+
+forum:
+    label: 'Forum'
+
+topic:
+    label: 'Topic'
+    already_read: 'Topic already read'
+    marked_as_read: 'Topic marked as read'
+    notification:
+        enabled: 'Notifications enabled for this topic'
+        disabled: 'Notifications disabled for this topic'
+
+message:
+    label: 'Message'
+
+error:
+    authentication_required: 'Authentication required'
+    mark_as_read_failed: 'Failed to mark as read'
+    notification_update_failed: 'Failed to update notification'

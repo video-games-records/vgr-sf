@@ -1,0 +1,48 @@
+services:
+  sonata.admin.forum.category:
+    class: App\BoundedContext\Forum\Presentation\Admin\CategoryAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Forum\Domain\Entity\Category'
+        manager_type: orm
+        group: "group.forum"
+        label: "category.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'ForumAdmin' ] ]
+
+  sonata.admin.forum.forum:
+    class: App\BoundedContext\Forum\Presentation\Admin\ForumAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Forum\Domain\Entity\Forum'
+        manager_type: orm
+        group: "group.forum"
+        label: "forum.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'ForumAdmin' ] ]
+
+  sonata.admin.forum.topic:
+    class: App\BoundedContext\Forum\Presentation\Admin\TopicAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Forum\Domain\Entity\Topic'
+        manager_type: orm
+        group: "group.forum"
+        label: "topic.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'ForumAdmin' ] ]
+
+  sonata.admin.forum.message:
+    class: App\BoundedContext\Forum\Presentation\Admin\MessageAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Forum\Domain\Entity\Message'
+        manager_type: orm
+        group: "group.forum"
+        label: "message.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'ForumAdmin' ] ]

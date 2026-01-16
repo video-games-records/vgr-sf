@@ -1,0 +1,39 @@
+label:
+    id: 'ID'
+    name: 'Nom'
+    forum: 'Forum'
+    forumFr: 'Forum FR'
+    category: 'Catégorie'
+    status: 'Statut'
+    position: 'Position'
+    displayOnHome: 'Afficher sur l''accueil'
+    nbTopic: 'Nombre de sujets'
+    nbMessage: 'Nombre de messages'
+    lastMessage: 'Dernier message'
+    topic: 'Sujet'
+    type: 'Type'
+    message: 'Message'
+    user: 'Utilisateur'
+    createdAt: 'Créé le'
+
+category:
+    label: 'Catégorie'
+
+forum:
+    label: 'Forum'
+
+topic:
+    label: 'Sujet'
+    already_read: 'Sujet déjà lu'
+    marked_as_read: 'Sujet marqué comme lu'
+    notification:
+        enabled: 'Notifications activées pour ce sujet'
+        disabled: 'Notifications désactivées pour ce sujet'
+
+message:
+    label: 'Message'
+
+error:
+    authentication_required: 'Authentification requise'
+    mark_as_read_failed: 'Échec du marquage comme lu'
+    notification_update_failed: 'Échec de la mise à jour de notification'

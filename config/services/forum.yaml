@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Forum Services
+    App\BoundedContext\Forum\:
+        resource: '../../src/BoundedContext/Forum/*'
+
+
+
+
