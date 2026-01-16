@@ -1,0 +1,55 @@
+services:
+  sonata.admin.vgr.igdb.genre:
+    class: App\BoundedContext\VideoGamesRecords\Igdb\Presentation\Admin\GenreAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Genre
+        manager_type: orm
+        group: "group.igdb"
+        label: "genre.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrIgdbAdmin' ] ]
+
+  sonata.admin.vgr.igdb.platform_type:
+    class: App\BoundedContext\VideoGamesRecords\Igdb\Presentation\Admin\PlatformTypeAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\PlatformType
+        manager_type: orm
+        group: "group.igdb"
+        label: "platform_type.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrIgdbAdmin' ] ]
+
+  sonata.admin.vgr.igdb.platform_logo:
+    class: App\BoundedContext\VideoGamesRecords\Igdb\Presentation\Admin\PlatformLogoAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\PlatformLogo
+        manager_type: orm
+        group: "group.igdb"
+        label: "platform_logo.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrIgdbAdmin' ] ]
+
+  sonata.admin.vgr.igdb.platform:
+    class: App\BoundedContext\VideoGamesRecords\Igdb\Presentation\Admin\PlatformAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Platform
+        manager_type: orm
+        group: "group.igdb"
+        label: "platform.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrIgdbAdmin' ] ]
+
+  sonata.admin.vgr.igdb.game:
+    class: App\BoundedContext\VideoGamesRecords\Igdb\Presentation\Admin\GameAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Game
+        manager_type: orm
+        group: "group.igdb"
+        label: "game.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrIgdbAdmin' ] ]

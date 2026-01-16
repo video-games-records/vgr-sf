@@ -49,6 +49,12 @@ doctrine:
                         dir: '%kernel.project_dir%/src/BoundedContext/Forum/Domain'
                         prefix: 'App\BoundedContext\Forum\Domain'
                         alias: ForumDomain
+                    VideoGamesRecordsIgdb:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Igdb/Domain'
+                        prefix: 'App\BoundedContext\VideoGamesRecords\Igdb\Domain'
+                        alias: VideoGamesRecordsIgdb
                     SharedKernel:
                         type: attribute
                         is_bundle: false

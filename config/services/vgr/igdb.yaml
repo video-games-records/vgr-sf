@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Article Domain Services
+    App\BoundedContext\VideoGamesRecords\Igdb\:
+        resource: '../../../src/BoundedContext/VideoGamesRecords/Igdb/*'
+
+    # IGDB Client with explicit configuration
+    App\BoundedContext\VideoGamesRecords\Igdb\Infrastructure\Client\IgdbClient:
+        arguments:
+            $clientId: '%env(IGDB_CLIENT_ID)%'
+            $clientSecret: '%env(IGDB_CLIENT_SECRET)%'

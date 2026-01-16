@@ -6,9 +6,11 @@ imports:
     - { resource: services/user.yaml }
     - { resource: services/article.yaml }
     - { resource: services/forum.yaml }
+    - { resource: services/vgr/igdb.yaml }
     - { resource: admin/user.yml }
     - { resource: admin/article.yml }
     - { resource: admin/forum.yml }
+    - { resource: admin/vgr/igdb.yml }
 
 services:
     # default configuration for services in *this* file
