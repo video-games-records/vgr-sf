@@ -20,199 +20,45 @@
 {# Top 5 Leaderboards Section #}
 <div class="row g-4">
     {# Game Points Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card border shadow-sm h-100">
-            <div class="card-header border-bottom">
-                <h5 class="mb-0"><i class="bi bi-graph-up-arrow"></i> Game Points</h5>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Player</th>
-                                <th class="text-end">Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-warning text-dark">1</span></td>
-                                <td><strong>Basile</strong></td>
-                                <td class="text-end">2,782,254</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">2</span></td>
-                                <td>narutokyuby</td>
-                                <td class="text-end">2,192,235</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">3</span></td>
-                                <td>daftpunk</td>
-                                <td class="text-end">2,184,677</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">4</span></td>
-                                <td>ThePandaEmperor</td>
-                                <td class="text-end">1,941,288</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">5</span></td>
-                                <td>Djon</td>
-                                <td class="text-end">1,814,411</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::gamePoints'
+        )) }}
     </div>
 
     {# Cup Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card border shadow-sm h-100">
-            <div class="card-header border-bottom">
-                <h5 class="mb-0"><i class="bi bi-trophy"></i> Cups</h5>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Player</th>
-                                <th class="text-end">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-warning text-dark">1</span></td>
-                                <td><strong>daftpunk</strong></td>
-                                <td class="text-end">454</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">2</span></td>
-                                <td>GTi</td>
-                                <td class="text-end">447</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">3</span></td>
-                                <td>Siliconian</td>
-                                <td class="text-end">226</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">4</span></td>
-                                <td>narutokyuby</td>
-                                <td class="text-end">389</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">5</span></td>
-                                <td>Basile</td>
-                                <td class="text-end">414</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::cups'
+        )) }}
     </div>
 
     {# Medals Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card border shadow-sm h-100">
-            <div class="card-header border-bottom">
-                <h5 class="mb-0"><i class="bi bi-award"></i> Medals</h5>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Player</th>
-                                <th class="text-end">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-warning text-dark">1</span></td>
-                                <td><strong>narutokyuby</strong></td>
-                                <td class="text-end">1,247</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">2</span></td>
-                                <td>Basile</td>
-                                <td class="text-end">1,189</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">3</span></td>
-                                <td>daftpunk</td>
-                                <td class="text-end">1,156</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">4</span></td>
-                                <td>GTi</td>
-                                <td class="text-end">987</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">5</span></td>
-                                <td>ThePandaEmperor</td>
-                                <td class="text-end">854</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::medals'
+        )) }}
     </div>
 
     {# Record Points Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card border shadow-sm h-100">
-            <div class="card-header border-bottom">
-                <h5 class="mb-0"><i class="bi bi-graph-up-arrow"></i> Record Points</h5>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Player</th>
-                                <th class="text-end">Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-warning text-dark">1</span></td>
-                                <td><strong>daftpunk</strong></td>
-                                <td class="text-end">3,456,789</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">2</span></td>
-                                <td>Basile</td>
-                                <td class="text-end">3,234,567</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">3</span></td>
-                                <td>narutokyuby</td>
-                                <td class="text-end">2,987,654</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">4</span></td>
-                                <td>GTi</td>
-                                <td class="text-end">2,765,432</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><span class="badge rounded-pill bg-secondary">5</span></td>
-                                <td>Siliconian</td>
-                                <td class="text-end">2,543,210</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::recordPoints'
+        )) }}
+    </div>
+
+    {# Badge Points Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::badges'
+        )) }}
+    </div>
+
+    {# Proofs Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::proofs'
+        )) }}
     </div>
 </div>
 {% endblock %}

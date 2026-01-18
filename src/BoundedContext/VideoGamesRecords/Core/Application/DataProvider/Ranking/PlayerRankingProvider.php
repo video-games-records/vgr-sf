@@ -38,7 +38,7 @@ class PlayerRankingProvider
 
     /**
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingPointChart(array $options = []): array
@@ -50,7 +50,7 @@ class PlayerRankingProvider
 
     /**
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingPointGame(array $options = []): array
@@ -62,7 +62,7 @@ class PlayerRankingProvider
 
     /**
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingMedals(array $options = []): array
@@ -74,7 +74,7 @@ class PlayerRankingProvider
 
     /**
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingBadge(array $options = []): array
@@ -86,7 +86,7 @@ class PlayerRankingProvider
 
     /**
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingCup(array $options = []): array
@@ -98,7 +98,7 @@ class PlayerRankingProvider
 
     /**
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingProof(array $options = []): array
@@ -111,7 +111,7 @@ class PlayerRankingProvider
     /**
      * @param Country $country
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      * @throws ORMException
      */
     public function getRankingCountry(Country $country, array $options = []): array

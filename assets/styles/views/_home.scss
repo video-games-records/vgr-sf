@@ -1,2 +1,24 @@
 // Page d'accueil - Home
-// Les styles sont maintenant dans app.scss (disponibles globalement)
+
+// Tableaux de classement très compacts (style Cyberscore)
+.table {
+    font-size: 0.8125rem; // 13px - encore plus compact pour les tableaux
+    line-height: 1.3; // Hauteur de ligne très compacte
+
+    th, td {
+        padding: 0.35rem 0.5rem; // Padding vertical très réduit
+        vertical-align: middle;
+    }
+
+    thead th {
+        font-size: 0.75rem; // 12px pour les headers
+        font-weight: 600;
+        padding: 0.4rem 0.5rem;
+    }
+
+    // Badges et éléments dans les cellules
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.15rem 0.4rem;
+    }
+}

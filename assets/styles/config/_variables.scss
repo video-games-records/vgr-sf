@@ -5,7 +5,7 @@
  */
 
 /* == @section Fonts ==================== */
-$font-stack-common      : system-ui;
+$font-stack-common      : Verdana, Arial, Helvetica, sans-serif;
 $font-stack-headings    : "League Gothic", system-ui;
 
 
@@ -53,6 +53,11 @@ $ultra-large-screen     : 1600;  // ultra large screens
  */
 $primary                : $primary-color;
 $secondary              : $secondary-color;
+
+// Taille de police plus compacte (style site concurrent)
+$font-size-base         : 0.875rem;  // 14px au lieu de 16px
+$font-size-sm           : 0.8125rem; // 13px
+$line-height-base       : 1.5;       // Hauteur de ligne compacte
 
 // Customisation des card-headers
 // $card-cap-bg est géré dans app.scss selon le thème (light/dark)

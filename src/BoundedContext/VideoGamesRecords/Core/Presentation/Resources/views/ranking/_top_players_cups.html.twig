@@ -1,0 +1,47 @@
+<div class="card border shadow-sm h-100">
+    <div class="card-header border-bottom">
+        <h5 class="mb-0"><i class="bi bi-trophy"></i> Cups</h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width: 50px;">#</th>
+                        <th>Player</th>
+                        <th class="text-center" style="width: 60px;" title="Platine"><i class="bi bi-trophy text-platinum"></i></th>
+                        <th class="text-center" style="width: 60px;" title="Or"><i class="bi bi-trophy text-gold"></i></th>
+                        <th class="text-center" style="width: 60px;" title="Argent"><i class="bi bi-trophy text-silver"></i></th>
+                        <th class="text-center" style="width: 60px;" title="Bronze"><i class="bi bi-trophy text-bronze"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                        <tr>
+                            <td class="text-center">
+                                <span class="badge rounded-pill {% if loop.index == 1 %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                                    {{ player.rankCup }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if loop.index == 1 %}<strong>{% endif %}
+                                {{ player.pseudo }}
+                                {% if loop.index == 1 %}</strong>{% endif %}
+                            </td>
+                            <td class="text-center text-platinum">{{ player.gameRank0 }}</td>
+                            <td class="text-center text-gold">{{ player.gameRank1 }}</td>
+                            <td class="text-center text-silver">{{ player.gameRank2 }}</td>
+                            <td class="text-center text-bronze">{{ player.gameRank3 }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                No players found
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
