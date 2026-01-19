@@ -60,5 +60,12 @@
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::proofs'
         )) }}
     </div>
+
+    {# Latest News #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\Article\\Presentation\\Web\\Controller\\TopNewsController::latest'
+        )) }}
+    </div>
 </div>
 {% endblock %}
