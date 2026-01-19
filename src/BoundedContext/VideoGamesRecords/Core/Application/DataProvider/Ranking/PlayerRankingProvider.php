@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking;
 
+use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\QueryBuilder;
@@ -134,15 +135,14 @@ class PlayerRankingProvider
         $maxRank = $options['maxRank'] ?? 100;
         $limit = $options['limit'] ?? null;
         $player = $this->getPlayer();
-        $team = !empty($options['idTeam']) ? $this->em->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $options['idTeam']) : null;
+        $team = !empty($options['idTeam']) ? $this->em->getReference(Team::class, $options['idTeam']) : null;
 
         $query = $this->em->createQueryBuilder()
             ->select('p')
             ->from('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', 'p')
-            ->leftJoin('p.team', 't')
-            ->addSelect('t')
             ->leftJoin('p.country', 'c')
-            ->addSelect('c')
+            ->leftJoin('p.team', 't')
+            ->addSelect('t,c')
             ->where("p.$column != 0")
             ->orderBy("p.$column");
 
