@@ -89,12 +89,12 @@
                                 {{ 'navigation.leaderboards'|trans }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="leaderboardsDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up-arrow"></i> {{ 'navigation.leaderboards_dropdown.game_points'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up-arrow"></i> {{ 'navigation.leaderboards_dropdown.record_points'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-award"></i> {{ 'navigation.leaderboards_dropdown.medals'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-trophy"></i> {{ 'navigation.leaderboards_dropdown.cups'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-patch-check"></i> {{ 'navigation.leaderboards_dropdown.badges'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-text"></i> {{ 'navigation.leaderboards_dropdown.proofs'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('leaderboard_point_games') }}"><i class="bi bi-graph-up-arrow"></i> {{ 'navigation.leaderboards_dropdown.game_points'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('leaderboard_point_charts') }}"><i class="bi bi-bar-chart-line"></i> {{ 'navigation.leaderboards_dropdown.record_points'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('leaderboard_medals') }}"><i class="bi bi-award"></i> {{ 'navigation.leaderboards_dropdown.medals'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('leaderboard_cups') }}"><i class="bi bi-trophy"></i> {{ 'navigation.leaderboards_dropdown.cups'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('leaderboard_badges') }}"><i class="bi bi-patch-check"></i> {{ 'navigation.leaderboards_dropdown.badges'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('leaderboard_proofs') }}"><i class="bi bi-camera-video"></i> {{ 'navigation.leaderboards_dropdown.proofs'|trans }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> {{ 'navigation.leaderboards_dropdown.country'|trans }}</a></li>
                             </ul>

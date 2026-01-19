@@ -22,7 +22,7 @@ class ForumUserLastVisit
     #[ORM\JoinColumn(name:'user_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
     private User $user;
 
-    #[ORM\ManyToOne(targetEntity: Forum::class)]
+    #[ORM\ManyToOne(targetEntity: Forum::class, inversedBy: 'userLastVisits')]
     #[ORM\JoinColumn(name:'forum_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
     private Forum $forum;
 

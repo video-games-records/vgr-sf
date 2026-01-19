@@ -42,7 +42,7 @@ class Proof
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $response = null;
 
-    #[ORM\ManyToOne(targetEntity: Player::class, inversedBy: 'proofRespondings')]
+    #[ORM\ManyToOne(targetEntity: Player::class)]
     #[ORM\JoinColumn(name:'responding_player_id', referencedColumnName:'id', nullable:true)]
     private ?Player $playerResponding = null;
 

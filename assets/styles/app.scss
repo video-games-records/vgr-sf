@@ -50,6 +50,12 @@ body {
         background-color: var(--bs-dark-bg-subtle);
         color: var(--bs-dark-color);
     }
+
+    // Headers de tableaux plus sombres en mode dark
+    .table thead th {
+        background-color: var(--bs-dark-bg-subtle);
+        border-bottom-color: var(--bs-border-color);
+    }
 }
 
 .navbar {

@@ -5,6 +5,7 @@ twig:
         '%kernel.project_dir%/src/BoundedContext/User/Presentation/Resources/views': 'User'
         '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/views': 'Article'
         '%kernel.project_dir%/src/BoundedContext/Forum/Presentation/Resources/views': 'Forum'
+        '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Shared/Presentation/Resources/views': 'VideoGamesRecordsShared'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/views': 'VideoGamesRecordsCore'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Badge/Presentation/Resources/views': 'VideoGamesRecordsBadge'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Team/Presentation/Resources/views': 'VideoGamesRecordsTeam'

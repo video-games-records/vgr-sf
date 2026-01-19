@@ -38,7 +38,7 @@ class Country
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
 
-    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'], inversedBy: 'country')]
+    #[ORM\OneToOne(targetEntity: Badge::class, inversedBy: 'country', cascade: ['persist'])]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
     private ?Badge $badge;
 
@@ -47,6 +47,7 @@ class Country
         targetEntity: CountryTranslation::class,
         mappedBy: 'translatable',
         cascade: ['persist', 'remove'],
+        fetch: 'EAGER',
         orphanRemoval: true,
         indexBy: 'locale'
     )]

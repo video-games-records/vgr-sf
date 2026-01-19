@@ -1,0 +1,86 @@
+{% extends '@SharedKernel/base.html.twig' %}
+
+{% block title %}Cups Leaderboard - Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card border shadow-sm">
+                <div class="card-header border-bottom">
+                    <h5 class="mb-0"><i class="bi bi-trophy"></i> Cups Leaderboard</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 60px;">#</th>
+                                    <th class="d-none d-md-table-cell" style="width: 60px;"></th>
+                                    <th>Player</th>
+                                    <th class="text-center" style="width: 80px;" title="Platinum Cups"><i class="bi bi-trophy-fill text-platinum"></i></th>
+                                    <th class="text-center" style="width: 80px;" title="Gold Cups"><i class="bi bi-trophy-fill text-gold"></i></th>
+                                    <th class="text-center" style="width: 80px;" title="Silver Cups"><i class="bi bi-trophy-fill text-silver"></i></th>
+                                    <th class="text-center" style="width: 80px;" title="Bronze Cups"><i class="bi bi-trophy-fill text-bronze"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in players %}
+                                    <tr {% if app.user and player.getUserId() == app.user.id %}class="table-primary"{% endif %}>
+                                        <td class="text-center align-middle">
+                                            <span class="badge rounded-pill {% if loop.index <= 3 %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                                                {{ player.rankCup }}
+                                            </span>
+                                        </td>
+                                        <td class="align-middle d-none d-md-table-cell">
+                                            <img src="/users/{{ player.getUserId() }}/avatar"
+                                                 alt="{{ player.pseudo }}"
+                                                 class="rounded-circle"
+                                                 width="40"
+                                                 height="40">
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="d-flex align-items-center gap-2">
+                                                {% if player.team %}
+                                                    <span>[{{ player.team.tag }}]</span>
+                                                {% endif %}
+                                                <span {% if loop.index <= 3 %}class="fw-bold"{% endif %}>
+                                                    {{ player.pseudo }}
+                                                </span>
+                                                {% if player.country %}
+                                                    <img src="https://flagcdn.com/20x15/{{ player.country.codeIso2|lower }}.png"
+                                                         alt="{{ player.country.name }}"
+                                                         title="{{ player.country.name }}">
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge text-bg-info">{{ player.gameRank0 }}</span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge text-bg-warning">{{ player.gameRank1 }}</span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge text-bg-secondary">{{ player.gameRank2 }}</span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge text-bg-danger">{{ player.gameRank3 }}</span>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted py-4">
+                                            No players found
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
