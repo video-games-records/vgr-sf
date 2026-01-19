@@ -61,6 +61,13 @@
         )) }}
     </div>
 
+    {# Game of the Day #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Game\\GameOfDay'
+        )) }}
+    </div>
+
     {# Latest News #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
