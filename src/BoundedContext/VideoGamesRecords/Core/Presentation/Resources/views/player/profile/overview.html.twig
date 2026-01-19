@@ -1,0 +1,245 @@
+{% extends '@VideoGamesRecordsCore/player/profile/_base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block profile_content %}
+{# Top Stats Cards - More compact #}
+<div class="row g-2 mb-3">
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-bar-chart-line text-success"></i>
+                <div class="fw-bold">{{ player.nbChart|number_format }}</div>
+                <div class="text-muted small">{{ 'player.profile.stats.records'|trans }}</div>
+                {% if player.nbChartMax > 0 %}
+                    <div class="text-muted small">
+                        ({{ ((player.nbChart / player.nbChartMax) * 100)|number_format(1) }}%)
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-check-circle text-success"></i>
+                <div class="fw-bold">{{ player.nbChartProven|number_format }}</div>
+                <div class="text-muted small">{{ 'player.profile.stats.proven'|trans }}</div>
+                {% if player.nbChart > 0 %}
+                    <div class="text-muted small">
+                        ({{ ((player.nbChartProven / player.nbChart) * 100)|number_format(1) }}%)
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-graph-up text-primary"></i>
+                <div class="fw-bold">{{ (player.pointChart / 1000000)|number_format(1) }}M</div>
+                <div class="text-muted small">{{ 'player.profile.stats.chart_points'|trans }}</div>
+                <div class="text-muted small">#{{ player.rankPointChart|number_format }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-controller text-primary"></i>
+                <div class="fw-bold">{{ player.nbGame|number_format }}</div>
+                <div class="text-muted small">{{ 'player.profile.stats.games'|trans }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-patch-check text-warning"></i>
+                <div class="fw-bold">{{ player.nbMasterBadge|number_format }}</div>
+                <div class="text-muted small">{{ 'player.profile.stats.master_badges'|trans }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-camera-video text-danger"></i>
+                <div class="fw-bold">{{ player.nbVideo|number_format }}</div>
+                <div class="text-muted small">{{ 'player.profile.stats.videos'|trans }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Rankings and Points Section - More compact #}
+<div class="row g-2 mb-3">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body p-2">
+                <h6 class="mb-2"><i class="bi bi-trending-up"></i> {{ 'player.profile.sections.rankings'|trans }}</h6>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.rankings.game_points_rank'|trans }}</span>
+                    <span class="badge bg-secondary">{{ player.rankPointGame|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.rankings.cup_rank'|trans }}</span>
+                    <span class="badge bg-secondary">{{ player.rankCup|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.rankings.chart_points_rank'|trans }}</span>
+                    <span class="badge bg-secondary">{{ player.rankPointChart|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.rankings.medal_rank'|trans }}</span>
+                    <span class="badge bg-secondary">{{ player.rankMedal|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.rankings.proof_rank'|trans }}</span>
+                    <span class="badge bg-secondary">{{ player.rankProof|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between small">
+                    <span>{{ 'player.profile.rankings.badge_rank'|trans }}</span>
+                    <span class="badge bg-secondary">{{ player.rankBadge|number_format }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body p-2">
+                <h6 class="mb-2"><i class="bi bi-star"></i> {{ 'player.profile.sections.points_performance'|trans }}</h6>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.points.chart_points'|trans }}</span>
+                    <span class="fw-bold text-primary">{{ player.pointChart|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.points.game_points'|trans }}</span>
+                    <span class="fw-bold text-success">{{ player.pointGame|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.points.badge_points'|trans }}</span>
+                    <span class="fw-bold text-warning">{{ player.pointBadge|number_format }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>{{ 'player.profile.points.average_record_rank'|trans }}</span>
+                    <span class="fw-bold">{{ player.averageChartRank|number_format(2) }}</span>
+                </div>
+                <div class="d-flex justify-content-between small">
+                    <span>{{ 'player.profile.points.average_game_rank'|trans }}</span>
+                    <span class="fw-bold">{{ player.averageGameRank|number_format(2) }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Medals and Cups Section - More compact #}
+<div class="row g-2 mb-3">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body p-2">
+                <h6 class="mb-2"><i class="bi bi-trophy"></i> {{ 'player.profile.sections.medals_records'|trans }}</h6>
+                <div class="row g-2 text-center">
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-platinum fs-4"></i>
+                            <div class="fw-bold">{{ player.chartRank0|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.platinum'|trans }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-gold fs-4"></i>
+                            <div class="fw-bold">{{ player.chartRank1|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.gold'|trans }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-silver fs-4"></i>
+                            <div class="fw-bold">{{ player.chartRank2|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.silver'|trans }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-bronze fs-4"></i>
+                            <div class="fw-bold">{{ player.chartRank3|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.bronze'|trans }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body p-2">
+                <h6 class="mb-2"><i class="bi bi-trophy"></i> {{ 'player.profile.sections.cups_games'|trans }}</h6>
+                <div class="row g-2 text-center">
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-platinum fs-4"></i>
+                            <div class="fw-bold">{{ player.gameRank0|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.platinum'|trans }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-gold fs-4"></i>
+                            <div class="fw-bold">{{ player.gameRank1|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.gold'|trans }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-silver fs-4"></i>
+                            <div class="fw-bold">{{ player.gameRank2|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.silver'|trans }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-2">
+                            <i class="bi bi-trophy-fill text-bronze fs-4"></i>
+                            <div class="fw-bold">{{ player.gameRank3|number_format }}</div>
+                            <div class="text-muted small">{{ 'player.profile.achievements.bronze'|trans }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Additional Info #}
+{% if player.presentation or player.collection %}
+<div class="row g-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bi bi-person-lines-fill"></i> {{ 'player.profile.sections.about'|trans }}</h5>
+                {% if player.presentation %}
+                <div class="mb-3">
+                    <h6 class="text-muted">{{ 'player.profile.info.presentation'|trans }}</h6>
+                    <div class="mb-0">{{ player.presentation|raw }}</div>
+                </div>
+                {% endif %}
+                {% if player.collection %}
+                <div>
+                    <h6 class="text-muted">{{ 'player.profile.info.collection'|trans }}</h6>
+                    <div class="mb-0">{{ player.collection|raw }}</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

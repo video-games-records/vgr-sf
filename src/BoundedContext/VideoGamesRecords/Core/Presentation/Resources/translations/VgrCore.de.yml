@@ -1,25 +1,51 @@
-video:
-  type_not_found: "Nur URLs von YouTube und Twitch sind erlaubt"
-  youtube:
-    not_found: "Dieses YouTube-Video existiert nicht"
+player:
+  profile:
+    tabs:
+      overview: Übersicht
+      badges: Abzeichen
+      games: Spiele
+      proofs: Beweise
 
-avatar:
-  extension_not_allowed: 'Erlaubte Formate sind PNG und JPG'
-  success: "Avatar wurde erfolgreich hochgeladen"
+    header:
+      member_since: Mitglied seit
+      last_login: Letzter Login
 
+    stats:
+      records: Rekorde
+      proven: Beweise
+      chart_points: Rekord-Punkte
+      games: Spiele
+      master_badges: Meister-Abzeichen
+      videos: Videos
 
-team:
-  request:
-    exists: 'Sie haben bereits eine Team-Anfrage gestellt'
-    has_team: 'Dieser Spieler hat bereits ein Team'
+    sections:
+      rankings: Ranglisten
+      points_performance: Punkte & Leistung
+      medals_records: Medaillen (Rekorde)
+      cups_games: Pokale (Spiele)
+      about: Über
 
-workflow_transitions: 'Arbeitsablauf'
-workflow:
-  transition_add_score: 'Score hinzufügen'
-  transition_add_picture: 'Bild hinzufügen'
-  transition_completed: 'Abgeschlossen'
-  transition_activate: 'Aktivieren'
-  transition_desactivate: 'Deaktivieren'
+    rankings:
+      game_points_rank: Spiele-Punkte Rang
+      cup_rank: Pokal-Rang
+      chart_points_rank: Rekord-Punkte Rang
+      medal_rank: Medaillen-Rang
+      proof_rank: Beweis-Rang
+      badge_rank: Abzeichen-Rang
 
-playerChart:
-  bulk_upsert_success: '%total% Scores erfolgreich verarbeitet (%created% erstellt, %updated% aktualisiert)'
+    points:
+      chart_points: Rekord-Punkte
+      game_points: Spiele-Punkte
+      badge_points: Abzeichen-Punkte
+      average_record_rank: Durchschnittlicher Rekord-Rang
+      average_game_rank: Durchschnittlicher Spiele-Rang
+
+    achievements:
+      platinum: Platin
+      gold: Gold
+      silver: Silber
+      bronze: Bronze
+
+    info:
+      presentation: Präsentation
+      collection: Sammlung

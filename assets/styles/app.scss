@@ -56,6 +56,15 @@ body {
         background-color: var(--bs-dark-bg-subtle);
         border-bottom-color: var(--bs-border-color);
     }
+
+    // Liens plus clairs en mode dark pour meilleure lisibilité
+    a:not(.btn):not(.nav-link):not(.dropdown-item) {
+        color: #9db9d1;
+
+        &:hover {
+            color: #b8d4ea;
+        }
+    }
 }
 
 .navbar {

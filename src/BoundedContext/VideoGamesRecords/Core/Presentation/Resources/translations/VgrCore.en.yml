@@ -1,24 +1,51 @@
-video:
-  type_not_found: "Only URL from youtube and twitch"
-  youtube:
-    not_found: "This youtube video does not exists"
+player:
+  profile:
+    tabs:
+      overview: Overview
+      badges: Badges
+      games: Games
+      proofs: Proofs
 
-avatar:
-  extension_not_allowed: 'Format allowed are png and jpg'
-  success: "Avatar has been successfull uploaded"
+    header:
+      member_since: Member since
+      last_login: Last login
 
-team:
-  request:
-    exists: 'You already requested a team'
-    has_team: 'This player has already a team'
+    stats:
+      records: Records
+      proven: Proofs
+      chart_points: Chart Points
+      games: Games
+      master_badges: Master Badges
+      videos: Videos
 
-workflow_transitions: 'Workflow'
-workflow:
-  transition_add_score: 'Add Score'
-  transition_add_picture: 'Add Picture'
-  transition_completed: 'Completed'
-  transition_activate: 'Activate'
-  transition_desactivate: 'Desactivate'
+    sections:
+      rankings: Rankings
+      points_performance: Points & Performance
+      medals_records: Medals (Records)
+      cups_games: Cups (Games)
+      about: About
 
-playerChart:
-  bulk_upsert_success: '%total% scores processed successfully (%created% created, %updated% updated)'
+    rankings:
+      game_points_rank: Game Points Rank
+      cup_rank: Cup Rank
+      chart_points_rank: Chart Points Rank
+      medal_rank: Medal Rank
+      proof_rank: Proof Rank
+      badge_rank: Badge Rank
+
+    points:
+      chart_points: Chart Points
+      game_points: Game Points
+      badge_points: Badge Points
+      average_record_rank: Average Record Rank
+      average_game_rank: Average Game Rank
+
+    achievements:
+      platinum: Platinum
+      gold: Gold
+      silver: Silver
+      bronze: Bronze
+
+    info:
+      presentation: Presentation
+      collection: Collection

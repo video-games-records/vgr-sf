@@ -1,0 +1,110 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ player.pseudo }} - Player Profile{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Player Header Card #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <div class="row align-items-center">
+                {# Avatar #}
+                <div class="col-auto">
+                    <img
+                        src="{{ asset('users/' ~ player.userId ~ '/avatar') }}"
+                        alt="{{ player.pseudo }}"
+                        class="rounded-circle"
+                        width="80"
+                        height="80"
+                    >
+                </div>
+
+                {# Player Info #}
+                <div class="col">
+                    <h1 class="h3 mb-2">
+                        {{ player.pseudo }}
+                        {% if player.team %}
+                            <small class="text-muted fs-6">
+                                <i class="bi bi-people"></i>
+                                <a href="#" class="text-decoration-none">{{ player.team.name }}</a>
+                            </small>
+                        {% endif %}
+                    </h1>
+
+                    <div class="d-flex flex-wrap gap-3 text-muted small">
+                        {# Country #}
+                        {% if player.country %}
+                            <span>
+                                <i class="bi bi-flag"></i>
+                                {{ player.country.name }}
+                            </span>
+                        {% endif %}
+
+                        {# Status #}
+                        <span>
+                            <i class="bi bi-person-badge"></i>
+                            <span class="badge {{ player.statusClass }}">
+                                {{ player.statusLabel }}
+                            </span>
+                        </span>
+
+                        {# Registration Date #}
+                        <span>
+                            <i class="bi bi-calendar-check"></i>
+                            {{ 'player.profile.header.member_since'|trans }} {{ player.createdAt|date('M Y') }}
+                        </span>
+
+                        {# Last Login #}
+                        {% if player.lastLogin %}
+                            <span>
+                                <i class="bi bi-clock-history"></i>
+                                {{ 'player.profile.header.last_login'|trans }} {{ player.lastLogin|date('Y-m-d') }}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Navigation Tabs #}
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'overview' ? 'active' : '' }}"
+                href="{{ path('player_profile_overview', {id: player.id, slug: player.slug}) }}"
+            >
+                <i class="bi bi-speedometer2"></i> {{ 'player.profile.tabs.overview'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'badges' ? 'active' : '' }}"
+                href="{{ path('player_profile_badges', {id: player.id, slug: player.slug}) }}"
+            >
+                <i class="bi bi-patch-check"></i> {{ 'player.profile.tabs.badges'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'games' ? 'active' : '' }}"
+                href="{{ path('player_profile_games', {id: player.id, slug: player.slug}) }}"
+            >
+                <i class="bi bi-controller"></i> {{ 'player.profile.tabs.games'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'proofs' ? 'active' : '' }}"
+                href="{{ path('player_profile_proofs', {id: player.id, slug: player.slug}) }}"
+            >
+                <i class="bi bi-camera-video"></i> {{ 'player.profile.tabs.proofs'|trans }}
+            </a>
+        </li>
+    </ul>
+
+    {# Tab Content #}
+    {% block profile_content %}{% endblock %}
+</div>
+{% endblock %}

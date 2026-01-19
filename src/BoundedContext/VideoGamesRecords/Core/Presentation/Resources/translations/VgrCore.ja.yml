@@ -1,24 +1,51 @@
-video:
-  type_not_found: "YouTubeとTwitchのURLのみ利用可能です"
-  youtube:
-    not_found: "このYouTube動画は存在しません"
+player:
+  profile:
+    tabs:
+      overview: 概要
+      badges: バッジ
+      games: ゲーム
+      proofs: 証明
 
-avatar:
-  extension_not_allowed: '許可されているフォーマットはPNGとJPGです'
-  success: "アバターが正常にアップロードされました"
+    header:
+      member_since: 登録日
+      last_login: 最終ログイン
 
-team:
-  request:
-    exists: '既にチーム申請を送信済みです'
-    has_team: 'このプレイヤーは既にチームに所属しています'
+    stats:
+      records: レコード
+      proven: 証明
+      chart_points: レコードポイント
+      games: ゲーム
+      master_badges: マスターバッジ
+      videos: ビデオ
 
-workflow_transitions: 'ワークフロー'
-workflow:
-  transition_add_score: 'スコアを追加'
-  transition_add_picture: '画像を追加'
-  transition_completed: '完了'
-  transition_activate: 'アクティブ化'
-  transition_desactivate: '無効化'
+    sections:
+      rankings: ランキング
+      points_performance: ポイント＆パフォーマンス
+      medals_records: メダル（レコード）
+      cups_games: カップ（ゲーム）
+      about: について
 
-playerChart:
-  bulk_upsert_success: '%total%スコアが正常に処理されました（%created%作成、%updated%更新）'
+    rankings:
+      game_points_rank: ゲームポイントランク
+      cup_rank: カップランク
+      chart_points_rank: レコードポイントランク
+      medal_rank: メダルランク
+      proof_rank: 証明ランク
+      badge_rank: バッジランク
+
+    points:
+      chart_points: レコードポイント
+      game_points: ゲームポイント
+      badge_points: バッジポイント
+      average_record_rank: 平均レコードランク
+      average_game_rank: 平均ゲームランク
+
+    achievements:
+      platinum: プラチナ
+      gold: ゴールド
+      silver: シルバー
+      bronze: ブロンズ
+
+    info:
+      presentation: プレゼンテーション
+      collection: コレクション

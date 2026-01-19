@@ -1,24 +1,51 @@
-video:
-  type_not_found: "Solo URL di YouTube e Twitch"
-  youtube:
-    not_found: "Questo video di YouTube non esiste"
+player:
+  profile:
+    tabs:
+      overview: Panoramica
+      badges: Distintivi
+      games: Giochi
+      proofs: Prove
 
-avatar:
-  extension_not_allowed: 'I formati consentiti sono PNG e JPG'
-  success: "Avatar caricato con successo"
+    header:
+      member_since: Membro dal
+      last_login: Ultimo accesso
 
-team:
-  request:
-    exists: 'Hai già richiesto un team'
-    has_team: 'Questo giocatore ha già un team'
+    stats:
+      records: Record
+      proven: Prove
+      chart_points: Punti Record
+      games: Giochi
+      master_badges: Distintivi Maestri
+      videos: Video
 
-workflow_transitions: 'Flusso di lavoro'
-workflow:
-  transition_add_score: 'Aggiungi punteggio'
-  transition_add_picture: 'Aggiungi immagine'
-  transition_completed: 'Completato'
-  transition_activate: 'Attiva'
-  transition_desactivate: 'Disattiva'
+    sections:
+      rankings: Classifiche
+      points_performance: Punti e Prestazioni
+      medals_records: Medaglie (Record)
+      cups_games: Coppe (Giochi)
+      about: Informazioni
 
-playerChart:
-  bulk_upsert_success: '%total% punteggi elaborati con successo (%created% creati, %updated% aggiornati)'
+    rankings:
+      game_points_rank: Classifica Punti Giochi
+      cup_rank: Classifica Coppe
+      chart_points_rank: Classifica Punti Record
+      medal_rank: Classifica Medaglie
+      proof_rank: Classifica Prove
+      badge_rank: Classifica Distintivi
+
+    points:
+      chart_points: Punti Record
+      game_points: Punti Giochi
+      badge_points: Punti Distintivi
+      average_record_rank: Rango Medio Record
+      average_game_rank: Rango Medio Giochi
+
+    achievements:
+      platinum: Platino
+      gold: Oro
+      silver: Argento
+      bronze: Bronzo
+
+    info:
+      presentation: Presentazione
+      collection: Collezione

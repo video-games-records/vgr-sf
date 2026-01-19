@@ -163,6 +163,11 @@ class Team
         return $this->libTeam;
     }
 
+    public function getName(): string
+    {
+        return $this->libTeam;
+    }
+
     public function setTag(string $tag): void
     {
         $this->tag = $tag;

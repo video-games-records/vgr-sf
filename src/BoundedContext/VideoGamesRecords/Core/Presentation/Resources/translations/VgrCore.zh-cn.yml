@@ -1,24 +1,51 @@
-video:
-  type_not_found: "仅支持YouTube和Twitch的URL"
-  youtube:
-    not_found: "此YouTube视频不存在"
+player:
+  profile:
+    tabs:
+      overview: 概览
+      badges: 徽章
+      games: 游戏
+      proofs: 证明
 
-avatar:
-  extension_not_allowed: '允许的格式为PNG和JPG'
-  success: "头像上传成功"
+    header:
+      member_since: 注册时间
+      last_login: 最后登录
 
-team:
-  request:
-    exists: '您已经申请了一个团队'
-    has_team: '该玩家已经有团队'
+    stats:
+      records: 记录
+      proven: 证明
+      chart_points: 记录积分
+      games: 游戏
+      master_badges: 大师徽章
+      videos: 视频
 
-workflow_transitions: '工作流程'
-workflow:
-  transition_add_score: '添加分数'
-  transition_add_picture: '添加图片'
-  transition_completed: '已完成'
-  transition_activate: '激活'
-  transition_desactivate: '停用'
+    sections:
+      rankings: 排名
+      points_performance: 积分与表现
+      medals_records: 奖牌（记录）
+      cups_games: 奖杯（游戏）
+      about: 关于
 
-playerChart:
-  bulk_upsert_success: '成功处理%total%个分数（%created%个已创建，%updated%个已更新）'
+    rankings:
+      game_points_rank: 游戏积分排名
+      cup_rank: 奖杯排名
+      chart_points_rank: 记录积分排名
+      medal_rank: 奖牌排名
+      proof_rank: 证明排名
+      badge_rank: 徽章排名
+
+    points:
+      chart_points: 记录积分
+      game_points: 游戏积分
+      badge_points: 徽章积分
+      average_record_rank: 平均记录排名
+      average_game_rank: 平均游戏排名
+
+    achievements:
+      platinum: 白金
+      gold: 金
+      silver: 银
+      bronze: 铜
+
+    info:
+      presentation: 介绍
+      collection: 收藏

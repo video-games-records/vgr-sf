@@ -24,9 +24,11 @@
                                 </span>
                             </td>
                             <td>
-                                {% if loop.index == 1 %}<strong>{% endif %}
-                                {{ player.pseudo }}
-                                {% if loop.index == 1 %}</strong>{% endif %}
+                                <a href="{{ path('player_profile_overview', {id: player.id, slug: player.slug}) }}" class="text-decoration-none">
+                                    {% if loop.index == 1 %}<strong>{% endif %}
+                                    {{ player.pseudo }}
+                                    {% if loop.index == 1 %}</strong>{% endif %}
+                                </a>
                             </td>
                             <td class="text-center text-platinum">{{ player.gameRank0 }}</td>
                             <td class="text-center text-gold">{{ player.gameRank1 }}</td>

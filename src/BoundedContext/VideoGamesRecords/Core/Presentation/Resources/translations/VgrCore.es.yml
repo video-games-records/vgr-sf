@@ -1,24 +1,51 @@
-video:
-  type_not_found: "Solo URLs de YouTube y Twitch"
-  youtube:
-    not_found: "Este vídeo de YouTube no existe"
+player:
+  profile:
+    tabs:
+      overview: Resumen
+      badges: Insignias
+      games: Juegos
+      proofs: Pruebas
 
-avatar:
-  extension_not_allowed: 'Los formatos permitidos son PNG y JPG'
-  success: "Avatar subido correctamente"
+    header:
+      member_since: Miembro desde
+      last_login: Último acceso
 
-team:
-  request:
-    exists: 'Ya has enviado una solicitud de equipo'
-    has_team: 'Este jugador ya tiene un equipo'
+    stats:
+      records: Récords
+      proven: Pruebas
+      chart_points: Puntos de Récords
+      games: Juegos
+      master_badges: Insignias Maestras
+      videos: Vídeos
 
-workflow_transitions: 'Flujo de trabajo'
-workflow:
-  transition_add_score: 'Añadir puntuación'
-  transition_add_picture: 'Añadir imagen'
-  transition_completed: 'Completado'
-  transition_activate: 'Activar'
-  transition_desactivate: 'Desactivar'
+    sections:
+      rankings: Clasificaciones
+      points_performance: Puntos y Rendimiento
+      medals_records: Medallas (Récords)
+      cups_games: Copas (Juegos)
+      about: Acerca de
 
-playerChart:
-  bulk_upsert_success: '%total% puntuaciones procesadas exitosamente (%created% creadas, %updated% actualizadas)'
+    rankings:
+      game_points_rank: Clasificación Puntos de Juegos
+      cup_rank: Clasificación de Copas
+      chart_points_rank: Clasificación Puntos de Récords
+      medal_rank: Clasificación de Medallas
+      proof_rank: Clasificación de Pruebas
+      badge_rank: Clasificación de Insignias
+
+    points:
+      chart_points: Puntos de Récords
+      game_points: Puntos de Juegos
+      badge_points: Puntos de Insignias
+      average_record_rank: Rango Promedio de Récords
+      average_game_rank: Rango Promedio de Juegos
+
+    achievements:
+      platinum: Platino
+      gold: Oro
+      silver: Plata
+      bronze: Bronce
+
+    info:
+      presentation: Presentación
+      collection: Colección

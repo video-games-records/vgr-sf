@@ -1,25 +1,51 @@
-video:
-  type_not_found: "Impossible de déterminer l'origine de la vidéo"
-  youtube:
-    not_found: "Cette vidéo youtube n'existe pas"
+player:
+  profile:
+    tabs:
+      overview: Vue d'ensemble
+      badges: Badges
+      games: Jeux
+      proofs: Preuves
 
-avatar:
-  extension_not_allowed: 'Les format autorisés sont png et jpg'
-  success: "L'avatar a bien été chargé"
+    header:
+      member_since: Membre depuis
+      last_login: Dernière connexion
 
-team:
-  request:
-    exists: 'Vous avez déjà envoyé une demande en cours'
-    has_team: 'Ce joueur a déjà une équipe'
+    stats:
+      records: Records
+      proven: Preuves
+      chart_points: Points Records
+      games: Jeux
+      master_badges: Master Badges
+      videos: Vidéos
 
+    sections:
+      rankings: Classements
+      points_performance: Points & Performance
+      medals_records: Médailles (Records)
+      cups_games: Coupes (Jeux)
+      about: À propos
 
-workflow_transitions: 'Workflow'
-workflow:
-  transition_add_score: 'Ajout de score'
-  transition_add_picture: 'Ajout des images'
-  transition_completed: 'Complet'
-  transition_activate: 'Activer'
-  transition_desactivate: 'Désactiver'
+    rankings:
+      game_points_rank: Classement Points Jeux
+      cup_rank: Classement Coupes
+      chart_points_rank: Classement Points Records
+      medal_rank: Classement Médailles
+      proof_rank: Classement Preuves
+      badge_rank: Classement Badges
 
-playerChart:
-  bulk_upsert_success: '%total% scores traités avec succès (%created% créés, %updated% mis à jour)'
+    points:
+      chart_points: Points Records
+      game_points: Points Jeux
+      badge_points: Points Badges
+      average_record_rank: Rang Moyen Records
+      average_game_rank: Rang Moyen Jeux
+
+    achievements:
+      platinum: Platine
+      gold: Or
+      silver: Argent
+      bronze: Bronze
+
+    info:
+      presentation: Présentation
+      collection: Collection

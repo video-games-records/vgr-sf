@@ -1,24 +1,51 @@
-video:
-  type_not_found: "Apenas URLs do YouTube e Twitch"
-  youtube:
-    not_found: "Este vídeo do YouTube não existe"
+player:
+  profile:
+    tabs:
+      overview: Visão Geral
+      badges: Emblemas
+      games: Jogos
+      proofs: Provas
 
-avatar:
-  extension_not_allowed: 'Os formatos permitidos são PNG e JPG'
-  success: "Avatar enviado com sucesso"
+    header:
+      member_since: Membro desde
+      last_login: Último acesso
 
-team:
-  request:
-    exists: 'Você já solicitou um time'
-    has_team: 'Este jogador já tem um time'
+    stats:
+      records: Recordes
+      proven: Provas
+      chart_points: Pontos de Recordes
+      games: Jogos
+      master_badges: Emblemas Mestre
+      videos: Vídeos
 
-workflow_transitions: 'Fluxo de trabalho'
-workflow:
-  transition_add_score: 'Adicionar pontuação'
-  transition_add_picture: 'Adicionar imagem'
-  transition_completed: 'Concluído'
-  transition_activate: 'Ativar'
-  transition_desactivate: 'Desativar'
+    sections:
+      rankings: Classificações
+      points_performance: Pontos e Desempenho
+      medals_records: Medalhas (Recordes)
+      cups_games: Copas (Jogos)
+      about: Sobre
 
-playerChart:
-  bulk_upsert_success: '%total% pontuações processadas com sucesso (%created% criadas, %updated% atualizadas)'
+    rankings:
+      game_points_rank: Classificação Pontos de Jogos
+      cup_rank: Classificação de Copas
+      chart_points_rank: Classificação Pontos de Recordes
+      medal_rank: Classificação de Medalhas
+      proof_rank: Classificação de Provas
+      badge_rank: Classificação de Emblemas
+
+    points:
+      chart_points: Pontos de Recordes
+      game_points: Pontos de Jogos
+      badge_points: Pontos de Emblemas
+      average_record_rank: Classificação Média de Recordes
+      average_game_rank: Classificação Média de Jogos
+
+    achievements:
+      platinum: Platina
+      gold: Ouro
+      silver: Prata
+      bronze: Bronze
+
+    info:
+      presentation: Apresentação
+      collection: Coleção
