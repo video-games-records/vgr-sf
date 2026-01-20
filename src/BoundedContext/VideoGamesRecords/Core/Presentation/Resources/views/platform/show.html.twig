@@ -144,9 +144,12 @@
                                             <strong>#{{ playerPlatform.rankPointPlatform }}</strong>
                                         </td>
                                         <td>
-                                            <a href="{{ path('vgr_player_profile_overview', {id: playerPlatform.player.id, slug: playerPlatform.player.slug}) }}" class="text-decoration-none" data-turbo-prefetch="false">
-                                                {{ playerPlatform.player.pseudo }}
-                                            </a>
+                                            {{ component('player_link', {
+                                                player: playerPlatform.player,
+                                                bold: false,
+                                                showTeam: false,
+                                                showCountry: false
+                                            }) }}
                                         </td>
                                         <td class="text-end">
                                             <strong>{{ playerPlatform.pointPlatform|number_format(0, '.', ',') }}</strong>

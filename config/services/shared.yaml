@@ -1,15 +1,16 @@
 services:
-    # Shared Domain Services
-    App\SharedKernel\Domain\:
-        resource: '../../src/SharedKernel/Domain/*'
-        exclude: '../../src/SharedKernel/Domain/{Entity,ValueObject,Exception,Event,Security}'
+    _defaults:
+        autowire: true
+        autoconfigure: true
 
-    # Infrastructure Services
-    App\SharedKernel\Infrastructure\:
-        resource: '../../src/SharedKernel/Infrastructure/*'
-        exclude: '../../src/SharedKernel/Infrastructure/{Entity}'
+    # Forum Services
+    App\SharedKernel\:
+        resource: '../../src/SharedKernel/*'
 
     # Event Dispatcher
     App\SharedKernel\Domain\Interface\EventDispatcherInterface:
         alias: App\SharedKernel\Infrastructure\Event\SymfonyEventDispatcher
+
+
+
 

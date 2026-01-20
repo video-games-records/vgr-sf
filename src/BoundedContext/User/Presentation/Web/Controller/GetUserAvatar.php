@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/users')]
 class GetUserAvatar extends AbstractController
 {
-    public function __construct(private readonly AvatarManager $userAvatarManager)
+    public function __construct(private readonly AvatarManager $avatarManager)
     {
     }
 
@@ -24,6 +24,6 @@ class GetUserAvatar extends AbstractController
     #[Route('/{id}/avatar', name: 'pn_user_avatar_show', requirements: ['page' => '\d+'], stateless: false)]
     public function download(User $user): StreamedResponse
     {
-        return $this->userAvatarManager->read($user->getAvatar());
+        return $this->avatarManager->read('users/' . $user->getAvatar());
     }
 }

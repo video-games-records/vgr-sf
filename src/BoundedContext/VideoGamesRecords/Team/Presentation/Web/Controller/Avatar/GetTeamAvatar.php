@@ -28,7 +28,7 @@ class GetTeamAvatar extends AbstractController
     )]
     public function __invoke(Team $team): StreamedResponse
     {
-        $response = $this->avatarManager->read($team->getLogo());
+        $response = $this->avatarManager->read('teams/' . $team->getLogo());
         $response->setPublic();
         $response->setMaxAge(3600);
         return $response;

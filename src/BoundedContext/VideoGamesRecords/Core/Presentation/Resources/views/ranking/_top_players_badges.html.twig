@@ -22,11 +22,12 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}" class="text-decoration-none" data-turbo-prefetch="false">
-                                    {% if loop.index == 1 %}<strong>{% endif %}
-                                    {{ player.pseudo }}
-                                    {% if loop.index == 1 %}</strong>{% endif %}
-                                </a>
+                                {{ component('player_link', {
+                                    player: player,
+                                    bold: loop.index == 1,
+                                    showTeam: false,
+                                    showCountry: false
+                                }) }}
                             </td>
                             <td class="text-end">{{ player.pointBadge|number_format(0, '.', ',') }}</td>
                             <td class="text-end"><span class="badge bg-primary">{{ player.nbMasterBadge }}</span></td>

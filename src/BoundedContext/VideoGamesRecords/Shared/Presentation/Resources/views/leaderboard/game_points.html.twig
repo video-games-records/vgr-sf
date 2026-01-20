@@ -39,19 +39,13 @@
                                                  height="40">
                                         </td>
                                         <td class="align-middle">
-                                            <div class="d-flex align-items-center gap-2">
-                                                {% if player.team %}
-                                                    <span>[{{ player.team.tag }}]</span>
-                                                {% endif %}
-                                                <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}" {% if loop.index <= 3 %}class="fw-bold text-decoration-none"{% else %}class="text-decoration-none"{% endif %} data-turbo-prefetch="false">
-                                                    {{ player.pseudo }}
-                                                </a>
-                                                {% if player.country %}
-                                                    <img src="https://flagcdn.com/20x15/{{ player.country.codeIso2|lower }}.png"
-                                                         alt="{{ player.country.name }}"
-                                                         title="{{ player.country.name }}">
-                                                {% endif %}
-                                            </div>
+                                            {{ component('player_link', {
+                                                player: player,
+                                                bold: loop.index <= 3,
+                                                showTeam: true,
+                                                showCountry: true,
+                                                showAvatar: false
+                                            }) }}
                                         </td>
                                         <td class="text-end align-middle {% if loop.index <= 3 %}fw-bold{% endif %}">
                                             {{ player.pointGame|number_format(0, '.', ',') }}

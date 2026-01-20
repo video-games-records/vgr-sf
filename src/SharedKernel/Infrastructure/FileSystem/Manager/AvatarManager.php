@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AvatarManager
 {
-    private string $prefix;
 
     /** @var array<string, string> */
     private array $extensions = [
@@ -19,39 +18,48 @@ class AvatarManager
     ];
 
     private FilesystemOperator $appStorage;
+    private string $projectDir;
 
-    public function __construct(FilesystemOperator $appStorage, string $prefix = 'avatar/')
+    public function __construct(FilesystemOperator $appStorage, string $projectDir)
     {
         $this->appStorage = $appStorage;
-        $this->prefix = rtrim($prefix, '/') . '/';
+        $this->projectDir = $projectDir;
     }
 
     /**
      * @throws FilesystemException
      */
-    public function write(string $filename, string $contents): void
+    public function write(string $path, string $contents): void
     {
-        $this->appStorage->write($this->prefix . $filename, $contents);
+        $this->appStorage->write($path, $contents);
     }
 
 
     /**
-     * @param string|null $filename
+     * @param string|null $path
      * @return StreamedResponse
      * @throws FilesystemException
      */
-    public function read(?string $filename): StreamedResponse
+    public function read(?string $path): StreamedResponse
     {
-        $path = $this->prefix . $filename;
-        if (!$this->appStorage->fileExists($path)) {
-            $path = $this->prefix . 'default.png';
+        if ($path && $this->appStorage->fileExists($path)) {
+            $stream = $this->appStorage->readStream($path);
+            return new StreamedResponse(function () use ($stream) {
+                fpassthru($stream);
+                exit();
+            }, 200, ['Content-Type' => $this->getMimeType($path)]);
         }
 
-        $stream = $this->appStorage->readStream($path);
-        return new StreamedResponse(function () use ($stream) {
-            fpassthru($stream);
+        // Return default avatar if user avatar doesn't exist
+        $defaultAvatarPath = $this->projectDir . '/assets/img/default/avatar.png';
+        return new StreamedResponse(function () use ($defaultAvatarPath) {
+            $handle = fopen($defaultAvatarPath, 'rb');
+            if ($handle !== false) {
+                fpassthru($handle);
+                fclose($handle);
+            }
             exit();
-        }, 200, ['Content-Type' => $this->getMimeType($path)]);
+        }, 200, ['Content-Type' => 'image/png']);
     }
 
 

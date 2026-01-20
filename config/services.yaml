@@ -38,3 +38,8 @@ services:
         arguments:
             $cache: '@cache.app'
             $ttl: 3600
+
+    App\SharedKernel\Infrastructure\FileSystem\Manager\AvatarManager:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
