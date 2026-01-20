@@ -146,6 +146,7 @@ class GameRepository extends DefaultRepository
     {
         $column = ($locale == 'fr') ? 'libGameFr' : 'libGameEn';
         $query = $this->createQueryBuilder('g');
+
         if ($letter === '0') {
             $query->where("SUBSTRING(g.$column , 1, 1) NOT IN (:list)")
                 ->setParameter('list', range('a', 'z'));

@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
@@ -21,13 +20,12 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\SerieStatus;
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Serie::class)]
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Serie::class)]
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Serie::class)]
-#[AsEntityListener(event: Events::postLoad, method: 'postLoad', entity: Serie::class)]
 class SerieListener
 {
     /** @var array<string, array{0: mixed, 1: mixed}> */
     private array $changeSet = [];
 
-    public function __construct(private MessageBusInterface $bus, private RequestStack $requestStack)
+    public function __construct(private MessageBusInterface $bus)
     {
     }
 
@@ -69,16 +67,5 @@ class SerieListener
         }
 
         $em->flush();
-    }
-
-    /**
-     * @param Serie $serie
-     */
-    public function postLoad(Serie $serie): void
-    {
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request) {
-            $serie->setCurrentLocale($request->getLocale());
-        }
     }
 }

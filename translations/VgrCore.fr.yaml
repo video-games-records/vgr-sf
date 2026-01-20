@@ -4,6 +4,16 @@ breadcrumb:
 game:
     breadcrumb:
         games: 'Jeux'
+    list:
+        title: 'Liste des Jeux'
+        breadcrumb: 'Jeux'
+        header: 'Jeux'
+        description: '%count% jeu(x) affiché(s)'
+        meta_description: 'Parcourez tous les jeux commençant par %letter%'
+        select_letter: 'Sélectionnez une lettre'
+        showing_results: '%count% jeu(x) trouvé(s)'
+        no_games: 'Aucun jeu trouvé commençant par %letter%'
+        try_another_letter: 'Essayez de sélectionner une autre lettre'
     show:
         title: 'Détails du Jeu'
         meta_description: 'Consultez les records et classements pour %game%'

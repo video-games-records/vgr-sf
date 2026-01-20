@@ -1,0 +1,146 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'game.list.title'|trans }} - {{ currentLetter|upper }}{% endblock %}
+
+{% block meta_description %}{{ 'game.list.meta_description'|trans({'%letter%': currentLetter|upper}) }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb Navigation #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'game.list.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Page Header #}
+    <div class="mb-4">
+        <h1 class="h3">
+            <i class="bi bi-controller"></i>
+            {{ 'game.list.header'|trans }}
+            <span class="badge bg-primary">{{ currentLetter|upper }}</span>
+        </h1>
+        <p class="text-muted">{{ 'game.list.description'|trans({'%count%': games|length}) }}</p>
+    </div>
+
+    {# Letter Navigation - Sticky on scroll #}
+    <div class="card shadow-sm mb-4 sticky-top" style="top: 70px; z-index: 1020;">
+        <div class="card-body py-2 px-3">
+            <div class="d-flex flex-wrap gap-1 justify-content-center align-items-center">
+                <small class="text-muted me-2 d-none d-md-inline">{{ 'game.list.select_letter'|trans }}:</small>
+                {% for letter in letters %}
+                    {% if letter == currentLetter %}
+                        <span class="badge bg-primary px-2 py-1">{{ letter|upper }}</span>
+                    {% else %}
+                        <a href="{{ path('vgr_game_list_by_letter', {letter: letter}) }}"
+                           class="badge bg-light text-dark text-decoration-none px-2 py-1 border"
+                           data-turbo-prefetch="false">
+                            {{ letter|upper }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Games List #}
+    {% if games|length > 0 %}
+        <div class="card shadow-sm">
+            <div class="list-group list-group-flush">
+                {% for game in games %}
+                    <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}"
+                       class="list-group-item list-group-item-action py-2"
+                       data-turbo-prefetch="false">
+                        <div class="row align-items-center g-2">
+                            {# Game Image - Compact #}
+                            <div class="col-auto">
+                                <img
+                                    src="{{ path('vgr_core_game_picture', {id: game.id}) }}"
+                                    alt="{{ game.name }}"
+                                    class="rounded"
+                                    width="50"
+                                    height="50"
+                                    style="object-fit: cover;"
+                                >
+                            </div>
+
+                            {# Game Info #}
+                            <div class="col">
+                                {# Game Name #}
+                                <h6 class="mb-1">{{ game.name }}</h6>
+
+                                {# Platforms - Compact badges #}
+                                {% if game.platforms|length > 0 %}
+                                    <div class="d-flex flex-wrap gap-1">
+                                        {% for platform in game.platforms|slice(0, 5) %}
+                                            <span class="badge bg-secondary text-white" style="font-size: 0.7rem;">
+                                                {{ platform.name }}
+                                            </span>
+                                        {% endfor %}
+                                        {% if game.platforms|length > 5 %}
+                                            <span class="badge bg-light text-dark" style="font-size: 0.7rem;">
+                                                +{{ game.platforms|length - 5 }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            {# Game Stats - Right side, single line #}
+                            <div class="col-auto d-none d-md-block">
+                                <div class="d-flex gap-3 text-muted" style="font-size: 0.75rem;">
+                                    {% if game.nbChart is defined and game.nbChart > 0 %}
+                                        <span>
+                                            <i class="bi bi-bar-chart"></i>
+                                            {{ game.nbChart }}
+                                        </span>
+                                    {% endif %}
+                                    {% if game.nbPlayer is defined and game.nbPlayer > 0 %}
+                                        <span>
+                                            <i class="bi bi-people"></i>
+                                            {{ game.nbPlayer }}
+                                        </span>
+                                    {% endif %}
+                                    {% if game.nbPost is defined and game.nbPost > 0 %}
+                                        <span>
+                                            <i class="bi bi-trophy"></i>
+                                            {{ game.nbPost }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            {# Arrow Icon #}
+                            <div class="col-auto">
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Results Count #}
+        <div class="mt-3 text-center text-muted small">
+            {{ 'game.list.showing_results'|trans({'%count%': games|length}) }}
+        </div>
+    {% else %}
+        {# No Games Found #}
+        <div class="card shadow-sm">
+            <div class="card-body text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'game.list.no_games'|trans({'%letter%': currentLetter|upper}) }}</p>
+                <p class="small mt-2">{{ 'game.list.try_another_letter'|trans }}</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

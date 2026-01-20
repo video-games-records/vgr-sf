@@ -11,7 +11,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Article::class)]
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Article::class)]
-//#[AsEntityListener(event: Events::postLoad, method: 'postLoad', entity: Article::class)]
 readonly class ArticleListener
 {
     public function __construct(
@@ -36,14 +35,6 @@ readonly class ArticleListener
 
         $this->updateSlug($article);
     }
-
-    /*public function postLoad(Article $article, LifecycleEventArgs $event): void
-    {
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request) {
-            $article->setCurrentLocale($request->getLocale());
-        }
-    }*/
 
     private function updateSlug(Article $article): void
     {
