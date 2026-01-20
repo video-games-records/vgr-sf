@@ -17,7 +17,7 @@ class Overview extends AbstractLocalizedController
     ) {
     }
 
-    #[Route('/player/{id}-{slug}', name: 'player_profile_overview', requirements: ['id' => '\d+'])]
+    #[Route('/player/{id}-{slug}', name: 'vgr_player_profile_overview', requirements: ['id' => '\d+'])]
     public function overview(int $id, string $slug): Response
     {
         $player = $this->playerRepository->find($id);
@@ -32,7 +32,7 @@ class Overview extends AbstractLocalizedController
         ]);
     }
 
-    #[Route('/player/{id}-{slug}/badges', name: 'player_profile_badges', requirements: ['id' => '\d+'])]
+    #[Route('/player/{id}-{slug}/badges', name: 'vgr_player_profile_badges', requirements: ['id' => '\d+'])]
     public function badges(int $id, string $slug): Response
     {
         $player = $this->playerRepository->find($id);
@@ -47,7 +47,7 @@ class Overview extends AbstractLocalizedController
         ]);
     }
 
-    #[Route('/player/{id}-{slug}/games', name: 'player_profile_games', requirements: ['id' => '\d+'])]
+    #[Route('/player/{id}-{slug}/games', name: 'vgr_player_profile_games', requirements: ['id' => '\d+'])]
     public function games(int $id, string $slug): Response
     {
         $player = $this->playerRepository->find($id);
@@ -62,7 +62,7 @@ class Overview extends AbstractLocalizedController
         ]);
     }
 
-    #[Route('/player/{id}-{slug}/proofs', name: 'player_profile_proofs', requirements: ['id' => '\d+'])]
+    #[Route('/player/{id}-{slug}/proofs', name: 'vgr_player_profile_proofs', requirements: ['id' => '\d+'])]
     public function proofs(int $id, string $slug): Response
     {
         $player = $this->playerRepository->find($id);

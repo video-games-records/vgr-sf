@@ -21,3 +21,14 @@ game:
         charts: 'records'
         players: 'joueurs'
         scores: 'scores'
+
+group:
+    show:
+        title: 'Tableaux & Records'
+        meta_description: 'Consultez les records %group% pour %game%'
+        charts: 'records'
+        players: 'joueurs'
+        scores: 'scores'
+        charts_title: 'Records'
+        no_charts: 'Aucun tableau disponible'
+        video_proof_required: 'Preuve vidéo requise'

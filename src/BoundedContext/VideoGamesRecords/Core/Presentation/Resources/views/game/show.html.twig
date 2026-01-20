@@ -35,7 +35,7 @@
         {% if game.groups|length > 0 %}
             <div class="list-group list-group-flush">
                 {% for group in game.groups %}
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug}) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between align-items-center">
                             <div>
                                 <h6 class="mb-1">

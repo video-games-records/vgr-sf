@@ -18,6 +18,17 @@ game:
         download: 'Download'
         download_button: 'Download Game'
     stats:
+        charts: 'records'
+        players: 'players'
+        scores: 'scores'
+
+group:
+    show:
+        title: 'Charts & Records'
+        meta_description: 'View %group% charts and records for %game%'
         charts: 'charts'
         players: 'players'
         scores: 'scores'
+        charts_title: 'Records'
+        no_charts: 'No records available yet'
+        video_proof_required: 'Video proof required'

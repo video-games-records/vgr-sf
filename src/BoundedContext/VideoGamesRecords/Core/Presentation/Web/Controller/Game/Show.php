@@ -17,7 +17,7 @@ class Show extends AbstractLocalizedController
     ) {
     }
 
-    #[Route('/game/{id}-{slug}', name: 'game_show', requirements: ['id' => '\d+'])]
+    #[Route('/game/{id}-{slug}', name: 'vgr_game_show', requirements: ['id' => '\d+'])]
     public function show(int $id, string $slug): Response
     {
         $game = $this->gameRepository->find($id);

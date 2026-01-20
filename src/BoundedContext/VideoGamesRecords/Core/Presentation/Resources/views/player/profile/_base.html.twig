@@ -73,7 +73,7 @@
         <li class="nav-item">
             <a
                 class="nav-link {{ current_tab == 'overview' ? 'active' : '' }}"
-                href="{{ path('player_profile_overview', {id: player.id, slug: player.slug}) }}"
+                href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}"
             >
                 <i class="bi bi-speedometer2"></i> {{ 'player.profile.tabs.overview'|trans }}
             </a>
@@ -81,7 +81,7 @@
         <li class="nav-item">
             <a
                 class="nav-link {{ current_tab == 'badges' ? 'active' : '' }}"
-                href="{{ path('player_profile_badges', {id: player.id, slug: player.slug}) }}"
+                href="{{ path('vgr_player_profile_badges', {id: player.id, slug: player.slug}) }}"
             >
                 <i class="bi bi-patch-check"></i> {{ 'player.profile.tabs.badges'|trans }}
             </a>
@@ -89,7 +89,7 @@
         <li class="nav-item">
             <a
                 class="nav-link {{ current_tab == 'games' ? 'active' : '' }}"
-                href="{{ path('player_profile_games', {id: player.id, slug: player.slug}) }}"
+                href="{{ path('vgr_player_profile_games', {id: player.id, slug: player.slug}) }}"
             >
                 <i class="bi bi-controller"></i> {{ 'player.profile.tabs.games'|trans }}
             </a>
@@ -97,7 +97,7 @@
         <li class="nav-item">
             <a
                 class="nav-link {{ current_tab == 'proofs' ? 'active' : '' }}"
-                href="{{ path('player_profile_proofs', {id: player.id, slug: player.slug}) }}"
+                href="{{ path('vgr_player_profile_proofs', {id: player.id, slug: player.slug}) }}"
             >
                 <i class="bi bi-camera-video"></i> {{ 'player.profile.tabs.proofs'|trans }}
             </a>

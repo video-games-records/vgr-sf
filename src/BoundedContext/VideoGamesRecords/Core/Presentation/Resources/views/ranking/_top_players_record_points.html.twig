@@ -21,7 +21,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ path('player_profile_overview', {id: player.id, slug: player.slug}) }}" class="text-decoration-none">
+                                <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}" class="text-decoration-none">
                                     {% if loop.index == 1 %}<strong>{% endif %}
                                     {{ player.pseudo }}
                                     {% if loop.index == 1 %}</strong>{% endif %}

@@ -1,0 +1,114 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ group.name }} - {{ game.name }} - {{ 'group.show.title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'group.show.meta_description'|trans({'%group%': group.name, '%game%': game.name}) }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Include common game header with breadcrumb #}
+    {% include '@VideoGamesRecordsCore/game/_header.html.twig' with {
+        'game': game,
+        'breadcrumbs': [
+            {
+                'label': game.name,
+                'url': path('vgr_game_show', {id: game.id, slug: game.slug})
+            },
+            {
+                'label': group.name
+            }
+        ]
+    } %}
+
+    {# Group Information Card #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="h5 mb-0">
+                    <i class="bi bi-collection"></i> {{ group.name }}
+                    {% if group.isDlc %}
+                        <span class="badge bg-info ms-2">
+                            <i class="bi bi-download"></i> DLC
+                        </span>
+                    {% endif %}
+                </h2>
+
+                {# Group Stats #}
+                <div class="d-flex gap-3 text-muted small">
+                    {% if group.nbChart is defined and group.nbChart > 0 %}
+                        <span>
+                            <i class="bi bi-bar-chart"></i>
+                            {{ group.nbChart }} {{ 'group.show.charts'|trans }}
+                        </span>
+                    {% endif %}
+
+                    {% if group.nbPlayer is defined and group.nbPlayer > 0 %}
+                        <span>
+                            <i class="bi bi-people"></i>
+                            {{ group.nbPlayer }} {{ 'group.show.players'|trans }}
+                        </span>
+                    {% endif %}
+
+                    {% if group.nbPost is defined and group.nbPost > 0 %}
+                        <span>
+                            <i class="bi bi-trophy"></i>
+                            {{ group.nbPost }} {{ 'group.show.scores'|trans }}
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Charts List #}
+    <div class="card shadow-sm">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">
+                <i class="bi bi-bar-chart"></i> {{ 'group.show.charts_title'|trans }}
+            </h5>
+        </div>
+
+        {% if group.charts|length > 0 %}
+            <div class="list-group list-group-flush">
+                {% for chart in group.charts %}
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">
+                                    {{ chart.name }}
+                                    {% if chart.isDlc %}
+                                        <span class="badge bg-info">
+                                            <i class="bi bi-download"></i> DLC
+                                        </span>
+                                    {% endif %}
+                                    {% if chart.isProofVideoOnly %}
+                                        <span class="badge bg-warning text-dark">
+                                            <i class="bi bi-camera-video"></i> {{ 'group.show.video_proof_required'|trans }}
+                                        </span>
+                                    {% endif %}
+                                </h6>
+
+                                {% if chart.nbPost is defined and chart.nbPost > 0 %}
+                                    <p class="mb-0 text-muted small">
+                                        <i class="bi bi-trophy"></i>
+                                        {{ chart.nbPost }} {{ 'group.show.scores'|trans }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <i class="bi bi-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card-body text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'group.show.no_charts'|trans }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
