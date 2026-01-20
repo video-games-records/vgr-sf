@@ -21,20 +21,26 @@ class PictureController
         $this->appStorage = $appStorage;
     }
 
+    /**
+     * @throws FilesystemException
+     */
     #[Route(
         '/game/{id}/picture',
         name: 'vgr_core_game_picture',
         requirements: ['id' => '[1-9]\d*'],
         methods: ['GET']
     )]
-    #[Cache(maxage: 3600 * 24, public: true, mustRevalidate: true)]
+    #[Cache(maxage: 31536000, public: true)]
     public function game(Game $game): StreamedResponse
     {
         $prefix = 'game/';
-        return $this->getFile($prefix . $game->getPicture(), $prefix . 'default.png');
+        $response = $this->getFile($prefix . $game->getPicture(), $prefix . 'default.png');
+        $response->headers->set('Cache-Control', 'public, max-age=31536000, immutable');
+        return $response;
     }
 
     /**
+     * @throws FilesystemException
      */
     #[Route(
         '/serie/{id}/picture',
@@ -42,11 +48,13 @@ class PictureController
         requirements: ['id' => '[1-9]\d*'],
         methods: ['GET']
     )]
-    #[Cache(maxage: 3600 * 24, public: true, mustRevalidate: true)]
+    #[Cache(maxage: 31536000, public: true)]
     public function serie(Serie $serie): StreamedResponse
     {
         $prefix = 'series/picture/';
-        return $this->getFile($prefix . $serie->getPicture(), $prefix . 'default.png');
+        $response = $this->getFile($prefix . $serie->getPicture(), $prefix . 'default.png');
+        $response->headers->set('Cache-Control', 'public, max-age=31536000, immutable');
+        return $response;
     }
 
 
