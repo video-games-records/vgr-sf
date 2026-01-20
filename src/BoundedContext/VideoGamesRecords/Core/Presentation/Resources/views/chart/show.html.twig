@@ -108,7 +108,7 @@
                                                         [{{ playerChart.player.team.tag }}]
                                                     </span>
                                                 {% endif %}
-                                                <a href="{{ path('vgr_player_profile_overview', {id: playerChart.player.id, slug: playerChart.player.slug}) }}" class="text-decoration-none fw-semibold">
+                                                <a href="{{ path('vgr_player_profile_overview', {id: playerChart.player.id, slug: playerChart.player.slug}) }}" class="text-decoration-none fw-semibold" data-turbo-prefetch="false">
                                                     {{ playerChart.player.pseudo }}
                                                 </a>
                                             </div>

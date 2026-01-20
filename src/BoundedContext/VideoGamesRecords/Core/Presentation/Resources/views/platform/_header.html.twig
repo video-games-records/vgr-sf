@@ -1,0 +1,59 @@
+{# Common header for platform pages #}
+{# Parameters: platform (required) #}
+{% trans_default_domain 'VgrCore' %}
+
+{# Breadcrumb Navigation #}
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('home') }}">
+                <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ path('vgr_platform_index') }}">
+                {{ 'platform.index.breadcrumb'|trans }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {{ platform.name }}
+        </li>
+    </ol>
+</nav>
+
+{# Platform Header Card #}
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <div class="row align-items-center">
+            {# Platform Logo #}
+            <div class="col-auto">
+                <img
+                    src="{{ platform.picture ?: asset('img/default/platform.png') }}"
+                    alt="{{ platform.name }}"
+                    class="img-thumbnail"
+                    width="120"
+                    height="120"
+                    style="object-fit: contain;"
+                >
+            </div>
+
+            {# Platform Info #}
+            <div class="col">
+                <h1 class="h3 mb-3">
+                    {{ platform.name }}
+                </h1>
+
+                {# Platform Stats #}
+                <div class="d-flex flex-wrap gap-3 text-muted small">
+                    {# Number of Games #}
+                    {% if platform.games|length > 0 %}
+                        <span>
+                            <i class="bi bi-joystick"></i>
+                            {{ platform.games|length }} {{ 'platform.stats.games'|trans }}
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

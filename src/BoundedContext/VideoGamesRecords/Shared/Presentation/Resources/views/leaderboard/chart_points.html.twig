@@ -42,9 +42,9 @@
                                                 {% if player.team %}
                                                     <span>[{{ player.team.tag }}]</span>
                                                 {% endif %}
-                                                <span {% if loop.index <= 3 %}class="fw-bold"{% endif %}>
+                                                <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}" {% if loop.index <= 3 %}class="fw-bold text-decoration-none"{% else %}class="text-decoration-none"{% endif %} data-turbo-prefetch="false">
                                                     {{ player.pseudo }}
-                                                </span>
+                                                </a>
                                                 {% if player.country %}
                                                     <img src="https://flagcdn.com/20x15/{{ player.country.codeIso2|lower }}.png"
                                                          alt="{{ player.country.name }}"

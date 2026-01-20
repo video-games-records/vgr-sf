@@ -1,0 +1,81 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'platform.index.title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'platform.index.meta_description'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb Navigation #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'platform.index.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Page Header #}
+    <div class="mb-4">
+        <h1 class="h3">
+            <i class="bi bi-controller"></i>
+            {{ 'platform.index.header'|trans }}
+        </h1>
+        <p class="text-muted">{{ 'platform.index.description'|trans({'%count%': platforms|length}) }}</p>
+    </div>
+
+    {# Platforms Grid #}
+    {% if platforms|length > 0 %}
+        <div class="row g-3">
+            {% for platform in platforms %}
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <a href="{{ path('vgr_platform_show', {id: platform.id, slug: platform.slug}) }}"
+                       class="text-decoration-none"
+                       data-turbo-prefetch="false">
+                        <div class="card h-100 text-center hover-shadow">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center p-3">
+                                {# Platform Logo #}
+                                <img
+                                    src="{{ platform.picture ?: asset('img/default/platform.png') }}"
+                                    alt="{{ platform.name }}"
+                                    class="mb-2"
+                                    width="80"
+                                    height="80"
+                                    style="object-fit: contain;"
+                                >
+
+                                {# Platform Name #}
+                                <h6 class="card-title mb-0 small">{{ platform.name }}</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {# No Platforms Found #}
+        <div class="card shadow-sm">
+            <div class="card-body text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'platform.index.no_platforms'|trans }}</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.hover-shadow {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+</style>
+{% endblock %}

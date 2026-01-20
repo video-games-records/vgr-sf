@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerPlatform;
 use App\BoundedContext\VideoGamesRecords\Shared\Application\DataProvider\Ranking\AbstractRankingProvider;
+use Doctrine\ORM\Exception\ORMException;
 
 class PlayerPlatformRankingProvider extends AbstractRankingProvider
 {
     /**
      * @param int|null $id
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerPlatform>
+     * @return array<PlayerPlatform>
+     * @throws ORMException
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
     {
@@ -48,7 +51,7 @@ class PlayerPlatformRankingProvider extends AbstractRankingProvider
     /**
      * @param int|null $id
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerPlatform>
+     * @return array<PlayerPlatform>
      */
     public function getRankingMedals(?int $id = null, array $options = []): array
     {

@@ -25,9 +25,9 @@ class Platform
     private string $name = '';
 
     #[Assert\NotBlank]
-    #[Assert\Length(max: 30)]
-    #[ORM\Column(length: 30, nullable: false)]
-    private string $picture = 'bt_default.png';
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
 
     #[Assert\Length(max: 30)]
     #[ORM\Column(length: 30, nullable: false)]
@@ -80,7 +80,7 @@ class Platform
         $this->name = $name;
     }
 
-    public function setPicture(string $picture): void
+    public function setPicture(?string $picture): void
     {
         $this->picture = $picture;
     }

@@ -58,3 +58,25 @@ chart:
         detail: 'Detail'
         last_update: 'Last update'
         no_rankings: 'No rankings available yet'
+
+platform:
+    index:
+        title: 'Platforms'
+        breadcrumb: 'Platforms'
+        header: 'Platforms'
+        description: 'Browse %count% platform(s)'
+        meta_description: 'Browse all gaming platforms and their games'
+        no_platforms: 'No platforms available'
+    show:
+        title: 'Platform Details'
+        meta_description: 'View games and rankings for %platform%'
+        tab_games: 'Games'
+        tab_leaderboard: 'Leaderboard'
+        no_games: 'No games available for this platform'
+        no_rankings: 'No rankings available yet'
+    stats:
+        games: 'games'
+    leaderboard:
+        rank: 'Rank'
+        player: 'Player'
+        points: 'Points'

@@ -58,3 +58,25 @@ chart:
         detail: 'Détail'
         last_update: 'Dernière mise à jour'
         no_rankings: 'Aucun classement disponible'
+
+platform:
+    index:
+        title: 'Plateformes'
+        breadcrumb: 'Plateformes'
+        header: 'Plateformes'
+        description: 'Parcourez %count% plateforme(s)'
+        meta_description: 'Parcourez toutes les plateformes de jeux et leurs jeux'
+        no_platforms: 'Aucune plateforme disponible'
+    show:
+        title: 'Détails de la Plateforme'
+        meta_description: 'Consultez les jeux et classements pour %platform%'
+        tab_games: 'Jeux'
+        tab_leaderboard: 'Classement'
+        no_games: 'Aucun jeu disponible pour cette plateforme'
+        no_rankings: 'Aucun classement disponible'
+    stats:
+        games: 'jeux'
+    leaderboard:
+        rank: 'Rang'
+        player: 'Joueur'
+        points: 'Points'

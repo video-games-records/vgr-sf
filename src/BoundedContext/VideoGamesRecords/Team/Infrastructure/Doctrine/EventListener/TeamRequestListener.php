@@ -10,7 +10,6 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamRequest;
 
-#[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: TeamRequest::class)]
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: TeamRequest::class)]
 class TeamRequestListener
 {

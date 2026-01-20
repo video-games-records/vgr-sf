@@ -1,0 +1,171 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ platform.name }} - {{ 'platform.show.title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'platform.show.meta_description'|trans({'%platform%': platform.name}) }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Include common platform header #}
+    {% include '@VideoGamesRecordsCore/platform/_header.html.twig' with {
+        'platform': platform
+    } %}
+
+    {# Tabs Navigation #}
+    <ul class="nav nav-tabs mb-4" id="platformTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {{ activeTab == 'games' ? 'active' : '' }}"
+                    id="games-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#games"
+                    type="button"
+                    role="tab"
+                    aria-controls="games"
+                    aria-selected="{{ activeTab == 'games' ? 'true' : 'false' }}">
+                <i class="bi bi-joystick"></i> {{ 'platform.show.tab_games'|trans }}
+                <span class="badge bg-secondary ms-1">{{ games|length }}</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {{ activeTab == 'leaderboard' ? 'active' : '' }}"
+                    id="leaderboard-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#leaderboard"
+                    type="button"
+                    role="tab"
+                    aria-controls="leaderboard"
+                    aria-selected="{{ activeTab == 'leaderboard' ? 'true' : 'false' }}">
+                <i class="bi bi-trophy"></i> {{ 'platform.show.tab_leaderboard'|trans }}
+                {% if rankings|length > 0 %}
+                    <span class="badge bg-secondary ms-1">{{ rankings|length }}</span>
+                {% endif %}
+            </button>
+        </li>
+    </ul>
+
+    {# Tab Content #}
+    <div class="tab-content" id="platformTabsContent">
+        {# Games Tab #}
+        <div class="tab-pane fade {{ activeTab == 'games' ? 'show active' : '' }}"
+             id="games"
+             role="tabpanel"
+             aria-labelledby="games-tab">
+
+            {% if games|length > 0 %}
+                <div class="card shadow-sm">
+                    <div class="list-group list-group-flush">
+                        {% for game in games %}
+                            <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}"
+                               class="list-group-item list-group-item-action py-2"
+                               data-turbo-prefetch="false">
+                                <div class="row align-items-center g-2">
+                                    {# Game Image #}
+                                    <div class="col-auto">
+                                        <img
+                                            src="{{ path('vgr_core_game_picture', {id: game.id}) }}"
+                                            alt="{{ game.name }}"
+                                            class="rounded"
+                                            width="50"
+                                            height="50"
+                                            style="object-fit: cover;"
+                                        >
+                                    </div>
+
+                                    {# Game Info #}
+                                    <div class="col">
+                                        <h6 class="mb-0">{{ game.name }}</h6>
+                                    </div>
+
+                                    {# Game Stats #}
+                                    <div class="col-auto d-none d-md-block">
+                                        <div class="d-flex gap-3 text-muted" style="font-size: 0.75rem;">
+                                            {% if game.nbChart is defined and game.nbChart > 0 %}
+                                                <span>
+                                                    <i class="bi bi-bar-chart"></i>
+                                                    {{ game.nbChart }}
+                                                </span>
+                                            {% endif %}
+                                            {% if game.nbPlayer is defined and game.nbPlayer > 0 %}
+                                                <span>
+                                                    <i class="bi bi-people"></i>
+                                                    {{ game.nbPlayer }}
+                                                </span>
+                                            {% endif %}
+                                            {% if game.nbPost is defined and game.nbPost > 0 %}
+                                                <span>
+                                                    <i class="bi bi-trophy"></i>
+                                                    {{ game.nbPost }}
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    {# Arrow Icon #}
+                                    <div class="col-auto">
+                                        <i class="bi bi-chevron-right text-muted"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="card shadow-sm">
+                    <div class="card-body text-center text-muted py-5">
+                        <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                        <p class="mt-3 mb-0">{{ 'platform.show.no_games'|trans }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        {# Leaderboard Tab #}
+        <div class="tab-pane fade {{ activeTab == 'leaderboard' ? 'show active' : '' }}"
+             id="leaderboard"
+             role="tabpanel"
+             aria-labelledby="leaderboard-tab">
+
+            {% if rankings|length > 0 %}
+                <div class="card shadow-sm">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 80px;">{{ 'platform.leaderboard.rank'|trans }}</th>
+                                    <th>{{ 'platform.leaderboard.player'|trans }}</th>
+                                    <th class="text-end">{{ 'platform.leaderboard.points'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for playerPlatform in rankings %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <strong>#{{ playerPlatform.rankPointPlatform }}</strong>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('vgr_player_profile_overview', {id: playerPlatform.player.id, slug: playerPlatform.player.slug}) }}" class="text-decoration-none" data-turbo-prefetch="false">
+                                                {{ playerPlatform.player.pseudo }}
+                                            </a>
+                                        </td>
+                                        <td class="text-end">
+                                            <strong>{{ playerPlatform.pointPlatform|number_format(0, '.', ',') }}</strong>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                <div class="card shadow-sm">
+                    <div class="card-body text-center text-muted py-5">
+                        <i class="bi bi-trophy" style="font-size: 3rem;"></i>
+                        <p class="mt-3 mb-0">{{ 'platform.show.no_rankings'|trans }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

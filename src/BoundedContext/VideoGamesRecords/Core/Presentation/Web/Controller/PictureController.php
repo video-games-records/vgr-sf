@@ -57,7 +57,6 @@ class PictureController
         return $response;
     }
 
-
     /**
      * @throws FilesystemException
      */
