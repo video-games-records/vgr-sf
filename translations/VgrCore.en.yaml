@@ -32,3 +32,19 @@ group:
         charts_title: 'Records'
         no_charts: 'No records available yet'
         video_proof_required: 'Video proof required'
+
+chart:
+    show:
+        meta_description: 'View %chart% leaderboard for %game%'
+        video_proof_required: 'Video proof required'
+        scores: 'scores'
+        rankings_title: 'Leaderboard'
+        rank: 'Rank'
+        player: 'Player'
+        score: 'Score'
+        points: 'Points'
+        status: 'Status'
+        action: 'Action'
+        detail: 'Detail'
+        last_update: 'Last update'
+        no_rankings: 'No rankings available yet'

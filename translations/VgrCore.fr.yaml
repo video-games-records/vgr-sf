@@ -32,3 +32,19 @@ group:
         charts_title: 'Records'
         no_charts: 'Aucun tableau disponible'
         video_proof_required: 'Preuve vidéo requise'
+
+chart:
+    show:
+        meta_description: 'Consultez le classement %chart% pour %game%'
+        video_proof_required: 'Preuve vidéo requise'
+        scores: 'scores'
+        rankings_title: 'Classement'
+        rank: 'Rang'
+        player: 'Joueur'
+        score: 'Score'
+        points: 'Points'
+        status: 'Statut'
+        action: 'Action'
+        detail: 'Détail'
+        last_update: 'Dernière mise à jour'
+        no_rankings: 'Aucun classement disponible'

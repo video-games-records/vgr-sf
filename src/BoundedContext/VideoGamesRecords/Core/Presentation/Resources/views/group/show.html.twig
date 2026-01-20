@@ -72,7 +72,7 @@
         {% if group.charts|length > 0 %}
             <div class="list-group list-group-flush">
                 {% for chart in group.charts %}
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug}) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between align-items-center">
                             <div>
                                 <h6 class="mb-1">

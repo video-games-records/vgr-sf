@@ -1,0 +1,193 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ chart.name }} - {{ group.name }} - {{ game.name }}{% endblock %}
+
+{% block meta_description %}{{ 'chart.show.meta_description'|trans({'%chart%': chart.name, '%game%': game.name}) }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Include common game header with breadcrumb #}
+    {% include '@VideoGamesRecordsCore/game/_header.html.twig' with {
+        'game': game,
+        'breadcrumbs': [
+            {
+                'label': game.name,
+                'url': path('vgr_game_show', {id: game.id, slug: game.slug})
+            },
+            {
+                'label': group.name,
+                'url': path('vgr_group_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug})
+            },
+            {
+                'label': chart.name
+            }
+        ]
+    } %}
+
+    {# Chart Header #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="h5 mb-0">
+                    <i class="bi bi-bar-chart"></i> {{ chart.name }}
+                    {% if chart.isDlc %}
+                        <span class="badge bg-info ms-2">
+                            <i class="bi bi-download"></i> DLC
+                        </span>
+                    {% endif %}
+                    {% if chart.isProofVideoOnly %}
+                        <span class="badge bg-warning text-dark ms-2">
+                            <i class="bi bi-camera-video"></i> {{ 'chart.show.video_proof_required'|trans }}
+                        </span>
+                    {% endif %}
+                </h2>
+
+                {# Chart Stats #}
+                <div class="d-flex gap-3 text-muted small">
+                    {% if chart.nbPost is defined and chart.nbPost > 0 %}
+                        <span>
+                            <i class="bi bi-trophy"></i>
+                            {{ chart.nbPost }} {{ 'chart.show.scores'|trans }}
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Rankings Table #}
+    <div class="card shadow-sm">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">
+                <i class="bi bi-list-ol"></i> {{ 'chart.show.rankings_title'|trans }}
+            </h5>
+        </div>
+
+        {% if ranking|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 60px;">{{ 'chart.show.rank'|trans }}</th>
+                            <th>{{ 'chart.show.player'|trans }}</th>
+                            <th class="text-end">{{ 'chart.show.score'|trans }}</th>
+                            <th class="text-end" style="width: 100px;">{{ 'chart.show.points'|trans }}</th>
+                            <th class="text-center" style="width: 100px;">{{ 'chart.show.status'|trans }}</th>
+                            <th class="text-center" style="width: 100px;">{{ 'chart.show.action'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in ranking %}
+                            {% set playerChart = row[0] %}
+                            <tr>
+                                {# Rank #}
+                                <td class="text-center">
+                                    <span class="badge rounded-pill {% if playerChart.rank == 1 %}bg-warning text-dark{% elseif playerChart.rank == 2 %}bg-secondary text-white{% elseif playerChart.rank == 3 %}bg-bronze text-white{% else %}bg-secondary text-white{% endif %}">
+                                        {{ playerChart.rank ?? '-' }}
+                                    </span>
+                                </td>
+
+                                {# Player #}
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        {# Avatar #}
+                                        <img
+                                            src="{{ asset('users/' ~ playerChart.player.userId ~ '/avatar') }}"
+                                            alt="{{ playerChart.player.pseudo }}"
+                                            class="rounded-circle"
+                                            width="32"
+                                            height="32"
+                                        >
+
+                                        <div>
+                                            {# Pseudo with team #}
+                                            <div>
+                                                {% if playerChart.player.team %}
+                                                    <span class="badge bg-secondary me-1">
+                                                        [{{ playerChart.player.team.tag }}]
+                                                    </span>
+                                                {% endif %}
+                                                <a href="{{ path('vgr_player_profile_overview', {id: playerChart.player.id, slug: playerChart.player.slug}) }}" class="text-decoration-none fw-semibold">
+                                                    {{ playerChart.player.pseudo }}
+                                                </a>
+                                            </div>
+
+                                            {# Country and Platform #}
+                                            <div class="small text-muted">
+                                                {% if playerChart.player.country %}
+                                                    <span>{{ playerChart.player.country.name }}</span>
+                                                {% endif %}
+                                                {% if playerChart.platform %}
+                                                    <span class="ms-2">
+                                                        <i class="bi bi-controller"></i> {{ playerChart.platform.name }}
+                                                    </span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {# Last Update #}
+                                    {% if playerChart.lastUpdate %}
+                                        <div class="small text-muted mt-1">
+                                            {{ 'chart.show.last_update'|trans }}: {{ playerChart.lastUpdate|date('M d, Y, h:i A') }}
+                                        </div>
+                                    {% endif %}
+                                </td>
+
+                                {# Score - Display formatted score #}
+                                <td class="text-end">
+                                    {% set scoreValues = [] %}
+                                    {% for lib in chart.libs %}
+                                        {% set key = 'value_' ~ lib.id %}
+                                        {% if row[key] is defined %}
+                                            {% set scoreValues = scoreValues|merge([row[key]|format_score(lib.type.mask)]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <strong>{{ scoreValues|join(' / ') }}</strong>
+                                </td>
+
+                                {# Points #}
+                                <td class="text-end">
+                                    <span class="badge bg-primary">
+                                        {{ playerChart.pointChart }}
+                                    </span>
+                                </td>
+
+                                {# Status #}
+                                <td class="text-center">
+                                    {% if playerChart.status.value == 'proved' %}
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-check-circle"></i>
+                                        </span>
+                                    {% elseif playerChart.status.value == 'unproved' %}
+                                        <span class="badge bg-warning text-dark">
+                                            <i class="bi bi-clock"></i>
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-dash-circle"></i>
+                                        </span>
+                                    {% endif %}
+                                </td>
+
+                                {# Action #}
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-primary">
+                                        {{ 'chart.show.detail'|trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="card-body text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'chart.show.no_rankings'|trans }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
