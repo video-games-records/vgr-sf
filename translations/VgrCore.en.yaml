@@ -1,0 +1,23 @@
+breadcrumb:
+    home: 'Home'
+
+game:
+    breadcrumb:
+        games: 'Games'
+    show:
+        title: 'Game Details'
+        meta_description: 'View records and leaderboards for %game%'
+        about: 'About This Game'
+        groups_title: 'Game Modes & Categories'
+        charts: 'records'
+        players: 'players'
+        scores: 'scores'
+        no_charts: 'No charts yet'
+        no_groups: 'No game modes available yet'
+        storyline: 'Storyline'
+        download: 'Download'
+        download_button: 'Download Game'
+    stats:
+        charts: 'charts'
+        players: 'players'
+        scores: 'scores'

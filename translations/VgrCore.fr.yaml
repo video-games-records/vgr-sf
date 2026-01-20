@@ -1,0 +1,23 @@
+breadcrumb:
+    home: 'Accueil'
+
+game:
+    breadcrumb:
+        games: 'Jeux'
+    show:
+        title: 'Détails du Jeu'
+        meta_description: 'Consultez les records et classements pour %game%'
+        about: 'À propos de ce jeu'
+        groups_title: 'Modes de jeu & Catégories'
+        charts: 'records'
+        players: 'joueurs'
+        scores: 'scores'
+        no_charts: 'Aucun tableau pour le moment'
+        no_groups: 'Aucun mode de jeu disponible'
+        storyline: 'Histoire'
+        download: 'Télécharger'
+        download_button: 'Télécharger le jeu'
+    stats:
+        charts: 'records'
+        players: 'joueurs'
+        scores: 'scores'

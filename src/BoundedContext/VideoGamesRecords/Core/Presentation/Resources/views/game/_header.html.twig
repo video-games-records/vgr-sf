@@ -1,0 +1,119 @@
+{# Common header for game, group, and record pages #}
+{# Parameters: game (required), breadcrumbs (optional array) #}
+{% trans_default_domain 'VgrCore' %}
+
+{# Breadcrumb Navigation #}
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('home') }}">
+                <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+            </a>
+        </li>
+        {% if breadcrumbs is defined %}
+            {% for breadcrumb in breadcrumbs %}
+                {% if breadcrumb.url is defined %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ breadcrumb.url }}">{{ breadcrumb.label }}</a>
+                    </li>
+                {% else %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ breadcrumb.label }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ game.name }}
+            </li>
+        {% endif %}
+    </ol>
+</nav>
+
+{# Game Header Card #}
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <div class="row align-items-center">
+            {# Game Cover Image #}
+            <div class="col-auto">
+                <img
+                    src="{{ path('vgr_core_game_picture', {id: game.id}) }}"
+                    alt="{{ game.name }}"
+                    class="img-thumbnail"
+                    width="120"
+                    height="120"
+                >
+            </div>
+
+            {# Game Info #}
+            <div class="col">
+                <h1 class="h3 mb-3">
+                    {{ game.name }}
+                    {% if game.serie %}
+                        <small class="text-muted fs-6">
+                            <i class="bi bi-collection"></i>
+                            <a href="#" class="text-decoration-none">{{ game.serie.name }}</a>
+                        </small>
+                    {% endif %}
+                </h1>
+
+                {# Platforms #}
+                {% if game.platforms|length > 0 %}
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        {% for platform in game.platforms %}
+                            <span class="badge bg-secondary">
+                                <i class="bi bi-controller"></i>
+                                {{ platform.name }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# Game Stats #}
+                <div class="d-flex flex-wrap gap-3 text-muted small">
+                    {# Number of Charts #}
+                    {% if game.nbChart is defined and game.nbChart > 0 %}
+                        <span>
+                            <i class="bi bi-bar-chart"></i>
+                            {{ game.nbChart }} {{ 'game.stats.charts'|trans }}
+                        </span>
+                    {% endif %}
+
+                    {# Number of Players #}
+                    {% if game.nbPlayer is defined and game.nbPlayer > 0 %}
+                        <span>
+                            <i class="bi bi-people"></i>
+                            {{ game.nbPlayer }} {{ 'game.stats.players'|trans }}
+                        </span>
+                    {% endif %}
+
+                    {# Number of Scores Posted #}
+                    {% if game.nbPost is defined and game.nbPost > 0 %}
+                        <span>
+                            <i class="bi bi-trophy"></i>
+                            {{ game.nbPost }} {{ 'game.stats.scores'|trans }}
+                        </span>
+                    {% endif %}
+
+                    {# Release Date #}
+                    {% if game.releaseDate %}
+                        <span>
+                            <i class="bi bi-calendar-event"></i>
+                            {{ game.releaseDate|date('Y') }}
+                        </span>
+                    {% endif %}
+
+                    {# Genres #}
+                    {% if game.genres|length > 0 %}
+                        <span>
+                            <i class="bi bi-tag"></i>
+                            {% for genre in game.genres|slice(0, 3) %}
+                                {{ genre.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
