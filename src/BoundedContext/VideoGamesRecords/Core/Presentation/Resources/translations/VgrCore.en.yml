@@ -1,3 +1,27 @@
+breadcrumb:
+  home: Home
+
+game:
+  list:
+    title: Games List
+    meta_description: "List of games starting with %letter%"
+    breadcrumb: Games
+    header: Games
+    description: "%count% games found"
+    select_letter: Select a letter
+    showing_results: "Showing %count% games"
+    no_games: "No games found starting with %letter%"
+    try_another_letter: Try selecting another letter
+
+  latest:
+    title: Latest Games
+    meta_description: Discover the latest games added to Video Games Records
+    breadcrumb: Latest Games
+    header: Latest Games
+    description: "%count% most recent games"
+    showing_results: "Showing %count% games"
+    no_games: No games found
+
 player:
   profile:
     tabs:

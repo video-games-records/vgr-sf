@@ -1,3 +1,27 @@
+breadcrumb:
+  home: Accueil
+
+game:
+  list:
+    title: Liste des jeux
+    meta_description: "Liste des jeux commençant par %letter%"
+    breadcrumb: Jeux
+    header: Jeux
+    description: "%count% jeux trouvés"
+    select_letter: Sélectionnez une lettre
+    showing_results: "%count% jeux affichés"
+    no_games: "Aucun jeu trouvé commençant par %letter%"
+    try_another_letter: Essayez de sélectionner une autre lettre
+
+  latest:
+    title: Derniers jeux
+    meta_description: Découvrez les derniers jeux ajoutés sur Video Games Records
+    breadcrumb: Derniers jeux
+    header: Derniers jeux
+    description: "Les %count% jeux les plus récents"
+    showing_results: "%count% jeux affichés"
+    no_games: Aucun jeu trouvé
+
 player:
   profile:
     tabs:

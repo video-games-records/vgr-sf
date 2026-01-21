@@ -163,6 +163,39 @@ class GameRepository extends DefaultRepository
     }
 
     /**
+     * Finds latest published games.
+     *
+     * @param int $limit
+     * @return array<Game>
+     */
+    public function findLatest(int $limit = 50): array
+    {
+        // First get the IDs of the latest games (without join to avoid limit issues)
+        $ids = $this->createQueryBuilder('g')
+            ->select('g.id')
+            ->where('g.status = :status')
+            ->setParameter('status', GameStatus::ACTIVE)
+            ->orderBy('g.publishedAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getSingleColumnResult();
+
+        if (empty($ids)) {
+            return [];
+        }
+
+        // Then fetch the full games with platforms
+        return $this->createQueryBuilder('g')
+            ->join('g.platforms', 'p')
+            ->addSelect('p')
+            ->where('g.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->orderBy('g.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param string $q
      * @param string $locale
      * @return mixed

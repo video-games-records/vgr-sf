@@ -81,7 +81,7 @@
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-collection"></i> {{ 'navigation.games_dropdown.by_series'|trans }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-star"></i> {{ 'navigation.games_dropdown.featured_games'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-clock-history"></i> {{ 'navigation.games_dropdown.latest_games'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('vgr_game_list_latest') }}"><i class="bi bi-clock-history"></i> {{ 'navigation.games_dropdown.latest_games'|trans }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -164,7 +164,7 @@
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary text-white px-3" href="{{ path('app_login') }}">{{ 'navigation.login'|trans }}</a>
+                                <a class="nav-link btn btn-primary text-white px-3" href="{{ path('app_login') }}" data-turbo="false" data-turbo-prefetch="false">{{ 'navigation.login'|trans }}</a>
                             </li>
                         {% endif %}
                     </ul>
