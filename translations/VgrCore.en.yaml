@@ -80,3 +80,27 @@ platform:
         rank: 'Rank'
         player: 'Player'
         points: 'Points'
+
+serie:
+    index:
+        title: 'Series'
+        breadcrumb: 'Series'
+        header: 'Series'
+        description: 'Browse %count% series'
+        meta_description: 'Browse all game series and their games'
+        no_series: 'No series available'
+    show:
+        title: 'Series Details'
+        meta_description: 'View games and rankings for %serie%'
+        tab_games: 'Games'
+        tab_leaderboard_points: 'Points'
+        tab_leaderboard_medals: 'Medals'
+        no_games: 'No games available for this series'
+        no_rankings: 'No rankings available yet'
+    stats:
+        games: 'games'
+        players: 'players'
+    leaderboard:
+        rank: 'Rank'
+        player: 'Player'
+        points: 'Points'

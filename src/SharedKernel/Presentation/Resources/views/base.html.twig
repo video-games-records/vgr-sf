@@ -78,7 +78,7 @@
                             <ul class="dropdown-menu" aria-labelledby="gamesDropdown">
                                 <li><a class="dropdown-item" href="{{ path('vgr_game_list_by_letter', {letter: 'a'}) }}"><i class="bi bi-alphabet"></i> {{ 'navigation.games_dropdown.by_letter'|trans }}</a></li>
                                 <li><a class="dropdown-item" href="{{ path('vgr_platform_index') }}"><i class="bi bi-controller"></i> {{ 'navigation.games_dropdown.by_platform'|trans }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-collection"></i> {{ 'navigation.games_dropdown.by_series'|trans }}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('vgr_serie_index') }}"><i class="bi bi-collection"></i> {{ 'navigation.games_dropdown.by_series'|trans }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-star"></i> {{ 'navigation.games_dropdown.featured_games'|trans }}</a></li>
                                 <li><a class="dropdown-item" href="{{ path('vgr_game_list_latest') }}"><i class="bi bi-clock-history"></i> {{ 'navigation.games_dropdown.latest_games'|trans }}</a></li>

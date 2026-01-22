@@ -80,3 +80,27 @@ platform:
         rank: 'Rang'
         player: 'Joueur'
         points: 'Points'
+
+serie:
+    index:
+        title: 'Séries'
+        breadcrumb: 'Séries'
+        header: 'Séries'
+        description: 'Parcourez %count% série(s)'
+        meta_description: 'Parcourez toutes les séries de jeux et leurs jeux'
+        no_series: 'Aucune série disponible'
+    show:
+        title: 'Détails de la Série'
+        meta_description: 'Consultez les jeux et classements pour %serie%'
+        tab_games: 'Jeux'
+        tab_leaderboard_points: 'Points'
+        tab_leaderboard_medals: 'Médailles'
+        no_games: 'Aucun jeu disponible pour cette série'
+        no_rankings: 'Aucun classement disponible'
+    stats:
+        games: 'jeux'
+        players: 'joueurs'
+    leaderboard:
+        rank: 'Rang'
+        player: 'Joueur'
+        points: 'Points'

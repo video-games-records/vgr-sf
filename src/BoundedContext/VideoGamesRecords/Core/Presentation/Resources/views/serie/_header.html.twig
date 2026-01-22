@@ -1,0 +1,66 @@
+{# Common header for serie pages #}
+{# Parameters: serie (required) #}
+{% trans_default_domain 'VgrCore' %}
+
+{# Breadcrumb Navigation #}
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('home') }}">
+                <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ path('vgr_serie_index') }}">
+                {{ 'serie.index.breadcrumb'|trans }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {{ serie.libSerie }}
+        </li>
+    </ol>
+</nav>
+
+{# Serie Header Card #}
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <div class="row align-items-center">
+            {# Serie Logo #}
+            <div class="col-auto">
+                <img
+                    src="{{ path('vgr_core_serie_picture', {id: serie.id}) }}"
+                    alt="{{ serie.libSerie }}"
+                    class="img-thumbnail"
+                    width="120"
+                    height="120"
+                    style="object-fit: contain;"
+                >
+            </div>
+
+            {# Serie Info #}
+            <div class="col">
+                <h1 class="h3 mb-3">
+                    {{ serie.libSerie }}
+                </h1>
+
+                {# Serie Stats #}
+                <div class="d-flex flex-wrap gap-3 text-muted small">
+                    {# Number of Games #}
+                    {% if serie.games|length > 0 %}
+                        <span>
+                            <i class="bi bi-joystick"></i>
+                            {{ serie.games|length }} {{ 'serie.stats.games'|trans }}
+                        </span>
+                    {% endif %}
+                    {# Number of Players #}
+                    {% if serie.nbPlayer is defined and serie.nbPlayer > 0 %}
+                        <span>
+                            <i class="bi bi-people"></i>
+                            {{ serie.nbPlayer }} {{ 'serie.stats.players'|trans }}
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
