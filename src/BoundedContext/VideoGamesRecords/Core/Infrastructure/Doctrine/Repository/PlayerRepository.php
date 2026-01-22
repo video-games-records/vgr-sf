@@ -102,4 +102,45 @@ class PlayerRepository extends DefaultRepository
             ->addGroupBy('month');
         return $query->getQuery()->getResult(2);
     }
+
+    /**
+     * @param string $sortBy
+     * @param string $order
+     * @param int $limit
+     * @param int $offset
+     * @return array<Player>
+     */
+    public function findAllWithSort(string $sortBy = 'pseudo', string $order = 'ASC', int $limit = 100, int $offset = 0): array
+    {
+        $validFields = ['pointGame', 'lastLogin', 'pseudo', 'createdAt', 'nbGame', 'nbChart'];
+        if (!in_array($sortBy, $validFields)) {
+            $sortBy = 'pseudo';
+        }
+
+        $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
+
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.team', 't')
+            ->addSelect('t')
+            ->leftJoin('p.country', 'c')
+            ->addSelect('c')
+            ->where('p.nbChart > 0')
+            ->orderBy('p.' . $sortBy, $order)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return int
+     */
+    public function countActivePlayers(): int
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->where('p.nbChart > 0');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
 }

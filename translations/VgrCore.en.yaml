@@ -119,3 +119,19 @@ serie:
         rank: 'Rank'
         player: 'Player'
         points: 'Points'
+
+player:
+    index:
+        title: 'Players'
+        breadcrumb: 'Players'
+        header: 'Players'
+        description: '%count% active players'
+        meta_description: 'Browse all players and their statistics'
+        no_players: 'No players found'
+        showing_results: 'Showing %start% to %end% of %total% players'
+        column_pseudo: 'Player'
+        column_points: 'Points'
+        column_games: 'Games'
+        column_charts: 'Records'
+        column_registered: 'Registered'
+        column_last_login: 'Last Login'
