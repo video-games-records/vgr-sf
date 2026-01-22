@@ -74,7 +74,18 @@
 
                                     {# Game Info #}
                                     <div class="col">
-                                        <h6 class="mb-0">{{ game.name }}</h6>
+                                        <h6 class="mb-1">{{ game.name }}</h6>
+                                        {# Platforms #}
+                                        {% if game.platforms|length > 0 %}
+                                            <div class="d-flex flex-wrap gap-1">
+                                                {% for p in game.platforms|slice(0, 5) %}
+                                                    {{ component('platform_badge', {platform: p}) }}
+                                                {% endfor %}
+                                                {% if game.platforms|length > 5 %}
+                                                    <span class="platform-badge">+{{ game.platforms|length - 5 }}</span>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
                                     </div>
 
                                     {# Game Stats #}

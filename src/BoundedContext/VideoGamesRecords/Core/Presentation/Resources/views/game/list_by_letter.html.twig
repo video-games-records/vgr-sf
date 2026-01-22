@@ -81,14 +81,10 @@
                                 {% if game.platforms|length > 0 %}
                                     <div class="d-flex flex-wrap gap-1">
                                         {% for platform in game.platforms|slice(0, 5) %}
-                                            <span class="badge bg-secondary text-white" style="font-size: 0.7rem;">
-                                                {{ platform.name }}
-                                            </span>
+                                            {{ component('platform_badge', {platform: platform}) }}
                                         {% endfor %}
                                         {% if game.platforms|length > 5 %}
-                                            <span class="badge bg-light text-dark" style="font-size: 0.7rem;">
-                                                +{{ game.platforms|length - 5 }}
-                                            </span>
+                                            <span class="platform-badge">+{{ game.platforms|length - 5 }}</span>
                                         {% endif %}
                                     </div>
                                 {% endif %}

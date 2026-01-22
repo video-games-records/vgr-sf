@@ -1,0 +1,91 @@
+// Components - Platform badges with specific colors by platform ID
+// Each platform has its own color based on the original V7 design
+
+/* == @section Platform badge base styles ==================== */
+.platform-badge {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: #6c757d; // Default gray
+    white-space: nowrap;
+}
+
+/* == @section Colors by platform ID ==================== */
+.platform-badge--1     { background-color: hsl(274, 100%, 33%); } /* GameCube */
+.platform-badge--2     { background-color: hsl(236, 98%, 33%); } /* PlayStation 2 */
+.platform-badge--3     { background-color: hsl(119, 48%, 42%); color: #000; } /* Xbox */
+.platform-badge--4     { background-color: hsl(28, 87%, 51%); color: #000; } /* Dreamcast */
+.platform-badge--5     { background-color: #6c757d; } /* Saturn */
+.platform-badge--6     { background-color: hsl(245, 11%, 59%); color: #000; } /* PlayStation */
+.platform-badge--7     { background-color: hsl(305, 79%, 54%); color: #000; } /* Game Boy Advance */
+.platform-badge--8     { background-color: hsl(0, 0%, 53%); color: #000; } /* Super NES */
+.platform-badge--9     { background-color: hsl(79, 53%, 39%); color: #000; } /* Game Boy / Color */
+.platform-badge--10    { background-color: hsl(0, 1%, 67%); color: #000; } /* Nintendo Dual Screen */
+.platform-badge--11    { background-color: hsl(11, 100%, 46%); color: #000; } /* Nintendo 64 */
+.platform-badge--12    { background-color: #6c757d; } /* Neo Geo */
+.platform-badge--13    { background-color: #6c757d; } /* PC */
+.platform-badge--14    { background-color: hsl(85, 78%, 46%); color: #000; } /* Xbox 360 */
+.platform-badge--15    { background-color: hsl(197, 100%, 43%); color: #000; } /* Wii */
+.platform-badge--16    { background-color: hsl(7, 99%, 34%); } /* PlayStation 3 */
+.platform-badge--17    { background-color: hsl(0, 0%, 66%); color: #000; } /* Nintendo / Famicom */
+.platform-badge--18    { background-color: hsl(351, 100%, 27%); } /* Master System */
+.platform-badge--19    { background-color: hsl(0, 0%, 13%); } /* PlayStation Portable */
+.platform-badge--20    { background-color: #6c757d; } /* Megadrive / Genesis */
+.platform-badge--21    { background-color: #6c757d; } /* PC-Engine / TurboGrafx */
+.platform-badge--22    { background-color: #6c757d; } /* Atari 2600 */
+.platform-badge--23    { background-color: #6c757d; } /* NO PLATFORM */
+.platform-badge--24    { background-color: #6c757d; } /* Jaguar */
+.platform-badge--25    { background-color: #6c757d; } /* NO PLATFORM */
+.platform-badge--26    { background-color: #6c757d; } /* NO PLATFORM */
+.platform-badge--27    { background-color: #6c757d; } /* Colecovision */
+.platform-badge--28    { background-color: #6c757d; } /* Amiga */
+.platform-badge--29    { background-color: #6c757d; } /* Game & Watch */
+.platform-badge--30    { background-color: #6c757d; } /* Atari 5200 */
+.platform-badge--31    { background-color: hsl(355, 100%, 50%); color: #000; } /* Virtual Boy */
+.platform-badge--32    { background-color: #6c757d; } /* NO PLATFORM */
+.platform-badge--33    { background-color: #6c757d; } /* WonderSwan */
+.platform-badge--34    { background-color: #6c757d; } /* Commodore 64 */
+.platform-badge--35    { background-color: #6c757d; } /* Game Gear */
+.platform-badge--36    { background-color: #6c757d; } /* 3DO Interactive Multiplayer */
+.platform-badge--37    { background-color: #6c757d; } /* MSX */
+.platform-badge--38    { background-color: #6c757d; } /* Lynx */
+.platform-badge--39    { background-color: #6c757d; } /* Neo Geo Pocket Color */
+.platform-badge--40    { background-color: hsl(357, 96%, 45%); } /* Nintendo 3DS */
+.platform-badge--41    { background-color: hsl(0, 0%, 16%); } /* iOS */
+.platform-badge--42    { background-color: hsl(76, 100%, 35%); color: #000; } /* Android */
+.platform-badge--43    { background-color: hsl(120, 50%, 40%); color: #000; } /* Windows Phone */
+.platform-badge--44    { background-color: #6c757d; } /* Microvision */
+.platform-badge--45    { background-color: hsl(192, 100%, 39%); color: #000; } /* Wii U */
+.platform-badge--46    { background-color: #6c757d; } /* Amstrad CPC6128 */
+.platform-badge--47    { background-color: hsl(218, 100%, 26%); } /* PS Vita */
+.platform-badge--48    { background-color: hsl(258, 100%, 16%); } /* Windows 8 */
+.platform-badge--49    { background-color: hsl(240, 100%, 49%); } /* PlayStation 4 */
+.platform-badge--50    { background-color: hsl(119, 81%, 27%); } /* Xbox One */
+.platform-badge--51    { background-color: hsl(207, 100%, 42%); } /* Windows 10 */
+.platform-badge--52    { background-color: hsl(355, 100%, 45%); } /* Switch */
+.platform-badge--53    { background-color: #6c757d; } /* ZX Spectrum */
+.platform-badge--54    { background-color: #6c757d; } /* Atari ST */
+.platform-badge--55    { background-color: #6c757d; } /* Sharp x68000 */
+.platform-badge--56    { background-color: #6c757d; } /* MSX2 */
+.platform-badge--57    { background-color: #6c757d; } /* Atari 400/800/1200/XL/XE */
+.platform-badge--58    { background-color: #6c757d; } /* MegaDrive Classic */
+.platform-badge--59    { background-color: #6c757d; } /* Bandai Electronics */
+.platform-badge--60    { background-color: #6c757d; } /* Vectrex */
+.platform-badge--61    { background-color: #6c757d; } /* Atari 7800 */
+.platform-badge--62    { background-color: hsl(121, 78%, 27%); } /* Xbox Series */
+.platform-badge--63    { background-color: hsl(207, 99%, 41%); } /* PlayStation 5 */
+.platform-badge--64    { background-color: #6c757d; } /* Megadrive Mini / Genesis Mini */
+.platform-badge--65    { background-color: hsl(0, 0%, 53%); color: #000; } /* Super Nintendo Mini / Super Famicom Mini */
+.platform-badge--66    { background-color: hsl(0, 0%, 66%); color: #000; } /* Nintendo Mini / Famicom Mini */
+.platform-badge--67    { background-color: hsl(245, 11%, 59%); color: #000; } /* PlayStation Classic */
+.platform-badge--68    { background-color: #6c757d; } /* Commodore 64 Mini */
+.platform-badge--69    { background-color: #6c757d; } /* Neo Geo Mini */
+.platform-badge--70    { background-color: #6c757d; } /* Neo Geo Arcade Stick Pro */
+.platform-badge--71    { background-color: hsl(210, 100%, 35%); } /* Mega-CD / Sega CD */
+.platform-badge--72    { background-color: hsl(280, 70%, 45%); } /* Evercade */
+.platform-badge--73    { background-color: #6c757d; } /* Megadrive/Genesis Mini 2 */
+.platform-badge--74    { background-color: hsl(0, 0%, 50%); } /* TRS-80 */
+.platform-badge--75    { background-color: hsl(355, 100%, 45%); } /* Switch 2 */
