@@ -21,7 +21,7 @@ navigation:
     by_letter: "Par lettre"
     by_platform: "Par plateforme"
     by_series: "Par série"
-    featured_games: "Jeux mis en avant"
+    featured_games: "Prochains jeux"
     latest_games: "Derniers jeux"
 
   # Dropdown Leaderboards

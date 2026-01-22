@@ -32,8 +32,8 @@ body {
 
 // 6. Styles spécifiques au thème light
 [data-bs-theme="light"] {
-    // Card headers en orange uniquement en mode light
-    .card-header {
+    // Card headers en orange uniquement en mode light (sauf si une classe bg-* est définie)
+    .card-header:not([class*="bg-"]) {
         background-color: $base-background !important;
         font-weight: 500;
     }
