@@ -33,7 +33,6 @@ class ProofAdminController extends AbstractCRUDController
         // Formatage
         $months = [];
 
-
         // MONTH
         foreach ($stats as $row) {
             $months[$row['month']][] = $row;

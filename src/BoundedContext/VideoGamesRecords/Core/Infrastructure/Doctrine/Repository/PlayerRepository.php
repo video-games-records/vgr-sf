@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository;
 
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\ORM\ORMException;
@@ -88,19 +89,25 @@ class PlayerRepository extends DefaultRepository
 
 
     /**
-     * @return int|mixed|string
+     * @return array<int, array{idPlayer: int, pseudo: string, nb: int, month: string}>
+     * @throws Exception
      */
-    public function getProofStats(): mixed
+    public function getProofStats(): array
     {
-        $query = $this->createQueryBuilder('player')
-            ->select('player.id as idPlayer, player.pseudo')
-            ->innerJoin('player.proofRespondings', 'proof')
-            ->addSelect('COUNT(proof.id) as nb, SUBSTRING(proof.checkedAt, 1, 7) as month')
-            ->where("proof.checkedAt > '2020-01-01'")
-            ->orderBy('month', 'DESC')
-            ->groupBy('player.id')
-            ->addGroupBy('month');
-        return $query->getQuery()->getResult(2);
+        $sql = <<<SQL
+            SELECT
+                p.id,
+                p.pseudo,
+                COUNT(pr.id) as nb,
+                SUBSTRING(pr.checked_at, 1, 7) as month
+            FROM vgr_player p
+            INNER JOIN vgr_proof pr ON pr.responding_player_id = p.id
+            WHERE pr.checked_at > '2020-01-01'
+            GROUP BY p.id, SUBSTRING(pr.checked_at, 1, 7)
+            ORDER BY month DESC
+        SQL;
+
+        return $this->getEntityManager()->getConnection()->executeQuery($sql)->fetchAllAssociative();
     }
 
     /**
