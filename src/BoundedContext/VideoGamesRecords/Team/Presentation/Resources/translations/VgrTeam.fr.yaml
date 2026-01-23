@@ -1,0 +1,67 @@
+team:
+    profile:
+        title: 'Profil de l''Equipe'
+        header:
+            status_open: 'Ouvert'
+            status_closed: 'Fermé'
+            leader: 'Leader'
+            members: 'membres'
+            website: 'Site web'
+            created: 'Créée le'
+        tabs:
+            overview: 'Aperçu'
+            badges: 'Badges'
+            games: 'Jeux'
+            leaderboards: 'Classements'
+        stats:
+            members: 'Membres'
+            games: 'Jeux'
+            chart_points: 'Points Record'
+            game_points: 'Points Jeu'
+            master_badges: 'Badges Master'
+            badge_points: 'Points Badge'
+        sections:
+            rankings: 'Classements'
+            points_performance: 'Points & Performance'
+            medals_records: 'Médailles (Records)'
+            cups_games: 'Coupes (Jeux)'
+            members: 'Membres de l''équipe'
+            about: 'À propos'
+        rankings:
+            game_points_rank: 'Rang Points Jeu'
+            cup_rank: 'Rang Coupe'
+            chart_points_rank: 'Rang Points Record'
+            medal_rank: 'Rang Médaille'
+            badge_rank: 'Rang Badge'
+        points:
+            chart_points: 'Points Record'
+            game_points: 'Points Jeu'
+            badge_points: 'Points Badge'
+            average_record_rank: 'Rang Record Moyen'
+            average_game_rank: 'Rang Jeu Moyen'
+        achievements:
+            platinum: 'Platine'
+            gold: 'Or'
+            silver: 'Argent'
+            bronze: 'Bronze'
+        badges:
+            title: 'Badges Master'
+            no_badges: 'Aucun badge obtenu'
+            value: 'Valeur'
+            obtained: 'Obtenu le'
+        games:
+            title: 'Jeux'
+            column_game: 'Jeu'
+            column_rank: 'Rang'
+            column_points: 'Points'
+            column_medals: 'Médailles'
+            no_games: 'Aucun jeu joué'
+        leaderboards:
+            members_title: 'Classement des membres'
+            column_rank: 'Rang'
+            column_player: 'Joueur'
+            column_game_points: 'Points Jeu'
+            column_chart_points: 'Points Record'
+            column_games: 'Jeux'
+            column_records: 'Records'
+            no_members: 'Aucun membre dans cette équipe'

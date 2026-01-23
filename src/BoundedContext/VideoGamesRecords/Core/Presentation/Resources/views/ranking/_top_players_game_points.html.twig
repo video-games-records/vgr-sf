@@ -10,6 +10,9 @@
                         <th class="text-center" style="width: 50px;">#</th>
                         <th>Player</th>
                         <th class="text-end">Points</th>
+                        {% if showNbGame|default(false) %}
+                            <th class="text-center">Games</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -29,10 +32,13 @@
                                 }) }}
                             </td>
                             <td class="text-end">{{ player.pointGame|number_format(0, '.', ',') }}</td>
+                            {% if showNbGame|default(false) %}
+                                <td class="text-center">{{ player.nbGame }}</td>
+                            {% endif %}
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="3" class="text-center text-muted py-4">
+                            <td colspan="{{ showNbGame|default(false) ? 4 : 3 }}" class="text-center text-muted py-4">
                                 No players found
                             </td>
                         </tr>

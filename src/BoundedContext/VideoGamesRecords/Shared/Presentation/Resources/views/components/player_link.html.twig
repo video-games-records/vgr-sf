@@ -8,7 +8,9 @@
     {% endif %}
 
     {% if showTeam and player.team %}
-        <span>[{{ player.team.tag }}]</span>
+        <a href="{{ path('vgr_team_profile_overview', {id: player.team.id, slug: player.team.slug}) }}"
+           class="text-decoration-none text-muted"
+           title="{{ player.team.libTeam }}">[{{ player.team.tag }}]</a>
     {% endif %}
 
     <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}"

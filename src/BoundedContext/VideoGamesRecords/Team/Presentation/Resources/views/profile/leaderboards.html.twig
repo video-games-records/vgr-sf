@@ -1,0 +1,54 @@
+{% extends '@VideoGamesRecordsTeam/profile/_base.html.twig' %}
+{% trans_default_domain 'VgrTeam' %}
+
+{% block profile_content %}
+<div class="row g-3">
+    {# Game Points Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::gamePoints',
+            {teamId: team.id, limit: 100, showNbGame: true}
+        )) }}
+    </div>
+
+    {# Cups Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::cups',
+            {teamId: team.id, limit: 100}
+        )) }}
+    </div>
+
+    {# Medals Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::medals',
+            {teamId: team.id, limit: 100}
+        )) }}
+    </div>
+
+    {# Record Points Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::recordPoints',
+            {teamId: team.id, limit: 100, showNbChart: true}
+        )) }}
+    </div>
+
+    {# Badge Points Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::badges',
+            {teamId: team.id, limit: 100}
+        )) }}
+    </div>
+
+    {# Proofs Leaderboard #}
+    <div class="col-12 col-md-6 col-lg-4">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::proofs',
+            {teamId: team.id, limit: 100, showPercentage: true}
+        )) }}
+    </div>
+</div>
+{% endblock %}

@@ -56,7 +56,7 @@ class Serie
     private Collection $games;
 
 
-    #[ORM\OneToOne(targetEntity: Badge::class, inversedBy: 'serie', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
     private ?Badge $badge;
 

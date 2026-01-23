@@ -10,9 +10,6 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 use App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\BadgeRepository;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTrait;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Country;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform;
 
 #[ORM\Table(name:'vgr_badge')]
 #[ORM\Entity(repositoryClass: BadgeRepository::class)]
@@ -34,18 +31,6 @@ class Badge
 
     #[ORM\Column(length: 100, nullable: false, options: ['default' => 0])]
     private int $value = 0;
-
-    #[ORM\OneToOne(targetEntity: Game::class, mappedBy: "badge")]
-    private ?Game $game;
-
-    #[ORM\OneToOne(targetEntity: Serie::class, mappedBy: "badge")]
-    private ?Serie $serie;
-
-    #[ORM\OneToOne(targetEntity: Country::class, mappedBy: "badge")]
-    private ?Country $country;
-
-    #[ORM\OneToOne(targetEntity: Platform::class, mappedBy: "badge")]
-    private ?Platform $platform;
 
 
     public function __toString()
@@ -93,54 +78,12 @@ class Badge
         return $this->value;
     }
 
-    public function setGame(?Game $game): void
-    {
-        $this->game = $game;
-    }
-
-    public function getGame(): ?Game
-    {
-        return $this->game;
-    }
-
-    public function setSerie(?Serie $serie): void
-    {
-        $this->serie = $serie;
-    }
-
-    public function getSerie(): ?Serie
-    {
-        return $this->serie;
-    }
-
-    public function setCountry(?Country $country): void
-    {
-        $this->country = $country;
-    }
-
-    public function getCountry(): ?Country
-    {
-        return $this->country;
-    }
-
-    public function setPlatform(?Platform $platform): void
-    {
-        $this->platform = $platform;
-    }
-
-    public function getPlatform(): ?Platform
-    {
-        return $this->platform;
-    }
-
-
-    public function majValue(): void
+    public function majValue(?Game $game): void
     {
         if (BadgeType::MASTER !== $this->type) {
             return;
         }
 
-        $game = $this->getGame();
         if ($game === null) {
             $this->value = 0;
             return;

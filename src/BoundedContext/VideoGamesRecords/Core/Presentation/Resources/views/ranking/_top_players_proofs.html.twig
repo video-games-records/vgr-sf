@@ -10,6 +10,9 @@
                         <th class="text-center" style="width: 50px;">#</th>
                         <th>Player</th>
                         <th class="text-end">Total</th>
+                        {% if showPercentage|default(false) %}
+                            <th class="text-center">%</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -29,10 +32,19 @@
                                 }) }}
                             </td>
                             <td class="text-end">{{ player.nbChartProven|number_format(0, '.', ',') }}</td>
+                            {% if showPercentage|default(false) %}
+                                <td class="text-center">
+                                    {% if player.nbChart > 0 %}
+                                        {{ ((player.nbChartProven / player.nbChart) * 100)|number_format(1) }}%
+                                    {% else %}
+                                        0%
+                                    {% endif %}
+                                </td>
+                            {% endif %}
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="3" class="text-center text-muted py-4">
+                            <td colspan="{{ showPercentage|default(false) ? 4 : 3 }}" class="text-center text-muted py-4">
                                 No players found
                             </td>
                         </tr>

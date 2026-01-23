@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use DateTime;
 use Doctrine\ORM\Exception\ORMException;
@@ -41,7 +43,9 @@ class TeamBadgeRepository extends DefaultRepository
         bool $onlyActive = true
     ): array {
         $qb = $this->createQueryBuilder('tb')
+            ->distinct()
             ->join('tb.badge', 'b')
+            ->addSelect('b')
             ->where('tb.team = :team')
             ->setParameter('team', $team);
 
@@ -52,17 +56,6 @@ class TeamBadgeRepository extends DefaultRepository
         } else {
             $qb->andWhere('b.type = :badgeType')
                 ->setParameter('badgeType', $badgeType);
-
-            // Si le type est Master, on ajoute la jointure avec game
-            if ($badgeType === BadgeType::MASTER->value) {
-                $qb->leftJoin('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game', 'g', 'WITH', 'g.badge = b')
-                    ->addSelect('g');
-            }
-
-            if ($badgeType === BadgeType::SERIE->value) {
-                $qb->leftJoin('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie', 's', 'WITH', 's.badge = b')
-                    ->addSelect('s');
-            }
         }
 
         // Filtre sur les badges actifs si demandé
@@ -100,11 +93,6 @@ class TeamBadgeRepository extends DefaultRepository
 
 
     /**
-     * @param array $teams
-     * @param Badge $badge
-     * @throws Exception
-     */
-    /**
      * @param array<int, int> $teams
      * @param Badge $badge
      * @throws Exception
@@ -131,12 +119,33 @@ class TeamBadgeRepository extends DefaultRepository
                 $teamBadge = new TeamBadge();
                 /** @var Team $team */
                 $team = $this->getEntityManager()
-                    ->getReference('App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team', $idTeam);
+                    ->getReference(Team::class, $idTeam);
                 $teamBadge->setTeam($team);
                 $teamBadge->setBadge($badge);
                 $this->getEntityManager()->persist($teamBadge);
             }
         }
+    }
+
+    /**
+     * Get master badges data for a team without loading Badge entity relationships
+     *
+     * @param Team $team
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getMasterBadgesDataForTeam(Team $team): array
+    {
+        return $this->createQueryBuilder('tb')
+            ->select('b.id as badgeId, b.value as badgeValue, tb.createdAt')
+            ->join('tb.badge', 'b')
+            ->where('tb.team = :team')
+            ->andWhere('b.type = :badgeType')
+            ->andWhere('tb.endedAt IS NULL')
+            ->setParameter('team', $team)
+            ->setParameter('badgeType', BadgeType::MASTER)
+            ->orderBy('b.value', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

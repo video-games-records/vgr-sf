@@ -45,7 +45,7 @@ class Platform
     private Collection $games;
 
 
-    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'], inversedBy: 'platform')]
+    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
     private ?Badge $badge;
 

@@ -243,6 +243,6 @@ readonly class UpdatePlayerGameRankHandler
         }
 
         $this->em->getRepository(PlayerBadge::class)
-            ->updateBadge($firstPlacePlayers, $game->getBadge());
+            ->updateBadge($firstPlacePlayers, $game->getBadge(), $game);
     }
 }

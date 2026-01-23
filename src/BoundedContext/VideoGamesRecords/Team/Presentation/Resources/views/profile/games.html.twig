@@ -1,0 +1,74 @@
+{% extends '@VideoGamesRecordsTeam/profile/_base.html.twig' %}
+{% trans_default_domain 'VgrTeam' %}
+
+{% block profile_content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title mb-3"><i class="bi bi-controller"></i> {{ 'team.profile.games.title'|trans }}</h5>
+
+        {% if teamGames|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{ _self.sort_header('game', 'team.profile.games.column_game'|trans, currentSort, currentOrder, team) }}</th>
+                            <th class="text-center d-none d-md-table-cell">{{ _self.sort_header('medals', 'team.profile.games.column_medals'|trans, currentSort, currentOrder, team) }}</th>
+                            <th class="text-end">{{ _self.sort_header('pointChart', 'team.profile.games.column_points'|trans, currentSort, currentOrder, team) }}</th>
+                            <th class="text-center">{{ _self.sort_header('rank', 'team.profile.games.column_rank'|trans, currentSort, currentOrder, team) }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for teamGame in teamGames %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('vgr_game_show', {id: teamGame.game.id, slug: teamGame.game.slug}) }}" class="text-decoration-none">
+                                        {{ teamGame.game.getName(app.request.locale) }}
+                                    </a>
+                                </td>
+                                <td class="text-center d-none d-md-table-cell">
+                                    {% if teamGame.chartRank0 > 0 %}
+                                        <span class="me-1" title="Platinum"><i class="bi bi-trophy-fill text-platinum"></i> {{ teamGame.chartRank0 }}</span>
+                                    {% endif %}
+                                    {% if teamGame.chartRank1 > 0 %}
+                                        <span class="me-1" title="Gold"><i class="bi bi-trophy-fill text-gold"></i> {{ teamGame.chartRank1 }}</span>
+                                    {% endif %}
+                                    {% if teamGame.chartRank2 > 0 %}
+                                        <span class="me-1" title="Silver"><i class="bi bi-trophy-fill text-silver"></i> {{ teamGame.chartRank2 }}</span>
+                                    {% endif %}
+                                    {% if teamGame.chartRank3 > 0 %}
+                                        <span title="Bronze"><i class="bi bi-trophy-fill text-bronze"></i> {{ teamGame.chartRank3 }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end">
+                                    <strong>{{ teamGame.pointChart|number_format }}</strong>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary">#{{ teamGame.rankPointChart }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'team.profile.games.no_games'|trans }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{# Macro for sortable column headers #}
+{% macro sort_header(field, label, currentSort, currentOrder, team) %}
+    {% set newOrder = (currentSort == field and currentOrder == 'DESC') ? 'ASC' : 'DESC' %}
+    {% set isActive = currentSort == field %}
+    <a href="{{ path('vgr_team_profile_games', {id: team.id, slug: team.slug, sort: field, order: newOrder}) }}"
+       class="text-decoration-none {{ isActive ? 'fw-bold' : '' }}">
+        {{ label }}
+        {% if isActive %}
+            <i class="bi bi-caret-{{ currentOrder == 'DESC' ? 'down' : 'up' }}-fill"></i>
+        {% endif %}
+    </a>
+{% endmacro %}
+{% endblock %}

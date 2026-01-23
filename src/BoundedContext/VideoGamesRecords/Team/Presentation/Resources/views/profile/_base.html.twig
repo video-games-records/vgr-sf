@@ -1,0 +1,120 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrTeam' %}
+
+{% block title %}[{{ team.tag }}] {{ team.libTeam }} - {{ 'team.profile.title'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Team Header Card #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <div class="row align-items-center">
+                {# Avatar #}
+                <div class="col-auto">
+                    <img
+                        src="{{ path('vgr_team_avatar', {id: team.id}) }}"
+                        alt="{{ team.libTeam }}"
+                        class="rounded-circle"
+                        width="80"
+                        height="80"
+                    >
+                </div>
+
+                {# Team Info #}
+                <div class="col">
+                    <h1 class="h3 mb-2">
+                        <span class="badge bg-secondary me-2">{{ team.tag }}</span>
+                        {{ team.libTeam }}
+                    </h1>
+
+                    <div class="d-flex flex-wrap gap-3 text-muted small">
+                        {# Status #}
+                        <span>
+                            <i class="bi bi-door-{{ team.isOpened ? 'open' : 'closed' }}"></i>
+                            {% if team.isOpened %}
+                                <span class="badge bg-success">{{ 'team.profile.header.status_open'|trans }}</span>
+                            {% else %}
+                                <span class="badge bg-secondary">{{ 'team.profile.header.status_closed'|trans }}</span>
+                            {% endif %}
+                        </span>
+
+                        {# Leader #}
+                        <span>
+                            <i class="bi bi-person-badge"></i>
+                            {{ 'team.profile.header.leader'|trans }}:
+                            {{ component('player_link', {
+                                player: team.leader,
+                                bold: false,
+                                showTeam: false,
+                                showCountry: true,
+                                showAvatar: false
+                            }) }}
+                        </span>
+
+                        {# Members Count #}
+                        <span>
+                            <i class="bi bi-people"></i>
+                            {{ team.nbPlayer }} {{ 'team.profile.header.members'|trans }}
+                        </span>
+
+                        {# Website #}
+                        {% if team.siteWeb %}
+                            <span>
+                                <i class="bi bi-globe"></i>
+                                <a href="{{ team.siteWeb }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                    {{ 'team.profile.header.website'|trans }}
+                                </a>
+                            </span>
+                        {% endif %}
+
+                        {# Created Date #}
+                        <span>
+                            <i class="bi bi-calendar-check"></i>
+                            {{ 'team.profile.header.created'|trans }} {{ team.createdAt|date('M Y') }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Navigation Tabs #}
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'overview' ? 'active' : '' }}"
+                href="{{ path('vgr_team_profile_overview', {id: team.id, slug: team.slug}) }}"
+            >
+                <i class="bi bi-speedometer2"></i> {{ 'team.profile.tabs.overview'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'badges' ? 'active' : '' }}"
+                href="{{ path('vgr_team_profile_badges', {id: team.id, slug: team.slug}) }}"
+            >
+                <i class="bi bi-patch-check"></i> {{ 'team.profile.tabs.badges'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'games' ? 'active' : '' }}"
+                href="{{ path('vgr_team_profile_games', {id: team.id, slug: team.slug}) }}"
+            >
+                <i class="bi bi-controller"></i> {{ 'team.profile.tabs.games'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'leaderboards' ? 'active' : '' }}"
+                href="{{ path('vgr_team_profile_leaderboards', {id: team.id, slug: team.slug}) }}"
+            >
+                <i class="bi bi-trophy"></i> {{ 'team.profile.tabs.leaderboards'|trans }}
+            </a>
+        </li>
+    </ul>
+
+    {# Tab Content #}
+    {% block profile_content %}{% endblock %}
+</div>
+{% endblock %}

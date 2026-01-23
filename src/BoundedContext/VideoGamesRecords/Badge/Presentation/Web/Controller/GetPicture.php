@@ -24,10 +24,10 @@ class GetPicture extends AbstractController
     #[Route(
         '/badge/{id}/picture',
         name: 'vgr_badge_picture',
-        methods: ['GET'],
-        requirements: ['id' => '[1-9]\d*']
+        requirements: ['id' => '[1-9]\d*'],
+        methods: ['GET']
     )]
-    #[Cache(public: true, maxage: 3600 * 24, mustRevalidate: true)]
+    #[Cache(maxage: 3600 * 24, public: true, mustRevalidate: true)]
     public function __invoke(Badge $badge): StreamedResponse
     {
         $path = $badge->getType()->getDirectory() . DIRECTORY_SEPARATOR . $badge->getPicture();
@@ -36,8 +36,10 @@ class GetPicture extends AbstractController
         }
 
         $stream = $this->appStorage->readStream($path);
-        return new StreamedResponse(function () use ($stream) {
+        $response = new StreamedResponse(function () use ($stream) {
             fpassthru($stream);
         }, 200, ['Content-Type' => 'image/gif']);
+        $response->headers->set('Cache-Control', 'public, max-age=86400, immutable');
+        return $response;
     }
 }

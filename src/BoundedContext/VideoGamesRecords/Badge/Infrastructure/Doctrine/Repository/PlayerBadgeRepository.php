@@ -11,8 +11,9 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 
 /**
@@ -103,9 +104,10 @@ class PlayerBadgeRepository extends DefaultRepository
     /**
      * @param array<int, int> $players
      * @param Badge $badge
+     * @param Game|null $game Game entity for MASTER badges (required for value calculation)
      * @throws Exception|ORMException
      */
-    public function updateBadge(array $players, Badge $badge): void
+    public function updateBadge(array $players, Badge $badge, ?Game $game = null): void
     {
         //----- get players with badge
         $list = $this->getFromBadge($badge);
@@ -135,7 +137,7 @@ class PlayerBadgeRepository extends DefaultRepository
             }
         }
         $badge->setNbPlayer(count($players));
-        $badge->majValue();
+        $badge->majValue($game);
     }
 
     /**

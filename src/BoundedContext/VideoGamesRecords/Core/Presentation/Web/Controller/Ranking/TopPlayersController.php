@@ -21,26 +21,29 @@ class TopPlayersController extends AbstractController
     /**
      * @throws ORMException
      */
-    public function gamePoints(): Response
+    public function gamePoints(?int $teamId = null, int $limit = 5, bool $showNbGame = false): Response
     {
         $topPlayers = $this->playerRankingProvider->getRankingPointGame([
-            'maxRank' => 5,
-            'limit' => 5
+            'maxRank' => $limit,
+            'limit' => $limit,
+            'idTeam' => $teamId
         ]);
 
         return $this->render('@VideoGamesRecordsCore/ranking/_top_players_game_points.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'showNbGame' => $showNbGame
         ]);
     }
 
     /**
      * @throws ORMException
      */
-    public function cups(): Response
+    public function cups(?int $teamId = null, int $limit = 5): Response
     {
         $topPlayers = $this->playerRankingProvider->getRankingCup([
-            'maxRank' => 5,
-            'limit' => 5
+            'maxRank' => $limit,
+            'limit' => $limit,
+            'idTeam' => $teamId
         ]);
 
         return $this->render('@VideoGamesRecordsCore/ranking/_top_players_cups.html.twig', [
@@ -51,11 +54,12 @@ class TopPlayersController extends AbstractController
     /**
      * @throws ORMException
      */
-    public function medals(): Response
+    public function medals(?int $teamId = null, int $limit = 5): Response
     {
         $topPlayers = $this->playerRankingProvider->getRankingMedals([
-            'maxRank' => 5,
-            'limit' => 5
+            'maxRank' => $limit,
+            'limit' => $limit,
+            'idTeam' => $teamId
         ]);
 
         return $this->render('@VideoGamesRecordsCore/ranking/_top_players_medals.html.twig', [
@@ -66,26 +70,29 @@ class TopPlayersController extends AbstractController
     /**
      * @throws ORMException
      */
-    public function recordPoints(): Response
+    public function recordPoints(?int $teamId = null, int $limit = 5, bool $showNbChart = false): Response
     {
         $topPlayers = $this->playerRankingProvider->getRankingPointChart([
-            'maxRank' => 5,
-            'limit' => 5
+            'maxRank' => $limit,
+            'limit' => $limit,
+            'idTeam' => $teamId
         ]);
 
         return $this->render('@VideoGamesRecordsCore/ranking/_top_players_record_points.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'showNbChart' => $showNbChart
         ]);
     }
 
     /**
      * @throws ORMException
      */
-    public function badges(): Response
+    public function badges(?int $teamId = null, int $limit = 5): Response
     {
         $topPlayers = $this->playerRankingProvider->getRankingBadge([
-            'maxRank' => 5,
-            'limit' => 5
+            'maxRank' => $limit,
+            'limit' => $limit,
+            'idTeam' => $teamId
         ]);
 
         return $this->render('@VideoGamesRecordsCore/ranking/_top_players_badges.html.twig', [
@@ -96,15 +103,17 @@ class TopPlayersController extends AbstractController
     /**
      * @throws ORMException
      */
-    public function proofs(): Response
+    public function proofs(?int $teamId = null, int $limit = 5, bool $showPercentage = false): Response
     {
         $topPlayers = $this->playerRankingProvider->getRankingProof([
-            'maxRank' => 5,
-            'limit' => 5
+            'maxRank' => $limit,
+            'limit' => $limit,
+            'idTeam' => $teamId
         ]);
 
         return $this->render('@VideoGamesRecordsCore/ranking/_top_players_proofs.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'showPercentage' => $showPercentage
         ]);
     }
 }

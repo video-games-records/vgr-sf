@@ -27,7 +27,9 @@
                         {% if player.team %}
                             <small class="text-muted fs-6">
                                 <i class="bi bi-people"></i>
-                                <a href="#" class="text-decoration-none">{{ player.team.name }}</a>
+                                <a href="{{ path('vgr_team_profile_overview', {id: player.team.id, slug: player.team.slug}) }}" class="text-decoration-none">
+                                    [{{ player.team.tag }}] {{ player.team.name }}
+                                </a>
                             </small>
                         {% endif %}
                     </h1>
