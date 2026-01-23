@@ -1,0 +1,23 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Links</h3>
+                </div>
+                <div class="box-body">
+                    <a href="https://drive.google.com/drive/folders/1kQq39WmAOvBXs-yWUColfPmtlKmY03r6?usp=drive_link" target="_blank" class="btn btn-info">
+                        <i class="fa fa-book"></i> Administration Documentation
+                    </a>
+                    <a href="{{ path('vgrcorebundle_admin_proof_stats') }}" class="btn btn-primary">
+                        <i class="fa fa-chart-bar"></i> Proof Validation Stats
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ sonata_block_render({ 'type': 'admin.block.service.game.status' }, ) }}
+    {{ sonata_block_render({ 'type': 'admin.block.service.proof.games' }, ) }}
+    {{ sonata_block_render({ 'type': 'admin.block.service.proof_requests' }, ) }}
+{% endblock %}

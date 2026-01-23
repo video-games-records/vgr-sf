@@ -12,6 +12,7 @@ sonata_admin:
     persist_filters: true
     templates:
         layout: '@SharedKernel/admin/layout.html.twig'
+        dashboard: '@SharedKernel/admin/dashboard.html.twig'
 
 sonata_block:
     blocks:
