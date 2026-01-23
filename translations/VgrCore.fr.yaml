@@ -135,3 +135,18 @@ player:
         column_charts: 'Records'
         column_registered: 'Inscription'
         column_last_login: 'Dernière connexion'
+
+player_chart:
+    search:
+        title: 'Rechercher des Scores'
+        results: 'Résultats'
+        no_results: 'Aucun score trouvé pour les critères sélectionnés.'
+        game: 'Jeu'
+        group: 'Groupe'
+        chart: 'Tableau'
+        player: 'Joueur'
+        rank: 'Rang'
+        points: 'Points'
+        platform: 'Plateforme'
+        value: 'Valeur'
+        page: 'Page'
