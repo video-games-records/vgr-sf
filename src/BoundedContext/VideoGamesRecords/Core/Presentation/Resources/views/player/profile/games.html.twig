@@ -1,15 +1,74 @@
 {% extends '@VideoGamesRecordsCore/player/profile/_base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
 
 {% block profile_content %}
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body text-center py-5">
-                <i class="bi bi-controller display-1 text-muted mb-3"></i>
-                <h2 class="h4 text-muted">Games</h2>
-                <p class="text-muted">This section will display all player games and records</p>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title mb-3"><i class="bi bi-controller"></i> {{ 'player.profile.games.title'|trans }}</h5>
+
+        {% if playerGames|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{ _self.sort_header('game', 'player.profile.games.column_game'|trans, currentSort, currentOrder, player) }}</th>
+                            <th class="text-center d-none d-md-table-cell">{{ _self.sort_header('medals', 'player.profile.games.column_medals'|trans, currentSort, currentOrder, player) }}</th>
+                            <th class="text-end">{{ _self.sort_header('pointChart', 'player.profile.games.column_points'|trans, currentSort, currentOrder, player) }}</th>
+                            <th class="text-center">{{ _self.sort_header('rank', 'player.profile.games.column_rank'|trans, currentSort, currentOrder, player) }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for playerGame in playerGames %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('vgr_game_show', {id: playerGame.game.id, slug: playerGame.game.slug}) }}" class="text-decoration-none">
+                                        {{ playerGame.game.getName(app.request.locale) }}
+                                    </a>
+                                </td>
+                                <td class="text-center d-none d-md-table-cell">
+                                    {% if playerGame.chartRank0 > 0 %}
+                                        <span class="me-1" title="Platinum"><i class="bi bi-trophy-fill text-platinum"></i> {{ playerGame.chartRank0 }}</span>
+                                    {% endif %}
+                                    {% if playerGame.chartRank1 > 0 %}
+                                        <span class="me-1" title="Gold"><i class="bi bi-trophy-fill text-gold"></i> {{ playerGame.chartRank1 }}</span>
+                                    {% endif %}
+                                    {% if playerGame.chartRank2 > 0 %}
+                                        <span class="me-1" title="Silver"><i class="bi bi-trophy-fill text-silver"></i> {{ playerGame.chartRank2 }}</span>
+                                    {% endif %}
+                                    {% if playerGame.chartRank3 > 0 %}
+                                        <span title="Bronze"><i class="bi bi-trophy-fill text-bronze"></i> {{ playerGame.chartRank3 }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end">
+                                    <strong>{{ playerGame.pointChart|number_format }}</strong>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary">#{{ playerGame.rankPointChart }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </div>
+        {% else %}
+            <div class="text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'player.profile.games.no_games'|trans }}</p>
+            </div>
+        {% endif %}
     </div>
 </div>
+
+{# Macro for sortable column headers #}
+{% macro sort_header(field, label, currentSort, currentOrder, player) %}
+    {% set newOrder = (currentSort == field and currentOrder == 'DESC') ? 'ASC' : 'DESC' %}
+    {% set isActive = currentSort == field %}
+    <a href="{{ path('vgr_player_profile_games', {id: player.id, slug: player.slug, sort: field, order: newOrder}) }}"
+       class="text-decoration-none {{ isActive ? 'fw-bold' : '' }}">
+        {{ label }}
+        {% if isActive %}
+            <i class="bi bi-caret-{{ currentOrder == 'DESC' ? 'down' : 'up' }}-fill"></i>
+        {% endif %}
+    </a>
+{% endmacro %}
 {% endblock %}

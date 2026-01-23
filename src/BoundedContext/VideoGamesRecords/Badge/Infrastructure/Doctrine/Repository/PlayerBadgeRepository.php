@@ -27,65 +27,6 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
-     * Récupère les badges d'un joueur selon le type et avec tri personnalisé
-     *
-     * @param Player $player Le joueur
-     * @param string|array<string> $badgeType Le type de badge (string) ou tableau de types
-     * @param array<string, string> $orderBy Tableau associatif pour le tri (ex: ['badge.value' => 'DESC', 'createdAt' => 'ASC'])
-     * @param bool $onlyActive Si true, ne retourne que les badges actifs (ended_at = null)
-     * @return array<PlayerBadge>
-     */
-    public function findByPlayerAndType(
-        Player $player,
-        string|array $badgeType,
-        array $orderBy = [],
-        bool $onlyActive = true
-    ): array {
-        $qb = $this->createQueryBuilder('pb')
-            ->join('pb.badge', 'b')
-            ->where('pb.player = :player')
-            ->setParameter('player', $player);
-
-        // Filtre sur le type de badge
-        if (is_array($badgeType)) {
-            $qb->andWhere('b.type IN (:badgeTypes)')
-                ->setParameter('badgeTypes', $badgeType);
-        } else {
-            $qb->andWhere('b.type = :badgeType')
-                ->setParameter('badgeType', $badgeType);
-
-            // Jointures pour optimiser les requêtes mais sans addSelect pour éviter les problèmes de type
-            if ($badgeType === BadgeType::MASTER->value) {
-                $qb->leftJoin('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game', 'g', 'WITH', 'g.badge = b');
-            }
-
-            if ($badgeType === BadgeType::SERIE->value) {
-                $qb->leftJoin('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie', 's', 'WITH', 's.badge = b');
-            }
-
-            if ($badgeType === BadgeType::PLATFORM->value) {
-                $qb->leftJoin('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform', 'p', 'WITH', 'p.badge = b');
-            }
-        }
-
-        // Filtre sur les badges actifs si demandé
-        if ($onlyActive) {
-            $this->onlyActive($qb);
-        }
-
-        // Application du tri
-        foreach ($orderBy as $field => $direction) {
-            $qb->addOrderBy($field, $direction);
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * @param $badge
-     * @return array
-     */
-    /**
      * @param Badge $badge
      * @return array<PlayerBadge>
      */
@@ -138,6 +79,88 @@ class PlayerBadgeRepository extends DefaultRepository
         }
         $badge->setNbPlayer(count($players));
         $badge->majValue($game);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getMasterBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::MASTER);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getPlatformBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::PLATFORM);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getSerieBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::SERIE);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getForumBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::FORUM);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getConnexionBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::CONNEXION);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getChartBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::VGR_CHART);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getProofBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::VGR_PROOF);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    public function getDonationBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getBadgesDataForPlayer($player, BadgeType::DON);
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     */
+    private function getBadgesDataForPlayer(Player $player, BadgeType $badgeType): array
+    {
+        return $this->createQueryBuilder('pb')
+            ->select('b.id as badgeId, b.value as badgeValue, pb.createdAt')
+            ->join('pb.badge', 'b')
+            ->where('pb.player = :player')
+            ->andWhere('b.type = :badgeType')
+            ->andWhere('pb.endedAt IS NULL')
+            ->setParameter('player', $player)
+            ->setParameter('badgeType', $badgeType)
+            ->orderBy('b.value', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

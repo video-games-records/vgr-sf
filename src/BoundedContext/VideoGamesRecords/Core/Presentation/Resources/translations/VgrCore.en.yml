@@ -73,3 +73,24 @@ player:
     info:
       presentation: Presentation
       collection: Collection
+
+    badges:
+      master_title: Master Badges
+      serie_title: Serie Badges
+      platform_title: Platform Badges
+      forum_title: Forum Badges
+      connexion_title: Connection Badges
+      chart_title: Records Badges
+      proof_title: Proof Badges
+      donation_title: Donation Badges
+      value: Value
+      obtained: Obtained
+      no_badges: No badges yet
+
+    games:
+      title: Games
+      column_game: Game
+      column_medals: Medals
+      column_points: Points
+      column_rank: Rank
+      no_games: No games yet

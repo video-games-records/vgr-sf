@@ -8,16 +8,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
-class Overview extends AbstractProfileController
+class Proofs extends AbstractProfileController
 {
-    #[Route('/player/{id}-{slug}', name: 'vgr_player_profile_overview', requirements: ['id' => '\d+'])]
+    #[Route('/player/{id}-{slug}/proofs', name: 'vgr_player_profile_proofs', requirements: ['id' => '\d+'])]
     public function __invoke(int $id, string $slug): Response
     {
         $player = $this->getPlayer($id, $slug);
 
-        return $this->render('@VideoGamesRecordsCore/player/profile/overview.html.twig', [
+        return $this->render('@VideoGamesRecordsCore/player/profile/proofs.html.twig', [
             'player' => $player,
-            'current_tab' => 'overview',
+            'current_tab' => 'proofs',
         ]);
     }
 }
