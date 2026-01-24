@@ -1,0 +1,113 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'Message' %}
+
+{% block title %}{{ message.object }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path(isInbox ? 'message_inbox' : 'message_outbox') }}">
+                    {{ isInbox ? 'breadcrumb.inbox'|trans : 'breadcrumb.outbox'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'breadcrumb.view'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header py-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h1 class="h4 mb-1">{{ message.object }}</h1>
+                            {% if message.type != 'DEFAULT' %}
+                                <span class="badge bg-secondary">{{ message.type }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="text-end">
+                            <a href="{{ path(isInbox ? 'message_inbox' : 'message_outbox') }}"
+                               class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-arrow-left"></i> {{ 'view.back'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                        <div class="d-flex align-items-center">
+                            {% if isInbox %}
+                                <img src="/users/{{ message.sender.id }}/avatar"
+                                     alt="{{ message.sender.username }}"
+                                     class="rounded-circle me-3"
+                                     width="48" height="48">
+                                <div>
+                                    <strong>{{ message.sender.username }}</strong>
+                                    <div class="text-body-secondary small">{{ 'view.from'|trans }}</div>
+                                </div>
+                            {% else %}
+                                <img src="/users/{{ message.recipient.id }}/avatar"
+                                     alt="{{ message.recipient.username }}"
+                                     class="rounded-circle me-3"
+                                     width="48" height="48">
+                                <div>
+                                    <strong>{{ message.recipient.username }}</strong>
+                                    <div class="text-body-secondary small">{{ 'view.to'|trans }}</div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="text-end text-body-secondary">
+                            <i class="bi bi-calendar"></i>
+                            {{ message.createdAt|date('d/m/Y') }}<br>
+                            <small>{{ message.createdAt|date('H:i') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="message-content">
+                        {{ message.message|raw }}
+                    </div>
+                </div>
+
+                <div class="card-footer py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            {% if not isInbox %}
+                                {% if message.isOpened %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check2-all"></i> {{ 'view.status.read'|trans }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">
+                                        <i class="bi bi-check2"></i> {{ 'view.status.sent'|trans }}
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div>
+                            <form action="{{ path('message_delete', {id: message.id}) }}"
+                                  method="POST"
+                                  class="d-inline"
+                                  onsubmit="return confirm('{{ 'view.confirm_delete'|trans }}');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete-message-' ~ message.id) }}">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i> {{ 'view.action.delete'|trans }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

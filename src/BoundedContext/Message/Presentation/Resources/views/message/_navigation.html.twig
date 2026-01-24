@@ -1,0 +1,19 @@
+{% trans_default_domain 'Message' %}
+
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'message_inbox' %} active{% endif %}"
+           href="{{ path('message_inbox') }}">
+            <i class="bi bi-inbox"></i> {{ 'navigation.inbox'|trans }}
+            {% if nbNewMessages is defined and nbNewMessages > 0 %}
+                <span class="badge bg-danger">{{ nbNewMessages }}</span>
+            {% endif %}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'message_outbox' %} active{% endif %}"
+           href="{{ path('message_outbox') }}">
+            <i class="bi bi-send"></i> {{ 'navigation.outbox'|trans }}
+        </a>
+    </li>
+</ul>

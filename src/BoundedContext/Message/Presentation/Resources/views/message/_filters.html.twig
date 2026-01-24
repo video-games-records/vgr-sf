@@ -1,0 +1,61 @@
+{% trans_default_domain 'Message' %}
+
+<form method="GET" action="{{ path(app.request.attributes.get('_route')) }}" class="mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label for="search" class="form-label">{{ 'filter.search'|trans }}</label>
+            <input type="text" class="form-control" id="search" name="search"
+                   value="{{ filters.search|default('') }}" placeholder="{{ 'filter.search_placeholder'|trans }}">
+        </div>
+
+        {% if type == 'inbox' and senders|length > 0 %}
+        <div class="col-md-3">
+            <label for="sender" class="form-label">{{ 'filter.sender'|trans }}</label>
+            <select class="form-select" id="sender" name="sender">
+                <option value="">{{ 'filter.all'|trans }}</option>
+                {% for sender in senders %}
+                    <option value="{{ sender.id }}" {% if filters.sender|default('') == sender.id %}selected{% endif %}>
+                        {{ sender.username }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+
+        {% if type == 'outbox' and recipients|length > 0 %}
+        <div class="col-md-3">
+            <label for="recipient" class="form-label">{{ 'filter.recipient'|trans }}</label>
+            <select class="form-select" id="recipient" name="recipient">
+                <option value="">{{ 'filter.all'|trans }}</option>
+                {% for recipient in recipients %}
+                    <option value="{{ recipient.id }}" {% if filters.recipient|default('') == recipient.id %}selected{% endif %}>
+                        {{ recipient.username }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+
+        <div class="col-md-2">
+            <label for="isOpened" class="form-label">{{ 'filter.status'|trans }}</label>
+            <select class="form-select" id="isOpened" name="isOpened">
+                <option value="">{{ 'filter.all'|trans }}</option>
+                <option value="0" {% if filters.isOpened is defined and filters.isOpened == false %}selected{% endif %}>
+                    {{ 'filter.unread'|trans }}
+                </option>
+                <option value="1" {% if filters.isOpened is defined and filters.isOpened == true %}selected{% endif %}>
+                    {{ 'filter.read'|trans }}
+                </option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i> {{ 'filter.apply'|trans }}
+            </button>
+            <a href="{{ path(app.request.attributes.get('_route')) }}" class="btn btn-outline-secondary">
+                <i class="bi bi-x-lg"></i> {{ 'filter.reset'|trans }}
+            </a>
+        </div>
+    </div>
+</form>

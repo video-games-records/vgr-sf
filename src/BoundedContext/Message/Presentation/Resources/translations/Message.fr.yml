@@ -5,7 +5,7 @@ label:
     message: 'Message'
     object: 'Objet'
     recipient: 'Destinataire'
-    sender: 'Expediteur'
+    sender: 'Expéditeur'
     type: 'Type'
     isOpened: 'Lu'
     isDeletedSender: 'Supprimé par l''expéditeur'
@@ -13,6 +13,84 @@ label:
 
 message:
     label: 'Message'
+    flash:
+        deleted: 'Message supprimé avec succès.'
 
 group:
     messages: 'Messages'
+
+breadcrumb:
+    home: 'Accueil'
+    messages: 'Messages'
+    inbox: 'Boîte de réception'
+    outbox: 'Envoyés'
+    view: 'Voir le message'
+
+navigation:
+    inbox: 'Boîte de réception'
+    outbox: 'Envoyés'
+
+inbox:
+    title: 'Boîte de réception'
+    header: 'Boîte de réception'
+    description: '%count% message(s) reçu(s)'
+    empty: 'Aucun message dans votre boîte de réception.'
+    unread: 'Non lu'
+    read: 'Lu'
+    column:
+        sender: 'De'
+        subject: 'Objet'
+        date: 'Date'
+        actions: 'Actions'
+    action:
+        view: 'Voir'
+        delete: 'Supprimer'
+    confirm_delete: 'Êtes-vous sûr de vouloir supprimer ce message ?'
+
+outbox:
+    title: 'Messages envoyés'
+    header: 'Messages envoyés'
+    description: '%count% message(s) envoyé(s)'
+    empty: 'Aucun message envoyé.'
+    read: 'Lu par le destinataire'
+    unread: 'Pas encore lu'
+    status:
+        read: 'Lu'
+        sent: 'Envoyé'
+    column:
+        recipient: 'À'
+        subject: 'Objet'
+        date: 'Date'
+        status: 'Statut'
+        actions: 'Actions'
+    action:
+        view: 'Voir'
+        delete: 'Supprimer'
+    confirm_delete: 'Êtes-vous sûr de vouloir supprimer ce message ?'
+
+view:
+    back: 'Retour'
+    from: 'De'
+    to: 'À'
+    status:
+        read: 'Lu'
+        sent: 'Envoyé'
+    action:
+        delete: 'Supprimer'
+    confirm_delete: 'Êtes-vous sûr de vouloir supprimer ce message ?'
+
+filter:
+    search: 'Recherche'
+    search_placeholder: 'Rechercher par objet ou contenu...'
+    sender: 'Expéditeur'
+    recipient: 'Destinataire'
+    status: 'Statut'
+    all: 'Tous'
+    unread: 'Non lus'
+    read: 'Lus'
+    apply: 'Rechercher'
+    reset: 'Réinitialiser'
+
+pagination:
+    label: 'Pagination des messages'
+    showing: 'Affichage de %start% à %end% sur %total% messages'

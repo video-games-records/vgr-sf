@@ -13,6 +13,84 @@ label:
 
 message:
     label: 'Message'
+    flash:
+        deleted: 'Message deleted successfully.'
 
 group:
     messages: 'Messages'
+
+breadcrumb:
+    home: 'Home'
+    messages: 'Messages'
+    inbox: 'Inbox'
+    outbox: 'Sent'
+    view: 'View message'
+
+navigation:
+    inbox: 'Inbox'
+    outbox: 'Sent'
+
+inbox:
+    title: 'Inbox'
+    header: 'Inbox'
+    description: '%count% message(s) received'
+    empty: 'No messages in your inbox.'
+    unread: 'Unread'
+    read: 'Read'
+    column:
+        sender: 'From'
+        subject: 'Subject'
+        date: 'Date'
+        actions: 'Actions'
+    action:
+        view: 'View'
+        delete: 'Delete'
+    confirm_delete: 'Are you sure you want to delete this message?'
+
+outbox:
+    title: 'Sent Messages'
+    header: 'Sent Messages'
+    description: '%count% message(s) sent'
+    empty: 'No sent messages.'
+    read: 'Read by recipient'
+    unread: 'Not read yet'
+    status:
+        read: 'Read'
+        sent: 'Sent'
+    column:
+        recipient: 'To'
+        subject: 'Subject'
+        date: 'Date'
+        status: 'Status'
+        actions: 'Actions'
+    action:
+        view: 'View'
+        delete: 'Delete'
+    confirm_delete: 'Are you sure you want to delete this message?'
+
+view:
+    back: 'Back'
+    from: 'From'
+    to: 'To'
+    status:
+        read: 'Read'
+        sent: 'Sent'
+    action:
+        delete: 'Delete'
+    confirm_delete: 'Are you sure you want to delete this message?'
+
+filter:
+    search: 'Search'
+    search_placeholder: 'Search by subject or content...'
+    sender: 'Sender'
+    recipient: 'Recipient'
+    status: 'Status'
+    all: 'All'
+    unread: 'Unread'
+    read: 'Read'
+    apply: 'Search'
+    reset: 'Reset'
+
+pagination:
+    label: 'Message pagination'
+    showing: 'Showing %start% to %end% of %total% messages'

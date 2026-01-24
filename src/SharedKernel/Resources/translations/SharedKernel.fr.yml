@@ -43,6 +43,7 @@ navigation:
   # User menu (when logged in)
   user_menu:
     profile: "Profil"
+    messages: "Messages"
     settings: "Paramètres"
     logout: "Déconnexion"
 
