@@ -1,0 +1,13 @@
+services:
+  # Admin classes
+  sonata.admin.message.message:
+    class: App\BoundedContext\Message\Presentation\Admin\MessageAdmin
+    tags:
+      - name: sonata.admin
+        model_class: 'App\BoundedContext\Message\Domain\Entity\Message'
+        manager_type: orm
+        group: "group.messages"
+        label: "message.label"
+        label_translator_strategy: "sonata.admin.label.strategy.underscore"
+    calls:
+      - [ setTranslationDomain, [ 'Message' ] ]

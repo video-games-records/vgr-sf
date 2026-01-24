@@ -1,0 +1,18 @@
+label:
+    createdAt: 'Créé le'
+    updatedAt: 'Modifié le'
+    id: 'id'
+    message: 'Message'
+    object: 'Objet'
+    recipient: 'Destinataire'
+    sender: 'Expediteur'
+    type: 'Type'
+    isOpened: 'Lu'
+    isDeletedSender: 'Supprimé par l''expéditeur'
+    isDeletedRecipient: 'Supprimé par le destinataire'
+
+message:
+    label: 'Message'
+
+group:
+    messages: 'Messages'

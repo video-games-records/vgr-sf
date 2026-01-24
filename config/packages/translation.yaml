@@ -7,7 +7,7 @@ framework:
             - '%kernel.project_dir%/src/BoundedContext/User/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/Article/Presentation/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/Forum/Presentation/Resources/translations'
-            #- '%kernel.project_dir%/src/BoundedContext/Message/Presentation/Resources/translations'
+            - '%kernel.project_dir%/src/BoundedContext/Message/Presentation/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Badge/Presentation/Resources/translations'
             - '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Proof/Presentation/Resources/translations'

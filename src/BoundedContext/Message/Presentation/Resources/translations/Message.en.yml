@@ -1,0 +1,18 @@
+label:
+    createdAt: 'Created at'
+    updatedAt: 'Updated at'
+    id: 'ID'
+    message: 'Message'
+    object: 'Subject'
+    recipient: 'Recipient'
+    sender: 'Sender'
+    type: 'Type'
+    isOpened: 'Read'
+    isDeletedSender: 'Deleted by sender'
+    isDeletedRecipient: 'Deleted by recipient'
+
+message:
+    label: 'Message'
+
+group:
+    messages: 'Messages'
