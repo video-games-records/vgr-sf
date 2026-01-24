@@ -62,6 +62,14 @@ profile:
       timezone:
         label: "Fuseau horaire"
         placeholder: "Sélectionnez votre fuseau horaire"
+      submit: "Enregistrer"
+      error:
+        username_required: "Le nom d'utilisateur est requis"
+        username_too_short: "Le nom d'utilisateur doit comporter au moins {{ limit }} caractères"
+        username_too_long: "Le nom d'utilisateur ne peut pas dépasser {{ limit }} caractères"
+        username_invalid_format: "Le nom d'utilisateur ne peut contenir que des lettres, chiffres, tirets et underscores"
+        email_required: "L'email est requis"
+        email_invalid: "Veuillez entrer une adresse email valide"
     message:
       success: "Vos informations personnelles ont été mises à jour avec succès"
       error: "Une erreur s'est produite lors de la mise à jour de vos informations"

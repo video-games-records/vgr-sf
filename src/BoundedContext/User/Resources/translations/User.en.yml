@@ -62,6 +62,14 @@ profile:
       timezone:
         label: "Timezone"
         placeholder: "Select your timezone"
+      submit: "Save Changes"
+      error:
+        username_required: "Username is required"
+        username_too_short: "Username must be at least {{ limit }} characters"
+        username_too_long: "Username cannot exceed {{ limit }} characters"
+        username_invalid_format: "Username can only contain letters, numbers, underscores and hyphens"
+        email_required: "Email is required"
+        email_invalid: "Please enter a valid email address"
     message:
       success: "Your personal information has been updated successfully"
       error: "An error occurred while updating your information"
