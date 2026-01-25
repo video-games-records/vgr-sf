@@ -75,16 +75,26 @@
                     </thead>
                     <tbody>
                         {% for topic in topics %}
-                            <tr>
+                            {% set hasUnread = is_granted('ROLE_USER') and topic.hasNewContent %}
+                            <tr{% if hasUnread %} class="table-info"{% endif %}>
                                 <td>
-                                    <i class="bi bi-chat-dots me-2"></i>
+                                    {% if hasUnread %}
+                                        <i class="bi bi-chat-dots-fill text-primary me-2" title="{{ 'forum.unread'|trans }}"></i>
+                                    {% else %}
+                                        <i class="bi bi-chat-dots me-2"></i>
+                                    {% endif %}
                                     <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug}) }}" class="text-decoration-none">
-                                        <strong>{{ topic.name }}</strong>
+                                        {% if hasUnread %}<strong class="text-primary">{% endif %}
+                                        {{ topic.name }}
+                                        {% if hasUnread %}</strong>{% endif %}
                                     </a>
-                                    {% set totalPages = ((topic.nbMessage - 1) / 20)|round(0, 'floor') + 1 %}
-                                    {% if totalPages > 1 %}
-                                        <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug, page: totalPages}) }}" class="badge bg-secondary text-decoration-none ms-1" title="{{ 'forum.show.go_to_last_page'|trans }}">
-                                            {{ totalPages }}
+                                    {% if hasUnread %}
+                                        <span class="badge bg-primary ms-1">{{ 'forum.new'|trans }}</span>
+                                    {% endif %}
+                                    {% set topicPages = ((topic.nbMessage - 1) / 20)|round(0, 'floor') + 1 %}
+                                    {% if topicPages > 1 %}
+                                        <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug, page: topicPages}) }}" class="badge bg-secondary text-decoration-none ms-1" title="{{ 'forum.show.go_to_last_page'|trans }}">
+                                            {{ topicPages }}
                                         </a>
                                     {% endif %}
                                     <br>
@@ -118,15 +128,6 @@
                         {% endfor %}
                     </tbody>
                 </table>
-
-                {% include '@Forum/forum/_pagination.html.twig' with {
-                    route: 'forum_show',
-                    routeParams: {id: forum.id, slug: forum.slug},
-                    currentPage: currentPage,
-                    totalPages: totalPages,
-                    totalItems: totalTopics,
-                    perPage: 20
-                } %}
             {% else %}
                 <div class="text-center py-5 text-muted">
                     <i class="bi bi-chat-left" style="font-size: 3rem;"></i>
@@ -135,5 +136,16 @@
             {% endif %}
         </div>
     </div>
+
+    {% if topics|length > 0 %}
+        {% include '@Forum/forum/_pagination.html.twig' with {
+            route: 'forum_show',
+            routeParams: {id: forum.id, slug: forum.slug},
+            currentPage: currentPage,
+            totalPages: totalPages,
+            totalItems: totalTopics,
+            perPage: 20
+        } %}
+    {% endif %}
 </div>
 {% endblock %}

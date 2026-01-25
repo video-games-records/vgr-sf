@@ -13,6 +13,8 @@ forum:
         topic: 'Sujet'
     show:
         new_topic: 'Nouveau sujet'
+    unread: 'Messages non lus'
+    new: 'Nouveau'
 
 topic:
     show:

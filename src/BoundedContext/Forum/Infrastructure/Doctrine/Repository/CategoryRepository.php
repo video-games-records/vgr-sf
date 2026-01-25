@@ -36,9 +36,16 @@ class CategoryRepository extends ServiceEntityRepository
     public function findDisplayedOnHome(): array
     {
         return $this->createQueryBuilder('c')
+            ->leftJoin('c.forums', 'f')
+            ->addSelect('f')
+            ->leftJoin('f.lastMessage', 'lm')
+            ->addSelect('lm')
+            ->leftJoin('lm.user', 'lmu')
+            ->addSelect('lmu')
             ->where('c.displayOnHome = :displayOnHome')
             ->setParameter('displayOnHome', true)
             ->orderBy('c.position', 'ASC')
+            ->addOrderBy('f.position', 'ASC')
             ->getQuery()
             ->getResult();
     }

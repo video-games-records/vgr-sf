@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\Forum\Presentation\Web\Controller;
 
+use App\BoundedContext\Forum\Application\Service\TopicReadService;
 use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\MessageRepository;
@@ -26,7 +27,8 @@ class TopicController extends AbstractLocalizedController
     public function __construct(
         private readonly MessageRepository $messageRepository,
         private readonly EntityManagerInterface $entityManager,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
+        private readonly TopicReadService $topicReadService
     ) {
     }
 
@@ -57,6 +59,10 @@ class TopicController extends AbstractLocalizedController
 
         $replyForm = null;
         if ($this->isGranted('ROLE_USER')) {
+            /** @var User $user */
+            $user = $this->getUser();
+            $this->topicReadService->markTopicAsRead($user, $topic);
+
             $replyForm = $this->createForm(ReplyType::class, null, [
                 'action' => $this->generateUrl('topic_reply', [
                     'id' => $topic->getId(),

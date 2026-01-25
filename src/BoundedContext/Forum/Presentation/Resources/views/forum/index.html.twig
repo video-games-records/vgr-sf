@@ -15,10 +15,20 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
+                {% set unreadCount = 0 %}
+                {% if is_granted('ROLE_USER') %}
+                    {% for topic in recentTopics %}
+                        {% if topic.hasNewContent %}
+                            {% set unreadCount = unreadCount + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 <button class="nav-link" id="recent-tab" data-bs-toggle="tab" data-bs-target="#recent" type="button" role="tab" aria-controls="recent" aria-selected="false">
                     <i class="bi bi-clock-history"></i> {{ 'forum.tabs.recent'|trans }}
-                    {% if recentTopics|length > 0 %}
-                        <span class="badge bg-primary">{{ recentTopics|length }}</span>
+                    {% if unreadCount > 0 %}
+                        <span class="badge bg-danger">{{ unreadCount }}</span>
+                    {% elseif recentTopics|length > 0 %}
+                        <span class="badge bg-secondary">{{ recentTopics|length }}</span>
                     {% endif %}
                 </button>
             </li>
@@ -43,11 +53,16 @@
                                 </thead>
                                 <tbody>
                                     {% for forum in category.forums %}
-                                        <tr>
+                                        {% set hasUnread = is_granted('ROLE_USER') and forum.hasNewContent %}
+                                        <tr{% if hasUnread %} class="table-info"{% endif %}>
                                             <td>
-                                                <i class="bi bi-chat-left-text me-2"></i>
+                                                {% if hasUnread %}
+                                                    <i class="bi bi-chat-left-text-fill text-primary me-2" title="{{ 'forum.unread'|trans }}"></i>
+                                                {% else %}
+                                                    <i class="bi bi-chat-left-text me-2"></i>
+                                                {% endif %}
                                                 <a href="{{ path('forum_show', {id: forum.id, slug: forum.slug}) }}" class="text-decoration-none">
-                                                    <strong>
+                                                    {% if hasUnread %}<strong class="text-primary">{% else %}<strong>{% endif %}
                                                         {% if app.request.locale == 'fr' and forum.libForumFr %}
                                                             {{ forum.libForumFr }}
                                                         {% else %}
@@ -55,6 +70,9 @@
                                                         {% endif %}
                                                     </strong>
                                                 </a>
+                                                {% if hasUnread %}
+                                                    <span class="badge bg-primary ms-1">{{ 'forum.new'|trans }}</span>
+                                                {% endif %}
                                             </td>
                                             <td class="text-center d-none d-sm-table-cell">{{ forum.nbTopic }}</td>
                                             <td class="text-center d-none d-sm-table-cell">{{ forum.nbMessage }}</td>
@@ -106,12 +124,22 @@
                                 </thead>
                                 <tbody>
                                     {% for topic in recentTopics %}
-                                        <tr>
+                                        {% set hasUnread = is_granted('ROLE_USER') and topic.hasNewContent %}
+                                        <tr{% if hasUnread %} class="table-info"{% endif %}>
                                             <td>
-                                                <i class="bi bi-chat-dots me-2"></i>
+                                                {% if hasUnread %}
+                                                    <i class="bi bi-chat-dots-fill text-primary me-2" title="{{ 'forum.unread'|trans }}"></i>
+                                                {% else %}
+                                                    <i class="bi bi-chat-dots me-2"></i>
+                                                {% endif %}
                                                 <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: topic.forum.id, forumSlug: topic.forum.slug}) }}" class="text-decoration-none">
-                                                    <strong>{{ topic.name }}</strong>
+                                                    {% if hasUnread %}<strong class="text-primary">{% endif %}
+                                                    {{ topic.name }}
+                                                    {% if hasUnread %}</strong>{% endif %}
                                                 </a>
+                                                {% if hasUnread %}
+                                                    <span class="badge bg-primary ms-1">{{ 'forum.new'|trans }}</span>
+                                                {% endif %}
                                                 {% if topic.type %}
                                                     <span class="badge topic-type--{{ topic.type.name|lower }} ms-1">{{ topic.type.name }}</span>
                                                 {% endif %}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\Forum\Infrastructure\Doctrine\Repository;
 
+use App\BoundedContext\User\Domain\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,14 +33,17 @@ class TopicRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    /**
-     * @param Forum $forum
-     * @return Query
-     */
     public function getActiveTopicsQuery(Forum $forum): Query
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.type', 'tt')
+            ->addSelect('tt')
+            ->leftJoin('t.lastMessage', 'lm')
+            ->addSelect('lm')
+            ->leftJoin('lm.user', 'lmu')
+            ->addSelect('lmu')
+            ->leftJoin('t.user', 'tu')
+            ->addSelect('tu')
             ->where('t.forum = :forum')
             ->andWhere('t.boolArchive = :archived')
             ->setParameter('forum', $forum)
@@ -52,21 +56,28 @@ class TopicRepository extends ServiceEntityRepository
     /**
      * @return Topic[]
      */
-    public function findWithRecentActivity(int $days = 7, int $limit = 20): array
+    public function findWithRecentActivity(int $days = 7, int $limit = 20, ?User $user = null): array
     {
         $date = new \DateTime();
         $date->modify("-{$days} days");
 
-        return $this->createQueryBuilder('t')
+        $qb = $this->createQueryBuilder('t')
             ->innerJoin('t.lastMessage', 'lm')
             ->innerJoin('t.forum', 'f')
+            ->leftJoin('lm.user', 'lmu')
             ->where('t.boolArchive = :archived')
             ->andWhere('lm.createdAt >= :date')
             ->setParameter('archived', false)
             ->setParameter('date', $date)
             ->orderBy('lm.createdAt', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults($limit);
+
+        if ($user !== null) {
+            $qb->leftJoin('t.userLastVisits', 'ulv', 'WITH', 'ulv.user = :user')
+               ->addSelect('ulv')
+               ->setParameter('user', $user);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

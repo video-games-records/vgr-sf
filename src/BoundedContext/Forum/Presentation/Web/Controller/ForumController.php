@@ -8,8 +8,10 @@ use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\CategoryRepository;
+use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\ForumUserLastVisitRepository;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\TopicRepository;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\TopicTypeRepository;
+use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\TopicUserLastVisitRepository;
 use App\BoundedContext\Forum\Presentation\Form\CreateTopicFormType;
 use App\BoundedContext\User\Domain\Entity\User;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
@@ -33,6 +35,8 @@ class ForumController extends AbstractLocalizedController
         private readonly CategoryRepository $categoryRepository,
         private readonly TopicRepository $topicRepository,
         private readonly TopicTypeRepository $topicTypeRepository,
+        private readonly ForumUserLastVisitRepository $forumUserLastVisitRepository,
+        private readonly TopicUserLastVisitRepository $topicUserLastVisitRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly TranslatorInterface $translator
     ) {
@@ -41,11 +45,36 @@ class ForumController extends AbstractLocalizedController
     #[Route('/forum', name: 'forum_index')]
     public function index(): Response
     {
+        /** @var User|null $user */
+        $user = $this->getUser();
+
         $categories = $this->categoryRepository->findDisplayedOnHome();
         $recentTopics = $this->topicRepository->findWithRecentActivity(
             self::RECENT_ACTIVITY_DAYS,
-            self::RECENT_TOPICS_LIMIT
+            self::RECENT_TOPICS_LIMIT,
+            $user
         );
+
+        // Calculate hasNewContent for each forum
+        if ($user !== null) {
+            $forumVisits = $this->forumUserLastVisitRepository->findByUserIndexedByForum($user);
+
+            foreach ($categories as $category) {
+                foreach ($category->getForums() as $forum) {
+                    $visit = $forumVisits[$forum->getId()] ?? null;
+                    $lastMessage = $forum->getLastMessage();
+
+                    if ($lastMessage === null) {
+                        $forum->hasNewContent = false;
+                    } elseif ($visit === null) {
+                        // Never visited = has new content
+                        $forum->hasNewContent = true;
+                    } else {
+                        $forum->hasNewContent = $lastMessage->getCreatedAt() > $visit->getLastVisitedAt();
+                    }
+                }
+            }
+        }
 
         return $this->render('@Forum/forum/index.html.twig', [
             'categories' => $categories,
@@ -64,6 +93,9 @@ class ForumController extends AbstractLocalizedController
             ], 301);
         }
 
+        /** @var User|null $user */
+        $user = $this->getUser();
+
         $page = max(1, $request->query->getInt('page', 1));
 
         $query = $this->topicRepository->getActiveTopicsQuery($forum);
@@ -75,9 +107,29 @@ class ForumController extends AbstractLocalizedController
         $totalTopics = count($paginator);
         $totalPages = (int) ceil($totalTopics / self::TOPICS_PER_PAGE);
 
+        // Calculate hasNewContent for each topic
+        $topics = iterator_to_array($paginator);
+        if ($user !== null) {
+            $topicVisits = $this->topicUserLastVisitRepository->findByUserAndForumIndexedByTopic($user, $forum);
+
+            foreach ($topics as $topic) {
+                $visit = $topicVisits[$topic->getId()] ?? null;
+                $lastMessage = $topic->getLastMessage();
+
+                if ($lastMessage === null) {
+                    $topic->hasNewContent = false;
+                } elseif ($visit === null) {
+                    // Never visited = has new content
+                    $topic->hasNewContent = true;
+                } else {
+                    $topic->hasNewContent = $lastMessage->getCreatedAt() > $visit->getLastVisitedAt();
+                }
+            }
+        }
+
         return $this->render('@Forum/forum/show.html.twig', [
             'forum' => $forum,
-            'topics' => $paginator,
+            'topics' => $topics,
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'totalTopics' => $totalTopics,
