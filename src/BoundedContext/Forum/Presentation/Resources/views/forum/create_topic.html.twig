@@ -1,0 +1,84 @@
+{% extends '@SharedKernel/base.html.twig' %}
+
+{% trans_default_domain 'Forum' %}
+
+{% block title %}{{ 'topic.create.title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path('forum_index') }}">{{ 'forum.title'|trans }}</a>
+            </li>
+            {% if forum.category %}
+            <li class="breadcrumb-item">
+                {{ forum.category.name }}
+            </li>
+            {% endif %}
+            <li class="breadcrumb-item">
+                <a href="{{ path('forum_show', {id: forum.id, slug: forum.slug}) }}">
+                    {% if app.request.locale == 'fr' and forum.libForumFr %}
+                        {{ forum.libForumFr }}
+                    {% else %}
+                        {{ forum.libForum }}
+                    {% endif %}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'topic.create.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header py-3">
+                    <h1 class="h4 mb-0">
+                        <i class="bi bi-plus-circle"></i> {{ 'topic.create.header'|trans }}
+                    </h1>
+                </div>
+
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name) }}
+                            {{ form_errors(form.name) }}
+                        </div>
+
+                        {% if form.type is defined %}
+                        <div class="mb-3">
+                            {{ form_label(form.type) }}
+                            {{ form_widget(form.type) }}
+                            {{ form_errors(form.type) }}
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            {{ form_label(form.message) }}
+                            {{ form_widget(form.message) }}
+                            {{ form_errors(form.message) }}
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ path('forum_show', {id: forum.id, slug: forum.slug}) }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> {{ 'topic.create.form.cancel'|trans }}
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-send"></i> {{ 'topic.create.form.submit'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,6 +3,8 @@ breadcrumb:
 
 forum:
     title: 'Forum'
+    show:
+        new_topic: 'Nouveau sujet'
 
 topic:
     show:
@@ -18,3 +20,20 @@ topic:
         login_required: 'Vous devez être connecté pour répondre à ce sujet.'
         validation:
             message_required: 'Veuillez saisir votre message.'
+    create:
+        title: 'Créer un nouveau sujet'
+        breadcrumb: 'Nouveau sujet'
+        header: 'Créer un nouveau sujet'
+        success: 'Votre sujet a été créé avec succès.'
+        form:
+            name: 'Titre du sujet'
+            message: 'Votre message'
+            type: 'Type de sujet'
+            type_placeholder: 'Sélectionner un type...'
+            cancel: 'Annuler'
+            submit: 'Créer le sujet'
+        validation:
+            name_required: 'Veuillez saisir un titre pour votre sujet.'
+            name_too_short: 'Le titre doit contenir au moins 3 caractères.'
+            name_too_long: 'Le titre ne peut pas dépasser 255 caractères.'
+            message_required: 'Veuillez saisir un message pour votre sujet.'

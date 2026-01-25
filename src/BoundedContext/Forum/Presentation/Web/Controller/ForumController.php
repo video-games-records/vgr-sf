@@ -5,22 +5,34 @@ declare(strict_types=1);
 namespace App\BoundedContext\Forum\Presentation\Web\Controller;
 
 use App\BoundedContext\Forum\Domain\Entity\Forum;
+use App\BoundedContext\Forum\Domain\Entity\Message;
+use App\BoundedContext\Forum\Domain\Entity\Topic;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\CategoryRepository;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\TopicRepository;
+use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\TopicTypeRepository;
+use App\BoundedContext\Forum\Presentation\Form\CreateTopicFormType;
+use App\BoundedContext\User\Domain\Entity\User;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
 class ForumController extends AbstractLocalizedController
 {
     private const int TOPICS_PER_PAGE = 20;
+    private const int DEFAULT_TOPIC_TYPE_ID = 3;
 
     public function __construct(
         private readonly CategoryRepository $categoryRepository,
-        private readonly TopicRepository $topicRepository
+        private readonly TopicRepository $topicRepository,
+        private readonly TopicTypeRepository $topicTypeRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator
     ) {
     }
 
@@ -61,6 +73,66 @@ class ForumController extends AbstractLocalizedController
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'totalTopics' => $totalTopics,
+        ]);
+    }
+
+    #[Route('/forum/{slug}-f{id}/new-topic', name: 'forum_create_topic', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
+    #[IsGranted('ROLE_USER')]
+    public function createTopic(Request $request, Forum $forum, string $slug): Response
+    {
+        if ($forum->getSlug() !== $slug) {
+            return $this->redirectToRoute('forum_create_topic', [
+                'id' => $forum->getId(),
+                'slug' => $forum->getSlug(),
+            ], 301);
+        }
+
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        $form = $this->createForm(CreateTopicFormType::class, null, [
+            'is_admin' => $isAdmin,
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $topic = new Topic();
+            $topic->setName($form->get('name')->getData());
+            $topic->setForum($forum);
+            $topic->setUser($user);
+
+            if ($isAdmin && $form->has('type') && $form->get('type')->getData()) {
+                $topic->setType($form->get('type')->getData());
+            } else {
+                $defaultType = $this->topicTypeRepository->find(self::DEFAULT_TOPIC_TYPE_ID);
+                $topic->setType($defaultType);
+            }
+
+            $message = new Message();
+            $message->setTopic($topic);
+            $message->setUser($user);
+            $message->setMessage($form->get('message')->getData());
+
+            $topic->addMessage($message);
+
+            $this->entityManager->persist($topic);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', $this->translator->trans('topic.create.success', [], 'Forum'));
+
+            return $this->redirectToRoute('topic_show', [
+                'id' => $topic->getId(),
+                'slug' => $topic->getSlug(),
+                'forumId' => $forum->getId(),
+                'forumSlug' => $forum->getSlug(),
+            ]);
+        }
+
+        return $this->render('@Forum/forum/create_topic.html.twig', [
+            'forum' => $forum,
+            'form' => $form->createView(),
         ]);
     }
 }

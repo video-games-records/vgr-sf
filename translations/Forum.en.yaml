@@ -3,6 +3,8 @@ breadcrumb:
 
 forum:
     title: 'Forum'
+    show:
+        new_topic: 'New Topic'
 
 topic:
     show:
@@ -18,3 +20,20 @@ topic:
         login_required: 'You must be logged in to reply to this topic.'
         validation:
             message_required: 'Please enter your message.'
+    create:
+        title: 'Create a New Topic'
+        breadcrumb: 'New Topic'
+        header: 'Create a New Topic'
+        success: 'Your topic has been created successfully.'
+        form:
+            name: 'Topic Title'
+            message: 'Your message'
+            type: 'Topic Type'
+            type_placeholder: 'Select a type...'
+            cancel: 'Cancel'
+            submit: 'Create Topic'
+        validation:
+            name_required: 'Please enter a title for your topic.'
+            name_too_short: 'The title must be at least 3 characters long.'
+            name_too_long: 'The title cannot exceed 255 characters.'
+            message_required: 'Please enter a message for your topic.'

@@ -50,6 +50,14 @@
         <p class="text-muted">{{ 'forum.show.description'|trans({'%count%': totalTopics}) }}</p>
     </div>
 
+    {% if is_granted('ROLE_USER') %}
+    <div class="mb-3">
+        <a href="{{ path('forum_create_topic', {id: forum.id, slug: forum.slug}) }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> {{ 'forum.show.new_topic'|trans }}
+        </a>
+    </div>
+    {% endif %}
+
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <span>{{ 'forum.show.topics_list'|trans }}</span>
