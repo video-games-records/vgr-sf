@@ -3,8 +3,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/quill-emoji@0.1.8/dist/quill-emoji.css" rel="stylesheet">
+    {{ encore_entry_link_tags('admin') }}
     <style>
         /* A2lix Translation Tabs Styling */
         .a2lix_translations {
@@ -66,118 +65,23 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quill-emoji@0.1.8/dist/quill-emoji.js"></script>
+    {{ encore_entry_script_tags('admin') }}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Register emoji module
-            Quill.register('modules/emoji', window.QuillEmoji);
+            setTimeout(initTranslationTabs, 100);
 
-            // Wait for Sonata to be loaded
-            setTimeout(function() {
-                initTranslationTabs();
-                initQuillEditors();
-            }, 100);
-
-            // Reinitialize on dynamic additions (Sonata collections)
             document.addEventListener('sonata-collection-item-added', function() {
-                setTimeout(function() {
-                    initTranslationTabs();
-                    initQuillEditors();
-                }, 100);
+                setTimeout(initTranslationTabs, 100);
             });
         });
 
         function initTranslationTabs() {
-            // Initialize Bootstrap tabs for a2lix translations
             document.querySelectorAll('[data-bs-toggle="tab"]').forEach(function(tabElement) {
                 tabElement.style.cursor = 'pointer';
                 tabElement.addEventListener('click', function(e) {
                     e.preventDefault();
                     const tab = new bootstrap.Tab(tabElement);
                     tab.show();
-                });
-            });
-        }
-
-        function initQuillEditors() {
-            document.querySelectorAll('textarea.rich-text-editor:not(.quill-initialized)').forEach(function(textarea) {
-                // Mark as initialized
-                textarea.classList.add('quill-initialized');
-
-                // Create Quill container
-                const editorDiv = document.createElement('div');
-                editorDiv.style.minHeight = '300px';
-                textarea.parentNode.insertBefore(editorDiv, textarea);
-                textarea.style.display = 'none';
-
-                // Initialize Quill with full toolbar + emoji
-                const quill = new Quill(editorDiv, {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            // Header styles
-                            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-                            // Font and size
-                            [{ 'font': [] }],
-                            [{ 'size': ['small', false, 'large', 'huge'] }],
-
-                            // Text formatting
-                            ['bold', 'italic', 'underline', 'strike'],
-
-                            // Colors
-                            [{ 'color': [] }, { 'background': [] }],
-
-                            // Superscript/subscript
-                            [{ 'script': 'sub'}, { 'script': 'super' }],
-
-                            // Lists
-                            [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-
-                            // Indentation
-                            [{ 'indent': '-1'}, { 'indent': '+1' }],
-
-                            // Text alignment
-                            [{ 'align': [] }],
-
-                            // Text direction
-                            [{ 'direction': 'rtl' }],
-
-                            // Special elements
-                            ['blockquote', 'code-block'],
-
-                            // Links and media
-                            ['link', 'image', 'video'],
-
-                            // Emoji
-                            ['emoji'],
-
-                            // Clean formatting
-                            ['clean']
-                        ],
-
-                        // Emoji module configuration
-                        'emoji-toolbar': true,
-                        'emoji-textarea': false,
-                        'emoji-shortname': true,
-
-                        clipboard: {
-                            matchVisual: false
-                        }
-                    }
-                });
-
-                // Load initial content
-                if (textarea.value) {
-                    quill.root.innerHTML = textarea.value;
-                }
-
-                // Sync with textarea
-                quill.on('text-change', function() {
-                    textarea.value = quill.root.innerHTML;
-                    // Trigger change event for Sonata
-                    textarea.dispatchEvent(new Event('change', { bubbles: true }));
                 });
             });
         }

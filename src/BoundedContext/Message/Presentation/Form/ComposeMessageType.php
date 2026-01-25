@@ -55,6 +55,7 @@ class ComposeMessageType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'rows' => 10,
+                    'data-controller' => 'quill',
                 ],
             ]);
     }
