@@ -26,6 +26,8 @@ class ForumController extends AbstractLocalizedController
 {
     private const int TOPICS_PER_PAGE = 20;
     private const int DEFAULT_TOPIC_TYPE_ID = 3;
+    private const int RECENT_ACTIVITY_DAYS = 15;
+    private const int RECENT_TOPICS_LIMIT = 50;
 
     public function __construct(
         private readonly CategoryRepository $categoryRepository,
@@ -40,9 +42,15 @@ class ForumController extends AbstractLocalizedController
     public function index(): Response
     {
         $categories = $this->categoryRepository->findDisplayedOnHome();
+        $recentTopics = $this->topicRepository->findWithRecentActivity(
+            self::RECENT_ACTIVITY_DAYS,
+            self::RECENT_TOPICS_LIMIT
+        );
 
         return $this->render('@Forum/forum/index.html.twig', [
             'categories' => $categories,
+            'recentTopics' => $recentTopics,
+            'recentActivityDays' => self::RECENT_ACTIVITY_DAYS,
         ]);
     }
 

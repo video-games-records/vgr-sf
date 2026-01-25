@@ -48,4 +48,25 @@ class TopicRepository extends ServiceEntityRepository
             ->addOrderBy('t.updatedAt', 'DESC')
             ->getQuery();
     }
+
+    /**
+     * @return Topic[]
+     */
+    public function findWithRecentActivity(int $days = 7, int $limit = 20): array
+    {
+        $date = new \DateTime();
+        $date->modify("-{$days} days");
+
+        return $this->createQueryBuilder('t')
+            ->innerJoin('t.lastMessage', 'lm')
+            ->innerJoin('t.forum', 'f')
+            ->where('t.boolArchive = :archived')
+            ->andWhere('lm.createdAt >= :date')
+            ->setParameter('archived', false)
+            ->setParameter('date', $date)
+            ->orderBy('lm.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

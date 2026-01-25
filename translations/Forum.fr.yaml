@@ -3,6 +3,14 @@ breadcrumb:
 
 forum:
     title: 'Forum'
+    tabs:
+        categories: 'Catégories'
+        recent: 'Activité récente'
+    recent:
+        title: 'Sujets avec activité dans les %days% derniers jours'
+        no_topics: 'Aucun sujet avec activité récente dans les %days% derniers jours.'
+    table:
+        topic: 'Sujet'
     show:
         new_topic: 'Nouveau sujet'
 
