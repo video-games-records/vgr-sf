@@ -1,0 +1,35 @@
+forum:
+    title: "Forum"
+    table:
+        forum: "Forum"
+        topics: "Topics"
+        messages: "Messages"
+        last_message: "Last Message"
+    by: "by"
+    no_message: "No messages yet"
+    no_forum: "No forum in this category"
+    no_category: "No category to display"
+    show:
+        description: "%count% topic(s) in this forum"
+        topics_list: "Topics"
+        table:
+            topic: "Topic"
+            type: "Type"
+            messages: "Replies"
+            last_message: "Last Message"
+        started_by: "Started by"
+        no_topic: "No topics in this forum yet"
+        go_to_last_page: "Go to last page"
+
+topic:
+    show:
+        description: "%count% message(s)"
+        messages_count: "%count% messages"
+        no_message: "No messages in this topic yet"
+
+breadcrumb:
+    home: "Home"
+
+pagination:
+    label: "Page navigation"
+    showing: "Showing %start% to %end% of %total% items"

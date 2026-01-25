@@ -1,0 +1,111 @@
+{% extends '@SharedKernel/base.html.twig' %}
+
+{% trans_default_domain 'Forum' %}
+
+{% block title %}{{ topic.name }} - {{ 'forum.title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path('forum_index') }}">{{ 'forum.title'|trans }}</a>
+            </li>
+            {% if forum.category %}
+            <li class="breadcrumb-item">
+                {{ forum.category.name }}
+            </li>
+            {% endif %}
+            <li class="breadcrumb-item">
+                <a href="{{ path('forum_show', {id: forum.id, slug: forum.slug}) }}">
+                    {% if app.request.locale == 'fr' and forum.libForumFr %}
+                        {{ forum.libForumFr }}
+                    {% else %}
+                        {{ forum.libForum }}
+                    {% endif %}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ topic.name }}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="mb-4">
+        <h1 class="h3">
+            <i class="bi bi-chat-dots"></i> {{ topic.name }}
+        </h1>
+        <p class="text-muted">
+            {{ 'topic.show.description'|trans({'%count%': totalMessages}) }}
+            {% if topic.type %}
+                <span class="badge topic-type--{{ topic.type.name|lower }} ms-2">{{ topic.type.name }}</span>
+            {% endif %}
+        </p>
+    </div>
+
+    {% include '@Forum/forum/_pagination.html.twig' with {
+        route: 'topic_show',
+        routeParams: {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug},
+        currentPage: currentPage,
+        totalPages: totalPages,
+        totalItems: totalMessages,
+        perPage: 20
+    } %}
+
+    {% for message in messages %}
+        <div class="card mb-3" id="message-{{ message.id }}">
+            <div class="card-header d-flex justify-content-between align-items-center py-2">
+                <small class="text-muted">
+                    <i class="bi bi-clock"></i> {{ message.createdAt|date('d/m/Y H:i') }}
+                </small>
+                <small class="text-muted">#{{ message.position }}</small>
+            </div>
+            <div class="card-body p-0">
+                <div class="row g-0">
+                    <div class="col-12 col-md-2 p-3 border-end bg-body-tertiary">
+                        <div class="text-center">
+                            <a href="{{ path('vgr_player_profile_overview', {id: message.user.id, slug: message.user.slug}) }}">
+                                <img src="/users/{{ message.user.id }}/avatar"
+                                     alt="{{ message.user.username }}"
+                                     class="rounded-circle mb-2"
+                                     width="64" height="64">
+                            </a>
+                            <div class="fw-bold">
+                                <a href="{{ path('vgr_player_profile_overview', {id: message.user.id, slug: message.user.slug}) }}" class="text-decoration-none">
+                                    {{ message.user.username }}
+                                </a>
+                            </div>
+                            <small class="text-muted d-block">
+                                {{ 'topic.show.messages_count'|trans({'%count%': message.user.nbForumMessage}) }}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-10 p-3">
+                        <div class="message-content">
+                            {{ message.message|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> {{ 'topic.show.no_message'|trans }}
+        </div>
+    {% endfor %}
+
+    {% include '@Forum/forum/_pagination.html.twig' with {
+        route: 'topic_show',
+        routeParams: {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug},
+        currentPage: currentPage,
+        totalPages: totalPages,
+        totalItems: totalMessages,
+        perPage: 20
+    } %}
+</div>
+{% endblock %}

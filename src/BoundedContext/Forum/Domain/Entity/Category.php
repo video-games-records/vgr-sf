@@ -32,6 +32,7 @@ class Category
      * @var Collection<int, Forum>
      */
     #[ORM\OneToMany(targetEntity: Forum::class, mappedBy: 'category')]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $forums;
 
     public function __toString()

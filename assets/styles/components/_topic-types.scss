@@ -1,0 +1,38 @@
+/**
+ * Topic Types - Forum
+ * Couleurs pour les différents types de sujets
+ */
+
+.topic-type {
+    &--announcement {
+        background-color: #dc3545 !important; // Rouge - Important
+        color: #fff !important;
+    }
+
+    &--sticky {
+        background-color: #fd7e14 !important; // Orange - Épinglé
+        color: #fff !important;
+    }
+
+    &--normal {
+        background-color: #6c757d !important; // Gris - Normal
+        color: #fff !important;
+    }
+}
+
+// Mode dark - ajustements si nécessaire
+[data-bs-theme="dark"] {
+    .topic-type {
+        &--announcement {
+            background-color: #b02a37 !important;
+        }
+
+        &--sticky {
+            background-color: #ca6510 !important;
+        }
+
+        &--normal {
+            background-color: #565e64 !important;
+        }
+    }
+}

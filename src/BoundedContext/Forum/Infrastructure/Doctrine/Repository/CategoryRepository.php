@@ -29,4 +29,17 @@ class CategoryRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($category);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * @return Category[]
+     */
+    public function findDisplayedOnHome(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.displayOnHome = :displayOnHome')
+            ->setParameter('displayOnHome', true)
+            ->orderBy('c.position', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

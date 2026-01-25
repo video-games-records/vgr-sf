@@ -7,6 +7,7 @@ namespace App\BoundedContext\Forum\Infrastructure\Doctrine\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\Forum\Domain\Entity\Message;
+use App\BoundedContext\Forum\Domain\Entity\Topic;
 
 /**
  * @extends ServiceEntityRepository<Message>
@@ -28,5 +29,17 @@ class MessageRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($message);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @return \Doctrine\ORM\Query
+     */
+    public function getMessagesByTopicQuery(Topic $topic): \Doctrine\ORM\Query
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.topic = :topic')
+            ->setParameter('topic', $topic)
+            ->orderBy('m.position', 'ASC')
+            ->getQuery();
     }
 }

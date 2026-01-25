@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\BoundedContext\Forum\Infrastructure\Doctrine\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
 
 /**
@@ -28,5 +30,22 @@ class TopicRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($topic);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Forum $forum
+     * @return Query
+     */
+    public function getActiveTopicsQuery(Forum $forum): Query
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.type', 'tt')
+            ->where('t.forum = :forum')
+            ->andWhere('t.boolArchive = :archived')
+            ->setParameter('forum', $forum)
+            ->setParameter('archived', false)
+            ->orderBy('tt.position', 'ASC')
+            ->addOrderBy('t.updatedAt', 'DESC')
+            ->getQuery();
     }
 }

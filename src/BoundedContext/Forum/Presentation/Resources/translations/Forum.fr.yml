@@ -1,0 +1,35 @@
+forum:
+    title: "Forum"
+    table:
+        forum: "Forum"
+        topics: "Sujets"
+        messages: "Messages"
+        last_message: "Dernier message"
+    by: "par"
+    no_message: "Aucun message"
+    no_forum: "Aucun forum dans cette catégorie"
+    no_category: "Aucune catégorie à afficher"
+    show:
+        description: "%count% sujet(s) dans ce forum"
+        topics_list: "Sujets"
+        table:
+            topic: "Sujet"
+            type: "Type"
+            messages: "Réponses"
+            last_message: "Dernier message"
+        started_by: "Créé par"
+        no_topic: "Aucun sujet dans ce forum"
+        go_to_last_page: "Aller à la dernière page"
+
+topic:
+    show:
+        description: "%count% message(s)"
+        messages_count: "%count% messages"
+        no_message: "Aucun message dans ce sujet"
+
+breadcrumb:
+    home: "Accueil"
+
+pagination:
+    label: "Navigation des pages"
+    showing: "Affichage de %start% à %end% sur %total% éléments"

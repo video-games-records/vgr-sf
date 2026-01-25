@@ -1,0 +1,50 @@
+{% trans_default_domain 'Forum' %}
+
+{% if totalPages > 1 %}
+<nav aria-label="{{ 'pagination.label'|trans }}" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {{ currentPage == 1 ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ path(route, routeParams|merge({page: currentPage - 1})) }}">
+                <i class="bi bi-chevron-left"></i>
+            </a>
+        </li>
+
+        {% set startPage = max(1, currentPage - 2) %}
+        {% set endPage = min(totalPages, currentPage + 2) %}
+
+        {% if startPage > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path(route, routeParams|merge({page: 1})) }}">1</a>
+            </li>
+            {% if startPage > 2 %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+        {% endif %}
+
+        {% for p in startPage..endPage %}
+            <li class="page-item {{ p == currentPage ? 'active' : '' }}">
+                <a class="page-link" href="{{ path(route, routeParams|merge({page: p})) }}">{{ p }}</a>
+            </li>
+        {% endfor %}
+
+        {% if endPage < totalPages %}
+            {% if endPage < totalPages - 1 %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path(route, routeParams|merge({page: totalPages})) }}">{{ totalPages }}</a>
+            </li>
+        {% endif %}
+
+        <li class="page-item {{ currentPage == totalPages ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ path(route, routeParams|merge({page: currentPage + 1})) }}">
+                <i class="bi bi-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<div class="text-center text-muted small">
+    {{ 'pagination.showing'|trans({'%start%': ((currentPage - 1) * perPage) + 1, '%end%': min(currentPage * perPage, totalItems), '%total%': totalItems}) }}
+</div>
+{% endif %}

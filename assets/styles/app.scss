@@ -19,6 +19,7 @@
 // 4. Utilities (styles de base)
 @import 'components/achievements';
 @import 'components/platforms';
+@import 'components/topic-types';
 
 // 5. Import des vues
 @import 'views/home';
@@ -52,10 +53,10 @@ body {
     --bs-primary: #5dade2;
     --bs-primary-rgb: 93, 173, 226;
 
-    // En mode dark, les card-headers utilisent le style par défaut de Bootstrap
-    .card-header {
-        background-color: var(--bs-dark-bg-subtle);
-        color: var(--bs-dark-color);
+    // En mode dark, les card-headers utilisent un orange foncé/désaturé
+    .card-header:not([class*="bg-"]) {
+        background-color: hsl(27, 60%, 25%);
+        color: #fff;
     }
 
     // Headers de tableaux plus sombres en mode dark
