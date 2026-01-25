@@ -1,0 +1,20 @@
+breadcrumb:
+    home: 'Accueil'
+
+forum:
+    title: 'Forum'
+
+topic:
+    show:
+        description: '{0} Aucun message|{1} %count% message|]1,Inf[ %count% messages'
+        no_message: 'Aucun message dans ce sujet pour le moment.'
+        messages_count: '{0} Aucun message|{1} %count% message|]1,Inf[ %count% messages'
+    reply:
+        title: 'Répondre à ce sujet'
+        form:
+            message: 'Votre message'
+        submit: 'Publier la réponse'
+        success: 'Votre message a été publié avec succès.'
+        login_required: 'Vous devez être connecté pour répondre à ce sujet.'
+        validation:
+            message_required: 'Veuillez saisir votre message.'

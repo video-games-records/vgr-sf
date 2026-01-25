@@ -1,0 +1,20 @@
+breadcrumb:
+    home: 'Home'
+
+forum:
+    title: 'Forum'
+
+topic:
+    show:
+        description: '{0} No messages|{1} %count% message|]1,Inf[ %count% messages'
+        no_message: 'No messages in this topic yet.'
+        messages_count: '{0} No messages|{1} %count% message|]1,Inf[ %count% messages'
+    reply:
+        title: 'Reply to this topic'
+        form:
+            message: 'Your message'
+        submit: 'Post Reply'
+        success: 'Your message has been posted successfully.'
+        login_required: 'You must be logged in to reply to this topic.'
+        validation:
+            message_required: 'Please enter your message.'
