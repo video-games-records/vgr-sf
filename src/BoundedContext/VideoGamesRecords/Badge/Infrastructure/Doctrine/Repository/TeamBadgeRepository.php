@@ -12,7 +12,9 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Event\TeamMasterBadgeLost;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
@@ -22,8 +24,10 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
  */
 class TeamBadgeRepository extends DefaultRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly EventDispatcherInterface $eventDispatcher
+    ) {
         parent::__construct($registry, TeamBadge::class);
     }
 
@@ -95,12 +99,13 @@ class TeamBadgeRepository extends DefaultRepository
     /**
      * @param array<int, int> $teams
      * @param Badge $badge
+     * @param Game|null $game Game entity for MASTER badges (required for notifications)
      * @throws Exception
      * @throws ORMException
      */
-    public function updateBadge(array $teams, Badge $badge): void
+    public function updateBadge(array $teams, Badge $badge, ?Game $game = null): void
     {
-        //----- get players with badge
+        //----- get teams with badge
         $list = $this->getFromBadge($badge);
 
         //----- Remove badge
@@ -110,6 +115,10 @@ class TeamBadgeRepository extends DefaultRepository
             if (!array_key_exists($idTeam, $teams)) {
                 $teamBadge->setEndedAt(new DateTime());
                 $this->getEntityManager()->persist($teamBadge);
+                //----- Dispatch event for Master badges (games)
+                if ($game !== null && $badge->isTypeMaster()) {
+                    $this->eventDispatcher->dispatch(new TeamMasterBadgeLost($teamBadge, $game));
+                }
             }
             $teams[$idTeam] = 1;
         }

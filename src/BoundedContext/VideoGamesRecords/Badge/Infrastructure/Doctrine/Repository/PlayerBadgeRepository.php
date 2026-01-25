@@ -10,8 +10,10 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Event\PlayerMasterBadgeLost;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
@@ -21,8 +23,10 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
  */
 class PlayerBadgeRepository extends DefaultRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly EventDispatcherInterface $eventDispatcher
+    ) {
         parent::__construct($registry, PlayerBadge::class);
     }
 
@@ -60,6 +64,10 @@ class PlayerBadgeRepository extends DefaultRepository
             if ($idPlayer !== null && !array_key_exists($idPlayer, $players)) {
                 $playerBadge->setEndedAt(new DateTime());
                 $this->getEntityManager()->persist($playerBadge);
+                //----- Dispatch event for Master badges (games)
+                if ($game !== null && $badge->isTypeMaster()) {
+                    $this->eventDispatcher->dispatch(new PlayerMasterBadgeLost($playerBadge, $game));
+                }
             }
             if ($idPlayer !== null) {
                 $players[$idPlayer] = 1;

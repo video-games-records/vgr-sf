@@ -6,7 +6,9 @@ namespace App\BoundedContext\Message\Presentation\Web\Controller;
 
 use App\BoundedContext\Message\Domain\Entity\Message;
 use App\BoundedContext\Message\Domain\Repository\MessageRepositoryInterface;
+use App\BoundedContext\Message\Presentation\Form\ComposeMessageType;
 use App\BoundedContext\User\Domain\Entity\User;
+use App\BoundedContext\User\Infrastructure\Persistence\Doctrine\UserRepository;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -26,6 +28,7 @@ class MessageController extends AbstractLocalizedController
         private readonly MessageRepositoryInterface $messageRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly TranslatorInterface $translator,
+        private readonly UserRepository $userRepository,
     ) {
     }
 
@@ -88,6 +91,92 @@ class MessageController extends AbstractLocalizedController
             'totalMessages' => $totalMessages,
             'filters' => $filters,
             'recipients' => $recipients,
+        ]);
+    }
+
+    #[Route('/messages/compose', name: 'message_compose')]
+    public function compose(Request $request): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $preselectedRecipient = null;
+        $formData = [];
+        $replyToMessage = null;
+
+        // Handle reply to message
+        $replyToId = $request->query->getInt('reply');
+        if ($replyToId > 0) {
+            $replyToMessage = $this->entityManager->getRepository(Message::class)->find($replyToId);
+            if (
+                $replyToMessage
+                && $replyToMessage->getRecipient()->getId() === $user->getId()
+                && $replyToMessage->isReplyable()
+            ) {
+                $preselectedRecipient = $replyToMessage->getSender();
+                $formData['recipient'] = (string) $preselectedRecipient->getId();
+
+                // Add "Re:" prefix if not already present
+                $originalSubject = $replyToMessage->getObject();
+                if (!str_starts_with(strtolower($originalSubject), 're:')) {
+                    $formData['object'] = 'Re: ' . $originalSubject;
+                } else {
+                    $formData['object'] = $originalSubject;
+                }
+            }
+        }
+
+        // Handle direct message to user (if not replying)
+        if (!$preselectedRecipient) {
+            $toUserId = $request->query->getInt('to');
+            if ($toUserId > 0) {
+                $preselectedRecipient = $this->userRepository->find($toUserId);
+                if ($preselectedRecipient && $preselectedRecipient->getId() !== $user->getId()) {
+                    $formData['recipient'] = (string) $preselectedRecipient->getId();
+                }
+            }
+        }
+
+        $form = $this->createForm(ComposeMessageType::class, $formData ?: null, [
+            'users_autocomplete_url' => '/api/users/autocomplete',
+            'recipient_placeholder' => $this->translator->trans('compose.form.recipient_placeholder', [], 'Message'),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $recipientId = (int) $data['recipient'];
+            $recipient = $this->userRepository->find($recipientId);
+
+            if (!$recipient) {
+                $this->addFlash('error', $this->translator->trans('compose.error.recipient_not_found', [], 'Message'));
+                return $this->redirectToRoute('message_compose');
+            }
+
+            if ($recipient->getId() === $user->getId()) {
+                $this->addFlash('error', $this->translator->trans('compose.error.cannot_send_to_self', [], 'Message'));
+                return $this->redirectToRoute('message_compose');
+            }
+
+            $message = new Message();
+            $message->setSender($user);
+            $message->setRecipient($recipient);
+            $message->setObject($data['object']);
+            $message->setMessage($data['message']);
+
+            $this->entityManager->persist($message);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', $this->translator->trans('compose.success.sent', [], 'Message'));
+
+            return $this->redirectToRoute('message_outbox');
+        }
+
+        return $this->render('@Message/message/compose.html.twig', [
+            'form' => $form,
+            'preselectedRecipient' => $preselectedRecipient,
         ]);
     }
 

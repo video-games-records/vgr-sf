@@ -93,7 +93,12 @@
                                 {% endif %}
                             {% endif %}
                         </div>
-                        <div>
+                        <div class="d-flex gap-2">
+                            {% if isInbox and message.replyable %}
+                                <a href="{{ path('message_compose', {reply: message.id}) }}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-reply"></i> {{ 'view.action.reply'|trans }}
+                                </a>
+                            {% endif %}
                             <form action="{{ path('message_delete', {id: message.id}) }}"
                                   method="POST"
                                   class="d-inline"

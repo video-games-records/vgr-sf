@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\Message\Infrastructure\Builder;
 
+use App\BoundedContext\Message\Domain\ValueObject\MessageTypeEnum;
 use App\BoundedContext\User\Domain\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use App\BoundedContext\Message\Domain\Entity\Message;
@@ -23,9 +24,9 @@ class MessageBuilder
         $this->em = $em;
     }
 
-    public function setType(string $type): MessageBuilder
+    public function setType(string|MessageTypeEnum $type): MessageBuilder
     {
-        $this->type = $type;
+        $this->type = $type instanceof MessageTypeEnum ? $type->value : $type;
         return $this;
     }
 

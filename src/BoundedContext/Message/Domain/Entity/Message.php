@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\Message\Domain\Entity;
 
+use App\BoundedContext\Message\Domain\ValueObject\MessageTypeEnum;
+use App\BoundedContext\Message\Infrastructure\Doctrine\Repository\MessageRepository;
+use App\BoundedContext\User\Domain\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use App\BoundedContext\Message\Infrastructure\Doctrine\Repository\MessageRepository;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\BoundedContext\User\Domain\Entity\User;
 
 #[ORM\Index(name: "idx_inbox", columns: ["recipient_id", 'is_deleted_recipient'])]
 #[ORM\Index(name: "idx_outbox", columns: ["sender_id", 'is_deleted_sender'])]
@@ -82,14 +83,24 @@ class Message
         return $this->object;
     }
 
-    public function setType(string $type): void
+    public function setType(string|MessageTypeEnum $type): void
     {
-        $this->type = $type;
+        $this->type = $type instanceof MessageTypeEnum ? $type->value : $type;
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
+    }
+
+    public function getTypeEnum(): MessageTypeEnum
+    {
+        return MessageTypeEnum::tryFrom($this->type) ?? MessageTypeEnum::DEFAULT;
+    }
+
+    public function isReplyable(): bool
+    {
+        return $this->getTypeEnum()->isReplyable();
     }
 
     public function setMessage(string $message): void

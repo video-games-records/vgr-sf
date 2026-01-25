@@ -155,6 +155,6 @@ readonly class UpdateTeamGameRankHandler
         }
 
         $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge')
-            ->updateBadge($firstPlaceTeams, $game->getBadge());
+            ->updateBadge($firstPlaceTeams, $game->getBadge(), $game);
     }
 }

@@ -25,10 +25,33 @@ breadcrumb:
     inbox: 'Boîte de réception'
     outbox: 'Envoyés'
     view: 'Voir le message'
+    compose: 'Nouveau message'
 
 navigation:
     inbox: 'Boîte de réception'
     outbox: 'Envoyés'
+    compose: 'Nouveau message'
+
+compose:
+    title: 'Nouveau message'
+    header: 'Nouveau message'
+    form:
+        recipient: 'À'
+        recipient_placeholder: 'Rechercher un utilisateur...'
+        subject: 'Objet'
+        message: 'Message'
+        send: 'Envoyer'
+        cancel: 'Annuler'
+    validation:
+        recipient_required: 'Veuillez sélectionner un destinataire.'
+        subject_required: 'Veuillez entrer un objet.'
+        subject_too_long: 'L''objet ne peut pas dépasser 255 caractères.'
+        message_required: 'Veuillez entrer un message.'
+    error:
+        recipient_not_found: 'Le destinataire sélectionné n''a pas été trouvé.'
+        cannot_send_to_self: 'Vous ne pouvez pas vous envoyer un message à vous-même.'
+    success:
+        sent: 'Votre message a été envoyé avec succès.'
 
 inbox:
     title: 'Boîte de réception'
@@ -76,6 +99,7 @@ view:
         read: 'Lu'
         sent: 'Envoyé'
     action:
+        reply: 'Répondre'
         delete: 'Supprimer'
     confirm_delete: 'Êtes-vous sûr de vouloir supprimer ce message ?'
 

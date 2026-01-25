@@ -1,0 +1,75 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'Message' %}
+
+{% block title %}{{ 'compose.title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path('message_inbox') }}">{{ 'breadcrumb.messages'|trans }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'breadcrumb.compose'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header py-3">
+                    <h1 class="h4 mb-0">
+                        <i class="bi bi-pencil-square"></i> {{ 'compose.header'|trans }}
+                    </h1>
+                </div>
+
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.recipient) }}
+                            {% if preselectedRecipient %}
+                                {{ form_widget(form.recipient, {
+                                    attr: form.recipient.vars.attr|merge({
+                                        'data-tomselect-items-value': [{ id: preselectedRecipient.id, text: preselectedRecipient.username }]|json_encode
+                                    })
+                                }) }}
+                            {% else %}
+                                {{ form_widget(form.recipient) }}
+                            {% endif %}
+                            {{ form_errors(form.recipient) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.object) }}
+                            {{ form_widget(form.object) }}
+                            {{ form_errors(form.object) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.message) }}
+                            {{ form_widget(form.message) }}
+                            {{ form_errors(form.message) }}
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ path('message_inbox') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> {{ 'compose.form.cancel'|trans }}
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-send"></i> {{ 'compose.form.send'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

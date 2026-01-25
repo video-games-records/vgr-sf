@@ -25,10 +25,33 @@ breadcrumb:
     inbox: 'Inbox'
     outbox: 'Sent'
     view: 'View message'
+    compose: 'New message'
 
 navigation:
     inbox: 'Inbox'
     outbox: 'Sent'
+    compose: 'New message'
+
+compose:
+    title: 'New message'
+    header: 'New message'
+    form:
+        recipient: 'To'
+        recipient_placeholder: 'Search user...'
+        subject: 'Subject'
+        message: 'Message'
+        send: 'Send'
+        cancel: 'Cancel'
+    validation:
+        recipient_required: 'Please select a recipient.'
+        subject_required: 'Please enter a subject.'
+        subject_too_long: 'The subject cannot exceed 255 characters.'
+        message_required: 'Please enter a message.'
+    error:
+        recipient_not_found: 'The selected recipient was not found.'
+        cannot_send_to_self: 'You cannot send a message to yourself.'
+    success:
+        sent: 'Your message has been sent successfully.'
 
 inbox:
     title: 'Inbox'
@@ -76,6 +99,7 @@ view:
         read: 'Read'
         sent: 'Sent'
     action:
+        reply: 'Reply'
         delete: 'Delete'
     confirm_delete: 'Are you sure you want to delete this message?'
 
