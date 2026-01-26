@@ -181,6 +181,12 @@
             </div>
         </nav>
 
+        {% if app.environment == 'staging' %}
+            <div class="alert alert-warning text-center mb-3 rounded-0 border-0 fw-bold py-3" role="alert" style="background-color: #ff9800; color: #000;">
+                ⚠️ STAGING ENVIRONMENT - This is a test site with sample data ⚠️
+            </div>
+        {% endif %}
+
         {# Site Header with background image (V7 style) - Image only, no content #}
         <div class="site-header d-none d-md-block"></div>
 
