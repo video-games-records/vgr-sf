@@ -21,6 +21,8 @@ game:
     description: "%count% most recent games"
     showing_results: "Showing %count% games"
     no_games: No games found
+    card_title: Latest Games
+    no_games_card: No recent games
 
 player:
   profile:
