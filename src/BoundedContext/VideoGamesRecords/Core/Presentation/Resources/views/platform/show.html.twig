@@ -60,18 +60,6 @@
                                class="list-group-item list-group-item-action py-2"
                                data-turbo-prefetch="false">
                                 <div class="row align-items-center g-2">
-                                    {# Game Image #}
-                                    <div class="col-auto">
-                                        <img
-                                            src="{{ path('vgr_core_game_picture', {id: game.id}) }}"
-                                            alt="{{ game.name }}"
-                                            class="rounded"
-                                            width="50"
-                                            height="50"
-                                            style="object-fit: cover;"
-                                        >
-                                    </div>
-
                                     {# Game Info #}
                                     <div class="col">
                                         <h6 class="mb-1">{{ game.name }}</h6>
