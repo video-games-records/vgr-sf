@@ -75,6 +75,13 @@
         )) }}
     </div>
 
+    {# Latest Scores #}
+    <div class="col-12 col-xl-6">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\PlayerChart\\LatestScores'
+        )) }}
+    </div>
+
     {# Latest News #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(

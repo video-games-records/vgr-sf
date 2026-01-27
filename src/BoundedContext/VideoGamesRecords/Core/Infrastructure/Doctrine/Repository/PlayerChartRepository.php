@@ -21,6 +21,39 @@ class PlayerChartRepository extends DefaultRepository
     }
 
     /**
+     * @return array<PlayerChart>
+     */
+    public function findLatest(int $limit = 5): array
+    {
+        $ids = $this->createQueryBuilder('pc')
+            ->select('pc.id')
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getSingleColumnResult();
+
+        if (empty($ids)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('pc')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'ga')
+            ->join('pc.player', 'p')
+            ->leftJoin('pc.platform', 'plt')
+            ->leftJoin('pc.libs', 'libs')
+            ->leftJoin('libs.libChart', 'lc')
+            ->leftJoin('lc.type', 'ct')
+            ->addSelect('c', 'g', 'ga', 'p', 'plt', 'libs', 'lc', 'ct')
+            ->where('pc.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Search PlayerCharts with filters and pagination
      *
      * @param array<int> $gameIds

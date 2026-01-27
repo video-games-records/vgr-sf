@@ -24,6 +24,11 @@ game:
     card_title: Latest Games
     no_games_card: No recent games
 
+player_chart:
+  latest:
+    card_title: Latest Scores
+    no_scores_card: No recent scores
+
 player:
   profile:
     tabs:

@@ -1,0 +1,49 @@
+<div class="card border shadow-sm h-100">
+    <div class="card-header border-bottom">
+        <h5 class="mb-0"><i class="bi bi-trophy"></i> {{ 'player_chart.latest.card_title'|trans({}, 'VgrCore') }}</h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <tbody>
+                    {% for playerChart in playerCharts %}
+                        <tr>
+                            <td class="text-nowrap">
+                                <a href="{{ path('vgr_player_profile_overview', {id: playerChart.player.id, slug: playerChart.player.slug}) }}" class="fw-bold text-decoration-none">
+                                    {{ playerChart.player.pseudo }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('vgr_game_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug}) }}" class="text-decoration-none">
+                                    {{ playerChart.chart.group.game.name }}
+                                </a>
+                            </td>
+                            <td class="text-muted">
+                                {{ playerChart.chart.group.name }}
+                            </td>
+                            <td>
+                                <a href="{{ path('vgr_chart_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug, groupId: playerChart.chart.group.id, groupSlug: playerChart.chart.group.slug, chartId: playerChart.chart.id, chartSlug: playerChart.chart.slug}) }}" class="text-decoration-none">
+                                    {{ playerChart.chart.name }}
+                                </a>
+                            </td>
+                            <td class="text-nowrap">
+                                {% for lib in playerChart.libs %}
+                                    <span class="badge bg-primary">{{ lib.formatValue }}</span>
+                                {% endfor %}
+                            </td>
+                            <td class="text-muted text-nowrap text-end">
+                                {{ playerChart.lastUpdate|date('M d') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                {{ 'player_chart.latest.no_scores_card'|trans({}, 'VgrCore') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
