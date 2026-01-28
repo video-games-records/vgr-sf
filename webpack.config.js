@@ -62,7 +62,8 @@ Encore
         options.sassOptions = {
             includePaths: [
                 './vendor/twbs/bootstrap/scss'
-            ]
+            ],
+            silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function'],
         };
     })
 
