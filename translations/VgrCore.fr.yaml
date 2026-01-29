@@ -42,6 +42,7 @@ game:
         storyline: 'Histoire'
         download: 'Télécharger'
         download_button: 'Télécharger le jeu'
+        submit_scores: 'Soumettre des Scores'
     stats:
         charts: 'records'
         players: 'joueurs'
@@ -57,6 +58,7 @@ group:
         charts_title: 'Records'
         no_charts: 'Aucun tableau disponible'
         video_proof_required: 'Preuve vidéo requise'
+        submit_scores: 'Soumettre des Scores'
 
 chart:
     show:
@@ -73,6 +75,7 @@ chart:
         detail: 'Détail'
         last_update: 'Dernière mise à jour'
         no_rankings: 'Aucun classement disponible'
+        submit_score: 'Soumettre un Score'
 
 platform:
     index:
@@ -150,3 +153,22 @@ player_chart:
         platform: 'Plateforme'
         value: 'Valeur'
         page: 'Page'
+
+score:
+    form:
+        title: 'Soumettre des Scores'
+        charts: 'Tableaux'
+        chart: 'Tableau'
+        current_score: 'Score Actuel'
+        new_score: 'Nouveau Score'
+        platform: 'Plateforme'
+        status: 'Statut'
+        rank: 'Rang'
+        modified: 'modifié(s)'
+        no_charts: 'Aucun tableau trouvé'
+        submit: 'Soumettre les Scores'
+        search_label: 'Rechercher des Tableaux'
+        search_placeholder: 'Rechercher par nom de tableau...'
+        search_button: 'Rechercher'
+        clear_search: 'Effacer la recherche'
+        pagination_info: 'Page %current% sur %total% (%items% tableaux)'

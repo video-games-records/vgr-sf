@@ -42,6 +42,7 @@ game:
         storyline: 'Storyline'
         download: 'Download'
         download_button: 'Download Game'
+        submit_scores: 'Submit Scores'
     stats:
         charts: 'records'
         players: 'players'
@@ -57,6 +58,7 @@ group:
         charts_title: 'Records'
         no_charts: 'No records available yet'
         video_proof_required: 'Video proof required'
+        submit_scores: 'Submit Scores'
 
 chart:
     show:
@@ -73,6 +75,7 @@ chart:
         detail: 'Detail'
         last_update: 'Last update'
         no_rankings: 'No rankings available yet'
+        submit_score: 'Submit Score'
 
 platform:
     index:
@@ -150,3 +153,22 @@ player_chart:
         platform: 'Platform'
         value: 'Value'
         page: 'Page'
+
+score:
+    form:
+        title: 'Submit Scores'
+        charts: 'Charts'
+        chart: 'Chart'
+        current_score: 'Current Score'
+        new_score: 'New Score'
+        platform: 'Platform'
+        status: 'Status'
+        rank: 'Rank'
+        modified: 'modified'
+        no_charts: 'No charts found'
+        submit: 'Submit Scores'
+        search_label: 'Search Charts'
+        search_placeholder: 'Search by chart name...'
+        search_button: 'Search'
+        clear_search: 'Clear search'
+        pagination_info: 'Page %current% of %total% (%items% charts)'

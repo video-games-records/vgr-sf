@@ -139,7 +139,7 @@ readonly class UpdatePlayerDataHandler
         $player->setGameRank3($data['gameRank3'] ?? 0);
 
         // 3 Badge Ranking
-        $query = $this->em->createQuery("
+        /*$query = $this->em->createQuery("
             SELECT
                  p.id,
                  COUNT(pb.badge) as nbMasterBadge,
@@ -160,7 +160,7 @@ readonly class UpdatePlayerDataHandler
         if ($row) {
             $player->setNbMasterBadge($row['nbMasterBadge']);
             $player->setPointBadge((int) $row['pointBadge']);
-        }
+        }*/
 
         // 4 nbChartWithPlatform
         $query = $this->em->createQuery("

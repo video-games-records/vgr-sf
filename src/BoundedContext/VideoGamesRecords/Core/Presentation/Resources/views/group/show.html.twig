@@ -59,6 +59,13 @@
                 </div>
             </div>
         </div>
+        {% if is_granted('ROLE_USER') %}
+            <div class="card-body">
+                <a href="{{ path('vgr_group_scores', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug}) }}" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> {{ 'group.show.submit_scores'|trans }}
+                </a>
+            </div>
+        {% endif %}
     </div>
 
     {# Charts List #}

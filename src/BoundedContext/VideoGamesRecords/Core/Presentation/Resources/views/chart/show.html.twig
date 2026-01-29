@@ -54,6 +54,13 @@
                 </div>
             </div>
         </div>
+        {% if is_granted('ROLE_USER') %}
+            <div class="card-body">
+                <a href="{{ path('vgr_chart_score', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug}) }}" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> {{ 'chart.show.submit_score'|trans }}
+                </a>
+            </div>
+        {% endif %}
     </div>
 
     {# Rankings Table #}
@@ -160,19 +167,7 @@
 
                                 {# Status #}
                                 <td class="text-center">
-                                    {% if playerChart.status.value == 'proved' %}
-                                        <span class="badge bg-success">
-                                            <i class="bi bi-check-circle"></i>
-                                        </span>
-                                    {% elseif playerChart.status.value == 'unproved' %}
-                                        <span class="badge bg-warning text-dark">
-                                            <i class="bi bi-clock"></i>
-                                        </span>
-                                    {% else %}
-                                        <span class="badge bg-secondary">
-                                            <i class="bi bi-dash-circle"></i>
-                                        </span>
-                                    {% endif %}
+                                    {{ component('player_chart_status', {status: playerChart.status}) }}
                                 </td>
 
                                 {# Action #}

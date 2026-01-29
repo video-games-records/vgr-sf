@@ -15,6 +15,110 @@ framework:
                     multiplier: 2
             failed: 'doctrine://default?queue_name=failed'
             sync: 'sync://'
+            player_chart_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_chart_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 500
+                    multiplier: 2
+            player_group_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_group_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            player_game_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_game_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            player_serie_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_serie_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            player_platform_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_platform_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            player_data:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_data
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            player_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: player_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            team_chart_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: team_chart_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            team_group_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: team_group_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            team_game_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: team_game_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            team_serie_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: team_serie_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            team_data:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: team_data
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+            team_rank:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: team_rank
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
 
         default_bus: messenger.bus.default
 
@@ -31,9 +135,22 @@ framework:
             Symfony\Component\Mailer\Messenger\SendEmailMessage: async
             Symfony\Component\Notifier\Message\ChatMessage: async
             Symfony\Component\Notifier\Message\SmsMessage: async
+            #Player Ranking
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerChartRank: player_chart_rank
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerGroupRank: player_group_rank
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerGameRank: player_game_rank
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerSerieRank: player_serie_rank
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerPlatformRank: player_platform_rank
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerData: player_data
+            App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerRank: player_rank
+            #Team Ranking
+            App\BoundedContext\VideoGamesRecords\Team\Application\Message\UpdateTeamChartRank: team_chart_rank
+            App\BoundedContext\VideoGamesRecords\Team\Application\Message\UpdateTeamGroupRank: team_group_rank
+            App\BoundedContext\VideoGamesRecords\Team\Application\Message\UpdateTeamGameRank: team_game_rank
+            App\BoundedContext\VideoGamesRecords\Team\Application\Message\UpdateTeamSerieRank: team_serie_rank
+            App\BoundedContext\VideoGamesRecords\Team\Application\Message\UpdateTeamData: team_data
+            App\BoundedContext\VideoGamesRecords\Team\Application\Message\UpdateTeamRank: team_rank
 
-            # Route your messages to the transports
-            # 'App\Message\YourMessage': async
 
 when@dev:
     framework:

@@ -61,10 +61,7 @@
                 {% if game.platforms|length > 0 %}
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         {% for platform in game.platforms %}
-                            <span class="badge bg-secondary">
-                                <i class="bi bi-controller"></i>
-                                {{ platform.name }}
-                            </span>
+                            {{ component('platform_badge', {platform: platform}) }}
                         {% endfor %}
                     </div>
                 {% endif %}

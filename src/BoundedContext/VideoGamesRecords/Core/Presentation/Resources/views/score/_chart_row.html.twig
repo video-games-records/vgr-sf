@@ -1,0 +1,100 @@
+{# Chart row for score form #}
+{# Parameters: chart, playerChart, existingValues, originalData, platforms #}
+{% trans_default_domain 'VgrCore' %}
+
+{# Check if row is editable based on status #}
+{% set editableStatuses = ['none', 'proof-sent', 'proved'] %}
+{% set currentStatus = playerChart ? playerChart.status.value : 'none' %}
+{% set isEditable = currentStatus in editableStatuses %}
+
+<tr data-chart-id="{{ chart.id }}"
+    data-original="{{ originalData|json_encode|e('html_attr') }}"
+    data-score-form-target="row">
+    {# Chart name #}
+    <td>
+        <strong>{{ chart.name }}</strong>
+        {% if chart.group is defined %}
+            <br><small class="text-muted">{{ chart.group.name }}</small>
+        {% endif %}
+    </td>
+
+    {# Current score display #}
+    <td class="text-muted d-none d-md-table-cell">
+        {% if playerChart %}
+            {% for lib in playerChart.libs %}
+                <span class="badge bg-secondary">{{ lib.formatValue }}</span>
+            {% endfor %}
+            {% if playerChart.rank %}
+                <br><small>{{ 'score.form.rank'|trans }}: #{{ playerChart.rank }}</small>
+            {% endif %}
+        {% else %}
+            <span class="text-muted">-</span>
+        {% endif %}
+    </td>
+
+    {# New score inputs #}
+    <td>
+        {% for lib in chart.libs %}
+            {% set libId = lib.id %}
+            {% set mask = lib.type.parseMask %}
+            {% set libName = lib.name %}
+
+            {# Display lib name if multiple libs #}
+            {% if chart.libs|length > 1 and libName %}
+                <small class="text-muted d-block mb-1">{{ libName }}</small>
+            {% endif %}
+
+            <div class="d-inline-flex align-items-center flex-wrap gap-1 mb-1">
+                {% for index, part in mask %}
+                    {# Calculate input width based on size #}
+                    {% set inputWidth = (part.size * 12 + 30) %}
+                    {% if inputWidth < 50 %}
+                        {% set inputWidth = 50 %}
+                    {% endif %}
+                    {% if inputWidth > 150 %}
+                        {% set inputWidth = 150 %}
+                    {% endif %}
+
+                    <input type="text"
+                           name="scores[{{ chart.id }}][libs][{{ libId }}][values][{{ index }}]"
+                           value="{{ existingValues[libId][index]|default('') }}"
+                           maxlength="{{ part.size + 1 }}"
+                           class="form-control form-control-sm score-input"
+                           style="width: {{ inputWidth }}px"
+                           data-action="input->score-form#onChange change->score-form#onChange"
+                           data-lib-id="{{ libId }}"
+                           data-index="{{ index }}"
+                           placeholder=""
+                           inputmode="numeric"
+                           {{ not isEditable ? 'readonly' }}>
+
+                    {% if part.suffixe %}
+                        <span class="text-muted small">{{ part.suffixe }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </td>
+
+    {# Platform select #}
+    <td class="d-none d-md-table-cell">
+        <select name="scores[{{ chart.id }}][platform]"
+                class="form-select form-select-sm"
+                data-action="change->score-form#onChange"
+                style="min-width: 120px"
+                {{ not isEditable ? 'disabled' }}>
+            <option value="">-</option>
+            {% for platform in platforms %}
+                <option value="{{ platform.id }}"
+                        {{ (originalData.platform == platform.id) ? 'selected' }}>
+                    {{ platform.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </td>
+
+    {# Status display #}
+    <td class="text-center">
+        {{ component('player_chart_status', {status: playerChart ? playerChart.status : null}) }}
+    </td>
+</tr>

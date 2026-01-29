@@ -12,6 +12,15 @@
         'game': game
     } %}
 
+    {# Submit Scores Button #}
+    {% if is_granted('ROLE_USER') %}
+        <div class="mb-4">
+            <a href="{{ path('vgr_game_scores', {id: game.id, slug: game.slug}) }}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> {{ 'game.show.submit_scores'|trans }}
+            </a>
+        </div>
+    {% endif %}
+
     {# Game Summary (if available from IGDB) - Hidden on mobile #}
     {% if game.summary %}
         <div class="card mb-4 d-none d-md-block">
