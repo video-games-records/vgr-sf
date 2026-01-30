@@ -1,0 +1,197 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'lost_position.title'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'lost_position.header'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Header #}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+            <i class="bi bi-graph-down-arrow"></i> {{ 'lost_position.header'|trans }}
+        </h1>
+        <div>
+            <span class="badge bg-primary fs-6">{{ 'lost_position.description'|trans({'%count%': totalCount}) }}</span>
+            {% if newCount > 0 %}
+                <span class="badge bg-danger fs-6 ms-1">{{ newCount }} {{ 'lost_position.new'|trans }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Filter Form #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            {{ form_start(form, {'attr': {'class': 'd-flex flex-wrap gap-2 align-items-end'}}) }}
+                <div class="flex-grow-1" style="min-width: 200px; max-width: 400px;">
+                    {{ form_row(form.game) }}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-funnel"></i> {{ 'lost_position.filter.submit'|trans }}
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    {# Lost Positions Table #}
+    {% if lostPositions|length > 0 %}
+        <form method="post" action="{{ path('vgr_lost_positions_delete') }}" onsubmit="return confirm('{{ 'lost_position.confirm_delete'|trans }}');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete-lost-positions') }}">
+
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="selectAll">
+                        <label class="form-check-label" for="selectAll">
+                            {{ 'lost_position.select_all'|trans }}
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-sm" id="deleteBtn" disabled>
+                        <i class="bi bi-trash"></i> {{ 'lost_position.delete_selected'|trans }}
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 40px;"></th>
+                                <th>{{ 'lost_position.column.date'|trans }}</th>
+                                <th>{{ 'lost_position.column.game'|trans }}</th>
+                                <th class="d-none d-md-table-cell">{{ 'lost_position.column.group'|trans }}</th>
+                                <th>{{ 'lost_position.column.chart'|trans }}</th>
+                                <th class="text-center">{{ 'lost_position.column.old_rank'|trans }}</th>
+                                <th class="text-center">{{ 'lost_position.column.new_rank'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lp in lostPositions %}
+                                <tr>
+                                    {# Checkbox #}
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input position-checkbox" type="checkbox" name="selected_positions[]" value="{{ lp.id }}">
+                                        </div>
+                                    </td>
+
+                                    {# Date #}
+                                    <td class="text-muted text-nowrap">
+                                        {{ lp.createdAt|date('Y-m-d H:i') }}
+                                    </td>
+
+                                    {# Game #}
+                                    <td>
+                                        <a href="{{ path('vgr_game_show', {id: lp.chart.group.game.id, slug: lp.chart.group.game.slug}) }}" class="text-decoration-none">
+                                            {{ lp.chart.group.game.name }}
+                                        </a>
+                                    </td>
+
+                                    {# Group #}
+                                    <td class="text-muted d-none d-md-table-cell">
+                                        <a href="{{ path('vgr_group_show', {id: lp.chart.group.game.id, slug: lp.chart.group.game.slug, groupId: lp.chart.group.id, groupSlug: lp.chart.group.slug}) }}" class="text-decoration-none text-muted">
+                                            {{ lp.chart.group.name }}
+                                        </a>
+                                    </td>
+
+                                    {# Chart #}
+                                    <td>
+                                        <a href="{{ path('vgr_chart_show', {id: lp.chart.group.game.id, slug: lp.chart.group.game.slug, groupId: lp.chart.group.id, groupSlug: lp.chart.group.slug, chartId: lp.chart.id, chartSlug: lp.chart.slug}) }}" class="text-decoration-none">
+                                            {{ lp.chart.name }}
+                                        </a>
+                                    </td>
+
+                                    {# Old Rank #}
+                                    <td class="text-center">
+                                        {% if lp.oldRank == 0 %}
+                                            <span class="badge bg-warning text-dark">#1</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">#{{ lp.oldRank }}</span>
+                                        {% endif %}
+                                    </td>
+
+                                    {# New Rank #}
+                                    <td class="text-center">
+                                        <span class="badge bg-light text-dark">#{{ lp.newRank }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+
+        {# Pagination #}
+        {% if totalPages > 1 %}
+            {% include '@VideoGamesRecordsCore/lost_position/_pagination.html.twig' with {
+                currentPage: currentPage,
+                totalPages: totalPages,
+                currentGameId: currentGameId
+            } %}
+        {% endif %}
+    {% else %}
+        {# Empty state #}
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-trophy" style="font-size: 4rem; color: #ffc107;"></i>
+                <h4 class="mt-3">{{ 'lost_position.empty'|trans }}</h4>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{# JavaScript for select all functionality #}
+<script>
+(function() {
+    function initLostPositions() {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const positionCheckboxes = document.querySelectorAll('.position-checkbox');
+        const deleteBtn = document.getElementById('deleteBtn');
+
+        if (!deleteBtn) return;
+
+        function updateDeleteButton() {
+            const checkedCount = document.querySelectorAll('.position-checkbox:checked').length;
+            deleteBtn.disabled = checkedCount === 0;
+        }
+
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                positionCheckboxes.forEach(function(checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+                updateDeleteButton();
+            });
+        }
+
+        positionCheckboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                const allChecked = document.querySelectorAll('.position-checkbox:checked').length === positionCheckboxes.length;
+                if (selectAllCheckbox) {
+                    selectAllCheckbox.checked = allChecked;
+                }
+                updateDeleteButton();
+            });
+        });
+    }
+
+    // Support both initial load and Turbo navigation
+    document.addEventListener('DOMContentLoaded', initLostPositions);
+    document.addEventListener('turbo:load', initLostPositions);
+})();
+</script>
+{% endblock %}

@@ -166,6 +166,15 @@
                                             {% endif %}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ path('vgr_lost_positions') }}">
+                                            <span><i class="bi bi-graph-down-arrow"></i> {{ 'navigation.user_menu.lost_positions'|trans }}</span>
+                                            {% set lost_count = get_new_lost_positions_count() %}
+                                            {% if lost_count > 0 %}
+                                                <span class="badge bg-danger">{{ lost_count }}</span>
+                                            {% endif %}
+                                        </a>
+                                    </li>
                                     <li><a class="dropdown-item" href="{{ path('app_profile_index') }}"><i class="bi bi-gear"></i> {{ 'navigation.user_menu.settings'|trans }}</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> {{ 'navigation.user_menu.logout'|trans }}</a></li>

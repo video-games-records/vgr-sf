@@ -44,6 +44,7 @@ navigation:
   user_menu:
     profile: "Profile"
     messages: "Messages"
+    lost_positions: "Lost Positions"
     settings: "Settings"
     logout: "Logout"
 

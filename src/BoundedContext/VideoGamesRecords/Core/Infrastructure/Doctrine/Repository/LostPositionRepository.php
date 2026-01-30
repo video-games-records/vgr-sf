@@ -71,6 +71,94 @@ class LostPositionRepository extends DefaultRepository
 
 
     /**
+     * Récupère les lost positions paginées avec filtrage optionnel par jeu
+     * @return array{items: array<LostPosition>, total: int, pages: int}
+     */
+    public function findByPlayerPaginated(Player $player, ?int $gameId, int $page, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('l')
+            ->select('l', 'c', 'g', 'game')
+            ->join('l.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'game');
+
+        $this->wherePlayer($qb, $player);
+
+        if ($gameId !== null) {
+            $qb->andWhere('game.id = :gameId')
+                ->setParameter('gameId', $gameId);
+        }
+
+        $qb->orderBy('l.createdAt', 'DESC');
+
+        // Get total count
+        $countQb = clone $qb;
+        $countQb->select('COUNT(l.id)');
+        $total = (int) $countQb->getQuery()->getSingleScalarResult();
+
+        // Get paginated results
+        $qb->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit);
+
+        $items = $qb->getQuery()->getResult();
+        $pages = (int) ceil($total / $limit);
+
+        return [
+            'items' => $items,
+            'total' => $total,
+            'pages' => $pages,
+        ];
+    }
+
+    /**
+     * Récupère les jeux où le joueur a des lost positions (pour le dropdown)
+     * @return array<Game>
+     */
+    public function getGamesWithLostPositions(Player $player): array
+    {
+        $gameIds = $this->createQueryBuilder('l')
+            ->select('DISTINCT IDENTITY(g.game)')
+            ->join('l.chart', 'c')
+            ->join('c.group', 'g')
+            ->where('l.player = :player')
+            ->setParameter('player', $player)
+            ->getQuery()
+            ->getSingleColumnResult();
+
+        if (empty($gameIds)) {
+            return [];
+        }
+
+        return $this->getEntityManager()
+            ->getRepository(Game::class)
+            ->createQueryBuilder('game')
+            ->where('game.id IN (:ids)')
+            ->setParameter('ids', $gameIds)
+            ->orderBy('game.libGameEn', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Supprime plusieurs lost positions par IDs (vérifie ownership)
+     */
+    public function deleteByIdsForPlayer(array $ids, Player $player): int
+    {
+        if (empty($ids)) {
+            return 0;
+        }
+
+        return $this->createQueryBuilder('l')
+            ->delete()
+            ->where('l.id IN (:ids)')
+            ->andWhere('l.player = :player')
+            ->setParameter('ids', $ids)
+            ->setParameter('player', $player)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
      * @param QueryBuilder $query
      * @param              $player
      */

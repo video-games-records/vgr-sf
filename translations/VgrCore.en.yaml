@@ -196,3 +196,27 @@ score:
         search_button: 'Search'
         clear_search: 'Clear search'
         pagination_info: 'Page %current% of %total% (%items% records)'
+
+lost_position:
+    title: 'Lost Positions'
+    header: 'Lost Positions'
+    description: '%count% lost position(s)'
+    new: 'new'
+    empty: 'No lost positions. Great job!'
+    filter:
+        game: 'Game'
+        all_games: 'All games'
+        submit: 'Filter'
+    column:
+        date: 'Date'
+        game: 'Game'
+        group: 'Group'
+        chart: 'Record'
+        old_rank: 'Old Rank'
+        new_rank: 'New Rank'
+    select_all: 'Select All'
+    delete_selected: 'Delete Selected'
+    confirm_delete: 'Delete selected lost positions?'
+    flash:
+        deleted: '%count% lost position(s) deleted'
+        no_selection: 'No positions selected'

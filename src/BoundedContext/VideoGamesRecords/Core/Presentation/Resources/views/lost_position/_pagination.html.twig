@@ -1,0 +1,29 @@
+{# Pagination template for lost positions #}
+<nav class="mt-4" aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {# Previous button #}
+        <li class="page-item {{ currentPage == 1 ? 'disabled' }}">
+            <a class="page-link" href="{{ path('vgr_lost_positions', {page: currentPage - 1, game: currentGameId}) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        {# Page numbers #}
+        {% for p in 1..totalPages %}
+            {% if p == 1 or p == totalPages or (p >= currentPage - 2 and p <= currentPage + 2) %}
+                <li class="page-item {{ p == currentPage ? 'active' }}">
+                    <a class="page-link" href="{{ path('vgr_lost_positions', {page: p, game: currentGameId}) }}">{{ p }}</a>
+                </li>
+            {% elseif p == currentPage - 3 or p == currentPage + 3 %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+        {% endfor %}
+
+        {# Next button #}
+        <li class="page-item {{ currentPage == totalPages ? 'disabled' }}">
+            <a class="page-link" href="{{ path('vgr_lost_positions', {page: currentPage + 1, game: currentGameId}) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

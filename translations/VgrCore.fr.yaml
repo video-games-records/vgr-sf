@@ -196,3 +196,27 @@ score:
         search_button: 'Rechercher'
         clear_search: 'Effacer la recherche'
         pagination_info: 'Page %current% sur %total% (%items% records)'
+
+lost_position:
+    title: 'Positions perdues'
+    header: 'Positions perdues'
+    description: '%count% position(s) perdue(s)'
+    new: 'nouveau'
+    empty: 'Aucune position perdue. Bravo !'
+    filter:
+        game: 'Jeu'
+        all_games: 'Tous les jeux'
+        submit: 'Filtrer'
+    column:
+        date: 'Date'
+        game: 'Jeu'
+        group: 'Groupe'
+        chart: 'Record'
+        old_rank: 'Ancien rang'
+        new_rank: 'Nouveau rang'
+    select_all: 'Tout sélectionner'
+    delete_selected: 'Supprimer la sélection'
+    confirm_delete: 'Supprimer les positions perdues sélectionnées ?'
+    flash:
+        deleted: '%count% position(s) perdue(s) supprimée(s)'
+        no_selection: 'Aucune position sélectionnée'
