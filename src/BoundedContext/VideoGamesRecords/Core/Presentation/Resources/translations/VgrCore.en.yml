@@ -45,6 +45,14 @@ player_chart:
     proof_picture: Picture
     proof_video: Video
     back_to_chart: Back to Chart
+    upload_proof: Upload Proof
+    upload_drag_drop: Drag and drop your image here
+    upload_or_click: or click to select a file
+    upload_formats: "Accepted formats: JPEG, PNG (max 5MB)"
+    upload_submit: Upload Proof
+    youtube_url: YouTube Video URL
+    youtube_hint: Paste the full URL of your YouTube video
+    video_submit: Submit Video
 
 player:
   profile:

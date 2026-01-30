@@ -43,8 +43,16 @@ player_chart:
     view_proof: Voir la Preuve
     no_proof: Aucune preuve soumise
     proof_picture: Image
-    proof_video: Video
+    proof_video: Vidéo
     back_to_chart: Retour au Classement
+    upload_proof: Soumettre une Preuve
+    upload_drag_drop: Glissez-déposez votre image ici
+    upload_or_click: ou cliquez pour sélectionner un fichier
+    upload_formats: "Formats acceptés : JPEG, PNG (max 5Mo)"
+    upload_submit: Envoyer la Preuve
+    youtube_url: URL de la Vidéo YouTube
+    youtube_hint: Collez l'URL complète de votre vidéo YouTube
+    video_submit: Soumettre la Vidéo
 
 player:
   profile:

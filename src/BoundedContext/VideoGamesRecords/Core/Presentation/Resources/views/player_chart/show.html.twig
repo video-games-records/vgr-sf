@@ -169,7 +169,7 @@
 
     {# Proof Display Card #}
     {% if playerChart.proof %}
-        <div class="card shadow-sm">
+        <div class="card mb-4 shadow-sm">
             <div class="card-header border-bottom">
                 <h5 class="mb-0">
                     {% if playerChart.proof.picture %}
@@ -181,6 +181,119 @@
             </div>
             <div class="card-body text-center">
                 {{ component('proof_display', {proof: playerChart.proof}) }}
+            </div>
+        </div>
+    {% endif %}
+
+    {# Proof Upload Form - Only show if user owns this score and no proof exists #}
+    {% if is_granted('ROLE_USER') and app.user and playerChart.player.userId == app.user.id and not playerChart.proof %}
+        <div class="card mb-4 shadow-sm"
+             data-controller="proof-upload"
+             data-proof-upload-player-chart-id-value="{{ playerChart.id }}"
+             data-proof-upload-picture-url-value="{{ path('vgr_player_chart_send_picture', {id: playerChart.id}) }}"
+             data-proof-upload-video-url-value="{{ path('vgr_player_chart_send_video', {id: playerChart.id}) }}">
+            <div class="card-header border-bottom">
+                <h5 class="mb-0">
+                    <i class="bi bi-upload"></i> {{ 'player_chart.show.upload_proof'|trans }}
+                </h5>
+            </div>
+            <div class="card-body">
+                {# Alert Messages #}
+                <div class="alert alert-success d-none" data-proof-upload-target="successMessage"></div>
+                <div class="alert alert-danger d-none" data-proof-upload-target="errorMessage"></div>
+
+                {# Tabs for Picture/Video #}
+                <ul class="nav nav-tabs mb-4" role="tablist">
+                    {% if not chart.isProofVideoOnly %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="picture-tab" data-bs-toggle="tab" data-bs-target="#picture-panel" type="button" role="tab">
+                                <i class="bi bi-image me-2"></i>{{ 'player_chart.show.proof_picture'|trans }}
+                            </button>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {% if chart.isProofVideoOnly %}active{% endif %}" id="video-tab" data-bs-toggle="tab" data-bs-target="#video-panel" type="button" role="tab">
+                            <i class="bi bi-play-circle me-2"></i>{{ 'player_chart.show.proof_video'|trans }}
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    {# Picture Upload Tab #}
+                    {% if not chart.isProofVideoOnly %}
+                        <div class="tab-pane fade show active" id="picture-panel" role="tabpanel">
+                            {# Dropzone #}
+                            <div class="border border-2 border-dashed rounded p-5 text-center cursor-pointer"
+                                 data-proof-upload-target="dropzone"
+                                 data-action="click->proof-upload#triggerFileInput">
+                                <i class="bi bi-cloud-arrow-up display-4 text-muted"></i>
+                                <p class="mt-3 mb-1 fw-bold">{{ 'player_chart.show.upload_drag_drop'|trans }}</p>
+                                <p class="text-muted small mb-0">{{ 'player_chart.show.upload_or_click'|trans }}</p>
+                                <p class="text-muted small">{{ 'player_chart.show.upload_formats'|trans }}</p>
+                            </div>
+
+                            {# Hidden file input #}
+                            <input type="file"
+                                   class="d-none"
+                                   accept="image/jpeg,image/png"
+                                   data-proof-upload-target="fileInput"
+                                   data-action="change->proof-upload#onFileSelected">
+
+                            {# Preview #}
+                            <div class="d-none mt-4" data-proof-upload-target="preview">
+                                <div class="position-relative d-inline-block">
+                                    <img src="" alt="Preview" class="img-fluid rounded shadow" style="max-height: 300px;" data-proof-upload-target="previewImage">
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
+                                            data-action="click->proof-upload#removeImage">
+                                        <i class="bi bi-x-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {# Submit button #}
+                            <div class="mt-4 text-center">
+                                <button type="button"
+                                        class="btn btn-success btn-lg"
+                                        disabled
+                                        data-proof-upload-target="pictureSubmit"
+                                        data-action="click->proof-upload#submitPicture">
+                                    <i class="bi bi-upload me-2"></i>{{ 'player_chart.show.upload_submit'|trans }}
+                                </button>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {# Video URL Tab #}
+                    <div class="tab-pane fade {% if chart.isProofVideoOnly %}show active{% endif %}" id="video-panel" role="tabpanel">
+                        <div class="mb-3">
+                            <label for="videoUrl" class="form-label fw-bold">
+                                <i class="bi bi-youtube text-danger me-2"></i>{{ 'player_chart.show.youtube_url'|trans }}
+                            </label>
+                            <input type="url"
+                                   class="form-control form-control-lg"
+                                   id="videoUrl"
+                                   placeholder="https://www.youtube.com/watch?v=..."
+                                   data-proof-upload-target="videoUrl"
+                                   data-action="input->proof-upload#onVideoUrlInput">
+                            <div class="form-text">{{ 'player_chart.show.youtube_hint'|trans }}</div>
+                        </div>
+
+                        {# Video Preview #}
+                        <div class="d-none" data-proof-upload-target="videoPreview"></div>
+
+                        {# Submit button #}
+                        <div class="mt-4 text-center">
+                            <button type="button"
+                                    class="btn btn-danger btn-lg"
+                                    disabled
+                                    data-proof-upload-target="videoSubmit"
+                                    data-action="click->proof-upload#submitVideo">
+                                <i class="bi bi-send me-2"></i>{{ 'player_chart.show.video_submit'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     {% endif %}
