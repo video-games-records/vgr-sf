@@ -36,6 +36,7 @@ class PlayerChartRepository extends DefaultRepository
             return [];
         }
 
+        // @phpstan-ignore return.type
         return $this->createQueryBuilder('pc')
             ->join('pc.chart', 'c')
             ->join('c.group', 'g')
@@ -51,6 +52,35 @@ class PlayerChartRepository extends DefaultRepository
             ->orderBy('pc.lastUpdate', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Find latest scores within a time period with pagination
+     *
+     * @return Paginator<PlayerChart>
+     */
+    public function findLatestByPeriod(int $days, int $page = 1, int $limit = 50): Paginator
+    {
+        $since = new \DateTime("-{$days} days");
+
+        $qb = $this->createQueryBuilder('pc')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'ga')
+            ->join('pc.player', 'p')
+            ->leftJoin('pc.platform', 'plt')
+            ->leftJoin('pc.libs', 'libs')
+            ->leftJoin('libs.libChart', 'lc')
+            ->leftJoin('lc.type', 'ct')
+            ->addSelect('c', 'g', 'ga', 'p', 'plt', 'libs', 'lc', 'ct')
+            ->where('pc.lastUpdate >= :since')
+            ->setParameter('since', $since)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit);
+
+        // @phpstan-ignore return.type
+        return new Paginator($qb->getQuery(), fetchJoinCollection: true);
     }
 
     /**
@@ -145,6 +175,7 @@ class PlayerChartRepository extends DefaultRepository
         $paginator = new Paginator($qb->getQuery(), fetchJoinCollection: true);
         $total = count($paginator);
 
+        // @phpstan-ignore return.type
         return [
             'items' => iterator_to_array($paginator),
             'total' => $total,

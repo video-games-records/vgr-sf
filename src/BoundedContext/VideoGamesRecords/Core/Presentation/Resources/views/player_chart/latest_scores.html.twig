@@ -1,0 +1,164 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'player_chart.latest.page_title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'player_chart.latest.meta_description'|trans({'%period%': period}) }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'player_chart.latest.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Header #}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+            <i class="bi bi-trophy"></i> {{ 'player_chart.latest.header'|trans }}
+        </h1>
+        <span class="badge bg-primary fs-6">{{ totalItems }} {{ 'player_chart.latest.scores_count'|trans }}</span>
+    </div>
+
+    {# Period Filter #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <span class="text-muted me-2">{{ 'player_chart.latest.filter_period'|trans }}:</span>
+                {% for p in periods %}
+                    <a href="{{ path('vgr_latest_scores', {period: p}) }}"
+                       class="btn btn-sm {{ period == p ? 'btn-primary' : 'btn-outline-primary' }}">
+                        {{ ('player_chart.latest.period_' ~ p)|trans }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Scores Table #}
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>{{ 'player_chart.latest.column_player'|trans }}</th>
+                        <th>{{ 'player_chart.latest.column_game'|trans }}</th>
+                        <th class="d-none d-md-table-cell">{{ 'player_chart.latest.column_group'|trans }}</th>
+                        <th>{{ 'player_chart.latest.column_chart'|trans }}</th>
+                        <th>{{ 'player_chart.latest.column_score'|trans }}</th>
+                        <th class="text-center">{{ 'player_chart.latest.column_rank'|trans }}</th>
+                        <th class="text-center d-none d-md-table-cell">{{ 'player_chart.latest.column_status'|trans }}</th>
+                        <th class="text-end">{{ 'player_chart.latest.column_date'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for playerChart in playerCharts %}
+                        <tr>
+                            {# Player #}
+                            <td>
+                                {{ component('player_link', {player: playerChart.player, showAvatar: false}) }}
+                            </td>
+
+                            {# Game #}
+                            <td>
+                                <a href="{{ path('vgr_game_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug}) }}" class="text-decoration-none">
+                                    {{ playerChart.chart.group.game.name }}
+                                </a>
+                            </td>
+
+                            {# Group #}
+                            <td class="text-muted d-none d-md-table-cell">
+                                {{ playerChart.chart.group.name }}
+                            </td>
+
+                            {# Chart #}
+                            <td>
+                                <a href="{{ path('vgr_chart_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug, groupId: playerChart.chart.group.id, groupSlug: playerChart.chart.group.slug, chartId: playerChart.chart.id, chartSlug: playerChart.chart.slug}) }}" class="text-decoration-none">
+                                    {{ playerChart.chart.name }}
+                                </a>
+                            </td>
+
+                            {# Score #}
+                            <td class="text-nowrap">
+                                {% for lib in playerChart.libs %}
+                                    <span class="badge bg-primary">{{ lib.formatValue }}</span>
+                                {% endfor %}
+                            </td>
+
+                            {# Rank #}
+                            <td class="text-center">
+                                <span class="badge rounded-pill {% if playerChart.rank == 1 %}bg-warning text-dark{% elseif playerChart.rank == 2 %}bg-secondary{% elseif playerChart.rank == 3 %}bg-bronze{% else %}bg-light text-dark{% endif %}">
+                                    #{{ playerChart.rank ?? '-' }}
+                                </span>
+                            </td>
+
+                            {# Status #}
+                            <td class="text-center d-none d-md-table-cell">
+                                {{ component('player_chart_status', {status: playerChart.status}) }}
+                            </td>
+
+                            {# Date #}
+                            <td class="text-muted text-nowrap text-end">
+                                {{ playerChart.lastUpdate|date('M d, H:i') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-5">
+                                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">{{ 'player_chart.latest.no_scores'|trans }}</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {# Pagination #}
+    {% if totalPages > 1 %}
+        <nav class="mt-4" aria-label="Page navigation">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <small class="text-muted">
+                    {{ 'player_chart.latest.pagination_info'|trans({'%current%': currentPage, '%total%': totalPages, '%items%': totalItems}) }}
+                </small>
+            </div>
+            <ul class="pagination justify-content-center">
+                {# Previous button #}
+                <li class="page-item {{ currentPage == 1 ? 'disabled' }}">
+                    <a class="page-link" href="{{ path('vgr_latest_scores', {period: period, page: currentPage - 1}) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                {# Page numbers #}
+                {% for p in 1..totalPages %}
+                    {% if p == 1 or p == totalPages or (p >= currentPage - 2 and p <= currentPage + 2) %}
+                        <li class="page-item {{ p == currentPage ? 'active' }}">
+                            <a class="page-link" href="{{ path('vgr_latest_scores', {period: period, page: p}) }}">{{ p }}</a>
+                        </li>
+                    {% elseif p == currentPage - 3 or p == currentPage + 3 %}
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    {% endif %}
+                {% endfor %}
+
+                {# Next button #}
+                <li class="page-item {{ currentPage == totalPages ? 'disabled' }}">
+                    <a class="page-link" href="{{ path('vgr_latest_scores', {period: period, page: currentPage + 1}) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}
