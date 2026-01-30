@@ -72,6 +72,18 @@ src/BoundedContext/VideoGamesRecords/Core/
 │   │   ├── GameOfDayManager.php
 │   │   ├── LostPositionManager.php
 │   │   └── ScoreManager.php
+│   ├── DTO/                        # Data Transfer Objects pour l'API
+│   │   ├── Country/
+│   │   │   └── CountryDTO.php
+│   │   ├── Game/
+│   │   │   └── GameDTO.php
+│   │   └── Player/
+│   │       ├── PlayerDTO.php
+│   │       └── PlayerStatsDTO.php
+│   ├── Mapper/                     # Mappers Entity -> DTO
+│   │   ├── CountryMapper.php
+│   │   ├── GameMapper.php
+│   │   └── PlayerMapper.php
 │   ├── DataProvider/               # Data providers pour rankings
 │   │   └── Ranking/
 │   │       ├── PlayerRankingProvider.php
@@ -91,6 +103,13 @@ src/BoundedContext/VideoGamesRecords/Core/
 │   ├── Doctrine/
 │   │   ├── Repository/             # 27 repositories
 │   │   └── EventListener/          # 7 Doctrine listeners
+│   ├── ApiPlatform/                # API Platform State Providers
+│   │   ├── Country/
+│   │   │   └── CountryDataProvider.php
+│   │   ├── Game/
+│   │   │   └── GameDataProvider.php
+│   │   └── Player/
+│   │       └── PlayerDataProvider.php
 │   ├── Security/
 │   │   └── UserProvider.php
 │   ├── EventListener/
@@ -109,6 +128,19 @@ src/BoundedContext/VideoGamesRecords/Core/
 │       ├── views/                  # Templates Twig
 │       └── translations/           # i18n
 └── Tests/
+    ├── Factory/                    # Foundry Factories pour tests
+    │   ├── PlayerFactory.php
+    │   ├── GameFactory.php
+    │   ├── CountryFactory.php
+    │   ├── GroupFactory.php
+    │   ├── ChartFactory.php
+    │   ├── PlatformFactory.php
+    │   ├── SerieFactory.php
+    │   └── ...
+    └── Story/                      # Foundry Stories pour fixtures
+        ├── DefaultPlayerStory.php
+        ├── DefaultGameStory.php
+        └── ...
 ```
 
 ## Entités Principales
@@ -290,6 +322,125 @@ Le contexte utilise Symfony Messenger pour les mises à jour asynchrones :
 
 ### Handlers
 Chaque message a son handler correspondant dans `Application/MessageHandler/Player/`.
+
+## API Platform
+
+L'API REST utilise API Platform avec une architecture DTO/Mapper/DataProvider pour séparer les entités Doctrine de la représentation API.
+
+### Architecture
+
+```
+Request → DataProvider → Repository → Entity → Mapper → DTO → Response
+```
+
+### DTOs (Data Transfer Objects)
+
+Les DTOs définissent la structure des réponses API et portent les attributs API Platform :
+
+| DTO | Endpoint | Description |
+|-----|----------|-------------|
+| `PlayerDTO` | `GET /api/players/{id}` | Données complètes d'un joueur |
+| `PlayerStatsDTO` | (embarqué) | Statistiques du joueur |
+| `GameDTO` | `GET /api/games/{id}` | Données complètes d'un jeu |
+| `CountryDTO` | `GET /api/countries/{id}` | Données d'un pays |
+
+#### Exemple : PlayerDTO
+```php
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/players/{id}',
+            provider: PlayerDataProvider::class
+        ),
+    ]
+)]
+class PlayerDTO
+{
+    public function __construct(
+        public readonly int $id,
+        public readonly string $pseudo,
+        public readonly string $slug,
+        public readonly PlayerStatsDTO $stats,
+        public readonly ?CountryDTO $country,
+        // ...
+    ) {}
+}
+```
+
+### Mappers
+
+Les Mappers transforment les entités Doctrine en DTOs :
+
+| Mapper | Entrée | Sortie |
+|--------|--------|--------|
+| `PlayerMapper` | `Player` | `PlayerDTO` |
+| `GameMapper` | `Game` | `GameDTO` |
+| `CountryMapper` | `Country` | `CountryDTO` |
+
+#### Exemple : PlayerMapper
+```php
+readonly class PlayerMapper
+{
+    public function __construct(
+        private CountryMapper $countryMapper
+    ) {}
+
+    public function toDTO(Player $player): PlayerDTO
+    {
+        return new PlayerDTO(
+            id: $player->getId(),
+            pseudo: $player->getPseudo(),
+            stats: $this->toPlayerStatsDTO($player),
+            country: $player->getCountry()
+                ? $this->countryMapper->toDTO($player->getCountry())
+                : null,
+            // ...
+        );
+    }
+}
+```
+
+### DataProviders (State Providers)
+
+Les DataProviders implémentent `ProviderInterface` et fournissent les données à l'API :
+
+| Provider | Localisation | Rôle |
+|----------|--------------|------|
+| `PlayerDataProvider` | `Infrastructure/ApiPlatform/Player/` | Fournit les données Player |
+| `GameDataProvider` | `Infrastructure/ApiPlatform/Game/` | Fournit les données Game |
+| `CountryDataProvider` | `Infrastructure/ApiPlatform/Country/` | Fournit les données Country |
+
+#### Exemple : PlayerDataProvider
+```php
+class PlayerDataProvider implements ProviderInterface
+{
+    public function __construct(
+        private readonly PlayerRepository $playerRepository,
+        private readonly PlayerMapper $playerMapper
+    ) {}
+
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): PlayerDTO
+    {
+        $player = $this->playerRepository->find($uriVariables['id']);
+
+        if (!$player) {
+            throw new NotFoundHttpException('Player not found');
+        }
+
+        return $this->playerMapper->toDTO($player);
+    }
+}
+```
+
+### Bonnes Pratiques API
+
+1. **DTOs immutables** : Utiliser `readonly` pour les propriétés
+2. **Mappers injectables** : Les mappers peuvent s'injecter entre eux pour les relations
+3. **Gestion des erreurs** : Lever `NotFoundHttpException` pour les 404
+4. **Séparation des responsabilités** :
+   - DTO : Structure de la réponse + attributs API Platform
+   - Mapper : Transformation Entity → DTO
+   - DataProvider : Récupération des données + validation
 
 ## Data Providers
 
