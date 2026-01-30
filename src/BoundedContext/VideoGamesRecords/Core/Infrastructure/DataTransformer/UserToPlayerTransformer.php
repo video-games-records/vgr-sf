@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\DataTransformer;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Exception\ORMException;
+use App\BoundedContext\User\Domain\Entity\User;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 
@@ -14,11 +14,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
  */
 class UserToPlayerTransformer implements DataTransformerInterface
 {
-    private EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
+    public function __construct(
+        private readonly PlayerRepository $playerRepository
+    ) {
     }
 
     /**
@@ -26,17 +24,14 @@ class UserToPlayerTransformer implements DataTransformerInterface
      *
      * @param mixed $value The value in the original representation (Player or User)
      * @return Player|null The value in the transformed representation
-     * @throws ORMException
      */
     public function transform(mixed $value): ?Player
     {
-        if ($value === null) {
+        if ($value === null || !$value instanceof User) {
             return null;
         }
 
-        /** @var Player $player */
-        $player = $this->em->getReference(Player::class, $value->getId());
-        return $player;
+        return $this->playerRepository->getPlayerFromUser($value);
     }
 
     /**

@@ -124,6 +124,10 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.6",
+        "doctrine/doctrine-fixtures-bundle": "^4.3",
+        "fakerphp/faker": "^1.24",
+        "justinrainbow/json-schema": "^6.6",
         "phpstan/extension-installer": "^1.4.3",
         "phpstan/phpstan": "^2.1.37",
         "phpstan/phpstan-doctrine": "^2.0.14",

@@ -34,6 +34,10 @@ services:
     App\SharedKernel\:
         resource: '../src/SharedKernel/'
 
+    # DataFixtures
+    App\DataFixtures\:
+        resource: '../src/DataFixtures/'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\SharedKernel\Infrastructure\Messenger\Middleware\UniquenessMiddleware:
@@ -44,4 +48,9 @@ services:
     App\SharedKernel\Infrastructure\FileSystem\Manager\AvatarManager:
         arguments:
             $projectDir: '%kernel.project_dir%'
+
+    # API-aware locale subscriber (replaces Sonata's which uses session on stateless requests)
+    App\SharedKernel\Infrastructure\EventSubscriber\ApiAwareLocaleSubscriber:
+        arguments:
+            $defaultLocale: '%sonata_translation.default_locale%'
 

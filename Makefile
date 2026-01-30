@@ -4,6 +4,12 @@
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+# Default configuration
+PHP_BIN := php
+COMPOSER_BIN := composer
+PHPUNIT_BIN := php bin/phpunit
+CONSOLE_BIN := php bin/console
+
 ##
 ## Qualité de code
 ##---------------------------------------------------------------------------
@@ -59,6 +65,23 @@ db-fixtures: ## Charge les fixtures
 
 db-reset: db-drop db-create db-migrate db-fixtures ## Réinitialise complètement la base de données
 
+##@ Database
+db-local: ## Create local database with fixtures
+	@echo "$(YELLOW)Setting up local database...$(RESET)"
+	$(CONSOLE_BIN) doctrine:database:drop --force --if-exists
+	$(CONSOLE_BIN) doctrine:database:create
+	$(CONSOLE_BIN) doctrine:schema:update --force
+	$(CONSOLE_BIN) doctrine:fixtures:load --no-interaction
+
+db-test: ## Create test database with fixtures
+	@echo "$(YELLOW)Setting up test database...$(RESET)"
+	$(CONSOLE_BIN) doctrine:database:drop --force --env=test --if-exists
+	$(CONSOLE_BIN) doctrine:database:create --env=test
+	$(CONSOLE_BIN) doctrine:schema:update --force --env=test
+	@echo "$(YELLOW)Loading fixtures...$(RESET)"
+	$(CONSOLE_BIN) doctrine:fixtures:load --env=test --no-interaction
+	@echo "$(GREEN)Test database ready with fixtures loaded!$(RESET)"
+
 ##
 ## Tests
 ##---------------------------------------------------------------------------
@@ -68,6 +91,11 @@ test: ## Lance les tests
 
 test-coverage: ## Lance les tests avec couverture de code
 	XDEBUG_MODE=coverage php bin/phpunit --coverage-html var/coverage
+
+test-vgr-core-api: ## Run VideoGamesRecords Core API tests only
+	@echo "$(GREEN)Running VideoGamesRecords Core API tests...$(RESET)"
+	@echo "$(YELLOW)Clearing rate limiter cache...$(RESET)"
+	$(PHPUNIT_BIN) tests/BoundedContext/VideoGamesRecords/Core/Functional/Api/ --testdox
 
 ##
 ## Assets

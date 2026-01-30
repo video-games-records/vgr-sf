@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\BoundedContext\User\Tests\Factory;
 
 use App\BoundedContext\User\Domain\Entity\User;
-use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<User>
+ * @extends PersistentObjectFactory<User>
  */
-final class UserFactory extends PersistentProxyObjectFactory
+final class UserFactory extends PersistentObjectFactory
 {
     public static function class(): string
     {
@@ -25,12 +25,23 @@ final class UserFactory extends PersistentProxyObjectFactory
         return [
             'email' => self::faker()->unique()->safeEmail(),
             'username' => self::faker()->unique()->userName(),
-            'plainPassword' => 'password',
             'roles' => [],
             'enabled' => true,
-            'createdAt' => self::faker()->dateTimeBetween('-1 year'),
-            'updatedAt' => self::faker()->dateTimeBetween('-1 month'),
+            'plainPassword' => 'password',
         ];
+    }
+
+    protected function initialize(): static
+    {
+        return $this->beforeInstantiate(function (array $attributes): array {
+            // Remove plainPassword from attributes as it's not a Doctrine field
+            // but store it for use in afterInstantiate
+            return $attributes;
+        })->afterInstantiate(function (User $user, array $attributes): void {
+            if (isset($attributes['plainPassword'])) {
+                $user->setPlainPassword($attributes['plainPassword']);
+            }
+        });
     }
 
     /**

@@ -1,7 +1,35 @@
 api_platform:
     title: Hello API Platform
     version: 1.0.0
+    resource_class_directories:
+        - '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Core/Domain'
+    mapping:
+        paths:
+            # Scan des dossiers Resource pour les configurations API
+            #- '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Core/Presentation/Api/Resource'
+    formats:
+        jsonld: [ 'application/ld+json' ]
+        json: [ 'application/json' ]
+    patch_formats:
+        json: [ 'application/merge-patch+json' ]
+        jsonapi: [ 'application/vnd.api+json' ]
+    docs_formats:
+        jsonld: [ 'application/ld+json' ]
+        jsonopenapi: [ 'application/vnd.openapi+json' ]
+        html: [ 'text/html' ]
     defaults:
         stateless: true
         cache_headers:
-            vary: ['Content-Type', 'Authorization', 'Origin']
+            vary: [ 'Content-Type', 'Authorization', 'Origin' ]
+        extra_properties:
+            standard_put: false
+            rfc_7807_compliant_errors: true
+        normalization_context:
+            skip_null_values: false
+        pagination_client_enabled: true
+        pagination_client_items_per_page: true
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header

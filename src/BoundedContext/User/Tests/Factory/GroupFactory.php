@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\BoundedContext\User\Tests\Factory;
 
 use App\BoundedContext\User\Domain\Entity\Group;
-use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Group>
+ * @extends PersistentObjectFactory<Group>
  */
-final class GroupFactory extends PersistentProxyObjectFactory
+final class GroupFactory extends PersistentObjectFactory
 {
     public static function class(): string
     {
