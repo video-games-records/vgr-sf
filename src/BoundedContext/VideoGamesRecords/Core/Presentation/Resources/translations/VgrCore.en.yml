@@ -28,6 +28,23 @@ player_chart:
   latest:
     card_title: Latest Scores
     no_scores_card: No recent scores
+  show:
+    meta_description: "Score of %player% on %chart% - %game%"
+    score_detail: Score Detail
+    player: Player
+    score_info: Score Information
+    rank: Rank
+    points: Points
+    score: Score
+    additional_info: Additional Information
+    status: Status
+    last_update: Last Update
+    proof: Proof
+    view_proof: View Proof
+    no_proof: No proof submitted
+    proof_picture: Picture
+    proof_video: Video
+    back_to_chart: Back to Chart
 
 player:
   profile:

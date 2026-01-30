@@ -172,7 +172,7 @@
 
                                 {# Action #}
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-primary">
+                                    <a href="{{ path('vgr_player_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug, playerChartId: playerChart.id}) }}" class="btn btn-sm btn-primary">
                                         {{ 'chart.show.detail'|trans }}
                                     </a>
                                 </td>
