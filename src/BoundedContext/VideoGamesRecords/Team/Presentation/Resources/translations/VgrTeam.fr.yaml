@@ -1,4 +1,21 @@
+breadcrumb:
+    home: 'Accueil'
+
 team:
+    index:
+        title: 'Équipes'
+        meta_description: 'Liste de toutes les équipes actives sur Video Games Records'
+        breadcrumb: 'Équipes'
+        header: 'Équipes'
+        description: '%count% équipes actives'
+        column_name: 'Nom'
+        column_tag: 'Tag'
+        column_games: 'Jeux'
+        column_points: 'Points'
+        column_badges: 'Badges'
+        column_players: 'Joueurs'
+        showing_results: 'Affichage %start% - %end% sur %total% équipes'
+        no_teams: 'Aucune équipe trouvée'
     profile:
         title: 'Profil de l''Equipe'
         header:

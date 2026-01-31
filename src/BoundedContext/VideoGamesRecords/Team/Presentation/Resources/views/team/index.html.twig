@@ -1,0 +1,160 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrTeam' %}
+
+{% block title %}{{ 'team.index.title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'team.index.meta_description'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb Navigation #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'team.index.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Page Header #}
+    <div class="mb-4">
+        <h1 class="h3">
+            <i class="bi bi-people-fill"></i>
+            {{ 'team.index.header'|trans }}
+        </h1>
+        <p class="text-muted">{{ 'team.index.description'|trans({'%count%': totalTeams}) }}</p>
+    </div>
+
+    {# Teams Table #}
+    {% if teams|length > 0 %}
+        <div class="card shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>
+                                {{ _self.sort_header('libTeam', 'team.index.column_name'|trans, currentSort, currentOrder) }}
+                            </th>
+                            <th class="text-center d-none d-lg-table-cell">
+                                {{ _self.sort_header('nbGame', 'team.index.column_games'|trans, currentSort, currentOrder) }}
+                            </th>
+                            <th class="text-end">
+                                {{ _self.sort_header('pointGame', 'team.index.column_points'|trans, currentSort, currentOrder) }}
+                            </th>
+                            <th class="text-center d-none d-lg-table-cell">
+                                {{ _self.sort_header('nbMasterBadge', 'team.index.column_badges'|trans, currentSort, currentOrder) }}
+                            </th>
+                            <th class="text-center d-none d-md-table-cell">
+                                {{ _self.sort_header('nbPlayer', 'team.index.column_players'|trans, currentSort, currentOrder) }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for team in teams %}
+                            <tr>
+                                <td class="align-middle">
+                                    <a href="{{ path('vgr_team_profile_overview', {id: team.id, slug: team.slug}) }}" class="text-decoration-none">
+                                        [{{ team.tag }}] {{ team.libTeam }}
+                                    </a>
+                                </td>
+                                <td class="text-center align-middle d-none d-lg-table-cell">
+                                    {{ team.nbGame|number_format(0, '.', ',') }}
+                                </td>
+                                <td class="text-end align-middle">
+                                    <strong>{{ team.pointGame|number_format(0, '.', ',') }}</strong>
+                                </td>
+                                <td class="text-center align-middle d-none d-lg-table-cell">
+                                    {{ team.nbMasterBadge|number_format(0, '.', ',') }}
+                                </td>
+                                <td class="text-center align-middle d-none d-md-table-cell">
+                                    {{ team.nbPlayer|number_format(0, '.', ',') }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {# Pagination #}
+        {% if totalPages > 1 %}
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {# Previous #}
+                    <li class="page-item {{ currentPage == 1 ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ path('vgr_team_index', {sort: currentSort, order: currentOrder, page: currentPage - 1}) }}">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+
+                    {# Page numbers #}
+                    {% set startPage = max(1, currentPage - 2) %}
+                    {% set endPage = min(totalPages, currentPage + 2) %}
+
+                    {% if startPage > 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('vgr_team_index', {sort: currentSort, order: currentOrder, page: 1}) }}">1</a>
+                        </li>
+                        {% if startPage > 2 %}
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% for p in startPage..endPage %}
+                        <li class="page-item {{ p == currentPage ? 'active' : '' }}">
+                            <a class="page-link" href="{{ path('vgr_team_index', {sort: currentSort, order: currentOrder, page: p}) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if endPage < totalPages %}
+                        {% if endPage < totalPages - 1 %}
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        {% endif %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('vgr_team_index', {sort: currentSort, order: currentOrder, page: totalPages}) }}">{{ totalPages }}</a>
+                        </li>
+                    {% endif %}
+
+                    {# Next #}
+                    <li class="page-item {{ currentPage == totalPages ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ path('vgr_team_index', {sort: currentSort, order: currentOrder, page: currentPage + 1}) }}">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        {# Results Count #}
+        <div class="mt-3 text-center text-muted small">
+            {{ 'team.index.showing_results'|trans({'%start%': ((currentPage - 1) * 100) + 1, '%end%': min(currentPage * 100, totalTeams), '%total%': totalTeams}) }}
+        </div>
+    {% else %}
+        {# No Teams Found #}
+        <div class="card shadow-sm">
+            <div class="card-body text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'team.index.no_teams'|trans }}</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{# Macro for sortable column headers #}
+{% macro sort_header(field, label, currentSort, currentOrder) %}
+    {% set newOrder = (currentSort == field and currentOrder == 'ASC') ? 'DESC' : 'ASC' %}
+    {% set isActive = currentSort == field %}
+    <a href="{{ path('vgr_team_index', {sort: field, order: newOrder}) }}"
+       class="text-decoration-none {{ isActive ? 'fw-bold' : '' }}">
+        {{ label }}
+        {% if isActive %}
+            <i class="bi bi-caret-{{ currentOrder == 'ASC' ? 'up' : 'down' }}-fill"></i>
+        {% endif %}
+    </a>
+{% endmacro %}
+{% endblock %}

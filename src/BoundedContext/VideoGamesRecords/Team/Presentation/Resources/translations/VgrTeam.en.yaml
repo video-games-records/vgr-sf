@@ -1,4 +1,21 @@
+breadcrumb:
+    home: 'Home'
+
 team:
+    index:
+        title: 'Teams'
+        meta_description: 'List of all active teams on Video Games Records'
+        breadcrumb: 'Teams'
+        header: 'Teams'
+        description: '%count% active teams'
+        column_name: 'Name'
+        column_tag: 'Tag'
+        column_games: 'Games'
+        column_points: 'Points'
+        column_badges: 'Badges'
+        column_players: 'Players'
+        showing_results: 'Showing %start% - %end% of %total% teams'
+        no_teams: 'No teams found'
     profile:
         title: 'Team Profile'
         header:
