@@ -126,3 +126,35 @@ player:
       column_points: Points
       column_rank: Rang
       no_games: Aucun jeu pour le moment
+
+leaderboard:
+  tabs:
+    players: Joueurs
+    teams: Équipes
+  columns:
+    rank: "#"
+    player: Joueur
+    team: Équipe
+    points: Points
+    games: Jeux
+    master_badges: Master Badges
+  no_players: Aucun joueur trouvé
+  no_teams: Aucune équipe trouvée
+  chart_points:
+    title: Classement Points Records
+    page_title: Classement Points Records - Video Games Records
+  game_points:
+    title: Classement Points Jeux
+    page_title: Classement Points Jeux - Video Games Records
+  medals:
+    title: Classement Médailles
+    page_title: Classement Médailles - Video Games Records
+  cups:
+    title: Classement Coupes
+    page_title: Classement Coupes - Video Games Records
+  badges:
+    title: Classement Badges
+    page_title: Classement Badges - Video Games Records
+  proofs:
+    title: Classement Preuves
+    page_title: Classement Preuves - Video Games Records

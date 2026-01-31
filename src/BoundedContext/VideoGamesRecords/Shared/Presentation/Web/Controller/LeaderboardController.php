@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Shared\Presentation\Web\Controller;
 
 use App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking\PlayerRankingProvider;
+use App\BoundedContext\VideoGamesRecords\Team\Application\DataProvider\Ranking\TeamRankingProvider;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class LeaderboardController extends AbstractLocalizedController
 {
     private PlayerRankingProvider $playerRankingProvider;
+    private TeamRankingProvider $teamRankingProvider;
 
-    public function __construct(PlayerRankingProvider $playerRankingProvider)
-    {
+    public function __construct(
+        PlayerRankingProvider $playerRankingProvider,
+        TeamRankingProvider $teamRankingProvider
+    ) {
         $this->playerRankingProvider = $playerRankingProvider;
+        $this->teamRankingProvider = $teamRankingProvider;
     }
 
     /**
@@ -30,8 +35,13 @@ class LeaderboardController extends AbstractLocalizedController
             'maxRank' => 100
         ]);
 
+        $topTeams = $this->teamRankingProvider->getRankingPointGame([
+            'maxRank' => 100
+        ]);
+
         return $this->render('@VideoGamesRecordsShared/leaderboard/game_points.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'teams' => $topTeams
         ]);
     }
 
@@ -45,8 +55,13 @@ class LeaderboardController extends AbstractLocalizedController
             'maxRank' => 100,
         ]);
 
+        $topTeams = $this->teamRankingProvider->getRankingPointChart([
+            'maxRank' => 100,
+        ]);
+
         return $this->render('@VideoGamesRecordsShared/leaderboard/chart_points.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'teams' => $topTeams
         ]);
     }
 
@@ -60,8 +75,13 @@ class LeaderboardController extends AbstractLocalizedController
             'maxRank' => 100
         ]);
 
+        $topTeams = $this->teamRankingProvider->getRankingMedals([
+            'maxRank' => 100
+        ]);
+
         return $this->render('@VideoGamesRecordsShared/leaderboard/medals.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'teams' => $topTeams
         ]);
     }
 
@@ -75,8 +95,13 @@ class LeaderboardController extends AbstractLocalizedController
             'maxRank' => 100
         ]);
 
+        $topTeams = $this->teamRankingProvider->getRankingCup([
+            'maxRank' => 100
+        ]);
+
         return $this->render('@VideoGamesRecordsShared/leaderboard/cups.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'teams' => $topTeams
         ]);
     }
 
@@ -90,8 +115,13 @@ class LeaderboardController extends AbstractLocalizedController
             'maxRank' => 100
         ]);
 
+        $topTeams = $this->teamRankingProvider->getRankingBadge([
+            'maxRank' => 100
+        ]);
+
         return $this->render('@VideoGamesRecordsShared/leaderboard/badges.html.twig', [
-            'players' => $topPlayers
+            'players' => $topPlayers,
+            'teams' => $topTeams
         ]);
     }
 
