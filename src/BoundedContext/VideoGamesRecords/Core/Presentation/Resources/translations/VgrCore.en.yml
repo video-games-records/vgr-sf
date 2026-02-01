@@ -181,7 +181,9 @@ sidebar:
   forum_description: Discuss this game
   serie: Serie
   serie_description: See all games in this serie
-  no_links: No additional links available
+  rules: Rules
+  rules_description: Site rules and guidelines
+  game_rules_title: Game Rules
 
 leaderboard:
   tabs:
