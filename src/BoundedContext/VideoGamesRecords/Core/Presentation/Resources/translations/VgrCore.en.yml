@@ -24,6 +24,34 @@ game:
     card_title: Latest Games
     no_games_card: No recent games
 
+  show:
+    title: Video Games Records
+    meta_description: "Records and rankings for %game%"
+    about: About
+    groups_title: Groups
+    charts: charts
+    no_charts: No charts
+    players: players
+    scores: scores
+    no_groups: No groups found
+    storyline: Storyline
+    download: Download
+    download_button: Download Game
+    submit_scores: Submit Scores
+    rankings_title: Rankings
+    rankings:
+      player_points: Player Points
+      player_medals: Player Medals
+      team_points: Team Points
+      team_medals: Team Medals
+      records: Records
+      proofs: Proofs
+      view_team_players: View team players
+
+common:
+  loading: Loading...
+  error: An error occurred
+
 player_chart:
   latest:
     card_title: Latest Scores

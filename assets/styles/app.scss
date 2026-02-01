@@ -21,6 +21,7 @@
 @import 'components/platforms';
 @import 'components/topic-types';
 @import 'components/player-chart-status';
+@import 'components/ajax-modal';
 
 // 5. Import des vues
 @import 'views/home';
@@ -86,6 +87,15 @@ body {
         &:hover {
             color: #b8d4ea;
         }
+    }
+
+    // Boutons outline-secondary plus visibles en dark mode
+    .btn-outline-secondary {
+        --bs-btn-color: #adb5bd;
+        --bs-btn-border-color: #adb5bd;
+        --bs-btn-hover-color: #212529;
+        --bs-btn-hover-bg: #adb5bd;
+        --bs-btn-hover-border-color: #adb5bd;
     }
 }
 

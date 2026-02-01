@@ -24,6 +24,34 @@ game:
     card_title: Derniers jeux
     no_games_card: Aucun jeu récent
 
+  show:
+    title: Video Games Records
+    meta_description: "Records et classements pour %game%"
+    about: À propos
+    groups_title: Groupes
+    charts: records
+    no_charts: Aucun record
+    players: joueurs
+    scores: scores
+    no_groups: Aucun groupe trouvé
+    storyline: Histoire
+    download: Téléchargement
+    download_button: Télécharger le jeu
+    submit_scores: Soumettre des scores
+    rankings_title: Classements
+    rankings:
+      player_points: Points Joueurs
+      player_medals: Médailles Joueurs
+      team_points: Points Équipes
+      team_medals: Médailles Équipes
+      records: Records
+      proofs: Preuves
+      view_team_players: Voir les joueurs de l'équipe
+
+common:
+  loading: Chargement...
+  error: Une erreur est survenue
+
 player_chart:
   latest:
     card_title: Derniers scores

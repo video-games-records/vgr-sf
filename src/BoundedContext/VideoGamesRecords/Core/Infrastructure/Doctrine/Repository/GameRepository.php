@@ -28,6 +28,28 @@ class GameRepository extends DefaultRepository
     }
 
     /**
+     * Find a game with its relations for the show page (optimized query)
+     */
+    public function findForShow(int $id): ?Game
+    {
+        try {
+            return $this->createQueryBuilder('g')
+                ->leftJoin('g.platforms', 'p')
+                ->addSelect('p')
+                ->leftJoin('g.serie', 's')
+                ->addSelect('s')
+                ->leftJoin('g.igdbGame', 'ig')
+                ->addSelect('ig')
+                ->where('g.id = :id')
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException) {
+            return null;
+        }
+    }
+
+    /**
      * @return array<int, array{id: int}>
      */
     public function getIds(): array
