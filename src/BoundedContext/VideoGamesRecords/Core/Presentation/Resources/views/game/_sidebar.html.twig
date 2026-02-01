@@ -1,0 +1,45 @@
+{# Sidebar for game, group, chart, and score pages #}
+{# Parameters: game (required) #}
+{% trans_default_domain 'VgrCore' %}
+
+<div class="card shadow-sm">
+    <div class="card-header border-bottom">
+        <h5 class="mb-0">
+            <i class="bi bi-link-45deg"></i> {{ 'sidebar.title'|trans }}
+        </h5>
+    </div>
+    <div class="list-group list-group-flush">
+        {# Forum Link #}
+        {% if game.forum is defined and game.forum %}
+            <a href="{{ path('forum_show', {id: game.forum.id, slug: game.forum.slug}) }}" class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-chat-dots me-3 fs-5 text-primary"></i>
+                    <div>
+                        <div class="fw-bold">{{ 'sidebar.forum'|trans }}</div>
+                        <small class="text-muted">{{ 'sidebar.forum_description'|trans }}</small>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+
+        {# Serie Link #}
+        {% if game.serie is defined and game.serie %}
+            <a href="{{ path('vgr_serie_show', {id: game.serie.id, slug: game.serie.slug}) }}" class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-collection me-3 fs-5 text-success"></i>
+                    <div>
+                        <div class="fw-bold">{{ game.serie.name }}</div>
+                        <small class="text-muted">{{ 'sidebar.serie_description'|trans }}</small>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+
+        {# Show a message if no links are available #}
+        {% if (game.forum is not defined or not game.forum) and (game.serie is not defined or not game.serie) %}
+            <div class="list-group-item text-center text-muted py-4">
+                <i class="bi bi-info-circle"></i> {{ 'sidebar.no_links'|trans }}
+            </div>
+        {% endif %}
+    </div>
+</div>

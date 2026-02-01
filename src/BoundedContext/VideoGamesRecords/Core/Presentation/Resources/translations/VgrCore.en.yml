@@ -48,6 +48,26 @@ game:
       proofs: Proofs
       view_team_players: View team players
 
+group:
+  show:
+    title: Groups
+    meta_description: "Records and rankings for %group% in %game%"
+    charts: charts
+    charts_title: Charts
+    top_scores: Top Scores
+    players: players
+    scores: scores
+    no_charts: No charts
+    submit_scores: Submit Scores
+    video_proof_required: Video Proof Required
+  top_scores:
+    chart: Chart
+    your_score: Your Score
+    your_rank: Your Rank
+    best_score: Best Score
+    best_player: Best Player
+    no_data: No scores yet
+
 common:
   loading: Loading...
   error: An error occurred
@@ -154,6 +174,14 @@ player:
       column_points: Points
       column_rank: Rank
       no_games: No games yet
+
+sidebar:
+  title: Links
+  forum: Forum
+  forum_description: Discuss this game
+  serie: Serie
+  serie_description: See all games in this serie
+  no_links: No additional links available
 
 leaderboard:
   tabs:

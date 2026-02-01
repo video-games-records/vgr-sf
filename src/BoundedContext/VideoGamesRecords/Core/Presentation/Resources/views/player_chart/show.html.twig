@@ -29,280 +29,293 @@
         ]
     } %}
 
-    {# Score Detail Card #}
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header border-bottom">
-            <h2 class="h5 mb-0">
-                <i class="bi bi-trophy"></i> {{ 'player_chart.show.score_detail'|trans }}
-            </h2>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                {# Player Info Column #}
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <h6 class="text-muted mb-3">{{ 'player_chart.show.player'|trans }}</h6>
-                    <div class="d-flex align-items-center gap-3">
-                        <img
-                            src="{{ asset('users/' ~ playerChart.player.userId ~ '/avatar') }}"
-                            alt="{{ playerChart.player.pseudo }}"
-                            class="rounded-circle"
-                            width="64"
-                            height="64"
-                        >
-                        <div>
-                            <div class="fs-5 fw-bold">
-                                {% if playerChart.player.team %}
-                                    <span class="badge bg-secondary me-1">[{{ playerChart.player.team.tag }}]</span>
+    {# Main content with sidebar #}
+    <div class="row">
+        {# Main Content Column #}
+        <div class="col-lg-9">
+            {# Score Detail Card #}
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header border-bottom">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-trophy"></i> {{ 'player_chart.show.score_detail'|trans }}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {# Player Info Column #}
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <h6 class="text-muted mb-3">{{ 'player_chart.show.player'|trans }}</h6>
+                            <div class="d-flex align-items-center gap-3">
+                                <img
+                                    src="{{ asset('users/' ~ playerChart.player.userId ~ '/avatar') }}"
+                                    alt="{{ playerChart.player.pseudo }}"
+                                    class="rounded-circle"
+                                    width="64"
+                                    height="64"
+                                >
+                                <div>
+                                    <div class="fs-5 fw-bold">
+                                        {% if playerChart.player.team %}
+                                            <span class="badge bg-secondary me-1">[{{ playerChart.player.team.tag }}]</span>
+                                        {% endif %}
+                                        {{ component('player_link', {
+                                            player: playerChart.player,
+                                            bold: true,
+                                            showTeam: false,
+                                            showCountry: false,
+                                            showAvatar: false
+                                        }) }}
+                                    </div>
+                                    {% if playerChart.player.country %}
+                                        <div class="text-muted">
+                                            <i class="bi bi-geo-alt"></i> {{ playerChart.player.country.name }}
+                                        </div>
+                                    {% endif %}
+                                    {% if playerChart.platform %}
+                                        <div class="text-muted">
+                                            <i class="bi bi-controller"></i> {{ playerChart.platform.name }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Score Info Column #}
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">{{ 'player_chart.show.score_info'|trans }}</h6>
+                            <div class="row g-3">
+                                {# Rank #}
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded text-center">
+                                        <div class="text-muted small">{{ 'player_chart.show.rank'|trans }}</div>
+                                        <div class="fs-3 fw-bold">
+                                            <span class="badge rounded-pill {% if playerChart.rank == 1 %}bg-warning text-dark{% elseif playerChart.rank == 2 %}bg-secondary text-white{% elseif playerChart.rank == 3 %}bg-bronze text-white{% else %}bg-primary{% endif %} fs-5">
+                                                {{ playerChart.rank ?? '-' }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Points #}
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded text-center">
+                                        <div class="text-muted small">{{ 'player_chart.show.points'|trans }}</div>
+                                        <div class="fs-3 fw-bold">
+                                            <span class="badge bg-primary fs-5">{{ playerChart.pointChart }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Score #}
+                                <div class="col-12">
+                                    <div class="p-3 bg-light rounded text-center">
+                                        <div class="text-muted small">{{ 'player_chart.show.score'|trans }}</div>
+                                        <div class="fs-3 fw-bold text-success">
+                                            {% set scoreValues = [] %}
+                                            {% for lib in playerChart.libs %}
+                                                {% set scoreValues = scoreValues|merge([lib.value|format_score(lib.libChart.type.mask)]) %}
+                                            {% endfor %}
+                                            {{ scoreValues|join(' / ') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Additional Info Card #}
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header border-bottom">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle"></i> {{ 'player_chart.show.additional_info'|trans }}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {# Status #}
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <div class="text-muted small mb-1">{{ 'player_chart.show.status'|trans }}</div>
+                            <div>{{ component('player_chart_status', {status: playerChart.status}) }}</div>
+                        </div>
+
+                        {# Last Update #}
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <div class="text-muted small mb-1">{{ 'player_chart.show.last_update'|trans }}</div>
+                            <div>
+                                {% if playerChart.lastUpdate %}
+                                    <i class="bi bi-clock"></i> {{ playerChart.lastUpdate|date('M d, Y, h:i A') }}
+                                {% else %}
+                                    -
                                 {% endif %}
-                                {{ component('player_link', {
-                                    player: playerChart.player,
-                                    bold: true,
-                                    showTeam: false,
-                                    showCountry: false,
-                                    showAvatar: false
-                                }) }}
-                            </div>
-                            {% if playerChart.player.country %}
-                                <div class="text-muted">
-                                    <i class="bi bi-geo-alt"></i> {{ playerChart.player.country.name }}
-                                </div>
-                            {% endif %}
-                            {% if playerChart.platform %}
-                                <div class="text-muted">
-                                    <i class="bi bi-controller"></i> {{ playerChart.platform.name }}
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-
-                {# Score Info Column #}
-                <div class="col-md-6">
-                    <h6 class="text-muted mb-3">{{ 'player_chart.show.score_info'|trans }}</h6>
-                    <div class="row g-3">
-                        {# Rank #}
-                        <div class="col-6">
-                            <div class="p-3 bg-light rounded text-center">
-                                <div class="text-muted small">{{ 'player_chart.show.rank'|trans }}</div>
-                                <div class="fs-3 fw-bold">
-                                    <span class="badge rounded-pill {% if playerChart.rank == 1 %}bg-warning text-dark{% elseif playerChart.rank == 2 %}bg-secondary text-white{% elseif playerChart.rank == 3 %}bg-bronze text-white{% else %}bg-primary{% endif %} fs-5">
-                                        {{ playerChart.rank ?? '-' }}
-                                    </span>
-                                </div>
                             </div>
                         </div>
 
-                        {# Points #}
-                        <div class="col-6">
-                            <div class="p-3 bg-light rounded text-center">
-                                <div class="text-muted small">{{ 'player_chart.show.points'|trans }}</div>
-                                <div class="fs-3 fw-bold">
-                                    <span class="badge bg-primary fs-5">{{ playerChart.pointChart }}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {# Score #}
-                        <div class="col-12">
-                            <div class="p-3 bg-light rounded text-center">
-                                <div class="text-muted small">{{ 'player_chart.show.score'|trans }}</div>
-                                <div class="fs-3 fw-bold text-success">
-                                    {% set scoreValues = [] %}
-                                    {% for lib in playerChart.libs %}
-                                        {% set scoreValues = scoreValues|merge([lib.value|format_score(lib.libChart.type.mask)]) %}
-                                    {% endfor %}
-                                    {{ scoreValues|join(' / ') }}
-                                </div>
+                        {# Proof Status #}
+                        <div class="col-md-4">
+                            <div class="text-muted small mb-1">{{ 'player_chart.show.proof'|trans }}</div>
+                            <div>
+                                {% if playerChart.proof %}
+                                    {% if playerChart.proof.picture %}
+                                        <span class="badge bg-success"><i class="bi bi-image"></i> {{ 'player_chart.show.proof_picture'|trans }}</span>
+                                    {% elseif playerChart.proof.video %}
+                                        <span class="badge bg-danger"><i class="bi bi-play-circle"></i> {{ 'player_chart.show.proof_video'|trans }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="text-muted">{{ 'player_chart.show.no_proof'|trans }}</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    {# Additional Info Card #}
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header border-bottom">
-            <h5 class="mb-0">
-                <i class="bi bi-info-circle"></i> {{ 'player_chart.show.additional_info'|trans }}
-            </h5>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                {# Status #}
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="text-muted small mb-1">{{ 'player_chart.show.status'|trans }}</div>
-                    <div>{{ component('player_chart_status', {status: playerChart.status}) }}</div>
-                </div>
-
-                {# Last Update #}
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="text-muted small mb-1">{{ 'player_chart.show.last_update'|trans }}</div>
-                    <div>
-                        {% if playerChart.lastUpdate %}
-                            <i class="bi bi-clock"></i> {{ playerChart.lastUpdate|date('M d, Y, h:i A') }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </div>
-                </div>
-
-                {# Proof Status #}
-                <div class="col-md-4">
-                    <div class="text-muted small mb-1">{{ 'player_chart.show.proof'|trans }}</div>
-                    <div>
-                        {% if playerChart.proof %}
+            {# Proof Display Card #}
+            {% if playerChart.proof %}
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">
                             {% if playerChart.proof.picture %}
-                                <span class="badge bg-success"><i class="bi bi-image"></i> {{ 'player_chart.show.proof_picture'|trans }}</span>
-                            {% elseif playerChart.proof.video %}
-                                <span class="badge bg-danger"><i class="bi bi-play-circle"></i> {{ 'player_chart.show.proof_video'|trans }}</span>
+                                <i class="bi bi-image"></i> {{ 'player_chart.show.proof_picture'|trans }}
+                            {% else %}
+                                <i class="bi bi-play-circle"></i> {{ 'player_chart.show.proof_video'|trans }}
                             {% endif %}
-                        {% else %}
-                            <span class="text-muted">{{ 'player_chart.show.no_proof'|trans }}</span>
-                        {% endif %}
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        {{ component('proof_display', {proof: playerChart.proof}) }}
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            {% endif %}
 
-    {# Proof Display Card #}
-    {% if playerChart.proof %}
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header border-bottom">
-                <h5 class="mb-0">
-                    {% if playerChart.proof.picture %}
-                        <i class="bi bi-image"></i> {{ 'player_chart.show.proof_picture'|trans }}
-                    {% else %}
-                        <i class="bi bi-play-circle"></i> {{ 'player_chart.show.proof_video'|trans }}
-                    {% endif %}
-                </h5>
-            </div>
-            <div class="card-body text-center">
-                {{ component('proof_display', {proof: playerChart.proof}) }}
-            </div>
-        </div>
-    {% endif %}
+            {# Proof Upload Form - Only show if user owns this score and no proof exists #}
+            {% if is_granted('ROLE_USER') and app.user and playerChart.player.userId == app.user.id and not playerChart.proof %}
+                <div class="card mb-4 shadow-sm"
+                     data-controller="proof-upload"
+                     data-proof-upload-player-chart-id-value="{{ playerChart.id }}"
+                     data-proof-upload-picture-url-value="{{ path('vgr_player_chart_send_picture', {id: playerChart.id}) }}"
+                     data-proof-upload-video-url-value="{{ path('vgr_player_chart_send_video', {id: playerChart.id}) }}">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">
+                            <i class="bi bi-upload"></i> {{ 'player_chart.show.upload_proof'|trans }}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {# Alert Messages #}
+                        <div class="alert alert-success d-none" data-proof-upload-target="successMessage"></div>
+                        <div class="alert alert-danger d-none" data-proof-upload-target="errorMessage"></div>
 
-    {# Proof Upload Form - Only show if user owns this score and no proof exists #}
-    {% if is_granted('ROLE_USER') and app.user and playerChart.player.userId == app.user.id and not playerChart.proof %}
-        <div class="card mb-4 shadow-sm"
-             data-controller="proof-upload"
-             data-proof-upload-player-chart-id-value="{{ playerChart.id }}"
-             data-proof-upload-picture-url-value="{{ path('vgr_player_chart_send_picture', {id: playerChart.id}) }}"
-             data-proof-upload-video-url-value="{{ path('vgr_player_chart_send_video', {id: playerChart.id}) }}">
-            <div class="card-header border-bottom">
-                <h5 class="mb-0">
-                    <i class="bi bi-upload"></i> {{ 'player_chart.show.upload_proof'|trans }}
-                </h5>
-            </div>
-            <div class="card-body">
-                {# Alert Messages #}
-                <div class="alert alert-success d-none" data-proof-upload-target="successMessage"></div>
-                <div class="alert alert-danger d-none" data-proof-upload-target="errorMessage"></div>
+                        {# Tabs for Picture/Video #}
+                        <ul class="nav nav-tabs mb-4" role="tablist">
+                            {% if not chart.isProofVideoOnly %}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="picture-tab" data-bs-toggle="tab" data-bs-target="#picture-panel" type="button" role="tab">
+                                        <i class="bi bi-image me-2"></i>{{ 'player_chart.show.proof_picture'|trans }}
+                                    </button>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link {% if chart.isProofVideoOnly %}active{% endif %}" id="video-tab" data-bs-toggle="tab" data-bs-target="#video-panel" type="button" role="tab">
+                                    <i class="bi bi-play-circle me-2"></i>{{ 'player_chart.show.proof_video'|trans }}
+                                </button>
+                            </li>
+                        </ul>
 
-                {# Tabs for Picture/Video #}
-                <ul class="nav nav-tabs mb-4" role="tablist">
-                    {% if not chart.isProofVideoOnly %}
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="picture-tab" data-bs-toggle="tab" data-bs-target="#picture-panel" type="button" role="tab">
-                                <i class="bi bi-image me-2"></i>{{ 'player_chart.show.proof_picture'|trans }}
-                            </button>
-                        </li>
-                    {% endif %}
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link {% if chart.isProofVideoOnly %}active{% endif %}" id="video-tab" data-bs-toggle="tab" data-bs-target="#video-panel" type="button" role="tab">
-                            <i class="bi bi-play-circle me-2"></i>{{ 'player_chart.show.proof_video'|trans }}
-                        </button>
-                    </li>
-                </ul>
+                        <div class="tab-content">
+                            {# Picture Upload Tab #}
+                            {% if not chart.isProofVideoOnly %}
+                                <div class="tab-pane fade show active" id="picture-panel" role="tabpanel">
+                                    {# Dropzone #}
+                                    <div class="border border-2 border-dashed rounded p-5 text-center cursor-pointer"
+                                         data-proof-upload-target="dropzone"
+                                         data-action="click->proof-upload#triggerFileInput">
+                                        <i class="bi bi-cloud-arrow-up display-4 text-muted"></i>
+                                        <p class="mt-3 mb-1 fw-bold">{{ 'player_chart.show.upload_drag_drop'|trans }}</p>
+                                        <p class="text-muted small mb-0">{{ 'player_chart.show.upload_or_click'|trans }}</p>
+                                        <p class="text-muted small">{{ 'player_chart.show.upload_formats'|trans }}</p>
+                                    </div>
 
-                <div class="tab-content">
-                    {# Picture Upload Tab #}
-                    {% if not chart.isProofVideoOnly %}
-                        <div class="tab-pane fade show active" id="picture-panel" role="tabpanel">
-                            {# Dropzone #}
-                            <div class="border border-2 border-dashed rounded p-5 text-center cursor-pointer"
-                                 data-proof-upload-target="dropzone"
-                                 data-action="click->proof-upload#triggerFileInput">
-                                <i class="bi bi-cloud-arrow-up display-4 text-muted"></i>
-                                <p class="mt-3 mb-1 fw-bold">{{ 'player_chart.show.upload_drag_drop'|trans }}</p>
-                                <p class="text-muted small mb-0">{{ 'player_chart.show.upload_or_click'|trans }}</p>
-                                <p class="text-muted small">{{ 'player_chart.show.upload_formats'|trans }}</p>
-                            </div>
+                                    {# Hidden file input #}
+                                    <input type="file"
+                                           class="d-none"
+                                           accept="image/jpeg,image/png"
+                                           data-proof-upload-target="fileInput"
+                                           data-action="change->proof-upload#onFileSelected">
 
-                            {# Hidden file input #}
-                            <input type="file"
-                                   class="d-none"
-                                   accept="image/jpeg,image/png"
-                                   data-proof-upload-target="fileInput"
-                                   data-action="change->proof-upload#onFileSelected">
+                                    {# Preview #}
+                                    <div class="d-none mt-4" data-proof-upload-target="preview">
+                                        <div class="position-relative d-inline-block">
+                                            <img src="" alt="Preview" class="img-fluid rounded shadow" style="max-height: 300px;" data-proof-upload-target="previewImage">
+                                            <button type="button"
+                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
+                                                    data-action="click->proof-upload#removeImage">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </div>
+                                    </div>
 
-                            {# Preview #}
-                            <div class="d-none mt-4" data-proof-upload-target="preview">
-                                <div class="position-relative d-inline-block">
-                                    <img src="" alt="Preview" class="img-fluid rounded shadow" style="max-height: 300px;" data-proof-upload-target="previewImage">
+                                    {# Submit button #}
+                                    <div class="mt-4 text-center">
+                                        <button type="button"
+                                                class="btn btn-success btn-lg"
+                                                disabled
+                                                data-proof-upload-target="pictureSubmit"
+                                                data-action="click->proof-upload#submitPicture">
+                                            <i class="bi bi-upload me-2"></i>{{ 'player_chart.show.upload_submit'|trans }}
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {# Video URL Tab #}
+                            <div class="tab-pane fade {% if chart.isProofVideoOnly %}show active{% endif %}" id="video-panel" role="tabpanel">
+                                <div class="mb-3">
+                                    <label for="videoUrl" class="form-label fw-bold">
+                                        <i class="bi bi-youtube text-danger me-2"></i>{{ 'player_chart.show.youtube_url'|trans }}
+                                    </label>
+                                    <input type="url"
+                                           class="form-control form-control-lg"
+                                           id="videoUrl"
+                                           placeholder="https://www.youtube.com/watch?v=..."
+                                           data-proof-upload-target="videoUrl"
+                                           data-action="input->proof-upload#onVideoUrlInput">
+                                    <div class="form-text">{{ 'player_chart.show.youtube_hint'|trans }}</div>
+                                </div>
+
+                                {# Video Preview #}
+                                <div class="d-none" data-proof-upload-target="videoPreview"></div>
+
+                                {# Submit button #}
+                                <div class="mt-4 text-center">
                                     <button type="button"
-                                            class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
-                                            data-action="click->proof-upload#removeImage">
-                                        <i class="bi bi-x-lg"></i>
+                                            class="btn btn-danger btn-lg"
+                                            disabled
+                                            data-proof-upload-target="videoSubmit"
+                                            data-action="click->proof-upload#submitVideo">
+                                        <i class="bi bi-send me-2"></i>{{ 'player_chart.show.video_submit'|trans }}
                                     </button>
                                 </div>
                             </div>
-
-                            {# Submit button #}
-                            <div class="mt-4 text-center">
-                                <button type="button"
-                                        class="btn btn-success btn-lg"
-                                        disabled
-                                        data-proof-upload-target="pictureSubmit"
-                                        data-action="click->proof-upload#submitPicture">
-                                    <i class="bi bi-upload me-2"></i>{{ 'player_chart.show.upload_submit'|trans }}
-                                </button>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {# Video URL Tab #}
-                    <div class="tab-pane fade {% if chart.isProofVideoOnly %}show active{% endif %}" id="video-panel" role="tabpanel">
-                        <div class="mb-3">
-                            <label for="videoUrl" class="form-label fw-bold">
-                                <i class="bi bi-youtube text-danger me-2"></i>{{ 'player_chart.show.youtube_url'|trans }}
-                            </label>
-                            <input type="url"
-                                   class="form-control form-control-lg"
-                                   id="videoUrl"
-                                   placeholder="https://www.youtube.com/watch?v=..."
-                                   data-proof-upload-target="videoUrl"
-                                   data-action="input->proof-upload#onVideoUrlInput">
-                            <div class="form-text">{{ 'player_chart.show.youtube_hint'|trans }}</div>
-                        </div>
-
-                        {# Video Preview #}
-                        <div class="d-none" data-proof-upload-target="videoPreview"></div>
-
-                        {# Submit button #}
-                        <div class="mt-4 text-center">
-                            <button type="button"
-                                    class="btn btn-danger btn-lg"
-                                    disabled
-                                    data-proof-upload-target="videoSubmit"
-                                    data-action="click->proof-upload#submitVideo">
-                                <i class="bi bi-send me-2"></i>{{ 'player_chart.show.video_submit'|trans }}
-                            </button>
                         </div>
                     </div>
                 </div>
+            {% endif %}
+
+            {# Back Button #}
+            <div class="mt-4">
+                <a href="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug}) }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> {{ 'player_chart.show.back_to_chart'|trans }}
+                </a>
             </div>
         </div>
-    {% endif %}
 
-    {# Back Button #}
-    <div class="mt-4">
-        <a href="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug}) }}" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left"></i> {{ 'player_chart.show.back_to_chart'|trans }}
-        </a>
+        {# Sidebar Column #}
+        <div class="col-lg-3 mt-4 mt-lg-0">
+            {% include '@VideoGamesRecordsCore/game/_sidebar.html.twig' with {
+                'game': game
+            } %}
+        </div>
     </div>
 </div>
 {% endblock %}

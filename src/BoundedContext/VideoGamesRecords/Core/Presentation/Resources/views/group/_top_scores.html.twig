@@ -1,0 +1,120 @@
+{% trans_default_domain 'VgrCore' %}
+
+{% if charts|length > 0 %}
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>{{ 'group.top_scores.chart'|trans }}</th>
+                    {% if app.user %}
+                        <th class="text-center">{{ 'group.top_scores.your_score'|trans }}</th>
+                        <th class="text-center">{{ 'group.top_scores.your_rank'|trans }}</th>
+                    {% endif %}
+                    <th class="text-center">{{ 'group.top_scores.best_score'|trans }}</th>
+                    <th class="text-center">{{ 'group.top_scores.best_player'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chart in charts %}
+                    {% set playerChart1 = chart.playerChart1 %}
+                    {% set playerChartP = chart.playerChartP %}
+                    <tr>
+                        {# Chart Name #}
+                        <td>
+                            <a href="{{ path('vgr_chart_show', {
+                                id: group.game.id,
+                                slug: group.game.slug,
+                                groupId: group.id,
+                                groupSlug: group.slug,
+                                chartId: chart.id,
+                                chartSlug: chart.slug
+                            }) }}" class="text-decoration-none">
+                                <strong class="text-primary">{{ chart.name }}</strong>
+                            </a>
+                            <br>
+                            <small class="text-muted">
+                                <i class="bi bi-trophy"></i>
+                                {{ chart.nbPost }} {{ 'group.show.scores'|trans }}
+                            </small>
+                        </td>
+
+                        {% if app.user %}
+                            {# Your Score #}
+                            <td class="text-center">
+                                {% if playerChartP %}
+                                    {% set scoreValues = [] %}
+                                    {% for lib in playerChartP.libs %}
+                                        {% set scoreValues = scoreValues|merge([lib.formatValue]) %}
+                                    {% endfor %}
+                                    <strong>{{ scoreValues|join(' / ') }}</strong>
+                                    <br>
+                                    <small class="text-muted">{{ playerChartP.pointChart }} pts</small>
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+
+                            {# Your Rank #}
+                            <td class="text-center">
+                                {% if playerChartP %}
+                                    {% set rankClass = 'bg-secondary' %}
+                                    {% if playerChartP.rank == 1 %}
+                                        {% set rankClass = 'bg-gold' %}
+                                    {% elseif playerChartP.rank == 2 %}
+                                        {% set rankClass = 'bg-silver' %}
+                                    {% elseif playerChartP.rank == 3 %}
+                                        {% set rankClass = 'bg-bronze' %}
+                                    {% endif %}
+                                    <span class="badge {{ rankClass }}">
+                                        {{ playerChartP.rank }}/{{ chart.nbPost }}
+                                    </span>
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+
+                        {# Best Score #}
+                        <td class="text-center">
+                            {% if playerChart1 %}
+                                {% set bestScoreValues = [] %}
+                                {% for lib in playerChart1.libs %}
+                                    {% set bestScoreValues = bestScoreValues|merge([lib.formatValue]) %}
+                                {% endfor %}
+                                <strong class="text-success">{{ bestScoreValues|join(' / ') }}</strong>
+                                <br>
+                                <small class="text-muted">{{ playerChart1.pointChart }} pts</small>
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+
+                        {# Best Player #}
+                        <td class="text-center">
+                            {% if playerChart1 %}
+                                {{ component('player_link', {
+                                    player: playerChart1.player,
+                                    bold: true,
+                                    showTeam: false,
+                                    showCountry: false,
+                                    showAvatar: false
+                                }) }}
+                                {% if playerChart1.lastUpdate %}
+                                    <br>
+                                    <small class="text-muted">{{ playerChart1.lastUpdate|date('F j, Y') }}</small>
+                                {% endif %}
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="card-body text-center text-muted py-5">
+        <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+        <p class="mt-3 mb-0">{{ 'group.top_scores.no_data'|trans }}</p>
+    </div>
+{% endif %}

@@ -48,6 +48,26 @@ game:
       proofs: Preuves
       view_team_players: Voir les joueurs de l'équipe
 
+group:
+  show:
+    title: Groupes
+    meta_description: "Records et classements pour %group% dans %game%"
+    charts: records
+    charts_title: Records
+    top_scores: Top Scores
+    players: joueurs
+    scores: scores
+    no_charts: Aucun record
+    submit_scores: Soumettre des scores
+    video_proof_required: Preuve Vidéo Requise
+  top_scores:
+    chart: Record
+    your_score: Votre Score
+    your_rank: Votre Rang
+    best_score: Meilleur Score
+    best_player: Meilleur Joueur
+    no_data: Aucun score pour le moment
+
 common:
   loading: Chargement...
   error: Une erreur est survenue
@@ -154,6 +174,14 @@ player:
       column_points: Points
       column_rank: Rang
       no_games: Aucun jeu pour le moment
+
+sidebar:
+  title: Liens
+  forum: Forum
+  forum_description: Discuter de ce jeu
+  serie: Série
+  serie_description: Voir tous les jeux de cette série
+  no_links: Aucun lien supplémentaire disponible
 
 leaderboard:
   tabs:
