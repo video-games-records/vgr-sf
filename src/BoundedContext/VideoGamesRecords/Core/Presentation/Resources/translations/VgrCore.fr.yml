@@ -184,6 +184,12 @@ sidebar:
   rules: Règlement
   rules_description: Règles et directives du site
   game_rules_title: Règles du jeu
+  group_switcher_title: Changer de groupe
+  group_prev: Précédent
+  group_next: Suivant
+  chart_switcher_title: Changer de record
+  chart_prev: Précédent
+  chart_next: Suivant
 
 leaderboard:
   tabs:

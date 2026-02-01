@@ -1,6 +1,130 @@
 {# Sidebar for game, group, chart, and score pages #}
-{# Parameters: game (required) #}
+{# Parameters: game (required), group (optional - for group switching) #}
 {% trans_default_domain 'VgrCore' %}
+
+{# Group Switcher Card - Only shown on group/chart/score pages #}
+{% if group is defined and group and game.groups|length > 1 %}
+    {% set groups = game.groups|sort((a, b) => a.id <=> b.id) %}
+    {% set currentIndex = null %}
+    {% for idx, g in groups %}
+        {% if g.id == group.id %}
+            {% set currentIndex = idx %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">
+                <i class="bi bi-arrow-left-right"></i> {{ 'sidebar.group_switcher_title'|trans }}
+            </h5>
+        </div>
+        <div class="card-body">
+            {# Select dropdown #}
+            <select class="form-select mb-3" id="groupSwitcher" onchange="window.location.href=this.value">
+                {% for g in groups %}
+                    <option value="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: g.id, groupSlug: g.slug}) }}" {% if g.id == group.id %}selected{% endif %}>
+                        {{ g.name }}{% if g.isDlc %} (DLC){% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+
+            {# Previous/Next buttons #}
+            <div class="d-flex justify-content-between gap-2">
+                {% set prevGroup = null %}
+                {% set nextGroup = null %}
+                {% for idx, g in groups %}
+                    {% if g.id == group.id %}
+                        {% if idx > 0 %}
+                            {% set prevGroup = groups[idx - 1] %}
+                        {% endif %}
+                        {% if idx < groups|length - 1 %}
+                            {% set nextGroup = groups[idx + 1] %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if prevGroup %}
+                    <a href="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: prevGroup.id, groupSlug: prevGroup.slug}) }}" class="btn btn-secondary btn-sm flex-fill" title="{{ prevGroup.name }}">
+                        <i class="bi bi-chevron-left"></i> {{ 'sidebar.group_prev'|trans }}
+                    </a>
+                {% else %}
+                    <span class="btn btn-secondary btn-sm flex-fill disabled">
+                        <i class="bi bi-chevron-left"></i> {{ 'sidebar.group_prev'|trans }}
+                    </span>
+                {% endif %}
+
+                {% if nextGroup %}
+                    <a href="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: nextGroup.id, groupSlug: nextGroup.slug}) }}" class="btn btn-secondary btn-sm flex-fill" title="{{ nextGroup.name }}">
+                        {{ 'sidebar.group_next'|trans }} <i class="bi bi-chevron-right"></i>
+                    </a>
+                {% else %}
+                    <span class="btn btn-secondary btn-sm flex-fill disabled">
+                        {{ 'sidebar.group_next'|trans }} <i class="bi bi-chevron-right"></i>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{# Chart Switcher Card - Only shown on chart/score pages #}
+{% if chart is defined and chart and group is defined and group and group.charts|length > 1 %}
+    {% set charts = group.charts %}
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">
+                <i class="bi bi-arrow-left-right"></i> {{ 'sidebar.chart_switcher_title'|trans }}
+            </h5>
+        </div>
+        <div class="card-body">
+            {# Select dropdown #}
+            <select class="form-select mb-3" id="chartSwitcher" onchange="window.location.href=this.value">
+                {% for c in charts %}
+                    <option value="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: c.id, chartSlug: c.slug}) }}" {% if c.id == chart.id %}selected{% endif %}>
+                        {{ c.name }}{% if c.isDlc %} (DLC){% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+
+            {# Previous/Next buttons #}
+            <div class="d-flex justify-content-between gap-2">
+                {% set prevChart = null %}
+                {% set nextChart = null %}
+                {% set foundCurrent = false %}
+                {% for c in charts %}
+                    {% if c.id == chart.id %}
+                        {% set foundCurrent = true %}
+                    {% elseif not foundCurrent %}
+                        {% set prevChart = c %}
+                    {% elseif foundCurrent and nextChart is null %}
+                        {% set nextChart = c %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if prevChart %}
+                    <a href="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: prevChart.id, chartSlug: prevChart.slug}) }}" class="btn btn-secondary btn-sm flex-fill" title="{{ prevChart.name }}">
+                        <i class="bi bi-chevron-left"></i> {{ 'sidebar.chart_prev'|trans }}
+                    </a>
+                {% else %}
+                    <span class="btn btn-secondary btn-sm flex-fill disabled">
+                        <i class="bi bi-chevron-left"></i> {{ 'sidebar.chart_prev'|trans }}
+                    </span>
+                {% endif %}
+
+                {% if nextChart %}
+                    <a href="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: nextChart.id, chartSlug: nextChart.slug}) }}" class="btn btn-secondary btn-sm flex-fill" title="{{ nextChart.name }}">
+                        {{ 'sidebar.chart_next'|trans }} <i class="bi bi-chevron-right"></i>
+                    </a>
+                {% else %}
+                    <span class="btn btn-secondary btn-sm flex-fill disabled">
+                        {{ 'sidebar.chart_next'|trans }} <i class="bi bi-chevron-right"></i>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 {# Links Card #}
 <div class="card shadow-sm">

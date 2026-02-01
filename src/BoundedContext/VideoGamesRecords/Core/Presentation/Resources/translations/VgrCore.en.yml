@@ -184,6 +184,12 @@ sidebar:
   rules: Rules
   rules_description: Site rules and guidelines
   game_rules_title: Game Rules
+  group_switcher_title: Switch Group
+  group_prev: Previous
+  group_next: Next
+  chart_switcher_title: Switch Chart
+  chart_prev: Previous
+  chart_next: Next
 
 leaderboard:
   tabs:
