@@ -1,0 +1,46 @@
+{% trans_default_domain 'VgrCore' %}
+
+<div class="table-responsive">
+    <table class="table table-hover mb-0">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 60px;">{{ 'leaderboard.columns.rank'|trans }}</th>
+                <th>{{ 'leaderboard.columns.player'|trans }}</th>
+                <th class="text-end" style="width: 120px;">{{ 'leaderboard.columns.points'|trans }}</th>
+                <th class="text-center" style="width: 80px;">{{ 'game.show.rankings.records'|trans }}</th>
+                <th class="text-center" style="width: 80px;">{{ 'game.show.rankings.proofs'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for playerGroup in playerRanking %}
+                <tr {% if app.user and playerGroup.player.userId == app.user.id %}class="table-primary"{% endif %}>
+                    <td class="text-center align-middle">
+                        <span class="badge rounded-pill {% if loop.index <= 3 %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                            {{ playerGroup.rankPointChart }}
+                        </span>
+                    </td>
+                    <td class="align-middle">
+                        {{ component('player_link', {
+                            player: playerGroup.player,
+                            bold: loop.index <= 3,
+                            showTeam: true,
+                            showCountry: true,
+                            showAvatar: false
+                        }) }}
+                    </td>
+                    <td class="text-end align-middle {% if loop.index <= 3 %}fw-bold{% endif %}">
+                        {{ playerGroup.pointChart|number_format(0, '.', ',') }}
+                    </td>
+                    <td class="text-center align-middle">{{ playerGroup.nbChart }}</td>
+                    <td class="text-center align-middle">{{ playerGroup.nbChartProven }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">
+                        {{ 'leaderboard.no_players'|trans }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

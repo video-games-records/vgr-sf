@@ -1,0 +1,51 @@
+{% trans_default_domain 'VgrCore' %}
+
+<div class="table-responsive">
+    <table class="table table-hover mb-0">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 60px;">{{ 'leaderboard.columns.rank'|trans }}</th>
+                <th>{{ 'leaderboard.columns.team'|trans }}</th>
+                <th class="text-center" style="width: 60px;" title="{{ 'player.profile.achievements.platinum'|trans }}"><i class="bi bi-trophy-fill text-platinum"></i></th>
+                <th class="text-center" style="width: 60px;" title="{{ 'player.profile.achievements.gold'|trans }}"><i class="bi bi-trophy-fill text-gold"></i></th>
+                <th class="text-center" style="width: 60px;" title="{{ 'player.profile.achievements.silver'|trans }}"><i class="bi bi-trophy-fill text-silver"></i></th>
+                <th class="text-center" style="width: 60px;" title="{{ 'player.profile.achievements.bronze'|trans }}"><i class="bi bi-trophy-fill text-bronze"></i></th>
+                <th class="text-center" style="width: 50px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teamGroup in teamRanking %}
+                <tr>
+                    <td class="text-center align-middle">
+                        <span class="badge rounded-pill {% if loop.index <= 3 %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                            {{ teamGroup.rankMedal }}
+                        </span>
+                    </td>
+                    <td class="align-middle">
+                        <a href="{{ path('vgr_team_profile_overview', {id: teamGroup.team.id, slug: teamGroup.team.slug}) }}"
+                           class="text-decoration-none{% if loop.index <= 3 %} fw-bold{% endif %}">
+                            [{{ teamGroup.team.tag }}] {{ teamGroup.team.libTeam }}
+                        </a>
+                    </td>
+                    <td class="text-center align-middle">{{ teamGroup.chartRank0 }}</td>
+                    <td class="text-center align-middle">{{ teamGroup.chartRank1 }}</td>
+                    <td class="text-center align-middle">{{ teamGroup.chartRank2 }}</td>
+                    <td class="text-center align-middle">{{ teamGroup.chartRank3 }}</td>
+                    <td class="text-center align-middle">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                onclick="openAjaxModal('{{ path('vgr_group_team_players_ajax', {groupId: groupId, teamId: teamGroup.team.id}) }}')"
+                                title="{{ 'game.show.rankings.view_team_players'|trans }}">
+                            <i class="bi bi-people"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-4">
+                        {{ 'leaderboard.no_teams'|trans }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

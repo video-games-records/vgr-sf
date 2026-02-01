@@ -117,5 +117,74 @@
             </div>
         {% endif %}
     </div>
+
+    {# Group Rankings #}
+    <div class="card shadow-sm mt-4">
+        <div class="card-header border-bottom">
+            <h5 class="mb-0">
+                <i class="bi bi-trophy"></i> {{ 'game.show.rankings_title'|trans }}
+            </h5>
+        </div>
+        <div class="card-body p-0">
+            {# Navigation Tabs #}
+            <ul class="nav nav-tabs px-3 pt-3" id="groupRankingTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="player-points-tab" data-bs-toggle="tab" data-bs-target="#player-points-pane" type="button" role="tab" aria-controls="player-points-pane" aria-selected="true">
+                        <i class="bi bi-person"></i> {{ 'game.show.rankings.player_points'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="player-medals-tab" data-bs-toggle="tab" data-bs-target="#player-medals-pane" type="button" role="tab" aria-controls="player-medals-pane" aria-selected="false">
+                        <i class="bi bi-person"></i> {{ 'game.show.rankings.player_medals'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="team-points-tab" data-bs-toggle="tab" data-bs-target="#team-points-pane" type="button" role="tab" aria-controls="team-points-pane" aria-selected="false">
+                        <i class="bi bi-people"></i> {{ 'game.show.rankings.team_points'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="team-medals-tab" data-bs-toggle="tab" data-bs-target="#team-medals-pane" type="button" role="tab" aria-controls="team-medals-pane" aria-selected="false">
+                        <i class="bi bi-people"></i> {{ 'game.show.rankings.team_medals'|trans }}
+                    </button>
+                </li>
+            </ul>
+
+            {# Tab Content #}
+            <div class="tab-content" id="groupRankingTabsContent">
+                {# Player Points Tab #}
+                <div class="tab-pane fade show active" id="player-points-pane" role="tabpanel" aria-labelledby="player-points-tab">
+                    {{ render(controller(
+                        'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGroupRankingController::points',
+                        {groupId: group.id, limit: 100}
+                    )) }}
+                </div>
+
+                {# Player Medals Tab #}
+                <div class="tab-pane fade" id="player-medals-pane" role="tabpanel" aria-labelledby="player-medals-tab">
+                    {{ render(controller(
+                        'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGroupRankingController::medals',
+                        {groupId: group.id, limit: 100}
+                    )) }}
+                </div>
+
+                {# Team Points Tab #}
+                <div class="tab-pane fade" id="team-points-pane" role="tabpanel" aria-labelledby="team-points-tab">
+                    {{ render(controller(
+                        'App\\BoundedContext\\VideoGamesRecords\\Team\\Presentation\\Web\\Controller\\Ranking\\TeamGroupRankingController::points',
+                        {groupId: group.id, limit: 100}
+                    )) }}
+                </div>
+
+                {# Team Medals Tab #}
+                <div class="tab-pane fade" id="team-medals-pane" role="tabpanel" aria-labelledby="team-medals-tab">
+                    {{ render(controller(
+                        'App\\BoundedContext\\VideoGamesRecords\\Team\\Presentation\\Web\\Controller\\Ranking\\TeamGroupRankingController::medals',
+                        {groupId: group.id, limit: 100}
+                    )) }}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

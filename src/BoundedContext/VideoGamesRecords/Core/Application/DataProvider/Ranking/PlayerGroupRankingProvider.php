@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGroup;
 use Doctrine\ORM\Exception\ORMException;
 use App\BoundedContext\VideoGamesRecords\Shared\Application\DataProvider\Ranking\AbstractRankingProvider;
 
@@ -12,7 +13,7 @@ class PlayerGroupRankingProvider extends AbstractRankingProvider
     /**
      * @param int|null $id
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGroup>
+     * @return array<PlayerGroup>
      * @throws ORMException
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
@@ -30,7 +31,9 @@ class PlayerGroupRankingProvider extends AbstractRankingProvider
             ->select('pg')
             ->from('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGroup', 'pg')
             ->join('pg.player', 'p')
-            ->addSelect('p')
+            ->leftJoin('p.team', 't')
+            ->leftJoin('p.country', 'c')
+            ->addSelect('p,t,c')
             ->orderBy('pg.rankPointChart');
 
         $query->where('pg.group = :group')
@@ -57,7 +60,7 @@ class PlayerGroupRankingProvider extends AbstractRankingProvider
     /**
      * @param int|null $id
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGroup>
+     * @return array<PlayerGroup>
      * @throws ORMException
      */
     public function getRankingMedals(?int $id = null, array $options = []): array
@@ -75,7 +78,9 @@ class PlayerGroupRankingProvider extends AbstractRankingProvider
             ->select('pg')
             ->from('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGroup', 'pg')
             ->join('pg.player', 'p')
-            ->addSelect('p')
+            ->leftJoin('p.team', 't')
+            ->leftJoin('p.country', 'c')
+            ->addSelect('p,t,c')
             ->orderBy('pg.rankMedal');
 
         $query->where('pg.group = :group')
