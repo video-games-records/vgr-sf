@@ -222,3 +222,38 @@ leaderboard:
   proofs:
     title: Proofs Leaderboard
     page_title: Proofs Leaderboard - Video Games Records
+
+profile:
+  player:
+    title: Player Profile
+    description: Manage your player profile information, social links, and personal details.
+    section:
+      communication: Communication
+      personal_info: Personal Information
+    form:
+      website:
+        label: Website
+        placeholder: "https://www.example.com"
+      youtube:
+        label: YouTube
+        placeholder: Your YouTube channel name
+      twitch:
+        label: Twitch
+        placeholder: Your Twitch channel name
+      discord:
+        label: Discord
+        placeholder: Your Discord username
+      presentation:
+        label: Presentation
+        placeholder: Tell us about yourself...
+      collection:
+        label: Collection
+        placeholder: Describe your game collection...
+      birth_date:
+        label: Birth Date
+      country:
+        label: Country
+        placeholder: Select your country
+      submit: Save Changes
+    message:
+      success: Your player profile has been updated successfully.

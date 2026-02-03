@@ -1,0 +1,90 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'profile.player.title'|trans }} - {{ 'profile.title.main'|trans({}, 'User') }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+<div class="profile-settings">
+    <div class="mb-4">
+        <h1>{{ 'profile.title.main'|trans({}, 'User') }}</h1>
+        <p class="text-muted">{{ 'profile.title.subtitle'|trans({}, 'User') }}</p>
+    </div>
+
+    {# Flash Messages #}
+    {% for label, messages in app.flashes() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {% if label == 'success' %}
+                    <i class="bi bi-check-circle"></i>
+                {% elseif label == 'error' %}
+                    <i class="bi bi-exclamation-circle"></i>
+                {% endif %}
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'common.close'|trans({}, 'User') }}"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            {% include '@User/profile/_navigation.html.twig' %}
+
+            {# Player Profile Content #}
+            <div class="profile-section">
+                <h3 class="mb-4">{{ 'profile.player.title'|trans }}</h3>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> {{ 'profile.player.description'|trans }}
+                </div>
+
+                {{ form_start(form) }}
+                    {# Communication Section #}
+                    <h5 class="mb-3">{{ 'profile.player.section.communication'|trans }}</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.website) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.youtube) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.twitch) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.discord) }}
+                        </div>
+                    </div>
+
+                    {# Personal Information Section #}
+                    <h5 class="mb-3 mt-4">{{ 'profile.player.section.personal_info'|trans }}</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.presentation) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.collection) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.birthDate) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.country) }}
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        {{ form_widget(form.submit) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

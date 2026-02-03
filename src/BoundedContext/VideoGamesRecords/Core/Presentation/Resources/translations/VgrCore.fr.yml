@@ -222,3 +222,38 @@ leaderboard:
   proofs:
     title: Classement Preuves
     page_title: Classement Preuves - Video Games Records
+
+profile:
+  player:
+    title: Profil Joueur
+    description: Gérez les informations de votre profil joueur, vos liens sociaux et vos données personnelles.
+    section:
+      communication: Communication
+      personal_info: Informations personnelles
+    form:
+      website:
+        label: Site web
+        placeholder: "https://www.exemple.com"
+      youtube:
+        label: YouTube
+        placeholder: Nom de votre chaîne YouTube
+      twitch:
+        label: Twitch
+        placeholder: Nom de votre chaîne Twitch
+      discord:
+        label: Discord
+        placeholder: Votre nom d'utilisateur Discord
+      presentation:
+        label: Présentation
+        placeholder: Parlez-nous de vous...
+      collection:
+        label: Collection
+        placeholder: Décrivez votre collection de jeux...
+      birth_date:
+        label: Date de naissance
+      country:
+        label: Pays
+        placeholder: Sélectionnez votre pays
+      submit: Enregistrer
+    message:
+      success: Votre profil joueur a été mis à jour avec succès.
