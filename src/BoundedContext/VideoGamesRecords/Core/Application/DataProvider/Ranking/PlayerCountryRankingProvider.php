@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Shared\Application\DataProvider\Ranking\AbstractRankingProvider;
 
 class PlayerCountryRankingProvider extends AbstractRankingProvider
@@ -11,7 +12,7 @@ class PlayerCountryRankingProvider extends AbstractRankingProvider
     /**
      * @param int|null $id
      * @param array<string, mixed> $options
-     * @return array<\App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player>
+     * @return array<Player>
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
     {

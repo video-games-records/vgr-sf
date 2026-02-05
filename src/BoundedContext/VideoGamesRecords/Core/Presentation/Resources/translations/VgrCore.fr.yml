@@ -257,3 +257,10 @@ profile:
       submit: Enregistrer
     message:
       success: Votre profil joueur a été mis à jour avec succès.
+
+country:
+  show:
+    title: Classement par pays
+    meta_description: "Classement des joueurs pour %country%"
+    select_country: Sélectionner un pays
+    ranking_points: Classement par points

@@ -257,3 +257,10 @@ profile:
       submit: Save Changes
     message:
       success: Your player profile has been updated successfully.
+
+country:
+  show:
+    title: Country Ranking
+    meta_description: "Player rankings for %country%"
+    select_country: Select a country
+    ranking_points: Points Ranking
