@@ -78,22 +78,19 @@ profile:
   picture:
     title: "Profile Picture"
     description: "This section will allow you to upload and update your profile picture/avatar."
+    current_avatar: "Current avatar"
     form:
-      upload:
-        label: "Choose a picture"
-        button: "Upload"
-        requirements: "Maximum size: 2MB. Allowed formats: JPG, PNG, GIF"
-      current:
-        label: "Current picture"
-      remove:
-        button: "Remove picture"
-        confirm: "Are you sure you want to remove your profile picture?"
+      avatar:
+        label: "Choose an image"
+      help: "Allowed formats: PNG, JPEG. Maximum size: 2 MB. The image will be resized to 100x100 pixels."
+      submit: "Upload"
+      error:
+        file_required: "Please select an image."
+        mime_type: "Only PNG and JPEG images are allowed."
+        max_size: "The file is too large. Maximum size: {{ limit }}."
     message:
       success: "Your profile picture has been updated successfully"
-      removed: "Your profile picture has been removed"
       error: "An error occurred while uploading your picture"
-      invalid_format: "Invalid file format. Please use JPG, PNG or GIF"
-      too_large: "File is too large. Maximum size is 2MB"
 
   # Section : Profil joueur
   player:

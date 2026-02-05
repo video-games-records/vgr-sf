@@ -78,22 +78,19 @@ profile:
   picture:
     title: "Photo de profil"
     description: "Cette section vous permettra de télécharger et mettre à jour votre photo de profil/avatar."
+    current_avatar: "Avatar actuel"
     form:
-      upload:
-        label: "Choisir une photo"
-        button: "Télécharger"
-        requirements: "Taille maximale : 2 Mo. Formats autorisés : JPG, PNG, GIF"
-      current:
-        label: "Photo actuelle"
-      remove:
-        button: "Supprimer la photo"
-        confirm: "Êtes-vous sûr de vouloir supprimer votre photo de profil ?"
+      avatar:
+        label: "Choisir une image"
+      help: "Formats autorisés : PNG, JPEG. Taille maximale : 2 Mo. L'image sera redimensionnée en 100x100 pixels."
+      submit: "Envoyer"
+      error:
+        file_required: "Veuillez sélectionner une image."
+        mime_type: "Seules les images PNG et JPEG sont autorisées."
+        max_size: "Le fichier est trop volumineux. Taille maximale : {{ limit }}."
     message:
       success: "Votre photo de profil a été mise à jour avec succès"
-      removed: "Votre photo de profil a été supprimée"
       error: "Une erreur s'est produite lors du téléchargement de votre photo"
-      invalid_format: "Format de fichier invalide. Veuillez utiliser JPG, PNG ou GIF"
-      too_large: "Le fichier est trop volumineux. La taille maximale est de 2 Mo"
 
   # Section : Profil joueur
   player:

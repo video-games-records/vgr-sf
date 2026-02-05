@@ -33,10 +33,31 @@
             {# Profile Picture Content #}
             <div class="profile-section">
                 <h3 class="mb-4">{{ 'profile.picture.title'|trans }}</h3>
-                <div class="alert alert-info">
-                    <i class="bi bi-info-circle"></i> {{ 'profile.picture.description'|trans }}
+
+                {# Current Avatar #}
+                <div class="text-center mb-4">
+                    <img src="{{ path('pn_user_avatar_show', {id: app.user.id}) }}"
+                         alt="{{ 'profile.picture.current_avatar'|trans }}"
+                         class="rounded-circle border"
+                         width="150"
+                         height="150"
+                         id="avatar-preview">
                 </div>
-                {# TODO: Add profile picture upload form #}
+
+                {# Upload Form #}
+                {{ form_start(form, {'attr': {'class': 'mt-3'}}) }}
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            {{ form_row(form.avatar) }}
+                            <div class="form-text">
+                                {{ 'profile.picture.form.help'|trans }}
+                            </div>
+                            <div class="mt-3">
+                                {{ form_widget(form.submit) }}
+                            </div>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
