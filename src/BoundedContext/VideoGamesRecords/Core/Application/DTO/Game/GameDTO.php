@@ -13,6 +13,8 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Game\Ga
     uriTemplate: '/games/{id}',
     operations: [
         new Get(
+            uriVariables: ['id'],
+            requirements: ['id' => '\d+'],
             provider: GameDataProvider::class,
             openapi: new Model\Operation(
                 tags: ['Game'],

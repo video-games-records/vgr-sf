@@ -15,6 +15,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Country\CountryDTO
     operations: [
         new Get(
             uriTemplate: '/players/{id}',
+            requirements: ['id' => '\d+'],
             openapi: new Model\Operation(
                 tags: ['Player'],
                 summary: 'Get player details',

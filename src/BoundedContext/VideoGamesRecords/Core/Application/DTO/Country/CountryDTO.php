@@ -13,6 +13,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Country
     operations: [
         new Get(
             uriTemplate: '/countries/{id}',
+            requirements: ['id' => '\d+'],
             openapi: new Model\Operation(
                 tags: ['Country'],
                 summary: 'Get a country',

@@ -45,6 +45,7 @@ navigation:
     profile: "Profil"
     messages: "Messages"
     lost_positions: "Positions perdues"
+    friends: "Amis"
     settings: "Paramètres"
     logout: "Déconnexion"
 

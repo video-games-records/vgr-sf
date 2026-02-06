@@ -197,6 +197,27 @@ score:
         clear_search: 'Effacer la recherche'
         pagination_info: 'Page %current% sur %total% (%items% records)'
 
+friend:
+    title: 'Amis'
+    header: 'Mes Amis'
+    description: '%count% ami(s)'
+    empty: 'Aucun ami pour le moment. Recherchez des joueurs pour les ajouter !'
+    add:
+        label: 'Ajouter un ami'
+        placeholder: 'Rechercher des joueurs...'
+        submit: 'Ajouter'
+        success: 'Ami ajouté avec succès'
+        error:
+            not_found: 'Joueur introuvable'
+            self: 'Vous ne pouvez pas vous ajouter vous-même'
+            already_friend: 'Ce joueur est déjà dans votre liste d''amis'
+    remove:
+        success: 'Ami supprimé avec succès'
+        confirm: 'Supprimer cet ami ?'
+    column:
+        player: 'Joueur'
+        actions: 'Actions'
+
 lost_position:
     title: 'Positions perdues'
     header: 'Positions perdues'

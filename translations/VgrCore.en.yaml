@@ -197,6 +197,27 @@ score:
         clear_search: 'Clear search'
         pagination_info: 'Page %current% of %total% (%items% records)'
 
+friend:
+    title: 'Friends'
+    header: 'My Friends'
+    description: '%count% friend(s)'
+    empty: 'No friends yet. Search for players to add them!'
+    add:
+        label: 'Add a friend'
+        placeholder: 'Search players...'
+        submit: 'Add'
+        success: 'Friend added successfully'
+        error:
+            not_found: 'Player not found'
+            self: 'You cannot add yourself as a friend'
+            already_friend: 'This player is already in your friends list'
+    remove:
+        success: 'Friend removed successfully'
+        confirm: 'Remove this friend?'
+    column:
+        player: 'Player'
+        actions: 'Actions'
+
 lost_position:
     title: 'Lost Positions'
     header: 'Lost Positions'
