@@ -1,0 +1,241 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrTeam' %}
+
+{% block title %}{{ 'team.manage.title'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'team.manage.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Header #}
+    <h1 class="h3 mb-4">
+        <i class="bi bi-people-fill"></i> {{ 'team.manage.header'|trans }}
+    </h1>
+
+    {# Flash messages #}
+    {% for type in ['success', 'error', 'warning'] %}
+        {% for message in app.flashes(type) %}
+            <div class="alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# ===== SCENARIO: LEADER ===== #}
+    {% if scenario == 'leader' %}
+        {# Edit Team Form #}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-pencil-square"></i> {{ 'team.manage.edit.title'|trans }}
+                </h5>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            {{ form_row(form.libTeam) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.tag) }}
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        {{ form_row(form.submit) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {# Pending Requests #}
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-envelope"></i> {{ 'team.manage.requests.title'|trans }}
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if requests|length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'team.manage.requests.column_player'|trans }}</th>
+                                    <th>{{ 'team.manage.requests.column_date'|trans }}</th>
+                                    <th class="text-end">{{ 'team.manage.requests.column_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for teamRequest in requests %}
+                                    <tr>
+                                        <td class="align-middle">{{ teamRequest.player.pseudo }}</td>
+                                        <td class="align-middle">{{ teamRequest.createdAt|date('Y-m-d') }}</td>
+                                        <td class="align-middle text-end">
+                                            <form method="post" action="{{ path('vgr_team_request_accept', {id: teamRequest.id}) }}" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('team-request-accept-' ~ teamRequest.id) }}">
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <i class="bi bi-check-lg"></i> {{ 'team.manage.requests.accept'|trans }}
+                                                </button>
+                                            </form>
+                                            <form method="post" action="{{ path('vgr_team_request_refuse', {id: teamRequest.id}) }}" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('team-request-refuse-' ~ teamRequest.id) }}">
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="bi bi-x-lg"></i> {{ 'team.manage.requests.refuse'|trans }}
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">{{ 'team.manage.requests.no_requests'|trans }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {# ===== SCENARIO: MEMBER ===== #}
+    {% elseif scenario == 'member' %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-people"></i> {{ 'team.manage.member.title'|trans }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table mb-0">
+                    <tbody>
+                        <tr>
+                            <th>{{ 'team.manage.member.team_name'|trans }}</th>
+                            <td>
+                                <a href="{{ path('vgr_team_profile_overview', {id: team.id, slug: team.slug}) }}">
+                                    {{ team.libTeam }}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'team.manage.member.tag'|trans }}</th>
+                            <td>{{ team.tag }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'team.manage.member.leader'|trans }}</th>
+                            <td>{{ team.leader.pseudo }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'team.manage.member.members'|trans }}</th>
+                            <td>{{ team.players|length }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-end">
+                <form method="post" action="{{ path('vgr_team_leave') }}" onsubmit="return confirm('{{ 'team.manage.member.leave_confirm'|trans }}');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('team-leave') }}">
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="bi bi-box-arrow-right"></i> {{ 'team.manage.member.leave'|trans }}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    {# ===== SCENARIO: NO TEAM ===== #}
+    {% elseif scenario == 'no_team' %}
+        {# Create Team Form #}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-plus-circle"></i> {{ 'team.manage.create.title'|trans }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">{{ 'team.manage.create.description'|trans }}</p>
+                {{ form_start(form) }}
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            {{ form_row(form.libTeam) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.tag) }}
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        {{ form_row(form.submit) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {# My Sent Requests #}
+        {% if playerRequests|length > 0 %}
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-send"></i> {{ 'team.manage.requests.my_requests_title'|trans }}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'team.manage.requests.column_team'|trans }}</th>
+                                    <th>{{ 'team.manage.requests.column_date'|trans }}</th>
+                                    <th class="text-center">{{ 'team.manage.requests.column_status'|trans }}</th>
+                                    <th class="text-end">{{ 'team.manage.requests.column_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for teamRequest in playerRequests %}
+                                    <tr>
+                                        <td class="align-middle">
+                                            <a href="{{ path('vgr_team_profile_overview', {id: teamRequest.team.id, slug: teamRequest.team.slug}) }}">
+                                                [{{ teamRequest.team.tag }}] {{ teamRequest.team.libTeam }}
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">{{ teamRequest.createdAt|date('Y-m-d') }}</td>
+                                        <td class="align-middle text-center">
+                                            {% if teamRequest.status == 'ACTIVE' %}
+                                                <span class="badge bg-primary">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
+                                            {% elseif teamRequest.status == 'ACCEPTED' %}
+                                                <span class="badge bg-success">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
+                                            {% elseif teamRequest.status == 'REFUSED' %}
+                                                <span class="badge bg-danger">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="align-middle text-end">
+                                            {% if teamRequest.status == 'ACTIVE' %}
+                                                <form method="post" action="{{ path('vgr_team_request_cancel', {id: teamRequest.id}) }}" class="d-inline" onsubmit="return confirm('{{ 'team.manage.requests.cancel_confirm'|trans }}');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('team-request-cancel-' ~ teamRequest.id) }}">
+                                                    <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                                        <i class="bi bi-x-circle"></i> {{ 'team.manage.requests.cancel'|trans }}
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

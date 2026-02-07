@@ -43,6 +43,7 @@ navigation:
   # User menu (when logged in)
   user_menu:
     profile: "Profile"
+    team: "My Team"
     messages: "Messages"
     lost_positions: "Lost Positions"
     friends: "Friends"

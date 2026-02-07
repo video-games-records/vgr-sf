@@ -15,9 +15,6 @@ class Leaderboards extends AbstractProfileController
     {
         $team = $this->getTeam($id, $slug);
 
-        return $this->render('@VideoGamesRecordsTeam/profile/leaderboards.html.twig', [
-            'team' => $team,
-            'current_tab' => 'leaderboards',
-        ]);
+        return $this->render('@VideoGamesRecordsTeam/profile/leaderboards.html.twig', $this->getBaseParams($team, 'leaderboards'));
     }
 }

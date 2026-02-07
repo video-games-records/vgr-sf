@@ -6,7 +6,9 @@ namespace App\BoundedContext\VideoGamesRecords\Team\Presentation\Web\Controller\
 
 use App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\TeamBadgeRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
 use App\BoundedContext\VideoGamesRecords\Team\Infrastructure\Doctrine\Repository\TeamRepository;
+use App\BoundedContext\VideoGamesRecords\Team\Infrastructure\Doctrine\Repository\TeamRequestRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -15,10 +17,12 @@ class Badges extends AbstractProfileController
 {
     public function __construct(
         TeamRepository $teamRepository,
+        PlayerRepository $playerRepository,
+        TeamRequestRepository $teamRequestRepository,
         private readonly TeamBadgeRepository $teamBadgeRepository,
         private readonly GameRepository $gameRepository
     ) {
-        parent::__construct($teamRepository);
+        parent::__construct($teamRepository, $playerRepository, $teamRequestRepository);
     }
 
     #[Route('/team/{id}-{slug}/badges', name: 'vgr_team_profile_badges', requirements: ['id' => '\d+'])]
@@ -43,11 +47,12 @@ class Badges extends AbstractProfileController
             }
         }
 
-        return $this->render('@VideoGamesRecordsTeam/profile/badges.html.twig', [
-            'team' => $team,
-            'badgesData' => $badgesData,
-            'games' => $games,
-            'current_tab' => 'badges',
-        ]);
+        return $this->render('@VideoGamesRecordsTeam/profile/badges.html.twig', array_merge(
+            $this->getBaseParams($team, 'badges'),
+            [
+                'badgesData' => $badgesData,
+                'games' => $games,
+            ]
+        ));
     }
 }
