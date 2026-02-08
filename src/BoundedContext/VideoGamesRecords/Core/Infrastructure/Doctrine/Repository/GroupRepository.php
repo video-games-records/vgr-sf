@@ -21,6 +21,20 @@ class GroupRepository extends DefaultRepository
     }
 
     /**
+     * @return Group[]
+     */
+    public function findByGameId(int $gameId): array
+    {
+        $query = $this->createQueryBuilder('g');
+        $query
+            ->where('g.game = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->orderBy('g.libGroupEn', 'ASC');
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
      * @param Group $group
      * @param bool $boolCopyLibChart
      */

@@ -6,13 +6,12 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repo
 
 use ApiPlatform\Doctrine\Orm\Paginator;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GroupOrderBy;
 use DateTime;
 
 /**
@@ -23,6 +22,26 @@ class ChartRepository extends DefaultRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Chart::class);
+    }
+
+    /**
+     * @return Chart[]
+     */
+    public function findByGroupId(int $groupId, string $orderBy = GroupOrderBy::NAME, string $locale = 'en'): array
+    {
+        $query = $this->createQueryBuilder('ch');
+        $query
+            ->where('ch.group = :groupId')
+            ->setParameter('groupId', $groupId);
+
+        if ($orderBy === GroupOrderBy::NAME) {
+            $column = ($locale === 'fr') ? 'ch.libChartFr' : 'ch.libChartEn';
+            $query->orderBy($column, 'ASC');
+        } else {
+            $query->orderBy('ch.id', 'ASC');
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     /**
