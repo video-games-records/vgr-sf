@@ -6,8 +6,10 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Game;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Game\GameDataProvider;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Serie\SerieGameDataProvider;
 
 #[ApiResource(
     uriTemplate: '/games/{id}',
@@ -18,6 +20,20 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Game\Ga
             provider: GameDataProvider::class,
             openapi: new Model\Operation(
                 tags: ['Game'],
+            )
+        ),
+    ]
+)]
+#[ApiResource(
+    uriTemplate: '/series/{id}/games',
+    operations: [
+        new GetCollection(
+            uriVariables: ['id'],
+            requirements: ['id' => '\d+'],
+            provider: SerieGameDataProvider::class,
+            paginationEnabled: false,
+            openapi: new Model\Operation(
+                tags: ['Serie'],
             )
         ),
     ]

@@ -255,6 +255,26 @@ class GameRepository extends DefaultRepository
     }
 
     /**
+     * Finds games in the given series, ordered by nbPost DESC.
+     *
+     * @param int $serieId
+     * @return array<Game>
+     */
+    public function findBySerieOrderedByNbPost(int $serieId): array
+    {
+        $query = $this->createQueryBuilder('g');
+        $query
+            ->where('g.serie = :serieId')
+            ->setParameter('serieId', $serieId)
+            ->orderBy('g.nbPost', 'DESC');
+
+        $this->onlyActive($query);
+        $this->withPlatforms($query);
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
      * @param DateTime $date1
      * @param DateTime $date2
      * @return array<string, mixed>
