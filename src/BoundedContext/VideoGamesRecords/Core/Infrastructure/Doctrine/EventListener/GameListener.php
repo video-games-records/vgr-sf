@@ -13,7 +13,9 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
+use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game\LatestGames;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
+use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Game::class)]
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Game::class)]
@@ -22,6 +24,11 @@ class GameListener
 {
     /** @var array<string, array{0: mixed, 1: mixed}|mixed> */
     private array $changeSet = [];
+
+    public function __construct(
+        private readonly CacheInterface $cache,
+    ) {
+    }
 
     /**
      * @param Game $game
@@ -48,6 +55,7 @@ class GameListener
 
         if ($game->getGameStatus()->isActive() && ($game->getPublishedAt() == null)) {
             $game->setPublishedAt(new DateTime());
+            $this->cache->delete(LatestGames::CACHE_KEY);
         }
     }
 

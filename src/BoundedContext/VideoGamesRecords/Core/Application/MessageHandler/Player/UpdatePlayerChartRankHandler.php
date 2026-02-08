@@ -6,12 +6,12 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Application\MessageHandler\P
 
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking\PlayerChartRankingProvider;
+use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\PlayerChart\LatestScores;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Event\LostPositionEvent;
@@ -28,7 +28,8 @@ readonly class UpdatePlayerChartRankHandler
         private EntityManagerInterface $em,
         private EventDispatcherInterface $eventDispatcher,
         private PlayerChartRankingProvider $playerChartRankingProvider,
-        private MessageBusInterface $bus
+        private MessageBusInterface $bus,
+        private CacheInterface $cache,
     ) {
     }
 
@@ -180,6 +181,8 @@ readonly class UpdatePlayerChartRankHandler
             }
         }
         $this->em->flush();
+
+        $this->cache->delete(LatestScores::CACHE_KEY);
 
         $this->bus->dispatch(
             new UpdatePlayerGroupRank((int) $chart->getGroup()->getId()),
