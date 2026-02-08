@@ -1,3 +1,27 @@
 news:
   latest_news: Latest News
   no_news: No news available
+
+comment:
+  count: "{0}comments|{1}comment|]1,Inf[comments"
+  section_title: "{0}Comments (%count%)|{1}Comment (%count%)|]1,Inf[Comments (%count%)"
+  form:
+    content: Your comment
+  add_title: Add a comment
+  submit: Submit
+  update: Update
+  cancel: Cancel
+  edit: Edit
+  edited: edited
+  no_comments: No comments yet. Be the first to comment!
+  login_required: Please log in to leave a comment.
+  flash:
+    created: Your comment has been added successfully.
+    updated: Your comment has been updated successfully.
+    error: An error occurred. Please try again.
+  validation:
+    content_required: Please enter a comment.
+
+pagination:
+  label: Comments pagination
+  showing: Showing %start% to %end% of %total% comments

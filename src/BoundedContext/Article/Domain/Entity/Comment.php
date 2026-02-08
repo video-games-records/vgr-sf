@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name:'pna_comment')]
 #[ORM\Entity(repositoryClass: 'App\BoundedContext\Article\Infrastructure\Doctrine\Repository\CommentRepository')]
+#[ORM\HasLifecycleCallbacks]
 class Comment
 {
     use TimestampableTrait;
@@ -26,6 +27,7 @@ class Comment
     #[ORM\JoinColumn(name:'user_id', referencedColumnName:'id', nullable:false)]
     private User $user;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: 'text', nullable: false)]
     private string $content;
 
@@ -49,7 +51,7 @@ class Comment
         $this->article = $article;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
