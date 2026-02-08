@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AvatarManager
 {
-
     /** @var array<string, string> */
     private array $extensions = [
         'png' => 'image/png',
