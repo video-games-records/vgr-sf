@@ -22,42 +22,48 @@
     {# Game Points Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::gamePoints'
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::gamePoints',
+            { ttl: 3600 }
         )) }}
     </div>
 
     {# Cup Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::cups'
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::cups',
+            { ttl: 3600 }
         )) }}
     </div>
 
     {# Medals Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::medals'
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::medals',
+            { ttl: 3600 }
         )) }}
     </div>
 
     {# Record Points Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::recordPoints'
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::recordPoints',
+            { ttl: 3600 }
         )) }}
     </div>
 
     {# Badge Points Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::badges'
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::badges',
+            { ttl: 3600 }
         )) }}
     </div>
 
     {# Proofs Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::proofs'
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::proofs',
+            { ttl: 3600 }
         )) }}
     </div>
 
