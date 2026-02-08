@@ -33,6 +33,7 @@ class TopicRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    /** @return Query<mixed, mixed> */
     public function getActiveTopicsQuery(Forum $forum): Query
     {
         return $this->createQueryBuilder('t')

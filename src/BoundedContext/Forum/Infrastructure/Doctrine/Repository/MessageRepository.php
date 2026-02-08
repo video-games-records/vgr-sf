@@ -32,7 +32,7 @@ class MessageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return \Doctrine\ORM\Query
+     * @return \Doctrine\ORM\Query<mixed, mixed>
      */
     public function getMessagesByTopicQuery(Topic $topic): \Doctrine\ORM\Query
     {

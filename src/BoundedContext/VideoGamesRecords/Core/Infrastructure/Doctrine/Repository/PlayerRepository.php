@@ -63,7 +63,7 @@ class PlayerRepository extends DefaultRepository
      * @return Player
      * @throws NonUniqueResultException
      */
-    public function getPlayerFromUser(User $user): Player
+    public function getPlayerFromUser(User $user): ?Player
     {
         $qb = $this->createQueryBuilder('player')
             ->where('player.user_id = :userId')
@@ -89,7 +89,7 @@ class PlayerRepository extends DefaultRepository
 
 
     /**
-     * @return array<int, array{idPlayer: int, pseudo: string, nb: int, month: string}>
+     * @return list<array<string, mixed>>
      * @throws Exception
      */
     public function getProofStats(): array

@@ -32,6 +32,10 @@ class FriendController extends AbstractLocalizedController
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
 
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->render('@VideoGamesRecordsCore/player/friends.html.twig', [
             'player' => $player,
             'friends' => $player->getFriends(),
@@ -49,6 +53,10 @@ class FriendController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
+
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
 
         $friendId = $request->request->getInt('player');
         if ($friendId === 0) {
@@ -91,6 +99,10 @@ class FriendController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
+
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
 
         $friend = $this->playerRepository->find($id);
         if ($friend === null) {

@@ -38,6 +38,10 @@ class SendVideo extends AbstractController
 
         $player = $this->userProvider->getPlayer();
 
+        if ($player === null) {
+            return new JsonResponse(['error' => 'Access denied'], Response::HTTP_FORBIDDEN);
+        }
+
         if ($playerChart->getPlayer()->getId() !== $player->getId()) {
             return new JsonResponse(['error' => 'Access denied'], Response::HTTP_FORBIDDEN);
         }

@@ -36,7 +36,7 @@ class PlayerChartRepository extends DefaultRepository
             return [];
         }
 
-        // @phpstan-ignore return.type
+
         return $this->createQueryBuilder('pc')
             ->join('pc.chart', 'c')
             ->join('c.group', 'g')
@@ -79,7 +79,7 @@ class PlayerChartRepository extends DefaultRepository
             ->setFirstResult(($page - 1) * $limit)
             ->setMaxResults($limit);
 
-        // @phpstan-ignore return.type
+
         return new Paginator($qb->getQuery(), fetchJoinCollection: true);
     }
 
@@ -175,7 +175,7 @@ class PlayerChartRepository extends DefaultRepository
         $paginator = new Paginator($qb->getQuery(), fetchJoinCollection: true);
         $total = count($paginator);
 
-        // @phpstan-ignore return.type
+
         return [
             'items' => iterator_to_array($paginator),
             'total' => $total,

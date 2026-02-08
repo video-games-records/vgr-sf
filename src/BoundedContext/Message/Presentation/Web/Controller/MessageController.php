@@ -114,7 +114,7 @@ class MessageController extends AbstractLocalizedController
                 && $replyToMessage->isReplyable()
             ) {
                 $preselectedRecipient = $replyToMessage->getSender();
-                $formData['recipient'] = (string) $preselectedRecipient->getId();
+                $formData['recipient'] = $preselectedRecipient !== null ? (string) $preselectedRecipient->getId() : '';
 
                 // Add "Re:" prefix if not already present
                 $originalSubject = $replyToMessage->getObject();
@@ -145,6 +145,7 @@ class MessageController extends AbstractLocalizedController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var array<string, mixed> $data */
             $data = $form->getData();
 
             $recipientId = (int) $data['recipient'];

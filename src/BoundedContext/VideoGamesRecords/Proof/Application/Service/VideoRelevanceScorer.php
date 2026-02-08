@@ -147,7 +147,11 @@ class VideoRelevanceScorer
 
     private function getRecencyScore(Video $video): float
     {
-        $daysSinceCreation = $video->getCreatedAt()->diff(new \DateTime())->days;
+        $createdAt = $video->getCreatedAt();
+        if ($createdAt === null) {
+            return 0;
+        }
+        $daysSinceCreation = $createdAt->diff(new \DateTime())->days;
 
         // Score qui diminue avec le temps (max 1.0 pour vidéo du jour)
         return max(0, 1.0 - ($daysSinceCreation / 365)); // Linéaire sur 1 an

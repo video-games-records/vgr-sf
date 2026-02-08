@@ -17,7 +17,7 @@ class Category
     use TimestampableEntity;
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(length: 50, nullable: false)]
     private string $name;
@@ -43,11 +43,6 @@ class Category
     public function __construct()
     {
         $this->forums = new ArrayCollection();
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getId(): ?int

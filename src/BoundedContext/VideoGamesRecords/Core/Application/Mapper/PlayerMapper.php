@@ -17,7 +17,7 @@ readonly class PlayerMapper
     public function toDTO(Player $player): PlayerDTO
     {
         return new PlayerDTO(
-            id: $player->getId(),
+            id: (int) $player->getId(),
             pseudo: $player->getPseudo(),
             slug: $player->getSlug(),
             nbConnexion: $player->getNbConnexion(),

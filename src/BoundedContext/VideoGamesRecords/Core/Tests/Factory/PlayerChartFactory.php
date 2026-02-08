@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Tests\Factory;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
@@ -40,7 +38,7 @@ final class PlayerChartFactory extends PersistentObjectFactory
     /**
      * Set the player relation
      */
-    public function forPlayer(Player $player): static
+    public function forPlayer(object $player): static
     {
         return $this->with(['player' => $player]);
     }
@@ -61,7 +59,7 @@ final class PlayerChartFactory extends PersistentObjectFactory
     /**
      * Set the chart relation
      */
-    public function forChart(Chart $chart): static
+    public function forChart(object $chart): static
     {
         return $this->with(['chart' => $chart]);
     }

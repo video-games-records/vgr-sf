@@ -172,7 +172,7 @@ class Player
         return sprintf('%s (%d)', $this->getPseudo(), $this->getId());
     }
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
@@ -218,7 +218,7 @@ class Player
         $this->rankProof = $rankProof;
     }
 
-    public function getRankProof(): ?int
+    public function getRankProof(): int
     {
         return $this->rankProof;
     }
@@ -228,7 +228,7 @@ class Player
         $this->rankCountry = $rankCountry;
     }
 
-    public function getRankCountry(): ?int
+    public function getRankCountry(): int
     {
         return $this->rankCountry;
     }

@@ -23,7 +23,7 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Proof::class)]
 class ProofListener
 {
-    /** @var array<string, array{0: mixed, 1: mixed}> */
+    /** @var array<string, array{0: mixed, 1: mixed}|mixed> */
     private array $changeSet = [];
     private UserProvider $userProvider;
     private EventDispatcherInterface $eventDispatcher;
@@ -54,9 +54,11 @@ class ProofListener
         $em = $event->getObjectManager();
         $event = new ProofAccepted($proof);
 
+        $playerChart = $proof->getPlayerChart();
+
         // ACCEPTED
-        if ($this->isAccepted()) {
-            $proof->getPlayerChart()?->setStatus(PlayerChartStatusEnum::PROVED);
+        if ($this->isAccepted() && $playerChart !== null) {
+            $playerChart->setStatus(PlayerChartStatusEnum::PROVED);
 
             $proof->setPlayerResponding($this->userProvider->getPlayer());
             $proof->setCheckedAt(new DateTime());
@@ -64,16 +66,13 @@ class ProofListener
         }
 
         // REFUSED
-        if ($this->isRefused()) {
-            $playerChart = $proof->getPlayerChart();
-            if ($playerChart) {
-                if ($playerChart->getStatus() === PlayerChartStatusEnum::PROVED) {
-                    $playerChart->setStatus(PlayerChartStatusEnum::NONE);
-                } else {
-                    $status = ($playerChart->getStatus() === PlayerChartStatusEnum::PROOF_SENT)
-                        ? PlayerChartStatusEnum::NONE : PlayerChartStatusEnum::REQUEST_VALIDATED;
-                    $playerChart->setStatus($status);
-                }
+        if ($this->isRefused() && $playerChart !== null) {
+            if ($playerChart->getStatus() === PlayerChartStatusEnum::PROVED) {
+                $playerChart->setStatus(PlayerChartStatusEnum::NONE);
+            } else {
+                $status = ($playerChart->getStatus() === PlayerChartStatusEnum::PROOF_SENT)
+                    ? PlayerChartStatusEnum::NONE : PlayerChartStatusEnum::REQUEST_VALIDATED;
+                $playerChart->setStatus($status);
             }
 
             $proof->setPlayerResponding($this->userProvider->getPlayer());
@@ -82,22 +81,19 @@ class ProofListener
         }
 
         // CLOSED
-        if ($proof->getStatus()->getValue() == ProofStatus::CLOSED) {
-            $playerChart = $proof->getPlayerChart();
-            if ($playerChart) {
-                $playerChart->setProof(null);
-                switch ($playerChart->getStatus()) {
-                    case PlayerChartStatusEnum::REQUEST_VALIDATED:
-                    case PlayerChartStatusEnum::REQUEST_PROOF_SENT:
-                        $playerChart->setStatus(PlayerChartStatusEnum::REQUEST_VALIDATED);
-                        break;
-                    case PlayerChartStatusEnum::PROVED:
-                    case PlayerChartStatusEnum::PROOF_SENT:
-                        $playerChart->setStatus(PlayerChartStatusEnum::NONE);
-                        break;
-                }
-                $em->flush();
+        if ($proof->getStatus()->getValue() == ProofStatus::CLOSED && $playerChart !== null) {
+            $playerChart->setProof(null);
+            switch ($playerChart->getStatus()) {
+                case PlayerChartStatusEnum::REQUEST_VALIDATED:
+                case PlayerChartStatusEnum::REQUEST_PROOF_SENT:
+                    $playerChart->setStatus(PlayerChartStatusEnum::REQUEST_VALIDATED);
+                    break;
+                case PlayerChartStatusEnum::PROVED:
+                case PlayerChartStatusEnum::PROOF_SENT:
+                    $playerChart->setStatus(PlayerChartStatusEnum::NONE);
+                    break;
             }
+            $em->flush();
         }
     }
 

@@ -23,7 +23,7 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 #[AsEntityListener(event: Events::preRemove, method: 'preRemove', entity: PlayerChart::class)]
 class PlayerChartListener
 {
-    /** @var array<string, array{0: mixed, 1: mixed}> */
+    /** @var array<string, array{0: mixed, 1: mixed}|mixed> */
     private array $changeSet = [];
 
     public function __construct(

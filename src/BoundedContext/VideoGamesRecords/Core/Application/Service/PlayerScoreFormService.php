@@ -122,7 +122,6 @@ readonly class PlayerScoreFormService
         foreach ($libsData as $libData) {
             if (isset($libData['values']) && is_array($libData['values'])) {
                 foreach ($libData['values'] as $value) {
-                    // @phpstan-ignore cast.string
                     if ((string) $value !== '') {
                         return true;
                     }
@@ -185,7 +184,6 @@ readonly class PlayerScoreFormService
             /** @var array<int, array{value: string}> $parseValue */
             $parseValue = [];
             foreach ($values as $index => $value) {
-                // @phpstan-ignore cast.string
                 $parseValue[(int) $index] = ['value' => (string) $value];
             }
 

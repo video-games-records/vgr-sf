@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Tests\Factory;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -34,7 +32,7 @@ final class ChartLibFactory extends PersistentObjectFactory
     /**
      * Set the chart relation
      */
-    public function forChart(Chart $chart): static
+    public function forChart(object $chart): static
     {
         return $this->with(['chart' => $chart]);
     }
@@ -42,7 +40,7 @@ final class ChartLibFactory extends PersistentObjectFactory
     /**
      * Set the chart type relation
      */
-    public function withType(ChartType $type): static
+    public function withType(object $type): static
     {
         return $this->with(['type' => $type]);
     }

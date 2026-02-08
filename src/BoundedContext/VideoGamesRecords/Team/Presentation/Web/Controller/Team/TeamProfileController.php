@@ -38,6 +38,11 @@ class TeamProfileController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
+
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
+
         $team = $player->getTeam();
 
         // Scenario 2 - Leader: edit team + manage requests
@@ -112,7 +117,7 @@ class TeamProfileController extends AbstractLocalizedController
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
 
-        if ($player->getTeam() === null) {
+        if ($player === null || $player->getTeam() === null) {
             return $this->redirectToRoute('vgr_team_manage');
         }
 
@@ -139,6 +144,10 @@ class TeamProfileController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
+
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
 
         $teamRequest = $this->teamRequestRepository->find($id);
         if (!$teamRequest instanceof TeamRequest) {
@@ -186,6 +195,10 @@ class TeamProfileController extends AbstractLocalizedController
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
 
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
+
         $teamRequest = $this->teamRequestRepository->find($id);
         if (!$teamRequest instanceof TeamRequest) {
             return $this->redirectToRoute('vgr_team_manage');
@@ -219,6 +232,10 @@ class TeamProfileController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
+
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
 
         $teamRequest = $this->teamRequestRepository->find($id);
         if (!$teamRequest instanceof TeamRequest) {

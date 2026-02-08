@@ -21,7 +21,7 @@ class PlayerRankingService
 
     /**
      * Generate weekly rankings
-     * @return array<string, mixed>
+     * @return list<PlayerTopRanking>
      */
     public function generateWeeklyRankings(?int $year = null, ?int $week = null): array
     {
@@ -52,7 +52,7 @@ class PlayerRankingService
 
     /**
      * Generate monthly rankings
-     * @return array<string, mixed>
+     * @return list<PlayerTopRanking>
      */
     public function generateMonthlyRankings(?int $year = null, ?int $month = null): array
     {
@@ -81,7 +81,7 @@ class PlayerRankingService
 
     /**
      * Generate yearly rankings
-     * @return array<string, mixed>
+     * @return list<PlayerTopRanking>
      */
     public function generateYearlyRankings(?int $year = null): array
     {

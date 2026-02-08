@@ -21,7 +21,7 @@ class PlayerChartLib
     #[Assert\NotNull]
     #[Assert\NotBlank]
     #[ORM\Column(type: Types::BIGINT, nullable: false)]
-    private string $value;
+    private string $value; // @phpstan-ignore doctrine.columnType (BIGINT is mapped to string in PHP by Doctrine)
 
     #[ORM\ManyToOne(targetEntity: ChartLib::class)]
     #[ORM\JoinColumn(name:'chartlib_id', referencedColumnName:'id', nullable:false)]

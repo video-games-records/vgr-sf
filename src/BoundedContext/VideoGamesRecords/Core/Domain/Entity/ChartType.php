@@ -34,11 +34,6 @@ class ChartType
         return $this->id;
     }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
 
 
     public function setMask(string $mask): void

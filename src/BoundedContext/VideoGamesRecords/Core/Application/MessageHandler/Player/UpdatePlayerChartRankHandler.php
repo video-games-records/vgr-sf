@@ -54,6 +54,7 @@ readonly class UpdatePlayerChartRankHandler
         $rank = 1;
         $nbEqual = 1;
         $playerChartEqual = [];
+        /** @var array<int|string, array{count: mixed, points: array<int, int>, previousLibValue: string, rank: int, nbEqual: int, playerChartEqual: list<PlayerChart>}> $platforms */
         $platforms = [];
         $result = $this->getPlatforms($chart);
 
@@ -68,6 +69,7 @@ readonly class UpdatePlayerChartRankHandler
             ];
         }
 
+        /** @var array<int, array<int|string, mixed>> $ranking */
         foreach ($ranking as $k => $item) {
             $libValue = '';
             /** @var PlayerChart $playerChart */
@@ -100,14 +102,17 @@ readonly class UpdatePlayerChartRankHandler
             // Platform point
             if ($playerChart->getPlatform() != null) {
                 $idPlatForm = $playerChart->getPlatform()->getId();
-                if ($platforms[$idPlatForm]['previousLibValue'] === $libValue) {
-                    ++$platforms[$idPlatForm]['nbEqual'];
+                /** @var array{count: mixed, points: array<int, int>, previousLibValue: string, rank: int, nbEqual: int, playerChartEqual: list<PlayerChart>} $pf */
+                $pf = &$platforms[$idPlatForm];
+                if ($pf['previousLibValue'] === $libValue) {
+                    ++$pf['nbEqual'];
                 } else {
-                    $platforms[$idPlatForm]['rank'] += $platforms[$idPlatForm]['nbEqual'];
-                    $platforms[$idPlatForm]['nbEqual'] = 1;
-                    $platforms[$idPlatForm]['playerChartEqual'] = [];
+                    $pf['rank'] += $pf['nbEqual'];
+                    $pf['nbEqual'] = 1;
+                    $pf['playerChartEqual'] = [];
                 }
-                $platforms[$idPlatForm]['playerChartEqual'][] = $playerChart;
+                $pf['playerChartEqual'][] = $playerChart;
+                unset($pf);
             }
 
             $playerChartEqual[] = $playerChart;
@@ -130,22 +135,25 @@ readonly class UpdatePlayerChartRankHandler
 
             if ($playerChart->getPlatform() != null) {
                 $idPlatForm = $playerChart->getPlatform()->getId();
+                /** @var array{count: mixed, points: array<int, int>, previousLibValue: string, rank: int, nbEqual: int, playerChartEqual: list<PlayerChart>} $pf */
+                $pf = &$platforms[$idPlatForm];
                 $playerChart->setPointPlatform((int) (
                     array_sum(
                         array_slice(
-                            array_values($platforms[$idPlatForm]['points']),
-                            $platforms[$idPlatForm]['rank'] - 1,
-                            $platforms[$idPlatForm]['nbEqual']
+                            array_values($pf['points']),
+                            $pf['rank'] - 1,
+                            $pf['nbEqual']
                         )
-                    ) / $platforms[$idPlatForm]['nbEqual']
+                    ) / $pf['nbEqual']
                 ));
-                if ($platforms[$idPlatForm]['nbEqual'] > 1) {
+                if ($pf['nbEqual'] > 1) {
                     // Pour les égalités déjà passées on met à jour le nbEqual et l'attribution des points
-                    foreach ($platforms[$idPlatForm]['playerChartEqual'] as $playerChartToModify) {
+                    foreach ($pf['playerChartEqual'] as $playerChartToModify) {
                         $playerChartToModify
-                            ->setPointPlatform($playerChart->getPointPlatform());
+                            ->setPointPlatform((int) $playerChart->getPointPlatform());
                     }
                 }
+                unset($pf);
             } else {
                 $playerChart->setPointPlatform(0);
             }

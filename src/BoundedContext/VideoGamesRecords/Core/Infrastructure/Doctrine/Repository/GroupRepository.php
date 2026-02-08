@@ -22,7 +22,7 @@ class GroupRepository extends DefaultRepository
 
     /**
      * @param Group $group
-     * @param false $boolCopyLibChart
+     * @param bool $boolCopyLibChart
      */
     public function copy(Group $group, bool $boolCopyLibChart = false): void
     {

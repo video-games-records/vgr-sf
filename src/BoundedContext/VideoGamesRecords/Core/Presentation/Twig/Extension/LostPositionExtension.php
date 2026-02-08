@@ -37,6 +37,10 @@ class LostPositionExtension extends AbstractExtension
 
         $player = $this->playerRepository->getPlayerFromUser($user);
 
+        if ($player === null) {
+            return 0;
+        }
+
         return (int) $this->lostPositionRepository->getNbNewLostPosition($player);
     }
 }

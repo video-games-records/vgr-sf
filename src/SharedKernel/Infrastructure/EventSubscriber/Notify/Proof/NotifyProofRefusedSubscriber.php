@@ -26,6 +26,12 @@ final class NotifyProofRefusedSubscriber extends AbstractNotifySubscriberInterfa
     public function sendMessage(ProofRefused $event): void
     {
         $proof = $event->getProof();
+        $playerChart = $proof->getPlayerChart();
+
+        if ($playerChart === null) {
+            return;
+        }
+
         $this->messageBuilder
             ->setSender($this->getDefaultSender())
             ->setType(MessageTypeEnum::VGR_PROOF_REFUSED);
@@ -33,7 +39,7 @@ final class NotifyProofRefusedSubscriber extends AbstractNotifySubscriberInterfa
         /** @var User $recipient */
         $recipient = $this->em->getRepository('App\BoundedContext\User\Domain\Entity\User')
             ->find($proof->getPlayer()->getUserId());
-        $url = '/' . $recipient->getLanguage() . '/' . $proof->getPlayerChart()->getUrl();
+        $url = '/' . $recipient->getLanguage() . '/' . $playerChart->getUrl();
         $this->messageBuilder
             ->setObject(
                 $this->translator->trans(
@@ -53,7 +59,7 @@ final class NotifyProofRefusedSubscriber extends AbstractNotifySubscriberInterfa
                     ),
                     $recipient->getUsername(),
                     $url,
-                    $proof->getPlayerChart()->getChart()->getCompleteName($recipient->getLanguage()),
+                    $playerChart->getChart()->getCompleteName($recipient->getLanguage()),
                     $proof->getResponse()
                 )
             )

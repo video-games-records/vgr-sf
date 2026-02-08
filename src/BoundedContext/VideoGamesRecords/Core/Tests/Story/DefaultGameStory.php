@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Tests\Story;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Tests\Factory\GameFactory;
-use App\BoundedContext\VideoGamesRecords\Core\Tests\Story\DefaultPlatformStory;
-use App\BoundedContext\VideoGamesRecords\Core\Tests\Story\DefaultSerieStory;
 use Zenstruck\Foundry\Story;
 
 final class DefaultGameStory extends Story
@@ -63,17 +62,17 @@ final class DefaultGameStory extends Story
             ->create();
     }
 
-    public static function mario(): object
+    public static function mario(): Game
     {
         return GameFactory::find(['libGameEn' => 'Super Mario Odyssey']);
     }
 
-    public static function zelda(): object
+    public static function zelda(): Game
     {
         return GameFactory::find(['libGameEn' => 'The Legend of Zelda: Breath of the Wild']);
     }
 
-    public static function hollowKnight(): object
+    public static function hollowKnight(): Game
     {
         return GameFactory::find(['libGameEn' => 'Hollow Knight']);
     }

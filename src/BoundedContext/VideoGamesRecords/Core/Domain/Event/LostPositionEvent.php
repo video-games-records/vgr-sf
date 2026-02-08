@@ -31,7 +31,7 @@ class LostPositionEvent extends Event
         return $this->previousNbEqual;
     }
 
-    public function getCurrentRank(): int
+    public function getCurrentRank(): ?int
     {
         return $this->playerChart->getRank();
     }

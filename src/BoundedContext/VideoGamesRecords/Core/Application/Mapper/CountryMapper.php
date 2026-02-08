@@ -12,8 +12,8 @@ class CountryMapper
     public function toDTO(Country $country): CountryDTO
     {
         return new CountryDTO(
-            id: $country->getId(),
-            name: $country->getName() ?? $country->getDefaultName() ?? 'Unknown',
+            id: (int) $country->getId(),
+            name: $country->getName() ?? $country->getDefaultName(),
             iso2: $country->getCodeIso2(),
             iso3: $country->getCodeIso3(),
             slug: $country->getSlug()

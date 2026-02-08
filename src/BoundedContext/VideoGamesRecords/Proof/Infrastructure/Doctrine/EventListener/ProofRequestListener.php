@@ -25,7 +25,7 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofRequestSt
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: ProofRequest::class)]
 class ProofRequestListener
 {
-    /** @var array<string, array{0: mixed, 1: mixed}> */
+    /** @var array<string, array{0: mixed, 1: mixed}|mixed> */
     private array $changeSet = [];
     private EventDispatcherInterface $eventDispatcher;
 

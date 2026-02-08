@@ -22,7 +22,7 @@ class Forum
     use TimestampableEntity;
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
-    private int $id;
+    private ?int $id = null;
 
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: false)]
@@ -88,11 +88,6 @@ class Forum
     public function __toString()
     {
         return sprintf('%s [%s]', $this->getLibForum(), $this->getId());
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getId(): ?int

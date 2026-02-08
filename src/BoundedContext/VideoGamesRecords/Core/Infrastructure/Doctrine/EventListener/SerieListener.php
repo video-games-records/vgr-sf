@@ -22,7 +22,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\SerieStatus;
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Serie::class)]
 class SerieListener
 {
-    /** @var array<string, array{0: mixed, 1: mixed}> */
+    /** @var array<string, array{0: mixed, 1: mixed}|mixed> */
     private array $changeSet = [];
 
     public function __construct(private MessageBusInterface $bus)

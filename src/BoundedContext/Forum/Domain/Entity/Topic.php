@@ -67,6 +67,8 @@ class Topic
     #[ORM\OneToMany(targetEntity: TopicUserLastVisit::class, mappedBy: 'topic')]
     private Collection $userLastVisits;
 
+    public ?bool $hasNewContent = null;
+
     public function __toString()
     {
         return sprintf('%s [%s]', $this->getName(), $this->getId());

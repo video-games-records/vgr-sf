@@ -48,6 +48,10 @@ class SendPicture extends AbstractController
 
         $player = $this->userProvider->getPlayer();
 
+        if ($player === null) {
+            return new JsonResponse(['error' => 'Access denied'], Response::HTTP_FORBIDDEN);
+        }
+
         if ($playerChart->getPlayer()->getId() !== $player->getId()) {
             return new JsonResponse(['error' => 'Access denied'], Response::HTTP_FORBIDDEN);
         }
@@ -76,7 +80,7 @@ class SendPicture extends AbstractController
         $mimeType = $matches[1];
         $imageData = base64_decode($matches[3]);
 
-        if ($imageData === false) {
+        if ($imageData === false) { // @phpstan-ignore identical.alwaysFalse
             return new JsonResponse(['error' => 'Invalid base64 data'], Response::HTTP_BAD_REQUEST);
         }
 

@@ -11,6 +11,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\PlayerMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/** @implements ProviderInterface<PlayerDTO> */
 class PlayerDataProvider implements ProviderInterface
 {
     public function __construct(

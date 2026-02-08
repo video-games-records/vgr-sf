@@ -280,6 +280,9 @@ class PlayerTest extends TestCase
         $this->assertTrue($this->player->isAdmin());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function adminStatusProvider(): array
     {
         return [
@@ -299,6 +302,9 @@ class PlayerTest extends TestCase
         $this->assertFalse($this->player->isAdmin());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function nonAdminStatusProvider(): array
     {
         return [
@@ -321,6 +327,9 @@ class PlayerTest extends TestCase
         $this->assertTrue($this->player->isModerator());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function moderatorStatusProvider(): array
     {
         return [
@@ -337,6 +346,9 @@ class PlayerTest extends TestCase
         $this->assertFalse($this->player->isModerator());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function nonModeratorStatusProvider(): array
     {
         return [
@@ -355,6 +367,9 @@ class PlayerTest extends TestCase
         $this->assertTrue($this->player->canManageProofs());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function proofManagerStatusProvider(): array
     {
         return [
@@ -373,6 +388,9 @@ class PlayerTest extends TestCase
         $this->assertFalse($this->player->canManageProofs());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function nonProofManagerStatusProvider(): array
     {
         return [
@@ -390,6 +408,9 @@ class PlayerTest extends TestCase
         $this->assertTrue($this->player->canManageGames());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function gameManagerStatusProvider(): array
     {
         return [
@@ -407,6 +428,9 @@ class PlayerTest extends TestCase
         $this->assertFalse($this->player->canManageGames());
     }
 
+    /**
+     * @return array<string, array{PlayerStatusEnum}>
+     */
     public static function nonGameManagerStatusProvider(): array
     {
         return [

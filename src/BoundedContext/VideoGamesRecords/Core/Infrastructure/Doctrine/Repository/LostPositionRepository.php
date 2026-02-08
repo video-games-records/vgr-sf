@@ -141,6 +141,8 @@ class LostPositionRepository extends DefaultRepository
 
     /**
      * Supprime plusieurs lost positions par IDs (vérifie ownership)
+     *
+     * @param array<int> $ids
      */
     public function deleteByIdsForPlayer(array $ids, Player $player): int
     {

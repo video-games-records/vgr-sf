@@ -10,6 +10,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Game\GameDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\GameMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
 
+/** @implements ProviderInterface<GameDTO> */
 class GameDataProvider implements ProviderInterface
 {
     public function __construct(

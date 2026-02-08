@@ -35,7 +35,7 @@ readonly class CreatePlayerListener
         // Player
         $player = new Player();
         $player->setId($user->getId());
-        $player->setUserId($user->getId());
+        $player->setUserId((int) $user->getId());
         $player->setPseudo($user->getUsername());
         $player->setStatus(PlayerStatusEnum::MEMBER);
 

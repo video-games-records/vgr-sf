@@ -15,7 +15,7 @@ class GameMapper
         $serie = null;
         if ($game->getSerie() !== null) {
             $serie = [
-                'id' => $game->getSerie()->getId(),
+                'id' => (int) $game->getSerie()->getId(),
                 'name' => $game->getSerie()->getName(),
                 'slug' => $game->getSerie()->getSlug()
             ];
@@ -25,7 +25,7 @@ class GameMapper
         $platforms = [];
         foreach ($game->getPlatforms() as $platform) {
             $platforms[] = [
-                'id' => $platform->getId(),
+                'id' => (int) $platform->getId(),
                 'name' => $platform->getName(),
                 'slug' => $platform->getSlug()
             ];
@@ -35,14 +35,14 @@ class GameMapper
         $genres = [];
         foreach ($game->getGenres() as $genre) {
             $genres[] = [
-                'id' => $genre->getId(),
+                'id' => (int) $genre->getId(),
                 'name' => $genre->getName(),
                 'slug' => $genre->getSlug()
             ];
         }
 
         return new GameDTO(
-            id: $game->getId(),
+            id: (int) $game->getId(),
             name: $game->getName(),
             picture: $game->getPicture(),
             status: $game->getStatus(),

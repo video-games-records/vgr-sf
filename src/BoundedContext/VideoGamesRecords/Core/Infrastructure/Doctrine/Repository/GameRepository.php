@@ -162,7 +162,7 @@ class GameRepository extends DefaultRepository
      * @param string $letter
      * @param string $locale
      *
-     * @return Query<int, Game>
+     * @return Query<null, mixed>
      */
     public function findWithLetter(string $letter, string $locale = 'en'): Query
     {
@@ -497,13 +497,15 @@ class GameRepository extends DefaultRepository
                 ->getQuery()
                 ->getSingleScalarResult();
 
-            $unmapped = $total - $mapped;
-            $coverage = $total > 0 ? round(($mapped / $total) * 100, 2) : 0;
+            $totalInt = (int) $total;
+            $mappedInt = (int) $mapped;
+            $unmapped = $totalInt - $mappedInt;
+            $coverage = $totalInt > 0 ? (int) round(($mappedInt / $totalInt) * 100, 2) : 0;
 
             return [
-                'total' => (int) $total,
-                'mapped' => (int) $mapped,
-                'unmapped' => (int) $unmapped,
+                'total' => $totalInt,
+                'mapped' => $mappedInt,
+                'unmapped' => $unmapped,
                 'coverage' => $coverage
             ];
         } catch (Exception) {

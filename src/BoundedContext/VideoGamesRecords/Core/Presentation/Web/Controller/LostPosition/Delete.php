@@ -38,6 +38,10 @@ class Delete extends AbstractLocalizedController
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
 
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
+
         /** @var array<int> $selectedPositions */
         $selectedPositions = $request->request->all('selected_positions');
 

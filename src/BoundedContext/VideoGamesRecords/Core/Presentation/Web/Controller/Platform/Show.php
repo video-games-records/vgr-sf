@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Platform;
 
 use App\BoundedContext\VideoGamesRecords\Core\Application\DataProvider\Ranking\PlayerPlatformRankingProvider;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlatformRepository;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +15,6 @@ class Show extends AbstractLocalizedController
 {
     public function __construct(
         private readonly PlatformRepository $platformRepository,
-        private readonly GameRepository $gameRepository,
         private readonly PlayerPlatformRankingProvider $rankingProvider
     ) {
     }

@@ -7,6 +7,10 @@ namespace App\BoundedContext\User\Tests\Story;
 use App\BoundedContext\User\Tests\Factory\GroupFactory;
 use Zenstruck\Foundry\Story;
 
+/**
+ * @method static object player()
+ * @method static object admin()
+ */
 final class GroupStory extends Story
 {
     public function build(): void

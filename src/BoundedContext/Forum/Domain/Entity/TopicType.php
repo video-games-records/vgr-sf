@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class TopicType
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
-    private int $id;
+    private ?int $id = null;
 
     #[Assert\Length(max: 30)]
     #[ORM\Column(length: 30, nullable: false)]
@@ -27,12 +27,7 @@ class TopicType
         return sprintf('%s [%s]', $this->getName(), $this->getId());
     }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

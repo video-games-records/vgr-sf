@@ -54,12 +54,7 @@ final class NotifyTeamMasterBadgeLostSubscriber extends AbstractNotifySubscriber
         }
     }
 
-    /**
-     * @param $user_id
-     * @param $game
-     * @return void
-     */
-    private function sendMessage($user_id, $game): void
+    private function sendMessage(int $user_id, \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game $game): void
     {
         /** @var User $recipient */
         $recipient = $this->em->getRepository('App\BoundedContext\User\Domain\Entity\User')->find($user_id);

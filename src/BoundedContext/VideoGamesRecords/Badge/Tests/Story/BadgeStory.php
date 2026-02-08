@@ -7,12 +7,18 @@ namespace App\BoundedContext\VideoGamesRecords\Badge\Tests\Story;
 use App\BoundedContext\VideoGamesRecords\Badge\Tests\Factory\BadgeFactory;
 use Zenstruck\Foundry\Story;
 
+/**
+ * @method static object register()
+ * @method static object connection()
+ * @method static object forum()
+ */
 final class BadgeStory extends Story
 {
     public function build(): void
     {
         // Badge d'inscription avec ID=1 (requis par CreatePlayerListener)
-        $this->addState('register', BadgeFactory::findOrCreate(['id' => 1], [
+        $this->addState('register', BadgeFactory::findOrCreate([
+            'id' => 1,
             'type' => \App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType::INSCRIPTION,
             'picture' => 'inscription.gif',
             'value' => 0,

@@ -35,7 +35,7 @@ class PlayerDTO
         public readonly bool $hasDonate,
         public readonly PlayerStatsDTO $stats,
         public readonly ?\DateTimeInterface $lastLogin,
-        public readonly \DateTimeInterface $createdAt,
+        public readonly ?\DateTimeInterface $createdAt,
         public readonly ?string $presentation,
         public readonly ?string $collection,
         #[ApiProperty(readableLink: true)]

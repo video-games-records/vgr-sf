@@ -26,14 +26,20 @@ final class NotifyProofAcceptedSubscriber extends AbstractNotifySubscriberInterf
     public function sendMessage(ProofAccepted $event): void
     {
         $proof = $event->getProof();
+        $playerChart = $proof->getPlayerChart();
+
+        if ($playerChart === null) {
+            return;
+        }
+
         $this->messageBuilder
             ->setSender($this->getDefaultSender())
             ->setType(MessageTypeEnum::VGR_PROOF_ACCEPTED);
 
         /** @var User $recipient */
         $recipient = $this->em->getRepository('App\BoundedContext\User\Domain\Entity\User')
-            ->find($proof->getPlayerChart()->getPlayer()->getUserId());
-        $url = '/' . $recipient->getLanguage() . '/' . $proof->getPlayerChart()->getUrl();
+            ->find($playerChart->getPlayer()->getUserId());
+        $url = '/' . $recipient->getLanguage() . '/' . $playerChart->getUrl();
         $this->messageBuilder
             ->setObject(
                 $this->translator->trans(
@@ -53,7 +59,7 @@ final class NotifyProofAcceptedSubscriber extends AbstractNotifySubscriberInterf
                     ),
                     $recipient->getUsername(),
                     $url,
-                    $proof->getPlayerChart()->getChart()->getCompleteName($recipient->getLanguage()),
+                    $playerChart->getChart()->getCompleteName($recipient->getLanguage()),
                     $proof->getResponse()
                 )
             )

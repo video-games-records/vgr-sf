@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Tests\Factory;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -45,7 +44,7 @@ final class ChartFactory extends PersistentObjectFactory
     /**
      * Set the group relation
      */
-    public function forGroup(Group $group): static
+    public function forGroup(object $group): static
     {
         return $this->with(['group' => $group]);
     }

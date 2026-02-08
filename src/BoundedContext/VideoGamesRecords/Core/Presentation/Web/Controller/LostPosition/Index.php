@@ -36,6 +36,10 @@ class Index extends AbstractLocalizedController
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
 
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
+
         $page = $request->query->getInt('page', 1);
         $gameId = $request->query->get('game') ? (int) $request->query->get('game') : null;
 

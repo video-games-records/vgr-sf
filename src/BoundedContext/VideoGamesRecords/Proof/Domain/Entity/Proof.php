@@ -58,7 +58,7 @@ class Proof
     private ?DateTime $checkedAt;
 
     #[ORM\OneToOne(targetEntity: PlayerChart::class, mappedBy: 'proof')]
-    private ?PlayerChart $playerChart;
+    private ?PlayerChart $playerChart = null;
 
     public function __toString()
     {

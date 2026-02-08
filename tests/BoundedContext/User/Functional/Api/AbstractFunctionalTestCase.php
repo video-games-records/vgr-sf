@@ -41,6 +41,9 @@ class AbstractFunctionalTestCase extends ApiTestCase
      * Helper method pour créer un utilisateur normal
      * Le Player est créé automatiquement via CreatePlayerListener
      */
+    /**
+     * @param array<string, mixed> $overrides
+     */
     protected function createUser(array $overrides = []): User
     {
         $unique = uniqid();
@@ -58,7 +61,7 @@ class AbstractFunctionalTestCase extends ApiTestCase
     /**
      * Helper method pour authentifier un utilisateur via JWT
      */
-    protected function authenticateUser(object $user): void
+    protected function authenticateUser(User $user): void
     {
         $loginResponse = $this->apiClient->request('POST', '/api/login_check', [
             'json' => [

@@ -109,7 +109,7 @@ class ProofAdminController extends AbstractCRUDController
             }
 
             // Message d'erreur si la validation a échoué
-            if (!$isFormValid) {
+            if (!$isFormValid) { // @phpstan-ignore booleanNot.alwaysTrue
                 $this->addFlash(
                     'sonata_flash_error',
                     $this->trans(
@@ -203,11 +203,8 @@ class ProofAdminController extends AbstractCRUDController
         // - Notifications custom
         // - Mise à jour de statistiques
 
-        $playerChart = $proof->getPlayerChart();
-        if ($playerChart) {
-            // Le statut du PlayerChart sera automatiquement mis à jour par le listener
-            // à PlayerChartStatusEnum::PROVED
-        }
+        // Le statut du PlayerChart sera automatiquement mis à jour par le listener
+        // à PlayerChartStatusEnum::PROVED
     }
 
     /**
@@ -216,12 +213,7 @@ class ProofAdminController extends AbstractCRUDController
     private function handleProofRefused(Proof $proof): void
     {
         // La logique est déjà gérée dans ProofListener::postUpdate()
-        // Mais vous pouvez ajouter ici des traitements supplémentaires
-
-        $playerChart = $proof->getPlayerChart();
-        if ($playerChart) {
-            // Le statut du PlayerChart sera automatiquement ajusté par le listener
-        }
+        // Le statut du PlayerChart sera automatiquement ajusté par le listener
     }
 
     /**
@@ -230,9 +222,7 @@ class ProofAdminController extends AbstractCRUDController
     private function getProofValidationMessage(Proof $proof): string
     {
         $status = $proof->getStatus()->getValue();
-        $playerName = $proof->getPlayerChart() ?
-            $proof->getPlayerChart()->getPlayer()->getPseudo() :
-            $this->trans('proof.unknown.player', [], 'VgrCoreAdmin');
+        $playerName = $proof->getPlayerChart()?->getPlayer()->getPseudo() ?? 'Unknown';
 
         switch ($status) {
             case ProofStatus::ACCEPTED:

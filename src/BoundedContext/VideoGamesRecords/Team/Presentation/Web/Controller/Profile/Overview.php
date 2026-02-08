@@ -47,6 +47,10 @@ class Overview extends AbstractProfileController
         $user = $this->getUser();
         $player = $this->playerRepository->getPlayerFromUser($user);
 
+        if ($player === null) {
+            throw $this->createAccessDeniedException();
+        }
+
         $teamRequest = new TeamRequest();
         $teamRequest->setTeam($team);
         $teamRequest->setPlayer($player);

@@ -124,7 +124,8 @@ class TopicController extends AbstractLocalizedController
                 'forumId' => $forum->getId(),
                 'forumSlug' => $forum->getSlug(),
                 'page' => $lastPage,
-            ], 303, ['fragment' => 'message-' . $message->getId()]);
+                '_fragment' => 'message-' . $message->getId(),
+            ], 303);
         }
 
         return $this->redirectToRoute('topic_show', [

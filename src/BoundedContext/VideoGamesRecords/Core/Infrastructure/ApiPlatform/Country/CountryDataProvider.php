@@ -11,6 +11,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\CountryMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\CountryRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/** @implements ProviderInterface<CountryDTO> */
 readonly class CountryDataProvider implements ProviderInterface
 {
     public function __construct(

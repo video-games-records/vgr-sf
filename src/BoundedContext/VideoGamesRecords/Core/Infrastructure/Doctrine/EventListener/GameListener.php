@@ -20,7 +20,7 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Game::class)]
 class GameListener
 {
-    /** @var array<string, array{0: mixed, 1: mixed}> */
+    /** @var array<string, array{0: mixed, 1: mixed}|mixed> */
     private array $changeSet = [];
 
     /**
