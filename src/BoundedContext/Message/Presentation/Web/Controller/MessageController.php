@@ -256,11 +256,13 @@ class MessageController extends AbstractLocalizedController
             $filters['isOpened'] = $isOpened === '1';
         }
 
-        if ($sender = $request->query->getInt('sender')) {
+        $sender = (int) $request->query->get('sender', 0);
+        if ($sender > 0) {
             $filters['sender'] = $sender;
         }
 
-        if ($recipient = $request->query->getInt('recipient')) {
+        $recipient = (int) $request->query->get('recipient', 0);
+        if ($recipient > 0) {
             $filters['recipient'] = $recipient;
         }
 
