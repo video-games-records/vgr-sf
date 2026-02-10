@@ -145,6 +145,7 @@ readonly class UpdateTeamGameRankHandler
 
         // Update badges directly (was in TeamGameUpdatedSubscriber - now optimized)
         // Get first place teams from the ranking we just calculated
+        $list = RankingTools::order($list, ['rankPointChart' => SORT_ASC]);
         $firstPlaceTeams = [];
         foreach ($list as $row) {
             if ($row['rankPointChart'] === 1) {

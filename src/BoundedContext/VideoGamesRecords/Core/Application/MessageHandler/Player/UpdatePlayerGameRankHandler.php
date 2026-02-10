@@ -233,12 +233,13 @@ readonly class UpdatePlayerGameRankHandler
 
         // Update badges directly (was in PlayerGameUpdatedSubscriber - now optimized)
         // Get first place players from the ranking we just calculated
+        $list = RankingTools::order($list, ['rankPointChart' => SORT_ASC]);
         $firstPlacePlayers = [];
         foreach ($list as $row) {
             if ($row['rankPointChart'] === 1) {
                 $firstPlacePlayers[$row['id']] = 0;
             } else {
-                break; // Rankings are ordered, so no more first places
+                break;
             }
         }
 
