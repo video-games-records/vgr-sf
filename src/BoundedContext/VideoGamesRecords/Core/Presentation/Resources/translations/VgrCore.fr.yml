@@ -175,6 +175,19 @@ player:
       column_rank: Rang
       no_games: Aucun jeu pour le moment
 
+    proofs:
+      title: Preuves
+      column_game: Jeu
+      column_statuses: Statuts
+      column_chart: Record
+      column_score: Score
+      column_rank: Rang
+      column_status: Statut
+      column_proof: Preuve
+      no_proofs: Aucune preuve pour le moment
+      no_scores_for_game: Aucun score pour ce jeu
+      back_to_games: Retour aux jeux
+
 sidebar:
   title: Liens
   forum: Forum

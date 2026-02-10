@@ -5,11 +5,13 @@
     height: 1em;
     background-color: grey;
     border: 1px solid $black;
+    border-radius: 3px;
 }
 
 .proof {
     &--none {
         background-color: #ccc;
+        color: #333;
     }
 
     &--request-pending {
@@ -22,6 +24,7 @@
 
     &--request-proof-sent {
         background-color: yellow;
+        color: #333;
     }
 
     &--proof-sent {
@@ -36,6 +39,3 @@
         background-color: black;
     }
 }
-
-
-

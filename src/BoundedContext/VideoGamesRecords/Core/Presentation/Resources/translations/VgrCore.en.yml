@@ -175,6 +175,19 @@ player:
       column_rank: Rank
       no_games: No games yet
 
+    proofs:
+      title: Proofs
+      column_game: Game
+      column_statuses: Statuses
+      column_chart: Chart
+      column_score: Score
+      column_rank: Rank
+      column_status: Status
+      column_proof: Proof
+      no_proofs: No proofs yet
+      no_scores_for_game: No scores for this game
+      back_to_games: Back to games
+
 sidebar:
   title: Links
   forum: Forum

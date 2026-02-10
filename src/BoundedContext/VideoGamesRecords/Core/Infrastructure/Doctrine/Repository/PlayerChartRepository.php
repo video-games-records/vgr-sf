@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
@@ -181,5 +183,105 @@ class PlayerChartRepository extends DefaultRepository
             'total' => $total,
             'pages' => (int) ceil($total / $limit),
         ];
+    }
+
+    /**
+     * @return array<array{game: Game, statuses: array<string, int>}>
+     */
+    public function getStatusCountsByGameForPlayer(Player $player): array
+    {
+        $rows = $this->createQueryBuilder('pc')
+            ->select('IDENTITY(g.game) AS game_id, pc.status AS status, COUNT(pc.id) AS cnt')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->where('pc.player = :player')
+            ->setParameter('player', $player)
+            ->groupBy('game_id, pc.status')
+            ->getQuery()
+            ->getArrayResult();
+
+        if (empty($rows)) {
+            return [];
+        }
+
+        $gameIds = array_unique(array_column($rows, 'game_id'));
+
+        $games = $this->getEntityManager()
+            ->getRepository(Game::class)
+            ->createQueryBuilder('ga')
+            ->where('ga.id IN (:ids)')
+            ->setParameter('ids', $gameIds)
+            ->orderBy('ga.libGameEn', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        $gamesById = [];
+        foreach ($games as $game) {
+            $gamesById[$game->getId()] = $game;
+        }
+
+        $grouped = [];
+        foreach ($rows as $row) {
+            $gameId = $row['game_id'];
+            if (!isset($grouped[$gameId])) {
+                $grouped[$gameId] = [];
+            }
+            $status = $row['status'] instanceof PlayerChartStatusEnum
+                ? $row['status']->value
+                : $row['status'];
+            $grouped[$gameId][$status] = (int) $row['cnt'];
+        }
+
+        $result = [];
+        foreach ($gamesById as $gameId => $game) {
+            if (isset($grouped[$gameId])) {
+                $result[] = [
+                    'game' => $game,
+                    'statuses' => $grouped[$gameId],
+                ];
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<array{group: \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group, playerCharts: array<PlayerChart>}>
+     */
+    public function findByPlayerAndGameGroupedByGroup(Player $player, Game $game): array
+    {
+        $playerCharts = $this->createQueryBuilder('pc')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->leftJoin('pc.proof', 'proof')
+            ->leftJoin('proof.picture', 'picture')
+            ->leftJoin('proof.video', 'video')
+            ->leftJoin('pc.libs', 'libs')
+            ->leftJoin('libs.libChart', 'lc')
+            ->leftJoin('lc.type', 'ct')
+            ->addSelect('c', 'g', 'proof', 'picture', 'video', 'libs', 'lc', 'ct')
+            ->where('pc.player = :player')
+            ->andWhere('g.game = :game')
+            ->setParameter('player', $player)
+            ->setParameter('game', $game)
+            ->orderBy('g.libGroupEn', 'ASC')
+            ->addOrderBy('c.libChartEn', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        $grouped = [];
+        foreach ($playerCharts as $pc) {
+            $group = $pc->getChart()->getGroup();
+            $groupId = $group->getId();
+            if (!isset($grouped[$groupId])) {
+                $grouped[$groupId] = [
+                    'group' => $group,
+                    'playerCharts' => [],
+                ];
+            }
+            $grouped[$groupId]['playerCharts'][] = $pc;
+        }
+
+        return array_values($grouped);
     }
 }
