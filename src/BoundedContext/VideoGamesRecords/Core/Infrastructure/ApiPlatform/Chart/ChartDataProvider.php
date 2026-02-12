@@ -9,6 +9,7 @@ use ApiPlatform\State\ProviderInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Chart\ChartDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\ChartMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\ChartRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @implements ProviderInterface<ChartDTO> */
 class ChartDataProvider implements ProviderInterface
@@ -30,7 +31,7 @@ class ChartDataProvider implements ProviderInterface
         $chart = $this->chartRepository->find((int) $id);
 
         if ($chart === null) {
-            return null;
+            throw new NotFoundHttpException('Chart not found');
         }
 
         return $this->chartMapper->toDTO($chart);

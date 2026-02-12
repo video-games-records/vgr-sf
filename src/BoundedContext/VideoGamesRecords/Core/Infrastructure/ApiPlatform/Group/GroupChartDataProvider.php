@@ -11,6 +11,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\ChartMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\ChartRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GroupRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @implements ProviderInterface<ChartDTO> */
 class GroupChartDataProvider implements ProviderInterface
@@ -37,7 +38,7 @@ class GroupChartDataProvider implements ProviderInterface
         $group = $this->groupRepository->find((int) $id);
 
         if ($group === null) {
-            return [];
+            throw new NotFoundHttpException('Group not found');
         }
 
         $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';

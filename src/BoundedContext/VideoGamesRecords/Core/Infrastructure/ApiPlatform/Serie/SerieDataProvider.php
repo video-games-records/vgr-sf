@@ -9,6 +9,7 @@ use ApiPlatform\State\ProviderInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Serie\SerieDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\SerieMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\SerieRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @implements ProviderInterface<SerieDTO> */
 class SerieDataProvider implements ProviderInterface
@@ -30,7 +31,7 @@ class SerieDataProvider implements ProviderInterface
         $serie = $this->serieRepository->find((int) $id);
 
         if ($serie === null) {
-            return null;
+            throw new NotFoundHttpException('Serie not found');
         }
 
         return $this->serieMapper->toDTO($serie);

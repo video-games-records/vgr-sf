@@ -9,6 +9,7 @@ use ApiPlatform\State\ProviderInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Group\GroupDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\GroupMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GroupRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @implements ProviderInterface<GroupDTO> */
 class GroupDataProvider implements ProviderInterface
@@ -30,7 +31,7 @@ class GroupDataProvider implements ProviderInterface
         $group = $this->groupRepository->find((int) $id);
 
         if ($group === null) {
-            return null;
+            throw new NotFoundHttpException('Group not found');
         }
 
         return $this->groupMapper->toDTO($group);

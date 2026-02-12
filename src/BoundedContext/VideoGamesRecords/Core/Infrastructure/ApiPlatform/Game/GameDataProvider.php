@@ -9,6 +9,7 @@ use ApiPlatform\State\ProviderInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Game\GameDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\GameMapper;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @implements ProviderInterface<GameDTO> */
 class GameDataProvider implements ProviderInterface
@@ -30,7 +31,7 @@ class GameDataProvider implements ProviderInterface
         $game = $this->gameRepository->find((int) $id);
 
         if ($game === null) {
-            return null;
+            throw new NotFoundHttpException('Game not found');
         }
 
         return $this->gameMapper->toDTO($game);
