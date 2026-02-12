@@ -271,6 +271,24 @@ profile:
     message:
       success: Your player profile has been updated successfully.
 
+my_proofs:
+  title: My Proofs
+  column_game: Game
+  column_statuses: Statuses
+  no_games: No games yet
+  back_to_games: Back to games
+  no_scores_for_game: No scores for this game
+  upload_label: Upload proof
+  upload_submit: Send
+  upload_formats: "Accepted formats: JPEG, PNG (max 5MB)"
+  upload_success: Proof uploaded successfully
+  upload_error: Error uploading proof
+  upload_invalid_file: "Invalid file. Accepted formats: JPEG, PNG (max 5MB)"
+  upload_not_allowed: Cannot upload proof for this score
+  upload_drag_drop: Drag and drop your image here
+  upload_or_click: or click to select a file
+  upload_sending: Sending...
+
 country:
   show:
     title: Country Ranking

@@ -271,6 +271,24 @@ profile:
     message:
       success: Votre profil joueur a été mis à jour avec succès.
 
+my_proofs:
+  title: Mes Preuves
+  column_game: Jeu
+  column_statuses: Statuts
+  no_games: Aucun jeu pour le moment
+  back_to_games: Retour aux jeux
+  no_scores_for_game: Aucun score pour ce jeu
+  upload_label: Envoyer une preuve
+  upload_submit: Envoyer
+  upload_formats: "Formats acceptés : JPEG, PNG (max 5Mo)"
+  upload_success: Preuve envoyée avec succès
+  upload_error: Erreur lors de l'envoi de la preuve
+  upload_invalid_file: "Fichier invalide. Formats acceptés : JPEG, PNG (max 5Mo)"
+  upload_not_allowed: Impossible d'envoyer une preuve pour ce score
+  upload_drag_drop: Glissez-déposez votre image ici
+  upload_or_click: ou cliquez pour sélectionner un fichier
+  upload_sending: Envoi en cours...
+
 country:
   show:
     title: Classement par pays

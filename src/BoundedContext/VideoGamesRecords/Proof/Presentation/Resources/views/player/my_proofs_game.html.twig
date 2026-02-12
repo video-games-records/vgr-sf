@@ -1,0 +1,62 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'my_proofs.title'|trans }} - {{ game.name }} - Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="mb-3">
+                <a href="{{ path('vgr_my_proofs') }}" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> {{ 'my_proofs.back_to_games'|trans }}
+                </a>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">{{ game.name }}</h2>
+                </div>
+                <div class="card-body">
+                    {% if groupedByGroup is empty %}
+                        <p class="text-muted text-center py-4 mb-0">{{ 'my_proofs.no_scores_for_game'|trans }}</p>
+                    {% elseif groupedByGroup|length == 1 %}
+                        {% set entry = groupedByGroup|first %}
+                        {% include '@VideoGamesRecordsProof/player/_my_proofs_group_table.html.twig' with {playerCharts: entry.playerCharts} %}
+                    {% else %}
+                        <ul class="nav nav-pills mb-3" role="tablist">
+                            {% for entry in groupedByGroup %}
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link {{ loop.first ? 'active' : '' }}"
+                                        id="group-tab-{{ entry.group.id }}"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#group-pane-{{ entry.group.id }}"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="group-pane-{{ entry.group.id }}"
+                                        aria-selected="{{ loop.first ? 'true' : 'false' }}"
+                                    >{{ entry.group.name }}</button>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="tab-content">
+                            {% for entry in groupedByGroup %}
+                                <div
+                                    class="tab-pane fade {{ loop.first ? 'show active' : '' }}"
+                                    id="group-pane-{{ entry.group.id }}"
+                                    role="tabpanel"
+                                    aria-labelledby="group-tab-{{ entry.group.id }}"
+                                >
+                                    {% include '@VideoGamesRecordsProof/player/_my_proofs_group_table.html.twig' with {playerCharts: entry.playerCharts} %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

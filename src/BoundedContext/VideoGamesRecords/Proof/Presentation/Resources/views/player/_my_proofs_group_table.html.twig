@@ -1,0 +1,55 @@
+{% trans_default_domain 'VgrCore' %}
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+    {% for pc in playerCharts %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center py-2">
+                    <span class="fw-semibold text-truncate me-2">{{ pc.chart.name }}</span>
+                    <span class="proof--{{ pc.status.cssClass }}" data-bs-toggle="tooltip" title="{{ pc.status.label }}"></span>
+                </div>
+                <div class="card-body p-2">
+                    <div class="d-flex gap-3 small text-muted mb-2">
+                        <span>{{ 'player.profile.proofs.column_score'|trans }}: <strong class="text-body">{{ pc.valuesAsString }}</strong></span>
+                        <span>{{ 'player.profile.proofs.column_rank'|trans }}: <strong class="text-body">{{ pc.rank }}</strong></span>
+                    </div>
+                    {% if pc.proof %}
+                        <twig:proof_display :proof="pc.proof" />
+                    {% elseif pc.status.value in ['none', 'request-validated', 'unproved'] and not pc.chart.isProofVideoOnly %}
+                        <form action="{{ path('vgr_my_proofs_upload', {id: pc.id}) }}" method="post" enctype="multipart/form-data"
+                              data-controller="my-proof-upload">
+                            <input type="hidden" name="_token" value="{{ csrf_token('my_proofs_upload_' ~ pc.id) }}">
+
+                            {# Dropzone #}
+                            <div class="border border-2 border-dashed rounded p-3 text-center"
+                                 role="button"
+                                 data-my-proof-upload-target="dropzone"
+                                 data-action="click->my-proof-upload#triggerFileInput">
+                                <i class="bi bi-cloud-arrow-up fs-3 text-muted"></i>
+                                <p class="mb-1 small fw-bold">{{ 'my_proofs.upload_drag_drop'|trans }}</p>
+                                <p class="text-muted small mb-0">{{ 'my_proofs.upload_or_click'|trans }}</p>
+                                <p class="text-muted small mb-0">{{ 'my_proofs.upload_formats'|trans }}</p>
+                            </div>
+
+                            {# Hidden file input #}
+                            <input type="file" class="d-none" name="proof_file" accept="image/jpeg,image/png"
+                                   data-my-proof-upload-target="fileInput"
+                                   data-action="change->my-proof-upload#onFileSelected">
+
+                            {# Image preview (shown briefly before auto-submit) #}
+                            <div class="d-none text-center mt-2" data-my-proof-upload-target="preview">
+                                <img src="" alt="Preview" class="img-fluid rounded" data-my-proof-upload-target="previewImage">
+                            </div>
+
+                            {# Loading state #}
+                            <div class="d-none text-center py-3" data-my-proof-upload-target="loading">
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                                {{ 'my_proofs.upload_sending'|trans }}
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

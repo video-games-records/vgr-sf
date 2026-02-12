@@ -44,6 +44,7 @@ navigation:
   user_menu:
     profile: "Profil"
     team: "Mon Équipe"
+    my_proofs: "Mes Preuves"
     messages: "Messages"
     lost_positions: "Positions perdues"
     friends: "Amis"
