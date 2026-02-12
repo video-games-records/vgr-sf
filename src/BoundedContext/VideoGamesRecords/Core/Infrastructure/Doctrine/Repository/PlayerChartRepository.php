@@ -7,6 +7,7 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repo
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -38,6 +39,44 @@ class PlayerChartRepository extends DefaultRepository
             return [];
         }
 
+
+        return $this->createQueryBuilder('pc')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'ga')
+            ->join('pc.player', 'p')
+            ->leftJoin('pc.platform', 'plt')
+            ->leftJoin('pc.libs', 'libs')
+            ->leftJoin('libs.libChart', 'lc')
+            ->leftJoin('lc.type', 'ct')
+            ->addSelect('c', 'g', 'ga', 'p', 'plt', 'libs', 'lc', 'ct')
+            ->where('pc.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return array<PlayerChart>
+     */
+    public function findLatestBySerie(Serie $serie, int $limit = 30): array
+    {
+        $ids = $this->createQueryBuilder('pc')
+            ->select('pc.id')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'ga')
+            ->where('ga.serie = :serie')
+            ->setParameter('serie', $serie)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getSingleColumnResult();
+
+        if (empty($ids)) {
+            return [];
+        }
 
         return $this->createQueryBuilder('pc')
             ->join('pc.chart', 'c')
