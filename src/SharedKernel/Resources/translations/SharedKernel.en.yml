@@ -91,6 +91,16 @@ common:
   loading: "Loading..."
   no_results: "No results found"
 
+# === SEARCH (Global search page) ===
+search:
+  title: "Search"
+  placeholder: "Search for a game, player or team..."
+  games: "Games"
+  players: "Players"
+  teams: "Teams"
+  no_results: "No results found"
+  min_chars: "Type at least 2 characters to search"
+
 # === FLASH MESSAGES (Messages système communs) ===
 flash:
   success:

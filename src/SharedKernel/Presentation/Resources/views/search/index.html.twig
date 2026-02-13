@@ -1,0 +1,44 @@
+{% extends '@SharedKernel/base.html.twig' %}
+
+{% trans_default_domain 'SharedKernel' %}
+
+{% block title %}{{ 'search.title'|trans }} - Video Games Records{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="mb-4 text-center">{{ 'search.title'|trans }}</h1>
+
+                <div
+                    data-controller="global-search"
+                    data-global-search-games-url-value="{{ path('vgr_api_game_autocomplete') }}"
+                    data-global-search-players-url-value="{{ path('vgr_api_player_autocomplete') }}"
+                    data-global-search-teams-url-value="{{ path('vgr_api_team_autocomplete') }}"
+                    data-global-search-locale-value="{{ app.request.locale }}"
+                    data-global-search-game-label-value="{{ 'search.games'|trans }}"
+                    data-global-search-player-label-value="{{ 'search.players'|trans }}"
+                    data-global-search-team-label-value="{{ 'search.teams'|trans }}"
+                    data-global-search-no-results-label-value="{{ 'search.no_results'|trans }}"
+                    data-global-search-min-chars-label-value="{{ 'search.min_chars'|trans }}"
+                >
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="{{ 'search.placeholder'|trans }}"
+                            data-global-search-target="input"
+                            data-action="input->global-search#onInput keydown->global-search#onKeydown"
+                            autofocus
+                        >
+                    </div>
+
+                    <div data-global-search-target="results">
+                        <p class="text-muted text-center mt-3">{{ 'search.min_chars'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

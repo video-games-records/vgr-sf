@@ -27,6 +27,7 @@ class Autocomplete extends AbstractController
         $results = array_map(fn($player) => [
             'id' => $player->getId(),
             'text' => $player->getPseudo(),
+            'slug' => $player->getSlug(),
         ], $players);
 
         return $this->json($results);

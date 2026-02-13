@@ -91,6 +91,16 @@ common:
   loading: "Chargement..."
   no_results: "Aucun résultat trouvé"
 
+# === SEARCH (Page de recherche globale) ===
+search:
+  title: "Recherche"
+  placeholder: "Rechercher un jeu, un joueur ou une équipe..."
+  games: "Jeux"
+  players: "Joueurs"
+  teams: "Équipes"
+  no_results: "Aucun résultat trouvé"
+  min_chars: "Tapez au moins 2 caractères pour rechercher"
+
 # === FLASH MESSAGES (Messages système communs) ===
 flash:
   success:

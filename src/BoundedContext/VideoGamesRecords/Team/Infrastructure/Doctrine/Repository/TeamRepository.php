@@ -65,6 +65,20 @@ class TeamRepository extends DefaultRepository
     }
 
     /**
+     * @return Team[]
+     */
+    public function autocomplete(string $q): array
+    {
+        $qb = $this->createQueryBuilder('team')
+            ->where('team.libTeam LIKE :q')
+            ->andWhere('team.nbPlayer > 0')
+            ->setParameter('q', '%' . $q . '%')
+            ->orderBy('team.libTeam', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @throws NonUniqueResultException
      */
     public function countActiveTeams(): int

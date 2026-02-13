@@ -111,6 +111,13 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
+                        {# Search #}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('global_search') }}" aria-label="{{ 'common.search'|trans }}">
+                                <i class="bi bi-search"></i>
+                            </a>
+                        </li>
+
                         {# Language Switcher #}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
