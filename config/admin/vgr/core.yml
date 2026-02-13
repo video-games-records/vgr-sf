@@ -13,7 +13,7 @@ services:
       - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/serie/show.html.twig' ] ]
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
 
-  # Platform Admin  
+  # Platform Admin
   sonata.admin.vgr.platform:
     class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\PlatformAdmin
     tags:
@@ -118,6 +118,7 @@ services:
     calls:
       - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/player_chart/show.html.twig' ] ]
       - [ setEventDispatcher, [ '@event_dispatcher' ] ]
+      - [ setMessageBus, [ '@messenger.default_bus' ] ]
       - [ setRequestStack, [ '@request_stack' ] ]
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
 

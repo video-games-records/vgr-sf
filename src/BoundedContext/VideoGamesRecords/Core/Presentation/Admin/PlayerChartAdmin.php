@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin;
 
+use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerChartRank;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -276,5 +277,6 @@ class PlayerChartAdmin extends BaseAdmin
         parent::postUpdate($object);
 
         $this->getEventDispatcher()->dispatch(new AdminPlayerChartUpdated($object));
+        $this->getMessageBus()->dispatch(new UpdatePlayerChartRank((int) $object->getId()));
     }
 }
