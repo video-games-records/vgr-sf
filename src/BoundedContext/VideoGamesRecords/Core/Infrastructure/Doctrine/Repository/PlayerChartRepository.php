@@ -323,4 +323,12 @@ class PlayerChartRepository extends DefaultRepository
 
         return array_values($grouped);
     }
+
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('pc')
+            ->select('COUNT(pc.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

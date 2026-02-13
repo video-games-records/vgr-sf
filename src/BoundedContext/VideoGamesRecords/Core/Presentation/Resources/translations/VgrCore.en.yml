@@ -289,6 +289,10 @@ my_proofs:
   upload_or_click: or click to select a file
   upload_sending: Sending...
 
+site_stats:
+  description: "Video Games Records is a video game records website, created in 2003. You can enter the competition and challenge hundreds of players on a wide choice of games, available on a significant number of platforms."
+  summary: "Our <strong>%nbPlayers% members</strong> have posted <strong>%nbScores% records</strong> on <strong>%nbGames% games</strong>."
+
 country:
   show:
     title: Country Ranking
