@@ -60,7 +60,7 @@ class PlayerChartRepository extends DefaultRepository
     /**
      * @return array<PlayerChart>
      */
-    public function findLatestBySerie(Serie $serie, int $limit = 30): array
+    public function findLatestBySerie(Serie $serie, int $limit = 3): array
     {
         $ids = $this->createQueryBuilder('pc')
             ->select('pc.id')
