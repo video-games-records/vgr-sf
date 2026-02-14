@@ -50,31 +50,19 @@ class BulkUpsert extends AbstractController
     }
 
     /**
-     * Transform DTO-format input to PlayerScoreFormService format.
+     * Transform ChartFormDataDTO-format input to PlayerScoreFormService format.
      *
-     * Input (DTO format from form-data endpoints):
+     * Input (mirrors ChartFormDataDTO structure from form-data endpoints):
      * [
      *   {
-     *     "chartId": 123,
-     *     "playerChart": {
-     *       "id": -1,
-     *       "platformId": 5,
-     *       "libs": [
+     *     "id": 123,                          // chart id
+     *     "playerChart": {                    // PlayerChartFormDTO
+     *       "platform": {"id": 5} | null,     // object or null
+     *       "libs": [                         // PlayerChartLibFormDTO[]
      *         {"libChartId": 456, "parseValue": [{"value": "100"}, {"value": "50"}]}
      *       ]
      *     }
      *   }
-     * ]
-     *
-     * Output (PlayerScoreFormService format):
-     * [
-     *   chartId => [
-     *     "modified" => "1",
-     *     "platform" => platformId,
-     *     "libs" => [
-     *       libChartId => ["values" => ["100", "50"]]
-     *     ]
-     *   ]
      * ]
      *
      * @param array<int, array<string, mixed>> $playerCharts
@@ -85,11 +73,20 @@ class BulkUpsert extends AbstractController
         $formData = [];
 
         foreach ($playerCharts as $item) {
-            $chartId = $item['chartId'] ?? null;
+            $chartId = $item['id'] ?? null;
             $playerChart = $item['playerChart'] ?? null;
 
             if ($chartId === null || $playerChart === null || !is_array($playerChart)) {
                 continue;
+            }
+
+            // platform: null, {"id": 5, ...} or just an int
+            $platformId = null;
+            $platform = $playerChart['platform'] ?? null;
+            if (is_array($platform) && isset($platform['id'])) {
+                $platformId = $platform['id'];
+            } elseif (is_numeric($platform)) {
+                $platformId = $platform;
             }
 
             $libs = [];
@@ -111,7 +108,7 @@ class BulkUpsert extends AbstractController
 
             $formData[$chartId] = [
                 'modified' => '1',
-                'platform' => $playerChart['platformId'] ?? null,
+                'platform' => $platformId,
                 'libs' => $libs,
             ];
         }
