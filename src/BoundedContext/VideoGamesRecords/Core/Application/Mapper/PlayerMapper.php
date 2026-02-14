@@ -20,6 +20,7 @@ readonly class PlayerMapper
             id: (int) $player->getId(),
             pseudo: $player->getPseudo(),
             slug: $player->getSlug(),
+            status: $player->getStatus()->value,
             nbConnexion: $player->getNbConnexion(),
             hasDonate: $player->getHasDonate(),
             stats: $this->toPlayerStatsDTO($player),

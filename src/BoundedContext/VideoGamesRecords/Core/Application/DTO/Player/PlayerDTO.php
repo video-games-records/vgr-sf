@@ -31,6 +31,7 @@ class PlayerDTO
         public readonly int $id,
         public readonly string $pseudo,
         public readonly string $slug,
+        public readonly string $status,
         public readonly int $nbConnexion,
         public readonly bool $hasDonate,
         public readonly PlayerStatsDTO $stats,
