@@ -17,4 +17,31 @@ class VideoRepository extends DefaultRepository
     {
         parent::__construct($registry, Video::class);
     }
+
+    /**
+     * @return Video[]
+     */
+    public function findActiveVideosPaginated(int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
+            ->leftJoin('v.game', 'g')
+            ->addSelect('g')
+            ->where('v.isActive = true')
+            ->orderBy('v.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countActiveVideos(): int
+    {
+        return (int) $this->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->where('v.isActive = true')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
