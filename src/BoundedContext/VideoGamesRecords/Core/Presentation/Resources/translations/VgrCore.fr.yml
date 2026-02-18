@@ -293,6 +293,28 @@ site_stats:
   description: "Video Games Records est un site de records de jeux vidéo, créé en 2003. Vous pouvez entrer dans la compétition et défier des centaines de joueurs sur un large choix de jeux, disponibles sur un nombre important de plateformes."
   summary: "Nos <strong>%nbPlayers% membres</strong> ont posté <strong>%nbScores% records</strong> sur <strong>%nbGames% jeux</strong>."
 
+top_ranking:
+  title: Top Classement
+  page_title: Top Classement - Video Games Records
+  meta_description: Top des jeux et joueurs par posts
+  filter:
+    type: Type
+    value: Valeur
+    submit: Charger les classements
+    week: Semaine
+    month: Mois
+    year: Année
+  top_games: Top Jeux
+  top_players: Top Joueurs
+  columns:
+    rank: Rang
+    game: Jeu
+    player: Joueur
+    posts: Posts
+    change: Évolution
+  posts: posts
+  no_rankings: Aucun classement trouvé pour cette période
+
 country:
   show:
     title: Classement par pays

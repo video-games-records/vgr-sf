@@ -33,6 +33,7 @@ navigation:
     badges: "Badges"
     proofs: "Preuves"
     country: "Pays"
+    top_ranking: "Top Classement"
 
   # Dropdown Community
   community_dropdown:

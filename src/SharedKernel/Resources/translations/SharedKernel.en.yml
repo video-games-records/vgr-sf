@@ -33,6 +33,7 @@ navigation:
     badges: "Badges"
     proofs: "Proofs"
     country: "Country"
+    top_ranking: "Top Ranking"
 
   # Dropdown Community
   community_dropdown:

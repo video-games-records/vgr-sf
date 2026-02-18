@@ -26,6 +26,14 @@ class GameTopRankingRepository extends DefaultRepository
      * @param string $beforePeriodValue
      * @return int Number of deleted records
      */
+    public function findByPeriod(string $periodType, string $periodValue): array
+    {
+        return $this->findBy(
+            ['periodType' => $periodType, 'periodValue' => $periodValue],
+            ['rank' => 'ASC']
+        );
+    }
+
     public function deleteOldRankings(string $periodType, string $beforePeriodValue): int
     {
         return $this->createQueryBuilder('gtr')
