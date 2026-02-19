@@ -7,10 +7,12 @@ namespace App\BoundedContext\VideoGamesRecords\Proof\Application\DTO\Video;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\VideoCollectionDataProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\VideoDataProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\VideoRelatedDataProvider;
+use App\BoundedContext\VideoGamesRecords\Proof\Presentation\Api\Controller\Video\CreateVideo;
 
 #[ApiResource(
     shortName: 'Video',
@@ -41,6 +43,20 @@ use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\
                 tags: ['Video'],
                 summary: 'Get related videos',
                 description: 'Returns a list of recommended videos related to the given video, ranked by relevance.',
+            )
+        ),
+        new Post(
+            uriTemplate: '/videos',
+            controller: CreateVideo::class,
+            read: false,
+            deserialize: false,
+            validate: false,
+            write: false,
+            serialize: false,
+            security: "is_granted('ROLE_PLAYER')",
+            openapi: new Model\Operation(
+                tags: ['Video'],
+                summary: 'Create a video',
             )
         ),
     ]
