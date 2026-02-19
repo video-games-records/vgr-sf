@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\VideoCollectionDataProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\VideoDataProvider;
+use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\VideoRelatedDataProvider;
 
 #[ApiResource(
     shortName: 'Video',
@@ -29,6 +30,17 @@ use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\ApiPlatform\Video\
             paginationItemsPerPage: 30,
             openapi: new Model\Operation(
                 tags: ['Video'],
+            )
+        ),
+        new GetCollection(
+            uriTemplate: '/videos/{id}/related-videos',
+            requirements: ['id' => '\d+'],
+            provider: VideoRelatedDataProvider::class,
+            paginationEnabled: false,
+            openapi: new Model\Operation(
+                tags: ['Video'],
+                summary: 'Get related videos',
+                description: 'Returns a list of recommended videos related to the given video, ranked by relevance.',
             )
         ),
     ]
