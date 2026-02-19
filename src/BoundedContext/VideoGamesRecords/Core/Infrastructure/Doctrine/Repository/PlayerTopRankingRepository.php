@@ -21,11 +21,7 @@ class PlayerTopRankingRepository extends DefaultRepository
 
 
     /**
-     * Delete old rankings to keep only recent data
-     *
-     * @param string $periodType
-     * @param string $beforePeriodValue
-     * @return int Number of deleted records
+     * @return array<PlayerTopRanking>
      */
     public function findByPeriod(string $periodType, string $periodValue): array
     {
