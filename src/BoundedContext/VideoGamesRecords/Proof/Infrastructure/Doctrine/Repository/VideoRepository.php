@@ -44,4 +44,21 @@ class VideoRepository extends DefaultRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * @return array<array{id: int, pseudo: string, slug: string, nbVideo: int}>
+     */
+    public function findPlayersWithMinVideos(int $minVideos = 5): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('p.id, p.pseudo, p.slug, COUNT(v.id) AS nbVideo')
+            ->join('v.player', 'p')
+            ->where('v.isActive = true')
+            ->groupBy('p.id, p.pseudo, p.slug')
+            ->having('COUNT(v.id) >= :minVideos')
+            ->setParameter('minVideos', $minVideos)
+            ->orderBy('p.pseudo', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
