@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BoundedContext\User\Presentation\Form;
 
 use Symfony\Component\Form\AbstractType;

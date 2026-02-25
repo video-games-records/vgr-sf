@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BoundedContext\Message\Domain\Repository;
 
 use App\BoundedContext\Message\Domain\Entity\Message;

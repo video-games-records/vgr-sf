@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BoundedContext\User\Domain\Exception;
 
 use App\SharedKernel\Domain\Exception\EntityNotFoundException;

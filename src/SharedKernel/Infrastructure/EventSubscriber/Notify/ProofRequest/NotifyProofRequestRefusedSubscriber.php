@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\SharedKernel\Infrastructure\EventSubscriber\Notify\ProofRequest;
 
 use App\BoundedContext\Message\Domain\ValueObject\MessageTypeEnum;

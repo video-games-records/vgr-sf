@@ -25,6 +25,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 #[ORM\Index(name: "idx_last_update_player", columns: ["last_update", 'player_id'])]
 #[ORM\Index(name: "idx_player_chart_last_update", columns: ["last_update"])]
 #[ORM\Index(name: "idx_status", columns: ["status"])]
+#[ORM\Index(name: "idx_player_status", columns: ["player_id", "status"])]
 #[DoctrineAssert\UniqueEntity(fields: ['chart', 'player'], message: "A score already exists")]
 class PlayerChart
 {

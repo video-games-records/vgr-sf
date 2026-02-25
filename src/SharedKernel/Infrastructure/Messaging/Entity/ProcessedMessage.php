@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\SharedKernel\Infrastructure\Messaging\Entity;
 
 use Zenstruck\Messenger\Monitor\History\Model\ProcessedMessage as BaseProcessedMessage;

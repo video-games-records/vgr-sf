@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BoundedContext\User\Infrastructure\Event\Subscriber;
 
 use App\BoundedContext\User\Domain\Event\EmailChangedEvent;
