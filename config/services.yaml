@@ -13,6 +13,7 @@ imports:
     - { resource: services/vgr/badge.yaml }
     - { resource: services/vgr/team.yaml }
     - { resource: services/vgr/proof.yaml }
+    - { resource: services/vgr/dwh.yaml }
     - { resource: admin/user.yml }
     - { resource: admin/article.yml }
     - { resource: admin/forum.yml }
