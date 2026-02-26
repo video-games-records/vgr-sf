@@ -71,8 +71,6 @@ class PlayerBadgeAdmin extends BaseAdmin
                 'field_options' => ['property' => 'pseudo'],
                 'label' => 'player_badge.filter.player'
             ])
-            ->add('badge.game.libGameFr', null, ['label' => 'player_badge.filter.game.fr'])
-            ->add('badge.game.libGameEn', null, ['label' => 'player_badge.filter.game.en'])
             ->add('badge.value', null, ['label' => 'player_badge.filter.value'])
             ->add('badge.type', null, ['label' => 'player_badge.filter.type']);
     }
@@ -90,12 +88,6 @@ class PlayerBadgeAdmin extends BaseAdmin
             ])
             ->add('badge.type', null, [
                 'label' => 'player_badge.list.type',
-            ])
-            ->add('badge.game', null, [
-                'label' => 'player_badge.list.game',
-            ])
-            ->add('badge.country', null, [
-                'label' => 'player_badge.list.country',
             ])
             ->add('badge.value', null, [
                 'label' => 'player_badge.list.value',
@@ -118,8 +110,6 @@ class PlayerBadgeAdmin extends BaseAdmin
             ->add('player', null, ['label' => 'player_badge.show.player'])
             ->add('badge', null, ['label' => 'player_badge.show.badge'])
             ->add('badge.type', null, ['label' => 'player_badge.show.type'])
-            ->add('badge.game', null, ['label' => 'player_badge.show.game'])
-            ->add('badge.country', null, ['label' => 'player_badge.show.country'])
             ->add('badge.value', null, ['label' => 'player_badge.show.value']);
     }
 }
