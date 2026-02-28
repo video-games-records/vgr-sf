@@ -68,6 +68,10 @@ group:
     best_player: Best Player
     no_data: No scores yet
 
+chart:
+  show:
+    disabled_rankings_title: Disabled Scores
+
 common:
   loading: Loading...
   error: An error occurred

@@ -68,6 +68,10 @@ group:
     best_player: Meilleur Joueur
     no_data: Aucun score pour le moment
 
+chart:
+  show:
+    disabled_rankings_title: Scores désactivés
+
 common:
   loading: Chargement...
   error: Une erreur est survenue

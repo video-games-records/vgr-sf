@@ -46,11 +46,14 @@ class Show extends AbstractLocalizedController
             ]
         );
 
+        $rankingDisabled = $this->playerChartRankingProvider->getRankingDisabled($chart);
+
         return $this->render('@VideoGamesRecordsCore/chart/show.html.twig', [
             'game' => $game,
             'group' => $group,
             'chart' => $chart,
             'ranking' => $ranking,
+            'rankingDisabled' => $rankingDisabled,
         ]);
     }
 }

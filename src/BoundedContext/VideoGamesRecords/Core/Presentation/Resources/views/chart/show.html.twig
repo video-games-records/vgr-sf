@@ -192,6 +192,104 @@
                     </div>
                 {% endif %}
             </div>
+
+            {# Disabled Rankings Table #}
+            {% if rankingDisabled|length > 0 %}
+                <div class="card shadow-sm mt-4">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">
+                            <i class="bi bi-exclamation-triangle"></i> {{ 'chart.show.disabled_rankings_title'|trans }}
+                        </h5>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'chart.show.player'|trans }}</th>
+                                    <th class="text-end">{{ 'chart.show.score'|trans }}</th>
+                                    <th class="text-center" style="width: 100px;">{{ 'chart.show.status'|trans }}</th>
+                                    <th class="text-center" style="width: 100px;">{{ 'chart.show.action'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in rankingDisabled %}
+                                    {% set playerChart = row[0] %}
+                                    <tr>
+                                        {# Player #}
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                {# Avatar #}
+                                                <img
+                                                    src="{{ asset('users/' ~ playerChart.player.userId ~ '/avatar') }}"
+                                                    alt="{{ playerChart.player.pseudo }}"
+                                                    class="rounded-circle"
+                                                    width="32"
+                                                    height="32"
+                                                >
+
+                                                <div>
+                                                    {# Pseudo with team #}
+                                                    <div>
+                                                        {% if playerChart.player.team %}
+                                                            <span class="badge bg-secondary me-1">
+                                                                [{{ playerChart.player.team.tag }}]
+                                                            </span>
+                                                        {% endif %}
+                                                        {{ component('player_link', {
+                                                            player: playerChart.player,
+                                                            bold: true,
+                                                            showTeam: false,
+                                                            showCountry: false,
+                                                            showAvatar: false
+                                                        }) }}
+                                                    </div>
+
+                                                    {# Country and Platform #}
+                                                    <div class="small text-muted">
+                                                        {% if playerChart.player.country %}
+                                                            <span>{{ playerChart.player.country.name }}</span>
+                                                        {% endif %}
+                                                        {% if playerChart.platform %}
+                                                            <span class="ms-2">
+                                                                <i class="bi bi-controller"></i> {{ playerChart.platform.name }}
+                                                            </span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        {# Score #}
+                                        <td class="text-end">
+                                            {% set scoreValues = [] %}
+                                            {% for lib in chart.libs %}
+                                                {% set key = 'value_' ~ lib.id %}
+                                                {% if row[key] is defined %}
+                                                    {% set scoreValues = scoreValues|merge([row[key]|format_score(lib.type.mask)]) %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <strong>{{ scoreValues|join(' / ') }}</strong>
+                                        </td>
+
+                                        {# Status #}
+                                        <td class="text-center">
+                                            {{ component('player_chart_status', {status: playerChart.status}) }}
+                                        </td>
+
+                                        {# Action #}
+                                        <td class="text-center">
+                                            <a href="{{ path('vgr_player_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug, playerChartId: playerChart.id}) }}" class="btn btn-sm btn-primary">
+                                                {{ 'chart.show.detail'|trans }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
         </div>
 
         {# Sidebar Column #}
