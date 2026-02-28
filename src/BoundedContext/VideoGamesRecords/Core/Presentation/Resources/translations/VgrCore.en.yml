@@ -127,6 +127,8 @@ player:
       points_performance: Points & Performance
       medals_records: Medals (Records)
       cups_games: Cups (Games)
+      medals_over_time: Medals Over Time
+      positions_distribution: Positions Distribution
       about: About
 
     rankings:

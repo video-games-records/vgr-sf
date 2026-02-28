@@ -218,6 +218,32 @@
     </div>
 </div>
 
+{# Charts Section #}
+<div class="row g-2 mb-3">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body p-2">
+                <h6 class="mb-2"><i class="bi bi-graph-up"></i> {{ 'player.profile.sections.medals_over_time'|trans }}</h6>
+                <div data-controller="medals-chart"
+                     data-medals-chart-url-value="{{ path('vgr_dwh_player_medals_by_time', {id: player.id}) }}"
+                     class="chart-container">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body p-2">
+                <h6 class="mb-2"><i class="bi bi-bar-chart"></i> {{ 'player.profile.sections.positions_distribution'|trans }}</h6>
+                <div data-controller="positions-chart"
+                     data-positions-chart-url-value="{{ path('vgr_dwh_player_positions', {id: player.id}) }}"
+                     class="chart-container">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {# Additional Info #}
 {% if player.presentation or player.collection %}
 <div class="row g-3">

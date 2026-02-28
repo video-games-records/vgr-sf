@@ -139,6 +139,12 @@ footer {
     }
 }
 
+// Chart.js container - fixed height required for responsive charts
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
 .user-badge {
     background: rgba(255,255,255,0.2);
     padding: 0.25rem 0.75rem;
