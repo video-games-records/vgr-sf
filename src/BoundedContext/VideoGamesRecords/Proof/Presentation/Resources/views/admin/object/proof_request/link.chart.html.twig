@@ -1,3 +1,10 @@
-<a target="_blank" class="btn btn-sm btn-primary" href="/en/{{ object.getPlayerChart().getChart().getUrl() }}">
+<a target="_blank" class="btn btn-sm btn-primary" href="{{ path('vgr_chart_show', {
+    'id': object.getPlayerChart().getChart().getGroup().getGame().getId(),
+    'slug': object.getPlayerChart().getChart().getGroup().getGame().getSlug(),
+    'groupId': object.getPlayerChart().getChart().getGroup().getId(),
+    'groupSlug': object.getPlayerChart().getChart().getGroup().getSlug(),
+    'chartId': object.getPlayerChart().getChart().getId(),
+    'chartSlug': object.getPlayerChart().getChart().getSlug()
+}) }}">
     <i class="fa fa-external-link"></i> Ranking
 </a>

@@ -202,6 +202,11 @@ class PlayerChart
         return $this->status;
     }
 
+    public function getStatusLabel(): string
+    {
+        return $this->status->getLabel();
+    }
+
     public function addLib(PlayerChartLib $lib): void
     {
         $lib->setPlayerChart($this);

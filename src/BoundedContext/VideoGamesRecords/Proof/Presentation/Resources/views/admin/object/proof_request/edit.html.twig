@@ -55,7 +55,14 @@
                         <tr class="sonata-ba-view-container">
                             <th>LINK</th>
                             <td>
-                                <a target="_blank" href="/en/{{ object.getPlayerChart().getChart().getUrl() }}">({% trans %}link.front.chart{% endtrans %})</a>
+                                <a target="_blank" href="{{ path('vgr_chart_show', {
+                                    'id': object.getPlayerChart().getChart().getGroup().getGame().getId(),
+                                    'slug': object.getPlayerChart().getChart().getGroup().getGame().getSlug(),
+                                    'groupId': object.getPlayerChart().getChart().getGroup().getId(),
+                                    'groupSlug': object.getPlayerChart().getChart().getGroup().getSlug(),
+                                    'chartId': object.getPlayerChart().getChart().getId(),
+                                    'chartSlug': object.getPlayerChart().getChart().getSlug()
+                                }) }}">({% trans %}link.front.chart{% endtrans %})</a>
                             </td>
                         </tr>
                     </tbody>

@@ -25,7 +25,14 @@
                         <div class="col-md-4">
                             <strong><i class="fa fa-bar-chart"></i> {% trans %}proof.show.chart{% endtrans %} :</strong><br>
                             <span class="text-muted">{{ object.getChart().getName() }}</span>
-                            <br><small><a target="_blank" href="/en/{{ object.getChart().getUrl() }}"><i class="fa fa-external-link"></i> {% trans %}proof.front.chart{% endtrans %}</a></small>
+                            <br><small><a target="_blank" href="{{ path('vgr_chart_show', {
+                                'id': object.getChart().getGroup().getGame().getId(),
+                                'slug': object.getChart().getGroup().getGame().getSlug(),
+                                'groupId': object.getChart().getGroup().getId(),
+                                'groupSlug': object.getChart().getGroup().getSlug(),
+                                'chartId': object.getChart().getId(),
+                                'chartSlug': object.getChart().getSlug()
+                            }) }}"><i class="fa fa-external-link"></i> {% trans %}proof.front.chart{% endtrans %}</a></small>
                         </div>
                     </div>
                 </div>

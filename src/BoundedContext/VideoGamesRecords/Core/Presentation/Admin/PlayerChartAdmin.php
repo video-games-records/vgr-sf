@@ -210,7 +210,7 @@ class PlayerChartAdmin extends BaseAdmin
                 'associated_property' => 'libChartEn',
                 'label' => 'player_chart.list.chart',
             ])
-            ->add('status', null, ['label' => 'player_chart.list.status'])
+            ->add('statusLabel', null, ['label' => 'player_chart.list.status'])
             ->add('libs', null, ['label' => 'player_chart.list.libs'])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -229,7 +229,7 @@ class PlayerChartAdmin extends BaseAdmin
             ->add('id', null, ['label' => 'player_chart.show.id'])
             ->add('player', null, ['label' => 'player_chart.show.player'])
             ->add('chart', null, ['label' => 'player_chart.show.chart'])
-            ->add('status', null, ['label' => 'player_chart.show.status'])
+            ->add('statusLabel', null, ['label' => 'player_chart.show.status'])
             ->add('lastUpdate', null, ['label' => 'player_chart.show.lastUpdate'])
             ->add('dateInvestigation', null, ['label' => 'player_chart.show.dateInvestigation'])
             ->add('proof', null, ['label' => 'player_chart.show.proof'])

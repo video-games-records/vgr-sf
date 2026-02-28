@@ -1,6 +1,15 @@
 group:
+    articles: 'Articles'
     users: 'Users'
     forums: 'Forum'
     igdb: 'IGDB'
+    games: 'Games'
+    players: 'Players'
+    scores: 'Scores'
+    community: 'Community'
+    badge: 'Badges'
+    proofs: 'Proofs'
+    config: 'Configuration'
+    messages: 'Messages'
 
 
