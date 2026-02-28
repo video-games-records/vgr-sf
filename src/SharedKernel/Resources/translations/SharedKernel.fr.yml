@@ -102,6 +102,11 @@ search:
   no_results: "Aucun résultat trouvé"
   min_chars: "Tapez au moins 2 caractères pour rechercher"
 
+# === HOME ===
+home:
+  partners:
+    title: "Nos Partenaires"
+
 # === FLASH MESSAGES (Messages système communs) ===
 flash:
   success:
