@@ -20,6 +20,8 @@ forum:
         started_by: "Créé par"
         no_topic: "Aucun sujet dans ce forum"
         go_to_last_page: "Aller à la dernière page"
+        mark_all_read: "Marquer tout comme lu"
+        mark_all_read.success: "Tous les sujets ont été marqués comme lus"
 
 topic:
     show:

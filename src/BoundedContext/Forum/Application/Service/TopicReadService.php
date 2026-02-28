@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\Forum\Application\Service;
 
+use App\BoundedContext\User\Domain\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
@@ -22,12 +23,12 @@ class TopicReadService
     /**
      * Marque un topic comme lu pour un utilisateur
      *
-     * @param mixed $user L'utilisateur
+     * @param User $user L'utilisateur
      * @param Topic $topic Le topic à marquer comme lu
      * @param bool $flush Si true, fait le flush automatiquement
      * @return array<string, mixed> Informations sur l'opération
      */
-    public function markTopicAsRead($user, Topic $topic, bool $flush = true): array
+    public function markTopicAsRead(User $user, Topic $topic, bool $flush = true): array
     {
         $now = new \DateTime();
         $forum = $topic->getForum();
@@ -94,6 +95,69 @@ class TopicReadService
     }
 
     /**
+     * Marque tous les topics d'un forum comme lus pour un utilisateur
+     */
+    public function markForumAsRead(User $user, Forum $forum): void
+    {
+        $now = new \DateTime();
+
+        // 1. Mettre à jour toutes les visites existantes en masse
+        $this->em->createQueryBuilder()
+            ->update(TopicUserLastVisit::class, 'tuv')
+            ->set('tuv.lastVisitedAt', ':now')
+            ->where('tuv.user = :user')
+            ->andWhere('tuv.topic IN (
+                SELECT t.id FROM App\BoundedContext\Forum\Domain\Entity\Topic t
+                WHERE t.forum = :forum
+            )')
+            ->setParameter('now', $now)
+            ->setParameter('user', $user)
+            ->setParameter('forum', $forum)
+            ->getQuery()
+            ->execute();
+
+        // 2. Créer des visites pour les topics jamais visités
+        $neverVisitedTopics = $this->em->createQueryBuilder()
+            ->select('t')
+            ->from(Topic::class, 't')
+            ->where('t.forum = :forum')
+            ->andWhere('t.lastMessage IS NOT NULL')
+            ->andWhere('t.id NOT IN (
+                SELECT IDENTITY(tuv.topic)
+                FROM App\BoundedContext\Forum\Domain\Entity\TopicUserLastVisit tuv
+                WHERE tuv.user = :user
+            )')
+            ->setParameter('forum', $forum)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+
+        foreach ($neverVisitedTopics as $topic) {
+            $visit = new TopicUserLastVisit();
+            $visit->setUser($user);
+            $visit->setTopic($topic);
+            $visit->setLastVisitedAt($now);
+            $this->em->persist($visit);
+        }
+
+        // 3. Mettre à jour ou créer la visite du forum
+        $forumVisit = $this->em->getRepository(ForumUserLastVisit::class)
+            ->findOneBy(['user' => $user, 'forum' => $forum]);
+
+        if ($forumVisit) {
+            $forumVisit->setLastVisitedAt($now);
+        } else {
+            $forumVisit = new ForumUserLastVisit();
+            $forumVisit->setUser($user);
+            $forumVisit->setForum($forum);
+            $forumVisit->setLastVisitedAt($now);
+            $this->em->persist($forumVisit);
+        }
+
+        $this->em->flush();
+    }
+
+    /**
      * Compte le nombre de topics non lus dans un forum
      * @param mixed $user
      */
@@ -121,8 +185,8 @@ class TopicReadService
                 ->where('t.forum = :forum')
                 ->andWhere('t.lastMessage IS NOT NULL')
                 ->andWhere('t.id NOT IN (
-                    SELECT IDENTITY(tuv2.topic) 
-                    FROM App\BoundedContext\Forum\Domain\Entity\TopicUserLastVisit tuv2 
+                    SELECT IDENTITY(tuv2.topic)
+                    FROM App\BoundedContext\Forum\Domain\Entity\TopicUserLastVisit tuv2
                     WHERE tuv2.user = :user
                 )')
                 ->setParameter('forum', $forum)

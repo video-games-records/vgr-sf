@@ -7,6 +7,7 @@ namespace App\BoundedContext\Forum\Presentation\Web\Controller;
 use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
+use App\BoundedContext\Forum\Application\Service\TopicReadService;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\CategoryRepository;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\ForumUserLastVisitRepository;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\TopicRepository;
@@ -38,7 +39,8 @@ class ForumController extends AbstractLocalizedController
         private readonly ForumUserLastVisitRepository $forumUserLastVisitRepository,
         private readonly TopicUserLastVisitRepository $topicUserLastVisitRepository,
         private readonly EntityManagerInterface $entityManager,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
+        private readonly TopicReadService $topicReadService
     ) {
     }
 
@@ -133,6 +135,27 @@ class ForumController extends AbstractLocalizedController
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'totalTopics' => $totalTopics,
+        ]);
+    }
+
+    #[Route('/forum/{id}/mark-as-read', name: 'forum_mark_as_read', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function markAsRead(Request $request, Forum $forum): Response
+    {
+        if (!$this->isCsrfTokenValid('mark_forum_read_' . $forum->getId(), $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException();
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $this->topicReadService->markForumAsRead($user, $forum);
+
+        $this->addFlash('success', $this->translator->trans('forum.show.mark_all_read.success', [], 'Forum'));
+
+        return $this->redirectToRoute('forum_show', [
+            'id' => $forum->getId(),
+            'slug' => $forum->getSlug(),
         ]);
     }
 

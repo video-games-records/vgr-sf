@@ -20,6 +20,8 @@ forum:
         started_by: "Started by"
         no_topic: "No topics in this forum yet"
         go_to_last_page: "Go to last page"
+        mark_all_read: "Mark all as read"
+        mark_all_read.success: "All topics have been marked as read"
 
 topic:
     show:
