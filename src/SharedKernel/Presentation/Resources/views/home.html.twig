@@ -89,6 +89,14 @@
             { ttl: 3600 }
         )) }}
     </div>
+
+    {# Latest Forum Messages #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\Forum\\Presentation\\Web\\Controller\\LatestMessagesController',
+            { ttl: 3600 }
+        )) }}
+    </div>
 </div>
 
 {# Affiliate Links #}

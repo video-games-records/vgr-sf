@@ -8,6 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
+use App\BoundedContext\Forum\Domain\ValueObject\ForumStatus;
 
 /**
  * @extends ServiceEntityRepository<Message>
@@ -29,6 +30,25 @@ class MessageRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($message);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @return Message[]
+     */
+    public function findLatest(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('m')
+            ->join('m.topic', 't')
+            ->join('t.forum', 'f')
+            ->join('m.user', 'u')
+            ->addSelect('t', 'f', 'u')
+            ->where('t.boolArchive = false')
+            ->andWhere('f.status = :status')
+            ->setParameter('status', ForumStatus::PUBLIC)
+            ->orderBy('m.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

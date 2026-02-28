@@ -1,0 +1,21 @@
+<div class="card border shadow-sm h-100">
+    <div class="card-header border-bottom">
+        <h5 class="mb-0"><i class="bi bi-chat-dots"></i> {{ 'home.latest_messages'|trans({}, 'Forum') }}</h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="list-group list-group-flush">
+            {% for message in messages %}
+                <a href="{{ path('topic_show', {id: message.topic.id, slug: message.topic.slug, forumId: message.topic.forum.id, forumSlug: message.topic.forum.slug}) }}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <span class="text-truncate me-2">{{ message.topic.name|u.truncate(40) }}</span>
+                        <small class="text-muted text-nowrap">{{ message.user.username }} - {{ message.createdAt|date('M d') }}</small>
+                    </div>
+                </a>
+            {% else %}
+                <div class="list-group-item text-center text-muted py-4">
+                    {{ 'home.no_recent_message'|trans({}, 'Forum') }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

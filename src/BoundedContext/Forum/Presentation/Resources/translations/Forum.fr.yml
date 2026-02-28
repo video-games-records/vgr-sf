@@ -32,6 +32,10 @@ topic:
 breadcrumb:
     home: "Accueil"
 
+home:
+    latest_messages: "Derniers messages du forum"
+    no_recent_message: "Aucun message récent"
+
 pagination:
     label: "Navigation des pages"
     showing: "Affichage de %start% à %end% sur %total% éléments"
