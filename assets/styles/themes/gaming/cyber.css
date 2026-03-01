@@ -1,0 +1,51 @@
+/* Cyberpunk theme - neon cyan on dark navy */
+[data-bs-theme="cyber"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.08 0.02 240);
+    --bs-body-color:           oklch(0.95 0.08 180);
+    --bs-emphasis-color:       oklch(1.00 0.08 180);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.70 0.15 180 / 75%);
+    --bs-tertiary-color:       oklch(0.70 0.15 180 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.15 0.04 240);
+    --bs-tertiary-bg:          oklch(0.12 0.03 240);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.25 0.08 240);
+    --bs-border-color-translucent: oklch(0.25 0.08 240 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.75 0.25 180);
+    --bs-primary-rgb: 0, 190, 185;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.75 0.25 180);
+    --bs-link-color-rgb:       0, 190, 185;
+    --bs-link-hover-color:     oklch(0.67 0.25 180);
+    --bs-link-hover-color-rgb: 0, 155, 150;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.65 0.25 15);
+    --bs-danger-rgb: 210, 50, 40;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.15rem;
+    --bs-border-radius-sm:   0.1rem;
+    --bs-border-radius-lg:   0.2rem;
+    --bs-border-radius-xl:   0.3rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.12 0.03 240);
+    --bs-card-border-color: oklch(0.25 0.08 240);
+    --bs-card-cap-bg:       oklch(0.10 0.025 240);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.05 0.02 240);
+    --vgr-footer: oklch(0.04 0.015 240);
+}

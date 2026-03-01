@@ -1,0 +1,51 @@
+/* Tekken theme - fighting red on deep blue-black */
+[data-bs-theme="tekken"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.08 0.05 240);
+    --bs-body-color:           oklch(0.90 0.08 50);
+    --bs-emphasis-color:       oklch(0.98 0.08 50);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.65 0.12 45 / 75%);
+    --bs-tertiary-color:       oklch(0.65 0.12 45 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.18 0.08 238);
+    --bs-tertiary-bg:          oklch(0.12 0.06 235);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.25 0.10 240);
+    --bs-border-color-translucent: oklch(0.25 0.10 240 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.65 0.25 15);
+    --bs-primary-rgb: 210, 55, 45;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.65 0.25 15);
+    --bs-link-color-rgb:       210, 55, 45;
+    --bs-link-hover-color:     oklch(0.57 0.25 15);
+    --bs-link-hover-color-rgb: 170, 42, 35;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.25 15);
+    --bs-danger-rgb: 200, 50, 40;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.25rem;
+    --bs-border-radius-sm:   0.167rem;
+    --bs-border-radius-lg:   0.333rem;
+    --bs-border-radius-xl:   0.5rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.12 0.06 235);
+    --bs-card-border-color: oklch(0.25 0.10 240);
+    --bs-card-cap-bg:       oklch(0.10 0.055 237);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.04 0.03 240);
+    --vgr-footer: oklch(0.03 0.02 240);
+}

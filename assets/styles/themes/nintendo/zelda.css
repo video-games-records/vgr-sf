@@ -1,0 +1,50 @@
+/* Zelda theme - forest greens and golden hues */
+[data-bs-theme="zelda"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.97 0.03 120);
+    --bs-body-color:           oklch(0.15 0.08 30);
+    --bs-emphasis-color:       oklch(0.08 0.08 30);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.40 0.10 135 / 75%);
+    --bs-tertiary-color:       oklch(0.40 0.10 135 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.93 0.04 125);
+    --bs-tertiary-bg:          oklch(0.99 0.02 115);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.06 120);
+    --bs-border-color-translucent: oklch(0.88 0.06 120 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.45 0.18 130);
+    --bs-primary-rgb: 40, 120, 50;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.45 0.18 130);
+    --bs-link-color-rgb:       40, 120, 50;
+    --bs-link-hover-color:     oklch(0.37 0.18 130);
+    --bs-link-hover-color-rgb: 30, 95, 40;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.22 15);
+    --bs-danger-rgb: 190, 50, 35;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.25rem;
+    --bs-border-radius-sm:   0.167rem;
+    --bs-border-radius-lg:   0.333rem;
+    --bs-border-radius-xl:   0.5rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.99 0.02 115);
+    --bs-card-border-color: oklch(0.88 0.06 120);
+    --bs-card-cap-bg:       oklch(0.98 0.025 118);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.25 0.14 130);
+    --vgr-footer: oklch(0.20 0.12 128);
+}

@@ -1,0 +1,53 @@
+/* ============================================================
+ * Thème : Official VGR
+ * Orange VGR + Fond crème chaud + Style classique
+ * ============================================================ */
+
+[data-bs-theme="official-vgr"] {
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.98 0.03 50);
+    --bs-body-color:           oklch(0.25 0.02 30);
+    --bs-emphasis-color:       oklch(0.18 0.02 30);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.05 35 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.05 35 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.94 0.05 48);
+    --bs-tertiary-bg:          oklch(0.96 0.04 50);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.90 0.08 50);
+    --bs-border-color-translucent: oklch(0.90 0.08 50 / 30%);
+
+    /* === PRIMARY (orange VGR) === */
+    --bs-primary:     oklch(0.65 0.18 40);
+    --bs-primary-rgb: 210, 130, 50;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.65 0.18 40);
+    --bs-link-color-rgb:       210, 130, 50;
+    --bs-link-hover-color:     oklch(0.55 0.18 40);
+    --bs-link-hover-color-rgb: 170, 100, 30;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.56 0.19 25.86);
+    --bs-danger-rgb: 220, 53, 69;
+
+    /* === BORDER RADIUS (style classique) === */
+    --bs-border-radius:      0.35rem;
+    --bs-border-radius-sm:   0.25rem;
+    --bs-border-radius-lg:   0.5rem;
+    --bs-border-radius-xl:   1rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.99 0.02 45);
+    --bs-card-border-color: oklch(0.90 0.08 50);
+    --bs-card-cap-bg:       oklch(0.95 0.06 48);
+
+    /* === NAVBAR / FOOTER (marron-orange foncé VGR) === */
+    --vgr-dark:   oklch(0.30 0.08 35);
+    --vgr-footer: oklch(0.25 0.07 35);
+}

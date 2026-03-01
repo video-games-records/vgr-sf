@@ -1,0 +1,51 @@
+/* DOOM theme - demon red on hell-black, rip and tear */
+[data-bs-theme="doom"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.08 0.05 15);
+    --bs-body-color:           oklch(0.90 0.08 25);
+    --bs-emphasis-color:       oklch(0.98 0.08 25);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.60 0.12 20 / 75%);
+    --bs-tertiary-color:       oklch(0.60 0.12 20 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.15 0.08 18);
+    --bs-tertiary-bg:          oklch(0.12 0.06 12);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.25 0.10 15);
+    --bs-border-color-translucent: oklch(0.25 0.10 15 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.25 15);
+    --bs-primary-rgb: 190, 45, 35;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.25 15);
+    --bs-link-color-rgb:       190, 45, 35;
+    --bs-link-hover-color:     oklch(0.47 0.25 15);
+    --bs-link-hover-color-rgb: 153, 34, 26;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.50 0.28 15);
+    --bs-danger-rgb: 175, 30, 20;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.05rem;
+    --bs-border-radius-sm:   0.033rem;
+    --bs-border-radius-lg:   0.067rem;
+    --bs-border-radius-xl:   0.1rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.12 0.06 12);
+    --bs-card-border-color: oklch(0.25 0.10 15);
+    --bs-card-cap-bg:       oklch(0.10 0.055 13);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.04 0.03 12);
+    --vgr-footer: oklch(0.03 0.02 10);
+}

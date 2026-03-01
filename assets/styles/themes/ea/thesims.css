@@ -1,0 +1,50 @@
+/* The Sims theme - playful purple-teal, everyday life simulation */
+[data-bs-theme="thesims"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.96 0.03 180);
+    --bs-body-color:           oklch(0.20 0.08 220);
+    --bs-emphasis-color:       oklch(0.12 0.08 220);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.50 0.10 220 / 75%);
+    --bs-tertiary-color:       oklch(0.50 0.10 220 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.92 0.04 180);
+    --bs-tertiary-bg:          oklch(0.98 0.02 180);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.06 180);
+    --bs-border-color-translucent: oklch(0.88 0.06 180 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.20 300);
+    --bs-primary-rgb: 140, 50, 185;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.20 300);
+    --bs-link-color-rgb:       140, 50, 185;
+    --bs-link-hover-color:     oklch(0.47 0.20 300);
+    --bs-link-hover-color-rgb: 110, 38, 148;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.25 340);
+    --bs-danger-rgb: 190, 40, 110;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.6rem;
+    --bs-border-radius-sm:   0.4rem;
+    --bs-border-radius-lg:   0.8rem;
+    --bs-border-radius-xl:   1.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.98 0.02 180);
+    --bs-card-border-color: oklch(0.88 0.06 180);
+    --bs-card-cap-bg:       oklch(0.97 0.025 180);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.28 0.12 270);
+    --vgr-footer: oklch(0.22 0.10 268);
+}

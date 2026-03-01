@@ -1,0 +1,50 @@
+/* Just Dance theme - hot pink neon, dancing and celebration */
+[data-bs-theme="justdance"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.98 0.05 320);
+    --bs-body-color:           oklch(0.15 0.08 300);
+    --bs-emphasis-color:       oklch(0.08 0.08 300);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.12 300 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.12 300 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.94 0.06 320);
+    --bs-tertiary-bg:          oklch(0.99 0.03 320);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.08 320);
+    --bs-border-color-translucent: oklch(0.88 0.08 320 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.65 0.30 340);
+    --bs-primary-rgb: 220, 55, 155;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.65 0.30 340);
+    --bs-link-color-rgb:       220, 55, 155;
+    --bs-link-hover-color:     oklch(0.57 0.30 340);
+    --bs-link-hover-color-rgb: 178, 40, 125;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.28 20);
+    --bs-danger-rgb: 200, 50, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.8rem;
+    --bs-border-radius-sm:   0.533rem;
+    --bs-border-radius-lg:   1.067rem;
+    --bs-border-radius-xl:   1.6rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.99 0.03 320);
+    --bs-card-border-color: oklch(0.88 0.08 320);
+    --bs-card-cap-bg:       oklch(0.985 0.04 320);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.28 0.20 310);
+    --vgr-footer: oklch(0.22 0.18 308);
+}

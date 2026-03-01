@@ -1,0 +1,50 @@
+/* Portal theme - clinical Aperture Science white with portal blue */
+[data-bs-theme="portal"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.99 0.005 200);
+    --bs-body-color:           oklch(0.20 0.02 210);
+    --bs-emphasis-color:       oklch(0.12 0.02 210);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.05 215 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.05 215 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.96 0.01 205);
+    --bs-tertiary-bg:          oklch(1.00 0.002 200);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.92 0.02 208);
+    --bs-border-color-translucent: oklch(0.92 0.02 208 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.60 0.18 220);
+    --bs-primary-rgb: 50, 115, 195;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.60 0.18 220);
+    --bs-link-color-rgb:       50, 115, 195;
+    --bs-link-hover-color:     oklch(0.52 0.18 220);
+    --bs-link-hover-color-rgb: 38, 90, 158;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.20 15);
+    --bs-danger-rgb: 185, 45, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0rem;
+    --bs-border-radius-sm:   0rem;
+    --bs-border-radius-lg:   0rem;
+    --bs-border-radius-xl:   0rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(1.00 0.002 200);
+    --bs-card-border-color: oklch(0.92 0.02 208);
+    --bs-card-cap-bg:       oklch(0.995 0.003 202);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.28 0.04 200);
+    --vgr-footer: oklch(0.22 0.03 200);
+}

@@ -1,0 +1,51 @@
+/* The Last of Us theme - post-apocalyptic olive and decay */
+[data-bs-theme="lastofus"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.18 0.05 80);
+    --bs-body-color:           oklch(0.82 0.08 60);
+    --bs-emphasis-color:       oklch(0.90 0.08 60);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.60 0.10 65 / 75%);
+    --bs-tertiary-color:       oklch(0.60 0.10 65 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.25 0.08 78);
+    --bs-tertiary-bg:          oklch(0.22 0.06 75);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.32 0.10 75);
+    --bs-border-color-translucent: oklch(0.32 0.10 75 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.18 90);
+    --bs-primary-rgb: 120, 145, 35;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.18 90);
+    --bs-link-color-rgb:       120, 145, 35;
+    --bs-link-hover-color:     oklch(0.47 0.18 90);
+    --bs-link-hover-color-rgb: 95, 115, 26;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.50 0.22 15);
+    --bs-danger-rgb: 175, 40, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.1rem;
+    --bs-border-radius-sm:   0.067rem;
+    --bs-border-radius-lg:   0.133rem;
+    --bs-border-radius-xl:   0.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.22 0.06 75);
+    --bs-card-border-color: oklch(0.32 0.10 75);
+    --bs-card-cap-bg:       oklch(0.20 0.055 77);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.10 0.04 78);
+    --vgr-footer: oklch(0.08 0.03 76);
+}

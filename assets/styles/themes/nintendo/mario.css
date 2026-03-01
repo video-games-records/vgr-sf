@@ -1,0 +1,53 @@
+/* ============================================================
+ * Thème : Super Mario (Nintendo)
+ * Rouge Mario + Vert Mario + Fond chaud + Radius arrondi
+ * ============================================================ */
+
+[data-bs-theme="mario"] {
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.96 0.04 30);
+    --bs-body-color:           oklch(0.18 0.10 15);
+    --bs-emphasis-color:       oklch(0.12 0.08 15);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.38 0.12 20 / 75%);
+    --bs-tertiary-color:       oklch(0.38 0.12 20 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.92 0.05 35);
+    --bs-tertiary-bg:          oklch(0.94 0.04 30);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.08 40);
+    --bs-border-color-translucent: oklch(0.88 0.08 40 / 30%);
+
+    /* === PRIMARY (rouge Mario) === */
+    --bs-primary:     oklch(0.60 0.22 15);
+    --bs-primary-rgb: 220, 50, 50;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.60 0.22 15);
+    --bs-link-color-rgb:       220, 50, 50;
+    --bs-link-hover-color:     oklch(0.50 0.22 15);
+    --bs-link-hover-color-rgb: 180, 35, 35;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.25 15);
+    --bs-danger-rgb: 200, 30, 30;
+
+    /* === BORDER RADIUS (style cartoon arrondi) === */
+    --bs-border-radius:      0.75rem;
+    --bs-border-radius-sm:   0.5rem;
+    --bs-border-radius-lg:   1rem;
+    --bs-border-radius-xl:   1.5rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.98 0.02 25);
+    --bs-card-border-color: oklch(0.88 0.08 40);
+    --bs-card-cap-bg:       oklch(0.93 0.06 35);
+
+    /* === NAVBAR / FOOTER (vert Mario) === */
+    --vgr-dark:   oklch(0.40 0.18 140);
+    --vgr-footer: oklch(0.32 0.15 140);
+}

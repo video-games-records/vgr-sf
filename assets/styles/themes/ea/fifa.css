@@ -1,0 +1,50 @@
+/* FIFA theme - football pitch greens, sporty and clean */
+[data-bs-theme="fifa"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.98 0.02 120);
+    --bs-body-color:           oklch(0.15 0.08 140);
+    --bs-emphasis-color:       oklch(0.08 0.08 140);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.12 140 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.12 140 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.94 0.04 120);
+    --bs-tertiary-bg:          oklch(0.99 0.01 120);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.06 120);
+    --bs-border-color-translucent: oklch(0.88 0.06 120 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.35 0.25 140);
+    --bs-primary-rgb: 15, 105, 45;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.35 0.25 140);
+    --bs-link-color-rgb:       15, 105, 45;
+    --bs-link-hover-color:     oklch(0.27 0.25 140);
+    --bs-link-hover-color-rgb: 10, 80, 34;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.58 0.24 20);
+    --bs-danger-rgb: 195, 50, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.4rem;
+    --bs-border-radius-sm:   0.267rem;
+    --bs-border-radius-lg:   0.533rem;
+    --bs-border-radius-xl:   0.8rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.99 0.01 120);
+    --bs-card-border-color: oklch(0.88 0.06 120);
+    --bs-card-cap-bg:       oklch(0.985 0.015 120);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.18 0.18 150);
+    --vgr-footer: oklch(0.14 0.15 148);
+}

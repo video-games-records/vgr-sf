@@ -1,0 +1,51 @@
+/* Street Fighter theme - golden orange on dark red-brown */
+[data-bs-theme="streetfighter"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.15 0.12 35);
+    --bs-body-color:           oklch(0.88 0.10 50);
+    --bs-emphasis-color:       oklch(0.96 0.10 50);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.65 0.12 48 / 75%);
+    --bs-tertiary-color:       oklch(0.65 0.12 48 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.22 0.16 40);
+    --bs-tertiary-bg:          oklch(0.18 0.14 38);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.28 0.18 42);
+    --bs-border-color-translucent: oklch(0.28 0.18 42 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.65 0.25 45);
+    --bs-primary-rgb: 215, 145, 30;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.65 0.25 45);
+    --bs-link-color-rgb:       215, 145, 30;
+    --bs-link-hover-color:     oklch(0.57 0.25 45);
+    --bs-link-hover-color-rgb: 175, 115, 22;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.50 0.22 15);
+    --bs-danger-rgb: 175, 40, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.3rem;
+    --bs-border-radius-sm:   0.2rem;
+    --bs-border-radius-lg:   0.4rem;
+    --bs-border-radius-xl:   0.6rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.18 0.14 38);
+    --bs-card-border-color: oklch(0.28 0.18 42);
+    --bs-card-cap-bg:       oklch(0.165 0.13 39);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.08 0.08 32);
+    --vgr-footer: oklch(0.06 0.06 30);
+}

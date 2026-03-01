@@ -1,0 +1,50 @@
+/* Retro gaming theme - warm red-brown, parchment tones */
+[data-bs-theme="retro"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.98 0.02 85);
+    --bs-body-color:           oklch(0.20 0.08 15);
+    --bs-emphasis-color:       oklch(0.12 0.08 15);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.40 0.12 20 / 75%);
+    --bs-tertiary-color:       oklch(0.40 0.12 20 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.92 0.04 80);
+    --bs-tertiary-bg:          oklch(0.96 0.03 75);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.06 70);
+    --bs-border-color-translucent: oklch(0.88 0.06 70 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.20 25);
+    --bs-primary-rgb: 170, 70, 45;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.20 25);
+    --bs-link-color-rgb:       170, 70, 45;
+    --bs-link-hover-color:     oklch(0.47 0.20 25);
+    --bs-link-hover-color-rgb: 140, 55, 35;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.22 15);
+    --bs-danger-rgb: 195, 50, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.1rem;
+    --bs-border-radius-sm:   0.067rem;
+    --bs-border-radius-lg:   0.133rem;
+    --bs-border-radius-xl:   0.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.96 0.03 75);
+    --bs-card-border-color: oklch(0.88 0.06 70);
+    --bs-card-cap-bg:       oklch(0.97 0.025 78);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.28 0.12 20);
+    --vgr-footer: oklch(0.22 0.10 18);
+}

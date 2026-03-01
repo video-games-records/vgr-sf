@@ -1,0 +1,51 @@
+/* Phantasy Star theme - sci-fi space blue with neon accents */
+[data-bs-theme="phantasy"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.12 0.08 250);
+    --bs-body-color:           oklch(0.90 0.12 200);
+    --bs-emphasis-color:       oklch(0.98 0.12 200);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.65 0.15 210 / 75%);
+    --bs-tertiary-color:       oklch(0.65 0.15 210 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.20 0.12 248);
+    --bs-tertiary-bg:          oklch(0.15 0.10 245);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.30 0.15 248);
+    --bs-border-color-translucent: oklch(0.30 0.15 248 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.70 0.25 220);
+    --bs-primary-rgb: 30, 140, 220;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.70 0.25 220);
+    --bs-link-color-rgb:       30, 140, 220;
+    --bs-link-hover-color:     oklch(0.62 0.25 220);
+    --bs-link-hover-color-rgb: 20, 110, 180;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.65 0.22 15);
+    --bs-danger-rgb: 210, 55, 40;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.25rem;
+    --bs-border-radius-sm:   0.167rem;
+    --bs-border-radius-lg:   0.333rem;
+    --bs-border-radius-xl:   0.5rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.15 0.10 245);
+    --bs-card-border-color: oklch(0.30 0.15 248);
+    --bs-card-cap-bg:       oklch(0.135 0.09 247);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.07 0.05 250);
+    --vgr-footer: oklch(0.05 0.04 252);
+}

@@ -1,0 +1,50 @@
+/* Shenmue theme - Japanese traditional aesthetic, warm parchment */
+[data-bs-theme="shenmue"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.96 0.02 60);
+    --bs-body-color:           oklch(0.20 0.08 30);
+    --bs-emphasis-color:       oklch(0.12 0.08 30);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.10 25 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.10 25 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.92 0.03 58);
+    --bs-tertiary-bg:          oklch(0.98 0.01 55);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.04 55);
+    --bs-border-color-translucent: oklch(0.88 0.04 55 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.35 0.15 15);
+    --bs-primary-rgb: 120, 35, 25;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.35 0.15 15);
+    --bs-link-color-rgb:       120, 35, 25;
+    --bs-link-hover-color:     oklch(0.27 0.15 15);
+    --bs-link-hover-color-rgb: 90, 25, 18;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.20 15);
+    --bs-danger-rgb: 185, 45, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.4rem;
+    --bs-border-radius-sm:   0.267rem;
+    --bs-border-radius-lg:   0.533rem;
+    --bs-border-radius-xl:   0.8rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.98 0.01 55);
+    --bs-card-border-color: oklch(0.88 0.04 55);
+    --bs-card-cap-bg:       oklch(0.97 0.015 57);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.22 0.10 18);
+    --vgr-footer: oklch(0.17 0.08 16);
+}

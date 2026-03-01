@@ -1,0 +1,51 @@
+/* Pac-Man theme - yellow arcade hero on dark blue-black */
+[data-bs-theme="pacman"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.08 0.05 250);
+    --bs-body-color:           oklch(0.85 0.18 80);
+    --bs-emphasis-color:       oklch(0.93 0.18 80);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.65 0.15 85 / 75%);
+    --bs-tertiary-color:       oklch(0.65 0.15 85 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.18 0.08 248);
+    --bs-tertiary-bg:          oklch(0.12 0.06 245);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.25 0.10 248);
+    --bs-border-color-translucent: oklch(0.25 0.10 248 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.75 0.25 80);
+    --bs-primary-rgb: 215, 190, 15;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.75 0.25 80);
+    --bs-link-color-rgb:       215, 190, 15;
+    --bs-link-hover-color:     oklch(0.67 0.25 80);
+    --bs-link-hover-color-rgb: 175, 155, 10;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.25 15);
+    --bs-danger-rgb: 200, 50, 40;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.5rem;
+    --bs-border-radius-sm:   0.333rem;
+    --bs-border-radius-lg:   0.667rem;
+    --bs-border-radius-xl:   1.0rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.12 0.06 245);
+    --bs-card-border-color: oklch(0.25 0.10 248);
+    --bs-card-cap-bg:       oklch(0.10 0.055 247);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.04 0.03 250);
+    --vgr-footer: oklch(0.03 0.025 252);
+}

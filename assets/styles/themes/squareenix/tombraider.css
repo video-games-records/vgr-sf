@@ -1,0 +1,50 @@
+/* Tomb Raider theme - earthy archaeological browns and warm tones */
+[data-bs-theme="tombraider"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.92 0.06 45);
+    --bs-body-color:           oklch(0.20 0.08 30);
+    --bs-emphasis-color:       oklch(0.12 0.08 30);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.10 35 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.10 35 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.88 0.06 45);
+    --bs-tertiary-bg:          oklch(0.94 0.05 45);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.80 0.08 45);
+    --bs-border-color-translucent: oklch(0.80 0.08 45 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.18 35);
+    --bs-primary-rgb: 170, 100, 40;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.18 35);
+    --bs-link-color-rgb:       170, 100, 40;
+    --bs-link-hover-color:     oklch(0.47 0.18 35);
+    --bs-link-hover-color-rgb: 135, 78, 30;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.58 0.24 15);
+    --bs-danger-rgb: 195, 45, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.3rem;
+    --bs-border-radius-sm:   0.2rem;
+    --bs-border-radius-lg:   0.4rem;
+    --bs-border-radius-xl:   0.6rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.94 0.05 45);
+    --bs-card-border-color: oklch(0.80 0.08 45);
+    --bs-card-cap-bg:       oklch(0.93 0.055 45);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.25 0.10 32);
+    --vgr-footer: oklch(0.20 0.08 30);
+}

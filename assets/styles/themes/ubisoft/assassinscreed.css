@@ -1,0 +1,50 @@
+/* Assassin's Creed theme - dark blue and white, historical sophistication */
+[data-bs-theme="assassinscreed"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.95 0.04 220);
+    --bs-body-color:           oklch(0.20 0.06 240);
+    --bs-emphasis-color:       oklch(0.12 0.06 240);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.50 0.08 240 / 75%);
+    --bs-tertiary-color:       oklch(0.50 0.08 240 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.90 0.04 220);
+    --bs-tertiary-bg:          oklch(0.97 0.03 220);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.82 0.06 220);
+    --bs-border-color-translucent: oklch(0.82 0.06 220 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.35 0.20 240);
+    --bs-primary-rgb: 30, 40, 160;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.35 0.20 240);
+    --bs-link-color-rgb:       30, 40, 160;
+    --bs-link-hover-color:     oklch(0.27 0.20 240);
+    --bs-link-hover-color-rgb: 22, 30, 125;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.22 15);
+    --bs-danger-rgb: 185, 45, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.25rem;
+    --bs-border-radius-sm:   0.167rem;
+    --bs-border-radius-lg:   0.333rem;
+    --bs-border-radius-xl:   0.5rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.97 0.03 220);
+    --bs-card-border-color: oklch(0.82 0.06 220);
+    --bs-card-cap-bg:       oklch(0.96 0.035 220);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.20 0.14 240);
+    --vgr-footer: oklch(0.15 0.12 238);
+}

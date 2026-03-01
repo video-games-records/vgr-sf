@@ -1,0 +1,51 @@
+/* Dark Souls theme - bonfire gold on ash grey darkness */
+[data-bs-theme="darksouls"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.12 0.02 30);
+    --bs-body-color:           oklch(0.85 0.04 45);
+    --bs-emphasis-color:       oklch(0.93 0.04 45);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.55 0.08 40 / 75%);
+    --bs-tertiary-color:       oklch(0.55 0.08 40 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.18 0.04 28);
+    --bs-tertiary-bg:          oklch(0.15 0.03 25);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.25 0.06 25);
+    --bs-border-color-translucent: oklch(0.25 0.06 25 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.60 0.20 35);
+    --bs-primary-rgb: 195, 130, 40;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.60 0.20 35);
+    --bs-link-color-rgb:       195, 130, 40;
+    --bs-link-hover-color:     oklch(0.52 0.20 35);
+    --bs-link-hover-color-rgb: 158, 103, 30;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.50 0.22 15);
+    --bs-danger-rgb: 175, 40, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.1rem;
+    --bs-border-radius-sm:   0.067rem;
+    --bs-border-radius-lg:   0.133rem;
+    --bs-border-radius-xl:   0.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.15 0.03 25);
+    --bs-card-border-color: oklch(0.25 0.06 25);
+    --bs-card-cap-bg:       oklch(0.135 0.025 27);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.07 0.01 28);
+    --vgr-footer: oklch(0.05 0.01 26);
+}

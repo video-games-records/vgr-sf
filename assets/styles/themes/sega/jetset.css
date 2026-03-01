@@ -1,0 +1,50 @@
+/* Jet Set Radio theme - vivid graffiti green and electric accents */
+[data-bs-theme="jetset"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.95 0.05 120);
+    --bs-body-color:           oklch(0.15 0.12 30);
+    --bs-emphasis-color:       oklch(0.08 0.12 30);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.40 0.15 35 / 75%);
+    --bs-tertiary-color:       oklch(0.40 0.15 35 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.90 0.08 118);
+    --bs-tertiary-bg:          oklch(0.97 0.03 115);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.82 0.12 120);
+    --bs-border-color-translucent: oklch(0.82 0.12 120 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.65 0.25 120);
+    --bs-primary-rgb: 80, 180, 60;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.65 0.25 120);
+    --bs-link-color-rgb:       80, 180, 60;
+    --bs-link-hover-color:     oklch(0.57 0.25 120);
+    --bs-link-hover-color-rgb: 60, 145, 45;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.25 15);
+    --bs-danger-rgb: 200, 50, 35;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.6rem;
+    --bs-border-radius-sm:   0.4rem;
+    --bs-border-radius-lg:   0.8rem;
+    --bs-border-radius-xl:   1.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.97 0.03 115);
+    --bs-card-border-color: oklch(0.82 0.12 120);
+    --bs-card-cap-bg:       oklch(0.96 0.055 118);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.22 0.14 125);
+    --vgr-footer: oklch(0.17 0.12 123);
+}

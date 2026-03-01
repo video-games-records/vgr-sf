@@ -1,0 +1,50 @@
+/* Rayman theme - warm sunny yellows with vivid blue hero */
+[data-bs-theme="rayman"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.96 0.06 50);
+    --bs-body-color:           oklch(0.18 0.08 20);
+    --bs-emphasis-color:       oklch(0.10 0.08 20);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.10 30 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.10 30 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.92 0.06 50);
+    --bs-tertiary-bg:          oklch(0.98 0.04 50);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.86 0.08 50);
+    --bs-border-color-translucent: oklch(0.86 0.08 50 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.22 250);
+    --bs-primary-rgb: 55, 85, 190;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.22 250);
+    --bs-link-color-rgb:       55, 85, 190;
+    --bs-link-hover-color:     oklch(0.47 0.22 250);
+    --bs-link-hover-color-rgb: 42, 65, 152;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.60 0.28 340);
+    --bs-danger-rgb: 200, 40, 110;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.7rem;
+    --bs-border-radius-sm:   0.467rem;
+    --bs-border-radius-lg:   0.933rem;
+    --bs-border-radius-xl:   1.4rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.98 0.04 50);
+    --bs-card-border-color: oklch(0.86 0.08 50);
+    --bs-card-cap-bg:       oklch(0.97 0.05 50);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.26 0.14 35);
+    --vgr-footer: oklch(0.20 0.12 33);
+}

@@ -1,0 +1,50 @@
+/* Kingdom Hearts theme - light and dark, Disney magic and darkness */
+[data-bs-theme="kingdomhearts"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.96 0.04 250);
+    --bs-body-color:           oklch(0.15 0.06 280);
+    --bs-emphasis-color:       oklch(0.08 0.06 280);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.50 0.08 280 / 75%);
+    --bs-tertiary-color:       oklch(0.50 0.08 280 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.92 0.05 250);
+    --bs-tertiary-bg:          oklch(0.98 0.03 250);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.88 0.06 250);
+    --bs-border-color-translucent: oklch(0.88 0.06 250 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.40 0.25 280);
+    --bs-primary-rgb: 90, 30, 185;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.40 0.25 280);
+    --bs-link-color-rgb:       90, 30, 185;
+    --bs-link-hover-color:     oklch(0.32 0.25 280);
+    --bs-link-hover-color-rgb: 68, 22, 145;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.25 0.20 320);
+    --bs-danger-rgb: 100, 10, 70;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.6rem;
+    --bs-border-radius-sm:   0.4rem;
+    --bs-border-radius-lg:   0.8rem;
+    --bs-border-radius-xl:   1.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.98 0.03 250);
+    --bs-card-border-color: oklch(0.88 0.06 250);
+    --bs-card-cap-bg:       oklch(0.97 0.035 250);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.20 0.18 282);
+    --vgr-footer: oklch(0.15 0.15 280);
+}

@@ -144,10 +144,17 @@
                             </ul>
                         </li>
 
-                        {# Theme Toggle #}
+                        {# Theme Toggle (light/dark rapide) #}
                         <li class="nav-item">
                             <button class="nav-link btn btn-link" id="theme-toggle" onclick="toggleTheme()" aria-label="{{ 'theme.toggle'|trans }}">
                                 <i class="bi bi-moon-fill"></i>
+                            </button>
+                        </li>
+
+                        {# Theme Picker (tous les thèmes) #}
+                        <li class="nav-item">
+                            <button class="nav-link btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#themePicker" aria-label="Choisir un thème">
+                                <i class="bi bi-palette"></i>
                             </button>
                         </li>
 
@@ -229,6 +236,9 @@
 
         {# Ajax Modal Component #}
         {% include '@SharedKernel/components/_ajax_modal.html.twig' %}
+
+        {# Theme Picker Component #}
+        {% include '@SharedKernel/components/_theme_picker.html.twig' %}
 
         {# Footer #}
         <footer class="py-4 mt-5">

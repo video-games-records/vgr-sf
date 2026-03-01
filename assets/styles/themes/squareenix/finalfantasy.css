@@ -1,0 +1,50 @@
+/* Final Fantasy theme - crystal blue-purple, epic fantasy magic */
+[data-bs-theme="finalfantasy"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.94 0.06 260);
+    --bs-body-color:           oklch(0.18 0.08 280);
+    --bs-emphasis-color:       oklch(0.10 0.08 280);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.45 0.10 280 / 75%);
+    --bs-tertiary-color:       oklch(0.45 0.10 280 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.90 0.06 260);
+    --bs-tertiary-bg:          oklch(0.96 0.04 260);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.84 0.08 260);
+    --bs-border-color-translucent: oklch(0.84 0.08 260 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.45 0.22 270);
+    --bs-primary-rgb: 80, 55, 190;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.45 0.22 270);
+    --bs-link-color-rgb:       80, 55, 190;
+    --bs-link-hover-color:     oklch(0.37 0.22 270);
+    --bs-link-hover-color-rgb: 60, 40, 150;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.25 340);
+    --bs-danger-rgb: 190, 35, 110;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.4rem;
+    --bs-border-radius-sm:   0.267rem;
+    --bs-border-radius-lg:   0.533rem;
+    --bs-border-radius-xl:   0.8rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.96 0.04 260);
+    --bs-card-border-color: oklch(0.84 0.08 260);
+    --bs-card-cap-bg:       oklch(0.95 0.05 260);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.22 0.16 275);
+    --vgr-footer: oklch(0.17 0.14 273);
+}

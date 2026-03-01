@@ -1,0 +1,51 @@
+/* Resident Evil theme - blood red on near-black horror */
+[data-bs-theme="residentevil"] {
+    color-scheme: dark;
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.08 0.05 15);
+    --bs-body-color:           oklch(0.75 0.08 10);
+    --bs-emphasis-color:       oklch(0.83 0.08 10);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.55 0.10 12 / 75%);
+    --bs-tertiary-color:       oklch(0.55 0.10 12 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.15 0.08 8);
+    --bs-tertiary-bg:          oklch(0.12 0.06 12);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.20 0.10 10);
+    --bs-border-color-translucent: oklch(0.20 0.10 10 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.40 0.20 5);
+    --bs-primary-rgb: 150, 25, 25;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.40 0.20 5);
+    --bs-link-color-rgb:       150, 25, 25;
+    --bs-link-hover-color:     oklch(0.32 0.20 5);
+    --bs-link-hover-color-rgb: 115, 18, 18;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.45 0.22 5);
+    --bs-danger-rgb: 160, 20, 20;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.2rem;
+    --bs-border-radius-sm:   0.133rem;
+    --bs-border-radius-lg:   0.267rem;
+    --bs-border-radius-xl:   0.4rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.12 0.06 12);
+    --bs-card-border-color: oklch(0.20 0.10 10);
+    --bs-card-cap-bg:       oklch(0.10 0.055 11);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.04 0.03 12);
+    --vgr-footer: oklch(0.03 0.02 10);
+}

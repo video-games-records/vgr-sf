@@ -1,0 +1,50 @@
+/* Mirror's Edge theme - clinical white with runner red accents */
+[data-bs-theme="mirrorsedge"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.99 0.005 180);
+    --bs-body-color:           oklch(0.25 0.04 180);
+    --bs-emphasis-color:       oklch(0.17 0.04 180);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.55 0.04 180 / 75%);
+    --bs-tertiary-color:       oklch(0.55 0.04 180 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.96 0.01 180);
+    --bs-tertiary-bg:          oklch(0.995 0.003 180);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.92 0.02 180);
+    --bs-border-color-translucent: oklch(0.92 0.02 180 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.55 0.30 15);
+    --bs-primary-rgb: 215, 40, 35;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.55 0.30 15);
+    --bs-link-color-rgb:       215, 40, 35;
+    --bs-link-hover-color:     oklch(0.47 0.30 15);
+    --bs-link-hover-color-rgb: 175, 30, 26;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.30 15);
+    --bs-danger-rgb: 215, 40, 35;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.1rem;
+    --bs-border-radius-sm:   0.067rem;
+    --bs-border-radius-lg:   0.133rem;
+    --bs-border-radius-xl:   0.2rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.995 0.003 180);
+    --bs-card-border-color: oklch(0.92 0.02 180);
+    --bs-card-cap-bg:       oklch(0.9925 0.004 180);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.28 0.04 185);
+    --vgr-footer: oklch(0.22 0.03 183);
+}

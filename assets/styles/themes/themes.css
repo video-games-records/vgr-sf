@@ -1,0 +1,72 @@
+/* src/assets/themes/themes.css */
+/* Import des thèmes organisés par catégorie */
+
+/* === THÈMES PAR DÉFAUT === */
+@import "./default/light.css";
+@import "./default/dark.css";
+
+/* === THÈMES CLASSIQUES === */
+@import "./default/official-vgr.css";
+
+/* === THÈMES GÉNÉRIQUES === */
+@import "./gaming/retro.css";
+@import "./gaming/cyber.css";
+
+/* === NINTENDO === */
+@import "./nintendo/mario.css";
+@import "./nintendo/zelda.css";
+@import "./nintendo/animal.css";
+@import "./nintendo/kirby.css";
+
+/* === SEGA === */
+@import "./sega/sonic.css";
+@import "./sega/jetset.css";
+@import "./sega/phantasy.css";
+@import "./sega/shenmue.css";
+
+/* === SONY === */
+@import "./sony/granturismo.css";
+@import "./sony/godofwar.css";
+@import "./sony/lastofus.css";
+@import "./sony/uncharted.css";
+
+/* === MICROSOFT / XBOX === */
+@import "./xbox/minecraft.css";
+@import "./xbox/forza.css";
+@import "./xbox/halo.css";
+@import "./xbox/gears.css";
+
+/* === CAPCOM === */
+@import "./capcom/streetfighter.css";
+@import "./capcom/residentevil.css";
+@import "./capcom/monsterhunter.css";
+@import "./capcom/megaman.css";
+
+/* === BANDAI NAMCO === */
+@import "./bandai-namco/darksouls.css";
+@import "./bandai-namco/tekken.css";
+@import "./bandai-namco/pacman.css";
+@import "./bandai-namco/dragonball.css";
+
+/* === ELECTRONIC ARTS === */
+@import "./ea/fifa.css";
+@import "./ea/burnout.css";
+@import "./ea/thesims.css";
+@import "./ea/mirrorsedge.css";
+
+/* === UBISOFT === */
+@import "./ubisoft/assassinscreed.css";
+@import "./ubisoft/justdance.css";
+@import "./ubisoft/trials.css";
+@import "./ubisoft/rayman.css";
+
+/* === SQUARE ENIX === */
+@import "./squareenix/finalfantasy.css";
+@import "./squareenix/tombraider.css";
+@import "./squareenix/dragonquest.css";
+@import "./squareenix/kingdomhearts.css";
+
+/* === LICENCES DIVERSES === */
+@import "./licenses/portal.css";
+@import "./licenses/doom.css";
+@import "./licenses/spyro.css";

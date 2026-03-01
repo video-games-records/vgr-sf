@@ -1,0 +1,50 @@
+/* Uncharted theme - earthy terra browns, treasure hunter adventure */
+[data-bs-theme="uncharted"] {
+
+    /* === BODY === */
+    --bs-body-bg:              oklch(0.94 0.04 45);
+    --bs-body-color:           oklch(0.18 0.08 20);
+    --bs-emphasis-color:       oklch(0.10 0.08 20);
+
+    /* === TEXTES SECONDAIRES === */
+    --bs-secondary-color:      oklch(0.40 0.10 25 / 75%);
+    --bs-tertiary-color:       oklch(0.40 0.10 25 / 50%);
+
+    /* === SURFACES === */
+    --bs-secondary-bg:         oklch(0.88 0.06 42);
+    --bs-tertiary-bg:          oklch(0.96 0.02 40);
+
+    /* === BORDERS === */
+    --bs-border-color:             oklch(0.82 0.08 42);
+    --bs-border-color-translucent: oklch(0.82 0.08 42 / 30%);
+
+    /* === PRIMARY === */
+    --bs-primary:     oklch(0.45 0.15 35);
+    --bs-primary-rgb: 150, 90, 35;
+
+    /* === LINKS === */
+    --bs-link-color:           oklch(0.45 0.15 35);
+    --bs-link-color-rgb:       150, 90, 35;
+    --bs-link-hover-color:     oklch(0.37 0.15 35);
+    --bs-link-hover-color-rgb: 118, 68, 25;
+
+    /* === DANGER === */
+    --bs-danger:     oklch(0.55 0.20 15);
+    --bs-danger-rgb: 185, 45, 30;
+
+    /* === BORDER RADIUS === */
+    --bs-border-radius:      0.3rem;
+    --bs-border-radius-sm:   0.2rem;
+    --bs-border-radius-lg:   0.4rem;
+    --bs-border-radius-xl:   0.6rem;
+    --bs-border-radius-pill: 50rem;
+
+    /* === CARD === */
+    --bs-card-bg:           oklch(0.96 0.02 40);
+    --bs-card-border-color: oklch(0.82 0.08 42);
+    --bs-card-cap-bg:       oklch(0.95 0.03 41);
+
+    /* === NAVBAR / FOOTER (VGR custom) === */
+    --vgr-dark:   oklch(0.24 0.10 28);
+    --vgr-footer: oklch(0.19 0.08 26);
+}

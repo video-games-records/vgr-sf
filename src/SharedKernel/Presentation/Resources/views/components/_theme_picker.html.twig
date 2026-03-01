@@ -1,0 +1,251 @@
+{# ============================================================
+ # Theme Picker – Offcanvas Bootstrap 5
+ # Triggered by: data-bs-toggle="offcanvas" data-bs-target="#themePicker"
+ # ============================================================ #}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="themePicker" aria-labelledby="themePickerLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="themePickerLabel">
+            <i class="bi bi-palette me-2"></i>Choisir un thème
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        {# ── Défaut ────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Défaut</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="light" onclick="applyTheme('light')">
+                <span class="theme-swatch" style="background:#f8f9fa;border:1px solid #dee2e6"></span>Light
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="dark" onclick="applyTheme('dark')">
+                <span class="theme-swatch" style="background:#212529"></span>Dark
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="official-vgr" onclick="applyTheme('official-vgr')">
+                <span class="theme-swatch" style="background:#d28232"></span>VGR Officiel
+            </button>
+        </div>
+
+        {# ── Gaming ────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Gaming</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="retro" onclick="applyTheme('retro')">
+                <span class="theme-swatch" style="background:#e8a030"></span>Retro
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="cyber" onclick="applyTheme('cyber')">
+                <span class="theme-swatch" style="background:#00beb9"></span>Cyber
+            </button>
+        </div>
+
+        {# ── Nintendo ──────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Nintendo</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="mario" onclick="applyTheme('mario')">
+                <span class="theme-swatch" style="background:#dc3232"></span>Mario
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="zelda" onclick="applyTheme('zelda')">
+                <span class="theme-swatch" style="background:#c8960a"></span>Zelda
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="animal" onclick="applyTheme('animal')">
+                <span class="theme-swatch" style="background:#5cb85c"></span>Animal Crossing
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="kirby" onclick="applyTheme('kirby')">
+                <span class="theme-swatch" style="background:#e875a0"></span>Kirby
+            </button>
+        </div>
+
+        {# ── Sega ──────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Sega</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="sonic" onclick="applyTheme('sonic')">
+                <span class="theme-swatch" style="background:#2050c0"></span>Sonic
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="jetset" onclick="applyTheme('jetset')">
+                <span class="theme-swatch" style="background:#30c0a0"></span>Jet Set Radio
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="phantasy" onclick="applyTheme('phantasy')">
+                <span class="theme-swatch" style="background:#c020c0"></span>Phantasy Star
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="shenmue" onclick="applyTheme('shenmue')">
+                <span class="theme-swatch" style="background:#3050a0"></span>Shenmue
+            </button>
+        </div>
+
+        {# ── Sony ──────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Sony</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="granturismo" onclick="applyTheme('granturismo')">
+                <span class="theme-swatch" style="background:#a0102a"></span>Gran Turismo
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="godofwar" onclick="applyTheme('godofwar')">
+                <span class="theme-swatch" style="background:#a01018"></span>God of War
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="lastofus" onclick="applyTheme('lastofus')">
+                <span class="theme-swatch" style="background:#3c6030"></span>The Last of Us
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="uncharted" onclick="applyTheme('uncharted')">
+                <span class="theme-swatch" style="background:#c08040"></span>Uncharted
+            </button>
+        </div>
+
+        {# ── Xbox ──────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Xbox</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="minecraft" onclick="applyTheme('minecraft')">
+                <span class="theme-swatch" style="background:#5a8a2a"></span>Minecraft
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="forza" onclick="applyTheme('forza')">
+                <span class="theme-swatch" style="background:#00a0e0"></span>Forza
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="halo" onclick="applyTheme('halo')">
+                <span class="theme-swatch" style="background:#205090"></span>Halo
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="gears" onclick="applyTheme('gears')">
+                <span class="theme-swatch" style="background:#6a6a5a"></span>Gears of War
+            </button>
+        </div>
+
+        {# ── Capcom ────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Capcom</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="streetfighter" onclick="applyTheme('streetfighter')">
+                <span class="theme-swatch" style="background:#1040a0"></span>Street Fighter
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="residentevil" onclick="applyTheme('residentevil')">
+                <span class="theme-swatch" style="background:#a01010"></span>Resident Evil
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="monsterhunter" onclick="applyTheme('monsterhunter')">
+                <span class="theme-swatch" style="background:#c06820"></span>Monster Hunter
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="megaman" onclick="applyTheme('megaman')">
+                <span class="theme-swatch" style="background:#1890d0"></span>Mega Man
+            </button>
+        </div>
+
+        {# ── Bandai Namco ──────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Bandai Namco</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="darksouls" onclick="applyTheme('darksouls')">
+                <span class="theme-swatch" style="background:#5a4530"></span>Dark Souls
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="tekken" onclick="applyTheme('tekken')">
+                <span class="theme-swatch" style="background:#c01010"></span>Tekken
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="pacman" onclick="applyTheme('pacman')">
+                <span class="theme-swatch" style="background:#d7be0f"></span>Pac-Man
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="dragonball" onclick="applyTheme('dragonball')">
+                <span class="theme-swatch" style="background:#e08010"></span>Dragon Ball
+            </button>
+        </div>
+
+        {# ── EA ────────────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">EA</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="fifa" onclick="applyTheme('fifa')">
+                <span class="theme-swatch" style="background:#1a5fa8"></span>FIFA
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="burnout" onclick="applyTheme('burnout')">
+                <span class="theme-swatch" style="background:#d04000"></span>Burnout
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="thesims" onclick="applyTheme('thesims')">
+                <span class="theme-swatch" style="background:#2ecc71"></span>The Sims
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="mirrorsedge" onclick="applyTheme('mirrorsedge')">
+                <span class="theme-swatch" style="background:#e82020"></span>Mirror's Edge
+            </button>
+        </div>
+
+        {# ── Ubisoft ───────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Ubisoft</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="assassinscreed" onclick="applyTheme('assassinscreed')">
+                <span class="theme-swatch" style="background:#c0a070"></span>Assassin's Creed
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="justdance" onclick="applyTheme('justdance')">
+                <span class="theme-swatch" style="background:#c020c0"></span>Just Dance
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="trials" onclick="applyTheme('trials')">
+                <span class="theme-swatch" style="background:#e06010"></span>Trials
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="rayman" onclick="applyTheme('rayman')">
+                <span class="theme-swatch" style="background:#f0c010"></span>Rayman
+            </button>
+        </div>
+
+        {# ── Square Enix ───────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Square Enix</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="finalfantasy" onclick="applyTheme('finalfantasy')">
+                <span class="theme-swatch" style="background:#6040d0"></span>Final Fantasy
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="tombraider" onclick="applyTheme('tombraider')">
+                <span class="theme-swatch" style="background:#708040"></span>Tomb Raider
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="dragonquest" onclick="applyTheme('dragonquest')">
+                <span class="theme-swatch" style="background:#2050b0"></span>Dragon Quest
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="kingdomhearts" onclick="applyTheme('kingdomhearts')">
+                <span class="theme-swatch" style="background:#5040b0"></span>Kingdom Hearts
+            </button>
+        </div>
+
+        {# ── Licences ──────────────────────────────────────────── #}
+        <p class="text-muted small fw-semibold text-uppercase mb-2">Licences</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="portal" onclick="applyTheme('portal')">
+                <span class="theme-swatch" style="background:#e08040"></span>Portal
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="doom" onclick="applyTheme('doom')">
+                <span class="theme-swatch" style="background:#be2d23"></span>DOOM
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                    data-vgr-theme="spyro" onclick="applyTheme('spyro')">
+                <span class="theme-swatch" style="background:#7030a0"></span>Spyro
+            </button>
+        </div>
+
+    </div>
+</div>
