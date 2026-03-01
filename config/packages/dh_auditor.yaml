@@ -1,0 +1,53 @@
+# Full configuration reference available at:
+# https://damienharper.github.io/auditor-docs/docs/auditor-bundle/configuration/reference.html
+dh_auditor:
+    enabled: true
+    providers:
+        doctrine:
+            table_prefix: null
+            table_suffix: '_audit'
+            ignored_columns:
+                - createdAt
+                - updatedAt
+                - slug
+            entities:
+                App\BoundedContext\User\Domain\Entity\User:
+                    ignored_columns:
+                        - password
+                        - lastLogin
+                        - confirmationToken
+                        - passwordRequestedAt
+                        - nbConnexion
+                        - nbForumMessage
+                        - extraData
+                        - avatar
+                App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game:
+                    ignored_columns:
+                        - nbChart
+                        - nbPost
+                        - nbPlayer
+                        - nbVideo
+                        - nbTeam
+                        - forum
+                        - lastUpdate
+                        - lastScore
+                        - picture
+                        - isRank
+                App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform:
+                    ignored_columns:
+                        - picture
+                App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie:
+                    ignored_columns:
+                        - nbChart
+                        - nbGame
+                        - nbPlayer
+                        - nbTeam
+                        - picture
+                App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Rule:
+                App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType:
+
+            storage_services:
+                - '@doctrine.orm.audit_entity_manager'
+            auditing_services:
+                - '@doctrine.orm.default_entity_manager'
+            viewer: true

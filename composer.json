@@ -15,6 +15,7 @@
         "api-platform/symfony": "^4.2.14",
         "aws/aws-sdk-php-symfony": "^2.9",
         "beberlei/doctrineextensions": "^1.5",
+        "damienharper/auditor-bundle": "^7.0",
         "doctrine/doctrine-bundle": "^3.2.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6.1",

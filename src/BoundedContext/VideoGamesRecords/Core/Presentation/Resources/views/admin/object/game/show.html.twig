@@ -383,6 +383,86 @@
         {% endif %}
     {% endif %}
 
+    {# Historique des modifications (audit) #}
+    {% set auditEntries = vgr_audit_history('App\\BoundedContext\\VideoGamesRecords\\Core\\Domain\\Entity\\Game', object.getId()) %}
+    {% if auditEntries|length > 0 %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default collapsed-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-history"></i> {% trans %}game.show.audit.history{% endtrans %}
+                        <span class="badge badge-default">{{ auditEntries|length }}</span>
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans %}game.show.audit.type{% endtrans %}</th>
+                                <th>{% trans %}game.show.audit.user{% endtrans %}</th>
+                                <th>{% trans %}game.show.audit.date{% endtrans %}</th>
+                                <th>{% trans %}game.show.audit.changes{% endtrans %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in auditEntries %}
+                            <tr>
+                                <td>
+                                    {% if entry.type == 'insert' %}
+                                        <span class="label label-success">INSERT</span>
+                                    {% elseif entry.type == 'update' %}
+                                        <span class="label label-warning">UPDATE</span>
+                                    {% else %}
+                                        <span class="label label-danger">DELETE</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ entry.username ?? '-' }}</td>
+                                <td>{{ entry.createdAt ? entry.createdAt|date('d/m/Y H:i') : '-' }}</td>
+                                <td>
+                                    {% set diffs = entry.getDiffs() %}
+                                    {% if diffs %}
+                                        {% for field, diff in diffs %}
+                                            {% if diff is iterable and (diff.old is defined or diff.new is defined) %}
+                                            <div>
+                                                <strong>{{ field }}</strong> :
+                                                {% if diff.old is defined %}
+                                                    <span class="text-danger">
+                                                        {%- if diff.old is iterable -%}
+                                                            {{ diff.old.label ?? diff.old|json_encode }}
+                                                        {%- else -%}
+                                                            {{ diff.old }}
+                                                        {%- endif -%}
+                                                    </span>
+                                                    <i class="fa fa-arrow-right"></i>
+                                                {% endif %}
+                                                <span class="text-success">
+                                                    {%- if diff.new is iterable -%}
+                                                        {{ diff.new.label ?? diff.new|json_encode }}
+                                                    {%- else -%}
+                                                        {{ diff.new }}
+                                                    {%- endif -%}
+                                                </span>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <style>
         .game-image {
             text-align: center;

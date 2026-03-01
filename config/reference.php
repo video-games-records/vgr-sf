@@ -411,7 +411,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: true
  *     },
  *     lock?: bool|string|array{ // Lock configuration
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *         resources?: array<string, string|list<scalar|Param|null>>,
  *     },
  *     semaphore?: bool|string|array{ // Semaphore configuration
@@ -963,7 +963,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *     },
  *     intl?: bool|array{
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *     },
  *     cssinliner?: bool|array{
  *         enabled?: bool|Param, // Default: false
@@ -2353,6 +2353,15 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         skip_same_as_origin?: bool|Param,
  *     }>,
  * }
+ * @psalm-type DhAuditorConfig = array{
+ *     enabled?: bool|Param, // Default: true
+ *     timezone?: scalar|Param|null, // Default: "UTC"
+ *     user_provider?: scalar|Param|null, // Default: "dh_auditor.user_provider"
+ *     security_provider?: scalar|Param|null, // Default: "dh_auditor.security_provider"
+ *     role_checker?: scalar|Param|null, // Default: "dh_auditor.role_checker"
+ *     extra_data_provider?: scalar|Param|null, // Default: null
+ *     providers?: array<string, mixed>,
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2387,6 +2396,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     fd_log_viewer?: FdLogViewerConfig,
  *     nelmio_cors?: NelmioCorsConfig,
+ *     dh_auditor?: DhAuditorConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2425,6 +2435,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         fd_log_viewer?: FdLogViewerConfig,
  *         nelmio_cors?: NelmioCorsConfig,
+ *         dh_auditor?: DhAuditorConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2460,6 +2471,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         fd_log_viewer?: FdLogViewerConfig,
  *         nelmio_cors?: NelmioCorsConfig,
+ *         dh_auditor?: DhAuditorConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2498,6 +2510,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         fd_log_viewer?: FdLogViewerConfig,
  *         dama_doctrine_test?: DamaDoctrineTestConfig,
  *         nelmio_cors?: NelmioCorsConfig,
+ *         dh_auditor?: DhAuditorConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

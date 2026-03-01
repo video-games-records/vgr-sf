@@ -69,6 +69,12 @@ game:
         since: Since
         until: Until
         active: Active
+    audit:
+      history: Modification History
+      type: Type
+      user: User
+      date: Date
+      changes: Changes
   # Template-specific translations
   statistics: Statistics
   detailed:
