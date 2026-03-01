@@ -12,7 +12,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\SerieRepository;
 use App\SharedKernel\Domain\Traits\Accessor\CurrentLocale;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\SerieBadge;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbChartTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbGameTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTrait;
@@ -56,9 +56,9 @@ class Serie
     private Collection $games;
 
 
-    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: SerieBadge::class, cascade: ['persist', 'remove'], inversedBy: 'serie')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
-    private ?Badge $badge;
+    private ?SerieBadge $badge;
 
     /**
      * @var Collection<string, SerieTranslation>
@@ -141,12 +141,12 @@ class Serie
         return $this->games;
     }
 
-    public function setBadge(?Badge $badge = null): void
+    public function setBadge(?SerieBadge $badge = null): void
     {
         $this->badge = $badge;
     }
 
-    public function getBadge(): ?Badge
+    public function getBadge(): ?SerieBadge
     {
         return $this->badge;
     }

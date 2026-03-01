@@ -59,10 +59,7 @@ class BadgeAdmin extends BaseAdmin
         $filter
             ->add('id', null, ['label' => 'badge.filter.id'])
             ->add('type', null, ['label' => 'badge.filter.type'])
-            ->add('picture', null, ['label' => 'badge.filter.picture'])
-            ->add('game.id', null, ['label' => 'badge.filter.game.id'])
-            ->add('game.libGameFr', null, ['label' => 'badge.filter.game.fr'])
-            ->add('game.libGameEn', null, ['label' => 'badge.filter.game.en']);
+            ->add('picture', null, ['label' => 'badge.filter.picture']);
     }
 
     /**

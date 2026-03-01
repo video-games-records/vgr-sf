@@ -24,7 +24,7 @@ use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbVideoTrai
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\PictureTrait;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Game as IgdbGame;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame;
 use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Contracts\GameInfoInterface;
 
@@ -74,9 +74,9 @@ class Game implements GameInfoInterface
     #[ORM\JoinColumn(name:'serie_id', referencedColumnName:'id', nullable:true)]
     private ?Serie $serie = null;
 
-    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: MasterBadge::class, cascade: ['persist'], inversedBy: 'game')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:false)]
-    private Badge $badge;
+    private MasterBadge $badge;
 
     /**
      * @var Collection<int, Group>
@@ -259,12 +259,12 @@ class Game implements GameInfoInterface
         return $this->serie;
     }
 
-    public function setBadge(Badge $badge): void
+    public function setBadge(MasterBadge $badge): void
     {
         $this->badge = $badge;
     }
 
-    public function getBadge(): Badge
+    public function getBadge(): MasterBadge
     {
         return $this->badge;
     }

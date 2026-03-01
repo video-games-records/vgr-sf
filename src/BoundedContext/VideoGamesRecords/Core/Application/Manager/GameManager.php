@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 
 readonly class GameManager
 {
@@ -31,8 +30,7 @@ readonly class GameManager
         $newGame->setSerie($game->getSerie());
         $newGame->setPicture($game->getPicture());
 
-        $badge = new Badge();
-        $badge->setType(BadgeType::MASTER);
+        $badge = new MasterBadge();
         $badge->setPicture($game->getBadge()->getPicture());
         $newGame->setBadge($badge);
 

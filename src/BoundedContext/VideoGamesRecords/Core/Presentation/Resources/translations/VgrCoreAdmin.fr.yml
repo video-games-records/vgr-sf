@@ -60,6 +60,15 @@ game:
     groups: Groupes
     publishedAt: Publié le
     boolRanking: Classé
+    badge_history:
+      player_history: Historique Badge - Joueurs
+      team_history: Historique Badge - Équipes
+      history:
+        player: Joueur
+        team: Équipe
+        since: Depuis
+        until: Jusqu'au
+        active: Actif
   # Template-specific translations
   statistics: Statistiques
   detailed:
@@ -102,6 +111,9 @@ platform:
     picture: Image
     status: Statut
     badge: Badge
+    nbGame: Nombre de jeux
+    games: Jeux
+    game_name: Nom du jeu
 
 serie:
   label: Séries
@@ -136,6 +148,8 @@ serie:
     picture: Image
     badge: Badge
     description: Description
+    nbPlayer: Nombre de joueurs
+    nbTeam: Nombre d'équipes
 
 group:
   label: Groupes
@@ -408,6 +422,7 @@ badge:
     type: Type
     picture: Image
     value: Valeur
+    nbPlayer: Nombre de joueurs
 
 player_badge:
   label: Badges joueurs

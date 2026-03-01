@@ -60,6 +60,15 @@ game:
     groups: Groups
     publishedAt: Published At
     boolRanking: Ranking
+    badge_history:
+      player_history: Player Badge History
+      team_history: Team Badge History
+      history:
+        player: Player
+        team: Team
+        since: Since
+        until: Until
+        active: Active
   # Template-specific translations
   statistics: Statistics
   detailed:
@@ -102,6 +111,9 @@ platform:
     picture: Picture
     status: Status
     badge: Badge
+    nbGame: Games Count
+    games: Games
+    game_name: Game Name
 
 serie:
   label: Series
@@ -136,6 +148,8 @@ serie:
     picture: Picture
     badge: Badge
     description: Description
+    nbPlayer: Players Count
+    nbTeam: Teams Count
 
 group:
   label: Groups
@@ -408,6 +422,7 @@ badge:
     type: Type
     picture: Picture
     value: Value
+    nbPlayer: Players Count
 
 player_badge:
   label: Player Badges

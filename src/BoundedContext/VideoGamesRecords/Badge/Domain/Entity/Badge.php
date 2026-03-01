@@ -8,13 +8,22 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 use App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\BadgeRepository;
-use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTrait;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
+use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTrait;
 
 #[ORM\Table(name:'vgr_badge')]
 #[ORM\Entity(repositoryClass: BadgeRepository::class)]
 #[ORM\Index(name: "idx_type", columns: ["type"])]
 #[ORM\Index(name: "idx_value", columns: ["value"])]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'dtype', type: 'string')]
+#[ORM\DiscriminatorMap([
+    'Badge'         => Badge::class,
+    'MasterBadge'   => MasterBadge::class,
+    'SerieBadge'    => SerieBadge::class,
+    'PlatformBadge' => PlatformBadge::class,
+    'CountryBadge'  => CountryBadge::class,
+])]
 class Badge
 {
     use NbPlayerTrait;
@@ -78,29 +87,13 @@ class Badge
         return $this->value;
     }
 
-    public function majValue(?Game $game): void
+    public function majValue(?Game $game = null): void
     {
-        if (BadgeType::MASTER !== $this->type) {
-            return;
-        }
-
-        if ($game === null) {
-            $this->value = 0;
-            return;
-        }
-
-        if (0 === $this->getNbPlayer()) {
-            $this->value = 0;
-        } else {
-            $nbPlayerDiff = 100 + $game->getNbPlayer() - $this->nbPlayer;
-            $factor = 6250 * (-1 / $nbPlayerDiff + 0.0102);
-            $divisor = pow($this->nbPlayer, 1 / 3);
-            $this->value = (int) floor(100 * $factor / $divisor);
-        }
+        // comportement par défaut : rien (surchargé dans MasterBadge)
     }
 
     public function isTypeMaster(): bool
     {
-        return $this->type === BadgeType::MASTER;
+        return $this instanceof MasterBadge;
     }
 }

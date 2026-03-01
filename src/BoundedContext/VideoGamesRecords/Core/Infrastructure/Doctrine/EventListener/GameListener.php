@@ -10,11 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game\LatestGames;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Game::class)]
@@ -39,8 +38,7 @@ class GameListener
             $game->setLibGameFr($game->getLibGameEn());
         }
 
-        $badge = new Badge();
-        $badge->setType(BadgeType::MASTER);
+        $badge = new MasterBadge();
         $badge->setPicture('master_default.gif');
         $game->setBadge($badge);
     }

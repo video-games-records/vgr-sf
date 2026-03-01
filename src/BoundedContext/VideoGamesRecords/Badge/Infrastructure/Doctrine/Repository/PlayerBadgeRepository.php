@@ -90,27 +90,96 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
-     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, nameEn: string, nameFr: string}>
      */
     public function getMasterBadgesDataForPlayer(Player $player): array
     {
-        return $this->getBadgesDataForPlayer($player, BadgeType::MASTER);
+        return $this->getEntityManager()->createQuery("
+            SELECT mb.id as badgeId, mb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
+            JOIN mb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY mb.value ASC
+        ")
+        ->setParameter('player', $player)
+        ->getResult();
     }
 
     /**
-     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, name: string}>
      */
     public function getPlatformBadgesDataForPlayer(Player $player): array
     {
-        return $this->getBadgesDataForPlayer($player, BadgeType::PLATFORM);
+        return $this->getEntityManager()->createQuery("
+            SELECT plb.id as badgeId, plb.value as badgeValue, pb.createdAt, pl.name as name
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlatformBadge plb
+            JOIN plb.platform pl
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = plb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY plb.value ASC
+        ")
+        ->setParameter('player', $player)
+        ->getResult();
     }
 
     /**
-     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, countryCode: string, nameEn: string, nameFr: string}>
+     */
+    public function getCountryBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT cb.id as badgeId, cb.value as badgeValue, pb.createdAt,
+                   c.codeIso2 as countryCode,
+                   (SELECT tEn.name FROM App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\CountryTranslation tEn
+                    WHERE tEn.translatable = c AND tEn.locale = 'en') as nameEn,
+                   (SELECT tFr.name FROM App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\CountryTranslation tFr
+                    WHERE tFr.translatable = c AND tFr.locale = 'fr') as nameFr
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\CountryBadge cb
+            JOIN cb.country c
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = cb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY cb.value ASC
+        ")
+        ->setParameter('player', $player)
+        ->getResult();
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, name: string}>
      */
     public function getSerieBadgesDataForPlayer(Player $player): array
     {
-        return $this->getBadgesDataForPlayer($player, BadgeType::SERIE);
+        return $this->getEntityManager()->createQuery("
+            SELECT sb.id as badgeId, sb.value as badgeValue, pb.createdAt, s.libSerie as name
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\SerieBadge sb
+            JOIN sb.serie s
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = sb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY sb.value ASC
+        ")
+        ->setParameter('player', $player)
+        ->getResult();
+    }
+
+    /**
+     * @return array<array{pseudo: string, createdAt: \DateTime, endedAt: \DateTime|null, mbOrder: int|null}>
+     */
+    public function getHistoryForBadge(Badge $badge): array
+    {
+        return $this->createQueryBuilder('pb')
+            ->select('p.pseudo, pb.createdAt, pb.endedAt, pb.mbOrder')
+            ->join('pb.player', 'p')
+            ->where('pb.badge = :badge')
+            ->setParameter('badge', $badge)
+            ->orderBy('pb.endedAt', 'ASC')
+            ->addOrderBy('pb.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

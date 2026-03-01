@@ -11,9 +11,8 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\SerieBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerSerieRank;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\SerieStatus;
 
@@ -34,8 +33,7 @@ class SerieListener
      */
     public function prePersist(Serie $serie): void
     {
-        $badge = new Badge();
-        $badge->setType(BadgeType::SERIE);
+        $badge = new SerieBadge();
         $badge->setPicture('default.gif');
         $serie->setBadge($badge);
     }

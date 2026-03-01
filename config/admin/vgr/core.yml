@@ -145,6 +145,7 @@ services:
         group: "group.players"
         label: "country.label"
     calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/country/show.html.twig' ] ]
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
 
   # Rule Admin

@@ -137,6 +137,22 @@ class TeamBadgeRepository extends DefaultRepository
     }
 
     /**
+     * @return array<array{libTeam: string, createdAt: \DateTime, endedAt: \DateTime|null, mbOrder: int|null}>
+     */
+    public function getHistoryForBadge(Badge $badge): array
+    {
+        return $this->createQueryBuilder('tb')
+            ->select('t.libTeam, tb.createdAt, tb.endedAt, tb.mbOrder')
+            ->join('tb.team', 't')
+            ->where('tb.badge = :badge')
+            ->setParameter('badge', $badge)
+            ->orderBy('tb.endedAt', 'ASC')
+            ->addOrderBy('tb.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Get master badges data for a team without loading Badge entity relationships
      *
      * @param Team $team

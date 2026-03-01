@@ -293,6 +293,96 @@
         </div>
     {% endif %}
 
+    {# Master Badge History #}
+    {% if object.getBadge() %}
+        {% set playerHistory = vgr_player_badge_history(object.getBadge()) %}
+        {% set teamHistory = vgr_team_badge_history(object.getBadge()) %}
+
+        {% if playerHistory|length > 0 or teamHistory|length > 0 %}
+        <div class="row">
+            {% if playerHistory|length > 0 %}
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-user"></i>
+                            {% trans %}game.show.badge_history.player_history{% endtrans %}
+                            <span class="badge badge-default">{{ playerHistory|length }}</span>
+                        </h3>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{% trans %}game.show.badge_history.history.player{% endtrans %}</th>
+                                    <th>{% trans %}game.show.badge_history.history.since{% endtrans %}</th>
+                                    <th>{% trans %}game.show.badge_history.history.until{% endtrans %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in playerHistory %}
+                                <tr class="{{ row.endedAt is null ? 'success' : '' }}">
+                                    <td>{{ row.pseudo }}</td>
+                                    <td>{{ row.createdAt|date('d/m/Y') }}</td>
+                                    <td>
+                                        {% if row.endedAt is null %}
+                                            <span class="label label-success">{% trans %}game.show.badge_history.history.active{% endtrans %}</span>
+                                        {% else %}
+                                            {{ row.endedAt|date('d/m/Y') }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if teamHistory|length > 0 %}
+            <div class="col-md-6">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-users"></i>
+                            {% trans %}game.show.badge_history.team_history{% endtrans %}
+                            <span class="badge badge-default">{{ teamHistory|length }}</span>
+                        </h3>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{% trans %}game.show.badge_history.history.team{% endtrans %}</th>
+                                    <th>{% trans %}game.show.badge_history.history.since{% endtrans %}</th>
+                                    <th>{% trans %}game.show.badge_history.history.until{% endtrans %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in teamHistory %}
+                                <tr class="{{ row.endedAt is null ? 'success' : '' }}">
+                                    <td>{{ row.libTeam }}</td>
+                                    <td>{{ row.createdAt|date('d/m/Y') }}</td>
+                                    <td>
+                                        {% if row.endedAt is null %}
+                                            <span class="label label-success">{% trans %}game.show.badge_history.history.active{% endtrans %}</span>
+                                        {% else %}
+                                            {{ row.endedAt|date('d/m/Y') }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    {% endif %}
+
     <style>
         .game-image {
             text-align: center;

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlatformRepository;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlatformBadge;
 
 #[ORM\Table(name:'vgr_platform')]
 #[ORM\Entity(repositoryClass: PlatformRepository::class)]
@@ -45,9 +45,9 @@ class Platform
     private Collection $games;
 
 
-    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: PlatformBadge::class, cascade: ['persist'], inversedBy: 'platform')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
-    private ?Badge $badge;
+    private ?PlatformBadge $badge;
 
     public function __construct()
     {
@@ -113,12 +113,12 @@ class Platform
         return $this->games;
     }
 
-    public function setBadge(?Badge $badge = null): void
+    public function setBadge(?PlatformBadge $badge = null): void
     {
         $this->badge = $badge;
     }
 
-    public function getBadge(): ?Badge
+    public function getBadge(): ?PlatformBadge
     {
         return $this->badge;
     }

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\CountryRepository;
 use App\SharedKernel\Domain\Traits\Accessor\CurrentLocale;
-use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\CountryBadge;
 
 #[ORM\Table(name:'vgr_country')]
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
@@ -38,9 +38,9 @@ class Country
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
 
-    #[ORM\OneToOne(targetEntity: Badge::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: CountryBadge::class, cascade: ['persist'], inversedBy: 'country')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
-    private ?Badge $badge;
+    private ?CountryBadge $badge;
 
     /** @var Collection<string, CountryTranslation> */
     #[ORM\OneToMany(
@@ -100,12 +100,12 @@ class Country
     }
 
 
-    public function setBadge(?Badge $badge = null): void
+    public function setBadge(?CountryBadge $badge = null): void
     {
         $this->badge = $badge;
     }
 
-    public function getBadge(): ?Badge
+    public function getBadge(): ?CountryBadge
     {
         return $this->badge;
     }

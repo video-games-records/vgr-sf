@@ -139,28 +139,26 @@ readonly class UpdatePlayerDataHandler
         $player->setGameRank3($data['gameRank3'] ?? 0);
 
         // 3 Badge Ranking
-        /*$query = $this->em->createQuery("
+        $query = $this->em->createQuery("
             SELECT
                  p.id,
                  COUNT(pb.badge) as nbMasterBadge,
-                 SUM(b.value) as pointBadge
-            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb
-            JOIN pb.badge b
-            JOIN b.game g
+                 SUM(mb.value) as pointBadge
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
+            JOIN mb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
             JOIN pb.player p
-            WHERE b.type = :type
-            AND pb.player = :player
+            WHERE pb.player = :player
             AND pb.endedAt IS NULL
             AND g.isRank = 1
             GROUP BY p.id");
-        $query->setParameter('type', 'Master');
         $query->setParameter('player', $player);
 
         $row = $query->getOneOrNullResult();
         if ($row) {
             $player->setNbMasterBadge($row['nbMasterBadge']);
             $player->setPointBadge((int) $row['pointBadge']);
-        }*/
+        }
 
         // 4 nbChartWithPlatform
         $query = $this->em->createQuery("
