@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Functional\Api;
 
-use App\BoundedContext\VideoGamesRecords\Core\Tests\Factory\GameFactory;
+use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\GameFactory;
 
 class GameTest extends AbstractFunctionalTestCase
 {

@@ -7,7 +7,7 @@ namespace App\Tests\BoundedContext\User\Functional\Api;
 use ApiPlatform\Symfony\Bundle\Test\Client;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\BoundedContext\User\Domain\Entity\User;
-use App\BoundedContext\User\Tests\Factory\UserFactory;
+use App\Tests\BoundedContext\User\Factory\UserFactory;
 use Zenstruck\Foundry\Test\Factories;
 
 class AbstractFunctionalTestCase extends ApiTestCase

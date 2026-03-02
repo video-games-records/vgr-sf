@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Functional\Api;
 
-use App\BoundedContext\VideoGamesRecords\Core\Tests\Factory\CountryFactory;
+use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\CountryFactory;
 
 class CountryTest extends AbstractFunctionalTestCase
 {
