@@ -7,15 +7,18 @@
         <title>{% block title %}Video Games Records{% endblock %}</title>
 
         {# SEO Meta Tags #}
-        <meta name="description" content="{% block meta_description %}World Crash Rankings - The ultimate resource for Burnout 3: Takedown Crash Mode rankings, player statistics, zone records, and competitive leaderboards.{% endblock %}">
-        <meta name="keywords" content="{% block meta_keywords %}burnout 3, crash mode, rankings, leaderboards, world records{% endblock %}">
+        <meta name="description" content="{% block meta_description %}Video Games Records - The ultimate platform for video game world records and rankings. Compare your scores, track your progression, and compete with players worldwide.{% endblock %}">
+        <meta name="keywords" content="{% block meta_keywords %}video games records, video game rankings, world records, gaming leaderboards, competitive gaming, player rankings, game scores{% endblock %}">
         <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
 
         {# Canonical URL #}
         <link rel="canonical" href="{% block canonical_url %}{{ app.request.schemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo }}{% endblock %}">
 
+        {# Hreflang - multilingual #}
+        {% block hreflang %}{% endblock %}
+
         {# Open Graph Meta Tags #}
-        <meta property="og:site_name" content="World Crash Rankings">
+        <meta property="og:site_name" content="Video Games Records">
         <meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
         <meta property="og:description" content="{% block og_description %}{{ block('meta_description') }}{% endblock %}">
         <meta property="og:type" content="{% block og_type %}website{% endblock %}">

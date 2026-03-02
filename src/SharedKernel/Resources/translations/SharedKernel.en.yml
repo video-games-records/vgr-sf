@@ -104,6 +104,10 @@ search:
 
 # === HOME ===
 home:
+  seo:
+    title: "Video Games Records | World Video Game Rankings & Leaderboards"
+    description: "Video Games Records is the ultimate platform for video game world records and rankings. Discover leaderboards for thousands of games, compare your scores with players worldwide, earn badges and trophies, and join a passionate gaming community."
+    keywords: "video games records, video game world records, gaming leaderboards, game rankings, competitive gaming, player rankings, game scores, gaming community, badges, trophies, video game competition"
   partners:
     title: "Our Partners"
 

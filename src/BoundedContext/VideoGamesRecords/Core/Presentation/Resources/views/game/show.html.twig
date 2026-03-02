@@ -3,7 +3,46 @@
 
 {% block title %}{{ game.name }} - {{ 'game.show.title'|trans }}{% endblock %}
 
-{% block meta_description %}{{ 'game.show.meta_description'|trans({'%game%': game.name}) }}{% endblock %}
+{% block meta_description %}
+    {%- if game.summary -%}
+        {{- game.summary|slice(0, 155) ~ (game.summary|length > 155 ? '...' : '') -}}
+    {%- else -%}
+        {{- 'game.show.meta_description'|trans({'%game%': game.name, '%nbPlayer%': game.nbPlayer, '%nbChart%': game.nbChart}) -}}
+    {%- endif -%}
+{% endblock %}
+
+{% block meta_keywords %}{{ 'game.show.seo.keywords'|trans({'%game%': game.name}) }}{% endblock %}
+
+{% block og_image %}{{ absolute_url(path('vgr_core_game_picture', {id: game.id})) }}{% endblock %}
+
+{% block hreflang %}
+    <link rel="alternate" hreflang="en" href="{{ absolute_url(path('vgr_game_show', {'_locale': 'en', 'id': game.id, 'slug': game.slug})) }}">
+    <link rel="alternate" hreflang="fr" href="{{ absolute_url(path('vgr_game_show', {'_locale': 'fr', 'id': game.id, 'slug': game.slug})) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ absolute_url(path('vgr_game_show', {'_locale': 'en', 'id': game.id, 'slug': game.slug})) }}">
+{% endblock %}
+
+{% block canonical_url %}{{ absolute_url(path('vgr_game_show', {'_locale': app.request.locale, 'id': game.id, 'slug': game.slug})) }}{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "{{ game.name|e('js') }}",
+    "url": "{{ absolute_url(path('vgr_game_show', {'_locale': 'en', 'id': game.id, 'slug': game.slug})) }}"
+    {% if game.summary %},"description": "{{ game.summary|slice(0, 300)|e('js') }}"{% endif %}
+    {% if game.picture %},"image": "{{ absolute_url(path('vgr_core_game_picture', {id: game.id})) }}"{% endif %}
+    {% if game.releaseDate %},"datePublished": "{{ game.releaseDate|date('Y-m-d') }}"{% endif %}
+    ,"numberOfPlayers": {"@type": "QuantitativeValue", "value": {{ game.nbPlayer }}}
+    {% if game.platforms|length > 0 %}
+    ,"gamePlatform": [{% for platform in game.platforms %}"{{ platform.name|e('js') }}"{% if not loop.last %},{% endif %}{% endfor %}]
+    {% endif %}
+    {% if game.genres|length > 0 %}
+    ,"genre": [{% for genre in game.genres %}"{{ genre.name|e('js') }}"{% if not loop.last %},{% endif %}{% endfor %}]
+    {% endif %}
+}
+</script>
+{% endblock %}
 
 {% block body %}
 <div class="container py-4">

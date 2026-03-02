@@ -104,6 +104,10 @@ search:
 
 # === HOME ===
 home:
+  seo:
+    title: "Video Games Records | Classements et Records Mondiaux de Jeux Vidéo"
+    description: "Video Games Records est la plateforme ultime pour les records et classements mondiaux de jeux vidéo. Découvrez les classements de milliers de jeux, comparez vos scores avec des joueurs du monde entier, obtenez des badges et trophées, et rejoignez une communauté passionnée."
+    keywords: "records jeux vidéo, classements jeux vidéo, records mondiaux, gaming compétitif, classements joueurs, scores jeux vidéo, communauté gaming, badges, trophées, compétition jeux vidéo"
   partners:
     title: "Nos Partenaires"
 

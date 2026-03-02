@@ -25,8 +25,10 @@ game:
     no_games_card: Aucun jeu récent
 
   show:
-    title: Video Games Records
-    meta_description: "Records et classements pour %game%"
+    title: "Records Mondiaux & Classements | Video Games Records"
+    meta_description: "Découvrez les records mondiaux et classements pour %game%. %nbPlayer% joueurs s'affrontent sur %nbChart% classements. Suivez vos scores et comparez-vous aux joueurs du monde entier sur Video Games Records."
+    seo:
+      keywords: "%game%, %game% records mondiaux, %game% classements, %game% meilleurs scores, %game% speedrun, records jeux vidéo"
     about: À propos
     groups_title: Groupes
     charts: records

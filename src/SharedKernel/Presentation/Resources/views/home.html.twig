@@ -1,6 +1,63 @@
 {% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'SharedKernel' %}
 
-{% block title %}Home - Video Games Records{% endblock %}
+{% block title %}{{ 'home.seo.title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'home.seo.description'|trans }}{% endblock %}
+
+{% block meta_keywords %}{{ 'home.seo.keywords'|trans }}{% endblock %}
+
+{% block hreflang %}
+    <link rel="alternate" hreflang="en" href="{{ absolute_url(path('home', {'_locale': 'en'})) }}">
+    <link rel="alternate" hreflang="fr" href="{{ absolute_url(path('home', {'_locale': 'fr'})) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ absolute_url(path('home', {'_locale': 'en'})) }}">
+{% endblock %}
+
+{% block canonical_url %}{{ absolute_url(path('home', {'_locale': app.request.locale})) }}{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "{{ absolute_url(path('home', {'_locale': 'en'})) }}#website",
+            "name": "Video Games Records",
+            "url": "{{ absolute_url(path('home', {'_locale': 'en'})) }}",
+            "description": "The ultimate platform for video game world records and rankings.",
+            "inLanguage": ["en", "fr"],
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "{{ absolute_url(path('global_search')) }}?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Organization",
+            "@id": "{{ absolute_url(path('home', {'_locale': 'en'})) }}#organization",
+            "name": "Video Games Records",
+            "url": "{{ absolute_url(path('home', {'_locale': 'en'})) }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ absolute_url(asset('img/logo/video-games-records-logo.png')) }}"
+            },
+            "sameAs": [
+                "https://www.youtube.com/channel/UC_b4IOPqkN9uOsk-vktl8eA",
+                "https://x.com/VGRecords",
+                "https://discord.com/invite/nYsRzsZ",
+                "https://www.twitch.tv/videogamesrecords/",
+                "https://www.linkedin.com/company/video-games-records/",
+                "https://steamcommunity.com/groups/vgrr"
+            ]
+        }
+    ]
+}
+</script>
+{% endblock %}
 
 {% block body %}
 {# Hero Header Content - Hidden on mobile #}
