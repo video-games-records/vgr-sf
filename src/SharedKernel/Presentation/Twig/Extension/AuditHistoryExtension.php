@@ -13,7 +13,8 @@ class AuditHistoryExtension extends AbstractExtension
 {
     public function __construct(
         private readonly Reader $reader,
-    ) {}
+    ) {
+    }
 
     public function getFunctions(): array
     {

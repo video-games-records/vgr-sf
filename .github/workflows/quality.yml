@@ -85,6 +85,9 @@ jobs:
 
       - run: composer install --no-interaction --no-progress --prefer-dist
 
+      - name: Generate JWT keys
+        run: php bin/console lexik:jwt:generate-keypair --env=test
+
       - name: Create additional databases
         run: |
           mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS vgr_test_dwh;"

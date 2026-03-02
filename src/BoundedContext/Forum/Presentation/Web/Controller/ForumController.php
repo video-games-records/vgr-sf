@@ -142,7 +142,7 @@ class ForumController extends AbstractLocalizedController
     #[IsGranted('ROLE_USER')]
     public function markAsRead(Request $request, Forum $forum): Response
     {
-        if (!$this->isCsrfTokenValid('mark_forum_read_' . $forum->getId(), $request->request->get('_token'))) {
+        if (!$this->isCsrfTokenValid('mark_forum_read_' . $forum->getId(), $request->request->getString('_token'))) {
             throw $this->createAccessDeniedException();
         }
 
