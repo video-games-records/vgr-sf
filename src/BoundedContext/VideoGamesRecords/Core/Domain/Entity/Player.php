@@ -129,7 +129,7 @@ class Player
     private ?Team $team = null;
 
     #[ORM\Column(nullable: true)]
-    protected ?DateTime $lastDisplayLostPosition;
+    protected ?DateTime $lastDisplayLostPosition = null;
 
     #[ORM\Column(enumType: PlayerStatusEnum::class)]
     private PlayerStatusEnum $status;

@@ -35,7 +35,7 @@ final class GroupFactory extends PersistentObjectFactory
     {
         return static::new()->with([
             'name' => 'Player',
-            'roles' => ['ROLE_USER'],
+            'roles' => ['ROLE_PLAYER'],
         ]);
     }
 

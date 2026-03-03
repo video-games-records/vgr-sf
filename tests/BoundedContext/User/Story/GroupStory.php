@@ -15,10 +15,11 @@ final class GroupStory extends Story
 {
     public function build(): void
     {
-        // Groupe Player avec ID=2 (requis par CreatePlayerListener)
-        $this->addState('player', GroupFactory::player()->create(['id' => 2]));
-
-        // Autres groupes pour les tests
+        // id=1 : groupe quelconque (pour que le Player obtienne id=2)
+        // CreatePlayerListener::GROUP_PLAYER = 2 impose que le groupe Player soit à id=2
         $this->addState('admin', GroupFactory::admin()->create());
+
+        // id=2 : groupe Player (requis par CreatePlayerListener::GROUP_PLAYER = 2)
+        $this->addState('player', GroupFactory::player()->create());
     }
 }

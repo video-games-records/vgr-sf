@@ -76,6 +76,6 @@ final class UserProvider implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-        return $class === User::class;
+        return $class === User::class || is_a($class, User::class, true);
     }
 }
