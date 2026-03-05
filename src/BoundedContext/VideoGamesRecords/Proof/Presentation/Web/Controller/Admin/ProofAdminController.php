@@ -7,6 +7,8 @@ namespace App\BoundedContext\VideoGamesRecords\Proof\Presentation\Web\Controller
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Doctrine\ORM\EntityManagerInterface;
+use Intervention\Image\ImageManager;
+use League\Flysystem\FilesystemOperator;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +21,10 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
  */
 class ProofAdminController extends AbstractCRUDController
 {
-    public function __construct(private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FilesystemOperator $proofStorage,
+    ) {
     }
 
     /**
@@ -44,6 +48,51 @@ class ProofAdminController extends AbstractCRUDController
                 'stats' => $months,
             ]
         );
+    }
+
+    /**
+     * Rotate the proof picture 90° clockwise.
+     */
+    public function rotatePictureAction(Request $request): RedirectResponse
+    {
+        /** @var Proof $proof */
+        $proof = $this->assertObjectExists($request, true);
+        $this->admin->checkAccess('edit', $proof);
+
+        $picture = $proof->getPicture();
+
+        if ($picture === null) {
+            $this->addFlash(
+                'sonata_flash_error',
+                $this->trans('proof.picture.rotate.no_picture', [], 'VgrProofAdmin')
+            );
+            return new RedirectResponse($this->admin->generateUrl('edit', ['id' => $proof->getId()]));
+        }
+
+        $path = $picture->getPath();
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+
+        $imageData = $this->proofStorage->read($path);
+
+        $image = ImageManager::gd()->read($imageData);
+        $image->rotate(-90); // 90° clockwise
+
+        $encoded = match ($extension) {
+            'png' => $image->toPng(),
+            default => $image->toJpeg(85),
+        };
+
+        $imageString = (string) $encoded;
+        $this->proofStorage->write($path, $imageString);
+        $picture->setHash(hash('sha256', $imageString));
+        $this->em->flush();
+
+        $this->addFlash(
+            'sonata_flash_success',
+            $this->trans('proof.picture.rotate.success', [], 'VgrProofAdmin')
+        );
+
+        return new RedirectResponse($this->admin->generateUrl('edit', ['id' => $proof->getId()]));
     }
 
     /**

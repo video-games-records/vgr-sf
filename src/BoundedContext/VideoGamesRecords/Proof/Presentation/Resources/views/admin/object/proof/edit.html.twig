@@ -61,6 +61,13 @@
                                                 <img src="{{ path('vgr_proof_picture_show',{'id': object.picture.id}) }}" alt="{% trans %}proof.image.alt{% endtrans %}" class="img-responsive" style="max-height: 350px;" />
                                             </a>
                                         </div>
+                                        <div class="mt-2">
+                                            <a href="{{ admin.generateObjectUrl('rotate_picture', object) }}"
+                                               class="btn btn-xs btn-warning"
+                                               onclick="return confirm('{% trans from 'VgrProofAdmin' %}proof.picture.rotate.confirm{% endtrans %}')">
+                                                <i class="fa fa-rotate-right"></i> {% trans from 'VgrProofAdmin' %}proof.picture.rotate.label{% endtrans %}
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             {% endif %}

@@ -123,6 +123,12 @@ proof:
     refused: "La preuve de %player% a été refusée. Le joueur en sera notifié."
   unknown:
     player: "Joueur inconnu"
+  picture:
+    rotate:
+      label: "Pivoter de 90°"
+      confirm: "Faire pivoter cette image de 90° dans le sens des aiguilles d'une montre ?"
+      success: "Image pivotée avec succès."
+      no_picture: "Cette preuve n'a pas d'image à faire pivoter."
 
 proof_request:
   label: Demandes de preuve

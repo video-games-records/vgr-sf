@@ -83,7 +83,8 @@ class ProofAdmin extends BaseAdmin
             ->remove('create')
             ->remove('delete')
             ->remove('export')
-            ->add('stats', 'stats');
+            ->add('stats', 'stats')
+            ->add('rotate_picture', $this->getRouterIdParameter() . '/rotate-picture');
     }
 
 

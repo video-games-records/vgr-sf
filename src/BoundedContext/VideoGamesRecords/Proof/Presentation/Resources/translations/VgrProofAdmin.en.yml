@@ -605,6 +605,12 @@ proof:
     refused: "Proof from %player% has been refused. The player will be notified."
   unknown:
     player: "Unknown player"
+  picture:
+    rotate:
+      label: Rotate 90°
+      confirm: "Rotate this picture 90° clockwise?"
+      success: Picture rotated successfully.
+      no_picture: This proof has no picture to rotate.
 
 proof_request:
   label: Proof Requests
