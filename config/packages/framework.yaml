@@ -6,6 +6,9 @@ framework:
     session:
         cookie_lifetime: 28800
         gc_maxlifetime: 28800
+        cookie_secure: auto
+        cookie_httponly: true
+        cookie_samesite: lax
 
     #esi: true
     #fragments: true

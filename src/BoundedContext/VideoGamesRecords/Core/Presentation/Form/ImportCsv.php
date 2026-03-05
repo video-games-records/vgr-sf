@@ -43,9 +43,10 @@ Best Lap;Meilleur Tour;Black Circuit;Circuit noir;2",
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
-                        /*'mimeTypes' => [
+                        'mimeTypes' => [
                             'text/csv',
-                        ],*/
+                            'text/plain',
+                        ],
                         'mimeTypesMessage' => 'Please upload a valid CSV document',
                     ])
                 ],

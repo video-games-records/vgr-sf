@@ -84,6 +84,10 @@ class SendPicture extends AbstractController
             return new JsonResponse(['error' => 'Invalid base64 data'], Response::HTTP_BAD_REQUEST);
         }
 
+        if (strlen($imageData) > 5 * 1024 * 1024) {
+            return new JsonResponse(['error' => 'Image exceeds maximum size of 5MB'], Response::HTTP_BAD_REQUEST);
+        }
+
         $extension = $this->mimeToExtension[$mimeType] ?? 'jpg';
 
         $idPlayer = $player->getId();

@@ -29,7 +29,8 @@ class UserRepository extends ServiceEntityRepository
             ->where('u.username LIKE :q')
             ->setParameter('q', '%' . $q . '%')
             //->andWhere('u.enabled = 1')
-            ->orderBy('u.username', 'ASC');
+            ->orderBy('u.username', 'ASC')
+            ->setMaxResults(20);
 
         return $query->getQuery()->getResult();
     }

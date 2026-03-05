@@ -197,6 +197,10 @@ class ScoreFormController extends AbstractLocalizedController
      */
     private function handleSubmission(Request $request, \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player $player, string $redirectUrl): Response
     {
+        if (!$this->isCsrfTokenValid('score_form', $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Invalid CSRF token.');
+        }
+
         $formData = $request->request->all('scores');
 
         if (empty($formData)) {
