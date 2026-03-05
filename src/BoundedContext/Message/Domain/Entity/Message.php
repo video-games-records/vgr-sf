@@ -33,7 +33,7 @@ class Message
     private string $object;
 
     #[ORM\Column(type:'text', nullable: true)]
-    private ?string $message;
+    private ?string $message = null;
 
     #[Assert\Length(max: 50)]
     #[ORM\Column(length: 50, nullable: false, options: ['default' => 'DEFAULT'])]

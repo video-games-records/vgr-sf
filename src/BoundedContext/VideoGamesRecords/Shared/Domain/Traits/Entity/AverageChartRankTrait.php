@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait AverageChartRankTrait
 {
     #[ORM\Column(nullable: true)]
-    private ?float $averageChartRank;
+    private ?float $averageChartRank = null;
 
     public function setAverageChartRank(float $averageChartRank): void
     {

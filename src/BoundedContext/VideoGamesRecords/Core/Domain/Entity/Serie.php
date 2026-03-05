@@ -58,7 +58,7 @@ class Serie
 
     #[ORM\OneToOne(targetEntity: SerieBadge::class, cascade: ['persist', 'remove'], inversedBy: 'serie')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
-    private ?SerieBadge $badge;
+    private ?SerieBadge $badge = null;
 
     /**
      * @var Collection<string, SerieTranslation>

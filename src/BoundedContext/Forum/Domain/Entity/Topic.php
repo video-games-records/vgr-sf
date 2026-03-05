@@ -56,7 +56,7 @@ class Topic
 
     #[ORM\ManyToOne(targetEntity: Message::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name:'max_message_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
-    private ?Message $lastMessage;
+    private ?Message $lastMessage = null;
 
     #[ORM\Column(nullable: false, options: ['default' => false])]
     private bool $boolArchive = false;

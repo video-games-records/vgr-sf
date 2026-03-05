@@ -85,7 +85,7 @@ class Team
     #[Assert\Length(max: 255)]
     #[Assert\Url(protocols: ['https', 'http'])]
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $siteWeb;
+    private ?string $siteWeb = null;
 
     #[Assert\Length(max: 30)]
     #[ORM\Column(length: 30, nullable: false, options: ['default' => 'default.png'])]
@@ -93,7 +93,7 @@ class Team
 
 
     #[ORM\Column(type: 'text', length: 30, nullable: true)]
-    private ?string $presentation;
+    private ?string $presentation = null;
 
 
     #[Assert\Choice(choices: ['CLOSED', 'OPENED'])]

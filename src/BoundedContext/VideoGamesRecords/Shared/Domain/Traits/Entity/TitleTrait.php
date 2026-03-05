@@ -11,7 +11,7 @@ trait TitleTrait
 {
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $title;
+    private ?string $title = null;
 
     public function setTitle(?string $title): void
     {

@@ -30,7 +30,7 @@ class Rule
 
     #[ORM\ManyToOne(targetEntity: Player::class)]
     #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', nullable:true)]
-    private ?Player $player;
+    private ?Player $player = null;
 
     /**
      * @var Collection<int, Game>

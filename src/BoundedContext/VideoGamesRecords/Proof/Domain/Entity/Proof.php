@@ -55,7 +55,7 @@ class Proof
     private Chart $chart;
 
     #[ORM\Column(nullable: true)]
-    private ?DateTime $checkedAt;
+    private ?DateTime $checkedAt = null;
 
     #[ORM\OneToOne(targetEntity: PlayerChart::class, mappedBy: 'proof')]
     private ?PlayerChart $playerChart = null;

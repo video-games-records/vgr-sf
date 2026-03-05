@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait PictureTrait
 {
     #[ORM\Column(length: 200, nullable: true)]
-    private ?string $picture;
+    private ?string $picture = null;
 
     public function setPicture(?string $picture = null): void
     {

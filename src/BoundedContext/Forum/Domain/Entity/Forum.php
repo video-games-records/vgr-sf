@@ -30,7 +30,7 @@ class Forum
 
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $libForumFr;
+    private ?string $libForumFr = null;
 
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $position = 0;
@@ -53,7 +53,7 @@ class Forum
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'forums')]
     #[ORM\JoinColumn(name:'category_id', referencedColumnName:'id', nullable:true)]
-    private ?Category $category;
+    private ?Category $category = null;
 
     /**
      * @var Collection<int, Topic>
@@ -63,7 +63,7 @@ class Forum
 
     #[ORM\ManyToOne(targetEntity: Message::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name:'max_message_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
-    private ?Message $lastMessage;
+    private ?Message $lastMessage = null;
 
     /**
      * @var Collection<int, ForumUserLastVisit>

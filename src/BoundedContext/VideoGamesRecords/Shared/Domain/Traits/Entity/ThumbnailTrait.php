@@ -11,7 +11,7 @@ trait ThumbnailTrait
 {
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $thumbnail;
+    private ?string $thumbnail = null;
 
     public function setThumbnail(?string $thumbnail): void
     {

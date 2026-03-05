@@ -11,20 +11,20 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Country;
 trait PlayerPersonalDataTrait
 {
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $presentation;
+    private ?string $presentation = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $collection;
+    private ?string $collection = null;
 
     #[ORM\Column(type: 'date', nullable: true)]
-    protected ?DateTime $birthDate;
+    protected ?DateTime $birthDate = null;
 
     #[ORM\Column(nullable: false, length: 1, options: ['default' => 'I'])]
     protected string $gender = 'I';
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
     #[ORM\JoinColumn(name:'country_id', referencedColumnName:'id', nullable:true)]
-    protected ?Country $country;
+    protected ?Country $country = null;
 
     #[ORM\Column(nullable: false, options: ['default' => false])]
     private bool $displayPersonalInfos = false;

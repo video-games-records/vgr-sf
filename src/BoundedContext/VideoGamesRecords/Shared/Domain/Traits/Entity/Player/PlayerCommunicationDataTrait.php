@@ -11,19 +11,19 @@ trait PlayerCommunicationDataTrait
 {
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    protected ?string $website;
+    protected ?string $website = null;
 
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    protected ?string $youtube;
+    protected ?string $youtube = null;
 
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    protected ?string $twitch;
+    protected ?string $twitch = null;
 
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    protected ?string $discord;
+    protected ?string $discord = null;
 
     public function getWebsite(): ?string
     {

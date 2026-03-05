@@ -58,7 +58,7 @@ class Game implements GameInfoInterface
 
     #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $downloadUrl;
+    private ?string $downloadUrl = null;
 
     #[ORM\Column(length: 30, nullable: false, options: ['default' => GameStatus::CREATED])]
     private string $status = GameStatus::CREATED;
@@ -99,7 +99,7 @@ class Game implements GameInfoInterface
 
     #[ORM\OneToOne(targetEntity: PlayerChart::class)]
     #[ORM\JoinColumn(name:'last_score_id', referencedColumnName:'id', nullable:true)]
-    private ?PlayerChart $lastScore;
+    private ?PlayerChart $lastScore = null;
 
     #[ORM\Column(length: 255)]
     #[Gedmo\Slug(fields: ['libGameEn'])]

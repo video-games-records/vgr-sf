@@ -20,7 +20,7 @@ class ChartLib
 
     #[Assert\Length(max: 100)]
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $name;
+    private ?string $name = null;
 
     #[ORM\ManyToOne(targetEntity: Chart::class, inversedBy: 'libs')]
     #[ORM\JoinColumn(name:'chart_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]

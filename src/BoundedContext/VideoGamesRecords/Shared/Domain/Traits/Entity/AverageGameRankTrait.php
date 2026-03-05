@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait AverageGameRankTrait
 {
     #[ORM\Column(nullable: true)]
-    private ?float $averageGameRank;
+    private ?float $averageGameRank = null;
 
     public function setAverageGameRank(float $averageGameRank): void
     {

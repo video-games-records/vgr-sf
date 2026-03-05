@@ -40,7 +40,7 @@ class Country
 
     #[ORM\OneToOne(targetEntity: CountryBadge::class, cascade: ['persist'], inversedBy: 'country')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
-    private ?CountryBadge $badge;
+    private ?CountryBadge $badge = null;
 
     /** @var Collection<string, CountryTranslation> */
     #[ORM\OneToMany(

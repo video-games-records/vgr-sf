@@ -18,7 +18,7 @@ class ChartType
 
     #[Assert\Length(max: 100)]
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $name;
+    private ?string $name = null;
 
     #[Assert\Length(max: 100)]
     #[ORM\Column(length: 100, nullable: false)]

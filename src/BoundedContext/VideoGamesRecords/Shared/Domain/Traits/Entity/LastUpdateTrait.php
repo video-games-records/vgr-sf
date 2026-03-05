@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait LastUpdateTrait
 {
     #[ORM\Column(nullable: true)]
-    private ?DateTime $lastUpdate;
+    private ?DateTime $lastUpdate = null;
 
     public function setLastUpdate(?DateTime $lastUpdate): void
     {

@@ -47,7 +47,7 @@ class Platform
 
     #[ORM\OneToOne(targetEntity: PlatformBadge::class, cascade: ['persist'], inversedBy: 'platform')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
-    private ?PlatformBadge $badge;
+    private ?PlatformBadge $badge = null;
 
     public function __construct()
     {
