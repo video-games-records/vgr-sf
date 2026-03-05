@@ -1,0 +1,53 @@
+field:
+  id: ID
+  name: Nom
+  slug: Slug
+  url: URL
+  checksum: Checksum
+  created_at: Créé le
+  updated_at: Modifié le
+  game:
+    name: Nom
+    first_release_date: Date de sortie
+    version_parent: Jeu parent
+    genres: Genres
+    platforms: Plate-formes
+    storyline: Histoire
+    summary: Résumé
+  platform:
+    name: Nom
+    abbreviation: Abréviation
+    generation: Génération
+    platform_type: Type de plate-forme
+    alternative_name: Nom alternatif
+    summary: Résumé
+    platform_logo: Logo
+  platform_logo:
+    image_id: "ID de l'image"
+    alpha_channel: Canal alpha
+    animated: Animé
+    width: Largeur
+    height: Hauteur
+    url: URL
+
+genre:
+  label: Genres
+
+platform_type:
+  label: Types de plate-formes
+
+platform_logo:
+  label: Logos de plate-formes
+
+platform:
+  label: Plate-formes
+
+game:
+  label: Jeux
+
+breadcrumb:
+  link_game_list: 'Liste des jeux'
+  link_genre_list: 'Liste des genres'
+  link_platform_list: 'Liste des plate-formes'
+  link_platform_type_list: 'Liste des types de plate-formes'
+  link_platform_logo_list: 'Liste des logos de plate-formes'
