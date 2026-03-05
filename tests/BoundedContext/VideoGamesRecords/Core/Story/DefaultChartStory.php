@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Story;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\ChartFactory;
 use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\ChartLibFactory;
-use App\Tests\BoundedContext\VideoGamesRecords\Core\Story\DefaultGroupStory;
 use App\Tests\BoundedContext\VideoGamesRecords\Core\Story\DefaultChartTypeStory;
+use App\Tests\BoundedContext\VideoGamesRecords\Core\Story\DefaultGroupStory;
 use Zenstruck\Foundry\Story;
 
 final class DefaultChartStory extends Story
@@ -209,89 +210,89 @@ final class DefaultChartStory extends Story
     }
 
     // Super Mario Odyssey charts
-    public static function marioAnyPercent(): object
+    public static function marioAnyPercent(): Chart
     {
         return static::get('marioAnyPercent');
     }
 
-    public static function mario100Percent(): object
+    public static function mario100Percent(): Chart
     {
         return static::get('mario100Percent');
     }
 
-    public static function marioMostMoons(): object
+    public static function marioMostMoons(): Chart
     {
         return static::get('marioMostMoons');
     }
 
-    public static function marioMoonRockCollection(): object
+    public static function marioMoonRockCollection(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Moon Rock Collection']);
     }
 
     // Zelda BOTW charts
-    public static function zeldaAnyPercent(): object
+    public static function zeldaAnyPercent(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Any% Speedrun', 'group' => DefaultGroupStory::zeldaMainQuest()]);
     }
 
-    public static function zelda100Percent(): object
+    public static function zelda100Percent(): Chart
     {
         return ChartFactory::find(['libChartEn' => '100% Speedrun', 'group' => DefaultGroupStory::zeldaMainQuest()]);
     }
 
-    public static function zeldaAllShrines(): object
+    public static function zeldaAllShrines(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'All Shrines']);
     }
 
-    public static function zeldaSideQuests(): object
+    public static function zeldaSideQuests(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'All Side Quests']);
     }
 
-    public static function zeldaKorokSeeds(): object
+    public static function zeldaKorokSeeds(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Korok Seeds']);
     }
 
-    public static function zeldaTrialOfSword(): object
+    public static function zeldaTrialOfSword(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Trial of the Sword']);
     }
 
-    public static function zeldaChampionsBallad(): object
+    public static function zeldaChampionsBallad(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Champion\'s Ballad Speedrun']);
     }
 
     // Hollow Knight charts
-    public static function hollowKnightAnyPercent(): object
+    public static function hollowKnightAnyPercent(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Any% Speedrun', 'group' => DefaultGroupStory::hollowKnightBase()]);
     }
 
-    public static function hollowKnight112Percent(): object
+    public static function hollowKnight112Percent(): Chart
     {
         return ChartFactory::find(['libChartEn' => '112% Speedrun']);
     }
 
-    public static function hollowKnightAllBosses(): object
+    public static function hollowKnightAllBosses(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'All Bosses']);
     }
 
-    public static function hollowKnightCompletion(): object
+    public static function hollowKnightCompletion(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Completion Percentage']);
     }
 
-    public static function hollowKnightSteelSoulAny(): object
+    public static function hollowKnightSteelSoulAny(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Steel Soul Any%']);
     }
 
-    public static function hollowKnightSteelSoul100(): object
+    public static function hollowKnightSteelSoul100(): Chart
     {
         return ChartFactory::find(['libChartEn' => 'Steel Soul 100%']);
     }

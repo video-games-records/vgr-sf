@@ -6,7 +6,7 @@ namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Functional\Web;
 
 use App\BoundedContext\User\Domain\Entity\User;
 use App\Tests\BoundedContext\User\Story\AdminUserStory;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -32,8 +32,9 @@ abstract class AbstractWebFunctionalTestCase extends WebTestCase
     {
         $proxy = AdminUserStory::regularUser();
 
-        /** @var EntityManagerInterface $em */
-        $em = self::getContainer()->get('doctrine')->getManager();
+        /** @var ManagerRegistry $doctrine */
+        $doctrine = self::getContainer()->get('doctrine');
+        $em = $doctrine->getManager();
 
         /** @var User $user */
         $user = $em->find(User::class, $proxy->getId());

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\User\Story;
 
+use App\BoundedContext\User\Domain\Entity\User;
 use App\Tests\BoundedContext\User\Factory\UserFactory;
 use Zenstruck\Foundry\Story;
 
@@ -33,7 +34,7 @@ final class AdminUserStory extends Story
     /**
      * Get the main admin user
      */
-    public static function adminUser(): object
+    public static function adminUser(): User
     {
         return UserFactory::find(['username' => 'admin']);
     }
@@ -41,7 +42,7 @@ final class AdminUserStory extends Story
     /**
      * Get the moderator user
      */
-    public static function moderatorUser(): object
+    public static function moderatorUser(): User
     {
         return UserFactory::find(['username' => 'moderator']);
     }
@@ -49,7 +50,7 @@ final class AdminUserStory extends Story
     /**
      * Get the regular user
      */
-    public static function regularUser(): object
+    public static function regularUser(): User
     {
         return UserFactory::find(['username' => 'user']);
     }

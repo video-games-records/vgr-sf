@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Story;
 
-use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\GroupFactory;
-use App\Tests\BoundedContext\VideoGamesRecords\Core\Story\DefaultGameStory;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GroupOrderBy;
+use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\GroupFactory;
 use Zenstruck\Foundry\Story;
 
 final class DefaultGroupStory extends Story
@@ -99,42 +99,42 @@ final class DefaultGroupStory extends Story
             ->create();
     }
 
-    public static function marioMainGame(): object
+    public static function marioMainGame(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'Main Game']);
     }
 
-    public static function marioMoonRocks(): object
+    public static function marioMoonRocks(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'Moon Rocks']);
     }
 
-    public static function zeldaMainQuest(): object
+    public static function zeldaMainQuest(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'Main Quest']);
     }
 
-    public static function zeldaSideQuests(): object
+    public static function zeldaSideQuests(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'Side Quests']);
     }
 
-    public static function zeldaMasterTrials(): object
+    public static function zeldaMasterTrials(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'DLC - The Master Trials']);
     }
 
-    public static function zeldaChampionsBallad(): object
+    public static function zeldaChampionsBallad(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'DLC - The Champions\' Ballad']);
     }
 
-    public static function hollowKnightBase(): object
+    public static function hollowKnightBase(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'Base Game']);
     }
 
-    public static function hollowKnightSteelSoul(): object
+    public static function hollowKnightSteelSoul(): Group
     {
         return GroupFactory::find(['libGroupEn' => 'Steel Soul Mode']);
     }
