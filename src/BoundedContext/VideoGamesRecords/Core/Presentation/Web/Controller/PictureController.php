@@ -6,7 +6,6 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
-use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Attribute\Cache;
@@ -16,14 +15,11 @@ class PictureController
 {
     private FilesystemOperator $appStorage;
 
-    public function __construct(FilesystemOperator $appStorage)
+    public function __construct(FilesystemOperator $appStorage, private readonly string $projectDir)
     {
         $this->appStorage = $appStorage;
     }
 
-    /**
-     * @throws FilesystemException
-     */
     #[Route(
         '/game/{id}/picture',
         name: 'vgr_core_game_picture',
@@ -33,15 +29,11 @@ class PictureController
     #[Cache(maxage: 31536000, public: true)]
     public function game(Game $game): StreamedResponse
     {
-        $prefix = 'game/';
-        $response = $this->getFile($prefix . $game->getPicture(), $prefix . 'default.png');
+        $response = $this->getFile('game/' . $game->getPicture(), $this->projectDir . '/assets/img/default/game.png');
         $response->headers->set('Cache-Control', 'public, max-age=31536000, immutable');
         return $response;
     }
 
-    /**
-     * @throws FilesystemException
-     */
     #[Route(
         '/serie/{id}/picture',
         name: 'vgr_core_serie_picture',
@@ -51,24 +43,26 @@ class PictureController
     #[Cache(maxage: 31536000, public: true)]
     public function serie(Serie $serie): StreamedResponse
     {
-        $prefix = 'series/picture/';
-        $response = $this->getFile($prefix . $serie->getPicture(), $prefix . 'default.png');
+        $response = $this->getFile('series/picture/' . $serie->getPicture(), $this->projectDir . '/assets/img/default/serie.png');
         $response->headers->set('Cache-Control', 'public, max-age=31536000, immutable');
         return $response;
     }
 
-    /**
-     * @throws FilesystemException
-     */
-    private function getFile(string $path, string $default): StreamedResponse
+    private function getFile(string $path, string $defaultAssetPath): StreamedResponse
     {
-        if (!$this->appStorage->fileExists($path)) {
-            $path = $default;
+        if ($this->appStorage->fileExists($path)) {
+            $stream = $this->appStorage->readStream($path);
+            return new StreamedResponse(function () use ($stream) {
+                fpassthru($stream);
+            }, 200, ['Content-Type' => 'image/png']);
         }
 
-        $stream = $this->appStorage->readStream($path);
-        return new StreamedResponse(function () use ($stream) {
-            fpassthru($stream);
+        return new StreamedResponse(function () use ($defaultAssetPath) {
+            $handle = fopen($defaultAssetPath, 'rb');
+            if ($handle !== false) {
+                fpassthru($handle);
+                fclose($handle);
+            }
         }, 200, ['Content-Type' => 'image/png']);
     }
 }

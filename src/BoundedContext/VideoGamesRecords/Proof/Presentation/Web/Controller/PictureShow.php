@@ -21,7 +21,7 @@ class PictureShow extends AbstractController
         'jpg' => 'image/jpeg'
     ];
 
-    public function __construct(FilesystemOperator $proofStorage)
+    public function __construct(FilesystemOperator $proofStorage, private readonly string $projectDir)
     {
         $this->proofStorage = $proofStorage;
     }
@@ -35,11 +35,23 @@ class PictureShow extends AbstractController
     #[Cache(maxage: 3600 * 24, public: true, mustRevalidate: true)]
     public function __invoke(Picture $picture): StreamedResponse
     {
-        $stream = $this->proofStorage->readStream($picture->getPath());
-        return new StreamedResponse(function () use ($stream) {
-            fpassthru($stream);
+        if ($this->proofStorage->fileExists($picture->getPath())) {
+            $stream = $this->proofStorage->readStream($picture->getPath());
+            return new StreamedResponse(function () use ($stream) {
+                fpassthru($stream);
+                exit();
+            }, 200, ['Content-Type' => $this->getMimeType($picture->getPath())]);
+        }
+
+        $defaultPath = $this->projectDir . '/assets/img/default/proof.png';
+        return new StreamedResponse(function () use ($defaultPath) {
+            $handle = fopen($defaultPath, 'rb');
+            if ($handle !== false) {
+                fpassthru($handle);
+                fclose($handle);
+            }
             exit();
-        }, 200, ['Content-Type' => $this->getMimeType($picture->getPath())]);
+        }, 200, ['Content-Type' => 'image/png']);
     }
 
     private function getMimeType(string $file): string

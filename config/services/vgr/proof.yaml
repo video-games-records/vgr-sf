@@ -8,6 +8,10 @@ services:
         resource: '../../../src/BoundedContext/VideoGamesRecords/Proof/*'
 
 
+    App\BoundedContext\VideoGamesRecords\Proof\Presentation\Web\Controller\PictureShow:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
     # Sonata Block Services
     admin.block.service.proof.games:
         class: App\BoundedContext\VideoGamesRecords\Proof\Presentation\Block\Service\ProofGamesBlockService
