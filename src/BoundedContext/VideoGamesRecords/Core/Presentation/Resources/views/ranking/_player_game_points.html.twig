@@ -22,13 +22,12 @@
                     <td class="align-middle">
                         {{ component('player_link', {
                             player: playerGame.player,
-                            bold: loop.index <= 3,
                             showTeam: true,
                             showCountry: true,
                             showAvatar: false
                         }) }}
                     </td>
-                    <td class="text-end align-middle {% if loop.index <= 3 %}fw-bold{% endif %}">
+                    <td class="text-end align-middle">
                         {{ playerGame.pointChart|number_format(0, '.', ',') }}
                     </td>
                     <td class="text-center align-middle">{{ playerGame.nbChart }}</td>
