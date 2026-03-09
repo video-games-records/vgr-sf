@@ -37,6 +37,8 @@ security:
                 secret: '%env(APP_SECRET)%'
                 lifetime: 2629746
                 path: /admin
+            login_throttling:
+                limiter: limiter.login
 
         api:
             pattern: ^/api
@@ -49,6 +51,8 @@ security:
             jwt: ~
             #refresh_jwt:
             #    check_path: /api/token/refresh # or, you may use the `api_refresh_token` route name
+            login_throttling:
+                limiter: limiter.api_login
 
         main:
             lazy: true
@@ -65,6 +69,8 @@ security:
             remember_me:
                 secret: '%env(APP_SECRET)%'
                 lifetime: 2629746
+            login_throttling:
+                limiter: limiter.login
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall

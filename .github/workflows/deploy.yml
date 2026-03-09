@@ -28,6 +28,9 @@ jobs:
             - name: Install PHP dependencies
               run: APP_ENV=prod composer install --no-dev --optimize-autoloader
 
+            - name: Security audit
+              run: composer audit
+
             - uses: actions/setup-node@v4
               with:
                   node-version: 'lts/*'
@@ -41,6 +44,8 @@ jobs:
                   echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
                   chmod 600 ~/.ssh/id_ed25519
                   ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+                  eval $(ssh-agent -a /tmp/ssh_agent.sock)
+                  ssh-add ~/.ssh/id_ed25519
               env:
                   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
@@ -48,9 +53,9 @@ jobs:
               run: cp public/robots.${{ inputs.environment || 'staging' }}.txt public/robots.txt
 
             - name: Deploy
+              env:
+                  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
               run: |
-                  eval $(ssh-agent -a /tmp/ssh_agent.sock)
-                  ssh-add ~/.ssh/id_ed25519
                   rsync -azv --delete \
                     -e "ssh -p ${{ secrets.SSH_PORT }}" \
                     --exclude='.git' \
@@ -58,11 +63,26 @@ jobs:
                     --exclude='var/' \
                     --exclude='.env.local' \
                     ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
-                  ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DEPLOY_PATH }} && php bin/console cache:clear"
+                  ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+                    "cd ${{ secrets.DEPLOY_PATH }} && php bin/console cache:clear && php bin/console cache:warmup"
 
             - name: Compile assets (production only)
               if: ${{ (inputs.environment || 'staging') == 'production' }}
+              env:
+                  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
               run: |
-                  eval $(ssh-agent -a /tmp/ssh_agent.sock)
-                  ssh-add ~/.ssh/id_ed25519
-                  ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DEPLOY_PATH }} && php bin/console asset-map:compile"
+                  ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+                    "cd ${{ secrets.DEPLOY_PATH }} && php bin/console asset-map:compile"
+
+            - name: Notify Discord
+              if: always() && (inputs.environment || 'staging') == 'production'
+              run: |
+                  STATUS="${{ job.status }}"
+                  if [ "$STATUS" = "success" ]; then
+                    MSG="🚀 **VGR deployed to production!**"
+                  else
+                    MSG="❌ **VGR deployment FAILED!**"
+                  fi
+                  curl -X POST "${{ secrets.DISCORD_WEBHOOK_URL }}" \
+                    -H "Content-Type: application/json" \
+                    -d "{\"content\": \"$MSG\"}"

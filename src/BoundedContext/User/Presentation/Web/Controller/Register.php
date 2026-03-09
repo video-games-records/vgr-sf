@@ -12,6 +12,8 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
@@ -19,7 +21,8 @@ class Register extends AbstractLocalizedController
 {
     public function __construct(
         private readonly UserRegistrationService $registrationService,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly RateLimiterFactoryInterface $registerLimiter,
     ) {
     }
 
@@ -29,6 +32,11 @@ class Register extends AbstractLocalizedController
         // Redirect authenticated users away from registration page
         if ($this->getUser()) {
             return $this->redirectToRoute('app_login');
+        }
+
+        $limiter = $this->registerLimiter->create($request->getClientIp());
+        if (!$limiter->consume()->isAccepted()) {
+            throw new TooManyRequestsHttpException();
         }
 
         $user = new User();
