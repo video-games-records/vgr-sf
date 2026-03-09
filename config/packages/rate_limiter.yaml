@@ -1,19 +1,13 @@
 framework:
     rate_limiter:
-        # Login web : 5 tentatives / 15 min par IP
-        login:
-            policy: sliding_window
-            limit: 5
-            interval: '15 minutes'
-
         # Register : 3 comptes / heure par IP
         register:
             policy: sliding_window
             limit: 3
             interval: '1 hour'
 
-        # API login (JWT) : 10 tentatives / 15 min par IP
-        api_login:
-            policy: sliding_window
-            limit: 10
-            interval: '15 minutes'
+when@test:
+    framework:
+        rate_limiter:
+            register:
+                policy: no_limit

@@ -89,8 +89,8 @@ db-test: ## Create test database with fixtures
 test: ## Lance les tests
 	php bin/phpunit
 
-test-coverage: ## Lance les tests avec couverture de code
-	XDEBUG_MODE=coverage php bin/phpunit --coverage-html var/coverage
+test-coverage: ## Lance les tests avec couverture de code (PCOV)
+	php -d pcov.enabled=1 bin/phpunit --coverage-html var/coverage
 
 test-vgr-core-api: ## Run VideoGamesRecords Core API tests only
 	@echo "$(GREEN)Running VideoGamesRecords Core API tests...$(RESET)"

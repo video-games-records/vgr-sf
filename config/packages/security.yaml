@@ -38,7 +38,8 @@ security:
                 lifetime: 2629746
                 path: /admin
             login_throttling:
-                limiter: limiter.login
+                max_attempts: 5
+                interval: '15 minutes'
 
         api:
             pattern: ^/api
@@ -52,7 +53,8 @@ security:
             #refresh_jwt:
             #    check_path: /api/token/refresh # or, you may use the `api_refresh_token` route name
             login_throttling:
-                limiter: limiter.api_login
+                max_attempts: 10
+                interval: '15 minutes'
 
         main:
             lazy: true
@@ -70,7 +72,8 @@ security:
                 secret: '%env(APP_SECRET)%'
                 lifetime: 2629746
             login_throttling:
-                limiter: limiter.login
+                max_attempts: 5
+                interval: '15 minutes'
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall

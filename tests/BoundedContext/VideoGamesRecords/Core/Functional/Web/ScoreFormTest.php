@@ -41,7 +41,10 @@ class ScoreFormTest extends AbstractWebFunctionalTestCase
         $this->client->loginUser($user, 'user');
 
         $url = sprintf('/en/game/%d-%s/scores', $game->getId(), $game->getSlug());
-        $this->client->request('POST', $url, []);
+        $crawler = $this->client->request('GET', $url);
+
+        $form = $crawler->filter('form#score-form')->form();
+        $this->client->submit($form, []);
 
         // Empty submission redirects back (URL may include query params like ?page=1)
         $this->assertResponseRedirects();
