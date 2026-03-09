@@ -16,8 +16,9 @@ trait PointGameTrait
         return $this->pointGame;
     }
 
-    public function setPointGame(int $pointGame): void
+    public function setPointGame(int $pointGame): static
     {
         $this->pointGame = $pointGame;
+        return $this;
     }
 }

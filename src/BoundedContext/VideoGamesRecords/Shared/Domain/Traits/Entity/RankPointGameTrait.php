@@ -11,9 +11,10 @@ trait RankPointGameTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $rankPointGame = 0;
 
-    public function setRankPointGame(int $rankPointGame): void
+    public function setRankPointGame(int $rankPointGame): static
     {
         $this->rankPointGame = $rankPointGame;
+        return $this;
     }
 
     public function getRankPointGame(): int

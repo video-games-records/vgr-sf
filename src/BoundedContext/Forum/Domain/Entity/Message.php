@@ -45,9 +45,10 @@ class Message
         return $this->id;
     }
 
-    public function setMessage(string $message): void
+    public function setMessage(string $message): static
     {
         $this->message = $message;
+        return $this;
     }
 
     public function getMessage(): string
@@ -55,9 +56,10 @@ class Message
         return $this->message;
     }
 
-    public function setTopic(Topic $topic): void
+    public function setTopic(Topic $topic): static
     {
         $this->topic = $topic;
+        return $this;
     }
 
     public function getTopic(): Topic
@@ -65,9 +67,10 @@ class Message
         return $this->topic;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getUser(): User
@@ -75,9 +78,10 @@ class Message
         return $this->user;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(int $position): static
     {
         $this->position = $position;
+        return $this;
     }
 
     public function getPosition(): int

@@ -10,9 +10,10 @@ trait SetSecurity
 {
     private Security $security;
 
-    public function setSecurity(Security $security): void
+    public function setSecurity(Security $security): static
     {
         $this->security = $security;
+        return $this;
     }
 
     public function getSecurity(): Security

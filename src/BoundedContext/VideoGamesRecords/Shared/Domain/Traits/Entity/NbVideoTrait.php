@@ -11,9 +11,10 @@ trait NbVideoTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbVideo = 0;
 
-    public function setNbVideo(int $nbVideo): void
+    public function setNbVideo(int $nbVideo): static
     {
         $this->nbVideo = $nbVideo;
+        return $this;
     }
 
     public function getNbVideo(): int

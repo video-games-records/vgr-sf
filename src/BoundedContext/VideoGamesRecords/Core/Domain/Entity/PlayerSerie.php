@@ -56,9 +56,10 @@ class PlayerSerie
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $pointGame;
 
-    public function setPointChartWithoutDlc(int $pointChartWithoutDlc): void
+    public function setPointChartWithoutDlc(int $pointChartWithoutDlc): static
     {
         $this->pointChartWithoutDlc = $pointChartWithoutDlc;
+        return $this;
     }
 
     public function getPointChartWithoutDlc(): int
@@ -66,9 +67,10 @@ class PlayerSerie
         return $this->pointChartWithoutDlc;
     }
 
-    public function setPointGame(int $pointGame): void
+    public function setPointGame(int $pointGame): static
     {
         $this->pointGame = $pointGame;
+        return $this;
     }
 
     public function getPointGame(): int
@@ -76,9 +78,10 @@ class PlayerSerie
         return $this->pointGame;
     }
 
-    public function setSerie(Serie $serie): void
+    public function setSerie(Serie $serie): static
     {
         $this->serie = $serie;
+        return $this;
     }
 
     public function getSerie(): Serie
@@ -86,9 +89,10 @@ class PlayerSerie
         return $this->serie;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player

@@ -38,9 +38,10 @@ class PlatformType
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -48,9 +49,10 @@ class PlatformType
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getChecksum(): ?string
@@ -58,9 +60,10 @@ class PlatformType
         return $this->checksum;
     }
 
-    public function setChecksum(?string $checksum): void
+    public function setChecksum(?string $checksum): static
     {
         $this->checksum = $checksum;
+        return $this;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
@@ -68,9 +71,10 @@ class PlatformType
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function getUpdatedAt(): \DateTimeImmutable
@@ -78,9 +82,10 @@ class PlatformType
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     public function __toString(): string

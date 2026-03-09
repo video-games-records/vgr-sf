@@ -11,9 +11,10 @@ trait IsDlcTrait
     #[ORM\Column(nullable: false, options: ['default' => false])]
     private bool $isDlc = false;
 
-    public function setIsDlc(bool $isDlc): void
+    public function setIsDlc(bool $isDlc): static
     {
         $this->isDlc = $isDlc;
+        return $this;
     }
 
     public function getIsDlc(): bool

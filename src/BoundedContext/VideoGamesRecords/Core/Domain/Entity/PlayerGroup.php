@@ -46,9 +46,10 @@ class PlayerGroup
     #[ORM\JoinColumn(name:'group_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
     private Group $group;
 
-    public function setGroup(Group $group): void
+    public function setGroup(Group $group): static
     {
         $this->group = $group;
+        return $this;
     }
 
     public function getGroup(): Group
@@ -56,9 +57,10 @@ class PlayerGroup
         return $this->group;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player

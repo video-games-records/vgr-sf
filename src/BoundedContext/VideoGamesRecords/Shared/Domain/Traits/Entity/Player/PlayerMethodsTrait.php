@@ -8,9 +8,10 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 
 trait PlayerMethodsTrait
 {
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player

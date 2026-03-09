@@ -48,9 +48,10 @@ class Team
         return sprintf('%s [%s]', $this->id, $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): int
@@ -59,10 +60,11 @@ class Team
     }
 
     /** @param array<string, mixed> $row */
-    public function setFromArray(array $row): void
+    public function setFromArray(array $row): static
     {
         foreach ($row as $key => $value) {
             $this->$key = $value;
         }
+        return $this;
     }
 }

@@ -16,8 +16,9 @@ trait NbMasterBadgeTrait
         return $this->nbMasterBadge;
     }
 
-    public function setNbMasterBadge(int $nbMasterBadge): void
+    public function setNbMasterBadge(int $nbMasterBadge): static
     {
         $this->nbMasterBadge = $nbMasterBadge;
+        return $this;
     }
 }

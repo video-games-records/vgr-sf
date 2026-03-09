@@ -11,9 +11,10 @@ trait ViewCountTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $viewCount = 0;
 
-    public function setViewCount(int $viewCount): void
+    public function setViewCount(int $viewCount): static
     {
         $this->viewCount = $viewCount;
+        return $this;
     }
 
     public function getViewCount(): int

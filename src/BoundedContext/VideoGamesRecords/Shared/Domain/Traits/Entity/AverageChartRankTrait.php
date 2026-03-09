@@ -11,9 +11,10 @@ trait AverageChartRankTrait
     #[ORM\Column(nullable: true)]
     private ?float $averageChartRank = null;
 
-    public function setAverageChartRank(float $averageChartRank): void
+    public function setAverageChartRank(float $averageChartRank): static
     {
         $this->averageChartRank = $averageChartRank;
+        return $this;
     }
 
     public function getAverageChartRank(): ?float

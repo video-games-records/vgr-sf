@@ -11,9 +11,10 @@ trait DescriptionTrait
     #[ORM\Column(nullable: true, type: 'text')]
     private ?string $description = null;
 
-    public function setDescription(?string $description): void
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
+        return $this;
     }
 
     public function getDescription(): ?string

@@ -52,9 +52,10 @@ class TopicUserLastVisit
         return $this->id;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getUser(): User
@@ -62,9 +63,10 @@ class TopicUserLastVisit
         return $this->user;
     }
 
-    public function setTopic(Topic $topic): void
+    public function setTopic(Topic $topic): static
     {
         $this->topic = $topic;
+        return $this;
     }
 
     public function getTopic(): Topic
@@ -72,9 +74,10 @@ class TopicUserLastVisit
         return $this->topic;
     }
 
-    public function setLastVisitedAt(\DateTime $lastVisitedAt): void
+    public function setLastVisitedAt(\DateTime $lastVisitedAt): static
     {
         $this->lastVisitedAt = $lastVisitedAt;
+        return $this;
     }
 
     public function getLastVisitedAt(): \DateTime
@@ -82,9 +85,10 @@ class TopicUserLastVisit
         return $this->lastVisitedAt;
     }
 
-    public function setIsNotify(bool $isNotify): void
+    public function setIsNotify(bool $isNotify): static
     {
         $this->isNotify = $isNotify;
+        return $this;
     }
 
     public function getIsNotify(): bool

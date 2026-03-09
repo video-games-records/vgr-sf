@@ -34,9 +34,10 @@ class SerieTranslation
         return $this->translatable;
     }
 
-    public function setTranslatable(Serie $translatable): void
+    public function setTranslatable(Serie $translatable): static
     {
         $this->translatable = $translatable;
+        return $this;
     }
 
     public function getLocale(): string
@@ -44,8 +45,9 @@ class SerieTranslation
         return $this->locale;
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(string $locale): static
     {
         $this->locale = $locale;
+        return $this;
     }
 }

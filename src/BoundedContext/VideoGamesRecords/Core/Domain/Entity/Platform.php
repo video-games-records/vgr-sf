@@ -60,9 +60,10 @@ class Platform
         return sprintf('%s [%s]', $this->name, $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -75,14 +76,16 @@ class Platform
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
-    public function setPicture(?string $picture): void
+    public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
+        return $this;
     }
 
     public function getPicture(): ?string
@@ -90,9 +93,10 @@ class Platform
         return $this->picture;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): string
@@ -113,9 +117,10 @@ class Platform
         return $this->games;
     }
 
-    public function setBadge(?PlatformBadge $badge = null): void
+    public function setBadge(?PlatformBadge $badge = null): static
     {
         $this->badge = $badge;
+        return $this;
     }
 
     public function getBadge(): ?PlatformBadge

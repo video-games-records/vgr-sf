@@ -16,8 +16,9 @@ trait NbPostDayTrait
         return $this->nbPostDay;
     }
 
-    public function setNbPostDay(int $nbPostDay): void
+    public function setNbPostDay(int $nbPostDay): static
     {
         $this->nbPostDay = $nbPostDay;
+        return $this;
     }
 }

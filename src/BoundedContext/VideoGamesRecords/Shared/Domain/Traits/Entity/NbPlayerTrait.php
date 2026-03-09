@@ -11,9 +11,10 @@ trait NbPlayerTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbPlayer = 0;
 
-    public function setNbPlayer(int $nbPlayer): void
+    public function setNbPlayer(int $nbPlayer): static
     {
         $this->nbPlayer = $nbPlayer;
+        return $this;
     }
 
     public function getNbPlayer(): int

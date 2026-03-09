@@ -64,9 +64,10 @@ class Platform
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -74,9 +75,10 @@ class Platform
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getAbbreviation(): ?string
@@ -84,9 +86,10 @@ class Platform
         return $this->abbreviation;
     }
 
-    public function setAbbreviation(?string $abbreviation): void
+    public function setAbbreviation(?string $abbreviation): static
     {
         $this->abbreviation = $abbreviation;
+        return $this;
     }
 
     public function getAlternativeName(): ?string
@@ -94,9 +97,10 @@ class Platform
         return $this->alternativeName;
     }
 
-    public function setAlternativeName(?string $alternativeName): void
+    public function setAlternativeName(?string $alternativeName): static
     {
         $this->alternativeName = $alternativeName;
+        return $this;
     }
 
     public function getGeneration(): ?int
@@ -104,9 +108,10 @@ class Platform
         return $this->generation;
     }
 
-    public function setGeneration(?int $generation): void
+    public function setGeneration(?int $generation): static
     {
         $this->generation = $generation;
+        return $this;
     }
 
     public function getSlug(): ?string
@@ -114,9 +119,10 @@ class Platform
         return $this->slug;
     }
 
-    public function setSlug(?string $slug): void
+    public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+        return $this;
     }
 
     public function getSummary(): ?string
@@ -124,9 +130,10 @@ class Platform
         return $this->summary;
     }
 
-    public function setSummary(?string $summary): void
+    public function setSummary(?string $summary): static
     {
         $this->summary = $summary;
+        return $this;
     }
 
     public function getUrl(): ?string
@@ -134,9 +141,10 @@ class Platform
         return $this->url;
     }
 
-    public function setUrl(?string $url): void
+    public function setUrl(?string $url): static
     {
         $this->url = $url;
+        return $this;
     }
 
     public function getChecksum(): ?string
@@ -144,9 +152,10 @@ class Platform
         return $this->checksum;
     }
 
-    public function setChecksum(?string $checksum): void
+    public function setChecksum(?string $checksum): static
     {
         $this->checksum = $checksum;
+        return $this;
     }
 
     public function getPlatformType(): ?PlatformType
@@ -154,9 +163,10 @@ class Platform
         return $this->platformType;
     }
 
-    public function setPlatformType(?PlatformType $platformType): void
+    public function setPlatformType(?PlatformType $platformType): static
     {
         $this->platformType = $platformType;
+        return $this;
     }
 
     public function getPlatformLogo(): ?PlatformLogo
@@ -164,9 +174,10 @@ class Platform
         return $this->platformLogo;
     }
 
-    public function setPlatformLogo(?PlatformLogo $platformLogo): void
+    public function setPlatformLogo(?PlatformLogo $platformLogo): static
     {
         $this->platformLogo = $platformLogo;
+        return $this;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
@@ -174,9 +185,10 @@ class Platform
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function getUpdatedAt(): \DateTimeImmutable
@@ -184,9 +196,10 @@ class Platform
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     public function __toString(): string

@@ -34,9 +34,10 @@ class LostPosition
     private Chart $chart;
 
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -44,9 +45,10 @@ class LostPosition
         return $this->id;
     }
 
-    public function setNewRank(int $newRank): void
+    public function setNewRank(int $newRank): static
     {
         $this->newRank = $newRank;
+        return $this;
     }
 
     public function getNewRank(): int
@@ -54,9 +56,10 @@ class LostPosition
         return $this->newRank;
     }
 
-    public function setOldRank(int $oldRank): void
+    public function setOldRank(int $oldRank): static
     {
         $this->oldRank = $oldRank;
+        return $this;
     }
 
     public function getOldRank(): int
@@ -64,9 +67,10 @@ class LostPosition
         return $this->oldRank;
     }
 
-    public function setChart(Chart $chart): void
+    public function setChart(Chart $chart): static
     {
         $this->chart = $chart;
+        return $this;
     }
 
     public function getChart(): Chart
@@ -74,9 +78,10 @@ class LostPosition
         return $this->chart;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player

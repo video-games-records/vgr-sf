@@ -37,9 +37,10 @@ class TeamRequest
         return sprintf('%s # %s [%s]', $this->getTeam()->getLibTeam(), $this->getPlayer()->getPseudo(), $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -47,10 +48,11 @@ class TeamRequest
         return $this->id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $value = new TeamRequestStatus($status);
         $this->status = $value->getValue();
+        return $this;
     }
 
     public function getStatus(): string
@@ -63,9 +65,10 @@ class TeamRequest
         return new TeamRequestStatus($this->status);
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player
@@ -73,9 +76,10 @@ class TeamRequest
         return $this->player;
     }
 
-    public function setTeam(Team $team): void
+    public function setTeam(Team $team): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): Team

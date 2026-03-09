@@ -30,9 +30,10 @@ trait PlayerPersonalDataTrait
     private bool $displayPersonalInfos = false;
 
 
-    public function setPresentation(?string $presentation = null): void
+    public function setPresentation(?string $presentation = null): static
     {
         $this->presentation = $presentation;
+        return $this;
     }
 
     public function getPresentation(): ?string
@@ -40,9 +41,10 @@ trait PlayerPersonalDataTrait
         return $this->presentation;
     }
 
-    public function setCollection(?string $collection = null): void
+    public function setCollection(?string $collection = null): static
     {
         $this->collection = $collection;
+        return $this;
     }
 
     public function getCollection(): ?string
@@ -50,9 +52,10 @@ trait PlayerPersonalDataTrait
         return $this->collection;
     }
 
-    public function setBirthDate(?DateTime $birthDate = null): void
+    public function setBirthDate(?DateTime $birthDate = null): static
     {
         $this->birthDate = $birthDate;
+        return $this;
     }
 
     public function getBirthDate(): ?DateTime
@@ -60,9 +63,10 @@ trait PlayerPersonalDataTrait
         return $this->birthDate;
     }
 
-    public function setGender(string $gender): void
+    public function setGender(string $gender): static
     {
         $this->gender = $gender;
+        return $this;
     }
 
     public function getGender(): string
@@ -70,9 +74,10 @@ trait PlayerPersonalDataTrait
         return $this->gender;
     }
 
-    public function setDisplayPersonalInfos(bool $displayPersonalInfos): void
+    public function setDisplayPersonalInfos(bool $displayPersonalInfos): static
     {
         $this->displayPersonalInfos = $displayPersonalInfos;
+        return $this;
     }
 
     public function getDisplayPersonalInfos(): bool
@@ -80,9 +85,10 @@ trait PlayerPersonalDataTrait
         return $this->displayPersonalInfos;
     }
 
-    public function setCountry(?Country $country): void
+    public function setCountry(?Country $country): static
     {
         $this->country = $country;
+        return $this;
     }
 
     public function getCountry(): ?Country

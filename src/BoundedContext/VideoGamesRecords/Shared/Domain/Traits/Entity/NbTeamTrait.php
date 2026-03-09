@@ -11,9 +11,10 @@ trait NbTeamTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbTeam = 0;
 
-    public function setNbTeam(int $nbTeam): void
+    public function setNbTeam(int $nbTeam): static
     {
         $this->nbTeam = $nbTeam;
+        return $this;
     }
 
     public function getNbTeam(): int

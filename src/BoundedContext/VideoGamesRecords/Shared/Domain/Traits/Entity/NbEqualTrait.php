@@ -11,9 +11,10 @@ trait NbEqualTrait
     #[ORM\Column(nullable: false, options: ['default' => 1])]
     private int $nbEqual = 1;
 
-    public function setNbEqual(int $nbEqual): void
+    public function setNbEqual(int $nbEqual): static
     {
         $this->nbEqual = $nbEqual;
+        return $this;
     }
 
     public function getNbEqual(): int

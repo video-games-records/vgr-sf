@@ -46,9 +46,10 @@ class Comment
         return $this->article;
     }
 
-    public function setArticle(Article $article): void
+    public function setArticle(Article $article): static
     {
         $this->article = $article;
+        return $this;
     }
 
     public function getUser(): User
@@ -56,9 +57,10 @@ class Comment
         return $this->user;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getContent(): string
@@ -66,8 +68,9 @@ class Comment
         return $this->content;
     }
 
-    public function setContent(string $content): void
+    public function setContent(string $content): static
     {
         $this->content = $content;
+        return $this;
     }
 }

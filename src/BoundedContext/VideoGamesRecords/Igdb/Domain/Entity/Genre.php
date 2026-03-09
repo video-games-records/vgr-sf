@@ -44,9 +44,10 @@ class Genre
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -54,9 +55,10 @@ class Genre
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getSlug(): string
@@ -64,9 +66,10 @@ class Genre
         return $this->slug;
     }
 
-    public function setSlug(string $slug): void
+    public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+        return $this;
     }
 
     public function getUrl(): ?string
@@ -74,9 +77,10 @@ class Genre
         return $this->url;
     }
 
-    public function setUrl(?string $url): void
+    public function setUrl(?string $url): static
     {
         $this->url = $url;
+        return $this;
     }
 
     public function getChecksum(): string
@@ -84,9 +88,10 @@ class Genre
         return $this->checksum;
     }
 
-    public function setChecksum(string $checksum): void
+    public function setChecksum(string $checksum): static
     {
         $this->checksum = $checksum;
+        return $this;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
@@ -94,9 +99,10 @@ class Genre
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function getUpdatedAt(): \DateTimeImmutable
@@ -104,9 +110,10 @@ class Genre
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     public function __toString(): string

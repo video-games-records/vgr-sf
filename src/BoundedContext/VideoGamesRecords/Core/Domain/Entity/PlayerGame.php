@@ -69,9 +69,10 @@ class PlayerGame
     private array $statuses;
 
 
-    public function setPointChartWithoutDlc(int $pointChartWithoutDlc): void
+    public function setPointChartWithoutDlc(int $pointChartWithoutDlc): static
     {
         $this->pointChartWithoutDlc = $pointChartWithoutDlc;
+        return $this;
     }
 
     public function getPointChartWithoutDlc(): int
@@ -79,9 +80,10 @@ class PlayerGame
         return $this->pointChartWithoutDlc;
     }
 
-    public function setPointGame(int $pointGame): void
+    public function setPointGame(int $pointGame): static
     {
         $this->pointGame = $pointGame;
+        return $this;
     }
 
     public function getPointGame(): int
@@ -89,9 +91,10 @@ class PlayerGame
         return $this->pointGame;
     }
 
-    public function setLastUpdate(DateTime $lastUpdate): void
+    public function setLastUpdate(DateTime $lastUpdate): static
     {
         $this->lastUpdate = $lastUpdate;
+        return $this;
     }
 
     public function getLastUpdate(): DateTime
@@ -102,9 +105,10 @@ class PlayerGame
     /**
      * @param array<string, mixed> $statuses
      */
-    public function setStatuses(array $statuses): void
+    public function setStatuses(array $statuses): static
     {
         $this->statuses = $statuses;
+        return $this;
     }
 
     /**

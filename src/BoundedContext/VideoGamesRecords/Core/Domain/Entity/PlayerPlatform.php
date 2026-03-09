@@ -30,9 +30,10 @@ class PlayerPlatform
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $pointPlatform = 0;
 
-    public function setRankPointPlatform(int $rankPointPlatform): void
+    public function setRankPointPlatform(int $rankPointPlatform): static
     {
         $this->rankPointPlatform = $rankPointPlatform;
+        return $this;
     }
 
     public function getRankPointPlatform(): int
@@ -40,9 +41,10 @@ class PlayerPlatform
         return $this->rankPointPlatform;
     }
 
-    public function setPointPlatform(int $pointPlatform): void
+    public function setPointPlatform(int $pointPlatform): static
     {
         $this->pointPlatform = $pointPlatform;
+        return $this;
     }
 
     public function getPointPlatform(): int
@@ -50,9 +52,10 @@ class PlayerPlatform
         return $this->pointPlatform;
     }
 
-    public function setPlatform(Platform $platform): void
+    public function setPlatform(Platform $platform): static
     {
         $this->platform = $platform;
+        return $this;
     }
 
     public function getPlatform(): Platform
@@ -61,9 +64,10 @@ class PlayerPlatform
     }
 
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player

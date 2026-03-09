@@ -11,9 +11,10 @@ trait AverageGameRankTrait
     #[ORM\Column(nullable: true)]
     private ?float $averageGameRank = null;
 
-    public function setAverageGameRank(float $averageGameRank): void
+    public function setAverageGameRank(float $averageGameRank): static
     {
         $this->averageGameRank = $averageGameRank;
+        return $this;
     }
 
     public function getAverageGameRank(): ?float

@@ -93,9 +93,10 @@ class Serie
         return $this->libSerie;
     }
 
-    public function setLibSerie(string $libSerie): void
+    public function setLibSerie(string $libSerie): static
     {
         $this->libSerie = $libSerie;
+        return $this;
     }
 
     public function getLibSerie(): string
@@ -103,9 +104,10 @@ class Serie
         return $this->libSerie;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -113,9 +115,10 @@ class Serie
         return $this->id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): string
@@ -141,9 +144,10 @@ class Serie
         return $this->games;
     }
 
-    public function setBadge(?SerieBadge $badge = null): void
+    public function setBadge(?SerieBadge $badge = null): static
     {
         $this->badge = $badge;
+        return $this;
     }
 
     public function getBadge(): ?SerieBadge
@@ -162,9 +166,10 @@ class Serie
     /**
      * @param Collection<string, SerieTranslation> $translations
      */
-    public function setTranslations(Collection $translations): void
+    public function setTranslations(Collection $translations): static
     {
         $this->translations = $translations;
+        return $this;
     }
 
     public function addTranslation(SerieTranslation $translation): void
@@ -210,7 +215,7 @@ class Serie
         return $this->translations->getKeys();
     }
 
-    public function setDescription(string $description, ?string $locale = null): void
+    public function setDescription(string $description, ?string $locale = null): static
     {
         $locale = $locale ?: $this->currentLocale ?: self::DEFAULT_LOCALE;
 
@@ -222,6 +227,7 @@ class Serie
         }
 
         $this->translations->get($locale)?->setDescription($description);
+        return $this;
     }
 
     public function getDescription(?string $locale = null): ?string

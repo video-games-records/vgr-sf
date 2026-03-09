@@ -11,9 +11,10 @@ trait NbChartProvenTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbChartProven = 0;
 
-    public function setNbChartProven(int $nbChartProven): void
+    public function setNbChartProven(int $nbChartProven): static
     {
         $this->nbChartProven = $nbChartProven;
+        return $this;
     }
 
     public function getNbChartProven(): int

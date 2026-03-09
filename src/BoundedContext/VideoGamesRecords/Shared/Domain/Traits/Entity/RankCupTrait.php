@@ -11,9 +11,10 @@ trait RankCupTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $rankCup = 0;
 
-    public function setRankCup(int $rankCup): void
+    public function setRankCup(int $rankCup): static
     {
         $this->rankCup = $rankCup;
+        return $this;
     }
 
     public function getRankCup(): int

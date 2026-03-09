@@ -128,15 +128,17 @@ class Player
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
-    public function setChartRank(int $rank, int $nb): void
+    public function setChartRank(int $rank, int $nb): static
     {
         $var = 'chartRank' . $rank;
         $this->$var = $nb;
+        return $this;
     }
 
     public function getChartRank(int $rank): int

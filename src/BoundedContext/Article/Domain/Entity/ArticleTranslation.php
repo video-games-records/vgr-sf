@@ -46,9 +46,10 @@ class ArticleTranslation implements OneLocaleInterface
         return $this->translatable;
     }
 
-    public function setTranslatable(Article $translatable): void
+    public function setTranslatable(Article $translatable): static
     {
         $this->translatable = $translatable;
+        return $this;
     }
 
     public function getLocale(): string
@@ -56,9 +57,10 @@ class ArticleTranslation implements OneLocaleInterface
         return $this->locale;
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(string $locale): static
     {
         $this->locale = $locale;
+        return $this;
     }
 
     public function getTitle(): string
@@ -66,9 +68,10 @@ class ArticleTranslation implements OneLocaleInterface
         return $this->title;
     }
 
-    public function setTitle(string $title): void
+    public function setTitle(string $title): static
     {
         $this->title = $title;
+        return $this;
     }
 
     public function getContent(): string
@@ -76,9 +79,10 @@ class ArticleTranslation implements OneLocaleInterface
         return $this->content;
     }
 
-    public function setContent(string $content): void
+    public function setContent(string $content): static
     {
         $this->content = $content;
+        return $this;
     }
 
     public function isEmpty(): bool

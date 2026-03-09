@@ -41,9 +41,10 @@ class TeamSerie
     #[ORM\JoinColumn(name:'serie_id', referencedColumnName:'id', nullable:false, onDelete: 'CASCADE')]
     private Serie $serie;
 
-    public function setSerie(Serie $serie): void
+    public function setSerie(Serie $serie): static
     {
         $this->serie = $serie;
+        return $this;
     }
 
     public function getSerie(): Serie
@@ -51,9 +52,10 @@ class TeamSerie
         return $this->serie;
     }
 
-    public function setTeam(Team $team): void
+    public function setTeam(Team $team): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): Team

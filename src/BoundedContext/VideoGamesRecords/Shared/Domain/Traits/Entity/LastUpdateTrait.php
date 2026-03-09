@@ -12,9 +12,10 @@ trait LastUpdateTrait
     #[ORM\Column(nullable: true)]
     private ?DateTime $lastUpdate = null;
 
-    public function setLastUpdate(?DateTime $lastUpdate): void
+    public function setLastUpdate(?DateTime $lastUpdate): static
     {
         $this->lastUpdate = $lastUpdate;
+        return $this;
     }
 
     public function getLastUpdate(): ?DateTime

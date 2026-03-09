@@ -39,9 +39,10 @@ class PlayerChartLib
         return sprintf('%s', ScoreTools::formatScore($this->value, $this->getLibChart()->getType()->getMask()));
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -49,11 +50,12 @@ class PlayerChartLib
         return $this->id;
     }
 
-    public function setValue(string|int|null $value = null): void
+    public function setValue(string|int|null $value = null): static
     {
         if ($value != null) {
             $this->value = (string) $value;
         }
+        return $this;
     }
 
     public function getValue(): string
@@ -61,9 +63,10 @@ class PlayerChartLib
         return $this->value;
     }
 
-    public function setLibChart(ChartLib $libChart): void
+    public function setLibChart(ChartLib $libChart): static
     {
         $this->libChart = $libChart;
+        return $this;
     }
 
     public function getLibChart(): ChartLib
@@ -71,9 +74,10 @@ class PlayerChartLib
         return $this->libChart;
     }
 
-    public function setPlayerChart(PlayerChart $playerChart): void
+    public function setPlayerChart(PlayerChart $playerChart): static
     {
         $this->playerChart = $playerChart;
+        return $this;
     }
 
     public function getPlayerChart(): PlayerChart
@@ -93,13 +97,14 @@ class PlayerChartLib
     /**
      * @param array<string, mixed> $parseValue
      */
-    public function setParseValue(array $parseValue): void
+    public function setParseValue(array $parseValue): static
     {
         $this->parseValue = $parseValue;
+        return $this;
     }
 
 
-    public function setParseValueFromValue(): void
+    public function setParseValueFromValue(): static
     {
         $this->parseValue = ScoreTools::getValues(
             $this->getLibChart()
@@ -107,9 +112,10 @@ class PlayerChartLib
                 ->getMask(),
             $this->value ?? null
         );
+        return $this;
     }
 
-    public function setValueFromPaseValue(): void
+    public function setValueFromPaseValue(): static
     {
         if ($this->parseValue == null) {
             $this->value = '';
@@ -121,6 +127,7 @@ class PlayerChartLib
                 $this->parseValue
             );
         }
+        return $this;
     }
 
     public function getFormatValue(): string

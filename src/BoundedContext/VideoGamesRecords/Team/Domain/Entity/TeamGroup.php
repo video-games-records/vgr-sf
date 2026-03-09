@@ -37,9 +37,10 @@ class TeamGroup
     #[ORM\JoinColumn(name:'group_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
     private Group $group;
 
-    public function setGroup(Group $group): void
+    public function setGroup(Group $group): static
     {
         $this->group = $group;
+        return $this;
     }
 
     public function getGroup(): Group
@@ -47,9 +48,10 @@ class TeamGroup
         return $this->group;
     }
 
-    public function setTeam(Team $team): void
+    public function setTeam(Team $team): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): Team

@@ -10,9 +10,10 @@ trait SetRequestStack
 {
     private RequestStack $requestStack;
 
-    public function setRequestStack(RequestStack $requestStack): void
+    public function setRequestStack(RequestStack $requestStack): static
     {
         $this->requestStack = $requestStack;
+        return $this;
     }
 
     public function getRequestStack(): RequestStack

@@ -92,9 +92,10 @@ class PlayerChart
         return sprintf('%s # %s [%s]', $this->getChart()->getDefaultName(), $this->getPlayer()->getPseudo(), $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -102,9 +103,10 @@ class PlayerChart
         return $this->id;
     }
 
-    public function setRank(int $rank): void
+    public function setRank(int $rank): static
     {
         $this->rank = $rank;
+        return $this;
     }
 
     public function getRank(): ?int
@@ -112,9 +114,10 @@ class PlayerChart
         return $this->rank;
     }
 
-    public function setPointChart(int $pointChart): void
+    public function setPointChart(int $pointChart): static
     {
         $this->pointChart = $pointChart;
+        return $this;
     }
 
     public function getPointChart(): int
@@ -122,9 +125,10 @@ class PlayerChart
         return $this->pointChart;
     }
 
-    public function setPointPlatform(int $pointPlatform): void
+    public function setPointPlatform(int $pointPlatform): static
     {
         $this->pointPlatform = $pointPlatform;
+        return $this;
     }
 
     public function getPointPlatform(): ?int
@@ -137,14 +141,16 @@ class PlayerChart
         return $this->isTopScore;
     }
 
-    public function setIsTopScore(bool $isTopScore): void
+    public function setIsTopScore(bool $isTopScore): static
     {
         $this->isTopScore = $isTopScore;
+        return $this;
     }
 
-    public function setDateInvestigation(?DateTime $dateInvestigation = null): void
+    public function setDateInvestigation(?DateTime $dateInvestigation = null): static
     {
         $this->dateInvestigation = $dateInvestigation;
+        return $this;
     }
 
     public function getDateInvestigation(): ?DateTime
@@ -152,9 +158,10 @@ class PlayerChart
         return $this->dateInvestigation;
     }
 
-    public function setChart(Chart $chart): void
+    public function setChart(Chart $chart): static
     {
         $this->chart = $chart;
+        return $this;
     }
 
     public function getChart(): Chart
@@ -167,14 +174,16 @@ class PlayerChart
         return $this->player;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
-    public function setProof(?Proof $proof = null): void
+    public function setProof(?Proof $proof = null): static
     {
         $this->proof = $proof;
+        return $this;
     }
 
     public function getProof(): ?Proof
@@ -182,9 +191,10 @@ class PlayerChart
         return $this->proof;
     }
 
-    public function setPlatform(?Platform $platform = null): void
+    public function setPlatform(?Platform $platform = null): static
     {
         $this->platform = $platform;
+        return $this;
     }
 
     public function getPlatform(): ?Platform
@@ -192,9 +202,10 @@ class PlayerChart
         return $this->platform;
     }
 
-    public function setStatus(PlayerChartStatusEnum $status): void
+    public function setStatus(PlayerChartStatusEnum $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): PlayerChartStatusEnum

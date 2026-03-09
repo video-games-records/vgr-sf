@@ -41,9 +41,10 @@ class Picture
         return $this->id;
     }
 
-    public function setPath(string $path): void
+    public function setPath(string $path): static
     {
         $this->path = $path;
+        return $this;
     }
 
     public function getPath(): string
@@ -51,9 +52,10 @@ class Picture
         return $this->path;
     }
 
-    public function setMetadata(string $metadata): void
+    public function setMetadata(string $metadata): static
     {
         $this->metadata = $metadata;
+        return $this;
     }
 
     public function getMetadata(): ?string
@@ -61,9 +63,10 @@ class Picture
         return $this->metadata;
     }
 
-    public function setHash(string $hash): void
+    public function setHash(string $hash): static
     {
         $this->hash = $hash;
+        return $this;
     }
 
     public function getHash(): string

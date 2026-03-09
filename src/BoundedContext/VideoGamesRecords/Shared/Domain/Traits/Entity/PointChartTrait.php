@@ -11,9 +11,10 @@ trait PointChartTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $pointChart = 0;
 
-    public function setPointChart(int $pointChart): void
+    public function setPointChart(int $pointChart): static
     {
         $this->pointChart = $pointChart;
+        return $this;
     }
 
     public function getPointChart(): int

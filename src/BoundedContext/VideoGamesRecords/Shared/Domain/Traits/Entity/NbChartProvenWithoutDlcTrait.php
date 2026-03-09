@@ -11,9 +11,10 @@ trait NbChartProvenWithoutDlcTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbChartProvenWithoutDlc = 0;
 
-    public function setNbChartProvenWithoutDlc(int $nbChartProvenWithoutDlc): void
+    public function setNbChartProvenWithoutDlc(int $nbChartProvenWithoutDlc): static
     {
         $this->nbChartProvenWithoutDlc = $nbChartProvenWithoutDlc;
+        return $this;
     }
 
     public function getNbChartProvenWithoutDlc(): int

@@ -90,9 +90,10 @@ class Video
         return sprintf('Video [%s]', $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -100,9 +101,10 @@ class Video
         return $this->id;
     }
 
-    public function setType(string $type): void
+    public function setType(string $type): static
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getType(): string
@@ -115,9 +117,10 @@ class Video
         return new VideoType($this->type);
     }
 
-    public function setExternalId(string $externalId): void
+    public function setExternalId(string $externalId): static
     {
         $this->externalId = $externalId;
+        return $this;
     }
 
 
@@ -127,10 +130,11 @@ class Video
     }
 
 
-    public function setUrl(string $url): void
+    public function setUrl(string $url): static
     {
         $this->url = $url;
         $this->majTypeAndVideoId();
+        return $this;
     }
 
     public function getUrl(): string
@@ -138,14 +142,16 @@ class Video
         return $this->url;
     }
 
-    public function setGame(?Game $game = null): void
+    public function setGame(?Game $game = null): static
     {
         $this->game = $game;
+        return $this;
     }
 
-    public function setNbComment(int $nbComment): void
+    public function setNbComment(int $nbComment): static
     {
         $this->nbComment = $nbComment;
+        return $this;
     }
 
     public function getNbComment(): int

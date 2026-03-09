@@ -47,9 +47,10 @@ class Badge
         return sprintf('%s / %s [%s]', $this->getType()->value, $this->getPicture(), $this->getId());
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -57,9 +58,10 @@ class Badge
         return $this->id;
     }
 
-    public function setType(BadgeType $type): void
+    public function setType(BadgeType $type): static
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getType(): BadgeType
@@ -67,9 +69,10 @@ class Badge
         return $this->type;
     }
 
-    public function setPicture(string $picture): void
+    public function setPicture(string $picture): static
     {
         $this->picture = $picture;
+        return $this;
     }
 
     public function getPicture(): string
@@ -77,9 +80,10 @@ class Badge
         return $this->picture;
     }
 
-    public function setValue(int $value): void
+    public function setValue(int $value): static
     {
         $this->value = $value;
+        return $this;
     }
 
     public function getValue(): int

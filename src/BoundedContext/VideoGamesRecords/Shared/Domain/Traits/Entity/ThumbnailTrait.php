@@ -13,9 +13,10 @@ trait ThumbnailTrait
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thumbnail = null;
 
-    public function setThumbnail(?string $thumbnail): void
+    public function setThumbnail(?string $thumbnail): static
     {
         $this->thumbnail = $thumbnail;
+        return $this;
     }
 
     public function getThumbnail(): ?string

@@ -36,9 +36,10 @@ class ChartType
 
 
 
-    public function setMask(string $mask): void
+    public function setMask(string $mask): static
     {
         $this->mask = $mask;
+        return $this;
     }
 
     public function getMask(): string
@@ -47,9 +48,10 @@ class ChartType
     }
 
 
-    public function setOrderBy(string $orderBy): void
+    public function setOrderBy(string $orderBy): static
     {
         $this->orderBy = $orderBy;
+        return $this;
     }
 
     public function getOrderBy(): string
@@ -69,9 +71,10 @@ class ChartType
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     /**

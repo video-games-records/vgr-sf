@@ -13,9 +13,10 @@ trait TitleTrait
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-    public function setTitle(?string $title): void
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
+        return $this;
     }
 
     public function getTitle(): ?string

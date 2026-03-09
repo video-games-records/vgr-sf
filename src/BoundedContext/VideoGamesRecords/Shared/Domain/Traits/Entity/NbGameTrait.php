@@ -11,9 +11,10 @@ trait NbGameTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbGame = 0;
 
-    public function setNbGame(int $nbGame): void
+    public function setNbGame(int $nbGame): static
     {
         $this->nbGame = $nbGame;
+        return $this;
     }
 
     public function getNbGame(): int

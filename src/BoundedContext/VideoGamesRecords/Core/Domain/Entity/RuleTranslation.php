@@ -34,9 +34,10 @@ class RuleTranslation
         return $this->translatable;
     }
 
-    public function setTranslatable(Rule $translatable): void
+    public function setTranslatable(Rule $translatable): static
     {
         $this->translatable = $translatable;
+        return $this;
     }
 
     public function getLocale(): string
@@ -44,9 +45,10 @@ class RuleTranslation
         return $this->locale;
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(string $locale): static
     {
         $this->locale = $locale;
+        return $this;
     }
 
     public function getContent(): string
@@ -54,8 +56,9 @@ class RuleTranslation
         return $this->content;
     }
 
-    public function setContent(string $content): void
+    public function setContent(string $content): static
     {
         $this->content = $content;
+        return $this;
     }
 }

@@ -11,9 +11,10 @@ trait PointBadgeTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $pointBadge = 0;
 
-    public function setPointBadge(int $pointBadge): void
+    public function setPointBadge(int $pointBadge): static
     {
         $this->pointBadge = $pointBadge;
+        return $this;
     }
 
     public function getPointBadge(): int

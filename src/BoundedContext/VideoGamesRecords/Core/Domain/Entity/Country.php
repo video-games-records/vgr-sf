@@ -59,9 +59,10 @@ class Country
     }
 
 
-    public function setCodeIso2(string $codeIso2): void
+    public function setCodeIso2(string $codeIso2): static
     {
         $this->codeIso2 = $codeIso2;
+        return $this;
     }
 
     public function getCodeIso2(): string
@@ -74,9 +75,10 @@ class Country
         return $this->codeIso3;
     }
 
-    public function setCodeIso3(string $codeIso3): void
+    public function setCodeIso3(string $codeIso3): static
     {
         $this->codeIso3 = $codeIso3;
+        return $this;
     }
 
     public function getCodeIsoNumeric(): int
@@ -84,9 +86,10 @@ class Country
         return $this->codeIsoNumeric;
     }
 
-    public function setCodeIsoNumeric(int $codeIsoNumeric): void
+    public function setCodeIsoNumeric(int $codeIsoNumeric): static
     {
         $this->codeIsoNumeric = $codeIsoNumeric;
+        return $this;
     }
 
     public function getId(): ?int
@@ -94,15 +97,17 @@ class Country
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
 
-    public function setBadge(?CountryBadge $badge = null): void
+    public function setBadge(?CountryBadge $badge = null): static
     {
         $this->badge = $badge;
+        return $this;
     }
 
     public function getBadge(): ?CountryBadge
@@ -116,9 +121,10 @@ class Country
         return $this->slug;
     }
 
-    public function setSlug(string $slug): void
+    public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+        return $this;
     }
 
     public function __toString()
@@ -143,9 +149,10 @@ class Country
     /**
      * @param Collection<string, CountryTranslation> $translations
      */
-    public function setTranslations(Collection $translations): void
+    public function setTranslations(Collection $translations): static
     {
         $this->translations = $translations;
+        return $this;
     }
 
     public function addTranslation(CountryTranslation $translation): void
@@ -191,7 +198,7 @@ class Country
         return $this->translations->getKeys();
     }
 
-    public function setName(string $name, ?string $locale = null): void
+    public function setName(string $name, ?string $locale = null): static
     {
         $locale = $locale ?: $this->currentLocale ?: self::DEFAULT_LOCALE;
 
@@ -206,6 +213,7 @@ class Country
         if ($translation) {
             $translation->setName($name);
         }
+        return $this;
     }
 
     public function getName(?string $locale = null): ?string

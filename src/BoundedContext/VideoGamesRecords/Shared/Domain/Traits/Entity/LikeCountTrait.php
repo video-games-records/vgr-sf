@@ -11,9 +11,10 @@ trait LikeCountTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $likeCount = 0;
 
-    public function setLikeCount(int $likeCount): void
+    public function setLikeCount(int $likeCount): static
     {
         $this->likeCount = $likeCount;
+        return $this;
     }
 
     public function getLikeCount(): int

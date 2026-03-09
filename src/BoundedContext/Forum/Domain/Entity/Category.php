@@ -50,9 +50,10 @@ class Category
         return $this->id;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): string
@@ -60,9 +61,10 @@ class Category
         return $this->name;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(int $position): static
     {
         $this->position = $position;
+        return $this;
     }
 
     public function getPosition(): int
@@ -70,9 +72,10 @@ class Category
         return $this->position;
     }
 
-    public function setDisplayOnHome(bool $displayOnHome): void
+    public function setDisplayOnHome(bool $displayOnHome): static
     {
         $this->displayOnHome = $displayOnHome;
+        return $this;
     }
 
     public function getDisplayOnHome(): bool

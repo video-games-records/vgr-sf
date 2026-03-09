@@ -51,9 +51,10 @@ class SecurityEvent
         return $this->user;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getEventType(): string
@@ -69,14 +70,16 @@ class SecurityEvent
         return SecurityEventTypeEnum::from($this->eventType);
     }
 
-    public function setEventType(string $eventType): void
+    public function setEventType(string $eventType): static
     {
         $this->eventType = $eventType;
+        return $this;
     }
 
-    public function setEventTypeFromEnum(SecurityEventTypeEnum $eventType): void
+    public function setEventTypeFromEnum(SecurityEventTypeEnum $eventType): static
     {
         $this->eventType = $eventType->value;
+        return $this;
     }
 
     public function getCreatedAt(): \DateTime
@@ -84,9 +87,10 @@ class SecurityEvent
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     /**
@@ -100,9 +104,10 @@ class SecurityEvent
     /**
      * @param array<string, mixed>|null $eventData
      */
-    public function setEventData(?array $eventData): void
+    public function setEventData(?array $eventData): static
     {
         $this->eventData = $eventData;
+        return $this;
     }
 
     public function getIpAddress(): ?string
@@ -110,9 +115,10 @@ class SecurityEvent
         return $this->ipAddress;
     }
 
-    public function setIpAddress(?string $ipAddress): void
+    public function setIpAddress(?string $ipAddress): static
     {
         $this->ipAddress = $ipAddress;
+        return $this;
     }
 
     public function getUserAgent(): ?string
@@ -120,9 +126,10 @@ class SecurityEvent
         return $this->userAgent;
     }
 
-    public function setUserAgent(?string $userAgent): void
+    public function setUserAgent(?string $userAgent): static
     {
         $this->userAgent = $userAgent;
+        return $this;
     }
 
     public function __toString(): string

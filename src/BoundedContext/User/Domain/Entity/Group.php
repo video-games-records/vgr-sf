@@ -34,9 +34,10 @@ class Group
         $this->roles = $roles;
     }
 
-    public function setId(?int $id): void
+    public function setId(?int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -44,9 +45,10 @@ class Group
         return $this->id;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): string
@@ -80,8 +82,9 @@ class Group
     /**
      * @param string[] $roles
      */
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+        return $this;
     }
 }

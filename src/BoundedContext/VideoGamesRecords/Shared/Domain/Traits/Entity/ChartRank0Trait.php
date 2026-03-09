@@ -11,9 +11,10 @@ trait ChartRank0Trait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $chartRank0 = 0;
 
-    public function setChartRank0(int $chartRank0): void
+    public function setChartRank0(int $chartRank0): static
     {
         $this->chartRank0 = $chartRank0;
+        return $this;
     }
 
     public function getChartRank0(): int

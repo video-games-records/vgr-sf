@@ -83,9 +83,10 @@ class Game
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -93,9 +94,10 @@ class Game
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getSlug(): ?string
@@ -103,9 +105,10 @@ class Game
         return $this->slug;
     }
 
-    public function setSlug(?string $slug): void
+    public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+        return $this;
     }
 
     public function getStoryline(): ?string
@@ -113,9 +116,10 @@ class Game
         return $this->storyline;
     }
 
-    public function setStoryline(?string $storyline): void
+    public function setStoryline(?string $storyline): static
     {
         $this->storyline = $storyline;
+        return $this;
     }
 
     public function getSummary(): ?string
@@ -123,9 +127,10 @@ class Game
         return $this->summary;
     }
 
-    public function setSummary(?string $summary): void
+    public function setSummary(?string $summary): static
     {
         $this->summary = $summary;
+        return $this;
     }
 
     public function getUrl(): ?string
@@ -133,9 +138,10 @@ class Game
         return $this->url;
     }
 
-    public function setUrl(?string $url): void
+    public function setUrl(?string $url): static
     {
         $this->url = $url;
+        return $this;
     }
 
     public function getChecksum(): ?string
@@ -143,9 +149,10 @@ class Game
         return $this->checksum;
     }
 
-    public function setChecksum(?string $checksum): void
+    public function setChecksum(?string $checksum): static
     {
         $this->checksum = $checksum;
+        return $this;
     }
 
     public function getFirstReleaseDate(): ?int
@@ -153,9 +160,10 @@ class Game
         return $this->firstReleaseDate;
     }
 
-    public function setFirstReleaseDate(?int $firstReleaseDate): void
+    public function setFirstReleaseDate(?int $firstReleaseDate): static
     {
         $this->firstReleaseDate = $firstReleaseDate;
+        return $this;
     }
 
     public function getFirstReleaseDateAsDateTime(): ?\DateTimeImmutable
@@ -168,9 +176,10 @@ class Game
         return $this->versionParent;
     }
 
-    public function setVersionParent(?Game $versionParent): void
+    public function setVersionParent(?Game $versionParent): static
     {
         $this->versionParent = $versionParent;
+        return $this;
     }
 
     /**
@@ -226,9 +235,10 @@ class Game
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function getUpdatedAt(): \DateTimeImmutable
@@ -236,9 +246,10 @@ class Game
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     public function __toString(): string

@@ -11,9 +11,10 @@ trait NbPostTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $nbPost = 0;
 
-    public function setNbPost(int $nbPost): void
+    public function setNbPost(int $nbPost): static
     {
         $this->nbPost = $nbPost;
+        return $this;
     }
 
     public function getNbPost(): int

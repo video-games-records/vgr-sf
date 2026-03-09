@@ -11,9 +11,10 @@ trait PictureTrait
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $picture = null;
 
-    public function setPicture(?string $picture = null): void
+    public function setPicture(?string $picture = null): static
     {
         $this->picture = $picture;
+        return $this;
     }
 
     public function getPicture(): ?string

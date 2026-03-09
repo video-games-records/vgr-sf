@@ -63,9 +63,10 @@ class Message
         return sprintf('Message [%s]', $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -73,9 +74,10 @@ class Message
         return $this->id;
     }
 
-    public function setObject(string $object): void
+    public function setObject(string $object): static
     {
         $this->object = $object;
+        return $this;
     }
 
     public function getObject(): string
@@ -83,9 +85,10 @@ class Message
         return $this->object;
     }
 
-    public function setType(string|MessageTypeEnum $type): void
+    public function setType(string|MessageTypeEnum $type): static
     {
         $this->type = $type instanceof MessageTypeEnum ? $type->value : $type;
+        return $this;
     }
 
     public function getType(): string
@@ -103,9 +106,10 @@ class Message
         return $this->getTypeEnum()->isReplyable();
     }
 
-    public function setMessage(string $message): void
+    public function setMessage(string $message): static
     {
         $this->message = $message;
+        return $this;
     }
 
     public function getMessage(): ?string
@@ -118,9 +122,10 @@ class Message
         return $this->sender;
     }
 
-    public function setSender(User $sender): void
+    public function setSender(User $sender): static
     {
         $this->sender = $sender;
+        return $this;
     }
 
     public function getRecipient(): User
@@ -128,14 +133,16 @@ class Message
         return $this->recipient;
     }
 
-    public function setRecipient(User $recipient): void
+    public function setRecipient(User $recipient): static
     {
         $this->recipient = $recipient;
+        return $this;
     }
 
-    public function setIsOpened(bool $isOpened): void
+    public function setIsOpened(bool $isOpened): static
     {
         $this->isOpened = $isOpened;
+        return $this;
     }
 
     public function getIsOpened(): bool
@@ -143,9 +150,10 @@ class Message
         return $this->isOpened;
     }
 
-    public function setIsDeletedSender(bool $isDeletedSender): void
+    public function setIsDeletedSender(bool $isDeletedSender): static
     {
         $this->isDeletedSender = $isDeletedSender;
+        return $this;
     }
 
     public function getIsDeletedSender(): bool
@@ -153,9 +161,10 @@ class Message
         return $this->isDeletedSender;
     }
 
-    public function setIsDeletedRecipient(bool $isDeletedRecipient): void
+    public function setIsDeletedRecipient(bool $isDeletedRecipient): static
     {
         $this->isDeletedRecipient = $isDeletedRecipient;
+        return $this;
     }
 
     public function getIsDeletedRecipient(): bool

@@ -11,9 +11,10 @@ trait IsActiveTrait
     #[ORM\Column(nullable: false, options: ['default' => true])]
     private bool $isActive = true;
 
-    public function setIsActive(bool $isActive): void
+    public function setIsActive(bool $isActive): static
     {
         $this->isActive = $isActive;
+        return $this;
     }
 
     public function getIsActive(): bool

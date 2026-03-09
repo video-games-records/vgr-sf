@@ -34,9 +34,10 @@ class Tag
         return sprintf('%s [%s]', $this->getName(), $this->getId());
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -44,9 +45,10 @@ class Tag
         return $this->id;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): string
@@ -54,9 +56,10 @@ class Tag
         return $this->name;
     }
 
-    public function setCategory(?string $category): void
+    public function setCategory(?string $category): static
     {
         $this->category = $category;
+        return $this;
     }
 
     public function getCategory(): ?string
@@ -64,9 +67,10 @@ class Tag
         return $this->category;
     }
 
-    public function setIsOfficial(bool $isOfficial): void
+    public function setIsOfficial(bool $isOfficial): static
     {
         $this->isOfficial = $isOfficial;
+        return $this;
     }
 
     public function isOfficial(): bool

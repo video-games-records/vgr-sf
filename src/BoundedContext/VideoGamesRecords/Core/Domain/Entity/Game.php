@@ -162,9 +162,10 @@ class Game implements GameInfoInterface
         }
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -172,9 +173,10 @@ class Game implements GameInfoInterface
         return $this->id;
     }
 
-    public function setLibGameEn(string $libGameEn): void
+    public function setLibGameEn(string $libGameEn): static
     {
         $this->libGameEn = $libGameEn;
+        return $this;
     }
 
     public function getLibGameEn(): string
@@ -182,11 +184,12 @@ class Game implements GameInfoInterface
         return $this->libGameEn;
     }
 
-    public function setLibGameFr(?string $libGameFr): void
+    public function setLibGameFr(?string $libGameFr): static
     {
         if ($libGameFr) {
             $this->libGameFr = $libGameFr;
         }
+        return $this;
     }
 
     public function getLibGameFr(): string
@@ -194,9 +197,10 @@ class Game implements GameInfoInterface
         return $this->libGameFr;
     }
 
-    public function setDownloadurl(?string $downloadUrl = null): void
+    public function setDownloadurl(?string $downloadUrl = null): static
     {
         $this->downloadUrl = $downloadUrl;
+        return $this;
     }
 
     public function getDownloadUrl(): ?string
@@ -204,9 +208,10 @@ class Game implements GameInfoInterface
         return $this->downloadUrl;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): string
@@ -224,9 +229,10 @@ class Game implements GameInfoInterface
         return $this->status;
     }
 
-    public function setPublishedAt(?DateTime $pubishedAt = null): void
+    public function setPublishedAt(?DateTime $pubishedAt = null): static
     {
         $this->publishedAt = $pubishedAt;
+        return $this;
     }
 
     public function getPublishedAt(): ?DateTime
@@ -234,9 +240,10 @@ class Game implements GameInfoInterface
         return $this->publishedAt;
     }
 
-    public function setIgdbGame(?IgdbGame $igdbGame): void
+    public function setIgdbGame(?IgdbGame $igdbGame): static
     {
         $this->igdbGame = $igdbGame;
+        return $this;
     }
 
     public function getIgdbGame(): ?IgdbGame
@@ -249,9 +256,10 @@ class Game implements GameInfoInterface
         return $this->igdbGame?->getId();
     }
 
-    public function setSerie(?Serie $serie = null): void
+    public function setSerie(?Serie $serie = null): static
     {
         $this->serie = $serie;
+        return $this;
     }
 
     public function getSerie(): ?Serie
@@ -259,9 +267,10 @@ class Game implements GameInfoInterface
         return $this->serie;
     }
 
-    public function setBadge(MasterBadge $badge): void
+    public function setBadge(MasterBadge $badge): static
     {
         $this->badge = $badge;
+        return $this;
     }
 
     public function getBadge(): MasterBadge
@@ -311,9 +320,10 @@ class Game implements GameInfoInterface
         return $this->forum;
     }
 
-    public function setForum(Forum $forum): void
+    public function setForum(Forum $forum): static
     {
         $this->forum = $forum;
+        return $this;
     }
 
     public function getLastScore(): ?PlayerChart
@@ -321,9 +331,10 @@ class Game implements GameInfoInterface
         return $this->lastScore;
     }
 
-    public function setLastScore(?PlayerChart $lastScore): void
+    public function setLastScore(?PlayerChart $lastScore): static
     {
         $this->lastScore = $lastScore;
+        return $this;
     }
 
     public function getSlug(): string

@@ -87,9 +87,10 @@ class Article
         return $this->id;
     }
 
-    public function setStatus(ArticleStatus $status): void
+    public function setStatus(ArticleStatus $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): ArticleStatus
@@ -102,9 +103,10 @@ class Article
         return $this->status;
     }
 
-    public function setNbComment(int $nbComment): void
+    public function setNbComment(int $nbComment): static
     {
         $this->nbComment = $nbComment;
+        return $this;
     }
 
     public function getNbComment(): int
@@ -117,9 +119,10 @@ class Article
         return $this->views;
     }
 
-    public function setViews(int $views): void
+    public function setViews(int $views): static
     {
         $this->views = $views;
+        return $this;
     }
 
     public function incrementViews(): void
@@ -132,9 +135,10 @@ class Article
         return $this->author;
     }
 
-    public function setAuthor(User $author): void
+    public function setAuthor(User $author): static
     {
         $this->author = $author;
+        return $this;
     }
 
     public function getPublishedAt(): ?DateTime
@@ -142,17 +146,19 @@ class Article
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(?DateTime $publishedAt = null): void
+    public function setPublishedAt(?DateTime $publishedAt = null): static
     {
         $this->publishedAt = $publishedAt;
+        return $this;
     }
 
     /**
      * @param Collection<int, Comment> $comments
      */
-    public function setComments(Collection $comments): void
+    public function setComments(Collection $comments): static
     {
         $this->comments = $comments;
+        return $this;
     }
 
     /**
@@ -168,9 +174,10 @@ class Article
         return $this->slug;
     }
 
-    public function setSlug(string $slug): void
+    public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+        return $this;
     }
 
     /**
@@ -184,9 +191,10 @@ class Article
     /**
      * @param Collection<string, ArticleTranslation> $translations
      */
-    public function setTranslations(Collection $translations): void
+    public function setTranslations(Collection $translations): static
     {
         $this->translations = $translations;
+        return $this;
     }
 
 
@@ -209,7 +217,7 @@ class Article
     }
 
 
-    public function setTitle(string $title, ?string $locale = null): void
+    public function setTitle(string $title, ?string $locale = null): static
     {
         $locale = $locale ?: $this->getCurrentLocale() ?: 'en';
 
@@ -223,6 +231,7 @@ class Article
         /** @var ArticleTranslation $translation  */
         $translation = $this->translations->get($locale);
         $translation->setTitle($title);
+        return $this;
     }
 
     public function getTitle(?string $locale = null): ?string
@@ -232,7 +241,7 @@ class Article
         return $translation?->getTitle();
     }
 
-    public function setContent(string $content, ?string $locale = null): void
+    public function setContent(string $content, ?string $locale = null): static
     {
         $locale = $locale ?: $this->getCurrentLocale() ?: 'en';
 
@@ -246,6 +255,7 @@ class Article
         /** @var ArticleTranslation $translation  */
         $translation = $this->translations->get($locale);
         $translation->setContent($content);
+        return $this;
     }
 
     public function getContent(?string $locale = null): ?string

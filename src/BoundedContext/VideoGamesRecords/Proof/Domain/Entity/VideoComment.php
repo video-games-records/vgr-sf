@@ -33,9 +33,10 @@ class VideoComment
         return sprintf('comment [%s]', $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -48,15 +49,17 @@ class VideoComment
         return $this->video;
     }
 
-    public function setVideo(Video $video): void
+    public function setVideo(Video $video): static
     {
         $this->video = $video;
+        return $this;
     }
 
 
-    public function setContent(string $content): void
+    public function setContent(string $content): static
     {
         $this->content = $content;
+        return $this;
     }
 
     public function getContent(): string

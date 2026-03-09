@@ -37,9 +37,10 @@ class TeamChart
     private Chart $chart;
 
 
-    public function setChart(Chart $chart): void
+    public function setChart(Chart $chart): static
     {
         $this->chart = $chart;
+        return $this;
     }
 
     public function getChart(): Chart
@@ -47,9 +48,10 @@ class TeamChart
         return $this->chart;
     }
 
-    public function setTeam(Team $team): void
+    public function setTeam(Team $team): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): Team

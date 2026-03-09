@@ -34,9 +34,10 @@ class PlayerBadge
     private Badge $badge;
 
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -44,9 +45,10 @@ class PlayerBadge
         return $this->id;
     }
 
-    public function setEndedAt(DateTime $endedAt): void
+    public function setEndedAt(DateTime $endedAt): static
     {
         $this->endedAt = $endedAt;
+        return $this;
     }
 
     public function getEndedAt(): ?DateTime
@@ -54,9 +56,10 @@ class PlayerBadge
         return $this->endedAt;
     }
 
-    public function setMbOrder(int $mbOrder): void
+    public function setMbOrder(int $mbOrder): static
     {
         $this->mbOrder = $mbOrder;
+        return $this;
     }
 
     public function getMbOrder(): ?int
@@ -65,9 +68,10 @@ class PlayerBadge
     }
 
 
-    public function setBadge(Badge $badge): void
+    public function setBadge(Badge $badge): static
     {
         $this->badge = $badge;
+        return $this;
     }
 
     public function getBadge(): Badge
@@ -75,9 +79,10 @@ class PlayerBadge
         return $this->badge;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player

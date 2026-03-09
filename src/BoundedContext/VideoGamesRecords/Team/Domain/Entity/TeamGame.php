@@ -45,9 +45,10 @@ class TeamGame
     #[ORM\JoinColumn(name:'game_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
     private Game $game;
 
-    public function setGame(Game $game): void
+    public function setGame(Game $game): static
     {
         $this->game = $game;
+        return $this;
     }
 
     public function getGame(): Game
@@ -55,9 +56,10 @@ class TeamGame
         return $this->game;
     }
 
-    public function setTeam(Team $team): void
+    public function setTeam(Team $team): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): Team

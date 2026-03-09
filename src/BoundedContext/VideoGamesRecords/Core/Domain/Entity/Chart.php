@@ -128,9 +128,10 @@ class Chart
     }
 
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -139,9 +140,10 @@ class Chart
     }
 
 
-    public function setLibChartEn(string $libChartEn): void
+    public function setLibChartEn(string $libChartEn): static
     {
         $this->libChartEn = $libChartEn;
+        return $this;
     }
 
     public function getLibChartEn(): string
@@ -149,11 +151,12 @@ class Chart
         return $this->libChartEn;
     }
 
-    public function setLibChartFr(?string $libChartFr): void
+    public function setLibChartFr(?string $libChartFr): static
     {
         if ($libChartFr) {
             $this->libChartFr = $libChartFr;
         }
+        return $this;
     }
 
     public function getLibChartFr(): string
@@ -166,9 +169,10 @@ class Chart
         return $this->isProofVideoOnly;
     }
 
-    public function setIsProofVideoOnly(bool $isProofVideoOnly): void
+    public function setIsProofVideoOnly(bool $isProofVideoOnly): static
     {
         $this->isProofVideoOnly = $isProofVideoOnly;
+        return $this;
     }
 
     /**
@@ -184,9 +188,10 @@ class Chart
         $this->playerCharts->add($playerChart);
     }
 
-    public function setGroup(Group $group): void
+    public function setGroup(Group $group): static
     {
         $this->group = $group;
+        return $this;
     }
 
     public function getGroup(): Group
@@ -214,9 +219,10 @@ class Chart
     }
 
 
-    public function setPlayerChart1(?PlayerChart $playerChart1): void
+    public function setPlayerChart1(?PlayerChart $playerChart1): static
     {
         $this->playerChart1 = $playerChart1;
+        return $this;
     }
 
     public function getPlayerChart1(): ?PlayerChart
@@ -224,9 +230,10 @@ class Chart
         return $this->playerChart1;
     }
 
-    public function setPlayerChartP(?PlayerChart $playerChartP): void
+    public function setPlayerChartP(?PlayerChart $playerChartP): static
     {
         $this->playerChartP = $playerChartP;
+        return $this;
     }
 
     public function getPlayerChartP(): ?PlayerChart

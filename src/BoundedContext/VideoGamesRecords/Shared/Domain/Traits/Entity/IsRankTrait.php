@@ -11,9 +11,10 @@ trait IsRankTrait
     #[ORM\Column(nullable: false, options: ['default' => true])]
     private bool $isRank = true;
 
-    public function setIsRank(bool $isRank): void
+    public function setIsRank(bool $isRank): static
     {
         $this->isRank = $isRank;
+        return $this;
     }
 
     public function getIsRank(): bool

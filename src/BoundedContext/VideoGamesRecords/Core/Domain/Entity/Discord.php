@@ -53,9 +53,10 @@ class Discord
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -63,9 +64,10 @@ class Discord
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getUrl(): string
@@ -73,9 +75,10 @@ class Discord
         return $this->url;
     }
 
-    public function setUrl(string $url): void
+    public function setUrl(string $url): static
     {
         $this->url = $url;
+        return $this;
     }
 
     /**

@@ -143,9 +143,10 @@ class Team
         return (string) $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): int
@@ -153,9 +154,10 @@ class Team
         return $this->id;
     }
 
-    public function setLibTeam(string $libTeam): void
+    public function setLibTeam(string $libTeam): static
     {
         $this->libTeam = $libTeam;
+        return $this;
     }
 
     public function getLibTeam(): string
@@ -168,9 +170,10 @@ class Team
         return $this->libTeam;
     }
 
-    public function setTag(string $tag): void
+    public function setTag(string $tag): static
     {
         $this->tag = $tag;
+        return $this;
     }
 
     public function getTag(): string
@@ -178,9 +181,10 @@ class Team
         return $this->tag;
     }
 
-    public function setLeader(Player $leader): void
+    public function setLeader(Player $leader): static
     {
         $this->leader = $leader;
+        return $this;
     }
 
     public function getLeader(): Player
@@ -188,9 +192,10 @@ class Team
         return $this->leader;
     }
 
-    public function setSiteWeb(?string $siteWeb): void
+    public function setSiteWeb(?string $siteWeb): static
     {
         $this->siteWeb = $siteWeb;
+        return $this;
     }
 
 
@@ -200,9 +205,10 @@ class Team
     }
 
 
-    public function setLogo(string $logo): void
+    public function setLogo(string $logo): static
     {
         $this->logo = $logo;
+        return $this;
     }
 
     public function getLogo(): string
@@ -210,9 +216,10 @@ class Team
         return $this->logo;
     }
 
-    public function setPresentation(string $presentation): void
+    public function setPresentation(string $presentation): static
     {
         $this->presentation = $presentation;
+        return $this;
     }
 
     public function getPresentation(): ?string
@@ -220,9 +227,10 @@ class Team
         return $this->presentation;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): string

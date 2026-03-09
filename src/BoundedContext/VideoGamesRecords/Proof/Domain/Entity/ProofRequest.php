@@ -52,9 +52,10 @@ class ProofRequest
         return sprintf('Request [%s]', $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -62,9 +63,10 @@ class ProofRequest
         return $this->id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): string
@@ -72,9 +74,10 @@ class ProofRequest
         return $this->status;
     }
 
-    public function setResponse(string $response): void
+    public function setResponse(string $response): static
     {
         $this->response = $response;
+        return $this;
     }
 
     public function getResponse(): ?string
@@ -82,9 +85,10 @@ class ProofRequest
         return $this->response;
     }
 
-    public function setDateAcceptance(DateTime $dateAcceptance): void
+    public function setDateAcceptance(DateTime $dateAcceptance): static
     {
         $this->dateAcceptance = $dateAcceptance;
+        return $this;
     }
 
     public function getDateAcceptance(): ?DateTime
@@ -92,9 +96,10 @@ class ProofRequest
         return $this->dateAcceptance;
     }
 
-    public function setMessage(string $message): void
+    public function setMessage(string $message): static
     {
         $this->message = $message;
+        return $this;
     }
 
     public function getMessage(): ?string
@@ -102,9 +107,10 @@ class ProofRequest
         return $this->message;
     }
 
-    public function setPlayerChart(PlayerChart $playerChart): void
+    public function setPlayerChart(PlayerChart $playerChart): static
     {
         $this->playerChart = $playerChart;
+        return $this;
     }
 
     public function getPlayerChart(): PlayerChart
@@ -112,9 +118,10 @@ class ProofRequest
         return $this->playerChart;
     }
 
-    public function setPlayerRequesting(Player $playerRequesting): void
+    public function setPlayerRequesting(Player $playerRequesting): static
     {
         $this->playerRequesting = $playerRequesting;
+        return $this;
     }
 
     public function getPlayerRequesting(): Player
@@ -122,9 +129,10 @@ class ProofRequest
         return $this->playerRequesting;
     }
 
-    public function setPlayerResponding(?Player $playerResponding = null): void
+    public function setPlayerResponding(?Player $playerResponding = null): static
     {
         $this->playerResponding = $playerResponding;
+        return $this;
     }
 
     public function getPlayerResponding(): ?Player

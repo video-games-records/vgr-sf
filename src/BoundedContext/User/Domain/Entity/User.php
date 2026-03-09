@@ -96,9 +96,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function setId(?int $id): void
+    public function setId(?int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getUsername(): string
@@ -106,9 +107,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): void
+    public function setUsername(string $username): static
     {
         $this->username = $username;
+        return $this;
     }
 
     public function getEmail(): string
@@ -116,14 +118,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): void
+    public function setEmail(string $email): static
     {
         $this->email = $email;
+        return $this;
     }
 
-    public function setEnabled(bool $boolean): void
+    public function setEnabled(bool $boolean): static
     {
         $this->enabled = (bool) $boolean;
+        return $this;
     }
 
     public function isEnabled(): bool
@@ -148,9 +152,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @param string[] $roles
      */
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+        return $this;
     }
 
     public function getPassword(): ?string
@@ -158,9 +163,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function setPassword(string $password): static
     {
         $this->password = $password;
+        return $this;
     }
 
     /**
@@ -193,7 +199,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?DateTime $time = null): void
+    public function setLastLogin(?DateTime $time = null): static
     {
         if ($time === null) {
             $time = new \DateTime();
@@ -206,6 +212,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->lastLogin = $time;
+        return $this;
     }
 
     public function updateLastLoginOnly(?\DateTime $time = null): void
@@ -217,9 +224,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->lastLogin = $time;
     }
 
-    public function setConfirmationToken(?string $confirmationToken): void
+    public function setConfirmationToken(?string $confirmationToken): static
     {
         $this->confirmationToken = $confirmationToken;
+        return $this;
     }
 
     public function getConfirmationToken(): ?string
@@ -227,9 +235,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->confirmationToken;
     }
 
-    public function setPasswordRequestedAt(?DateTime $date = null): void
+    public function setPasswordRequestedAt(?DateTime $date = null): static
     {
         $this->passwordRequestedAt = $date;
+        return $this;
     }
 
     public function getPasswordRequestedAt(): ?DateTime
@@ -248,9 +257,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->language;
     }
 
-    public function setLanguage(string $language): void
+    public function setLanguage(string $language): static
     {
         $this->language = $language;
+        return $this;
     }
 
     public function getSlug(): string
@@ -263,9 +273,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->nbConnexion;
     }
 
-    public function setNbConnexion(int $nbConnexion): void
+    public function setNbConnexion(int $nbConnexion): static
     {
         $this->nbConnexion = $nbConnexion;
+        return $this;
     }
 
     public function getNbForumMessage(): int
@@ -273,9 +284,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->nbForumMessage;
     }
 
-    public function setNbForumMessage(int $nbForumMessage): void
+    public function setNbForumMessage(int $nbForumMessage): static
     {
         $this->nbForumMessage = $nbForumMessage;
+        return $this;
     }
 
     public function getAvatar(): string
@@ -283,9 +295,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): void
+    public function setAvatar(string $avatar): static
     {
         $this->avatar = $avatar;
+        return $this;
     }
 
     public function getComment(): ?string
@@ -293,17 +306,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->comment;
     }
 
-    public function setComment(?string $comment = null): void
+    public function setComment(?string $comment = null): static
     {
         $this->comment = $comment;
+        return $this;
     }
 
     /**
      * @param Collection<int, Group> $groups
      */
-    public function setGroups(Collection $groups): void
+    public function setGroups(Collection $groups): static
     {
         $this->groups = $groups;
+        return $this;
     }
 
     /**
@@ -314,9 +329,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->groups;
     }
 
-    public function setPlainPassword(?string $password): void
+    public function setPlainPassword(?string $password): static
     {
         $this->plainPassword = $password;
+        return $this;
     }
 
     public function addGroup(Group $group): void

@@ -35,9 +35,10 @@ class CountryTranslation
         return $this->translatable;
     }
 
-    public function setTranslatable(Country $translatable): void
+    public function setTranslatable(Country $translatable): static
     {
         $this->translatable = $translatable;
+        return $this;
     }
 
     public function getLocale(): string
@@ -45,14 +46,16 @@ class CountryTranslation
         return $this->locale;
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(string $locale): static
     {
         $this->locale = $locale;
+        return $this;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): string

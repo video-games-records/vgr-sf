@@ -61,9 +61,10 @@ class Rule
         return sprintf('%s [%s]', $this->getName(), $this->id);
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -71,9 +72,10 @@ class Rule
         return $this->id;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): ?string
@@ -81,9 +83,10 @@ class Rule
         return $this->name;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): ?Player
@@ -102,9 +105,10 @@ class Rule
     /**
      * @param Collection<string, RuleTranslation> $translations
      */
-    public function setTranslations(Collection $translations): void
+    public function setTranslations(Collection $translations): static
     {
         $this->translations = $translations;
+        return $this;
     }
 
     public function addTranslation(RuleTranslation $translation): void
@@ -154,7 +158,7 @@ class Rule
         return $this->translations->getKeys();
     }
 
-    public function setContent(string $content, ?string $locale = null): void
+    public function setContent(string $content, ?string $locale = null): static
     {
         $locale = $locale ?: $this->currentLocale ?: self::DEFAULT_LOCALE;
 
@@ -166,6 +170,7 @@ class Rule
         }
 
         $this->translations->get($locale)?->setContent($content);
+        return $this;
     }
 
     public function getContent(?string $locale = null): ?string

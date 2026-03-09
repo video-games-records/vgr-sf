@@ -87,9 +87,10 @@ class Group
         }
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -97,9 +98,10 @@ class Group
         return $this->id;
     }
 
-    public function setLibGroupEn(string $libGroupEn): void
+    public function setLibGroupEn(string $libGroupEn): static
     {
         $this->libGroupEn = $libGroupEn;
+        return $this;
     }
 
     public function getLibGroupEn(): string
@@ -107,11 +109,12 @@ class Group
         return $this->libGroupEn;
     }
 
-    public function setLibGroupFr(?string $libGroupFr): void
+    public function setLibGroupFr(?string $libGroupFr): static
     {
         if ($libGroupFr) {
             $this->libGroupFr = $libGroupFr;
         }
+        return $this;
     }
 
     public function getLibGroupFr(): string
@@ -129,10 +132,11 @@ class Group
         return $this->orderBy;
     }
 
-    public function setOrderBy(string $orderBy): void
+    public function setOrderBy(string $orderBy): static
     {
         $value = new GroupOrderBy($orderBy);
         $this->orderBy = $value->getValue();
+        return $this;
     }
 
     public function getSlug(): string
@@ -140,9 +144,10 @@ class Group
         return $this->slug;
     }
 
-    public function setGame(Game $game): void
+    public function setGame(Game $game): static
     {
         $this->game = $game;
+        return $this;
     }
 
     public function getGame(): Game

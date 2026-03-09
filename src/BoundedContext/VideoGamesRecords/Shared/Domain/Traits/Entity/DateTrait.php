@@ -17,8 +17,9 @@ trait DateTrait
         return $this->date;
     }
 
-    public function setDate(string $date): void
+    public function setDate(string $date): static
     {
         $this->date = $date;
+        return $this;
     }
 }

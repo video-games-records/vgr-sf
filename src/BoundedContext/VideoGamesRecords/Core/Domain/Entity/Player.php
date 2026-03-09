@@ -172,9 +172,10 @@ class Player
         return sprintf('%s (%d)', $this->getPseudo(), $this->getId());
     }
 
-    public function setId(?int $id): void
+    public function setId(?int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -182,9 +183,10 @@ class Player
         return $this->id;
     }
 
-    public function setPseudo(string $pseudo): void
+    public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+        return $this;
     }
 
     public function getPseudo(): string
@@ -192,9 +194,10 @@ class Player
         return $this->pseudo;
     }
 
-    public function setAvatar(string $avatar): void
+    public function setAvatar(string $avatar): static
     {
         $this->avatar = $avatar;
+        return $this;
     }
 
     public function getAvatar(): string
@@ -202,9 +205,10 @@ class Player
         return $this->avatar;
     }
 
-    public function setGamerCard(?string $gamerCard): void
+    public function setGamerCard(?string $gamerCard): static
     {
         $this->gamerCard = $gamerCard;
+        return $this;
     }
 
     public function getGamerCard(): ?string
@@ -213,9 +217,10 @@ class Player
     }
 
 
-    public function setRankProof(int $rankProof): void
+    public function setRankProof(int $rankProof): static
     {
         $this->rankProof = $rankProof;
+        return $this;
     }
 
     public function getRankProof(): int
@@ -223,9 +228,10 @@ class Player
         return $this->rankProof;
     }
 
-    public function setRankCountry(int $rankCountry): void
+    public function setRankCountry(int $rankCountry): static
     {
         $this->rankCountry = $rankCountry;
+        return $this;
     }
 
     public function getRankCountry(): int
@@ -233,9 +239,10 @@ class Player
         return $this->rankCountry;
     }
 
-    public function setNbChartMax(int $nbChartMax): void
+    public function setNbChartMax(int $nbChartMax): static
     {
         $this->nbChartMax = $nbChartMax;
+        return $this;
     }
 
     public function getNbChartMax(): int
@@ -243,9 +250,10 @@ class Player
         return $this->nbChartMax;
     }
 
-    public function setNbChartWithPlatform(int $nbChartWithPlatform): void
+    public function setNbChartWithPlatform(int $nbChartWithPlatform): static
     {
         $this->nbChartWithPlatform = $nbChartWithPlatform;
+        return $this;
     }
 
     public function getNbChartWithPlatform(): int
@@ -253,9 +261,10 @@ class Player
         return $this->nbChartWithPlatform;
     }
 
-    public function setNbChartDisabled(int $nbChartDisabled): void
+    public function setNbChartDisabled(int $nbChartDisabled): static
     {
         $this->nbChartDisabled = $nbChartDisabled;
+        return $this;
     }
 
     public function getNbChartDisabled(): int
@@ -268,9 +277,10 @@ class Player
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?DateTime $time = null): void
+    public function setLastLogin(?DateTime $time = null): static
     {
         $this->lastLogin = $time;
+        return $this;
     }
 
     /**
@@ -287,9 +297,10 @@ class Player
         return $this;
     }
 
-    public function setTeam(?Team $team = null): void
+    public function setTeam(?Team $team = null): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): ?Team
@@ -303,14 +314,16 @@ class Player
     }
 
 
-    public function setLastDisplayLostPosition(?DateTime $lastDisplayLostPosition = null): void
+    public function setLastDisplayLostPosition(?DateTime $lastDisplayLostPosition = null): static
     {
         $this->lastDisplayLostPosition = $lastDisplayLostPosition;
+        return $this;
     }
 
-    public function setBoolMaj(bool $boolMaj): void
+    public function setBoolMaj(bool $boolMaj): static
     {
         $this->boolMaj = $boolMaj;
+        return $this;
     }
 
     public function getBoolMaj(): bool
@@ -323,14 +336,16 @@ class Player
         return $this->hasDonate;
     }
 
-    public function setHasDonate(bool $hasDonate): void
+    public function setHasDonate(bool $hasDonate): static
     {
         $this->hasDonate = $hasDonate;
+        return $this;
     }
 
-    public function setStatus(PlayerStatusEnum $status): void
+    public function setStatus(PlayerStatusEnum $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): PlayerStatusEnum
@@ -407,9 +422,10 @@ class Player
         return $this->nbConnexion;
     }
 
-    public function setNbConnexion(int $nbConnexion): void
+    public function setNbConnexion(int $nbConnexion): static
     {
         $this->nbConnexion = $nbConnexion;
+        return $this;
     }
 
 

@@ -12,9 +12,10 @@ trait RankPointChartTrait
     private int $rankPointChart = 0;
 
 
-    public function setRankPointChart(int $rankPointChart): void
+    public function setRankPointChart(int $rankPointChart): static
     {
         $this->rankPointChart = $rankPointChart;
+        return $this;
     }
 
     public function getRankPointChart(): int

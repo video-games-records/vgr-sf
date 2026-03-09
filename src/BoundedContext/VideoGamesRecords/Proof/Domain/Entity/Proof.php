@@ -65,9 +65,10 @@ class Proof
         return (string) $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -75,9 +76,10 @@ class Proof
         return $this->id;
     }
 
-    public function setPicture(Picture $picture): void
+    public function setPicture(Picture $picture): static
     {
         $this->picture = $picture;
+        return $this;
     }
 
     public function getPicture(): ?Picture
@@ -85,9 +87,10 @@ class Proof
         return $this->picture;
     }
 
-    public function setVideo(Video $video): void
+    public function setVideo(Video $video): static
     {
         $this->video = $video;
+        return $this;
     }
 
     public function getVideo(): ?Video
@@ -95,9 +98,10 @@ class Proof
         return $this->video;
     }
 
-    public function setProofRequest(?ProofRequest $proofRequest): void
+    public function setProofRequest(?ProofRequest $proofRequest): static
     {
         $this->proofRequest = $proofRequest;
+        return $this;
     }
 
     public function getProofRequest(): ?ProofRequest
@@ -105,9 +109,10 @@ class Proof
         return $this->proofRequest;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): ProofStatus
@@ -115,9 +120,10 @@ class Proof
         return new ProofStatus($this->status);
     }
 
-    public function setResponse(string $response): void
+    public function setResponse(string $response): static
     {
         $this->response = $response;
+        return $this;
     }
 
     public function getResponse(): ?string
@@ -125,9 +131,10 @@ class Proof
         return $this->response;
     }
 
-    public function setPlayerResponding(?Player $playerResponding = null): void
+    public function setPlayerResponding(?Player $playerResponding = null): static
     {
         $this->playerResponding = $playerResponding;
+        return $this;
     }
 
     public function getPlayerResponding(): ?Player
@@ -135,9 +142,10 @@ class Proof
         return $this->playerResponding;
     }
 
-    public function setPlayer(Player $player): void
+    public function setPlayer(Player $player): static
     {
         $this->player = $player;
+        return $this;
     }
 
     public function getPlayer(): Player
@@ -145,9 +153,10 @@ class Proof
         return $this->player;
     }
 
-    public function setChart(Chart $chart): void
+    public function setChart(Chart $chart): static
     {
         $this->chart = $chart;
+        return $this;
     }
 
     public function getChart(): Chart
@@ -155,9 +164,10 @@ class Proof
         return $this->chart;
     }
 
-    public function setCheckedAt(DateTime $checkedAt): void
+    public function setCheckedAt(DateTime $checkedAt): static
     {
         $this->checkedAt = $checkedAt;
+        return $this;
     }
 
     public function getCheckedAt(): ?DateTime

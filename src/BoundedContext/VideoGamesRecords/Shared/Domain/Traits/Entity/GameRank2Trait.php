@@ -11,9 +11,10 @@ trait GameRank2Trait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $gameRank2 = 0;
 
-    public function setGameRank2(int $gameRank2): void
+    public function setGameRank2(int $gameRank2): static
     {
         $this->gameRank2 = $gameRank2;
+        return $this;
     }
 
     public function getGameRank2(): int

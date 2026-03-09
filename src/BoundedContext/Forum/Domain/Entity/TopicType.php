@@ -32,9 +32,10 @@ class TopicType
         return $this->id;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): string
@@ -42,9 +43,10 @@ class TopicType
         return $this->name;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(int $position): static
     {
         $this->position = $position;
+        return $this;
     }
 
     public function getPosition(): int

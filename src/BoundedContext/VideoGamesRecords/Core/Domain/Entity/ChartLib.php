@@ -32,9 +32,10 @@ class ChartLib
     private ChartType $type;
 
 
-    public function setName(?string $name = null): void
+    public function setName(?string $name = null): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): ?string
@@ -47,14 +48,16 @@ class ChartLib
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
-    public function setChart(Chart $chart): void
+    public function setChart(Chart $chart): static
     {
         $this->chart = $chart;
+        return $this;
     }
 
     public function getChart(): Chart
@@ -62,9 +65,10 @@ class ChartLib
         return $this->chart;
     }
 
-    public function setType(ChartType $type): void
+    public function setType(ChartType $type): static
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getType(): ChartType

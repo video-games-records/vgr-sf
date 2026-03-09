@@ -30,9 +30,10 @@ trait PlayerCommunicationDataTrait
         return $this->website;
     }
 
-    public function setWebsite(?string $website = null): void
+    public function setWebsite(?string $website = null): static
     {
         $this->website = $website;
+        return $this;
     }
 
     public function getYoutube(): ?string
@@ -40,9 +41,10 @@ trait PlayerCommunicationDataTrait
         return $this->youtube;
     }
 
-    public function setYoutube(?string $youtube = null): void
+    public function setYoutube(?string $youtube = null): static
     {
         $this->youtube = $youtube;
+        return $this;
     }
 
     public function getTwitch(): ?string
@@ -50,9 +52,10 @@ trait PlayerCommunicationDataTrait
         return $this->twitch;
     }
 
-    public function setTwitch(?string $twitch = null): void
+    public function setTwitch(?string $twitch = null): static
     {
         $this->twitch = $twitch;
+        return $this;
     }
 
     public function getDiscord(): ?string
@@ -60,8 +63,9 @@ trait PlayerCommunicationDataTrait
         return $this->discord;
     }
 
-    public function setDiscord(?string $discord): void
+    public function setDiscord(?string $discord): static
     {
         $this->discord = $discord;
+        return $this;
     }
 }

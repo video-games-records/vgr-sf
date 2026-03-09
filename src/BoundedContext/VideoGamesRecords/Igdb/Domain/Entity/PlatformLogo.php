@@ -53,9 +53,10 @@ class PlatformLogo
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function isAlphaChannel(): bool
@@ -63,9 +64,10 @@ class PlatformLogo
         return $this->alphaChannel;
     }
 
-    public function setAlphaChannel(bool $alphaChannel): void
+    public function setAlphaChannel(bool $alphaChannel): static
     {
         $this->alphaChannel = $alphaChannel;
+        return $this;
     }
 
     public function isAnimated(): bool
@@ -73,9 +75,10 @@ class PlatformLogo
         return $this->animated;
     }
 
-    public function setAnimated(bool $animated): void
+    public function setAnimated(bool $animated): static
     {
         $this->animated = $animated;
+        return $this;
     }
 
     public function getChecksum(): ?string
@@ -83,9 +86,10 @@ class PlatformLogo
         return $this->checksum;
     }
 
-    public function setChecksum(?string $checksum): void
+    public function setChecksum(?string $checksum): static
     {
         $this->checksum = $checksum;
+        return $this;
     }
 
     public function getHeight(): int
@@ -93,9 +97,10 @@ class PlatformLogo
         return $this->height;
     }
 
-    public function setHeight(int $height): void
+    public function setHeight(int $height): static
     {
         $this->height = $height;
+        return $this;
     }
 
     public function getImageId(): string
@@ -103,9 +108,10 @@ class PlatformLogo
         return $this->imageId;
     }
 
-    public function setImageId(string $imageId): void
+    public function setImageId(string $imageId): static
     {
         $this->imageId = $imageId;
+        return $this;
     }
 
     public function getUrl(): ?string
@@ -113,9 +119,10 @@ class PlatformLogo
         return $this->url;
     }
 
-    public function setUrl(?string $url): void
+    public function setUrl(?string $url): static
     {
         $this->url = $url;
+        return $this;
     }
 
     public function getWidth(): int
@@ -123,9 +130,10 @@ class PlatformLogo
         return $this->width;
     }
 
-    public function setWidth(int $width): void
+    public function setWidth(int $width): static
     {
         $this->width = $width;
+        return $this;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
@@ -133,9 +141,10 @@ class PlatformLogo
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function getUpdatedAt(): \DateTimeImmutable
@@ -143,9 +152,10 @@ class PlatformLogo
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     public function getImageUrl(string $size = 'logo_med'): string

@@ -11,9 +11,10 @@ trait RankMedalTrait
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $rankMedal = 0;
 
-    public function setRankMedal(int $rankMedal): void
+    public function setRankMedal(int $rankMedal): static
     {
         $this->rankMedal = $rankMedal;
+        return $this;
     }
 
     public function getRankMedal(): int

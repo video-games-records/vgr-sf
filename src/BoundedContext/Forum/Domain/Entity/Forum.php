@@ -95,9 +95,10 @@ class Forum
         return $this->id;
     }
 
-    public function setLibForum(string $libForum): void
+    public function setLibForum(string $libForum): static
     {
         $this->libForum = $libForum;
+        return $this;
     }
 
     public function getLibForum(): string
@@ -105,9 +106,10 @@ class Forum
         return $this->libForum;
     }
 
-    public function setLibForumFr(string $libForumFr): void
+    public function setLibForumFr(string $libForumFr): static
     {
         $this->libForumFr = $libForumFr;
+        return $this;
     }
 
     public function getLibForumFr(): ?string
@@ -115,9 +117,10 @@ class Forum
         return $this->libForumFr;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(int $position): static
     {
         $this->position = $position;
+        return $this;
     }
 
     public function getPosition(): int
@@ -125,9 +128,10 @@ class Forum
         return $this->position;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): static
     {
         $this->status = $status;
+        return $this;
     }
 
     public function getStatus(): string
@@ -135,9 +139,10 @@ class Forum
         return $this->status;
     }
 
-    public function setRole(?string $role): void
+    public function setRole(?string $role): static
     {
         $this->role = $role;
+        return $this;
     }
 
     public function getRole(): ?string
@@ -145,9 +150,10 @@ class Forum
         return $this->role;
     }
 
-    public function setNbMessage(int $nbMessage): void
+    public function setNbMessage(int $nbMessage): static
     {
         $this->nbMessage = $nbMessage;
+        return $this;
     }
 
     public function getNbMessage(): int
@@ -155,9 +161,10 @@ class Forum
         return $this->nbMessage;
     }
 
-    public function setNbTopic(int $nbTopic): void
+    public function setNbTopic(int $nbTopic): static
     {
         $this->nbTopic = $nbTopic;
+        return $this;
     }
 
     public function getNbTopic(): int
@@ -170,9 +177,10 @@ class Forum
         return $this->slug;
     }
 
-    public function setCategory(?Category $category = null): void
+    public function setCategory(?Category $category = null): static
     {
         $this->category = $category;
+        return $this;
     }
 
     public function getCategory(): ?Category
@@ -188,9 +196,10 @@ class Forum
         return $this->topics;
     }
 
-    public function setLastMessage(?Message $message = null): void
+    public function setLastMessage(?Message $message = null): static
     {
         $this->lastMessage = $message;
+        return $this;
     }
 
     public function getLastMessage(): ?Message

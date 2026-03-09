@@ -10,9 +10,10 @@ trait SetMessageBus
 {
     private MessageBusInterface $messageBus;
 
-    public function setMessageBus(MessageBusInterface $messageBus): void
+    public function setMessageBus(MessageBusInterface $messageBus): static
     {
         $this->messageBus = $messageBus;
+        return $this;
     }
 
     public function getMessageBus(): MessageBusInterface

@@ -33,9 +33,10 @@ class TeamBadge
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:false, onDelete: 'CASCADE')]
     private Badge $badge;
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -43,9 +44,10 @@ class TeamBadge
         return $this->id;
     }
 
-    public function setEndedAt(?DateTime $endedAt): void
+    public function setEndedAt(?DateTime $endedAt): static
     {
         $this->endedAt = $endedAt;
+        return $this;
     }
 
     public function getEndedAt(): ?DateTime
@@ -53,9 +55,10 @@ class TeamBadge
         return $this->endedAt;
     }
 
-    public function setMbOrder(int $mbOrder): void
+    public function setMbOrder(int $mbOrder): static
     {
         $this->mbOrder = $mbOrder;
+        return $this;
     }
 
     public function getMbOrder(): ?int
@@ -63,9 +66,10 @@ class TeamBadge
         return $this->mbOrder;
     }
 
-    public function setBadge(Badge $badge): void
+    public function setBadge(Badge $badge): static
     {
         $this->badge = $badge;
+        return $this;
     }
 
     public function getBadge(): Badge
@@ -73,9 +77,10 @@ class TeamBadge
         return $this->badge;
     }
 
-    public function setTeam(Team $team): void
+    public function setTeam(Team $team): static
     {
         $this->team = $team;
+        return $this;
     }
 
     public function getTeam(): Team

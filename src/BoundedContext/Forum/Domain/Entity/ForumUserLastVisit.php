@@ -49,9 +49,10 @@ class ForumUserLastVisit
         return $this->id;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getUser(): User
@@ -59,9 +60,10 @@ class ForumUserLastVisit
         return $this->user;
     }
 
-    public function setForum(Forum $forum): void
+    public function setForum(Forum $forum): static
     {
         $this->forum = $forum;
+        return $this;
     }
 
     public function getForum(): Forum
@@ -69,9 +71,10 @@ class ForumUserLastVisit
         return $this->forum;
     }
 
-    public function setLastVisitedAt(\DateTime $lastVisitedAt): void
+    public function setLastVisitedAt(\DateTime $lastVisitedAt): static
     {
         $this->lastVisitedAt = $lastVisitedAt;
+        return $this;
     }
 
     public function getLastVisitedAt(): \DateTime

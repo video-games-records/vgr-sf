@@ -10,9 +10,10 @@ trait SetEventDispatcher
 {
     private EventDispatcherInterface $eventDispatcher;
 
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): static
     {
         $this->eventDispatcher = $eventDispatcher;
+        return $this;
     }
 
     public function getEventDispatcher(): EventDispatcherInterface

@@ -80,9 +80,10 @@ class Topic
         $this->userLastVisits = new ArrayCollection();
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): static
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): ?int
@@ -90,9 +91,10 @@ class Topic
         return $this->id;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName(): string
@@ -100,9 +102,10 @@ class Topic
         return $this->name;
     }
 
-    public function setNbMessage(int $nbMessage): void
+    public function setNbMessage(int $nbMessage): static
     {
         $this->nbMessage = $nbMessage;
+        return $this;
     }
 
     public function getNbMessage(): int
@@ -110,9 +113,10 @@ class Topic
         return $this->nbMessage;
     }
 
-    public function setForum(Forum $forum): void
+    public function setForum(Forum $forum): static
     {
         $this->forum = $forum;
+        return $this;
     }
 
     public function getForum(): Forum
@@ -120,9 +124,10 @@ class Topic
         return $this->forum;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+        return $this;
     }
 
     public function getUser(): User
@@ -135,9 +140,10 @@ class Topic
         return $this->slug;
     }
 
-    public function setType(?TopicType $type): void
+    public function setType(?TopicType $type): static
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getType(): ?TopicType
@@ -148,11 +154,12 @@ class Topic
     /**
      * @param array<Message> $messages
      */
-    public function setMessages(array $messages): void
+    public function setMessages(array $messages): static
     {
         foreach ($messages as $message) {
             $this->addMessage($message);
         }
+        return $this;
     }
 
     public function addMessage(Message $message): void
@@ -169,9 +176,10 @@ class Topic
         return $this->messages;
     }
 
-    public function setLastMessage(?Message $message = null): void
+    public function setLastMessage(?Message $message = null): static
     {
         $this->lastMessage = $message;
+        return $this;
     }
 
     public function getLastMessage(): ?Message
@@ -179,9 +187,10 @@ class Topic
         return $this->lastMessage;
     }
 
-    public function setBoolArchive(bool $boolArchive): void
+    public function setBoolArchive(bool $boolArchive): static
     {
         $this->boolArchive = $boolArchive;
+        return $this;
     }
 
     public function getBoolArchive(): bool
