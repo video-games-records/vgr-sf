@@ -102,7 +102,7 @@ readonly class UpdatePlayerChartRankHandler
             }
             // Platform point
             if ($playerChart->getPlatform() != null) {
-                $idPlatForm = $playerChart->getPlatform()->getId();
+                $idPlatForm = (int) $playerChart->getPlatform()->getId();
                 /** @var array{count: mixed, points: array<int, int>, previousLibValue: string, rank: int, nbEqual: int, playerChartEqual: list<PlayerChart>} $pf */
                 $pf = &$platforms[$idPlatForm];
                 if ($pf['previousLibValue'] === $libValue) {
@@ -135,7 +135,7 @@ readonly class UpdatePlayerChartRankHandler
             }
 
             if ($playerChart->getPlatform() != null) {
-                $idPlatForm = $playerChart->getPlatform()->getId();
+                $idPlatForm = (int) $playerChart->getPlatform()->getId();
                 /** @var array{count: mixed, points: array<int, int>, previousLibValue: string, rank: int, nbEqual: int, playerChartEqual: list<PlayerChart>} $pf */
                 $pf = &$platforms[$idPlatForm];
                 $playerChart->setPointPlatform((int) (
@@ -177,7 +177,7 @@ readonly class UpdatePlayerChartRankHandler
 
             // Platform point
             if ($playerChart->getPlatform() != null) {
-                $platforms[$playerChart->getPlatform()->getId()]['previousLibValue'] = $libValue;
+                $platforms[(int) $playerChart->getPlatform()->getId()]['previousLibValue'] = $libValue;
             }
         }
         $this->em->flush();

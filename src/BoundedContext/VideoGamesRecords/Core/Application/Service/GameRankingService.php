@@ -118,7 +118,7 @@ readonly class GameRankingService
 
         $previousRanksMap = [];
         foreach ($previousRankings as $prevRanking) {
-            $previousRanksMap[$prevRanking->getGame()->getId()] = $prevRanking->getRank();
+            $previousRanksMap[(int) $prevRanking->getGame()->getId()] = $prevRanking->getRank();
         }
 
         $rankings = [];
@@ -129,7 +129,7 @@ readonly class GameRankingService
             $nbPost = $gameData['nbPost'];
 
             // Calculate position change (positive = improvement, negative = decline)
-            $previousRank = $previousRanksMap[$game->getId()] ?? null;
+            $previousRank = $previousRanksMap[(int) $game->getId()] ?? null;
             $positionChange = $previousRank ? $previousRank - $currentRank : null;
 
             // Check if ranking already exists

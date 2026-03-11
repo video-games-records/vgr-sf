@@ -92,7 +92,7 @@ class PlayerSerieRankingProvider extends AbstractRankingProvider
         $row = (null !== $player) ? $this->getRow($serie, $player) : null;
 
         if (null !== $maxRank) {
-            if (null !== $row && null !== $player) {
+            if (null !== $row) {
                 $query->andWhere('(ps.rankMedal <= :maxRank OR ps.rankMedal BETWEEN :min AND :max OR p.id IN (:friends))')
                     ->setParameter('min', $row->getRankMedal() - 5)
                     ->setParameter('max', $row->getRankMedal() + 5)

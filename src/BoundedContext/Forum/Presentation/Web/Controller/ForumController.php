@@ -63,7 +63,7 @@ class ForumController extends AbstractLocalizedController
 
             foreach ($categories as $category) {
                 foreach ($category->getForums() as $forum) {
-                    $visit = $forumVisits[$forum->getId()] ?? null;
+                    $visit = $forumVisits[(int) $forum->getId()] ?? null;
                     $lastMessage = $forum->getLastMessage();
 
                     if ($lastMessage === null) {
