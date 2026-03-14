@@ -8,6 +8,7 @@ use App\BoundedContext\VideoGamesRecords\Dwh\Application\Message\DailyRanking;
 use App\BoundedContext\VideoGamesRecords\Dwh\Application\Message\UpdateGame;
 use App\BoundedContext\VideoGamesRecords\Dwh\Application\Message\UpdatePlayer;
 use App\BoundedContext\VideoGamesRecords\Dwh\Application\Message\UpdateTeam;
+use Symfony\Component\Console\Messenger\RunCommandMessage;
 use Symfony\Component\Messenger\Message\RedispatchMessage;
 use Symfony\Component\Scheduler\Attribute\AsSchedule;
 use Symfony\Component\Scheduler\RecurringMessage;
@@ -42,6 +43,9 @@ class Scheduler implements ScheduleProviderInterface
             ->add(RecurringMessage::cron('5 0 * * *', new RedispatchMessage(new UpdateTeam(), 'async')))
 
             ->add(RecurringMessage::cron('00 8 * * *', new DailyRanking()))
+
+            // Purge messenger processed messages older than 1 month (daily at 3am)
+            ->add(RecurringMessage::cron('0 3 * * *', new RunCommandMessage('messenger:monitor:purge --older-than=1-month')))
 
             // Core Bundle Messages (keeping original schedule)
         /*
