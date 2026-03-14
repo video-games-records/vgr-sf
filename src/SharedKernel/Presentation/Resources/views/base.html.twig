@@ -132,15 +132,16 @@
                                 {% endif %}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                                {% set current_route = app.request.attributes.get('_route') %}
                                 <li>
                                     <a class="dropdown-item {{ app.request.locale == 'en' ? 'active' : '' }}"
-                                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'en'})) : path('home', {'_locale': 'en'}) }}">
                                         🇬🇧 {{ 'navigation.language.english'|trans }}
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item {{ app.request.locale == 'fr' ? 'active' : '' }}"
-                                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}">
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'fr'})) : path('home', {'_locale': 'fr'}) }}">
                                         🇫🇷 {{ 'navigation.language.french'|trans }}
                                     </a>
                                 </li>
@@ -196,7 +197,6 @@
                                             {% endif %}
                                         </a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}"><i class="bi bi-gear"></i> {{ 'navigation.user_menu.settings'|trans }}</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> {{ 'navigation.user_menu.logout'|trans }}</a></li>
                                 </ul>
