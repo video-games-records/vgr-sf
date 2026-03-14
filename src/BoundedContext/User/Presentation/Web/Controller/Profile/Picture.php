@@ -57,7 +57,7 @@ class Picture extends AbstractController
                 default => new PngEncoder(),
             };
 
-            $this->avatarManager->write('users/' . $filename, (string) $image->encode($encoder));
+            $this->avatarManager->write('user/' . $filename, (string) $image->encode($encoder));
 
             $user->setAvatar($filename);
             $this->entityManager->flush();
