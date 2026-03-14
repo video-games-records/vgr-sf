@@ -56,6 +56,8 @@ class PlayerBadgeAdmin extends BaseAdmin
                 'btn_delete' => false,
                 'btn_catalogue' => true,
                 'label' => 'player_badge.form.badge',
+            ], [
+                'admin_code' => 'sonata.admin.vgr.badge',
             ])
         ;
     }

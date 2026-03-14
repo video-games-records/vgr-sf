@@ -149,6 +149,8 @@ class GameAdmin extends BaseAdmin
                 'btn_delete' => false,
                 'btn_catalogue' => true,
                 'label' => 'game.form.badge',
+            ], [
+                'admin_code' => 'sonata.admin.vgr.badge',
             ])
             ->add('forum', ModelListType::class, [
                 'btn_add' => true,

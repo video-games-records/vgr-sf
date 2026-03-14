@@ -66,6 +66,8 @@ class SerieAdmin extends BaseAdmin
                 'btn_delete' => false,
                 'btn_catalogue' => true,
                 'label' => 'serie.form.badge',
+            ], [
+                'admin_code' => 'sonata.admin.vgr.badge',
             ])
             ->add('translations', TranslationsType::class, [
                 'label' => 'serie.form.translations',
