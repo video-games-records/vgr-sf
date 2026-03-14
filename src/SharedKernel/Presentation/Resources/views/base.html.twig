@@ -175,7 +175,8 @@
                                     <span class="user-badge">{{ app.user.username }}</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}"><i class="bi bi-person"></i> {{ 'navigation.user_menu.profile'|trans }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('vgr_player_profile_overview', {id: app.user.id, slug: app.user.slug}) }}"><i class="bi bi-person"></i> {{ 'navigation.user_menu.profile'|trans }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_profile_index') }}"><i class="bi bi-gear"></i> {{ 'navigation.user_menu.settings'|trans }}</a></li>
                                     <li><a class="dropdown-item" href="{{ path('vgr_team_manage') }}"><i class="bi bi-people-fill"></i> {{ 'navigation.user_menu.team'|trans }}</a></li>
                                     <li><a class="dropdown-item" href="{{ path('vgr_my_proofs') }}"><i class="bi bi-camera"></i> {{ 'navigation.user_menu.my_proofs'|trans }}</a></li>
                                     <li>
