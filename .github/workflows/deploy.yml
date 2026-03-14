@@ -1,14 +1,14 @@
 name: Deploy
 
 on:
-    push:
-        branches: [ dev ]
+    schedule:
+        - cron: '0 7 * * *'   # 09h00 Paris (heure d'été)
     workflow_dispatch:
         inputs:
             environment:
                 description: 'Environment'
                 required: true
-                default: 'production'
+                default: 'staging'
                 type: choice
                 options:
                     - staging
