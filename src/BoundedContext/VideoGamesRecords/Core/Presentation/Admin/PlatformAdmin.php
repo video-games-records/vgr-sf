@@ -52,6 +52,8 @@ class PlatformAdmin extends BaseAdmin
                 'btn_delete' => false,
                 'btn_catalogue' => true,
                 'label' => 'platform.form.badge',
+            ], [
+                'admin_code' => 'sonata.admin.vgr.badge',
             ])
             ->add(
                 'status',
