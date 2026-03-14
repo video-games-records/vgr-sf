@@ -63,7 +63,8 @@ class TopicReadService
         }
 
         // 3. Vérifier si tous les topics du forum sont maintenant lus
-        $unreadTopicsCount = $this->countUnreadTopicsInForum($user, $forum);
+        // On exclut le topic courant : sa visite n'est pas encore flushée mais on sait qu'il est lu
+        $unreadTopicsCount = $this->countUnreadTopicsInForum($user, $forum, $topic);
         $forumMarkedAsRead = false;
 
         // 4. Si aucun topic non lu, marquer le forum comme lu
@@ -158,14 +159,16 @@ class TopicReadService
     }
 
     /**
-     * Compte le nombre de topics non lus dans un forum
+     * Compte le nombre de topics non lus dans un forum, en excluant optionnellement un topic
+     * (utile quand sa visite est en mémoire mais pas encore flushée)
+     *
      * @param mixed $user
      */
-    private function countUnreadTopicsInForum($user, Forum $forum): int
+    private function countUnreadTopicsInForum($user, Forum $forum, ?Topic $excludedTopic = null): int
     {
         try {
             // Topics visités mais avec nouveaux messages
-            $visitedUnreadQuery = $this->em->createQueryBuilder()
+            $visitedUnreadQb = $this->em->createQueryBuilder()
                 ->select('COUNT(t.id)')
                 ->from('App\BoundedContext\Forum\Domain\Entity\TopicUserLastVisit', 'tuv')
                 ->join('tuv.topic', 't')
@@ -176,10 +179,15 @@ class TopicReadService
                 ->setParameter('forum', $forum)
                 ->setParameter('user', $user);
 
-            $visitedUnread = (int) $visitedUnreadQuery->getQuery()->getSingleScalarResult();
+            if ($excludedTopic !== null) {
+                $visitedUnreadQb->andWhere('t.id != :excludedTopic')
+                    ->setParameter('excludedTopic', $excludedTopic->getId());
+            }
+
+            $visitedUnread = (int) $visitedUnreadQb->getQuery()->getSingleScalarResult();
 
             // Topics jamais visités avec des messages
-            $neverVisitedQuery = $this->em->createQueryBuilder()
+            $neverVisitedQb = $this->em->createQueryBuilder()
                 ->select('COUNT(t.id)')
                 ->from('App\BoundedContext\Forum\Domain\Entity\Topic', 't')
                 ->where('t.forum = :forum')
@@ -192,7 +200,12 @@ class TopicReadService
                 ->setParameter('forum', $forum)
                 ->setParameter('user', $user);
 
-            $neverVisited = (int) $neverVisitedQuery->getQuery()->getSingleScalarResult();
+            if ($excludedTopic !== null) {
+                $neverVisitedQb->andWhere('t.id != :excludedTopic')
+                    ->setParameter('excludedTopic', $excludedTopic->getId());
+            }
+
+            $neverVisited = (int) $neverVisitedQb->getQuery()->getSingleScalarResult();
 
             return $visitedUnread + $neverVisited;
         } catch (\Exception) {
