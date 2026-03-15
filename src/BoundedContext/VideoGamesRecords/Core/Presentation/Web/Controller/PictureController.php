@@ -26,11 +26,11 @@ class PictureController
         requirements: ['id' => '[1-9]\d*'],
         methods: ['GET']
     )]
-    #[Cache(maxage: 31536000, public: true)]
+    #[Cache(maxage: 86400, public: true)]
     public function game(Game $game): StreamedResponse
     {
         $response = $this->getFile('game/' . $game->getPicture(), $this->projectDir . '/assets/img/default/game.png');
-        $response->headers->set('Cache-Control', 'public, max-age=31536000, immutable');
+        $response->headers->set('Cache-Control', 'public, max-age=86400');
         return $response;
     }
 
@@ -40,11 +40,11 @@ class PictureController
         requirements: ['id' => '[1-9]\d*'],
         methods: ['GET']
     )]
-    #[Cache(maxage: 31536000, public: true)]
+    #[Cache(maxage: 86400, public: true)]
     public function serie(Serie $serie): StreamedResponse
     {
         $response = $this->getFile('series/picture/' . $serie->getPicture(), $this->projectDir . '/assets/img/default/serie.png');
-        $response->headers->set('Cache-Control', 'public, max-age=31536000, immutable');
+        $response->headers->set('Cache-Control', 'public, max-age=86400');
         return $response;
     }
 

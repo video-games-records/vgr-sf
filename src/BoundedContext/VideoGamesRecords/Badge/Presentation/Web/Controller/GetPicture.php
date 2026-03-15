@@ -39,7 +39,7 @@ class GetPicture extends AbstractController
         $response = new StreamedResponse(function () use ($stream) {
             fpassthru($stream);
         }, 200, ['Content-Type' => 'image/gif']);
-        $response->headers->set('Cache-Control', 'public, max-age=86400, immutable');
+        $response->headers->set('Cache-Control', 'public, max-age=86400');
         return $response;
     }
 }
