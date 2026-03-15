@@ -148,6 +148,21 @@ footer {
     flex-shrink: 0;
 }
 
+// Forum message content - reduce paragraph spacing from HTML content
+.message-content {
+    p {
+        margin-bottom: 0.25rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:empty {
+            display: none;
+        }
+    }
+}
+
 // Chart.js container - fixed height required for responsive charts
 .chart-container {
     position: relative;
