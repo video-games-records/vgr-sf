@@ -15,6 +15,7 @@ use Intervention\Image\ImageManager;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -53,12 +54,20 @@ class MyProofsUpload extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
+        $isAjax = $request->isXmlHttpRequest();
+
         if (!in_array($playerChart->getStatus(), PlayerChartStatusEnum::getStatusForProving())) {
+            if ($isAjax) {
+                return new JsonResponse(['error' => 'my_proofs.upload_not_allowed'], Response::HTTP_FORBIDDEN);
+            }
             $this->addFlash('error', 'my_proofs.upload_not_allowed');
             return $this->redirectToGame($playerChart);
         }
 
         if ($playerChart->getChart()->getIsProofVideoOnly()) {
+            if ($isAjax) {
+                return new JsonResponse(['error' => 'my_proofs.upload_not_allowed'], Response::HTTP_FORBIDDEN);
+            }
             $this->addFlash('error', 'my_proofs.upload_not_allowed');
             return $this->redirectToGame($playerChart);
         }
@@ -66,6 +75,9 @@ class MyProofsUpload extends AbstractController
         /** @var string|null $token */
         $token = $request->request->get('_token');
         if (!$this->isCsrfTokenValid('my_proofs_upload_' . $id, $token)) {
+            if ($isAjax) {
+                return new JsonResponse(['error' => 'my_proofs.upload_error'], Response::HTTP_BAD_REQUEST);
+            }
             $this->addFlash('error', 'my_proofs.upload_error');
             return $this->redirectToGame($playerChart);
         }
@@ -73,17 +85,26 @@ class MyProofsUpload extends AbstractController
         $file = $request->files->get('proof_file');
 
         if (!$file || !$file->isValid()) {
+            if ($isAjax) {
+                return new JsonResponse(['error' => 'my_proofs.upload_invalid_file'], Response::HTTP_BAD_REQUEST);
+            }
             $this->addFlash('error', 'my_proofs.upload_invalid_file');
             return $this->redirectToGame($playerChart);
         }
 
         $mimeType = $file->getMimeType();
         if (!isset($this->mimeToExtension[$mimeType])) {
+            if ($isAjax) {
+                return new JsonResponse(['error' => 'my_proofs.upload_invalid_file'], Response::HTTP_BAD_REQUEST);
+            }
             $this->addFlash('error', 'my_proofs.upload_invalid_file');
             return $this->redirectToGame($playerChart);
         }
 
         if ($file->getSize() > 5 * 1024 * 1024) {
+            if ($isAjax) {
+                return new JsonResponse(['error' => 'my_proofs.upload_invalid_file'], Response::HTTP_BAD_REQUEST);
+            }
             $this->addFlash('error', 'my_proofs.upload_invalid_file');
             return $this->redirectToGame($playerChart);
         }
@@ -155,6 +176,14 @@ class MyProofsUpload extends AbstractController
         }
 
         $this->em->flush();
+
+        if ($isAjax) {
+            return new Response(
+                $this->renderView('@VideoGamesRecordsProof/player/_score_card.html.twig', [
+                    'pc' => $playerChart,
+                ])
+            );
+        }
 
         $this->addFlash('success', 'my_proofs.upload_success');
 
