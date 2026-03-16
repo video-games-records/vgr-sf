@@ -175,6 +175,8 @@ player:
       value: Value
       obtained: Obtained
       no_badges: No badges yet
+      manage_link: Manage badge order
+      manage_title: Manage My Badges
 
     games:
       title: Games
@@ -196,6 +198,27 @@ player:
       no_proofs: No proofs yet
       no_scores_for_game: No scores for this game
       back_to_games: Back to games
+
+  badges:
+    manage:
+      title: Manage My Badges
+      subtitle: Drag and drop to reorder your Master Badges.
+      back_to_profile: Back to profile
+      save: Save order
+      saved: Order saved successfully!
+      error: An error occurred while saving. Please try again.
+      drag_hint: Drag badges to reorder them, then click "Save order".
+
+team:
+  badges:
+    manage:
+      title: Manage Team Badges
+      subtitle: Drag and drop to reorder your team's Master Badges.
+      back_to_profile: Back to team profile
+      save: Save order
+      saved: Order saved successfully!
+      error: An error occurred while saving. Please try again.
+      drag_hint: Drag badges to reorder them, then click "Save order".
 
 sidebar:
   title: Links

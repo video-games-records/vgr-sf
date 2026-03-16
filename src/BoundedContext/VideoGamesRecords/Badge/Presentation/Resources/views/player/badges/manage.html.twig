@@ -1,0 +1,126 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'player.badges.manage.title'|trans }} - {{ player.pseudo }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+
+    {# Header #}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h1 class="h3 mb-1">
+                <i class="bi bi-patch-check text-warning"></i>
+                {{ 'player.badges.manage.title'|trans }}
+            </h1>
+            <p class="text-muted mb-0">{{ 'player.badges.manage.subtitle'|trans }}</p>
+        </div>
+        <a href="{{ path('vgr_player_profile_badges', {id: player.id, slug: player.slug}) }}"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i>
+            {{ 'player.badges.manage.back_to_profile'|trans }}
+        </a>
+    </div>
+
+    {# Alert saved #}
+    <div id="alert-saved" class="alert alert-success d-none" role="alert">
+        <i class="bi bi-check-circle"></i>
+        {{ 'player.badges.manage.saved'|trans }}
+    </div>
+    <div id="alert-error" class="alert alert-danger d-none" role="alert">
+        <i class="bi bi-exclamation-circle"></i>
+        {{ 'player.badges.manage.error'|trans }}
+    </div>
+
+    {% if masterBadgesData|length > 0 %}
+    <div class="card shadow-sm">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">
+                {{ 'player.profile.badges.master_title'|trans }}
+                <span class="badge bg-secondary ms-1">{{ masterBadgesData|length }}</span>
+            </h5>
+            <button id="btn-save" class="btn btn-primary btn-sm">
+                <i class="bi bi-save"></i>
+                {{ 'player.badges.manage.save'|trans }}
+            </button>
+        </div>
+        <div class="card-body">
+            <p class="text-muted small mb-3">
+                <i class="bi bi-info-circle"></i>
+                {{ 'player.badges.manage.drag_hint'|trans }}
+            </p>
+
+            <div id="sortable-badges" class="row g-2">
+                {% for badge in masterBadgesData %}
+                    {% set gameName = app.request.locale == 'fr' ? badge.nameFr : badge.nameEn %}
+                    <div class="col-auto badge-sortable-item"
+                         data-pb-id="{{ badge.pbId }}">
+                        <div class="card border rounded p-2" title="{{ gameName }}">
+                            <i class="bi bi-grip-vertical text-muted"></i>
+                            <img src="/badge/{{ badge.badgeId }}/picture"
+                                 alt="{{ gameName }}"
+                                 width="40"
+                                 height="40"
+                                 class="border rounded">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card">
+        <div class="card-body text-center text-muted py-5">
+            <i class="bi bi-inbox fs-1"></i>
+            <p class="mt-3 mb-0">{{ 'player.profile.badges.no_badges'|trans }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const container = document.getElementById('sortable-badges');
+        if (!container) return;
+
+        new Sortable(container, {
+            animation: 150,
+            ghostClass: 'opacity-50',
+        });
+
+        document.getElementById('btn-save').addEventListener('click', function () {
+            const items = container.querySelectorAll('.badge-sortable-item');
+            const order = {};
+            items.forEach(function (item, index) {
+                order[item.dataset.pbId] = index + 1;
+            });
+
+            const alertSaved = document.getElementById('alert-saved');
+            const alertError = document.getElementById('alert-error');
+            alertSaved.classList.add('d-none');
+            alertError.classList.add('d-none');
+
+            fetch('{{ path('vgr_player_badges_reorder') }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({order: order}),
+            })
+            .then(function (res) {
+                if (res.ok) {
+                    alertSaved.classList.remove('d-none');
+                } else {
+                    alertError.classList.remove('d-none');
+                }
+            })
+            .catch(function () {
+                alertError.classList.remove('d-none');
+            });
+        });
+    });
+    </script>
+{% endblock %}

@@ -90,21 +90,55 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
-     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, nameEn: string, nameFr: string}>
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, nameEn: string, nameFr: string, mbOrder: int|null}>
      */
     public function getMasterBadgesDataForPlayer(Player $player): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT mb.id as badgeId, mb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr
+            SELECT mb.id as badgeId, mb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr, pb.mbOrder
             FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
             JOIN mb.game g
             JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
             WHERE pb.player = :player
             AND pb.endedAt IS NULL
-            ORDER BY mb.value ASC
+            ORDER BY pb.mbOrder ASC, mb.value ASC
         ")
         ->setParameter('player', $player)
         ->getResult();
+    }
+
+    /**
+     * @return array<array{pbId: int, badgeId: int, badgeValue: int, nameEn: string, nameFr: string, mbOrder: int|null}>
+     */
+    public function getMasterBadgesForManagement(Player $player): array
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT pb.id as pbId, mb.id as badgeId, mb.value as badgeValue, g.libGameEn as nameEn, g.libGameFr as nameFr, pb.mbOrder,
+                   COALESCE(pb.mbOrder, 999999) as HIDDEN mbOrderSort
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
+            JOIN mb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY mbOrderSort ASC, mb.value ASC
+        ")
+        ->setParameter('player', $player)
+        ->getResult();
+    }
+
+    /**
+     * @param array<int, int> $order Map of pbId => position
+     */
+    public function updateMasterBadgesOrder(Player $player, array $order): void
+    {
+        foreach ($order as $pbId => $position) {
+            $playerBadge = $this->find($pbId);
+            if ($playerBadge && $playerBadge->getPlayer()->getId() === $player->getId()) {
+                $playerBadge->setMbOrder($position);
+                $this->getEntityManager()->persist($playerBadge);
+            }
+        }
+        $this->getEntityManager()->flush();
     }
 
     /**
