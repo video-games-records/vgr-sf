@@ -24,6 +24,7 @@ team:
             leader: 'Leader'
             members: 'members'
             website: 'Website'
+            forum: 'Forum'
             created: 'Created'
         join_button: 'Join Team'
         join_success: 'Your join request has been sent successfully!'
