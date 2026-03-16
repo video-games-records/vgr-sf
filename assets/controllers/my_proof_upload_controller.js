@@ -14,10 +14,11 @@ import { Controller } from '@hotwired/stimulus';
  *           <img data-my-proof-upload-target="previewImage" ...>
  *       </div>
  *       <div data-my-proof-upload-target="loading" class="d-none">...</div>
+ *       <div data-my-proof-upload-target="error" class="d-none">...</div>
  *   </form>
  */
 export default class extends Controller {
-    static targets = ['dropzone', 'fileInput', 'preview', 'previewImage', 'loading'];
+    static targets = ['dropzone', 'fileInput', 'preview', 'previewImage', 'loading', 'error'];
 
     static values = {
         maxSize: { type: Number, default: 5242880 } // 5MB
@@ -107,14 +108,52 @@ export default class extends Controller {
         reader.readAsDataURL(file);
     }
 
-    submitForm() {
+    async submitForm() {
         if (this.hasLoadingTarget) {
             this.loadingTarget.classList.remove('d-none');
         }
         if (this.hasPreviewTarget) {
             this.previewTarget.classList.add('d-none');
         }
+        if (this.hasErrorTarget) {
+            this.errorTarget.classList.add('d-none');
+        }
 
-        this.element.submit();
+        const form = this.element;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+
+            if (response.ok) {
+                const html = await response.text();
+                const container = form.closest('[id^="score-card-"]');
+                if (container) {
+                    container.innerHTML = html;
+                }
+            } else {
+                this.showError();
+            }
+        } catch {
+            this.showError();
+        }
+    }
+
+    showError() {
+        if (this.hasLoadingTarget) {
+            this.loadingTarget.classList.add('d-none');
+        }
+        if (this.hasDropzoneTarget) {
+            this.dropzoneTarget.classList.remove('d-none');
+        }
+        if (this.hasErrorTarget) {
+            this.errorTarget.classList.remove('d-none');
+        }
     }
 }
