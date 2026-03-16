@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Team\Presentation\Web\Controller\Profile;
 
+use App\BoundedContext\User\Domain\Entity\User;
 use App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\TeamBadgeRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
@@ -47,11 +48,19 @@ class Badges extends AbstractProfileController
             }
         }
 
+        $user = $this->getUser();
+        $isLeader = false;
+        if ($user instanceof User) {
+            $currentPlayer = $this->playerRepository->getPlayerFromUser($user);
+            $isLeader = $currentPlayer !== null && $currentPlayer->getTeam()?->getId() === $team->getId() && $currentPlayer->isLeader();
+        }
+
         return $this->render('@VideoGamesRecordsTeam/profile/badges.html.twig', array_merge(
             $this->getBaseParams($team, 'badges'),
             [
                 'badgesData' => $badgesData,
                 'games' => $games,
+                'isLeader' => $isLeader,
             ]
         ));
     }

@@ -175,6 +175,8 @@ player:
       value: Valeur
       obtained: Obtenu le
       no_badges: Aucun badge pour le moment
+      manage_link: Gérer l'ordre des badges
+      manage_title: Gérer mes badges
 
     games:
       title: Jeux
@@ -196,6 +198,27 @@ player:
       no_proofs: Aucune preuve pour le moment
       no_scores_for_game: Aucun score pour ce jeu
       back_to_games: Retour aux jeux
+
+  badges:
+    manage:
+      title: Gérer mes badges
+      subtitle: Glissez-déposez pour réordonner vos Master Badges.
+      back_to_profile: Retour au profil
+      save: Sauvegarder l'ordre
+      saved: Ordre sauvegardé avec succès !
+      error: Une erreur est survenue lors de la sauvegarde. Veuillez réessayer.
+      drag_hint: Faites glisser les badges pour les réordonner, puis cliquez sur "Sauvegarder l'ordre".
+
+team:
+  badges:
+    manage:
+      title: Gérer les badges de l'équipe
+      subtitle: Glissez-déposez pour réordonner les Master Badges de votre équipe.
+      back_to_profile: Retour au profil de l'équipe
+      save: Sauvegarder l'ordre
+      saved: Ordre sauvegardé avec succès !
+      error: Une erreur est survenue lors de la sauvegarde. Veuillez réessayer.
+      drag_hint: Faites glisser les badges pour les réordonner, puis cliquez sur "Sauvegarder l'ordre".
 
 sidebar:
   title: Liens
