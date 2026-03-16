@@ -82,10 +82,12 @@ jobs:
               run: |
                   STATUS="${{ job.status }}"
                   if [ "$STATUS" = "success" ]; then
-                    MSG="🚀 **VGR deployed to production!**"
+                    HEADER="🚀 **VGR deployed to production!**"
                   else
-                    MSG="❌ **VGR deployment FAILED!**"
+                    HEADER="❌ **VGR deployment FAILED!**"
                   fi
+                  COMMITS=$(git log --oneline -10 --pretty=format:"• \`%h\` %s" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g')
+                  MSG="${HEADER}\n\n**Last 10 commits:**\n${COMMITS}"
                   curl -X POST "${{ secrets.DISCORD_WEBHOOK_URL }}" \
                     -H "Content-Type: application/json" \
                     -d "{\"content\": \"$MSG\"}"
