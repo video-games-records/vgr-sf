@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Team\Domain\Entity;
 
+use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\AverageChartRankTrait;
@@ -128,6 +129,10 @@ class Team
     #[ORM\JoinColumn(name:'leader_id', referencedColumnName:'id', nullable:false)]
     private Player $leader;
 
+    #[ORM\OneToOne(targetEntity: Forum::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(name:'forum_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
+    private ?Forum $forum = null;
+
     /**
      * Constructor
      */
@@ -190,6 +195,17 @@ class Team
     public function getLeader(): Player
     {
         return $this->leader;
+    }
+
+    public function getForum(): ?Forum
+    {
+        return $this->forum;
+    }
+
+    public function setForum(?Forum $forum): static
+    {
+        $this->forum = $forum;
+        return $this;
     }
 
     public function setSiteWeb(?string $siteWeb): static

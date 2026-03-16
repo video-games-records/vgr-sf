@@ -82,6 +82,16 @@
                             </span>
                         {% endif %}
 
+                        {# Forum #}
+                        {% if team.forum %}
+                            <span>
+                                <i class="bi bi-chat-dots"></i>
+                                <a href="{{ path('forum_show', {id: team.forum.id, slug: team.forum.slug}) }}" class="text-decoration-none">
+                                    {{ 'team.profile.header.forum'|trans }}
+                                </a>
+                            </span>
+                        {% endif %}
+
                         {# Created Date #}
                         <span>
                             <i class="bi bi-calendar-check"></i>

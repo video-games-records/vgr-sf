@@ -24,6 +24,7 @@ team:
             leader: 'Leader'
             members: 'membres'
             website: 'Site web'
+            forum: 'Forum'
             created: 'Créée le'
         join_button: 'Rejoindre l''équipe'
         join_success: 'Votre demande d''adhésion a été envoyée avec succès !'

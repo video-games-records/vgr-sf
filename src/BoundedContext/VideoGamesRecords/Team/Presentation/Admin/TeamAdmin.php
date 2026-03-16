@@ -58,6 +58,18 @@ class TeamAdmin extends BaseAdmin
                     'label' => 'team.form.status',
                     'choices' => Team::getStatusChoices(),
                 ]
+            )
+            ->add(
+                'forum',
+                ModelListType::class,
+                [
+                    'data_class' => null,
+                    'btn_add' => false,
+                    'btn_delete' => false,
+                    'btn_catalogue' => false,
+                    'label' => 'team.form.forum',
+                    'required' => false,
+                ]
             );
     }
 
