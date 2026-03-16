@@ -174,6 +174,40 @@ class TeamBadgeRepository extends DefaultRepository
     }
 
     /**
+     * @return array<array{tbId: int, badgeId: int, badgeValue: int, nameEn: string, nameFr: string, mbOrder: ?int}>
+     */
+    public function getMasterBadgesForManagement(Team $team): array
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT tb.id as tbId, mb.id as badgeId, mb.value as badgeValue, g.libGameEn as nameEn, g.libGameFr as nameFr, tb.mbOrder,
+                   COALESCE(tb.mbOrder, 999999) as HIDDEN mbOrderSort
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
+            JOIN mb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\TeamBadge tb WITH tb.badge = mb
+            WHERE tb.team = :team
+            AND tb.endedAt IS NULL
+            ORDER BY mbOrderSort ASC, mb.value ASC
+        ")
+        ->setParameter('team', $team)
+        ->getResult();
+    }
+
+    /**
+     * @param array<int, int> $order Map of tbId => position
+     */
+    public function updateMasterBadgesOrder(Team $team, array $order): void
+    {
+        foreach ($order as $tbId => $position) {
+            $teamBadge = $this->find($tbId);
+            if ($teamBadge && $teamBadge->getTeam()->getId() === $team->getId()) {
+                $teamBadge->setMbOrder($position);
+                $this->getEntityManager()->persist($teamBadge);
+            }
+        }
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @param QueryBuilder $query
      */
     private function onlyActive(QueryBuilder $query): void

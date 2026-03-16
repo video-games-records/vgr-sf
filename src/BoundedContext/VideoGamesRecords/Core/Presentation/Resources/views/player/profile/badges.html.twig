@@ -6,10 +6,19 @@
 {% if masterBadgesData|length > 0 %}
 <div class="card mb-4">
     <div class="card-body">
-        <h5 class="card-title mb-3">
-            <i class="bi bi-patch-check text-warning"></i>
-            {{ 'player.profile.badges.master_title'|trans }}
-            <span class="badge bg-secondary">{{ masterBadgesData|length }}</span>
+        <h5 class="card-title mb-3 d-flex align-items-center justify-content-between">
+            <span>
+                <i class="bi bi-patch-check text-warning"></i>
+                {{ 'player.profile.badges.master_title'|trans }}
+                <span class="badge bg-secondary">{{ masterBadgesData|length }}</span>
+            </span>
+            {% if app.user and app.user.id == player.userId %}
+                <a href="{{ path('vgr_player_badges_manage') }}"
+                   class="btn btn-outline-warning btn-sm">
+                    <i class="bi bi-sort-numeric-down"></i>
+                    {{ 'player.profile.badges.manage_link'|trans }}
+                </a>
+            {% endif %}
         </h5>
 
         <div class="d-flex flex-wrap gap-1">
