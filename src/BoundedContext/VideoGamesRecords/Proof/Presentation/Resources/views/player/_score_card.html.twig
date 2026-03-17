@@ -11,6 +11,24 @@
         </div>
         {% if pc.proof %}
             <twig:proof_display :proof="pc.proof" />
+            {% if pc.status.value == 'proof-sent' %}
+                <form action="{{ path('vgr_my_proofs_delete', {id: pc.id}) }}" method="post" class="mt-2"
+                      data-controller="my-proof-delete">
+                    <input type="hidden" name="_token" value="{{ csrf_token('my_proofs_delete_' ~ pc.id) }}">
+                    <button type="button"
+                            class="btn btn-outline-danger btn-sm w-100"
+                            data-my-proof-delete-target="button"
+                            data-action="click->my-proof-delete#confirm"
+                            data-delete-label="{{ 'my_proofs.delete_button'|trans }}"
+                            data-confirm-label="{{ 'my_proofs.delete_confirm'|trans }}">
+                        <i class="bi bi-trash"></i> {{ 'my_proofs.delete_button'|trans }}
+                    </button>
+                    <div class="d-none text-center py-2 small text-muted" data-my-proof-delete-target="loading">
+                        <span class="spinner-border spinner-border-sm me-1"></span>
+                        {{ 'my_proofs.delete_sending'|trans }}
+                    </div>
+                </form>
+            {% endif %}
         {% elseif pc.status.value in ['none', 'request-validated', 'unproved'] and not pc.chart.isProofVideoOnly %}
             <form action="{{ path('vgr_my_proofs_upload', {id: pc.id}) }}" method="post" enctype="multipart/form-data"
                   data-controller="my-proof-upload">
