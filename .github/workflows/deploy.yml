@@ -23,6 +23,8 @@ jobs:
         environment: ${{ inputs.environment || 'staging' }}
         steps:
             - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 10
 
             - uses: shivammathur/setup-php@v2
               with:
