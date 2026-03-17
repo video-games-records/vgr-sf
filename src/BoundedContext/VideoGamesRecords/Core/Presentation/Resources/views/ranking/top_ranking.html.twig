@@ -54,7 +54,7 @@
                                     <span class="badge rounded-pill bg-danger fs-6">#3</span>
                                 {% endif %}
                             </div>
-                            <img src="{{ path('vgr_core_game_picture', {id: ranking.game.id}) }}"
+                            <img src="{{ path('vgr_core_game_picture', {id: ranking.game.id, v: ranking.game.updatedAt|date('U')}) }}"
                                  alt="{{ ranking.game.name }}"
                                  class="rounded mb-3"
                                  width="100" height="100">

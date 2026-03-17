@@ -42,7 +42,7 @@
                             {# Game Image - Compact #}
                             <div class="col-auto">
                                 <img
-                                    src="{{ path('vgr_core_game_picture', {id: game.id}) }}"
+                                    src="{{ path('vgr_core_game_picture', {id: game.id, v: game.updatedAt|date('U')}) }}"
                                     alt="{{ game.name }}"
                                     class="rounded"
                                     width="50"
