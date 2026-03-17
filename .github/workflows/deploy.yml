@@ -88,8 +88,9 @@ jobs:
                   else
                     HEADER="❌ **VGR deployment FAILED!**"
                   fi
-                  COMMITS=$(git log --oneline -10 --pretty=format:"• \`%h\` %s" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g')
-                  MSG="${HEADER}\n\n**Last 10 commits:**\n${COMMITS}"
+                  COMMITS=$(git log --oneline -10 --pretty=format:"• \`%h\` %s")
+                  MSG=$(printf "%s\n\n**Last 10 commits:**\n%s" "$HEADER" "$COMMITS")
+                  PAYLOAD=$(jq -n --arg content "$MSG" '{content: $content}')
                   curl -X POST "${{ secrets.DISCORD_WEBHOOK_URL }}" \
                     -H "Content-Type: application/json" \
-                    -d "{\"content\": \"$MSG\"}"
+                    -d "$PAYLOAD"
