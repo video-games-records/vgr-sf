@@ -5,7 +5,7 @@
     {% if game %}
         <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}" class="card-body p-0 text-decoration-none text-body">
             <div class="text-center p-2">
-                <img src="{{ path('vgr_core_game_picture', {id: game.id}) }}" alt="{{ game.name }}" class="img-fluid" style="max-height: 180px;">
+                <img src="{{ path('vgr_core_game_picture', {id: game.id, v: game.updatedAt|date('U')}) }}" alt="{{ game.name }}" class="img-fluid" style="max-height: 180px;">
             </div>
             <div class="p-3 pt-0">
                 <h6 class="mb-0 text-center">{{ game.name }}</h6>

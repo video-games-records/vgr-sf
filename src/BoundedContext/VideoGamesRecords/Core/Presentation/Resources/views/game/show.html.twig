@@ -13,7 +13,7 @@
 
 {% block meta_keywords %}{{ 'game.show.seo.keywords'|trans({'%game%': game.name}) }}{% endblock %}
 
-{% block og_image %}{{ absolute_url(path('vgr_core_game_picture', {id: game.id})) }}{% endblock %}
+{% block og_image %}{{ absolute_url(path('vgr_core_game_picture', {id: game.id, v: game.updatedAt|date('U')})) }}{% endblock %}
 
 {% block hreflang %}
     <link rel="alternate" hreflang="en" href="{{ absolute_url(path('vgr_game_show', {'_locale': 'en', 'id': game.id, 'slug': game.slug})) }}">
@@ -31,7 +31,7 @@
     "name": "{{ game.name|e('js') }}",
     "url": "{{ absolute_url(path('vgr_game_show', {'_locale': 'en', 'id': game.id, 'slug': game.slug})) }}"
     {% if game.summary %},"description": "{{ game.summary|slice(0, 300)|e('js') }}"{% endif %}
-    {% if game.picture %},"image": "{{ absolute_url(path('vgr_core_game_picture', {id: game.id})) }}"{% endif %}
+    {% if game.picture %},"image": "{{ absolute_url(path('vgr_core_game_picture', {id: game.id, v: game.updatedAt|date('U')})) }}"{% endif %}
     {% if game.releaseDate %},"datePublished": "{{ game.releaseDate|date('Y-m-d') }}"{% endif %}
     ,"numberOfPlayers": {"@type": "QuantitativeValue", "value": {{ game.nbPlayer }}}
     {% if game.platforms|length > 0 %}
