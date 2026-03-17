@@ -320,6 +320,12 @@ my_proofs:
   upload_drag_drop: Drag and drop your image here
   upload_or_click: or click to select a file
   upload_sending: Sending...
+  delete_button: Delete proof
+  delete_confirm: Confirm?
+  delete_sending: Deleting...
+  delete_success: Proof deleted successfully
+  delete_error: Error deleting proof
+  delete_not_allowed: Cannot delete proof for this score
 
 site_stats:
   description: "Video Games Records is a video game records website, created in 2003. You can enter the competition and challenge hundreds of players on a wide choice of games, available on a significant number of platforms."
