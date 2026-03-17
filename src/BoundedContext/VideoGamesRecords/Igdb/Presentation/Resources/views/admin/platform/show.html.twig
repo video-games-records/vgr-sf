@@ -1,0 +1,82 @@
+{% extends '@SonataAdmin/CRUD/show.html.twig' %}
+{% trans_default_domain 'VgrIgdbAdmin' %}
+
+{% block show_groups %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-desktop"></i>
+                        {{ object.getName() }}
+                        {% if object.getAbbreviation() %}
+                            <small>({{ object.getAbbreviation() }})</small>
+                        {% endif %}
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <span class="label label-info">ID: {{ object.getId() }}</span>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table table-condensed">
+                                {% if object.getAlternativeName() %}
+                                <tr>
+                                    <td><strong>{% trans %}field.platform.alternative_name{% endtrans %} :</strong></td>
+                                    <td>{{ object.getAlternativeName() }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if object.getGeneration() %}
+                                <tr>
+                                    <td><strong>{% trans %}field.platform.generation{% endtrans %} :</strong></td>
+                                    <td>{{ object.getGeneration() }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if object.getPlatformType() %}
+                                <tr>
+                                    <td><strong>{% trans %}field.platform.platform_type{% endtrans %} :</strong></td>
+                                    <td>{{ object.getPlatformType().getName() }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if object.getSlug() %}
+                                <tr>
+                                    <td><strong>{% trans %}field.slug{% endtrans %} :</strong></td>
+                                    <td>{{ object.getSlug() }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if object.getUrl() %}
+                                <tr>
+                                    <td><strong>{% trans %}field.url{% endtrans %} :</strong></td>
+                                    <td><a href="{{ object.getUrl() }}" target="_blank">{{ object.getUrl() }}</a></td>
+                                </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                        {% if object.getPlatformLogo() %}
+                        <div class="col-md-4 text-center">
+                            <img
+                                src="https:{{ object.getPlatformLogo().getUrl() }}"
+                                alt="{{ object.getName() }}"
+                                style="max-width: 200px; max-height: 100px; object-fit: contain;"
+                            >
+                            <p class="text-muted small mt-1">
+                                {{ object.getPlatformLogo().getWidth() }}x{{ object.getPlatformLogo().getHeight() }}px
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if object.getSummary() %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{ object.getSummary() }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

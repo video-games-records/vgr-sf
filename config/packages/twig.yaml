@@ -11,6 +11,7 @@ twig:
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Badge/Presentation/Resources/views': 'VideoGamesRecordsBadge'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Team/Presentation/Resources/views': 'VideoGamesRecordsTeam'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Proof/Presentation/Resources/views': 'VideoGamesRecordsProof'
+        '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Igdb/Presentation/Resources/views': 'VideoGamesRecordsIgdb'
     form_themes:
         - 'bootstrap_5_layout.html.twig'
         - '@A2lixTranslationForm/bootstrap_5_layout.html.twig'

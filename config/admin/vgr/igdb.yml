@@ -41,6 +41,7 @@ services:
         group: "group.igdb"
         label: "platform.label"
     calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsIgdb/admin/platform/show.html.twig' ] ]
       - [ setTranslationDomain, [ 'VgrIgdbAdmin' ] ]
 
   sonata.admin.vgr.igdb.game:
