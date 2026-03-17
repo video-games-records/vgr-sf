@@ -1,1 +1,8 @@
 <span class="proof--{{ this.cssClass }}" title="{{ this.label }}"></span>
+{% if this.proof %}
+    {% if this.proof.type == 'Video' %}
+        <i class="bi bi-camera-video text-danger ms-1" title="Video" style="position: relative; top: -2px;"></i>
+    {% else %}
+        <i class="bi bi-image text-info ms-1" title="Image" style="position: relative; top: -2px;"></i>
+    {% endif %}
+{% endif %}
