@@ -33,22 +33,33 @@ class MessageRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string[] $userRoles
      * @return Message[]
      */
-    public function findLatest(int $limit = 5): array
+    public function findLatest(int $limit = 5, array $userRoles = []): array
     {
-        return $this->createQueryBuilder('m')
+        $qb = $this->createQueryBuilder('m')
             ->join('m.topic', 't')
             ->join('t.forum', 'f')
             ->join('m.user', 'u')
             ->addSelect('t', 'f', 'u')
             ->where('t.boolArchive = false')
-            ->andWhere('f.status = :status')
-            ->setParameter('status', ForumStatus::PUBLIC)
             ->orderBy('m.createdAt', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults($limit);
+
+        if (empty($userRoles)) {
+            // Anonyme : forums publics uniquement
+            $qb->andWhere('f.status = :status')
+                ->setParameter('status', ForumStatus::PUBLIC);
+        } else {
+            // Authentifié : forums publics + forums privés accessibles via rôle
+            $qb->andWhere('f.status = :status OR (f.status = :private AND f.role IN (:roles))')
+                ->setParameter('status', ForumStatus::PUBLIC)
+                ->setParameter('private', ForumStatus::PRIVATE)
+                ->setParameter('roles', $userRoles);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

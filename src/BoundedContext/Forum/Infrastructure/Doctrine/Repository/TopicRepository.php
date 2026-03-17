@@ -57,6 +57,9 @@ class TopicRepository extends ServiceEntityRepository
     /**
      * @return Topic[]
      */
+    /**
+     * @return Topic[]
+     */
     public function findWithRecentActivity(int $days = 7, int $limit = 20, ?User $user = null): array
     {
         $date = new \DateTime();

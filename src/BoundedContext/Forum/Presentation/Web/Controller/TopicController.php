@@ -8,6 +8,7 @@ use App\BoundedContext\Forum\Application\Service\TopicReadService;
 use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\MessageRepository;
+use App\BoundedContext\Forum\Infrastructure\Security\Voter\ForumVoter;
 use App\BoundedContext\Forum\Presentation\Form\ReplyType;
 use App\BoundedContext\User\Domain\Entity\User;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
@@ -36,6 +37,8 @@ class TopicController extends AbstractLocalizedController
     public function show(Request $request, Topic $topic, string $slug, string $forumSlug, int $forumId): Response
     {
         $forum = $topic->getForum();
+
+        $this->denyAccessUnlessGranted(ForumVoter::VIEW, $forum);
 
         if ($topic->getSlug() !== $slug || $forum->getSlug() !== $forumSlug || $forum->getId() !== $forumId) {
             return $this->redirectToRoute('topic_show', [
@@ -89,6 +92,8 @@ class TopicController extends AbstractLocalizedController
     public function reply(Request $request, Topic $topic, string $slug, string $forumSlug, int $forumId): Response
     {
         $forum = $topic->getForum();
+
+        $this->denyAccessUnlessGranted(ForumVoter::VIEW, $forum);
 
         if ($topic->getSlug() !== $slug || $forum->getSlug() !== $forumSlug || $forum->getId() !== $forumId) {
             return $this->redirectToRoute('topic_show', [

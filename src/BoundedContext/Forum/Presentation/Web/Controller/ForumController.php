@@ -7,6 +7,7 @@ namespace App\BoundedContext\Forum\Presentation\Web\Controller;
 use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
+use App\BoundedContext\Forum\Infrastructure\Security\Voter\ForumVoter;
 use App\BoundedContext\Forum\Application\Service\TopicReadService;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\CategoryRepository;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\ForumUserLastVisitRepository;
@@ -88,6 +89,8 @@ class ForumController extends AbstractLocalizedController
     #[Route('/forum/{slug}-f{id}', name: 'forum_show', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
     public function show(Request $request, Forum $forum, string $slug): Response
     {
+        $this->denyAccessUnlessGranted(ForumVoter::VIEW, $forum);
+
         if ($forum->getSlug() !== $slug) {
             return $this->redirectToRoute('forum_show', [
                 'id' => $forum->getId(),
@@ -163,6 +166,8 @@ class ForumController extends AbstractLocalizedController
     #[IsGranted('ROLE_USER')]
     public function createTopic(Request $request, Forum $forum, string $slug): Response
     {
+        $this->denyAccessUnlessGranted(ForumVoter::VIEW, $forum);
+
         if ($forum->getSlug() !== $slug) {
             return $this->redirectToRoute('forum_create_topic', [
                 'id' => $forum->getId(),

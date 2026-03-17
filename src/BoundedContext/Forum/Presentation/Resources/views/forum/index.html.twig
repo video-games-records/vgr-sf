@@ -53,6 +53,7 @@
                                 </thead>
                                 <tbody>
                                     {% for forum in category.forums %}
+                                        {% if is_granted('FORUM_VIEW', forum) %}
                                         {% set hasUnread = is_granted('ROLE_USER') and forum.hasNewContent %}
                                         <tr{% if hasUnread %} class="table-info"{% endif %}>
                                             <td>
@@ -90,6 +91,7 @@
                                                 {% endif %}
                                             </td>
                                         </tr>
+                                        {% endif %}
                                     {% else %}
                                         <tr>
                                             <td colspan="4" class="text-center text-muted">{{ 'forum.no_forum'|trans }}</td>
@@ -124,6 +126,7 @@
                                 </thead>
                                 <tbody>
                                     {% for topic in recentTopics %}
+                                        {% if is_granted('FORUM_VIEW', topic.forum) %}
                                         {% set hasUnread = is_granted('ROLE_USER') and topic.hasNewContent %}
                                         <tr{% if hasUnread %} class="table-info"{% endif %}>
                                             <td>
@@ -173,6 +176,7 @@
                                                 {% endif %}
                                             </td>
                                         </tr>
+                                        {% endif %}
                                     {% endfor %}
                                 </tbody>
                             </table>
