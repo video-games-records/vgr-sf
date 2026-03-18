@@ -54,6 +54,11 @@ body {
     .card-header:not([class*="bg-"]) {
         background-color: $base-background !important;
         font-weight: 500;
+
+        // WCAG AA : text-muted (#6c757d) sur fond orange = 1.90:1 ❌ → forcer couleur sombre
+        .text-muted {
+            color: #343a40 !important; // ratio ~4.91:1 sur orange ✓
+        }
     }
 }
 
@@ -110,6 +115,9 @@ body {
 .navbar {
     background: var(--vgr-dark) !important;
     box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    // WCAG AA : ratio 4.5:1 minimum — Bootstrap navbar-dark défaut (0.55) = 4.18:1 ❌
+    --bs-navbar-color: rgba(255,255,255,.8);
+    --bs-navbar-hover-color: rgba(255,255,255,.95);
 }
 
 .navbar-brand {
@@ -182,6 +190,7 @@ footer {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.9rem;
+    color: white; // WCAG AA : force blanc pur (nav-link hérite rgba(255,255,255,.55) = 2.85:1 ❌)
 }
 
 // Site header avec image en arrière-plan (style V7)

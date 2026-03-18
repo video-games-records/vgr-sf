@@ -7,11 +7,11 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th class="text-center" style="width: 50px;">#</th>
-                        <th>Player</th>
-                        <th class="text-end">Points</th>
+                        <th scope="col" class="text-center" style="width: 50px;">#</th>
+                        <th scope="col">Player</th>
+                        <th scope="col" class="text-end">Points</th>
                         {% if showNbChart|default(false) %}
-                            <th class="text-center">Records</th>
+                            <th scope="col" class="text-center">Records</th>
                         {% endif %}
                     </tr>
                 </thead>
