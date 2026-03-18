@@ -203,7 +203,10 @@ footer {
         position: absolute; // Position absolute pour ne pas affecter le layout
         content: "";
         display: block;
-        background: url("../img/background/header-banner.png");
+        background-image: image-set(
+            url("../img/background/header-banner.webp") type("image/webp"),
+            url("../img/background/header-banner.png") type("image/png")
+        );
         background-size: 100%;
         background-repeat: no-repeat;
         z-index: -1;
