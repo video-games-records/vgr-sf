@@ -1,0 +1,64 @@
+# Cache headers pour les assets avec hash (webpack/AssetMapper) — 1 an immutable
+<IfModule mod_headers.c>
+    <FilesMatch "\.[0-9a-f]{8}\.(css|js|png|jpg|jpeg|gif|webp|woff2?|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+
+# Cache pour les assets statiques sans hash — 1 semaine
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Versioned assets (build/ et assets/) — 1 an
+    <FilesMatch "\.[0-9a-f]{8,}\.(css|js|png|jpg|jpeg|gif|webp|woff2?|svg)$">
+        ExpiresDefault "access plus 1 year"
+    </FilesMatch>
+
+    # Images statiques non-hashées
+    ExpiresByType image/webp        "access plus 1 week"
+    ExpiresByType image/png         "access plus 1 week"
+    ExpiresByType image/jpeg        "access plus 1 week"
+    ExpiresByType image/gif         "access plus 1 week"
+    ExpiresByType image/svg+xml     "access plus 1 week"
+    ExpiresByType image/x-icon      "access plus 1 month"
+
+    # Fonts
+    ExpiresByType font/woff2        "access plus 1 year"
+    ExpiresByType font/woff         "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+# Compression gzip
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+    AddOutputFilterByType DEFLATE font/woff2 font/woff image/svg+xml
+</IfModule>
+
+# Symfony front controller
+DirectoryIndex index.php
+
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
+    RewriteRule .* - [E=BASE:%1]
+
+    RewriteCond %{HTTP:Authorization} .+
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%0]
+
+    RewriteCond %{ENV:REDIRECT_STATUS} =""
+    RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ %{ENV:BASE}/index.php [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 307 ^/$ /index.php/
+    </IfModule>
+</IfModule>
