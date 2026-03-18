@@ -7,8 +7,8 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use League\Flysystem\FilesystemOperator;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\Routing\Attribute\Route;
 
 class PictureController
@@ -26,12 +26,11 @@ class PictureController
         requirements: ['id' => '[1-9]\d*'],
         methods: ['GET']
     )]
-    #[Cache(maxage: 86400, public: true)]
-    public function game(Game $game): StreamedResponse
+    public function game(Game $game, Request $request): StreamedResponse
     {
-        $response = $this->getFile('game/' . $game->getPicture(), $this->projectDir . '/assets/img/default/game.png');
-        $response->headers->set('Cache-Control', 'public, max-age=86400');
-        return $response;
+        $picture = $game->getPicture();
+        $path = $picture ? 'game/' . $picture : null;
+        return $this->serveFile($path, $this->projectDir . '/assets/img/default/game.png', $request);
     }
 
     #[Route(
@@ -40,29 +39,66 @@ class PictureController
         requirements: ['id' => '[1-9]\d*'],
         methods: ['GET']
     )]
-    #[Cache(maxage: 86400, public: true)]
-    public function serie(Serie $serie): StreamedResponse
+    public function serie(Serie $serie, Request $request): StreamedResponse
     {
-        $response = $this->getFile('series/picture/' . $serie->getPicture(), $this->projectDir . '/assets/img/default/serie.png');
-        $response->headers->set('Cache-Control', 'public, max-age=86400');
-        return $response;
+        $picture = $serie->getPicture();
+        $path = $picture ? 'series/picture/' . $picture : null;
+        return $this->serveFile($path, $this->projectDir . '/assets/img/default/serie.png', $request);
     }
 
-    private function getFile(string $path, string $defaultAssetPath): StreamedResponse
+    private function serveFile(?string $path, string $defaultAssetPath, Request $request): StreamedResponse
     {
-        if ($this->appStorage->fileExists($path)) {
+        if ($path !== null && $this->appStorage->fileExists($path)) {
+            $lastModified = $this->appStorage->lastModified($path);
+            $etag = '"' . md5($path . $lastModified) . '"';
+
+            $response = new StreamedResponse();
+            $response->headers->set('Content-Type', 'image/png');
+            $response->headers->set('Cache-Control', 'public, max-age=86400, must-revalidate');
+            $response->headers->set('Last-Modified', gmdate('D, d M Y H:i:s', $lastModified) . ' GMT');
+            $response->headers->set('ETag', $etag);
+
+            if ($this->isNotModified($request, $etag, $lastModified)) {
+                $response->setStatusCode(304);
+                return $response;
+            }
+
             $stream = $this->appStorage->readStream($path);
-            return new StreamedResponse(function () use ($stream) {
+            $response->setCallback(function () use ($stream) {
                 fpassthru($stream);
-            }, 200, ['Content-Type' => 'image/png']);
+            });
+
+            return $response;
         }
 
-        return new StreamedResponse(function () use ($defaultAssetPath) {
+        // Default image: never cache so that a newly uploaded picture shows immediately
+        $response = new StreamedResponse();
+        $response->headers->set('Content-Type', 'image/png');
+        $response->headers->set('Cache-Control', 'no-store');
+
+        $response->setCallback(function () use ($defaultAssetPath) {
             $handle = fopen($defaultAssetPath, 'rb');
             if ($handle !== false) {
                 fpassthru($handle);
                 fclose($handle);
             }
-        }, 200, ['Content-Type' => 'image/png']);
+        });
+
+        return $response;
+    }
+
+    private function isNotModified(Request $request, string $etag, int $lastModified): bool
+    {
+        $ifNoneMatch = $request->headers->get('If-None-Match');
+        if ($ifNoneMatch !== null) {
+            return $ifNoneMatch === $etag;
+        }
+
+        $ifModifiedSince = $request->headers->get('If-Modified-Since');
+        if ($ifModifiedSince !== null) {
+            return strtotime($ifModifiedSince) >= $lastModified;
+        }
+
+        return false;
     }
 }
