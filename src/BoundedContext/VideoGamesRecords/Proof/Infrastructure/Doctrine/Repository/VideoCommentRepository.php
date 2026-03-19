@@ -17,4 +17,33 @@ class VideoCommentRepository extends DefaultRepository
     {
         parent::__construct($registry, VideoComment::class);
     }
+
+    /**
+     * @return VideoComment[]
+     */
+    public function findByVideoPaginated(int $videoId, int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.video', 'v')
+            ->join('c.player', 'p')
+            ->addSelect('p')
+            ->where('v.id = :videoId')
+            ->setParameter('videoId', $videoId)
+            ->orderBy('c.createdAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countByVideo(int $videoId): int
+    {
+        return (int) $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->join('c.video', 'v')
+            ->where('v.id = :videoId')
+            ->setParameter('videoId', $videoId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

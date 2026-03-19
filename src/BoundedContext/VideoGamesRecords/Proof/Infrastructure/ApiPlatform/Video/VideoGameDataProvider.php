@@ -12,7 +12,7 @@ use App\BoundedContext\VideoGamesRecords\Proof\Application\Mapper\VideoMapper;
 use App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\Doctrine\Repository\VideoRepository;
 
 /** @implements ProviderInterface<VideoDTO> */
-class VideoCollectionDataProvider implements ProviderInterface
+class VideoGameDataProvider implements ProviderInterface
 {
     public function __construct(
         private readonly VideoRepository $videoRepository,
@@ -22,19 +22,13 @@ class VideoCollectionDataProvider implements ProviderInterface
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): TraversablePaginator
     {
+        $gameId = (int) $uriVariables['gameId'];
         $page = (int) ($context['filters']['page'] ?? 1);
         $itemsPerPage = (int) ($context['filters']['itemsPerPage'] ?? $operation->getPaginationItemsPerPage() ?? 30);
         $offset = ($page - 1) * $itemsPerPage;
 
-        $search = trim((string) ($context['filters']['search'] ?? ''));
-
-        if ($search !== '') {
-            $videos = $this->videoRepository->findActiveVideosBySearchPaginated($search, $offset, $itemsPerPage);
-            $totalItems = $this->videoRepository->countActiveVideosBySearch($search);
-        } else {
-            $videos = $this->videoRepository->findActiveVideosPaginated($offset, $itemsPerPage);
-            $totalItems = $this->videoRepository->countActiveVideos();
-        }
+        $videos = $this->videoRepository->findActiveVideosByGamePaginated($gameId, $offset, $itemsPerPage);
+        $totalItems = $this->videoRepository->countActiveVideosByGame($gameId);
 
         $dtos = array_map(
             fn ($video) => $this->videoMapper->toDTO($video),
