@@ -21,6 +21,37 @@ class VideoRepository extends DefaultRepository
     /**
      * @return Video[]
      */
+    public function findActiveVideosBySearchPaginated(string $search, int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
+            ->leftJoin('v.game', 'g')
+            ->addSelect('g')
+            ->where('v.isActive = true')
+            ->andWhere('v.title LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('v.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countActiveVideosBySearch(string $search): int
+    {
+        return (int) $this->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->where('v.isActive = true')
+            ->andWhere('v.title LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Video[]
+     */
     public function findActiveVideosPaginated(int $offset, int $limit): array
     {
         return $this->createQueryBuilder('v')
@@ -43,6 +74,91 @@ class VideoRepository extends DefaultRepository
             ->where('v.isActive = true')
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Video[]
+     */
+    public function findActiveVideosByPlayerPaginated(int $playerId, int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
+            ->leftJoin('v.game', 'g')
+            ->addSelect('g')
+            ->where('v.isActive = true')
+            ->andWhere('p.id = :playerId')
+            ->setParameter('playerId', $playerId)
+            ->orderBy('v.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countActiveVideosByPlayer(int $playerId): int
+    {
+        return (int) $this->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->join('v.player', 'p')
+            ->where('v.isActive = true')
+            ->andWhere('p.id = :playerId')
+            ->setParameter('playerId', $playerId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Video[]
+     */
+    public function findActiveVideosByGamePaginated(int $gameId, int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
+            ->join('v.game', 'g')
+            ->addSelect('g')
+            ->where('v.isActive = true')
+            ->andWhere('g.id = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->orderBy('v.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countActiveVideosByGame(int $gameId): int
+    {
+        return (int) $this->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->join('v.game', 'g')
+            ->where('v.isActive = true')
+            ->andWhere('g.id = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param array<int> $ids
+     * @return Video[]
+     */
+    public function findByIdsWithPlayer(array $ids): array
+    {
+        if (empty($ids)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
+            ->leftJoin('v.game', 'g')
+            ->addSelect('g')
+            ->where('v.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

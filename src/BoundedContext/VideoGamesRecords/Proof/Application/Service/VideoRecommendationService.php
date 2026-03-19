@@ -18,6 +18,7 @@ class VideoRecommendationService
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly VideoRepository $videoRepository,
         private readonly CacheItemPoolInterface $cache,
         private readonly LoggerInterface $logger,
         private readonly VideoRelevanceScorer $relevanceScorer
@@ -38,12 +39,15 @@ class VideoRecommendationService
                 'videoId' => $video->getId(),
                 'cacheKey' => $cacheKey
             ]);
-            return $cacheItem->get();
+            /** @var array<int> $ids */
+            $ids = $cacheItem->get();
+            return $this->videoRepository->findByIdsWithPlayer($ids);
         }
 
         $recommendations = $this->generateRecommendations($video, $limit);
 
-        $cacheItem->set($recommendations);
+        $ids = $this->extractVideoIds($recommendations);
+        $cacheItem->set($ids);
         $cacheItem->expiresAfter(self::CACHE_TTL);
         $this->cache->save($cacheItem);
 
@@ -109,6 +113,8 @@ class VideoRecommendationService
         $repository = $this->entityManager->getRepository(Video::class);
 
         $qb = $repository->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
             ->where('v.game = :game')
             ->andWhere('v.id NOT IN (:excludeIds)')
             ->andWhere('v.isActive = true')
@@ -135,6 +141,8 @@ class VideoRecommendationService
         $repository = $this->entityManager->getRepository(Video::class);
 
         $qb = $repository->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
             ->join('v.game', 'g')
             ->where('g.serie = :serie')
             ->andWhere('v.id NOT IN (:excludeIds)')
@@ -173,6 +181,8 @@ class VideoRecommendationService
         $repository = $this->entityManager->getRepository(Video::class);
 
         $qb = $repository->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
             ->join('v.game', 'g')
             ->join('g.igdbGame', 'ig')
             ->join('ig.genres', 'genre')
@@ -203,6 +213,8 @@ class VideoRecommendationService
 
         // Get popular videos from the last 30 days
         $qb = $repository->createQueryBuilder('v')
+            ->join('v.player', 'p')
+            ->addSelect('p')
             ->where('v.id NOT IN (:excludeIds)')
             ->andWhere('v.isActive = true')
             ->andWhere('v.createdAt >= :thirtyDaysAgo')
