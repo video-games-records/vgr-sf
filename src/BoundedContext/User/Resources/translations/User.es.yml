@@ -1,0 +1,260 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - User Context
+# ========================================
+
+# === COMMUN ===
+common:
+  close: "Cerrar"
+  save: "Guardar"
+  cancel: "Cancelar"
+  submit: "Enviar"
+  delete: "Eliminar"
+  edit: "Editar"
+  back: "Volver"
+  confirm: "Confirmar"
+
+# === PROFILE ===
+profile:
+  title:
+    main: "Configuración del perfil"
+    subtitle: "Gestiona la configuración y preferencias de tu cuenta"
+
+  navigation:
+    personal_info: "Información personal"
+    picture: "Foto de perfil"
+    player: "Perfil de jugador"
+    password: "Contraseña"
+
+  personal_info:
+    title: "Información personal"
+    description: "En esta sección puedes actualizar tu información personal (nombre de usuario, email, idioma, etc.)."
+    form:
+      username:
+        label: "Nombre de usuario"
+        placeholder: "Introduce tu nombre de usuario"
+      email:
+        label: "Dirección de email"
+        placeholder: "Introduce tu email"
+      language:
+        label: "Idioma"
+        placeholder: "Selecciona tu idioma"
+      timezone:
+        label: "Zona horaria"
+        placeholder: "Selecciona tu zona horaria"
+      submit: "Guardar cambios"
+      error:
+        username_required: "El nombre de usuario es obligatorio"
+        username_too_short: "El nombre de usuario debe tener al menos {{ limit }} caracteres"
+        username_too_long: "El nombre de usuario no puede superar {{ limit }} caracteres"
+        username_invalid_format: "El nombre de usuario solo puede contener letras, números, guiones bajos y guiones"
+        email_required: "El email es obligatorio"
+        email_invalid: "Introduce una dirección de email válida"
+    message:
+      success: "Tu información personal ha sido actualizada con éxito"
+      error: "Se ha producido un error al actualizar tu información"
+
+  picture:
+    title: "Foto de perfil"
+    description: "En esta sección puedes subir y actualizar tu foto de perfil/avatar."
+    current_avatar: "Avatar actual"
+    form:
+      avatar:
+        label: "Elegir una imagen"
+      help: "Formatos permitidos: PNG, JPEG. Tamaño máximo: 2 MB. La imagen se redimensionará a 100x100 píxeles."
+      submit: "Subir"
+      error:
+        file_required: "Por favor, selecciona una imagen."
+        mime_type: "Solo se permiten imágenes PNG y JPEG."
+        max_size: "El archivo es demasiado grande. Tamaño máximo: {{ limit }}."
+    message:
+      success: "Tu foto de perfil ha sido actualizada con éxito"
+      error: "Se ha producido un error al subir tu foto"
+
+  player:
+    title: "Perfil de jugador"
+    description: "Esta sección mostrará tus estadísticas, logros y actividad de juego."
+    stats:
+      total_games: "Juegos totales"
+      total_records: "Récords totales"
+      achievements: "Logros"
+      rank: "Clasificación global"
+    message:
+      no_stats: "Aún no hay estadísticas disponibles. ¡Empieza a jugar para ver tu progreso!"
+
+  password:
+    title: "Cambiar contraseña"
+    subtitle: "La contraseña debe tener al menos 8 caracteres con letras y números"
+    form:
+      current_password:
+        label: "Contraseña actual"
+        placeholder: "Introduce tu contraseña actual"
+      new_password:
+        label: "Nueva contraseña"
+        placeholder: "Introduce tu nueva contraseña"
+      confirm_password:
+        label: "Confirmar nueva contraseña"
+        placeholder: "Confirma tu nueva contraseña"
+      submit: "Cambiar contraseña"
+    error:
+      current_required: "Por favor, introduce tu contraseña actual"
+      current_invalid: "Valor incorrecto para tu contraseña actual"
+      new_required: "Por favor, introduce una nueva contraseña"
+      new_too_short: "Tu contraseña debe tener al menos {{ limit }} caracteres"
+      new_invalid_format: "La contraseña debe tener al menos 8 caracteres con letras y números"
+      mismatch: "Los campos de contraseña deben coincidir."
+    message:
+      success: "Tu contraseña ha sido cambiada con éxito"
+      error: "Se ha producido un error al cambiar tu contraseña"
+
+# === ACCOUNT ===
+account:
+  settings:
+    title: "Configuración de cuenta"
+    privacy:
+      title: "Privacidad"
+      public_profile: "Hacer mi perfil público"
+      show_email: "Mostrar mi dirección de email"
+      show_activity: "Mostrar mi actividad de juego"
+    notifications:
+      title: "Notificaciones"
+      email_notifications: "Recibir notificaciones por email"
+      news_updates: "Recibir noticias y actualizaciones"
+    danger_zone:
+      title: "Zona de peligro"
+      delete_account: "Eliminar mi cuenta"
+      delete_confirm: "¿Estás seguro? Esta acción no se puede deshacer."
+
+# === SECURITY ===
+security:
+  events:
+    title: "Eventos de seguridad"
+    types:
+      login_success: "Inicio de sesión exitoso"
+      login_failure: "Intento de inicio de sesión fallido"
+      logout: "Cierre de sesión"
+      password_change: "Cambio de contraseña"
+      email_change: "Cambio de email"
+    list:
+      date: "Fecha"
+      type: "Tipo"
+      ip_address: "Dirección IP"
+      user_agent: "Dispositivo/Navegador"
+      no_events: "No se han registrado eventos de seguridad"
+
+# === LOGIN ===
+login:
+  title: "Iniciar sesión"
+  subtitle: "Inicia sesión en tu cuenta"
+
+  form:
+    username_or_email:
+      label: "Email o nombre de usuario"
+      placeholder: "Introduce tu email o nombre de usuario"
+    password:
+      label: "Contraseña"
+      placeholder: "Introduce tu contraseña"
+    submit: "Iniciar sesión"
+
+  flash:
+    success: "Has iniciado sesión. ¡Bienvenido de vuelta!"
+    error: "Error al iniciar sesión. Por favor, comprueba tus credenciales."
+
+  link:
+    no_account: "¿No tienes cuenta?"
+    register: "Registrarse"
+    forgot_password: "¿Olvidaste tu contraseña?"
+
+# === REGISTRATION ===
+registration:
+  title: "Crear cuenta"
+  subtitle: "Regístrate para unirte a nuestra comunidad"
+
+  form:
+    email:
+      label: "Email"
+      placeholder: "Introduce tu dirección de email"
+    username:
+      label: "Nombre de usuario"
+      placeholder: "magicbart"
+    password:
+      label: "Contraseña"
+      placeholder: "••••••••••••••••"
+    confirm_password:
+      label: "Confirmar contraseña"
+      placeholder: "Confirma tu contraseña"
+    submit: "Crear cuenta"
+
+  error:
+    email_required: "El email es obligatorio"
+    email_invalid: "Introduce una dirección de email válida"
+    username_required: "El nombre de usuario es obligatorio"
+    username_too_short: "El nombre de usuario debe tener al menos {{ limit }} caracteres"
+    username_too_long: "El nombre de usuario no puede superar {{ limit }} caracteres"
+    username_invalid_format: "El nombre de usuario solo puede contener letras, números, guiones bajos y guiones"
+    password_required: "La contraseña es obligatoria"
+    password_too_short: "La contraseña debe tener al menos {{ limit }} caracteres"
+    password_invalid_format: "La contraseña debe contener al menos una letra y un número"
+    password_mismatch: "Los campos de contraseña deben coincidir"
+
+  flash:
+    success: "¡Tu cuenta ha sido creada con éxito! ¡Bienvenido a Video Games Records!"
+    error: "Se ha producido un error durante el registro. Por favor, inténtalo de nuevo."
+
+  link:
+    have_account: "¿Ya tienes una cuenta?"
+    login: "Iniciar sesión"
+
+# === RESET PASSWORD ===
+reset_password:
+  request:
+    title: "Restablecer contraseña"
+    subtitle: "Introduce tu dirección de email y te enviaremos un enlace para restablecer tu contraseña"
+    help: "Te enviaremos un email con instrucciones para restablecer tu contraseña"
+    submit: "Enviar enlace de restablecimiento"
+    back_to_login: "Volver al inicio de sesión"
+
+  confirm:
+    title: "Crear nueva contraseña"
+    subtitle: "Introduce tu nueva contraseña a continuación"
+    help: "La contraseña debe tener al menos 6 caracteres"
+    submit: "Restablecer contraseña"
+    back_to_login: "Volver al inicio de sesión"
+
+  flash:
+    request_success: "Si existe una cuenta con ese email, recibirás un enlace para restablecer la contraseña en breve."
+    request_error: "Se ha producido un error al procesar tu solicitud. Por favor, inténtalo de nuevo."
+    invalid_token: "Token de restablecimiento inválido o caducado. Por favor, solicita un nuevo restablecimiento de contraseña."
+    expired_token: "Tu enlace de restablecimiento de contraseña ha caducado. Por favor, solicita uno nuevo."
+    success: "Tu contraseña ha sido restablecida con éxito. Ahora puedes iniciar sesión con tu nueva contraseña."
+    error: "Se ha producido un error al restablecer tu contraseña. Por favor, inténtalo de nuevo."
+
+# === FORM ===
+form:
+  email: "Email"
+  email.placeholder: "tu.email@example.com"
+  password: "Nueva contraseña"
+  password.placeholder: "Introduce tu nueva contraseña"
+  password.confirm: "Confirmar contraseña"
+  password.confirm.placeholder: "Confirma tu nueva contraseña"
+  error:
+    email:
+      required: "El email es obligatorio"
+      invalid: "Dirección de email inválida"
+    password:
+      required: "La contraseña es obligatoria"
+      min_length: "La contraseña debe tener al menos {{ limit }} caracteres"
+      mismatch: "Las contraseñas no coinciden"
+
+# === FLASH MESSAGES ===
+flash:
+  success:
+    generic: "Operación completada con éxito"
+    saved: "Cambios guardados con éxito"
+  error:
+    generic: "Se ha producido un error. Por favor, inténtalo de nuevo."
+    unauthorized: "No tienes autorización para realizar esta acción"
+    validation: "Por favor, revisa el formulario para ver los errores"
+  info:
+    processing: "Tu solicitud está siendo procesada..."
+  warning:
+    unsaved_changes: "Tienes cambios sin guardar. ¿Seguro que quieres salir?"

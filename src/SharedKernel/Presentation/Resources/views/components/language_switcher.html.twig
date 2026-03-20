@@ -2,7 +2,7 @@
     Language Switcher Component
 
     This component displays a language switcher that allows users to switch between
-    available locales (English and French).
+    available locales (English, French, German, Italian, Japanese, Spanish, Portuguese (Brazil), Chinese (Simplified)).
 
     Usage in your template:
     {% include '@SharedKernel/components/language_switcher.html.twig' %}
@@ -19,6 +19,18 @@
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             {% if app.request.locale == 'fr' %}
                 🇫🇷 Français
+            {% elseif app.request.locale == 'de' %}
+                🇩🇪 Deutsch
+            {% elseif app.request.locale == 'it' %}
+                🇮🇹 Italiano
+            {% elseif app.request.locale == 'ja' %}
+                🇯🇵 日本語
+            {% elseif app.request.locale == 'es' %}
+                🇪🇸 Español
+            {% elseif app.request.locale == 'pt-br' %}
+                🇧🇷 Português
+            {% elseif app.request.locale == 'zh-cn' %}
+                🇨🇳 中文
             {% else %}
                 🇬🇧 English
             {% endif %}
@@ -34,6 +46,42 @@
                 <a class="dropdown-item {{ app.request.locale == 'fr' ? 'active' : '' }}"
                    href="{{ path(currentRoute, routeParams|merge({'_locale': 'fr'})) }}">
                     🇫🇷 Français
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'de' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'de'})) }}">
+                    🇩🇪 Deutsch
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'it' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'it'})) }}">
+                    🇮🇹 Italiano
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'ja' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'ja'})) }}">
+                    🇯🇵 日本語
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'es' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'es'})) }}">
+                    🇪🇸 Español
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'pt-br' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'pt-br'})) }}">
+                    🇧🇷 Português
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{ app.request.locale == 'zh-cn' ? 'active' : '' }}"
+                   href="{{ path(currentRoute, routeParams|merge({'_locale': 'zh-cn'})) }}">
+                    🇨🇳 中文
                 </a>
             </li>
         </ul>

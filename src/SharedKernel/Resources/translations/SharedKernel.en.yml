@@ -59,6 +59,12 @@ navigation:
   language:
     english: "English"
     french: "Français"
+    german: "Deutsch"
+    italian: "Italiano"
+    japanese: "日本語"
+    spanish: "Español"
+    portuguese_br: "Português (Brasil)"
+    chinese_simplified: "中文 (简体)"
 
 # === FOOTER ===
 footer:

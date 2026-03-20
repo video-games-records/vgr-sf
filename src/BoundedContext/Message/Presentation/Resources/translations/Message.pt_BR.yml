@@ -1,0 +1,120 @@
+label:
+    createdAt: 'Criado em'
+    updatedAt: 'Atualizado em'
+    id: 'ID'
+    message: 'Mensagem'
+    object: 'Assunto'
+    recipient: 'Destinatário'
+    sender: 'Remetente'
+    type: 'Tipo'
+    isOpened: 'Lido'
+    isDeletedSender: 'Excluído pelo remetente'
+    isDeletedRecipient: 'Excluído pelo destinatário'
+
+message:
+    label: 'Mensagem'
+    flash:
+        deleted: 'Mensagem excluída com sucesso.'
+
+group:
+    messages: 'Mensagens'
+
+breadcrumb:
+    home: 'Início'
+    messages: 'Mensagens'
+    inbox: 'Caixa de entrada'
+    outbox: 'Enviados'
+    view: 'Ver mensagem'
+    compose: 'Nova mensagem'
+
+navigation:
+    inbox: 'Caixa de entrada'
+    outbox: 'Enviados'
+    compose: 'Nova mensagem'
+
+compose:
+    title: 'Nova mensagem'
+    header: 'Nova mensagem'
+    form:
+        recipient: 'Para'
+        recipient_placeholder: 'Buscar usuário...'
+        subject: 'Assunto'
+        message: 'Mensagem'
+        send: 'Enviar'
+        cancel: 'Cancelar'
+    validation:
+        recipient_required: 'Por favor, selecione um destinatário.'
+        subject_required: 'Por favor, insira um assunto.'
+        subject_too_long: 'O assunto não pode ter mais de 255 caracteres.'
+        message_required: 'Por favor, insira uma mensagem.'
+    error:
+        recipient_not_found: 'O destinatário selecionado não foi encontrado.'
+        cannot_send_to_self: 'Você não pode enviar uma mensagem para si mesmo.'
+    success:
+        sent: 'Sua mensagem foi enviada com sucesso.'
+
+inbox:
+    title: 'Caixa de entrada'
+    header: 'Caixa de entrada'
+    description: '%count% mensagem(ns) recebida(s)'
+    empty: 'Nenhuma mensagem na caixa de entrada.'
+    unread: 'Não lida'
+    read: 'Lida'
+    column:
+        sender: 'De'
+        subject: 'Assunto'
+        date: 'Data'
+        actions: 'Ações'
+    action:
+        view: 'Ver'
+        delete: 'Excluir'
+    confirm_delete: 'Tem certeza que quer excluir esta mensagem?'
+
+outbox:
+    title: 'Mensagens enviadas'
+    header: 'Mensagens enviadas'
+    description: '%count% mensagem(ns) enviada(s)'
+    empty: 'Nenhuma mensagem enviada.'
+    read: 'Lida pelo destinatário'
+    unread: 'Ainda não lida'
+    status:
+        read: 'Lida'
+        sent: 'Enviada'
+    column:
+        recipient: 'Para'
+        subject: 'Assunto'
+        date: 'Data'
+        status: 'Status'
+        actions: 'Ações'
+    action:
+        view: 'Ver'
+        delete: 'Excluir'
+    confirm_delete: 'Tem certeza que quer excluir esta mensagem?'
+
+view:
+    back: 'Voltar'
+    from: 'De'
+    to: 'Para'
+    status:
+        read: 'Lida'
+        sent: 'Enviada'
+    action:
+        reply: 'Responder'
+        delete: 'Excluir'
+    confirm_delete: 'Tem certeza que quer excluir esta mensagem?'
+
+filter:
+    search: 'Buscar'
+    search_placeholder: 'Buscar por assunto ou conteúdo...'
+    sender: 'Remetente'
+    recipient: 'Destinatário'
+    status: 'Status'
+    all: 'Todos'
+    unread: 'Não lidas'
+    read: 'Lidas'
+    apply: 'Buscar'
+    reset: 'Redefinir'
+
+pagination:
+    label: 'Paginação de mensagens'
+    showing: 'Exibindo %start% a %end% de %total% mensagens'

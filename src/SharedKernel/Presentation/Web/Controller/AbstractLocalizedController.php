@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
  *
  * Usage example:
  * ```php
- * #[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
+ * #[Route('/{_locale}', requirements: ['_locale' => 'en|fr|de|it|ja|es|pt_BR|zh_CN'], defaults: ['_locale' => 'en'])]
  * class MyController extends AbstractLocalizedController
  * {
  *     #[Route('/my-page', name: 'my_page')]
@@ -33,7 +33,7 @@ use Symfony\Component\Routing\Attribute\Route;
  *
  * @see https://symfony.com/doc/current/routing.html#localized-routes-i18n
  */
-#[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
+#[Route('/{_locale}', requirements: ['_locale' => 'en|fr|de|it|ja|es|pt_BR|zh_CN'], defaults: ['_locale' => 'en'])]
 abstract class AbstractLocalizedController extends AbstractController
 {
 }

@@ -1,0 +1,260 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - User Context
+# ========================================
+
+# === COMMUN ===
+common:
+  close: "关闭"
+  save: "保存"
+  cancel: "取消"
+  submit: "提交"
+  delete: "删除"
+  edit: "编辑"
+  back: "返回"
+  confirm: "确认"
+
+# === PROFILE ===
+profile:
+  title:
+    main: "个人资料设置"
+    subtitle: "管理您的账户设置和偏好"
+
+  navigation:
+    personal_info: "个人信息"
+    picture: "头像"
+    player: "玩家资料"
+    password: "密码"
+
+  personal_info:
+    title: "个人信息"
+    description: "在此部分您可以更新个人信息（用户名、电子邮件、语言等）。"
+    form:
+      username:
+        label: "用户名"
+        placeholder: "请输入用户名"
+      email:
+        label: "电子邮件地址"
+        placeholder: "请输入电子邮件"
+      language:
+        label: "语言"
+        placeholder: "选择语言"
+      timezone:
+        label: "时区"
+        placeholder: "选择时区"
+      submit: "保存更改"
+      error:
+        username_required: "用户名为必填项"
+        username_too_short: "用户名至少需要 {{ limit }} 个字符"
+        username_too_long: "用户名不能超过 {{ limit }} 个字符"
+        username_invalid_format: "用户名只能包含字母、数字、下划线和连字符"
+        email_required: "电子邮件为必填项"
+        email_invalid: "请输入有效的电子邮件地址"
+    message:
+      success: "您的个人信息已成功更新"
+      error: "更新信息时发生错误"
+
+  picture:
+    title: "头像"
+    description: "在此部分您可以上传和更新您的头像。"
+    current_avatar: "当前头像"
+    form:
+      avatar:
+        label: "选择图片"
+      help: "允许的格式：PNG、JPEG。最大大小：2 MB。图片将调整为 100x100 像素。"
+      submit: "上传"
+      error:
+        file_required: "请选择一张图片。"
+        mime_type: "只允许 PNG 和 JPEG 图片。"
+        max_size: "文件太大。最大大小：{{ limit }}。"
+    message:
+      success: "您的头像已成功更新"
+      error: "上传图片时发生错误"
+
+  player:
+    title: "玩家资料"
+    description: "此部分将显示您的玩家统计数据、成就和游戏活动。"
+    stats:
+      total_games: "游戏总数"
+      total_records: "记录总数"
+      achievements: "成就"
+      rank: "全球排名"
+    message:
+      no_stats: "暂无统计数据。开始游戏以查看您的进度！"
+
+  password:
+    title: "修改密码"
+    subtitle: "密码必须至少包含8个字符，包括字母和数字"
+    form:
+      current_password:
+        label: "当前密码"
+        placeholder: "请输入当前密码"
+      new_password:
+        label: "新密码"
+        placeholder: "请输入新密码"
+      confirm_password:
+        label: "确认新密码"
+        placeholder: "请确认新密码"
+      submit: "修改密码"
+    error:
+      current_required: "请输入您的当前密码"
+      current_invalid: "当前密码值不正确"
+      new_required: "请输入新密码"
+      new_too_short: "密码至少需要 {{ limit }} 个字符"
+      new_invalid_format: "密码必须至少包含8个字符，包括字母和数字"
+      mismatch: "两次输入的密码必须一致。"
+    message:
+      success: "您的密码已成功修改"
+      error: "修改密码时发生错误"
+
+# === ACCOUNT ===
+account:
+  settings:
+    title: "账户设置"
+    privacy:
+      title: "隐私"
+      public_profile: "公开我的个人资料"
+      show_email: "显示我的电子邮件地址"
+      show_activity: "显示我的游戏活动"
+    notifications:
+      title: "通知"
+      email_notifications: "接收电子邮件通知"
+      news_updates: "接收新闻和更新"
+    danger_zone:
+      title: "危险区域"
+      delete_account: "删除我的账户"
+      delete_confirm: "您确定吗？此操作无法撤销。"
+
+# === SECURITY ===
+security:
+  events:
+    title: "安全事件"
+    types:
+      login_success: "登录成功"
+      login_failure: "登录失败"
+      logout: "退出登录"
+      password_change: "密码更改"
+      email_change: "邮箱更改"
+    list:
+      date: "日期"
+      type: "类型"
+      ip_address: "IP地址"
+      user_agent: "设备/浏览器"
+      no_events: "暂无安全事件记录"
+
+# === LOGIN ===
+login:
+  title: "登录"
+  subtitle: "登录您的账户"
+
+  form:
+    username_or_email:
+      label: "电子邮件或用户名"
+      placeholder: "请输入电子邮件或用户名"
+    password:
+      label: "密码"
+      placeholder: "请输入密码"
+    submit: "登录"
+
+  flash:
+    success: "您已登录。欢迎回来！"
+    error: "登录失败。请检查您的凭据。"
+
+  link:
+    no_account: "没有账户？"
+    register: "注册"
+    forgot_password: "忘记密码？"
+
+# === REGISTRATION ===
+registration:
+  title: "创建账户"
+  subtitle: "注册以加入我们的社区"
+
+  form:
+    email:
+      label: "电子邮件"
+      placeholder: "请输入您的电子邮件地址"
+    username:
+      label: "用户名"
+      placeholder: "magicbart"
+    password:
+      label: "密码"
+      placeholder: "••••••••••••••••"
+    confirm_password:
+      label: "确认密码"
+      placeholder: "请确认您的密码"
+    submit: "创建账户"
+
+  error:
+    email_required: "电子邮件为必填项"
+    email_invalid: "请输入有效的电子邮件地址"
+    username_required: "用户名为必填项"
+    username_too_short: "用户名至少需要 {{ limit }} 个字符"
+    username_too_long: "用户名不能超过 {{ limit }} 个字符"
+    username_invalid_format: "用户名只能包含字母、数字、下划线和连字符"
+    password_required: "密码为必填项"
+    password_too_short: "密码至少需要 {{ limit }} 个字符"
+    password_invalid_format: "密码必须至少包含一个字母和一个数字"
+    password_mismatch: "两次输入的密码必须一致"
+
+  flash:
+    success: "您的账户已成功创建！欢迎来到 Video Games Records！"
+    error: "注册过程中发生错误。请重试。"
+
+  link:
+    have_account: "已有账户？"
+    login: "登录"
+
+# === RESET PASSWORD ===
+reset_password:
+  request:
+    title: "重置密码"
+    subtitle: "输入您的电子邮件地址，我们将向您发送重置密码的链接"
+    help: "我们将向您发送包含重置密码说明的电子邮件"
+    submit: "发送重置链接"
+    back_to_login: "返回登录"
+
+  confirm:
+    title: "创建新密码"
+    subtitle: "在下方输入您的新密码"
+    help: "密码至少需要6个字符"
+    submit: "重置密码"
+    back_to_login: "返回登录"
+
+  flash:
+    request_success: "如果该邮箱对应账户存在，您将很快收到密码重置链接。"
+    request_error: "处理您的请求时发生错误。请重试。"
+    invalid_token: "重置令牌无效或已过期。请重新申请密码重置。"
+    expired_token: "您的密码重置链接已过期。请申请新的链接。"
+    success: "您的密码已成功重置。现在您可以使用新密码登录。"
+    error: "重置密码时发生错误。请重试。"
+
+# === FORM ===
+form:
+  email: "电子邮件"
+  email.placeholder: "your.email@example.com"
+  password: "新密码"
+  password.placeholder: "请输入新密码"
+  password.confirm: "确认密码"
+  password.confirm.placeholder: "请确认新密码"
+  error:
+    email:
+      required: "电子邮件为必填项"
+      invalid: "无效的电子邮件地址"
+    password:
+      required: "密码为必填项"
+      min_length: "密码至少需要 {{ limit }} 个字符"
+      mismatch: "两次输入的密码不一致"
+
+# === FLASH MESSAGES ===
+flash:
+  success:
+    generic: "操作成功完成"
+    saved: "更改已成功保存"
+  error:
+    generic: "发生错误，请重试。"
+    unauthorized: "您无权执行此操作"
+    validation: "请检查表单中的错误"
+  info:
+    processing: "您的请求正在处理中..."
+  warning:
+    unsaved_changes: "您有未保存的更改，确定要离开吗？"

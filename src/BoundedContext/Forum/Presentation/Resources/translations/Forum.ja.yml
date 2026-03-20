@@ -1,0 +1,41 @@
+forum:
+    title: "フォーラム"
+    table:
+        forum: "フォーラム"
+        topics: "トピック"
+        messages: "メッセージ"
+        last_message: "最新メッセージ"
+    by: "by"
+    no_message: "まだメッセージはありません"
+    no_forum: "このカテゴリにフォーラムはありません"
+    no_category: "表示するカテゴリはありません"
+    show:
+        description: "このフォーラムのトピック数：%count%"
+        topics_list: "トピック"
+        table:
+            topic: "トピック"
+            type: "種類"
+            messages: "返信"
+            last_message: "最新メッセージ"
+        started_by: "作成者"
+        no_topic: "まだトピックはありません"
+        go_to_last_page: "最終ページへ"
+        mark_all_read: "すべて既読にする"
+        mark_all_read.success: "すべてのトピックを既読にしました"
+
+topic:
+    show:
+        description: "%count%件のメッセージ"
+        messages_count: "%count%件のメッセージ"
+        no_message: "まだメッセージはありません"
+
+breadcrumb:
+    home: "ホーム"
+
+home:
+    latest_messages: "最新フォーラムメッセージ"
+    no_recent_message: "最近のメッセージはありません"
+
+pagination:
+    label: "ページナビゲーション"
+    showing: "%total%件中%start%〜%end%件を表示"

@@ -1,0 +1,120 @@
+label:
+    createdAt: '创建时间'
+    updatedAt: '更新时间'
+    id: 'ID'
+    message: '消息'
+    object: '主题'
+    recipient: '收件人'
+    sender: '发件人'
+    type: '类型'
+    isOpened: '已读'
+    isDeletedSender: '发件人已删除'
+    isDeletedRecipient: '收件人已删除'
+
+message:
+    label: '消息'
+    flash:
+        deleted: '消息已成功删除。'
+
+group:
+    messages: '消息'
+
+breadcrumb:
+    home: '首页'
+    messages: '消息'
+    inbox: '收件箱'
+    outbox: '已发送'
+    view: '查看消息'
+    compose: '新建消息'
+
+navigation:
+    inbox: '收件箱'
+    outbox: '已发送'
+    compose: '新建消息'
+
+compose:
+    title: '新建消息'
+    header: '新建消息'
+    form:
+        recipient: '收件人'
+        recipient_placeholder: '搜索用户...'
+        subject: '主题'
+        message: '消息内容'
+        send: '发送'
+        cancel: '取消'
+    validation:
+        recipient_required: '请选择收件人。'
+        subject_required: '请输入主题。'
+        subject_too_long: '主题不能超过255个字符。'
+        message_required: '请输入消息内容。'
+    error:
+        recipient_not_found: '未找到所选收件人。'
+        cannot_send_to_self: '您不能给自己发送消息。'
+    success:
+        sent: '您的消息已成功发送。'
+
+inbox:
+    title: '收件箱'
+    header: '收件箱'
+    description: '共收到 %count% 条消息'
+    empty: '收件箱中没有消息。'
+    unread: '未读'
+    read: '已读'
+    column:
+        sender: '发件人'
+        subject: '主题'
+        date: '日期'
+        actions: '操作'
+    action:
+        view: '查看'
+        delete: '删除'
+    confirm_delete: '确定要删除此消息吗？'
+
+outbox:
+    title: '已发送消息'
+    header: '已发送消息'
+    description: '共发送 %count% 条消息'
+    empty: '没有已发送的消息。'
+    read: '收件人已读'
+    unread: '尚未阅读'
+    status:
+        read: '已读'
+        sent: '已发送'
+    column:
+        recipient: '收件人'
+        subject: '主题'
+        date: '日期'
+        status: '状态'
+        actions: '操作'
+    action:
+        view: '查看'
+        delete: '删除'
+    confirm_delete: '确定要删除此消息吗？'
+
+view:
+    back: '返回'
+    from: '发件人'
+    to: '收件人'
+    status:
+        read: '已读'
+        sent: '已发送'
+    action:
+        reply: '回复'
+        delete: '删除'
+    confirm_delete: '确定要删除此消息吗？'
+
+filter:
+    search: '搜索'
+    search_placeholder: '按主题或内容搜索...'
+    sender: '发件人'
+    recipient: '收件人'
+    status: '状态'
+    all: '全部'
+    unread: '未读'
+    read: '已读'
+    apply: '搜索'
+    reset: '重置'
+
+pagination:
+    label: '消息分页导航'
+    showing: '显示第 %start% 至 %end% 条，共 %total% 条消息'

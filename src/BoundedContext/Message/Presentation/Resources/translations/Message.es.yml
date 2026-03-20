@@ -1,0 +1,120 @@
+label:
+    createdAt: 'Creado el'
+    updatedAt: 'Actualizado el'
+    id: 'ID'
+    message: 'Mensaje'
+    object: 'Asunto'
+    recipient: 'Destinatario'
+    sender: 'Remitente'
+    type: 'Tipo'
+    isOpened: 'Leído'
+    isDeletedSender: 'Eliminado por el remitente'
+    isDeletedRecipient: 'Eliminado por el destinatario'
+
+message:
+    label: 'Mensaje'
+    flash:
+        deleted: 'Mensaje eliminado con éxito.'
+
+group:
+    messages: 'Mensajes'
+
+breadcrumb:
+    home: 'Inicio'
+    messages: 'Mensajes'
+    inbox: 'Bandeja de entrada'
+    outbox: 'Enviados'
+    view: 'Ver mensaje'
+    compose: 'Nuevo mensaje'
+
+navigation:
+    inbox: 'Bandeja de entrada'
+    outbox: 'Enviados'
+    compose: 'Nuevo mensaje'
+
+compose:
+    title: 'Nuevo mensaje'
+    header: 'Nuevo mensaje'
+    form:
+        recipient: 'Para'
+        recipient_placeholder: 'Buscar usuario...'
+        subject: 'Asunto'
+        message: 'Mensaje'
+        send: 'Enviar'
+        cancel: 'Cancelar'
+    validation:
+        recipient_required: 'Por favor, selecciona un destinatario.'
+        subject_required: 'Por favor, introduce un asunto.'
+        subject_too_long: 'El asunto no puede superar los 255 caracteres.'
+        message_required: 'Por favor, introduce un mensaje.'
+    error:
+        recipient_not_found: 'El destinatario seleccionado no fue encontrado.'
+        cannot_send_to_self: 'No puedes enviarte un mensaje a ti mismo.'
+    success:
+        sent: 'Tu mensaje ha sido enviado con éxito.'
+
+inbox:
+    title: 'Bandeja de entrada'
+    header: 'Bandeja de entrada'
+    description: '%count% mensaje(s) recibido(s)'
+    empty: 'No hay mensajes en tu bandeja de entrada.'
+    unread: 'No leído'
+    read: 'Leído'
+    column:
+        sender: 'De'
+        subject: 'Asunto'
+        date: 'Fecha'
+        actions: 'Acciones'
+    action:
+        view: 'Ver'
+        delete: 'Eliminar'
+    confirm_delete: '¿Estás seguro de que quieres eliminar este mensaje?'
+
+outbox:
+    title: 'Mensajes enviados'
+    header: 'Mensajes enviados'
+    description: '%count% mensaje(s) enviado(s)'
+    empty: 'No hay mensajes enviados.'
+    read: 'Leído por el destinatario'
+    unread: 'Aún no leído'
+    status:
+        read: 'Leído'
+        sent: 'Enviado'
+    column:
+        recipient: 'Para'
+        subject: 'Asunto'
+        date: 'Fecha'
+        status: 'Estado'
+        actions: 'Acciones'
+    action:
+        view: 'Ver'
+        delete: 'Eliminar'
+    confirm_delete: '¿Estás seguro de que quieres eliminar este mensaje?'
+
+view:
+    back: 'Volver'
+    from: 'De'
+    to: 'Para'
+    status:
+        read: 'Leído'
+        sent: 'Enviado'
+    action:
+        reply: 'Responder'
+        delete: 'Eliminar'
+    confirm_delete: '¿Estás seguro de que quieres eliminar este mensaje?'
+
+filter:
+    search: 'Buscar'
+    search_placeholder: 'Buscar por asunto o contenido...'
+    sender: 'Remitente'
+    recipient: 'Destinatario'
+    status: 'Estado'
+    all: 'Todos'
+    unread: 'No leídos'
+    read: 'Leídos'
+    apply: 'Buscar'
+    reset: 'Restablecer'
+
+pagination:
+    label: 'Paginación de mensajes'
+    showing: 'Mostrando %start% a %end% de %total% mensajes'

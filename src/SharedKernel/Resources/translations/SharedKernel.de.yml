@@ -1,0 +1,132 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+#
+# Ce fichier contient les traductions pour les éléments transversaux
+# partagés entre tous les contextes (navigation, footer, messages communs)
+#
+# ========================================
+
+# === NAVIGATION (Menu principal) ===
+navigation:
+  # Menu principal
+  home: "Startseite"
+  games: "Spiele"
+  leaderboards: "Ranglisten"
+  community: "Community"
+  admin: "Admin"
+
+  # Dropdown Games
+  games_dropdown:
+    by_letter: "Nach Buchstabe"
+    by_platform: "Nach Plattform"
+    by_series: "Nach Serie"
+    featured_games: "Kommende Spiele"
+    latest_games: "Neueste Spiele"
+
+  # Dropdown Leaderboards
+  leaderboards_dropdown:
+    game_points: "Spielpunkte"
+    record_points: "Rekordpunkte"
+    medals: "Medaillen"
+    cups: "Pokale"
+    badges: "Abzeichen"
+    proofs: "Beweise"
+    country: "Land"
+    top_ranking: "Top-Rangliste"
+
+  # Dropdown Community
+  community_dropdown:
+    forum: "Forum"
+    players: "Spieler"
+    teams: "Teams"
+
+  # User menu (when logged in)
+  user_menu:
+    profile: "Profil"
+    team: "Mein Team"
+    my_proofs: "Meine Beweise"
+    messages: "Nachrichten"
+    lost_positions: "Verlorene Positionen"
+    friends: "Freunde"
+    settings: "Einstellungen"
+    logout: "Abmelden"
+
+  # Login (when not logged in)
+  login: "Anmelden"
+
+  # Language switcher
+  language:
+    english: "English"
+    french: "Français"
+    german: "Deutsch"
+    italian: "Italiano"
+    japanese: "日本語"
+    spanish: "Español"
+    portuguese_br: "Português (Brasil)"
+    chinese_simplified: "中文 (简体)"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. Alle Rechte vorbehalten."
+  links:
+    faq: "FAQ"
+    rules: "Regeln"
+    privacy: "Datenschutz"
+    terms: "Nutzungsbedingungen"
+    contact: "Kontakt"
+    about: "Über uns"
+    legal: "Impressum"
+
+# === THEME ===
+theme:
+  toggle: "Design wechseln"
+  light: "Heller Modus"
+  dark: "Dunkler Modus"
+
+# === COMMON (Éléments communs réutilisables) ===
+common:
+  close: "Schließen"
+  save: "Speichern"
+  cancel: "Abbrechen"
+  submit: "Absenden"
+  delete: "Löschen"
+  edit: "Bearbeiten"
+  back: "Zurück"
+  confirm: "Bestätigen"
+  search: "Suchen"
+  loading: "Laden..."
+  no_results: "Keine Ergebnisse gefunden"
+
+# === SEARCH (Global search page) ===
+search:
+  title: "Suche"
+  placeholder: "Spiel, Spieler oder Team suchen..."
+  games: "Spiele"
+  players: "Spieler"
+  teams: "Teams"
+  no_results: "Keine Ergebnisse gefunden"
+  min_chars: "Geben Sie mindestens 2 Zeichen ein"
+
+# === HOME ===
+home:
+  seo:
+    title: "Video Games Records | Weltweite Videospiel-Ranglisten & Rekorde"
+    description: "Video Games Records ist die ultimative Plattform für Videospiel-Weltrekorde und Ranglisten. Entdecken Sie Bestenlisten für tausende Spiele, vergleichen Sie Ihre Punktzahlen mit Spielern weltweit, verdienen Sie Abzeichen und Trophäen und treten Sie einer leidenschaftlichen Gaming-Community bei."
+    keywords: "Videospiele Rekorde, Videospiel Weltrekorde, Gaming Ranglisten, Spiel-Rankings, kompetitives Gaming, Spieler-Rankings, Spielpunkte, Gaming Community, Abzeichen, Trophäen, Videospiel-Wettbewerb"
+  partners:
+    title: "Unsere Partner"
+
+# === FLASH MESSAGES (Messages système communs) ===
+flash:
+  success:
+    generic: "Vorgang erfolgreich abgeschlossen"
+    saved: "Änderungen erfolgreich gespeichert"
+  error:
+    generic: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    unauthorized: "Sie sind nicht berechtigt, diese Aktion durchzuführen"
+    validation: "Bitte überprüfen Sie das Formular auf Fehler"
+  info:
+    processing: "Ihre Anfrage wird verarbeitet..."
+  warning:
+    unsaved_changes: "Sie haben nicht gespeicherte Änderungen. Möchten Sie die Seite wirklich verlassen?"
