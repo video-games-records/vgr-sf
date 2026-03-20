@@ -1,0 +1,120 @@
+label:
+    createdAt: 'Creato il'
+    updatedAt: 'Aggiornato il'
+    id: 'ID'
+    message: 'Messaggio'
+    object: 'Oggetto'
+    recipient: 'Destinatario'
+    sender: 'Mittente'
+    type: 'Tipo'
+    isOpened: 'Letto'
+    isDeletedSender: 'Eliminato dal mittente'
+    isDeletedRecipient: 'Eliminato dal destinatario'
+
+message:
+    label: 'Messaggio'
+    flash:
+        deleted: 'Messaggio eliminato con successo.'
+
+group:
+    messages: 'Messaggi'
+
+breadcrumb:
+    home: 'Home'
+    messages: 'Messaggi'
+    inbox: 'Posta in arrivo'
+    outbox: 'Posta inviata'
+    view: 'Visualizza messaggio'
+    compose: 'Nuovo messaggio'
+
+navigation:
+    inbox: 'Posta in arrivo'
+    outbox: 'Posta inviata'
+    compose: 'Nuovo messaggio'
+
+compose:
+    title: 'Nuovo messaggio'
+    header: 'Nuovo messaggio'
+    form:
+        recipient: 'A'
+        recipient_placeholder: 'Cerca utente...'
+        subject: 'Oggetto'
+        message: 'Messaggio'
+        send: 'Invia'
+        cancel: 'Annulla'
+    validation:
+        recipient_required: 'Seleziona un destinatario.'
+        subject_required: 'Inserisci un oggetto.'
+        subject_too_long: "L'oggetto non può superare 255 caratteri."
+        message_required: 'Inserisci un messaggio.'
+    error:
+        recipient_not_found: 'Il destinatario selezionato non è stato trovato.'
+        cannot_send_to_self: 'Non puoi inviare un messaggio a te stesso.'
+    success:
+        sent: 'Il tuo messaggio è stato inviato con successo.'
+
+inbox:
+    title: 'Posta in arrivo'
+    header: 'Posta in arrivo'
+    description: '%count% messaggio/i ricevuto/i'
+    empty: 'Nessun messaggio nella posta in arrivo.'
+    unread: 'Non letto'
+    read: 'Letto'
+    column:
+        sender: 'Da'
+        subject: 'Oggetto'
+        date: 'Data'
+        actions: 'Azioni'
+    action:
+        view: 'Visualizza'
+        delete: 'Elimina'
+    confirm_delete: 'Sei sicuro di voler eliminare questo messaggio?'
+
+outbox:
+    title: 'Messaggi inviati'
+    header: 'Messaggi inviati'
+    description: '%count% messaggio/i inviato/i'
+    empty: 'Nessun messaggio inviato.'
+    read: 'Letto dal destinatario'
+    unread: 'Non ancora letto'
+    status:
+        read: 'Letto'
+        sent: 'Inviato'
+    column:
+        recipient: 'A'
+        subject: 'Oggetto'
+        date: 'Data'
+        status: 'Stato'
+        actions: 'Azioni'
+    action:
+        view: 'Visualizza'
+        delete: 'Elimina'
+    confirm_delete: 'Sei sicuro di voler eliminare questo messaggio?'
+
+view:
+    back: 'Indietro'
+    from: 'Da'
+    to: 'A'
+    status:
+        read: 'Letto'
+        sent: 'Inviato'
+    action:
+        reply: 'Rispondi'
+        delete: 'Elimina'
+    confirm_delete: 'Sei sicuro di voler eliminare questo messaggio?'
+
+filter:
+    search: 'Cerca'
+    search_placeholder: 'Cerca per oggetto o contenuto...'
+    sender: 'Mittente'
+    recipient: 'Destinatario'
+    status: 'Stato'
+    all: 'Tutti'
+    unread: 'Non letti'
+    read: 'Letti'
+    apply: 'Cerca'
+    reset: 'Reimposta'
+
+pagination:
+    label: 'Navigazione messaggi'
+    showing: 'Visualizzazione da %start% a %end% di %total% messaggi'

@@ -1,0 +1,132 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+#
+# Ce fichier contient les traductions pour les éléments transversaux
+# partagés entre tous les contextes (navigation, footer, messages communs)
+#
+# ========================================
+
+# === NAVIGATION (Menu principal) ===
+navigation:
+  # Menu principal
+  home: "Home"
+  games: "Giochi"
+  leaderboards: "Classifiche"
+  community: "Community"
+  admin: "Admin"
+
+  # Dropdown Games
+  games_dropdown:
+    by_letter: "Per lettera"
+    by_platform: "Per piattaforma"
+    by_series: "Per serie"
+    featured_games: "Prossimi giochi"
+    latest_games: "Ultimi giochi"
+
+  # Dropdown Leaderboards
+  leaderboards_dropdown:
+    game_points: "Punti gioco"
+    record_points: "Punti record"
+    medals: "Medaglie"
+    cups: "Coppe"
+    badges: "Distintivi"
+    proofs: "Prove"
+    country: "Paese"
+    top_ranking: "Top Classifica"
+
+  # Dropdown Community
+  community_dropdown:
+    forum: "Forum"
+    players: "Giocatori"
+    teams: "Squadre"
+
+  # User menu (when logged in)
+  user_menu:
+    profile: "Profilo"
+    team: "La mia squadra"
+    my_proofs: "Le mie prove"
+    messages: "Messaggi"
+    lost_positions: "Posizioni perse"
+    friends: "Amici"
+    settings: "Impostazioni"
+    logout: "Esci"
+
+  # Login (when not logged in)
+  login: "Accedi"
+
+  # Language switcher
+  language:
+    english: "English"
+    french: "Français"
+    german: "Deutsch"
+    italian: "Italiano"
+    japanese: "日本語"
+    spanish: "Español"
+    portuguese_br: "Português (Brasil)"
+    chinese_simplified: "中文 (简体)"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. Tutti i diritti riservati."
+  links:
+    faq: "FAQ"
+    rules: "Regole"
+    privacy: "Privacy"
+    terms: "Termini"
+    contact: "Contatto"
+    about: "Chi siamo"
+    legal: "Note legali"
+
+# === THEME ===
+theme:
+  toggle: "Cambia tema"
+  light: "Modalità chiara"
+  dark: "Modalità scura"
+
+# === COMMON (Éléments communs réutilisables) ===
+common:
+  close: "Chiudi"
+  save: "Salva"
+  cancel: "Annulla"
+  submit: "Invia"
+  delete: "Elimina"
+  edit: "Modifica"
+  back: "Indietro"
+  confirm: "Conferma"
+  search: "Cerca"
+  loading: "Caricamento..."
+  no_results: "Nessun risultato trovato"
+
+# === SEARCH (Global search page) ===
+search:
+  title: "Ricerca"
+  placeholder: "Cerca un gioco, un giocatore o una squadra..."
+  games: "Giochi"
+  players: "Giocatori"
+  teams: "Squadre"
+  no_results: "Nessun risultato trovato"
+  min_chars: "Inserisci almeno 2 caratteri per cercare"
+
+# === HOME ===
+home:
+  seo:
+    title: "Video Games Records | Classifiche e Record Mondiali di Videogiochi"
+    description: "Video Games Records è la piattaforma definitiva per i record e le classifiche mondiali di videogiochi. Scopri le classifiche di migliaia di giochi, confronta i tuoi punteggi con giocatori di tutto il mondo, guadagna distintivi e trofei e unisciti a una community appassionata."
+    keywords: "record videogiochi, classifiche videogiochi, record mondiali, gaming competitivo, classifiche giocatori, punteggi giochi, community gaming, distintivi, trofei, competizione videogiochi"
+  partners:
+    title: "I nostri partner"
+
+# === FLASH MESSAGES (Messages système communs) ===
+flash:
+  success:
+    generic: "Operazione completata con successo"
+    saved: "Modifiche salvate con successo"
+  error:
+    generic: "Si è verificato un errore. Riprova."
+    unauthorized: "Non sei autorizzato a eseguire questa azione"
+    validation: "Controlla il modulo per gli errori"
+  info:
+    processing: "La tua richiesta è in elaborazione..."
+  warning:
+    unsaved_changes: "Hai modifiche non salvate. Sei sicuro di voler uscire?"

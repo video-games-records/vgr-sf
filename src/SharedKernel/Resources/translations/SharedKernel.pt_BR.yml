@@ -1,0 +1,120 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+
+# === NAVIGATION ===
+navigation:
+  home: "Início"
+  games: "Jogos"
+  leaderboards: "Classificações"
+  community: "Comunidade"
+  admin: "Admin"
+
+  games_dropdown:
+    by_letter: "Por letra"
+    by_platform: "Por plataforma"
+    by_series: "Por série"
+    featured_games: "Próximos jogos"
+    latest_games: "Últimos jogos"
+
+  leaderboards_dropdown:
+    game_points: "Pontos de jogo"
+    record_points: "Pontos de recorde"
+    medals: "Medalhas"
+    cups: "Troféus"
+    badges: "Emblemas"
+    proofs: "Provas"
+    country: "País"
+    top_ranking: "Top classificação"
+
+  community_dropdown:
+    forum: "Fórum"
+    players: "Jogadores"
+    teams: "Times"
+
+  user_menu:
+    profile: "Perfil"
+    team: "Meu time"
+    my_proofs: "Minhas provas"
+    messages: "Mensagens"
+    lost_positions: "Posições perdidas"
+    friends: "Amigos"
+    settings: "Configurações"
+    logout: "Sair"
+
+  login: "Entrar"
+
+  language:
+    english: "English"
+    french: "Français"
+    german: "Deutsch"
+    italian: "Italiano"
+    japanese: "日本語"
+    spanish: "Español"
+    portuguese_br: "Português (Brasil)"
+    chinese_simplified: "中文 (简体)"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. Todos os direitos reservados."
+  links:
+    faq: "FAQ"
+    rules: "Regras"
+    privacy: "Privacidade"
+    terms: "Termos"
+    contact: "Contato"
+    about: "Sobre"
+    legal: "Aviso legal"
+
+# === THEME ===
+theme:
+  toggle: "Alternar tema"
+  light: "Modo claro"
+  dark: "Modo escuro"
+
+# === COMMON ===
+common:
+  close: "Fechar"
+  save: "Salvar"
+  cancel: "Cancelar"
+  submit: "Enviar"
+  delete: "Excluir"
+  edit: "Editar"
+  back: "Voltar"
+  confirm: "Confirmar"
+  search: "Buscar"
+  loading: "Carregando..."
+  no_results: "Nenhum resultado encontrado"
+
+# === SEARCH ===
+search:
+  title: "Busca"
+  placeholder: "Buscar um jogo, jogador ou time..."
+  games: "Jogos"
+  players: "Jogadores"
+  teams: "Times"
+  no_results: "Nenhum resultado encontrado"
+  min_chars: "Digite pelo menos 2 caracteres para buscar"
+
+# === HOME ===
+home:
+  seo:
+    title: "Video Games Records | Rankings e Recordes Mundiais de Videogames"
+    description: "Video Games Records é a plataforma definitiva para recordes e rankings mundiais de videogames. Descubra as classificações de milhares de jogos, compare suas pontuações com jogadores do mundo todo, ganhe emblemas e troféus e participe de uma comunidade apaixonada."
+    keywords: "recordes videogames, rankings videogames, recordes mundiais, gaming competitivo, rankings jogadores, pontuações jogos, comunidade gaming, emblemas, troféus, competição videogames"
+  partners:
+    title: "Nossos parceiros"
+
+# === FLASH MESSAGES ===
+flash:
+  success:
+    generic: "Operação concluída com sucesso"
+    saved: "Alterações salvas com sucesso"
+  error:
+    generic: "Ocorreu um erro. Por favor, tente novamente."
+    unauthorized: "Você não tem autorização para realizar esta ação"
+    validation: "Por favor, verifique o formulário para erros"
+  info:
+    processing: "Sua solicitação está sendo processada..."
+  warning:
+    unsaved_changes: "Você tem alterações não salvas. Tem certeza que quer sair?"

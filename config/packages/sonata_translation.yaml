@@ -8,6 +8,6 @@ sonata_block:
         sonata_translation.block.locale_switcher: null
 
 sonata_translation:
-    locales: ['en', 'fr' ]
+    locales: ['en', 'fr', 'de', 'it', 'ja', 'es', 'pt_BR', 'zh_CN']
     default_locale: 'en'
     locale_switcher: true

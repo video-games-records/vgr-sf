@@ -60,8 +60,14 @@ class PersonalInfoFormType extends AbstractType
             ->add('language', ChoiceType::class, [
                 'label' => 'profile.personal_info.form.language.label',
                 'choices' => [
-                    'English' => 'en',
-                    'Français' => 'fr',
+                    '🇬🇧 English' => 'en',
+                    '🇫🇷 Français' => 'fr',
+                    '🇩🇪 Deutsch' => 'de',
+                    '🇮🇹 Italiano' => 'it',
+                    '🇯🇵 日本語' => 'ja',
+                    '🇪🇸 Español' => 'es',
+                    '🇧🇷 Português (Brasil)' => 'pt_BR',
+                    '🇨🇳 中文 (简体)' => 'zh_CN',
                 ],
                 'attr' => [
                     'class' => 'form-select',

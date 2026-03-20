@@ -133,6 +133,18 @@
                             <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {% if app.request.locale == 'fr' %}
                                     🇫🇷 FR
+                                {% elseif app.request.locale == 'de' %}
+                                    🇩🇪 DE
+                                {% elseif app.request.locale == 'it' %}
+                                    🇮🇹 IT
+                                {% elseif app.request.locale == 'ja' %}
+                                    🇯🇵 JA
+                                {% elseif app.request.locale == 'es' %}
+                                    🇪🇸 ES
+                                {% elseif app.request.locale == 'pt_BR' %}
+                                    🇧🇷 PT
+                                {% elseif app.request.locale == 'zh_CN' %}
+                                    🇨🇳 ZH
                                 {% else %}
                                     🇬🇧 EN
                                 {% endif %}
@@ -149,6 +161,42 @@
                                     <a class="dropdown-item {{ app.request.locale == 'fr' ? 'active' : '' }}"
                                        href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'fr'})) : path('home', {'_locale': 'fr'}) }}">
                                         🇫🇷 {{ 'navigation.language.french'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'de' ? 'active' : '' }}"
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'de'})) : path('home', {'_locale': 'de'}) }}">
+                                        🇩🇪 {{ 'navigation.language.german'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'it' ? 'active' : '' }}"
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'it'})) : path('home', {'_locale': 'it'}) }}">
+                                        🇮🇹 {{ 'navigation.language.italian'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'ja' ? 'active' : '' }}"
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'ja'})) : path('home', {'_locale': 'ja'}) }}">
+                                        🇯🇵 {{ 'navigation.language.japanese'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'es' ? 'active' : '' }}"
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'es'})) : path('home', {'_locale': 'es'}) }}">
+                                        🇪🇸 {{ 'navigation.language.spanish'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'pt_BR' ? 'active' : '' }}"
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'pt_BR'})) : path('home', {'_locale': 'pt_BR'}) }}">
+                                        🇧🇷 {{ 'navigation.language.portuguese_br'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ app.request.locale == 'zh_CN' ? 'active' : '' }}"
+                                       href="{{ current_route ? path(current_route, app.request.attributes.get('_route_params')|default({})|merge({'_locale': 'zh_CN'})) : path('home', {'_locale': 'zh_CN'}) }}">
+                                        🇨🇳 {{ 'navigation.language.chinese_simplified'|trans }}
                                     </a>
                                 </li>
                             </ul>

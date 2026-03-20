@@ -1,0 +1,27 @@
+news:
+  latest_news: 最新ニュース
+  no_news: ニュースはありません
+
+comment:
+  count: "{0}コメント|{1}コメント|]1,Inf[コメント"
+  section_title: "{0}コメント (%count%)|{1}コメント (%count%)|]1,Inf[コメント (%count%)"
+  form:
+    content: コメントを入力
+  add_title: コメントを追加
+  submit: 送信
+  update: 更新
+  cancel: キャンセル
+  edit: 編集
+  edited: 編集済み
+  no_comments: まだコメントはありません。最初のコメントを投稿しましょう！
+  login_required: コメントするにはログインしてください。
+  flash:
+    created: コメントが正常に追加されました。
+    updated: コメントが正常に更新されました。
+    error: エラーが発生しました。もう一度お試しください。
+  validation:
+    content_required: コメントを入力してください。
+
+pagination:
+  label: コメントのページナビゲーション
+  showing: "%total%件中%start%〜%end%件を表示"

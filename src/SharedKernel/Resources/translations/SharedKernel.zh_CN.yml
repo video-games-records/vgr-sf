@@ -1,0 +1,120 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+
+# === NAVIGATION ===
+navigation:
+  home: "首页"
+  games: "游戏"
+  leaderboards: "排行榜"
+  community: "社区"
+  admin: "管理"
+
+  games_dropdown:
+    by_letter: "按字母"
+    by_platform: "按平台"
+    by_series: "按系列"
+    featured_games: "即将上线"
+    latest_games: "最新游戏"
+
+  leaderboards_dropdown:
+    game_points: "游戏积分"
+    record_points: "记录积分"
+    medals: "奖牌"
+    cups: "奖杯"
+    badges: "徽章"
+    proofs: "证明"
+    country: "国家"
+    top_ranking: "顶级排名"
+
+  community_dropdown:
+    forum: "论坛"
+    players: "玩家"
+    teams: "战队"
+
+  user_menu:
+    profile: "个人资料"
+    team: "我的战队"
+    my_proofs: "我的证明"
+    messages: "消息"
+    lost_positions: "失去的名次"
+    friends: "好友"
+    settings: "设置"
+    logout: "退出登录"
+
+  login: "登录"
+
+  language:
+    english: "English"
+    french: "Français"
+    german: "Deutsch"
+    italian: "Italiano"
+    japanese: "日本語"
+    spanish: "Español"
+    portuguese_br: "Português (Brasil)"
+    chinese_simplified: "中文 (简体)"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. 保留所有权利。"
+  links:
+    faq: "常见问题"
+    rules: "规则"
+    privacy: "隐私政策"
+    terms: "使用条款"
+    contact: "联系我们"
+    about: "关于我们"
+    legal: "法律声明"
+
+# === THEME ===
+theme:
+  toggle: "切换主题"
+  light: "浅色模式"
+  dark: "深色模式"
+
+# === COMMON ===
+common:
+  close: "关闭"
+  save: "保存"
+  cancel: "取消"
+  submit: "提交"
+  delete: "删除"
+  edit: "编辑"
+  back: "返回"
+  confirm: "确认"
+  search: "搜索"
+  loading: "加载中..."
+  no_results: "未找到结果"
+
+# === SEARCH ===
+search:
+  title: "搜索"
+  placeholder: "搜索游戏、玩家或战队..."
+  games: "游戏"
+  players: "玩家"
+  teams: "战队"
+  no_results: "未找到结果"
+  min_chars: "请输入至少2个字符进行搜索"
+
+# === HOME ===
+home:
+  seo:
+    title: "Video Games Records | 全球电子游戏排行榜与记录"
+    description: "Video Games Records 是电子游戏世界纪录和排名的终极平台。发现数千款游戏的排行榜，与全球玩家比较分数，获得徽章和奖杯，加入充满热情的游戏社区。"
+    keywords: "电子游戏记录, 游戏排行榜, 世界纪录, 竞技游戏, 玩家排名, 游戏分数, 游戏社区, 徽章, 奖杯, 游戏竞赛"
+  partners:
+    title: "我们的合作伙伴"
+
+# === FLASH MESSAGES ===
+flash:
+  success:
+    generic: "操作成功完成"
+    saved: "更改已成功保存"
+  error:
+    generic: "发生错误，请重试。"
+    unauthorized: "您无权执行此操作"
+    validation: "请检查表单中的错误"
+  info:
+    processing: "您的请求正在处理中..."
+  warning:
+    unsaved_changes: "您有未保存的更改，确定要离开吗？"

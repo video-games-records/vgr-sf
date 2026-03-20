@@ -1,0 +1,120 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - SharedKernel
+# ========================================
+
+# === NAVIGATION ===
+navigation:
+  home: "ホーム"
+  games: "ゲーム"
+  leaderboards: "ランキング"
+  community: "コミュニティ"
+  admin: "管理"
+
+  games_dropdown:
+    by_letter: "文字別"
+    by_platform: "プラットフォーム別"
+    by_series: "シリーズ別"
+    featured_games: "注目ゲーム"
+    latest_games: "最新ゲーム"
+
+  leaderboards_dropdown:
+    game_points: "ゲームポイント"
+    record_points: "レコードポイント"
+    medals: "メダル"
+    cups: "カップ"
+    badges: "バッジ"
+    proofs: "証拠"
+    country: "国"
+    top_ranking: "トップランキング"
+
+  community_dropdown:
+    forum: "フォーラム"
+    players: "プレイヤー"
+    teams: "チーム"
+
+  user_menu:
+    profile: "プロフィール"
+    team: "マイチーム"
+    my_proofs: "マイ証拠"
+    messages: "メッセージ"
+    lost_positions: "失った順位"
+    friends: "フレンド"
+    settings: "設定"
+    logout: "ログアウト"
+
+  login: "ログイン"
+
+  language:
+    english: "English"
+    french: "Français"
+    german: "Deutsch"
+    italian: "Italiano"
+    japanese: "日本語"
+    spanish: "Español"
+    portuguese_br: "Português (Brasil)"
+    chinese_simplified: "中文 (简体)"
+
+# === FOOTER ===
+footer:
+  copyright: "Video Games Records. 全著作権所有。"
+  links:
+    faq: "FAQ"
+    rules: "ルール"
+    privacy: "プライバシー"
+    terms: "利用規約"
+    contact: "お問い合わせ"
+    about: "サイトについて"
+    legal: "法的情報"
+
+# === THEME ===
+theme:
+  toggle: "テーマ切替"
+  light: "ライトモード"
+  dark: "ダークモード"
+
+# === COMMON ===
+common:
+  close: "閉じる"
+  save: "保存"
+  cancel: "キャンセル"
+  submit: "送信"
+  delete: "削除"
+  edit: "編集"
+  back: "戻る"
+  confirm: "確認"
+  search: "検索"
+  loading: "読み込み中..."
+  no_results: "結果が見つかりません"
+
+# === SEARCH ===
+search:
+  title: "検索"
+  placeholder: "ゲーム、プレイヤー、チームを検索..."
+  games: "ゲーム"
+  players: "プレイヤー"
+  teams: "チーム"
+  no_results: "結果が見つかりません"
+  min_chars: "検索するには2文字以上入力してください"
+
+# === HOME ===
+home:
+  seo:
+    title: "Video Games Records | 世界のビデオゲームランキング＆記録"
+    description: "Video Games Recordsはビデオゲームの世界記録とランキングのための究極のプラットフォームです。何千ものゲームのランキングを発見し、世界中のプレイヤーとスコアを比較し、バッジやトロフィーを獲得し、情熱的なゲームコミュニティに参加しましょう。"
+    keywords: "ビデオゲーム記録, ゲームランキング, 世界記録, eスポーツ, プレイヤーランキング, ゲームスコア, ゲームコミュニティ, バッジ, トロフィー"
+  partners:
+    title: "パートナー"
+
+# === FLASH MESSAGES ===
+flash:
+  success:
+    generic: "操作が正常に完了しました"
+    saved: "変更が正常に保存されました"
+  error:
+    generic: "エラーが発生しました。もう一度お試しください。"
+    unauthorized: "この操作を実行する権限がありません"
+    validation: "フォームのエラーを確認してください"
+  info:
+    processing: "リクエストを処理中です..."
+  warning:
+    unsaved_changes: "保存されていない変更があります。本当にページを離れますか？"
