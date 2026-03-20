@@ -39,3 +39,10 @@ home:
 pagination:
     label: "Navigation des pages"
     showing: "Affichage de %start% à %end% sur %total% éléments"
+
+message:
+    edit:
+        title: "Modifier le message"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+        success: "Votre message a été modifié."

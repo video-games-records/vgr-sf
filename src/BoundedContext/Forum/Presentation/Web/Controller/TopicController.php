@@ -9,6 +9,7 @@ use App\BoundedContext\Forum\Domain\Entity\Message;
 use App\BoundedContext\Forum\Domain\Entity\Topic;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\MessageRepository;
 use App\BoundedContext\Forum\Infrastructure\Security\Voter\ForumVoter;
+use App\BoundedContext\Forum\Infrastructure\Security\Voter\MessageVoter;
 use App\BoundedContext\Forum\Presentation\Form\ReplyType;
 use App\BoundedContext\User\Domain\Entity\User;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
@@ -61,6 +62,8 @@ class TopicController extends AbstractLocalizedController
         $totalPages = (int) ceil($totalMessages / self::MESSAGES_PER_PAGE);
 
         $replyForm = null;
+        $editForms = [];
+
         if ($this->isGranted('ROLE_USER')) {
             /** @var User $user */
             $user = $this->getUser();
@@ -74,6 +77,14 @@ class TopicController extends AbstractLocalizedController
                     'forumSlug' => $forum->getSlug(),
                 ]),
             ]);
+
+            foreach ($paginator as $message) {
+                if ($message->getUser()->getId() === $user->getId()) {
+                    $editForms[$message->getId()] = $this->createForm(ReplyType::class, null, [
+                        'action' => $this->generateUrl('message_edit', ['id' => $message->getId()]),
+                    ])->createView();
+                }
+            }
         }
 
         return $this->render('@Forum/topic/show.html.twig', [
@@ -84,6 +95,7 @@ class TopicController extends AbstractLocalizedController
             'totalPages' => $totalPages,
             'totalMessages' => $totalMessages,
             'replyForm' => $replyForm?->createView(),
+            'editForms' => $editForms,
         ]);
     }
 
@@ -139,5 +151,34 @@ class TopicController extends AbstractLocalizedController
             'forumId' => $forum->getId(),
             'forumSlug' => $forum->getSlug(),
         ]);
+    }
+
+    #[Route('/forum/message/{id}/edit', name: 'message_edit', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function editMessage(Request $request, Message $message): Response
+    {
+        $this->denyAccessUnlessGranted(MessageVoter::EDIT, $message);
+
+        $topic = $message->getTopic();
+        $forum = $topic->getForum();
+
+        $form = $this->createForm(ReplyType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message->setMessage($form->get('message')->getData());
+            $this->entityManager->flush();
+
+            $this->addFlash('success', $this->translator->trans('message.edit.success', [], 'Forum'));
+        }
+
+        return $this->redirectToRoute('topic_show', [
+            'id' => $topic->getId(),
+            'slug' => $topic->getSlug(),
+            'forumId' => $forum->getId(),
+            'forumSlug' => $forum->getSlug(),
+            'page' => $message->getPage(),
+            '_fragment' => 'message-' . $message->getId(),
+        ], 303);
     }
 }
