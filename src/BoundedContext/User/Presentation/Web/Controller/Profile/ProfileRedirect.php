@@ -12,6 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[AsController]
 #[IsGranted('ROLE_USER')]
+#[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
 class ProfileRedirect extends AbstractController
 {
     #[Route('/profile', name: 'app_profile_index', methods: ['GET'])]

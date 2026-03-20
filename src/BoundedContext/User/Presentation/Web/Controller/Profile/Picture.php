@@ -22,6 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsController]
 #[IsGranted('ROLE_USER')]
+#[Route('/{_locale}', requirements: ['_locale' => 'en|fr'], defaults: ['_locale' => 'en'])]
 class Picture extends AbstractController
 {
     public function __construct(
