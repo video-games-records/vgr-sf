@@ -1,0 +1,41 @@
+forum:
+    title: "论坛"
+    table:
+        forum: "论坛"
+        topics: "主题"
+        messages: "帖子"
+        last_message: "最新帖子"
+    by: "由"
+    no_message: "暂无帖子"
+    no_forum: "此分类下暂无论坛"
+    no_category: "暂无分类"
+    show:
+        description: "本论坛共 %count% 个主题"
+        topics_list: "主题"
+        table:
+            topic: "主题"
+            type: "类型"
+            messages: "回复"
+            last_message: "最新帖子"
+        started_by: "发布者"
+        no_topic: "本论坛暂无主题"
+        go_to_last_page: "跳至最后一页"
+        mark_all_read: "全部标记为已读"
+        mark_all_read.success: "所有主题已标记为已读"
+
+topic:
+    show:
+        description: "%count% 条帖子"
+        messages_count: "%count% 条帖子"
+        no_message: "本主题暂无帖子"
+
+breadcrumb:
+    home: "首页"
+
+home:
+    latest_messages: "最新论坛帖子"
+    no_recent_message: "暂无最新帖子"
+
+pagination:
+    label: "页面导航"
+    showing: "显示第 %start% 至 %end% 条，共 %total% 条"

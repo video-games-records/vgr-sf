@@ -1,0 +1,260 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - User Context
+# ========================================
+
+# === COMMUN ===
+common:
+  close: "閉じる"
+  save: "保存"
+  cancel: "キャンセル"
+  submit: "送信"
+  delete: "削除"
+  edit: "編集"
+  back: "戻る"
+  confirm: "確認"
+
+# === PROFILE ===
+profile:
+  title:
+    main: "プロフィール設定"
+    subtitle: "アカウントの設定と環境設定を管理する"
+
+  navigation:
+    personal_info: "個人情報"
+    picture: "プロフィール画像"
+    player: "プレイヤープロフィール"
+    password: "パスワード"
+
+  personal_info:
+    title: "個人情報"
+    description: "このセクションでは個人情報（ユーザー名、メール、言語など）を更新できます。"
+    form:
+      username:
+        label: "ユーザー名"
+        placeholder: "ユーザー名を入力"
+      email:
+        label: "メールアドレス"
+        placeholder: "メールを入力"
+      language:
+        label: "言語"
+        placeholder: "言語を選択"
+      timezone:
+        label: "タイムゾーン"
+        placeholder: "タイムゾーンを選択"
+      submit: "変更を保存"
+      error:
+        username_required: "ユーザー名は必須です"
+        username_too_short: "ユーザー名は{{ limit }}文字以上である必要があります"
+        username_too_long: "ユーザー名は{{ limit }}文字以下である必要があります"
+        username_invalid_format: "ユーザー名には文字、数字、アンダースコア、ハイフンのみ使用できます"
+        email_required: "メールは必須です"
+        email_invalid: "有効なメールアドレスを入力してください"
+    message:
+      success: "個人情報が正常に更新されました"
+      error: "情報の更新中にエラーが発生しました"
+
+  picture:
+    title: "プロフィール画像"
+    description: "このセクションではプロフィール画像/アバターをアップロード・更新できます。"
+    current_avatar: "現在のアバター"
+    form:
+      avatar:
+        label: "画像を選択"
+      help: "使用可能な形式：PNG、JPEG。最大サイズ：2 MB。画像は100x100ピクセルにリサイズされます。"
+      submit: "アップロード"
+      error:
+        file_required: "画像を選択してください。"
+        mime_type: "PNGおよびJPEG画像のみ使用できます。"
+        max_size: "ファイルが大きすぎます。最大サイズ：{{ limit }}。"
+    message:
+      success: "プロフィール画像が正常に更新されました"
+      error: "画像のアップロード中にエラーが発生しました"
+
+  player:
+    title: "プレイヤープロフィール"
+    description: "このセクションではプレイヤーの統計、実績、ゲーム活動が表示されます。"
+    stats:
+      total_games: "総ゲーム数"
+      total_records: "総レコード数"
+      achievements: "実績"
+      rank: "グローバルランク"
+    message:
+      no_stats: "まだ統計がありません。プレイを始めて進捗を確認しましょう！"
+
+  password:
+    title: "パスワードの変更"
+    subtitle: "パスワードは文字と数字を含む8文字以上である必要があります"
+    form:
+      current_password:
+        label: "現在のパスワード"
+        placeholder: "現在のパスワードを入力"
+      new_password:
+        label: "新しいパスワード"
+        placeholder: "新しいパスワードを入力"
+      confirm_password:
+        label: "新しいパスワードの確認"
+        placeholder: "新しいパスワードを確認"
+      submit: "パスワードを変更"
+    error:
+      current_required: "現在のパスワードを入力してください"
+      current_invalid: "現在のパスワードの値が正しくありません"
+      new_required: "新しいパスワードを入力してください"
+      new_too_short: "パスワードは{{ limit }}文字以上である必要があります"
+      new_invalid_format: "パスワードは文字と数字を含む8文字以上である必要があります"
+      mismatch: "パスワードフィールドが一致している必要があります。"
+    message:
+      success: "パスワードが正常に変更されました"
+      error: "パスワードの変更中にエラーが発生しました"
+
+# === ACCOUNT ===
+account:
+  settings:
+    title: "アカウント設定"
+    privacy:
+      title: "プライバシー"
+      public_profile: "プロフィールを公開する"
+      show_email: "メールアドレスを表示する"
+      show_activity: "ゲーム活動を表示する"
+    notifications:
+      title: "通知"
+      email_notifications: "メール通知を受け取る"
+      news_updates: "ニュースと更新情報を受け取る"
+    danger_zone:
+      title: "危険ゾーン"
+      delete_account: "アカウントを削除する"
+      delete_confirm: "よろしいですか？この操作は元に戻せません。"
+
+# === SECURITY ===
+security:
+  events:
+    title: "セキュリティイベント"
+    types:
+      login_success: "ログイン成功"
+      login_failure: "ログイン失敗"
+      logout: "ログアウト"
+      password_change: "パスワード変更"
+      email_change: "メール変更"
+    list:
+      date: "日付"
+      type: "種類"
+      ip_address: "IPアドレス"
+      user_agent: "デバイス/ブラウザ"
+      no_events: "セキュリティイベントは記録されていません"
+
+# === LOGIN ===
+login:
+  title: "ログイン"
+  subtitle: "アカウントにサインイン"
+
+  form:
+    username_or_email:
+      label: "メールまたはユーザー名"
+      placeholder: "メールまたはユーザー名を入力"
+    password:
+      label: "パスワード"
+      placeholder: "パスワードを入力"
+    submit: "ログイン"
+
+  flash:
+    success: "ログインしました。おかえりなさい！"
+    error: "ログインに失敗しました。認証情報を確認してください。"
+
+  link:
+    no_account: "アカウントをお持ちでないですか？"
+    register: "サインアップ"
+    forgot_password: "パスワードをお忘れですか？"
+
+# === REGISTRATION ===
+registration:
+  title: "アカウント作成"
+  subtitle: "コミュニティに参加するために登録する"
+
+  form:
+    email:
+      label: "メール"
+      placeholder: "メールアドレスを入力"
+    username:
+      label: "ユーザー名"
+      placeholder: "magicbart"
+    password:
+      label: "パスワード"
+      placeholder: "••••••••••••••••"
+    confirm_password:
+      label: "パスワードの確認"
+      placeholder: "パスワードを確認"
+    submit: "アカウント作成"
+
+  error:
+    email_required: "メールは必須です"
+    email_invalid: "有効なメールアドレスを入力してください"
+    username_required: "ユーザー名は必須です"
+    username_too_short: "ユーザー名は{{ limit }}文字以上である必要があります"
+    username_too_long: "ユーザー名は{{ limit }}文字以下である必要があります"
+    username_invalid_format: "ユーザー名には文字、数字、アンダースコア、ハイフンのみ使用できます"
+    password_required: "パスワードは必須です"
+    password_too_short: "パスワードは{{ limit }}文字以上である必要があります"
+    password_invalid_format: "パスワードには少なくとも1文字と1数字を含める必要があります"
+    password_mismatch: "パスワードフィールドが一致している必要があります"
+
+  flash:
+    success: "アカウントが正常に作成されました！Video Games Recordsへようこそ！"
+    error: "登録中にエラーが発生しました。もう一度お試しください。"
+
+  link:
+    have_account: "すでにアカウントをお持ちですか？"
+    login: "ログイン"
+
+# === RESET PASSWORD ===
+reset_password:
+  request:
+    title: "パスワードのリセット"
+    subtitle: "メールアドレスを入力してください。パスワードリセットのリンクをお送りします"
+    help: "パスワードをリセットするための手順をメールでお送りします"
+    submit: "リセットリンクを送信"
+    back_to_login: "ログインに戻る"
+
+  confirm:
+    title: "新しいパスワードの作成"
+    subtitle: "新しいパスワードを入力してください"
+    help: "パスワードは6文字以上である必要があります"
+    submit: "パスワードをリセット"
+    back_to_login: "ログインに戻る"
+
+  flash:
+    request_success: "そのメールのアカウントが存在する場合、パスワードリセットリンクがまもなく届きます。"
+    request_error: "リクエストの処理中にエラーが発生しました。もう一度お試しください。"
+    invalid_token: "無効または期限切れのリセットトークンです。パスワードリセットを再度リクエストしてください。"
+    expired_token: "パスワードリセットリンクの有効期限が切れています。新しいリンクをリクエストしてください。"
+    success: "パスワードが正常にリセットされました。新しいパスワードでログインできます。"
+    error: "パスワードのリセット中にエラーが発生しました。もう一度お試しください。"
+
+# === FORM ===
+form:
+  email: "メール"
+  email.placeholder: "your.email@example.com"
+  password: "新しいパスワード"
+  password.placeholder: "新しいパスワードを入力"
+  password.confirm: "パスワードの確認"
+  password.confirm.placeholder: "新しいパスワードを確認"
+  error:
+    email:
+      required: "メールは必須です"
+      invalid: "無効なメールアドレス"
+    password:
+      required: "パスワードは必須です"
+      min_length: "パスワードは{{ limit }}文字以上である必要があります"
+      mismatch: "パスワードが一致しません"
+
+# === FLASH MESSAGES ===
+flash:
+  success:
+    generic: "操作が正常に完了しました"
+    saved: "変更が正常に保存されました"
+  error:
+    generic: "エラーが発生しました。もう一度お試しください。"
+    unauthorized: "この操作を実行する権限がありません"
+    validation: "フォームのエラーを確認してください"
+  info:
+    processing: "リクエストを処理中です..."
+  warning:
+    unsaved_changes: "保存されていない変更があります。本当にページを離れますか？"

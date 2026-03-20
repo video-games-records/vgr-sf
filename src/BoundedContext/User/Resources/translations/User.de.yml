@@ -1,0 +1,260 @@
+# ========================================
+# STRATÉGIE DE TRADUCTION - User Context
+# ========================================
+
+# === COMMUN (Réutilisable dans tout le contexte User) ===
+common:
+  close: "Schließen"
+  save: "Speichern"
+  cancel: "Abbrechen"
+  submit: "Absenden"
+  delete: "Löschen"
+  edit: "Bearbeiten"
+  back: "Zurück"
+  confirm: "Bestätigen"
+
+# === PROFILE (Gestion du profil utilisateur) ===
+profile:
+  title:
+    main: "Profileinstellungen"
+    subtitle: "Verwalten Sie Ihre Kontoeinstellungen und Präferenzen"
+
+  navigation:
+    personal_info: "Persönliche Informationen"
+    picture: "Profilbild"
+    player: "Spielerprofil"
+    password: "Passwort"
+
+  personal_info:
+    title: "Persönliche Informationen"
+    description: "In diesem Bereich können Sie Ihre persönlichen Informationen aktualisieren (Benutzername, E-Mail, Sprache usw.)."
+    form:
+      username:
+        label: "Benutzername"
+        placeholder: "Geben Sie Ihren Benutzernamen ein"
+      email:
+        label: "E-Mail-Adresse"
+        placeholder: "Geben Sie Ihre E-Mail ein"
+      language:
+        label: "Sprache"
+        placeholder: "Sprache auswählen"
+      timezone:
+        label: "Zeitzone"
+        placeholder: "Zeitzone auswählen"
+      submit: "Änderungen speichern"
+      error:
+        username_required: "Benutzername ist erforderlich"
+        username_too_short: "Der Benutzername muss mindestens {{ limit }} Zeichen lang sein"
+        username_too_long: "Der Benutzername darf maximal {{ limit }} Zeichen lang sein"
+        username_invalid_format: "Der Benutzername darf nur Buchstaben, Zahlen, Unterstriche und Bindestriche enthalten"
+        email_required: "E-Mail ist erforderlich"
+        email_invalid: "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+    message:
+      success: "Ihre persönlichen Informationen wurden erfolgreich aktualisiert"
+      error: "Beim Aktualisieren Ihrer Informationen ist ein Fehler aufgetreten"
+
+  picture:
+    title: "Profilbild"
+    description: "In diesem Bereich können Sie Ihr Profilbild/Avatar hochladen und aktualisieren."
+    current_avatar: "Aktueller Avatar"
+    form:
+      avatar:
+        label: "Bild auswählen"
+      help: "Erlaubte Formate: PNG, JPEG. Maximale Größe: 2 MB. Das Bild wird auf 100x100 Pixel skaliert."
+      submit: "Hochladen"
+      error:
+        file_required: "Bitte wählen Sie ein Bild aus."
+        mime_type: "Es sind nur PNG- und JPEG-Bilder erlaubt."
+        max_size: "Die Datei ist zu groß. Maximale Größe: {{ limit }}."
+    message:
+      success: "Ihr Profilbild wurde erfolgreich aktualisiert"
+      error: "Beim Hochladen Ihres Bildes ist ein Fehler aufgetreten"
+
+  player:
+    title: "Spielerprofil"
+    description: "Dieser Bereich zeigt Ihre Spielerstatistiken, Erfolge und Spielaktivitäten."
+    stats:
+      total_games: "Spiele gesamt"
+      total_records: "Rekorde gesamt"
+      achievements: "Erfolge"
+      rank: "Globaler Rang"
+    message:
+      no_stats: "Noch keine Statistiken verfügbar. Fangen Sie an zu spielen, um Ihren Fortschritt zu sehen!"
+
+  password:
+    title: "Passwort ändern"
+    subtitle: "Das Passwort muss mindestens 8 Zeichen mit Buchstaben und Zahlen enthalten"
+    form:
+      current_password:
+        label: "Aktuelles Passwort"
+        placeholder: "Aktuelles Passwort eingeben"
+      new_password:
+        label: "Neues Passwort"
+        placeholder: "Neues Passwort eingeben"
+      confirm_password:
+        label: "Neues Passwort bestätigen"
+        placeholder: "Neues Passwort bestätigen"
+      submit: "Passwort ändern"
+    error:
+      current_required: "Bitte geben Sie Ihr aktuelles Passwort ein"
+      current_invalid: "Falscher Wert für Ihr aktuelles Passwort"
+      new_required: "Bitte geben Sie ein neues Passwort ein"
+      new_too_short: "Ihr Passwort muss mindestens {{ limit }} Zeichen lang sein"
+      new_invalid_format: "Das Passwort muss mindestens 8 Zeichen mit Buchstaben und Zahlen enthalten"
+      mismatch: "Die Passwortfelder müssen übereinstimmen."
+    message:
+      success: "Ihr Passwort wurde erfolgreich geändert"
+      error: "Beim Ändern Ihres Passworts ist ein Fehler aufgetreten"
+
+# === ACCOUNT (Gestion du compte) ===
+account:
+  settings:
+    title: "Kontoeinstellungen"
+    privacy:
+      title: "Datenschutz"
+      public_profile: "Mein Profil öffentlich machen"
+      show_email: "Meine E-Mail-Adresse anzeigen"
+      show_activity: "Meine Spielaktivität anzeigen"
+    notifications:
+      title: "Benachrichtigungen"
+      email_notifications: "E-Mail-Benachrichtigungen erhalten"
+      news_updates: "Neuigkeiten und Updates erhalten"
+    danger_zone:
+      title: "Gefahrenzone"
+      delete_account: "Mein Konto löschen"
+      delete_confirm: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden."
+
+# === SECURITY (Événements de sécurité, logs) ===
+security:
+  events:
+    title: "Sicherheitsereignisse"
+    types:
+      login_success: "Erfolgreiche Anmeldung"
+      login_failure: "Fehlgeschlagener Anmeldeversuch"
+      logout: "Abmeldung"
+      password_change: "Passwortänderung"
+      email_change: "E-Mail-Änderung"
+    list:
+      date: "Datum"
+      type: "Typ"
+      ip_address: "IP-Adresse"
+      user_agent: "Gerät/Browser"
+      no_events: "Keine Sicherheitsereignisse aufgezeichnet"
+
+# === LOGIN (User login) ===
+login:
+  title: "Anmelden"
+  subtitle: "Melden Sie sich bei Ihrem Konto an"
+
+  form:
+    username_or_email:
+      label: "E-Mail oder Benutzername"
+      placeholder: "E-Mail oder Benutzernamen eingeben"
+    password:
+      label: "Passwort"
+      placeholder: "Passwort eingeben"
+    submit: "Anmelden"
+
+  flash:
+    success: "Sie sind jetzt angemeldet. Willkommen zurück!"
+    error: "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten."
+
+  link:
+    no_account: "Noch kein Konto?"
+    register: "Registrieren"
+    forgot_password: "Passwort vergessen?"
+
+# === REGISTRATION (User registration) ===
+registration:
+  title: "Konto erstellen"
+  subtitle: "Registrieren Sie sich, um unserer Community beizutreten"
+
+  form:
+    email:
+      label: "E-Mail"
+      placeholder: "Geben Sie Ihre E-Mail-Adresse ein"
+    username:
+      label: "Benutzername"
+      placeholder: "magicbart"
+    password:
+      label: "Passwort"
+      placeholder: "••••••••••••••••"
+    confirm_password:
+      label: "Passwort bestätigen"
+      placeholder: "Passwort bestätigen"
+    submit: "Konto erstellen"
+
+  error:
+    email_required: "E-Mail ist erforderlich"
+    email_invalid: "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+    username_required: "Benutzername ist erforderlich"
+    username_too_short: "Der Benutzername muss mindestens {{ limit }} Zeichen lang sein"
+    username_too_long: "Der Benutzername darf maximal {{ limit }} Zeichen lang sein"
+    username_invalid_format: "Der Benutzername darf nur Buchstaben, Zahlen, Unterstriche und Bindestriche enthalten"
+    password_required: "Passwort ist erforderlich"
+    password_too_short: "Das Passwort muss mindestens {{ limit }} Zeichen lang sein"
+    password_invalid_format: "Das Passwort muss mindestens einen Buchstaben und eine Zahl enthalten"
+    password_mismatch: "Die Passwortfelder müssen übereinstimmen"
+
+  flash:
+    success: "Ihr Konto wurde erfolgreich erstellt! Willkommen bei Video Games Records!"
+    error: "Bei der Registrierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+
+  link:
+    have_account: "Bereits ein Konto?"
+    login: "Anmelden"
+
+# === RESET PASSWORD (Password reset functionality) ===
+reset_password:
+  request:
+    title: "Passwort zurücksetzen"
+    subtitle: "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts"
+    help: "Wir senden Ihnen eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts"
+    submit: "Reset-Link senden"
+    back_to_login: "Zurück zur Anmeldung"
+
+  confirm:
+    title: "Neues Passwort erstellen"
+    subtitle: "Geben Sie Ihr neues Passwort ein"
+    help: "Das Passwort muss mindestens 6 Zeichen lang sein"
+    submit: "Passwort zurücksetzen"
+    back_to_login: "Zurück zur Anmeldung"
+
+  flash:
+    request_success: "Wenn ein Konto mit dieser E-Mail existiert, erhalten Sie in Kürze einen Link zum Zurücksetzen des Passworts."
+    request_error: "Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    invalid_token: "Ungültiger oder abgelaufener Reset-Token. Bitte fordern Sie ein neues Passwort-Reset an."
+    expired_token: "Ihr Passwort-Reset-Link ist abgelaufen. Bitte fordern Sie einen neuen an."
+    success: "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit Ihrem neuen Passwort anmelden."
+    error: "Beim Zurücksetzen Ihres Passworts ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+
+# === FORM (Commun pour les formulaires) ===
+form:
+  email: "E-Mail"
+  email.placeholder: "ihre.email@example.com"
+  password: "Neues Passwort"
+  password.placeholder: "Neues Passwort eingeben"
+  password.confirm: "Passwort bestätigen"
+  password.confirm.placeholder: "Neues Passwort bestätigen"
+  error:
+    email:
+      required: "E-Mail ist erforderlich"
+      invalid: "Ungültige E-Mail-Adresse"
+    password:
+      required: "Passwort ist erforderlich"
+      min_length: "Das Passwort muss mindestens {{ limit }} Zeichen lang sein"
+      mismatch: "Passwörter stimmen nicht überein"
+
+# === FLASH MESSAGES (Messages système) ===
+flash:
+  success:
+    generic: "Vorgang erfolgreich abgeschlossen"
+    saved: "Änderungen erfolgreich gespeichert"
+  error:
+    generic: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    unauthorized: "Sie sind nicht berechtigt, diese Aktion durchzuführen"
+    validation: "Bitte überprüfen Sie das Formular auf Fehler"
+  info:
+    processing: "Ihre Anfrage wird verarbeitet..."
+  warning:
+    unsaved_changes: "Sie haben nicht gespeicherte Änderungen. Möchten Sie die Seite wirklich verlassen?"

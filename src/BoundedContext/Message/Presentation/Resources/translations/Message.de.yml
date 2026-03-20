@@ -1,0 +1,120 @@
+label:
+    createdAt: 'Erstellt am'
+    updatedAt: 'Aktualisiert am'
+    id: 'ID'
+    message: 'Nachricht'
+    object: 'Betreff'
+    recipient: 'Empfänger'
+    sender: 'Absender'
+    type: 'Typ'
+    isOpened: 'Gelesen'
+    isDeletedSender: 'Vom Absender gelöscht'
+    isDeletedRecipient: 'Vom Empfänger gelöscht'
+
+message:
+    label: 'Nachricht'
+    flash:
+        deleted: 'Nachricht erfolgreich gelöscht.'
+
+group:
+    messages: 'Nachrichten'
+
+breadcrumb:
+    home: 'Startseite'
+    messages: 'Nachrichten'
+    inbox: 'Posteingang'
+    outbox: 'Gesendet'
+    view: 'Nachricht anzeigen'
+    compose: 'Neue Nachricht'
+
+navigation:
+    inbox: 'Posteingang'
+    outbox: 'Gesendet'
+    compose: 'Neue Nachricht'
+
+compose:
+    title: 'Neue Nachricht'
+    header: 'Neue Nachricht'
+    form:
+        recipient: 'An'
+        recipient_placeholder: 'Benutzer suchen...'
+        subject: 'Betreff'
+        message: 'Nachricht'
+        send: 'Senden'
+        cancel: 'Abbrechen'
+    validation:
+        recipient_required: 'Bitte wählen Sie einen Empfänger aus.'
+        subject_required: 'Bitte geben Sie einen Betreff ein.'
+        subject_too_long: 'Der Betreff darf maximal 255 Zeichen lang sein.'
+        message_required: 'Bitte geben Sie eine Nachricht ein.'
+    error:
+        recipient_not_found: 'Der ausgewählte Empfänger wurde nicht gefunden.'
+        cannot_send_to_self: 'Sie können keine Nachricht an sich selbst senden.'
+    success:
+        sent: 'Ihre Nachricht wurde erfolgreich gesendet.'
+
+inbox:
+    title: 'Posteingang'
+    header: 'Posteingang'
+    description: '%count% Nachricht(en) erhalten'
+    empty: 'Keine Nachrichten im Posteingang.'
+    unread: 'Ungelesen'
+    read: 'Gelesen'
+    column:
+        sender: 'Von'
+        subject: 'Betreff'
+        date: 'Datum'
+        actions: 'Aktionen'
+    action:
+        view: 'Anzeigen'
+        delete: 'Löschen'
+    confirm_delete: 'Möchten Sie diese Nachricht wirklich löschen?'
+
+outbox:
+    title: 'Gesendete Nachrichten'
+    header: 'Gesendete Nachrichten'
+    description: '%count% Nachricht(en) gesendet'
+    empty: 'Keine gesendeten Nachrichten.'
+    read: 'Vom Empfänger gelesen'
+    unread: 'Noch nicht gelesen'
+    status:
+        read: 'Gelesen'
+        sent: 'Gesendet'
+    column:
+        recipient: 'An'
+        subject: 'Betreff'
+        date: 'Datum'
+        status: 'Status'
+        actions: 'Aktionen'
+    action:
+        view: 'Anzeigen'
+        delete: 'Löschen'
+    confirm_delete: 'Möchten Sie diese Nachricht wirklich löschen?'
+
+view:
+    back: 'Zurück'
+    from: 'Von'
+    to: 'An'
+    status:
+        read: 'Gelesen'
+        sent: 'Gesendet'
+    action:
+        reply: 'Antworten'
+        delete: 'Löschen'
+    confirm_delete: 'Möchten Sie diese Nachricht wirklich löschen?'
+
+filter:
+    search: 'Suchen'
+    search_placeholder: 'Nach Betreff oder Inhalt suchen...'
+    sender: 'Absender'
+    recipient: 'Empfänger'
+    status: 'Status'
+    all: 'Alle'
+    unread: 'Ungelesen'
+    read: 'Gelesen'
+    apply: 'Suchen'
+    reset: 'Zurücksetzen'
+
+pagination:
+    label: 'Nachrichten-Navigation'
+    showing: 'Zeige %start% bis %end% von %total% Nachrichten'

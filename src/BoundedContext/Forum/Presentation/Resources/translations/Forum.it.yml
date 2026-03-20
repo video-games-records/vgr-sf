@@ -1,0 +1,41 @@
+forum:
+    title: "Forum"
+    table:
+        forum: "Forum"
+        topics: "Argomenti"
+        messages: "Messaggi"
+        last_message: "Ultimo messaggio"
+    by: "da"
+    no_message: "Ancora nessun messaggio"
+    no_forum: "Nessun forum in questa categoria"
+    no_category: "Nessuna categoria da visualizzare"
+    show:
+        description: "%count% argomento/i in questo forum"
+        topics_list: "Argomenti"
+        table:
+            topic: "Argomento"
+            type: "Tipo"
+            messages: "Risposte"
+            last_message: "Ultimo messaggio"
+        started_by: "Iniziato da"
+        no_topic: "Ancora nessun argomento in questo forum"
+        go_to_last_page: "Vai all'ultima pagina"
+        mark_all_read: "Segna tutto come letto"
+        mark_all_read.success: "Tutti gli argomenti sono stati contrassegnati come letti"
+
+topic:
+    show:
+        description: "%count% messaggio/i"
+        messages_count: "%count% messaggi"
+        no_message: "Ancora nessun messaggio in questo argomento"
+
+breadcrumb:
+    home: "Home"
+
+home:
+    latest_messages: "Ultimi messaggi del forum"
+    no_recent_message: "Nessun messaggio recente"
+
+pagination:
+    label: "Navigazione pagine"
+    showing: "Visualizzazione da %start% a %end% di %total% elementi"

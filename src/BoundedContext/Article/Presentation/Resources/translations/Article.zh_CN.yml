@@ -1,0 +1,27 @@
+news:
+  latest_news: 最新资讯
+  no_news: 暂无资讯
+
+comment:
+  count: "{0}条评论|{1}条评论|]1,Inf[条评论"
+  section_title: "{0}评论 (%count%)|{1}评论 (%count%)|]1,Inf[评论 (%count%)"
+  form:
+    content: 您的评论
+  add_title: 添加评论
+  submit: 提交
+  update: 更新
+  cancel: 取消
+  edit: 编辑
+  edited: 已编辑
+  no_comments: 暂无评论，来发表第一条评论吧！
+  login_required: 请登录后发表评论。
+  flash:
+    created: 您的评论已成功添加。
+    updated: 您的评论已成功更新。
+    error: 发生错误，请重试。
+  validation:
+    content_required: 请输入评论内容。
+
+pagination:
+  label: 评论分页导航
+  showing: 显示第 %start% 至 %end% 条，共 %total% 条评论

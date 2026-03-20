@@ -1,0 +1,27 @@
+news:
+  latest_news: Últimas noticias
+  no_news: No hay noticias disponibles
+
+comment:
+  count: "{0}comentarios|{1}comentario|]1,Inf[comentarios"
+  section_title: "{0}Comentarios (%count%)|{1}Comentario (%count%)|]1,Inf[Comentarios (%count%)"
+  form:
+    content: Tu comentario
+  add_title: Añadir un comentario
+  submit: Enviar
+  update: Actualizar
+  cancel: Cancelar
+  edit: Editar
+  edited: editado
+  no_comments: Aún no hay comentarios. ¡Sé el primero en comentar!
+  login_required: Por favor, inicia sesión para dejar un comentario.
+  flash:
+    created: Tu comentario ha sido añadido con éxito.
+    updated: Tu comentario ha sido actualizado con éxito.
+    error: Se ha producido un error. Por favor, inténtalo de nuevo.
+  validation:
+    content_required: Por favor, introduce un comentario.
+
+pagination:
+  label: Paginación de comentarios
+  showing: Mostrando %start% a %end% de %total% comentarios
