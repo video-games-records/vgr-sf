@@ -39,3 +39,10 @@ home:
 pagination:
     label: "Seitennavigation"
     showing: "Zeige %start% bis %end% von %total% Einträgen"
+
+message:
+    edit:
+        title: "Nachricht bearbeiten"
+        submit: "Änderungen speichern"
+        cancel: "Abbrechen"
+        success: "Ihre Nachricht wurde aktualisiert."

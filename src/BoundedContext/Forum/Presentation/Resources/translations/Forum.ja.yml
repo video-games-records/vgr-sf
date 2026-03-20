@@ -39,3 +39,10 @@ home:
 pagination:
     label: "ページナビゲーション"
     showing: "%total%件中%start%〜%end%件を表示"
+
+message:
+    edit:
+        title: "メッセージを編集"
+        submit: "変更を保存"
+        cancel: "キャンセル"
+        success: "メッセージが更新されました。"

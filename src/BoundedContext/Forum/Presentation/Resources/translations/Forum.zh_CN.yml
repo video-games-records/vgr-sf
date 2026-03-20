@@ -39,3 +39,10 @@ home:
 pagination:
     label: "页面导航"
     showing: "显示第 %start% 至 %end% 条，共 %total% 条"
+
+message:
+    edit:
+        title: "编辑消息"
+        submit: "保存更改"
+        cancel: "取消"
+        success: "您的消息已更新。"
