@@ -21,7 +21,12 @@
                         {% for playerGame in playerGames %}
                             <tr>
                                 <td>
-                                    <a href="{{ path('vgr_game_show', {id: playerGame.game.id, slug: playerGame.game.slug}) }}" class="text-decoration-none">
+                                    <a href="{{ path('vgr_game_show', {id: playerGame.game.id, slug: playerGame.game.slug}) }}" class="text-decoration-none d-flex align-items-center gap-2">
+                                        <img src="{{ path('vgr_core_game_picture', {id: playerGame.game.id, v: playerGame.game.updatedAt|date('U')}) }}"
+                                             alt="{{ playerGame.game.getName(app.request.locale) }}"
+                                             width="96" height="96"
+                                             loading="lazy"
+                                             class="rounded object-fit-cover flex-shrink-0">
                                         {{ playerGame.game.getName(app.request.locale) }}
                                     </a>
                                 </td>
