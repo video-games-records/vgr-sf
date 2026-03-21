@@ -44,6 +44,18 @@ class Scheduler implements ScheduleProviderInterface
 
             ->add(RecurringMessage::cron('00 8 * * *', new DailyRanking()))
 
+            // Update simple quantity-based badges (daily at 2am)
+            ->add(RecurringMessage::cron('0 2 * * *', new RunCommandMessage('vgr:badge:update-simple')))
+
+            // Purge old lost positions (daily at 2am)
+            ->add(RecurringMessage::cron('0 2 * * *', new RunCommandMessage('vgr:lost-position:purge')))
+
+            // Deactivate player charts in investigation for more than 14 days (daily at 2am)
+            ->add(RecurringMessage::cron('0 2 * * *', new RunCommandMessage('vgr:player-chart:deactivate-investigations')))
+
+            // Update YouTube metadata for the 100 latest videos (weekly, Monday at 8am)
+            ->add(RecurringMessage::cron('0 8 * * 1', new RunCommandMessage('vgr:youtube:update-data')))
+
             // Purge messenger processed messages older than 1 month (daily at 3am)
             ->add(RecurringMessage::cron('0 3 * * *', new RunCommandMessage('messenger:monitor:purge --older-than=1-month')))
 
