@@ -12,24 +12,18 @@
                 {% if gameStatuses is empty %}
                     <p class="text-muted text-center py-4 mb-0">{{ 'player.profile.proofs.no_proofs'|trans }}</p>
                 {% else %}
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover align-middle mb-0">
-                            <thead>
-                                <tr>
-                                    <th>{{ 'player.profile.proofs.column_game'|trans }}</th>
-                                    <th>{{ 'player.profile.proofs.column_statuses'|trans }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for entry in gameStatuses %}
-                                    <tr>
-                                        <td>
-                                            <a href="{{ path('vgr_player_profile_proofs_game', {id: player.id, slug: player.slug, gameId: entry.game.id, gameSlug: entry.game.slug}) }}" class="text-decoration-none">
-                                                {{ entry.game.name }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-wrap gap-2">
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+                        {% for entry in gameStatuses %}
+                            <div class="col">
+                                <a href="{{ path('vgr_player_profile_proofs_game', {id: player.id, slug: player.slug, gameId: entry.game.id, gameSlug: entry.game.slug}) }}" class="text-decoration-none">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <img src="{{ path('vgr_core_game_picture', {id: entry.game.id, v: entry.game.updatedAt|date('U')}) }}"
+                                             alt="{{ entry.game.name }}"
+                                             loading="lazy"
+                                             class="card-img-top object-fit-cover"
+                                             style="height: 140px;">
+                                        <div class="card-body p-2">
+                                            <div class="d-flex flex-wrap gap-1">
                                                 {% for status in statuses %}
                                                     {% set count = entry.statuses[status.value] ?? 0 %}
                                                     {% if count > 0 %}
@@ -40,11 +34,11 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
                     </div>
                 {% endif %}
             </div>
