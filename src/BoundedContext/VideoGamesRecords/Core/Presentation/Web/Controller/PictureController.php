@@ -54,7 +54,7 @@ class PictureController
 
             $response = new StreamedResponse();
             $response->headers->set('Content-Type', 'image/png');
-            $response->headers->set('Cache-Control', 'public, max-age=86400, must-revalidate');
+            $response->headers->set('Cache-Control', 'no-cache');
             $response->headers->set('Last-Modified', gmdate('D, d M Y H:i:s', $lastModified) . ' GMT');
             $response->headers->set('ETag', $etag);
 
