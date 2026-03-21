@@ -6,6 +6,7 @@ namespace App\BoundedContext\Article\Presentation\Web\Controller;
 
 use App\BoundedContext\Article\Infrastructure\Doctrine\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -17,13 +18,16 @@ class TopNewsController extends AbstractController
     public function __construct(
         private readonly ArticleRepository $articleRepository,
         private readonly CacheInterface $cache,
+        private readonly RequestStack $requestStack,
     ) {
     }
 
     public function latest(int $ttl = 0): Response
     {
         if ($ttl > 0) {
-            $html = $this->cache->get(self::CACHE_KEY, function (ItemInterface $item) use ($ttl) {
+            $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';
+            $cacheKey = self::CACHE_KEY . '_' . $locale;
+            $html = $this->cache->get($cacheKey, function (ItemInterface $item) use ($ttl) {
                 $item->expiresAfter($ttl);
                 $articles = $this->articleRepository->findLatestPublished(5);
 
