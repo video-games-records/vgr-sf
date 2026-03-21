@@ -1,3 +1,11 @@
+# Pas de cache pour les images dynamiques (game/serie pictures)
+<IfModule mod_headers.c>
+    <If "%{REQUEST_URI} =~ m|^/(game|serie)/[0-9]+/picture|">
+        Header always set Cache-Control "no-cache"
+        Header always unset Expires
+    </If>
+</IfModule>
+
 # Cache headers pour les assets avec hash (webpack/AssetMapper) — 1 an immutable
 <IfModule mod_headers.c>
     <FilesMatch "\.[0-9a-f]{8}\.(css|js|png|jpg|jpeg|gif|webp|woff2?|svg|ico)$">
