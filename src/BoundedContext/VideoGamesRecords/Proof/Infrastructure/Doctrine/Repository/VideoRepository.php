@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Proof\Infrastructure\Doctrine\Repository;
 
+use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\VideoType;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Video;
@@ -138,6 +139,21 @@ class VideoRepository extends DefaultRepository
             ->setParameter('gameId', $gameId)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Video[]
+     */
+    public function findLatestYoutubeVideos(int $limit = 100): array
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.isActive = true')
+            ->andWhere('v.videoType = :type')
+            ->setParameter('type', VideoType::YOUTUBE)
+            ->orderBy('v.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
