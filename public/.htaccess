@@ -1,6 +1,6 @@
 # Pas de cache pour les images dynamiques (game/serie pictures)
 <IfModule mod_headers.c>
-    <If "%{REQUEST_URI} =~ m|^/(game|serie)/[0-9]+/picture|">
+    <If "%{REQUEST_URI} =~ m|^/(game|serie|badge)/[0-9]+/picture|">
         Header always set Cache-Control "no-cache"
         Header always unset Expires
     </If>
