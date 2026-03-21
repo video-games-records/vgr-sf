@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\
 
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -17,13 +18,16 @@ class LatestScores extends AbstractController
     public function __construct(
         private readonly PlayerChartRepository $playerChartRepository,
         private readonly CacheInterface $cache,
+        private readonly RequestStack $requestStack,
     ) {
     }
 
     public function __invoke(int $ttl = 0): Response
     {
         if ($ttl > 0) {
-            $html = $this->cache->get(self::CACHE_KEY, function (ItemInterface $item) use ($ttl) {
+            $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';
+            $cacheKey = self::CACHE_KEY . '_' . $locale;
+            $html = $this->cache->get($cacheKey, function (ItemInterface $item) use ($ttl) {
                 $item->expiresAfter($ttl);
                 $playerCharts = $this->playerChartRepository->findLatest(6);
 
