@@ -119,7 +119,7 @@ class SendPicture extends AbstractController
 
             // Encode to appropriate format
             $encodedImage = match ($extension) {
-                'png' => $image->toPng(),
+                'png' => $image->toPng(9),
                 default => $image->toJpeg(85),
             };
 

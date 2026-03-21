@@ -143,7 +143,7 @@ class MyProofsUpload extends AbstractController
             $image->scaleDown(1600, 1080);
 
             $encodedImage = match ($extension) {
-                'png' => $image->toPng(),
+                'png' => $image->toPng(9),
                 default => $image->toJpeg(85),
             };
 
