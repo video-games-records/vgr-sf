@@ -1,11 +1,3 @@
-# Pas de cache pour les images dynamiques (game/serie pictures)
-<IfModule mod_headers.c>
-    <If "%{REQUEST_URI} =~ m|^/(game|serie|badge)/[0-9]+/picture|">
-        Header always set Cache-Control "no-cache"
-        Header always unset Expires
-    </If>
-</IfModule>
-
 # Cache headers pour les assets avec hash (webpack/AssetMapper) — 1 an immutable
 <IfModule mod_headers.c>
     <FilesMatch "\.[0-9a-f]{8}\.(css|js|png|jpg|jpeg|gif|webp|woff2?|svg|ico)$">
@@ -13,7 +5,7 @@
     </FilesMatch>
 </IfModule>
 
-# Cache pour les assets statiques sans hash — 1 semaine
+# Cache pour les assets statiques sans hash
 <IfModule mod_expires.c>
     ExpiresActive On
 
@@ -22,13 +14,12 @@
         ExpiresDefault "access plus 1 year"
     </FilesMatch>
 
-    # Images statiques non-hashées
-    ExpiresByType image/webp        "access plus 1 week"
+    # Images (avatars, assets) — 1 semaine
     ExpiresByType image/png         "access plus 1 week"
     ExpiresByType image/jpeg        "access plus 1 week"
     ExpiresByType image/gif         "access plus 1 week"
+    ExpiresByType image/webp        "access plus 1 week"
     ExpiresByType image/svg+xml     "access plus 1 week"
-    ExpiresByType image/x-icon      "access plus 1 month"
 
     # Fonts
     ExpiresByType font/woff2        "access plus 1 year"

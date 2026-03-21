@@ -23,7 +23,7 @@
                         {% if object.getPicture() %}
                         <div class="col-md-2">
                             <div class="serie-image">
-                                <img src="/serie/{{ object.getId() }}/picture" alt="{{ object.getLibSerie() }}" class="img-responsive">
+                                <img src="{{ serie_picture_url(object.getPicture()) }}" alt="{{ object.getLibSerie() }}" class="img-responsive">
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -34,7 +34,7 @@
                             <div class="badge-block">
                                 <strong>{% trans %}serie.show.badge{% endtrans %} :</strong>
                                 <a href="{{ path('vgrcorebundle_admin_badge_show', {'id': object.getBadge().getId()}) }}">
-                                    <img src="/badge/{{ object.getBadge().getId() }}/picture" alt="Badge" style="height: 40px; margin-left: 8px;">
+                                    <img src="{{ badge_picture_url(object.getBadge().type.directory, object.getBadge().picture) }}" alt="Badge" style="height: 40px; margin-left: 8px;">
                                 </a>
                                 <span class="text-muted" style="margin-left: 8px;">
                                     {% trans %}badge.show.value{% endtrans %} : {{ object.getBadge().getValue() }}

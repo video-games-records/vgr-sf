@@ -6,3 +6,4 @@ services:
     App\BoundedContext\VideoGamesRecords\Badge\:
         resource: '../../../src/BoundedContext/VideoGamesRecords/Badge/*'
 
+

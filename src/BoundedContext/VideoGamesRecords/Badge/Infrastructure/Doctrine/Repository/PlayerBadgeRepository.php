@@ -95,7 +95,7 @@ class PlayerBadgeRepository extends DefaultRepository
     public function getMasterBadgesDataForPlayer(Player $player): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT mb.id as badgeId, mb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr, pb.mbOrder
+            SELECT mb.id as badgeId, mb.picture as badgePicture, mb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr, pb.mbOrder
             FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
             JOIN mb.game g
             JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
@@ -113,7 +113,7 @@ class PlayerBadgeRepository extends DefaultRepository
     public function getMasterBadgesForManagement(Player $player): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT pb.id as pbId, mb.id as badgeId, mb.value as badgeValue, g.libGameEn as nameEn, g.libGameFr as nameFr, pb.mbOrder,
+            SELECT pb.id as pbId, mb.id as badgeId, mb.picture as badgePicture, mb.value as badgeValue, g.libGameEn as nameEn, g.libGameFr as nameFr, pb.mbOrder,
                    COALESCE(pb.mbOrder, 999999) as HIDDEN mbOrderSort
             FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
             JOIN mb.game g
@@ -147,7 +147,7 @@ class PlayerBadgeRepository extends DefaultRepository
     public function getPlatformBadgesDataForPlayer(Player $player): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT plb.id as badgeId, plb.value as badgeValue, pb.createdAt, pl.name as name
+            SELECT plb.id as badgeId, plb.picture as badgePicture, plb.value as badgeValue, pb.createdAt, pl.name as name
             FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlatformBadge plb
             JOIN plb.platform pl
             JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = plb
@@ -165,7 +165,7 @@ class PlayerBadgeRepository extends DefaultRepository
     public function getCountryBadgesDataForPlayer(Player $player): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT cb.id as badgeId, cb.value as badgeValue, pb.createdAt,
+            SELECT cb.id as badgeId, cb.picture as badgePicture, cb.value as badgeValue, pb.createdAt,
                    c.codeIso2 as countryCode,
                    (SELECT tEn.name FROM App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\CountryTranslation tEn
                     WHERE tEn.translatable = c AND tEn.locale = 'en') as nameEn,
@@ -188,7 +188,7 @@ class PlayerBadgeRepository extends DefaultRepository
     public function getSerieBadgesDataForPlayer(Player $player): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT sb.id as badgeId, sb.value as badgeValue, pb.createdAt, s.libSerie as name
+            SELECT sb.id as badgeId, sb.picture as badgePicture, sb.value as badgeValue, pb.createdAt, s.libSerie as name
             FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\SerieBadge sb
             JOIN sb.serie s
             JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = sb
@@ -262,7 +262,7 @@ class PlayerBadgeRepository extends DefaultRepository
     private function getBadgesDataForPlayer(Player $player, BadgeType $badgeType): array
     {
         return $this->createQueryBuilder('pb')
-            ->select('b.id as badgeId, b.value as badgeValue, pb.createdAt')
+            ->select('b.id as badgeId, b.picture as badgePicture, b.value as badgeValue, pb.createdAt')
             ->join('pb.badge', 'b')
             ->where('pb.player = :player')
             ->andWhere('b.type = :badgeType')

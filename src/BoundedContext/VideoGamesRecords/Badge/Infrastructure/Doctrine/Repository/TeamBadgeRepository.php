@@ -161,7 +161,7 @@ class TeamBadgeRepository extends DefaultRepository
     public function getMasterBadgesDataForTeam(Team $team): array
     {
         return $this->createQueryBuilder('tb')
-            ->select('b.id as badgeId, b.value as badgeValue, tb.createdAt')
+            ->select('b.id as badgeId, b.picture as badgePicture, b.value as badgeValue, tb.createdAt')
             ->join('tb.badge', 'b')
             ->where('tb.team = :team')
             ->andWhere('b.type = :badgeType')
@@ -179,7 +179,7 @@ class TeamBadgeRepository extends DefaultRepository
     public function getMasterBadgesForManagement(Team $team): array
     {
         return $this->getEntityManager()->createQuery("
-            SELECT tb.id as tbId, mb.id as badgeId, mb.value as badgeValue, g.libGameEn as nameEn, g.libGameFr as nameFr, tb.mbOrder,
+            SELECT tb.id as tbId, mb.id as badgeId, mb.picture as badgePicture, mb.value as badgeValue, g.libGameEn as nameEn, g.libGameFr as nameFr, tb.mbOrder,
                    COALESCE(tb.mbOrder, 999999) as HIDDEN mbOrderSort
             FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
             JOIN mb.game g

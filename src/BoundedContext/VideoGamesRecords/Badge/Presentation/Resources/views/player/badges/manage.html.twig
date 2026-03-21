@@ -57,7 +57,7 @@
                          data-pb-id="{{ badge.pbId }}">
                         <div class="card border rounded p-2" title="{{ gameName }}">
                             <i class="bi bi-grip-vertical text-muted"></i>
-                            <img src="/badge/{{ badge.badgeId }}/picture"
+                            <img src="{{ badge_picture_url('badge/Master', badge.badgePicture) }}"
                                  alt="{{ gameName }}"
                                  width="40"
                                  height="40"

@@ -28,7 +28,7 @@
             {# Serie Logo #}
             <div class="col-auto">
                 <img
-                    src="{{ path('vgr_core_serie_picture', {id: serie.id}) }}"
+                    src="{{ serie_picture_url(serie.picture) }}"
                     alt="{{ serie.libSerie }}"
                     class="img-thumbnail"
                     width="120"
