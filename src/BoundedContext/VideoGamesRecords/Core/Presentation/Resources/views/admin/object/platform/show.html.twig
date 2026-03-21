@@ -45,7 +45,7 @@
                         <div class="col-md-6">
                             <div class="badge-block">
                                 <a href="{{ path('vgrcorebundle_admin_badge_show', {'id': object.getBadge().getId()}) }}">
-                                    <img src="/badge/{{ object.getBadge().getId() }}/picture" alt="Badge" style="height: 48px;">
+                                    <img src="{{ badge_picture_url(object.getBadge().type.directory, object.getBadge().picture) }}" alt="Badge" style="height: 48px;">
                                 </a>
                                 <span class="text-muted" style="margin-left: 10px;">
                                     {% trans %}badge.show.value{% endtrans %} : <strong>{{ object.getBadge().getValue() }}</strong>

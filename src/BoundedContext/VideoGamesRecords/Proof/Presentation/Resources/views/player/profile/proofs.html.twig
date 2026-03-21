@@ -17,7 +17,7 @@
                             <div class="col">
                                 <a href="{{ path('vgr_player_profile_proofs_game', {id: player.id, slug: player.slug, gameId: entry.game.id, gameSlug: entry.game.slug}) }}" class="text-decoration-none">
                                     <div class="card h-100 border-0 shadow-sm">
-                                        <img src="{{ path('vgr_core_game_picture', {id: entry.game.id, v: entry.game.updatedAt|date('U')}) }}"
+                                        <img src="{{ game_picture_url(entry.game.picture) }}"
                                              alt="{{ entry.game.name }}"
                                              loading="lazy"
                                              class="card-img-top object-fit-cover"

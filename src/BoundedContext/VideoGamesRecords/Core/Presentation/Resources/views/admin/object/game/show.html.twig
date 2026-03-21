@@ -215,7 +215,7 @@
                                 <td><strong>{% trans %}game.show.badge{% endtrans %} :</strong></td>
                                 <td>
                                     {% if object.getBadge().getId() %}
-                                        <img src="/badge/{{ object.getBadge().getId() }}/picture" alt="Badge" style="height: 32px; margin-right: 10px;">
+                                        <img src="{{ badge_picture_url(object.getBadge().type.directory, object.getBadge().picture) }}" alt="Badge" style="height: 32px; margin-right: 10px;">
                                     {% endif %}
                                     {{ object.getBadge() }}
                                 </td>

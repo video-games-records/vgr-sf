@@ -6,10 +6,6 @@ services:
     App\BoundedContext\VideoGamesRecords\Core\:
         resource: '../../../src/BoundedContext/VideoGamesRecords/Core/*'
 
-    App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\PictureController:
-        arguments:
-            $projectDir: '%kernel.project_dir%'
-
     # Sonata Block Services
     admin.block.service.game.status:
         class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Block\Service\GameStatusBlockService

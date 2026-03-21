@@ -51,6 +51,10 @@ services:
         arguments:
             $defaultLocale: '%sonata_translation.default_locale%'
 
+    App\SharedKernel\Presentation\Twig\Extension\StoragePictureExtension:
+        arguments:
+            $storagePublicUrl: '%env(STORAGE_PUBLIC_URL)%'
+
 when@dev:
     services:
         _defaults:
