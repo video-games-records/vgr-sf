@@ -7,11 +7,12 @@ namespace App\SharedKernel\Infrastructure\Monolog;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DiscordHandler extends AbstractProcessingHandler
 {
-    private const MAX_MESSAGE_LENGTH = 1990;
+    private const int MAX_MESSAGE_LENGTH = 1990;
 
     public function __construct(
         private readonly HttpClientInterface $httpClient,
@@ -20,6 +21,18 @@ class DiscordHandler extends AbstractProcessingHandler
         bool $bubble = true,
     ) {
         parent::__construct($level, $bubble);
+    }
+
+    public function isHandling(LogRecord $record): bool
+    {
+        $exception = $record->context['exception'] ?? null;
+        if (
+            $exception instanceof HttpExceptionInterface
+            && in_array($exception->getStatusCode(), [404, 405])
+        ) {
+            return false;
+        }
+        return parent::isHandling($record);
     }
 
     protected function write(LogRecord $record): void
