@@ -133,7 +133,7 @@ class ArticleTest extends TestCase
 
     public function testSetAndGetComments(): void
     {
-        $comment = $this->createMock(Comment::class);
+        $comment = new Comment();
         $collection = new ArrayCollection([$comment]);
         $result = $this->article->setComments($collection);
         $this->assertSame($collection, $this->article->getComments());
@@ -146,7 +146,7 @@ class ArticleTest extends TestCase
 
     public function testSetAndGetTranslations(): void
     {
-        $translation = $this->createMock(ArticleTranslation::class);
+        $translation = new ArticleTranslation();
         $collection = new ArrayCollection(['en' => $translation]);
         $result = $this->article->setTranslations($collection);
         $this->assertSame($collection, $this->article->getTranslations());
