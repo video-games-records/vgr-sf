@@ -143,7 +143,7 @@ class BadgeTest extends TestCase
         return [
             'INSCRIPTION'        => [BadgeType::INSCRIPTION],
             'SPECIAL_WEBMASTER'  => [BadgeType::SPECIAL_WEBMASTER],
-            'VGR_SPECIAL_COUNTRY'=> [BadgeType::VGR_SPECIAL_COUNTRY],
+            'VGR_SPECIAL_COUNTRY' => [BadgeType::VGR_SPECIAL_COUNTRY],
             'VGR_SPECIAL_CUP'    => [BadgeType::VGR_SPECIAL_CUP],
             'VGR_SPECIAL_LEGEND' => [BadgeType::VGR_SPECIAL_LEGEND],
             'VGR_SPECIAL_MEDALS' => [BadgeType::VGR_SPECIAL_MEDALS],
