@@ -51,6 +51,10 @@ services:
         arguments:
             $defaultLocale: '%sonata_translation.default_locale%'
 
+    App\SharedKernel\Infrastructure\Monolog\DiscordHandler:
+        arguments:
+            $webhookUrl: '%env(DISCORD_WEBHOOK_URL)%'
+
     App\SharedKernel\Presentation\Twig\Extension\StoragePictureExtension:
         arguments:
             $storagePublicUrl: '%env(STORAGE_PUBLIC_URL)%'
