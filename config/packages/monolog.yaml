@@ -44,18 +44,11 @@ when@prod:
     monolog:
         handlers:
             main:
-                type: fingers_crossed
-                action_level: error
-                handler: nested
-                excluded_http_codes: [404, 405]
-                channels: ["!deprecation"]
-                buffer_size: 50 # How many messages should be saved? Prevent memory leaks
-            nested:
                 type: rotating_file
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
-                level: debug
+                level: error
                 max_files: 30
-                formatter: monolog.formatter.json
+                channels: ["!deprecation"]
             discord:
                 type: service
                 id: App\SharedKernel\Infrastructure\Monolog\DiscordHandler
@@ -67,4 +60,3 @@ when@prod:
                 type: stream
                 channels: [deprecation]
                 path: php://stderr
-                formatter: monolog.formatter.json
