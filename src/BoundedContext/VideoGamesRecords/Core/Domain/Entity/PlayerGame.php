@@ -65,6 +65,9 @@ class PlayerGame
     #[ORM\Column(nullable: false)]
     private DateTime $lastUpdate;
 
+    #[ORM\Column(nullable: false, options: ['default' => false])]
+    private bool $isComplete = false;
+
     /** @var array<string, mixed> */
     private array $statuses;
 
@@ -117,6 +120,17 @@ class PlayerGame
     public function getStatuses(): array
     {
         return $this->statuses;
+    }
+
+    public function setIsComplete(bool $isComplete): static
+    {
+        $this->isComplete = $isComplete;
+        return $this;
+    }
+
+    public function getIsComplete(): bool
+    {
+        return $this->isComplete;
     }
 
     public function getId(): string

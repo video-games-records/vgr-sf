@@ -35,6 +35,7 @@ class Badges extends AbstractProfileController
             'chartBadgesData' => $this->playerBadgeRepository->getChartBadgesDataForPlayer($player),
             'proofBadgesData' => $this->playerBadgeRepository->getProofBadgesDataForPlayer($player),
             'donationBadgesData' => $this->playerBadgeRepository->getDonationBadgesDataForPlayer($player),
+            'completionBadgesData' => $this->playerBadgeRepository->getCompletionBadgesDataForPlayer($player),
             'current_tab' => 'badges',
         ]);
     }

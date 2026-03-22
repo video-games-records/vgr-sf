@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject;
 
 enum BadgeType: string
 {
+    case COMPLETION = 'Completion';
     case CONNEXION = 'Connexion';
     case DON = 'Don';
     case FORUM = 'Forum';

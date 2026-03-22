@@ -17,6 +17,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\IsRankTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\LastUpdateTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbChartTrait;
+use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbChartWithoutDlcTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPostTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbTeamTrait;
@@ -24,6 +25,7 @@ use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbVideoTrai
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\PictureTrait;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Game as IgdbGame;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\CompletionBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame;
 use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Contracts\GameInfoInterface;
@@ -37,6 +39,7 @@ class Game implements GameInfoInterface
 {
     use TimestampableEntity;
     use NbChartTrait;
+    use NbChartWithoutDlcTrait;
     use NbPostTrait;
     use NbPlayerTrait;
     use NbTeamTrait;
@@ -77,6 +80,10 @@ class Game implements GameInfoInterface
     #[ORM\OneToOne(targetEntity: MasterBadge::class, cascade: ['persist'], inversedBy: 'game')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:false)]
     private MasterBadge $badge;
+
+    #[ORM\OneToOne(targetEntity: CompletionBadge::class, cascade: ['persist'], inversedBy: 'game')]
+    #[ORM\JoinColumn(name:'completion_badge_id', referencedColumnName:'id', nullable:true)]
+    private ?CompletionBadge $completionBadge = null;
 
     /**
      * @var Collection<int, Group>
@@ -276,6 +283,17 @@ class Game implements GameInfoInterface
     public function getBadge(): MasterBadge
     {
         return $this->badge;
+    }
+
+    public function setCompletionBadge(CompletionBadge $completionBadge): static
+    {
+        $this->completionBadge = $completionBadge;
+        return $this;
+    }
+
+    public function getCompletionBadge(): ?CompletionBadge
+    {
+        return $this->completionBadge;
     }
 
     public function addGroup(Group $group): void

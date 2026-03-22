@@ -23,8 +23,13 @@ class ChartListener
         if (null == $chart->getLibChartFr()) {
             $chart->setLibChartFr($chart->getLibChartEn());
         }
-        $chart->getGroup()->setNbChart($chart->getGroup()->getNbChart() + 1);
-        $chart->getGroup()->getGame()->setNbChart($chart->getGroup()->getGame()->getNbChart() + 1);
+        $group = $chart->getGroup();
+        $game = $group->getGame();
+        $group->setNbChart($group->getNbChart() + 1);
+        $game->setNbChart($game->getNbChart() + 1);
+        if (!$group->getIsDlc()) {
+            $game->setNbChartWithoutDlc($game->getNbChartWithoutDlc() + 1);
+        }
     }
 
 
@@ -44,7 +49,12 @@ class ChartListener
      */
     public function preRemove(Chart $chart): void
     {
-        $chart->getGroup()->setNbChart($chart->getGroup()->getNbChart() - 1);
-        $chart->getGroup()->getGame()->setNbChart($chart->getGroup()->getGame()->getNbChart() - 1);
+        $group = $chart->getGroup();
+        $game = $group->getGame();
+        $group->setNbChart($group->getNbChart() - 1);
+        $game->setNbChart($game->getNbChart() - 1);
+        if (!$group->getIsDlc()) {
+            $game->setNbChartWithoutDlc($game->getNbChartWithoutDlc() - 1);
+        }
     }
 }

@@ -18,11 +18,12 @@ use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTra
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'dtype', type: 'string')]
 #[ORM\DiscriminatorMap([
-    'Badge'         => Badge::class,
-    'MasterBadge'   => MasterBadge::class,
-    'SerieBadge'    => SerieBadge::class,
-    'PlatformBadge' => PlatformBadge::class,
-    'CountryBadge'  => CountryBadge::class,
+    'Badge'           => Badge::class,
+    'MasterBadge'     => MasterBadge::class,
+    'SerieBadge'      => SerieBadge::class,
+    'PlatformBadge'   => PlatformBadge::class,
+    'CountryBadge'    => CountryBadge::class,
+    'CompletionBadge' => CompletionBadge::class,
 ])]
 class Badge
 {

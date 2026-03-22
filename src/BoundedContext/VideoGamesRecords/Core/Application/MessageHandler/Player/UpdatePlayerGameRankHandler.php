@@ -170,6 +170,7 @@ readonly class UpdatePlayerGameRankHandler
         $normalizer = new ObjectNormalizer();
         $serializer = new Serializer([$normalizer]);
 
+        $completePlayers = [];
         foreach ($list as $row) {
             $playerGame = $serializer->denormalize(
                 $row,
@@ -179,6 +180,13 @@ readonly class UpdatePlayerGameRankHandler
             $player = $this->em->getReference('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player', $row['id']);
             $playerGame->setPlayer($player);
             $playerGame->setGame($game);
+
+            $isComplete = $game->getNbChartWithoutDlc() > 0
+                && (int) $row['nbChartWithoutDlc'] === $game->getNbChartWithoutDlc();
+            $playerGame->setIsComplete($isComplete);
+            if ($isComplete) {
+                $completePlayers[$row['id']] = 0;
+            }
 
             $this->em->persist($playerGame);
         }
@@ -245,5 +253,10 @@ readonly class UpdatePlayerGameRankHandler
 
         $this->em->getRepository(PlayerBadge::class)
             ->updateBadge($firstPlacePlayers, $game->getBadge(), $game);
+
+        if ($game->getCompletionBadge() !== null) {
+            $this->em->getRepository(PlayerBadge::class)
+                ->updateBadge($completePlayers, $game->getCompletionBadge(), $game);
+        }
     }
 }

@@ -201,6 +201,24 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, badgePicture: string, nameEn: string, nameFr: string}>
+     */
+    public function getCompletionBadgesDataForPlayer(Player $player): array
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT cb.id as badgeId, cb.picture as badgePicture, cb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\CompletionBadge cb
+            JOIN cb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = cb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY cb.value ASC
+        ")
+        ->setParameter('player', $player)
+        ->getResult();
+    }
+
+    /**
      * @return array<array{pseudo: string, createdAt: \DateTime, endedAt: \DateTime|null, mbOrder: int|null}>
      */
     public function getHistoryForBadge(Badge $badge): array

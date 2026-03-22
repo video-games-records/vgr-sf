@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\CompletionBadge;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
@@ -41,6 +42,10 @@ class GameListener
         $badge = new MasterBadge();
         $badge->setPicture('master_default.gif');
         $game->setBadge($badge);
+
+        $completionBadge = new CompletionBadge();
+        $completionBadge->setPicture($badge->getPicture());
+        $game->setCompletionBadge($completionBadge);
     }
 
     /**
