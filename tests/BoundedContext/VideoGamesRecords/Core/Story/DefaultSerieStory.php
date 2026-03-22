@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Story;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\SerieFactory;
 use Zenstruck\Foundry\Story;
 
@@ -34,17 +35,17 @@ final class DefaultSerieStory extends Story
             ->create();
     }
 
-    public static function mario(): object
+    public static function mario(): Serie
     {
         return SerieFactory::find(['libSerie' => 'Super Mario']);
     }
 
-    public static function zelda(): object
+    public static function zelda(): Serie
     {
         return SerieFactory::find(['libSerie' => 'The Legend of Zelda']);
     }
 
-    public static function metroid(): object
+    public static function metroid(): Serie
     {
         return SerieFactory::find(['libSerie' => 'Metroid']);
     }

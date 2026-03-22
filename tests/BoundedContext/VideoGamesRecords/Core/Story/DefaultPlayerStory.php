@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Story;
 
-use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\PlayerFactory;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerStatusEnum;
+use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\PlayerFactory;
 use Zenstruck\Foundry\Story;
 
 final class DefaultPlayerStory extends Story
@@ -73,32 +74,32 @@ final class DefaultPlayerStory extends Story
             ]);
     }
 
-    public static function topPlayer(): object
+    public static function topPlayer(): Player
     {
         return PlayerFactory::find(['pseudo' => 'TopPlayer']);
     }
 
-    public static function activeGamer(): object
+    public static function activeGamer(): Player
     {
         return PlayerFactory::find(['pseudo' => 'ActiveGamer']);
     }
 
-    public static function newbie(): object
+    public static function newbie(): Player
     {
         return PlayerFactory::find(['pseudo' => 'NewbieMaster']);
     }
 
-    public static function donor(): object
+    public static function donor(): Player
     {
         return PlayerFactory::find(['pseudo' => 'GenerousDonor']);
     }
 
-    public static function adminUser(): object
+    public static function adminUser(): Player
     {
         return PlayerFactory::find(['pseudo' => 'AdminUser']);
     }
 
-    public static function moderatorUser(): object
+    public static function moderatorUser(): Player
     {
         return PlayerFactory::find(['pseudo' => 'ModeratorUser']);
     }

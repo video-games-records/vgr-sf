@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\BoundedContext\VideoGamesRecords\Core\Story;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform;
 use App\Tests\BoundedContext\VideoGamesRecords\Core\Factory\PlatformFactory;
 use Zenstruck\Foundry\Story;
 
@@ -39,22 +40,22 @@ final class DefaultPlatformStory extends Story
             ->create();
     }
 
-    public static function nintendoSwitch(): object
+    public static function nintendoSwitch(): Platform
     {
         return PlatformFactory::find(['name' => 'Nintendo Switch']);
     }
 
-    public static function pc(): object
+    public static function pc(): Platform
     {
         return PlatformFactory::find(['name' => 'PC']);
     }
 
-    public static function ps4(): object
+    public static function ps4(): Platform
     {
         return PlatformFactory::find(['name' => 'PlayStation 4']);
     }
 
-    public static function xboxOne(): object
+    public static function xboxOne(): Platform
     {
         return PlatformFactory::find(['name' => 'Xbox One']);
     }
