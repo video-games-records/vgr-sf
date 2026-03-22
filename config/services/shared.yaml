@@ -11,6 +11,13 @@ services:
     App\SharedKernel\Domain\Interface\EventDispatcherInterface:
         alias: App\SharedKernel\Infrastructure\Event\SymfonyEventDispatcher
 
+    # Discord Monolog Handler
+    App\SharedKernel\Infrastructure\Monolog\DiscordHandler:
+        arguments:
+            $webhookUrl: '%env(DISCORD_WEBHOOK_URL)%'
+        tags:
+            - { name: monolog.logger }
+
 
 
 

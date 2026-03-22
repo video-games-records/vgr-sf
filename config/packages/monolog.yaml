@@ -56,6 +56,9 @@ when@prod:
                 level: debug
                 max_files: 30
                 formatter: monolog.formatter.json
+            discord:
+                type: service
+                id: App\SharedKernel\Infrastructure\Monolog\DiscordHandler
             console:
                 type: console
                 process_psr_3_messages: false
