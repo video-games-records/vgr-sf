@@ -133,7 +133,7 @@ class ArticleAnalyticsService
         return [
             'total_articles' => (int) $stats['total_articles'],
             'total_views' => (int) $stats['total_views'],
-            'average_views' => round($stats['avg_views'], 2),
+            'average_views' => round((float) $stats['avg_views'], 2),
             'best_article_views' => (int) $stats['max_views']
         ];
     }
