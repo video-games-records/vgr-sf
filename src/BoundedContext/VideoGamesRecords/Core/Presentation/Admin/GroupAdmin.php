@@ -70,7 +70,7 @@ final class GroupAdmin extends BaseAdmin
     {
         $gameOptions = [];
         if (($this->hasRequest()) && ($this->isCurrentRoute('create'))) {
-            $idGame = $this->getRequest()->get('idGame', null);
+            $idGame = $this->getRequest()->query->get('idGame', null);
             if ($idGame !== null) {
                 $this->getRequest()->getSession()->set('vgrcorebundle_admin_group.idGame', $idGame);
             }

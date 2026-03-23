@@ -63,7 +63,7 @@ class ChartAdmin extends BaseAdmin
     {
         $groupOptions = [];
         if (($this->hasRequest()) && ($this->isCurrentRoute('create'))) {
-            $idGroup = $this->getRequest()->get('idGroup', null);
+            $idGroup = $this->getRequest()->query->get('idGroup', null);
 
             if ($idGroup !== null) {
                 $this->getRequest()->getSession()->set('vgrcorebundle_admin_chart.idGroup', $idGroup);
