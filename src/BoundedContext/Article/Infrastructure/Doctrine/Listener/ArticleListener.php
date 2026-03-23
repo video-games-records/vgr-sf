@@ -24,7 +24,9 @@ readonly class ArticleListener
     public function prePersist(Article $article): void
     {
         if ($article->getArticleStatus()->isPublished()) {
-            $article->setPublishedAt(new \DateTime());
+            if ($article->getPublishedAt() === null) {
+                $article->setPublishedAt(new \DateTime());
+            }
             $this->cache->delete(TopNewsController::CACHE_KEY);
         }
 
