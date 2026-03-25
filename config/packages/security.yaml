@@ -66,6 +66,7 @@ security:
                 check_path: app_login
                 default_target_path: /
                 enable_csrf: true
+                success_handler: App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\NativeAuthenticationSuccessHandler
             logout:
                 path: app_logout
                 target: app_login
