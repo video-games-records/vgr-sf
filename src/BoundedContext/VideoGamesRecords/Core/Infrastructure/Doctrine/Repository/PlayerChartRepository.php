@@ -28,10 +28,11 @@ class PlayerChartRepository extends DefaultRepository
      */
     public function findLatest(int $limit = 5): array
     {
+        // Multiplier élevé car un joueur peut poster des centaines de scores sur un même jeu d'un coup
         $ids = $this->createQueryBuilder('pc')
             ->select('pc.id')
             ->orderBy('pc.lastUpdate', 'DESC')
-            ->setMaxResults($limit)
+            ->setMaxResults($limit * 200)
             ->getQuery()
             ->getSingleColumnResult();
 
@@ -39,8 +40,7 @@ class PlayerChartRepository extends DefaultRepository
             return [];
         }
 
-
-        return $this->createQueryBuilder('pc')
+        $results = $this->createQueryBuilder('pc')
             ->join('pc.chart', 'c')
             ->join('c.group', 'g')
             ->join('g.game', 'ga')
@@ -55,6 +55,22 @@ class PlayerChartRepository extends DefaultRepository
             ->orderBy('pc.lastUpdate', 'DESC')
             ->getQuery()
             ->getResult();
+
+        // Dédoublonner par jeu : garder uniquement le score le plus récent par jeu
+        $seen = [];
+        $unique = [];
+        foreach ($results as $playerChart) {
+            $gameId = $playerChart->getChart()->getGroup()->getGame()->getId();
+            if (!isset($seen[$gameId])) {
+                $seen[$gameId] = true;
+                $unique[] = $playerChart;
+                if (count($unique) === $limit) {
+                    break;
+                }
+            }
+        }
+
+        return $unique;
     }
 
     /**
