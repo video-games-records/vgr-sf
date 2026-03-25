@@ -45,7 +45,7 @@ class MessageRepository extends ServiceEntityRepository
             ->addSelect('t', 'f', 'u')
             ->where('t.boolArchive = false')
             ->orderBy('m.createdAt', 'DESC')
-            ->setMaxResults($limit);
+            ->setMaxResults($limit * 10);
 
         if (empty($userRoles)) {
             // Anonyme : forums publics uniquement
@@ -59,7 +59,23 @@ class MessageRepository extends ServiceEntityRepository
                 ->setParameter('roles', $userRoles);
         }
 
-        return $qb->getQuery()->getResult();
+        $messages = $qb->getQuery()->getResult();
+
+        // Dédoublonner par topic : garder uniquement le message le plus récent de chaque topic
+        $seen = [];
+        $unique = [];
+        foreach ($messages as $message) {
+            $topicId = $message->getTopic()->getId();
+            if (!isset($seen[$topicId])) {
+                $seen[$topicId] = true;
+                $unique[] = $message;
+                if (count($unique) === $limit) {
+                    break;
+                }
+            }
+        }
+
+        return $unique;
     }
 
     /**
