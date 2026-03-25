@@ -2,6 +2,121 @@
 {% trans_default_domain 'VgrTeam' %}
 
 {% block profile_content %}
+{% if ux_is_native() %}
+
+{# Native: key stats #}
+<div class="row g-2 mb-3">
+    <div class="col-6">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-people text-primary"></i>
+                <div class="fw-bold">{{ team.nbPlayer|number_format }}</div>
+                <div class="text-muted small">{{ 'team.profile.stats.members'|trans }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-controller text-success"></i>
+                <div class="fw-bold">{{ team.nbGame|number_format }}</div>
+                <div class="text-muted small">{{ 'team.profile.stats.games'|trans }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-graph-up text-primary"></i>
+                <div class="fw-bold">{{ (team.pointChart / 1000000)|number_format(1) }}M</div>
+                <div class="text-muted small">{{ 'team.profile.stats.chart_points'|trans }}</div>
+                <div class="text-muted small">#{{ team.rankPointChart|number_format }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card text-center">
+            <div class="card-body p-2">
+                <i class="bi bi-patch-check text-warning"></i>
+                <div class="fw-bold">{{ team.nbMasterBadge|number_format }}</div>
+                <div class="text-muted small">{{ 'team.profile.stats.master_badges'|trans }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Rankings #}
+<div class="card mb-3">
+    <div class="card-body p-2">
+        <h6 class="mb-2"><i class="bi bi-trending-up"></i> {{ 'team.profile.sections.rankings'|trans }}</h6>
+        <div class="d-flex justify-content-between mb-1 small">
+            <span>{{ 'team.profile.rankings.game_points_rank'|trans }}</span>
+            <span class="badge bg-secondary">{{ team.rankPointGame|number_format }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-1 small">
+            <span>{{ 'team.profile.rankings.cup_rank'|trans }}</span>
+            <span class="badge bg-secondary">{{ team.rankCup|number_format }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-1 small">
+            <span>{{ 'team.profile.rankings.chart_points_rank'|trans }}</span>
+            <span class="badge bg-secondary">{{ team.rankPointChart|number_format }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-1 small">
+            <span>{{ 'team.profile.rankings.medal_rank'|trans }}</span>
+            <span class="badge bg-secondary">{{ team.rankMedal|number_format }}</span>
+        </div>
+        <div class="d-flex justify-content-between small">
+            <span>{{ 'team.profile.rankings.badge_rank'|trans }}</span>
+            <span class="badge bg-secondary">{{ team.rankBadge|number_format }}</span>
+        </div>
+    </div>
+</div>
+
+{# Medals Records #}
+<div class="card mb-3">
+    <div class="card-body p-2">
+        <h6 class="mb-2"><i class="bi bi-trophy"></i> {{ 'team.profile.sections.medals_records'|trans }}</h6>
+        <div class="row g-2 text-center">
+            <div class="col-3">
+                <i class="bi bi-trophy-fill text-platinum fs-5"></i>
+                <div class="fw-bold">{{ team.chartRank0|number_format }}</div>
+            </div>
+            <div class="col-3">
+                <i class="bi bi-trophy-fill text-gold fs-5"></i>
+                <div class="fw-bold">{{ team.chartRank1|number_format }}</div>
+            </div>
+            <div class="col-3">
+                <i class="bi bi-trophy-fill text-silver fs-5"></i>
+                <div class="fw-bold">{{ team.chartRank2|number_format }}</div>
+            </div>
+            <div class="col-3">
+                <i class="bi bi-trophy-fill text-bronze fs-5"></i>
+                <div class="fw-bold">{{ team.chartRank3|number_format }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Members list compact #}
+<div class="card">
+    <div class="card-body p-2">
+        <h6 class="mb-2"><i class="bi bi-people"></i> {{ 'team.profile.sections.members'|trans }}</h6>
+        <div class="list-group list-group-flush">
+            {% for player in team.players %}
+                <div class="list-group-item px-0 py-1 d-flex align-items-center gap-2">
+                    {{ component('player_link', {player: player, bold: player.id == team.leader.id, showTeam: false, showCountry: true, showAvatar: true}) }}
+                    {% if player.id == team.leader.id %}
+                        <i class="bi bi-star-fill text-warning small"></i>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+{# Web: full overview #}
 {# Top Stats Cards #}
 <div class="row g-2 mb-3">
     <div class="col-6 col-md-4 col-lg-2">
@@ -254,5 +369,7 @@
         </div>
     </div>
 </div>
+{% endif %}
+
 {% endif %}
 {% endblock %}
