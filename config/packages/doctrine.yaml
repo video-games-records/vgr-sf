@@ -85,6 +85,12 @@ doctrine:
                         dir: '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Proof/Domain'
                         prefix: 'App\BoundedContext\VideoGamesRecords\Proof\Domain'
                         alias: VideoGamesRecordsProof
+                    VideoGamesRecordsVideo:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Video/Domain'
+                        prefix: 'App\BoundedContext\VideoGamesRecords\Video\Domain'
+                        alias: VideoGamesRecordsVideo
                     SharedKernel:
                         type: attribute
                         is_bundle: false

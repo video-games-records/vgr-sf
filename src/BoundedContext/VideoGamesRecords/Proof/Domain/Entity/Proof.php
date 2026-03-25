@@ -13,6 +13,7 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
+use App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Video;
 
 #[ORM\Table(name:'vgr_proof')]
 #[ORM\Entity(repositoryClass: ProofRepository::class)]
