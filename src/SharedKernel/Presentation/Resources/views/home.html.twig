@@ -159,12 +159,14 @@
     </div>
 
     {# Latest Scores #}
+    {% if not ux_is_native() %}
     <div class="col-12 col-xl-6">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\PlayerChart\\LatestScores',
             { ttl: 3600 }
         )) }}
     </div>
+    {% endif %}
 </div>
 
 {# Partners Section #}
