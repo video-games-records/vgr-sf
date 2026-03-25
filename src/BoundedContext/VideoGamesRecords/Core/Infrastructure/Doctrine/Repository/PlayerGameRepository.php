@@ -52,4 +52,18 @@ class PlayerGameRepository extends DefaultRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @return PlayerGame[]
+     */
+    public function findLatestByPlayer(Player $player, int $limit = 10): array
+    {
+        return $this->createQueryBuilder('pg')
+            ->where('pg.player = :player')
+            ->setParameter('player', $player)
+            ->orderBy('pg.lastUpdate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

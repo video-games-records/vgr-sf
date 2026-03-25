@@ -39,4 +39,5 @@ return [
     DAMA\DoctrineTestBundle\DAMADoctrineTestBundle::class => ['test' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     DH\AuditorBundle\DHAuditorBundle::class => ['all' => true],
+    Symfony\UX\Native\UXNativeBundle::class => ['all' => true],
 ];

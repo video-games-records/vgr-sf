@@ -46,207 +46,256 @@
 
 {% block body %}
 <div class="container py-4">
-    {# Include common game header #}
-    {% include '@VideoGamesRecordsCore/game/_header.html.twig' with {
-        'game': game
-    } %}
+    {% if ux_is_native() %}
 
-    {# Main content with sidebar #}
-    <div class="row">
-        {# Main Content Column #}
-        <div class="col-lg-9">
-            {# Submit Scores Button #}
-            {% if is_granted('ROLE_USER') %}
-                <div class="mb-4">
-                    <a href="{{ path('vgr_game_scores', {id: game.id, slug: game.slug}) }}" class="btn btn-success">
-                        <i class="bi bi-plus-circle"></i> {{ 'game.show.submit_scores'|trans }}
-                    </a>
-                </div>
-            {% endif %}
-
-            {# Game Summary (if available from IGDB) - Hidden on mobile #}
-            {% if game.summary %}
-                <div class="card mb-4 d-none d-md-block">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="bi bi-info-circle"></i> {{ 'game.show.about'|trans }}
-                        </h5>
-                        <p class="card-text">{{ game.summary }}</p>
+        {# Native: game header card only (no breadcrumb) #}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="{{ game_picture_url(game.picture) }}" alt="{{ game.name }}" class="rounded" width="72" height="72" style="object-fit: cover;">
+                    <div>
+                        <h1 class="h5 mb-1">{{ game.name }}</h1>
+                        {% if game.nbPlayer is defined and game.nbPlayer > 0 %}
+                            <small class="text-muted"><i class="bi bi-people"></i> {{ game.nbPlayer }}</small>
+                        {% endif %}
                     </div>
                 </div>
-            {% endif %}
+            </div>
+        </div>
 
-            {# Groups List #}
-            <div class="card shadow-sm">
-                <div class="card-header border-bottom">
-                    <h5 class="mb-0">
-                        <i class="bi bi-collection"></i> {{ 'game.show.groups_title'|trans }}
-                    </h5>
-                </div>
-
-                {% if game.groups|length > 0 %}
-                    <div class="list-group list-group-flush">
-                        {% for group in game.groups %}
-                            <a href="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug}) }}" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="mb-1">
-                                            {{ group.name }}
-                                            {% if group.isDlc %}
-                                                <span class="badge bg-info">
-                                                    <i class="bi bi-download"></i> DLC
-                                                </span>
-                                            {% endif %}
-                                        </h6>
-                                        <p class="mb-1 text-muted small">
-                                            <i class="bi bi-bar-chart"></i>
-                                            {% if group.nbChart is defined and group.nbChart > 0 %}
-                                                {{ group.nbChart }} {{ 'game.show.charts'|trans }}
-                                            {% else %}
-                                                {{ 'game.show.no_charts'|trans }}
-                                            {% endif %}
-
-                                            {% if group.nbPlayer is defined and group.nbPlayer > 0 %}
-                                                <span class="ms-3">
-                                                    <i class="bi bi-people"></i>
-                                                    {{ group.nbPlayer }} {{ 'game.show.players'|trans }}
-                                                </span>
-                                            {% endif %}
-
-                                            {% if group.nbPost is defined and group.nbPost > 0 %}
-                                                <span class="ms-3">
-                                                    <i class="bi bi-trophy"></i>
-                                                    {{ group.nbPost }} {{ 'game.show.scores'|trans }}
-                                                </span>
-                                            {% endif %}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <i class="bi bi-chevron-right"></i>
-                                    </div>
+        {# Groups List #}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header border-bottom">
+                <h5 class="mb-0"><i class="bi bi-collection"></i> {{ 'game.show.groups_title'|trans }}</h5>
+            </div>
+            {% if game.groups|length > 0 %}
+                <div class="list-group list-group-flush">
+                    {% for group in game.groups %}
+                        <a href="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug}) }}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">
+                                        {{ group.name }}
+                                        {% if group.isDlc %}<span class="badge bg-info ms-1">DLC</span>{% endif %}
+                                    </h6>
+                                    {% if group.nbChart is defined and group.nbChart > 0 %}
+                                        <small class="text-muted"><i class="bi bi-bar-chart"></i> {{ group.nbChart }} {{ 'game.show.charts'|trans }}</small>
+                                    {% endif %}
                                 </div>
-                            </a>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <div class="card-body text-center text-muted py-5">
-                        <i class="bi bi-inbox" style="font-size: 3rem;"></i>
-                        <p class="mt-3 mb-0">{{ 'game.show.no_groups'|trans }}</p>
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card-body text-center text-muted py-4">{{ 'game.show.no_groups'|trans }}</div>
+            {% endif %}
+        </div>
+
+        {# Player Points Ranking #}
+        <div class="card shadow-sm">
+            <div class="card-header border-bottom">
+                <h5 class="mb-0"><i class="bi bi-trophy"></i> {{ 'game.show.rankings.player_points'|trans }}</h5>
+            </div>
+            <div class="card-body p-0">
+                {{ render(controller(
+                    'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGameRankingController::points',
+                    {gameId: game.id, limit: 100}
+                )) }}
+            </div>
+        </div>
+
+    {% else %}
+
+        {# Web: full page #}
+        {% include '@VideoGamesRecordsCore/game/_header.html.twig' with {'game': game} %}
+
+        <div class="row">
+            <div class="col-lg-9">
+                {# Submit Scores Button #}
+                {% if is_granted('ROLE_USER') %}
+                    <div class="mb-4">
+                        <a href="{{ path('vgr_game_scores', {id: game.id, slug: game.slug}) }}" class="btn btn-success">
+                            <i class="bi bi-plus-circle"></i> {{ 'game.show.submit_scores'|trans }}
+                        </a>
                     </div>
                 {% endif %}
-            </div>
 
-            {# Additional Game Information #}
-            {% if game.storyline or game.downloadUrl %}
-                <div class="row mt-4">
-                    {# Storyline #}
-                    {% if game.storyline %}
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <i class="bi bi-book"></i> {{ 'game.show.storyline'|trans }}
-                                    </h5>
-                                    <p class="card-text">{{ game.storyline }}</p>
-                                </div>
-                            </div>
+                {# Game Summary (if available from IGDB) - Hidden on mobile #}
+                {% if game.summary %}
+                    <div class="card mb-4 d-none d-md-block">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-info-circle"></i> {{ 'game.show.about'|trans }}
+                            </h5>
+                            <p class="card-text">{{ game.summary }}</p>
                         </div>
-                    {% endif %}
+                    </div>
+                {% endif %}
 
-                    {# Download Link #}
-                    {% if game.downloadUrl %}
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">
-                                        <i class="bi bi-download"></i> {{ 'game.show.download'|trans }}
-                                    </h5>
-                                    <a href="{{ game.downloadUrl }}" class="btn btn-primary" target="_blank" rel="noopener">
-                                        <i class="bi bi-box-arrow-up-right"></i> {{ 'game.show.download_button'|trans }}
-                                    </a>
-                                </div>
-                            </div>
+                {# Groups List #}
+                <div class="card shadow-sm">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">
+                            <i class="bi bi-collection"></i> {{ 'game.show.groups_title'|trans }}
+                        </h5>
+                    </div>
+
+                    {% if game.groups|length > 0 %}
+                        <div class="list-group list-group-flush">
+                            {% for group in game.groups %}
+                                <a href="{{ path('vgr_group_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug}) }}" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">
+                                                {{ group.name }}
+                                                {% if group.isDlc %}
+                                                    <span class="badge bg-info">
+                                                        <i class="bi bi-download"></i> DLC
+                                                    </span>
+                                                {% endif %}
+                                            </h6>
+                                            <p class="mb-1 text-muted small">
+                                                <i class="bi bi-bar-chart"></i>
+                                                {% if group.nbChart is defined and group.nbChart > 0 %}
+                                                    {{ group.nbChart }} {{ 'game.show.charts'|trans }}
+                                                {% else %}
+                                                    {{ 'game.show.no_charts'|trans }}
+                                                {% endif %}
+
+                                                {% if group.nbPlayer is defined and group.nbPlayer > 0 %}
+                                                    <span class="ms-3">
+                                                        <i class="bi bi-people"></i>
+                                                        {{ group.nbPlayer }} {{ 'game.show.players'|trans }}
+                                                    </span>
+                                                {% endif %}
+
+                                                {% if group.nbPost is defined and group.nbPost > 0 %}
+                                                    <span class="ms-3">
+                                                        <i class="bi bi-trophy"></i>
+                                                        {{ group.nbPost }} {{ 'game.show.scores'|trans }}
+                                                    </span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-chevron-right"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="card-body text-center text-muted py-5">
+                            <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                            <p class="mt-3 mb-0">{{ 'game.show.no_groups'|trans }}</p>
                         </div>
                     {% endif %}
                 </div>
-            {% endif %}
 
-            {# Game Rankings #}
-            <div class="card shadow-sm mt-4">
-                <div class="card-header border-bottom">
-                    <h5 class="mb-0">
-                        <i class="bi bi-trophy"></i> {{ 'game.show.rankings_title'|trans }}
-                    </h5>
-                </div>
-                <div class="card-body p-0">
-                    {# Navigation Tabs #}
-                    <ul class="nav nav-tabs px-3 pt-3" id="gameRankingTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="player-points-tab" data-bs-toggle="tab" data-bs-target="#player-points-pane" type="button" role="tab" aria-controls="player-points-pane" aria-selected="true">
-                                <i class="bi bi-person"></i> {{ 'game.show.rankings.player_points'|trans }}
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="player-medals-tab" data-bs-toggle="tab" data-bs-target="#player-medals-pane" type="button" role="tab" aria-controls="player-medals-pane" aria-selected="false">
-                                <i class="bi bi-person"></i> {{ 'game.show.rankings.player_medals'|trans }}
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="team-points-tab" data-bs-toggle="tab" data-bs-target="#team-points-pane" type="button" role="tab" aria-controls="team-points-pane" aria-selected="false">
-                                <i class="bi bi-people"></i> {{ 'game.show.rankings.team_points'|trans }}
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="team-medals-tab" data-bs-toggle="tab" data-bs-target="#team-medals-pane" type="button" role="tab" aria-controls="team-medals-pane" aria-selected="false">
-                                <i class="bi bi-people"></i> {{ 'game.show.rankings.team_medals'|trans }}
-                            </button>
-                        </li>
-                    </ul>
+                {# Additional Game Information #}
+                {% if game.storyline or game.downloadUrl %}
+                    <div class="row mt-4">
+                        {% if game.storyline %}
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="bi bi-book"></i> {{ 'game.show.storyline'|trans }}
+                                        </h5>
+                                        <p class="card-text">{{ game.storyline }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
 
-                    {# Tab Content #}
-                    <div class="tab-content" id="gameRankingTabsContent">
-                        {# Player Points Tab #}
-                        <div class="tab-pane fade show active" id="player-points-pane" role="tabpanel" aria-labelledby="player-points-tab">
-                            {{ render(controller(
-                                'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGameRankingController::points',
-                                {gameId: game.id, limit: 100}
-                            )) }}
-                        </div>
+                        {% if game.downloadUrl %}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">
+                                            <i class="bi bi-download"></i> {{ 'game.show.download'|trans }}
+                                        </h5>
+                                        <a href="{{ game.downloadUrl }}" class="btn btn-primary" target="_blank" rel="noopener">
+                                            <i class="bi bi-box-arrow-up-right"></i> {{ 'game.show.download_button'|trans }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
 
-                        {# Player Medals Tab #}
-                        <div class="tab-pane fade" id="player-medals-pane" role="tabpanel" aria-labelledby="player-medals-tab">
-                            {{ render(controller(
-                                'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGameRankingController::medals',
-                                {gameId: game.id, limit: 100}
-                            )) }}
-                        </div>
+                {# Game Rankings #}
+                <div class="card shadow-sm mt-4">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">
+                            <i class="bi bi-trophy"></i> {{ 'game.show.rankings_title'|trans }}
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="nav nav-tabs px-3 pt-3" id="gameRankingTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="player-points-tab" data-bs-toggle="tab" data-bs-target="#player-points-pane" type="button" role="tab" aria-controls="player-points-pane" aria-selected="true">
+                                    <i class="bi bi-person"></i> {{ 'game.show.rankings.player_points'|trans }}
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="player-medals-tab" data-bs-toggle="tab" data-bs-target="#player-medals-pane" type="button" role="tab" aria-controls="player-medals-pane" aria-selected="false">
+                                    <i class="bi bi-person"></i> {{ 'game.show.rankings.player_medals'|trans }}
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="team-points-tab" data-bs-toggle="tab" data-bs-target="#team-points-pane" type="button" role="tab" aria-controls="team-points-pane" aria-selected="false">
+                                    <i class="bi bi-people"></i> {{ 'game.show.rankings.team_points'|trans }}
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="team-medals-tab" data-bs-toggle="tab" data-bs-target="#team-medals-pane" type="button" role="tab" aria-controls="team-medals-pane" aria-selected="false">
+                                    <i class="bi bi-people"></i> {{ 'game.show.rankings.team_medals'|trans }}
+                                </button>
+                            </li>
+                        </ul>
 
-                        {# Team Points Tab #}
-                        <div class="tab-pane fade" id="team-points-pane" role="tabpanel" aria-labelledby="team-points-tab">
-                            {{ render(controller(
-                                'App\\BoundedContext\\VideoGamesRecords\\Team\\Presentation\\Web\\Controller\\Ranking\\TeamGameRankingController::points',
-                                {gameId: game.id, limit: 100}
-                            )) }}
-                        </div>
+                        <div class="tab-content" id="gameRankingTabsContent">
+                            <div class="tab-pane fade show active" id="player-points-pane" role="tabpanel" aria-labelledby="player-points-tab">
+                                {{ render(controller(
+                                    'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGameRankingController::points',
+                                    {gameId: game.id, limit: 100}
+                                )) }}
+                            </div>
 
-                        {# Team Medals Tab #}
-                        <div class="tab-pane fade" id="team-medals-pane" role="tabpanel" aria-labelledby="team-medals-tab">
-                            {{ render(controller(
-                                'App\\BoundedContext\\VideoGamesRecords\\Team\\Presentation\\Web\\Controller\\Ranking\\TeamGameRankingController::medals',
-                                {gameId: game.id, limit: 100}
-                            )) }}
+                            <div class="tab-pane fade" id="player-medals-pane" role="tabpanel" aria-labelledby="player-medals-tab">
+                                {{ render(controller(
+                                    'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\PlayerGameRankingController::medals',
+                                    {gameId: game.id, limit: 100}
+                                )) }}
+                            </div>
+
+                            <div class="tab-pane fade" id="team-points-pane" role="tabpanel" aria-labelledby="team-points-tab">
+                                {{ render(controller(
+                                    'App\\BoundedContext\\VideoGamesRecords\\Team\\Presentation\\Web\\Controller\\Ranking\\TeamGameRankingController::points',
+                                    {gameId: game.id, limit: 100}
+                                )) }}
+                            </div>
+
+                            <div class="tab-pane fade" id="team-medals-pane" role="tabpanel" aria-labelledby="team-medals-tab">
+                                {{ render(controller(
+                                    'App\\BoundedContext\\VideoGamesRecords\\Team\\Presentation\\Web\\Controller\\Ranking\\TeamGameRankingController::medals',
+                                    {gameId: game.id, limit: 100}
+                                )) }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {# Sidebar Column #}
+            <div class="col-lg-3 mt-4 mt-lg-0">
+                {% include '@VideoGamesRecordsCore/game/_sidebar.html.twig' with {'game': game} %}
+            </div>
         </div>
 
-        {# Sidebar Column #}
-        <div class="col-lg-3 mt-4 mt-lg-0">
-            {% include '@VideoGamesRecordsCore/game/_sidebar.html.twig' with {
-                'game': game
-            } %}
-        </div>
-    </div>
+    {% endif %}
 </div>
 {% endblock %}

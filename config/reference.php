@@ -2404,6 +2404,9 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     extra_data_provider?: scalar|Param|null, // Default: null
  *     providers?: array<string, mixed>,
  * }
+ * @psalm-type UxNativeConfig = array{
+ *     output_dir?: scalar|Param|null, // Directory where configuration JSON files are written. Defaults to %kernel.project_dir%/public. // Default: null
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2439,6 +2442,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     fd_log_viewer?: FdLogViewerConfig,
  *     nelmio_cors?: NelmioCorsConfig,
  *     dh_auditor?: DhAuditorConfig,
+ *     ux_native?: UxNativeConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2478,6 +2482,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         fd_log_viewer?: FdLogViewerConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         dh_auditor?: DhAuditorConfig,
+ *         ux_native?: UxNativeConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2514,6 +2519,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         fd_log_viewer?: FdLogViewerConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         dh_auditor?: DhAuditorConfig,
+ *         ux_native?: UxNativeConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2553,6 +2559,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         dama_doctrine_test?: DamaDoctrineTestConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         dh_auditor?: DhAuditorConfig,
+ *         ux_native?: UxNativeConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
