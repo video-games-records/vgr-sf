@@ -35,7 +35,7 @@ class Register extends AbstractLocalizedController
         }
 
         $limiter = $this->registerLimiter->create($request->getClientIp());
-        if (!$limiter->consume()->isAccepted()) {
+        if ($request->isMethod('POST') && !$limiter->consume()->isAccepted()) {
             throw new TooManyRequestsHttpException();
         }
 
