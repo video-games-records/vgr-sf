@@ -51,8 +51,8 @@ class GroupFormDataProvider implements ProviderInterface
         }
 
         $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';
-        $page = $this->requestStack->getCurrentRequest()?->query->getInt('page', 1) ?? 1;
-        $itemsPerPage = $this->requestStack->getCurrentRequest()?->query->getInt('itemsPerPage', 20) ?? 20;
+        $page = max(1, (int) ($this->requestStack->getCurrentRequest()?->query->get('page', 1) ?? 1));
+        $itemsPerPage = max(1, (int) ($this->requestStack->getCurrentRequest()?->query->get('itemsPerPage', 20) ?? 20));
 
         $paginator = $this->chartRepository->getList($player, $page, ['group' => $group], $locale, $itemsPerPage);
 

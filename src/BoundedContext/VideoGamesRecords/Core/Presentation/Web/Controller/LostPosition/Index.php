@@ -40,7 +40,7 @@ class Index extends AbstractLocalizedController
             throw $this->createAccessDeniedException();
         }
 
-        $page = $request->query->getInt('page', 1);
+        $page = max(1, (int) $request->query->get('page', 1));
         $gameId = $request->query->get('game') ? (int) $request->query->get('game') : null;
 
         // Get games with lost positions for the filter dropdown

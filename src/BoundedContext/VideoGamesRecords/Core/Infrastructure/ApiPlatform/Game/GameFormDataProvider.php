@@ -52,8 +52,8 @@ class GameFormDataProvider implements ProviderInterface
 
         $request = $this->requestStack->getCurrentRequest();
         $locale = $request?->getLocale() ?? 'en';
-        $page = $request?->query->getInt('page', 1) ?? 1;
-        $itemsPerPage = $request?->query->getInt('itemsPerPage', 20) ?? 20;
+        $page = max(1, (int) ($request?->query->get('page', 1) ?? 1));
+        $itemsPerPage = max(1, (int) ($request?->query->get('itemsPerPage', 20) ?? 20));
 
         $search = ['game' => $game];
         $searchTerm = $request?->query->get('search', '') ?? '';

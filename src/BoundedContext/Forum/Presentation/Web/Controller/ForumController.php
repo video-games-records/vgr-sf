@@ -101,7 +101,7 @@ class ForumController extends AbstractLocalizedController
         /** @var User|null $user */
         $user = $this->getUser();
 
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
 
         $query = $this->topicRepository->getActiveTopicsQuery($forum);
         $paginator = new Paginator($query);

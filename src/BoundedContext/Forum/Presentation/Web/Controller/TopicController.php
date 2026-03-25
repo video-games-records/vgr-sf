@@ -50,7 +50,7 @@ class TopicController extends AbstractLocalizedController
             ], 301);
         }
 
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
 
         $query = $this->messageRepository->getMessagesByTopicQuery($topic);
         $paginator = new Paginator($query);

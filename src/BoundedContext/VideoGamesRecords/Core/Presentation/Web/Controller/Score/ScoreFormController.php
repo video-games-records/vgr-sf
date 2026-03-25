@@ -50,12 +50,12 @@ class ScoreFormController extends AbstractLocalizedController
                 'id' => $id,
                 'slug' => $slug,
                 '_locale' => $_locale,
-                'page' => $request->query->getInt('page', 1),
+                'page' => max(1, (int) $request->query->get('page', 1)),
                 'search' => $request->query->get('search', ''),
             ]));
         }
 
-        $page = $request->query->getInt('page', 1);
+        $page = max(1, (int) $request->query->get('page', 1));
         $searchTerm = $request->query->get('search', '');
 
         $search = ['game' => $game];
@@ -108,11 +108,11 @@ class ScoreFormController extends AbstractLocalizedController
                 'groupId' => $groupId,
                 'groupSlug' => $groupSlug,
                 '_locale' => $_locale,
-                'page' => $request->query->getInt('page', 1),
+                'page' => max(1, (int) $request->query->get('page', 1)),
             ]));
         }
 
-        $page = $request->query->getInt('page', 1);
+        $page = max(1, (int) $request->query->get('page', 1));
 
         $paginator = $this->chartRepository->getList($player, $page, ['group' => $group], $_locale, 20);
 
