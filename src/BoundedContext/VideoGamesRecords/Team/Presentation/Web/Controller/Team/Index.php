@@ -23,7 +23,7 @@ class Index extends AbstractLocalizedController
     {
         $sortBy = $request->query->get('sort', 'pointGame');
         $order = $request->query->get('order', 'DESC');
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
         $limit = 100;
         $offset = ($page - 1) * $limit;
 

@@ -26,7 +26,7 @@ class LatestScoresPage extends AbstractLocalizedController
     public function __invoke(Request $request): Response
     {
         $period = $request->query->getInt('period', self::DEFAULT_PERIOD);
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
 
         // Validate period
         if (!in_array($period, self::ALLOWED_PERIODS, true)) {

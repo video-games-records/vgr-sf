@@ -38,7 +38,7 @@ class MessageController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
 
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
         $filters = $this->buildFilters($request);
 
         $queryBuilder = $this->messageRepository->getInboxMessages($user, $filters);
@@ -70,7 +70,7 @@ class MessageController extends AbstractLocalizedController
         /** @var User $user */
         $user = $this->getUser();
 
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
         $filters = $this->buildFilters($request);
 
         $queryBuilder = $this->messageRepository->getOutboxMessages($user, $filters);

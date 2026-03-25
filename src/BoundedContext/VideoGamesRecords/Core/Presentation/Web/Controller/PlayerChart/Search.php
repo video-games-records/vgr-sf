@@ -47,7 +47,7 @@ class Search extends AbstractLocalizedController
     {
         $locale = $request->getLocale();
         $session = $request->getSession();
-        $page = max(1, $request->query->getInt('page', 1));
+        $page = max(1, (int) $request->query->get('page', 1));
 
         // Load statuses from session for form pre-fill
         $statusValues = $session->get(self::SESSION_KEY_STATUSES, []);
