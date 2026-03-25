@@ -8,7 +8,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStat
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof;
-use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Video;
+use App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Video;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

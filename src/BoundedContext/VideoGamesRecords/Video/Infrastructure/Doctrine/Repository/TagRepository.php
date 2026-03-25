@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\BoundedContext\VideoGamesRecords\Video\Infrastructure\Doctrine\Repository;
+
+use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Tag;
+
+/**
+ * @extends DefaultRepository<Tag>
+ */
+class TagRepository extends DefaultRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Tag::class);
+    }
+}

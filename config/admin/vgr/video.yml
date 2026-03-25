@@ -1,0 +1,26 @@
+services:
+  # Video Admin
+  sonata.admin.vgr.video:
+    class: App\BoundedContext\VideoGamesRecords\Video\Presentation\Admin\VideoAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Video
+        controller: App\BoundedContext\VideoGamesRecords\Video\Presentation\Web\Controller\Admin\VideoAdminController
+        manager_type: orm
+        group: "group.proofs"
+        label: "video.label"
+    calls:
+      - [ setTemplate, [ 'show', '@@VideoGamesRecordsVideo/admin/object/video/show.html.twig' ] ]
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+
+  # Tag Admin
+  sonata.admin.vgr.tag:
+    class: App\BoundedContext\VideoGamesRecords\Video\Presentation\Admin\TagAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Tag
+        manager_type: orm
+        group: "group.config"
+        label: "tag.label"
+    calls:
+      - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]

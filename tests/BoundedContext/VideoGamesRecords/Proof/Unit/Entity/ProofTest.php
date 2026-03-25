@@ -10,7 +10,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Picture;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\ProofRequest;
-use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Video;
+use App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Video;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 use DateTime;
 use PHPUnit\Framework\Attributes\DataProvider;
