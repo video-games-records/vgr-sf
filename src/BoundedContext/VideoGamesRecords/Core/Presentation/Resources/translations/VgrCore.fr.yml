@@ -353,12 +353,6 @@ top_ranking:
   posts: posts
   no_rankings: Aucun classement trouvé pour cette période
 
-  recent_games:
-    title: Mes jeux récents
-    login_required: Connecte-toi pour voir tes jeux récents
-    login: Se connecter
-    empty: Aucun jeu joué pour l'instant
-
 country:
   show:
     title: Classement par pays

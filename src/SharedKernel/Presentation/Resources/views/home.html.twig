@@ -66,18 +66,8 @@
     { ttl: 86400 }
 )) }}
 
+{# Top 5 Leaderboards Section #}
 <div class="row g-4">
-    {% if ux_is_native() %}
-    {# Recent Games for logged-in player #}
-    <div class="col-12">
-        {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Player\\RecentGames',
-            { limit: 5 }
-        )) }}
-    </div>
-    {% endif %}
-
-    {% if not ux_is_native() %}
     {# Game Points Leaderboard #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
@@ -126,6 +116,13 @@
         )) }}
     </div>
 
+    {# Game of the Day #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Game\\GameOfDay'
+        )) }}
+    </div>
+
     {# Latest Games #}
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
@@ -134,19 +131,11 @@
         )) }}
     </div>
 
-    {# Latest Forum Messages #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    {# Latest Scores #}
+    <div class="col-12 col-xl-6">
         {{ render(controller(
-            'App\\BoundedContext\\Forum\\Presentation\\Web\\Controller\\LatestMessagesController',
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\PlayerChart\\LatestScores',
             { ttl: 3600 }
-        )) }}
-    </div>
-    {% endif %}
-
-    {# Game of the Day #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-        {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Game\\GameOfDay'
         )) }}
     </div>
 
@@ -158,19 +147,16 @@
         )) }}
     </div>
 
-    {# Latest Scores #}
-    {% if not ux_is_native() %}
-    <div class="col-12 col-xl-6">
+    {# Latest Forum Messages #}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         {{ render(controller(
-            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\PlayerChart\\LatestScores',
+            'App\\BoundedContext\\Forum\\Presentation\\Web\\Controller\\LatestMessagesController',
             { ttl: 3600 }
         )) }}
     </div>
-    {% endif %}
 </div>
 
 {# Partners Section #}
-{% if not ux_is_native() %}
 <div class="text-center mt-5 pt-4 border-top">
     <h2 class="h5 mb-4">{{ 'home.partners.title'|trans({}, 'SharedKernel') }}</h2>
     <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
@@ -185,7 +171,6 @@
         </a>
     </div>
 </div>
-{% endif %}
 
 {# Affiliate Links #}
 <div class="text-center mt-5 pt-4 border-top">
