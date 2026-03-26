@@ -104,7 +104,6 @@
     </div>
 
     {# Navigation Tabs #}
-    {% if not ux_is_native() %}
     <ul class="nav nav-tabs mb-4">
         <li class="nav-item">
             <a
@@ -139,7 +138,6 @@
             </a>
         </li>
     </ul>
-    {% endif %}
 
     {# Tab Content #}
     {% block profile_content %}{% endblock %}
