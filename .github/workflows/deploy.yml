@@ -67,6 +67,7 @@ jobs:
                     --exclude='.github' \
                     --exclude='var/' \
                     --exclude='.env.local' \
+                    --exclude='config/jwt/' \
                     ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
                   ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
                     "cd ${{ secrets.DEPLOY_PATH }} && php bin/console cache:clear && php bin/console cache:warmup"
