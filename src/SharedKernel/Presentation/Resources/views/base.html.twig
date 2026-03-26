@@ -64,7 +64,6 @@
     </head>
     <body>
         {# Navigation #}
-        {% if not ux_is_native() %}
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ path('home') }}">
@@ -266,7 +265,6 @@
                 </div>
             </div>
         </nav>
-        {% endif %}
 
         {% if app.environment == 'staging' %}
             <div class="alert alert-warning text-center mb-3 rounded-0 border-0 fw-bold py-3" role="alert" style="background-color: #ff9800; color: #000;">
@@ -275,9 +273,7 @@
         {% endif %}
 
         {# Site Header with background image (V7 style) - Image only, no content #}
-        {% if not ux_is_native() %}
         <div class="site-header d-none d-md-block"></div>
-        {% endif %}
 
         {# Flash Messages #}
         {% for type, messages in app.flashes %}
@@ -303,7 +299,6 @@
         {% include '@SharedKernel/components/_theme_picker.html.twig' %}
 
         {# Footer #}
-        {% if not ux_is_native() %}
         <footer class="py-4 mt-5">
             <div class="container">
                 <div class="row">
@@ -323,6 +318,5 @@
                 </div>
             </div>
         </footer>
-        {% endif %}
     </body>
 </html>

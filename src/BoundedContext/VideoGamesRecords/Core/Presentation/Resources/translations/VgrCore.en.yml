@@ -353,12 +353,6 @@ top_ranking:
   posts: posts
   no_rankings: No rankings found for this period
 
-  recent_games:
-    title: My Recent Games
-    login_required: Log in to see your recent games
-    login: Log in
-    empty: No games played yet
-
 country:
   show:
     title: Country Ranking
