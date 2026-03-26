@@ -6,9 +6,16 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Application\Mapper;
 
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Game\GameDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class GameMapper
 {
+    public function __construct(
+        #[Autowire(env: 'STORAGE_PUBLIC_URL')]
+        private readonly string $storagePublicUrl,
+    ) {
+    }
+
     public function toDTO(Game $game): GameDTO
     {
         // Map serie with serie:read fields
@@ -44,7 +51,7 @@ class GameMapper
         return new GameDTO(
             id: (int) $game->getId(),
             name: $game->getName(),
-            picture: $game->getPicture(),
+            picture: $this->storagePublicUrl . '/game/' . ($game->getPicture() ?: 'default.png'),
             status: $game->getStatus(),
             publishedAt: $game->getPublishedAt(),
             isRank: $game->getIsRank(),

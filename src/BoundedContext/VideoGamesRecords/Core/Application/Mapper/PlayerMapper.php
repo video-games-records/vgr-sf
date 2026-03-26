@@ -7,13 +7,17 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Application\Mapper;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Player\PlayerDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Player\PlayerStatsDTO;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 readonly class PlayerMapper
 {
     public function __construct(
-        private CountryMapper $countryMapper
+        private CountryMapper $countryMapper,
+        #[Autowire(env: 'STORAGE_PUBLIC_URL')]
+        private string $storagePublicUrl,
     ) {
     }
+
     public function toDTO(Player $player): PlayerDTO
     {
         return new PlayerDTO(
@@ -30,6 +34,7 @@ readonly class PlayerMapper
             collection: $player->getCollection(),
             country: $player->getCountry() ? $this->countryMapper->toDTO($player->getCountry()) : null,
             birthDate: $player->getBirthDate(),
+            avatarUrl: $this->storagePublicUrl . '/user/' . $player->getAvatar(),
         );
     }
 

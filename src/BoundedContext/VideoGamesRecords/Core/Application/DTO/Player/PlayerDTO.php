@@ -42,6 +42,7 @@ class PlayerDTO
         #[ApiProperty(readableLink: true)]
         public readonly ?CountryDTO $country,
         public readonly ?\DateTimeInterface $birthDate,
+        public readonly ?string $avatarUrl,
     ) {
     }
 }
