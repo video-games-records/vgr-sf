@@ -108,6 +108,31 @@ assets-compile: ## Compile les assets dans le répertoire public
 	php bin/console asset-map:compile
 
 ##
+## Déploiement
+##---------------------------------------------------------------------------
+
+maintenance-on: ## Active le mode maintenance (silence les alertes Discord)
+	touch var/maintenance
+
+maintenance-off: ## Désactive le mode maintenance
+	rm -f var/maintenance
+
+deploy: ## Déploie en production (silence Discord pendant la livraison)
+	@$(MAKE) maintenance-on
+	composer install --no-dev --optimize-autoloader
+	php bin/console doctrine:migrations:migrate --no-interaction --env=prod
+	php bin/console cache:clear --env=prod
+	php bin/console assets:install --env=prod
+	@$(MAKE) maintenance-off
+
+##
+## Sécurité
+##---------------------------------------------------------------------------
+
+jwt-keys: ## Génère les clés privée/publique JWT
+	php bin/console lexik:jwt:generate-keypair --overwrite
+
+##
 ## Messenger
 ##---------------------------------------------------------------------------
 

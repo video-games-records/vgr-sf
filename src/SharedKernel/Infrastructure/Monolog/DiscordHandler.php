@@ -17,6 +17,7 @@ class DiscordHandler extends AbstractProcessingHandler
     public function __construct(
         private readonly HttpClientInterface $httpClient,
         private readonly string $webhookUrl,
+        private readonly string $projectDir,
         int|string|Level $level = Level::Error,
         bool $bubble = true,
     ) {
@@ -25,6 +26,10 @@ class DiscordHandler extends AbstractProcessingHandler
 
     public function isHandling(LogRecord $record): bool
     {
+        if (file_exists($this->projectDir . '/var/maintenance')) {
+            return false;
+        }
+
         $exception = $record->context['exception'] ?? null;
         if (
             $exception instanceof HttpExceptionInterface
