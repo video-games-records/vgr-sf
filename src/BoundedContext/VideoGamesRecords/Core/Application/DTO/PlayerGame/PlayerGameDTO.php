@@ -16,7 +16,8 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Player\
             uriVariables: ['id'],
             requirements: ['id' => '\d+'],
             provider: PlayerGamesDataProvider::class,
-            paginationEnabled: false,
+            paginationEnabled: true,
+            paginationItemsPerPage: 10,
             openapi: new Model\Operation(
                 tags: ['Player'],
                 summary: 'Get player games ordered by last score',
