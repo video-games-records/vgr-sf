@@ -51,8 +51,8 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
-            #refresh_jwt:
-            #    check_path: /api/token/refresh # or, you may use the `api_refresh_token` route name
+            refresh_jwt:
+                check_path: /api/token/refresh
             login_throttling:
                 max_attempts: 10
                 interval: '15 minutes'
