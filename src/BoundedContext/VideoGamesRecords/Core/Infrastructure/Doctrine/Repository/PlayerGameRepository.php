@@ -56,13 +56,27 @@ class PlayerGameRepository extends DefaultRepository
     /**
      * @return PlayerGame[]
      */
-    public function findAllByPlayerOrderedByLastUpdate(Player $player): array
+    public function findAllByPlayerOrderedByLastUpdate(Player $player, int $limit = 0, int $offset = 0): array
     {
-        return $this->createQueryBuilder('pg')
+        $qb = $this->createQueryBuilder('pg')
             ->where('pg.player = :player')
             ->setParameter('player', $player)
-            ->orderBy('pg.lastUpdate', 'DESC')
+            ->orderBy('pg.lastUpdate', 'DESC');
+
+        if ($limit > 0) {
+            $qb->setMaxResults($limit)->setFirstResult($offset);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countByPlayer(Player $player): int
+    {
+        return (int) $this->createQueryBuilder('pg')
+            ->select('COUNT(pg.player)')
+            ->where('pg.player = :player')
+            ->setParameter('player', $player)
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
     }
 }

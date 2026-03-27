@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\ApiPlatform\Player;
 
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\Pagination\Pagination;
+use ApiPlatform\State\Pagination\TraversablePaginator;
 use ApiPlatform\State\ProviderInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\PlayerGame\PlayerGameDTO;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Mapper\PlayerGameMapper;
@@ -19,18 +21,16 @@ class PlayerGamesDataProvider implements ProviderInterface
         private readonly PlayerRepository $playerRepository,
         private readonly PlayerGameRepository $playerGameRepository,
         private readonly PlayerGameMapper $playerGameMapper,
+        private readonly Pagination $pagination,
     ) {
     }
 
-    /**
-     * @return array<PlayerGameDTO>
-     */
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): TraversablePaginator
     {
         $id = $uriVariables['id'] ?? null;
 
         if ($id === null) {
-            return [];
+            return new TraversablePaginator(new \ArrayIterator([]), 1, 10, 0);
         }
 
         $player = $this->playerRepository->find((int) $id);
@@ -39,11 +39,18 @@ class PlayerGamesDataProvider implements ProviderInterface
             throw new NotFoundHttpException('Player not found');
         }
 
-        $playerGames = $this->playerGameRepository->findAllByPlayerOrderedByLastUpdate($player);
+        $page = $this->pagination->getPage($context);
+        $limit = $this->pagination->getLimit($operation, $context);
+        $offset = $this->pagination->getOffset($operation, $context);
 
-        return array_map(
+        $total = $this->playerGameRepository->countByPlayer($player);
+        $playerGames = $this->playerGameRepository->findAllByPlayerOrderedByLastUpdate($player, $limit, $offset);
+
+        $dtos = array_map(
             fn ($playerGame) => $this->playerGameMapper->toDTO($playerGame),
             $playerGames
         );
+
+        return new TraversablePaginator(new \ArrayIterator($dtos), $page, $limit, $total);
     }
 }
