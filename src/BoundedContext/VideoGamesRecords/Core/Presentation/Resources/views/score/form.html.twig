@@ -26,7 +26,11 @@
         }]) %}
     {% endif %}
     {% if context == 'chart' %}
-        {% set breadcrumbs = breadcrumbs|merge([{'label': chart.name ~ ' - ' ~ 'score.form.title'|trans}]) %}
+        {% set breadcrumbs = breadcrumbs|merge([{
+            'url': path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug}),
+            'label': chart.name
+        }]) %}
+        {% set breadcrumbs = breadcrumbs|merge([{'label': 'score.form.title'|trans}]) %}
     {% else %}
         {% set breadcrumbs = breadcrumbs|merge([{'label': 'score.form.title'|trans}]) %}
     {% endif %}
