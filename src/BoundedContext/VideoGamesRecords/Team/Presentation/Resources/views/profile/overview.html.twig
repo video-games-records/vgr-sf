@@ -218,7 +218,7 @@
                     {% for player in team.players %}
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="d-flex align-items-center p-2 border rounded">
-                                <img src="{{ asset('users/' ~ player.userId ~ '/avatar') }}"
+                                <img src="{{ player_avatar_url(player.avatar) }}"
                                      alt="{{ player.pseudo }}"
                                      class="rounded-circle me-2"
                                      width="32"

@@ -12,7 +12,7 @@
                 {# Avatar #}
                 <div class="col-auto">
                     <img
-                        src="{{ asset('users/' ~ player.userId ~ '/avatar') }}"
+                        src="{{ player_avatar_url(player.avatar) }}"
                         alt="{{ player.pseudo }}"
                         class="rounded-circle"
                         width="80"

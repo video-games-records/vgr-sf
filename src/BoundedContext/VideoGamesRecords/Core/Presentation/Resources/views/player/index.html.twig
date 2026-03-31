@@ -62,7 +62,7 @@
                         {% for player in players %}
                             <tr {% if app.user and player.getUserId() == app.user.id %}class="table-primary"{% endif %}>
                                 <td class="align-middle d-none d-md-table-cell">
-                                    <img src="/users/{{ player.getUserId() }}/avatar"
+                                    <img src="{{ player_avatar_url(player.avatar) }}"
                                          alt="{{ player.pseudo }}"
                                          class="rounded-circle"
                                          width="40"

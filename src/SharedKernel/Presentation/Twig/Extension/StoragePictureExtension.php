@@ -19,6 +19,8 @@ class StoragePictureExtension extends AbstractExtension
             new TwigFunction('game_picture_url', $this->gamePictureUrl(...)),
             new TwigFunction('serie_picture_url', $this->seriePictureUrl(...)),
             new TwigFunction('badge_picture_url', $this->badgePictureUrl(...)),
+            new TwigFunction('player_avatar_url', $this->playerAvatarUrl(...)),
+            new TwigFunction('team_avatar_url', $this->teamAvatarUrl(...)),
         ];
     }
 
@@ -35,5 +37,15 @@ class StoragePictureExtension extends AbstractExtension
     public function badgePictureUrl(string $directory, string $picture): string
     {
         return $this->storagePublicUrl . '/' . $directory . '/' . $picture;
+    }
+
+    public function playerAvatarUrl(?string $avatar): string
+    {
+        return $this->storagePublicUrl . '/user/' . ($avatar ?: 'default.jpg');
+    }
+
+    public function teamAvatarUrl(?string $logo): string
+    {
+        return $this->storagePublicUrl . '/team/' . ($logo ?: 'default.png');
     }
 }
