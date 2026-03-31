@@ -12,7 +12,7 @@
                 {# Avatar #}
                 <div class="col-auto">
                     <img
-                        src="{{ path('vgr_team_avatar', {id: team.id}) }}"
+                        src="{{ team_avatar_url(team.logo) }}"
                         alt="{{ team.libTeam }}"
                         class="rounded-circle"
                         width="80"

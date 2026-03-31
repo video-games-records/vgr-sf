@@ -50,7 +50,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="align-middle d-none d-md-table-cell">
-                                                    <img src="/users/{{ player.getUserId() }}/avatar"
+                                                    <img src="{{ player_avatar_url(player.avatar) }}"
                                                          alt="{{ player.pseudo }}"
                                                          class="rounded-circle"
                                                          width="40"
@@ -101,7 +101,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="align-middle d-none d-md-table-cell">
-                                                    <img src="/teams/{{ team.id }}/avatar"
+                                                    <img src="{{ team_avatar_url(team.logo) }}"
                                                          alt="{{ team.libTeam }}"
                                                          class="rounded-circle"
                                                          width="40"

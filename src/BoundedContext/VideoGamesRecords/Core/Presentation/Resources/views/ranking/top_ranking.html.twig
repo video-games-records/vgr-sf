@@ -145,7 +145,7 @@
                                     <span class="badge rounded-pill bg-danger fs-6">#3</span>
                                 {% endif %}
                             </div>
-                            <img src="/users/{{ ranking.player.getUserId() }}/avatar"
+                            <img src="{{ player_avatar_url(ranking.player.avatar) }}"
                                  alt="{{ ranking.player.pseudo }}"
                                  class="rounded-circle mb-3"
                                  width="80" height="80">

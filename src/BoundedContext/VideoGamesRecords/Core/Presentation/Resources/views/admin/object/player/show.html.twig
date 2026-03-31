@@ -29,7 +29,7 @@
                         <div class="col-md-8">
                             <div class="player-details">
                                 <div class="player-header">
-                                    <img src="/users/{{ object.getUserId() }}/avatar" alt="{{ object.getPseudo() }}" class="player-avatar-img">
+                                    <img src="{{ player_avatar_url(object.getAvatar()) }}" alt="{{ object.getPseudo() }}" class="player-avatar-img">
                                     <h4>{{ object.getPseudo() }}</h4>
                                 </div>
                                 <div class="player-meta">
@@ -289,7 +289,7 @@
                                 <div class="col-md-3 col-sm-4 col-xs-6">
                                     <div class="friend-box">
                                         <div class="friend-avatar">
-                                            <img src="/users/{{ friend.getUserId() }}/avatar" alt="{{ friend.getPseudo() }}" class="friend-avatar-img">
+                                            <img src="{{ player_avatar_url(friend.getAvatar()) }}" alt="{{ friend.getPseudo() }}" class="friend-avatar-img">
                                         </div>
                                         <div class="friend-info">
                                             <div class="friend-name">
