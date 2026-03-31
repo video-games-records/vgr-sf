@@ -99,7 +99,7 @@
                                     {% endif %}
                                     {% set topicPages = ((topic.nbMessage - 1) / 20)|round(0, 'floor') + 1 %}
                                     {% if topicPages > 1 %}
-                                        <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug, page: topicPages}) }}" class="badge bg-secondary text-decoration-none ms-1" title="{{ 'forum.show.go_to_last_page'|trans }}">
+                                        <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug, page: topicPages}) }}{% if topic.lastMessage %}#message-{{ topic.lastMessage.id }}{% endif %}" class="badge bg-secondary text-decoration-none ms-1" title="{{ 'forum.show.go_to_last_page'|trans }}">
                                             {{ topicPages }}
                                         </a>
                                     {% endif %}
@@ -120,7 +120,9 @@
                                 <td class="d-none d-md-table-cell">
                                     {% if topic.lastMessage %}
                                         <small class="text-muted">
-                                            {{ topic.lastMessage.createdAt|date('d/m/Y H:i') }}<br>
+                                            <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug, page: topicPages}) }}#message-{{ topic.lastMessage.id }}" class="text-decoration-none text-muted">
+                                                {{ topic.lastMessage.createdAt|date('d/m/Y H:i') }}
+                                            </a><br>
                                             {{ 'forum.by'|trans }}
                                             <a href="{{ path('vgr_player_profile_overview', {id: topic.lastMessage.user.id, slug: topic.lastMessage.user.slug}) }}" class="text-decoration-none">
                                                 <strong>{{ topic.lastMessage.user.username }}</strong>
