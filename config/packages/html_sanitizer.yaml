@@ -17,3 +17,4 @@ framework:
                     h2: []
                     h3: []
                     blockquote: []
+                    img: ['src', 'alt']
