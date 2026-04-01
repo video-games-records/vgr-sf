@@ -18,3 +18,5 @@ framework:
                     h3: []
                     blockquote: []
                     img: ['src', 'alt']
+                allowed_media_schemes: ['http', 'https', 'data']
+                max_input_length: -1
