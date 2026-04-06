@@ -63,8 +63,8 @@
         <meta name="turbo-prefetch" content="false">
     </head>
     <body>
-        {# Navigation #}
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        {# Navigation - hidden on mobile, bottom nav used instead #}
+        <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-flex">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ path('home') }}">
                     <picture>
@@ -298,8 +298,29 @@
         {# Theme Picker Component #}
         {% include '@SharedKernel/components/_theme_picker.html.twig' %}
 
+        {# Mobile Bottom Navigation - visible on mobile only #}
+        <nav class="d-lg-none fixed-bottom mobile-bottom-nav" data-bs-theme="dark">
+            <div class="d-flex justify-content-around align-items-center h-100">
+                <a href="{{ path('home') }}" class="mobile-bottom-nav__item text-center">
+                    <i class="bi bi-house-fill fs-4"></i>
+                </a>
+                <a href="{{ path('vgr_game_list_by_letter', {letter: 'a'}) }}" class="mobile-bottom-nav__item text-center">
+                    <i class="bi bi-controller fs-4"></i>
+                </a>
+                {% if app.user %}
+                    <a href="{{ path('vgr_player_profile_overview', {id: app.user.id, slug: app.user.slug}) }}" class="mobile-bottom-nav__item text-center">
+                        <i class="bi bi-person-fill fs-4"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="mobile-bottom-nav__item text-center" data-turbo="false" data-turbo-prefetch="false">
+                        <i class="bi bi-person-fill fs-4"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </nav>
+
         {# Footer #}
-        <footer class="py-4 mt-5">
+        <footer class="py-4 mt-5 d-none d-lg-block">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">

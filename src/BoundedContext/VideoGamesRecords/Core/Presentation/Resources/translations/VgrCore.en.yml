@@ -109,6 +109,10 @@ player_chart:
     video_submit: Submit Video
 
 player:
+  home_recent_games:
+    card_title: My recent games
+    no_games: No games played yet
+
   profile:
     tabs:
       overview: Overview

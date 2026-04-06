@@ -60,16 +60,27 @@
 {% endblock %}
 
 {% block body %}
+{# Mobile only: recent games for logged-in player #}
+{% if app.user %}
+<div class="d-lg-none mb-4">
+    {{ render(controller(
+        'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Player\\HomeRecentGames'
+    )) }}
+</div>
+{% endif %}
+
 {# Hero Header Content - Hidden on mobile #}
+<div class="d-none d-lg-block">
 {{ render(controller(
     'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\SiteStats',
     { ttl: 86400 }
 )) }}
+</div>
 
 {# Top 5 Leaderboards Section #}
 <div class="row g-4">
     {# Game Points Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::gamePoints',
             { ttl: 3600 }
@@ -77,7 +88,7 @@
     </div>
 
     {# Cup Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::cups',
             { ttl: 3600 }
@@ -85,7 +96,7 @@
     </div>
 
     {# Medals Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::medals',
             { ttl: 3600 }
@@ -93,7 +104,7 @@
     </div>
 
     {# Record Points Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::recordPoints',
             { ttl: 3600 }
@@ -101,7 +112,7 @@
     </div>
 
     {# Badge Points Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::badges',
             { ttl: 3600 }
@@ -109,7 +120,7 @@
     </div>
 
     {# Proofs Leaderboard #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Ranking\\TopPlayersController::proofs',
             { ttl: 3600 }
@@ -124,7 +135,7 @@
     </div>
 
     {# Latest Games #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Game\\LatestGames',
             { ttl: 3600 }
@@ -132,7 +143,7 @@
     </div>
 
     {# Latest Scores #}
-    <div class="col-12 col-xl-6">
+    <div class="col-12 col-xl-6 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\PlayerChart\\LatestScores',
             { ttl: 3600 }
@@ -148,7 +159,7 @@
     </div>
 
     {# Latest Forum Messages #}
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-none d-lg-block">
         {{ render(controller(
             'App\\BoundedContext\\Forum\\Presentation\\Web\\Controller\\LatestMessagesController',
             { ttl: 3600 }
@@ -157,7 +168,7 @@
 </div>
 
 {# Partners Section #}
-<div class="text-center mt-5 pt-4 border-top">
+<div class="text-center mt-5 pt-4 border-top d-none d-lg-block">
     <h2 class="h5 mb-4">{{ 'home.partners.title'|trans({}, 'SharedKernel') }}</h2>
     <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
         <a href="https://www.culture-games.com/" target="_blank" rel="noopener noreferrer">
@@ -173,7 +184,7 @@
 </div>
 
 {# Affiliate Links #}
-<div class="text-center mt-5 pt-4 border-top">
+<div class="text-center mt-5 pt-4 border-top d-none d-lg-block">
     <a href="https://video-games-records.myspreadshop.fr/" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Shop"><i class="bi bi-cart3"></i></a>
     <a href="https://discord.com/invite/nYsRzsZ" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Discord"><i class="bi bi-discord"></i></a>
     <a href="https://www.twitch.tv/videogamesrecords/" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Twitch"><i class="bi bi-twitch"></i></a>
