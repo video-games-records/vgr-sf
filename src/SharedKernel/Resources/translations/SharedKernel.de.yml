@@ -116,6 +116,10 @@ home:
     keywords: "Videospiele Rekorde, Videospiel Weltrekorde, Gaming Ranglisten, Spiel-Rankings, kompetitives Gaming, Spieler-Rankings, Spielpunkte, Gaming Community, Abzeichen, Trophäen, Videospiel-Wettbewerb"
   partners:
     title: "Unsere Partner"
+  donate:
+    title: "Unterstütze uns"
+    description: "Hilf uns, Video Games Records am Leben zu erhalten und wachsen zu lassen. Jeder Beitrag macht einen Unterschied!"
+    button: "Spenden"
 
 # === FLASH MESSAGES (Messages système communs) ===
 flash:

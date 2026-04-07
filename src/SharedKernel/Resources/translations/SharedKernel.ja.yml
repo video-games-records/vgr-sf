@@ -104,6 +104,10 @@ home:
     keywords: "ビデオゲーム記録, ゲームランキング, 世界記録, eスポーツ, プレイヤーランキング, ゲームスコア, ゲームコミュニティ, バッジ, トロフィー"
   partners:
     title: "パートナー"
+  donate:
+    title: "サポートする"
+    description: "Video Games Recordsの維持・発展にご協力ください。皆様のご支援が大きな力になります！"
+    button: "寄付する"
 
 # === FLASH MESSAGES ===
 flash:

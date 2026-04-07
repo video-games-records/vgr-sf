@@ -172,6 +172,19 @@
     {% include '@SharedKernel/components/_adsense.html.twig' with {ad_slot: '9314775557'} %}
 </div>
 
+{# Donation Banner #}
+<div class="mt-4 text-center">
+    <div class="card border-warning">
+        <div class="card-body py-3">
+            <h2 class="h5 mb-1 text-warning"><i class="bi bi-heart-fill me-2"></i>{{ 'home.donate.title'|trans }}</h2>
+            <p class="mb-2 small">{{ 'home.donate.description'|trans }}</p>
+            <a href="https://streamlabs.com/videogamesrecords/tip" class="btn btn-warning btn-sm" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-gift me-1"></i>{{ 'home.donate.button'|trans }}
+            </a>
+        </div>
+    </div>
+</div>
+
 {# Partners Section #}
 <div class="text-center mt-5 pt-4 border-top d-none d-lg-block">
     <h2 class="h5 mb-4">{{ 'home.partners.title'|trans({}, 'SharedKernel') }}</h2>

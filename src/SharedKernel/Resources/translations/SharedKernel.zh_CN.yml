@@ -104,6 +104,10 @@ home:
     keywords: "电子游戏记录, 游戏排行榜, 世界纪录, 竞技游戏, 玩家排名, 游戏分数, 游戏社区, 徽章, 奖杯, 游戏竞赛"
   partners:
     title: "我们的合作伙伴"
+  donate:
+    title: "支持我们"
+    description: "帮助我们维持和发展 Video Games Records。每一份贡献都至关重要！"
+    button: "捐款"
 
 # === FLASH MESSAGES ===
 flash:

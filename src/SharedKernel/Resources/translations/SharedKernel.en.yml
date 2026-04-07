@@ -116,6 +116,10 @@ home:
     keywords: "video games records, video game world records, gaming leaderboards, game rankings, competitive gaming, player rankings, game scores, gaming community, badges, trophies, video game competition"
   partners:
     title: "Our Partners"
+  donate:
+    title: "Support Us"
+    description: "Help us keep Video Games Records alive and growing. Every contribution makes a difference!"
+    button: "Make a Donation"
 
 # === FLASH MESSAGES (Messages système communs) ===
 flash:
