@@ -168,19 +168,21 @@
 </div>
 
 {# AdSense Block #}
-<div class="mt-4 d-none d-lg-block">
+<div class="mt-4 d-none d-lg-block text-center">
     {% include '@SharedKernel/components/_adsense.html.twig' with {ad_slot: '9314775557'} %}
 </div>
 
 {# Donation Banner #}
-<div class="mt-4 text-center">
-    <div class="card border-warning">
-        <div class="card-body py-3">
-            <h2 class="h5 mb-1 text-warning"><i class="bi bi-heart-fill me-2"></i>{{ 'home.donate.title'|trans }}</h2>
-            <p class="mb-2 small">{{ 'home.donate.description'|trans }}</p>
-            <a href="https://streamlabs.com/videogamesrecords/tip" class="btn btn-warning btn-sm" target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-gift me-1"></i>{{ 'home.donate.button'|trans }}
-            </a>
+<div class="row mt-4">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <div class="card border-warning text-center">
+            <div class="card-body py-3">
+                <h2 class="h5 mb-1 text-warning"><i class="bi bi-heart-fill me-2"></i>{{ 'home.donate.title'|trans }}</h2>
+                <p class="mb-2 small">{{ 'home.donate.description'|trans }}</p>
+                <a href="https://streamlabs.com/videogamesrecords/tip" class="btn btn-warning btn-sm" target="_blank" rel="noopener noreferrer">
+                    <i class="bi bi-gift me-1"></i>{{ 'home.donate.button'|trans }}
+                </a>
+            </div>
         </div>
     </div>
 </div>
