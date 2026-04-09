@@ -12,13 +12,17 @@ flysystem:
                     dir:
                         public: 0o777
                         private: 0o777
-        s3.storage:
-            adapter: 'aws'
+        picture.storage:
+            adapter: 'local'
             options:
-                client: 'Aws\S3\S3Client'
-                bucket: '%env(AWS_S3_STORAGE_BUCKET)%'
-                prefix: ''
-                streamReads: true
+                directory: '%kernel.project_dir%/../picture'
+                permissions:
+                    file:
+                        public: 0o644
+                        private: 0o644
+                    dir:
+                        public: 0o755
+                        private: 0o755
         proof.s3.storage:
             adapter: 'aws'
             options:
@@ -26,10 +30,6 @@ flysystem:
                 bucket: '%env(AWS_S3_BUCKET_PROOF)%'
                 prefix: ''
                 streamReads: true
-        app.storage:
-            adapter: 'lazy'
-            options:
-                source: '%env(APP_STORAGE)%'
         proof.storage:
             adapter: 'lazy'
             options:

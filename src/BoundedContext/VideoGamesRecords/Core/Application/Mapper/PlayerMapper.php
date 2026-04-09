@@ -13,7 +13,7 @@ readonly class PlayerMapper
 {
     public function __construct(
         private CountryMapper $countryMapper,
-        #[Autowire(env: 'STORAGE_PUBLIC_URL')]
+        #[Autowire(env: 'PICTURE_PUBLIC_URL')]
         private string $storagePublicUrl,
     ) {
     }

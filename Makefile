@@ -130,7 +130,7 @@ messenger-consume: ## Consomme les messages de la queue Messenger
 ##---------------------------------------------------------------------------
 
 serve: ## Démarre le serveur Symfony et compile les assets en mode watch
-	symfony server:start -d
+	symfony server:start -d --no-tls
 	npm run watch
 
 serve-stop: ## Arrête le serveur Symfony
