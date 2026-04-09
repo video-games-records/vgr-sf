@@ -75,6 +75,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 2, nullable: false, options: ['default' => 'en'])]
     protected string $language = 'en';
 
+    #[Assert\Choice(callback: [\DateTimeZone::class, 'listIdentifiers'])]
+    #[ORM\Column(length: 50, nullable: false, options: ['default' => 'UTC'])]
+    protected string $timezone = 'UTC';
+
     #[ORM\Column(length: 128)]
     #[Gedmo\Slug(fields: ['username'])]
     protected string $slug;
@@ -260,6 +264,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLanguage(string $language): static
     {
         $this->language = $language;
+        return $this;
+    }
+
+    public function getTimezone(): string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(string $timezone): static
+    {
+        $this->timezone = $timezone;
         return $this;
     }
 

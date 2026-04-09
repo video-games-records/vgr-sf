@@ -80,7 +80,7 @@
                                             <td class="d-none d-md-table-cell">
                                                 {% if forum.lastMessage %}
                                                     <small class="text-muted">
-                                                        {{ forum.lastMessage.createdAt|date('d/m/Y H:i') }}<br>
+                                                        {{ forum.lastMessage.createdAt|user_datetime }}<br>
                                                         {{ 'forum.by'|trans }}
                                                         <a href="{{ path('vgr_player_profile_overview', {id: forum.lastMessage.user.id, slug: forum.lastMessage.user.slug}) }}" class="text-decoration-none">
                                                             <strong>{{ forum.lastMessage.user.username }}</strong>
@@ -167,7 +167,7 @@
                                             <td class="d-none d-md-table-cell">
                                                 {% if topic.lastMessage %}
                                                     <small class="text-muted">
-                                                        {{ topic.lastMessage.createdAt|date('d/m/Y H:i') }}<br>
+                                                        {{ topic.lastMessage.createdAt|user_datetime }}<br>
                                                         {{ 'forum.by'|trans }}
                                                         <a href="{{ path('vgr_player_profile_overview', {id: topic.lastMessage.user.id, slug: topic.lastMessage.user.slug}) }}" class="text-decoration-none">
                                                             <strong>{{ topic.lastMessage.user.username }}</strong>

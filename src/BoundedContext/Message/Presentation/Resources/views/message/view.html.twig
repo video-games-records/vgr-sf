@@ -68,8 +68,8 @@
                         </div>
                         <div class="text-end text-body-secondary">
                             <i class="bi bi-calendar"></i>
-                            {{ message.createdAt|date('d/m/Y') }}<br>
-                            <small>{{ message.createdAt|date('H:i') }}</small>
+                            {{ message.createdAt|user_date }}<br>
+                            <small>{{ message.createdAt|user_time }}</small>
                         </div>
                     </div>
 

@@ -121,7 +121,7 @@
                                     {% if topic.lastMessage %}
                                         <small class="text-muted">
                                             <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: forum.id, forumSlug: forum.slug, page: topicPages}) }}#message-{{ topic.lastMessage.id }}" class="text-decoration-none text-muted">
-                                                {{ topic.lastMessage.createdAt|date('d/m/Y H:i') }}
+                                                {{ topic.lastMessage.createdAt|user_datetime }}
                                             </a><br>
                                             {{ 'forum.by'|trans }}
                                             <a href="{{ path('vgr_player_profile_overview', {id: topic.lastMessage.user.id, slug: topic.lastMessage.user.slug}) }}" class="text-decoration-none">

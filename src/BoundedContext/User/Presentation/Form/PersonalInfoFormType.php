@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\User\Presentation\Form;
 
 use App\BoundedContext\User\Domain\Entity\User;
+use App\SharedKernel\Application\Service\TimezoneService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,6 +20,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class PersonalInfoFormType extends AbstractType
 {
+    public function __construct(
+        private readonly TimezoneService $timezoneService
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -73,6 +79,15 @@ class PersonalInfoFormType extends AbstractType
                     'class' => 'form-select',
                 ],
             ])
+            ->add('timezone', ChoiceType::class, [
+                'label' => 'profile.personal_info.form.timezone.label',
+                'required' => false,
+                'choices' => $this->getTimezoneChoices(),
+                'placeholder' => 'profile.personal_info.form.timezone.placeholder',
+                'attr' => [
+                    'class' => 'form-select',
+                ],
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'profile.personal_info.form.submit',
                 'attr' => [
@@ -90,5 +105,22 @@ class PersonalInfoFormType extends AbstractType
             'csrf_token_id' => 'personal_info',
             'translation_domain' => 'User',
         ]);
+    }
+
+    /**
+     * @return array<string, array<string, string>>
+     */
+    private function getTimezoneChoices(): array
+    {
+        $choices = [];
+        $timezones = $this->timezoneService->getCommonTimezones();
+
+        foreach ($timezones as $region => $regionTimezones) {
+            foreach ($regionTimezones as $timezone => $label) {
+                $choices[$region][$label] = $timezone;
+            }
+        }
+
+        return $choices;
     }
 }

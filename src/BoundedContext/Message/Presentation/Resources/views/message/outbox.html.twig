@@ -72,7 +72,7 @@
                                         {% endif %}
                                     </td>
                                     <td class="text-center d-none d-md-table-cell text-body-secondary">
-                                        <small>{{ message.createdAt|date('d/m/Y H:i') }}</small>
+                                        <small>{{ message.createdAt|user_datetime }}</small>
                                     </td>
                                     <td class="text-center d-none d-md-table-cell">
                                         {% if message.isOpened %}
