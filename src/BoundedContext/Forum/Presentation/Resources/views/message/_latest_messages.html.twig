@@ -8,7 +8,7 @@
                 <a href="{{ path('topic_show', {id: message.topic.id, slug: message.topic.slug, forumId: message.topic.forum.id, forumSlug: message.topic.forum.slug, page: (message.position / 20)|round(0, 'ceil')}) }}#message-{{ message.id }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between align-items-center">
                         <span class="text-truncate me-2">{{ message.topic.name|u.truncate(40) }}</span>
-                        <small class="text-muted text-nowrap">{{ message.user.username }} - {{ message.createdAt|date('M d') }}</small>
+                        <small class="text-muted text-nowrap">{{ message.user.username }} - {{ message.createdAt|user_date('M d') }}</small>
                     </div>
                 </a>
             {% else %}

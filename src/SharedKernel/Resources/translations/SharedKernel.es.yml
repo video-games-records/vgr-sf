@@ -122,3 +122,23 @@ flash:
     processing: "Tu solicitud está siendo procesada..."
   warning:
     unsaved_changes: "Tienes cambios sin guardar. ¿Seguro que quieres salir?"
+
+# === TIMEZONE & TIME (Temps relatif et timezones) ===
+time:
+  # Relative time translations
+  just_now: "Ahora mismo"
+  time_ago: "Hace %count% %unit%"
+  time_in: "En %count% %unit%"
+  
+  # Time unit translations
+  units:
+    year: "año"
+    years: "años"
+    month: "mes"
+    months: "meses"
+    day: "día"
+    days: "días"
+    hour: "hora"
+    hours: "horas"
+    minute: "minuto"
+    minutes: "minutos"
