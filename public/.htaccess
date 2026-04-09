@@ -14,12 +14,14 @@
         ExpiresDefault "access plus 1 year"
     </FilesMatch>
 
-    # Images (avatars, assets) — 1 semaine
-    ExpiresByType image/png         "access plus 1 week"
-    ExpiresByType image/jpeg        "access plus 1 week"
-    ExpiresByType image/gif         "access plus 1 week"
-    ExpiresByType image/webp        "access plus 1 week"
-    ExpiresByType image/svg+xml     "access plus 1 week"
+    # Images statiques (avatars, assets) — 1 semaine, exclure /picture/ dynamique
+    <LocationMatch "^(?!/picture/)">
+        ExpiresByType image/png         "access plus 1 week"
+        ExpiresByType image/jpeg        "access plus 1 week"
+        ExpiresByType image/gif         "access plus 1 week"
+        ExpiresByType image/webp        "access plus 1 week"
+        ExpiresByType image/svg+xml     "access plus 1 week"
+    </LocationMatch>
 
     # Fonts
     ExpiresByType font/woff2        "access plus 1 year"
