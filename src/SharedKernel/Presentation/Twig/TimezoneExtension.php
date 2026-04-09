@@ -37,7 +37,7 @@ class TimezoneExtension extends AbstractExtension
     /**
      * Format a date in the user's timezone
      */
-    public function formatUserDate(?DateTimeInterface $date, ?User $user = null, string $format = 'd/m/Y'): string
+    public function formatUserDate(?DateTimeInterface $date, string $format = 'd/m/Y', ?User $user = null): string
     {
         if (!$date) {
             return '';
@@ -57,7 +57,7 @@ class TimezoneExtension extends AbstractExtension
     /**
      * Format a datetime in the user's timezone
      */
-    public function formatUserDateTime(?DateTimeInterface $date, ?User $user = null, string $format = 'd/m/Y H:i'): string
+    public function formatUserDateTime(?DateTimeInterface $date, string $format = 'd/m/Y H:i', ?User $user = null): string
     {
         if (!$date) {
             return '';
@@ -80,7 +80,7 @@ class TimezoneExtension extends AbstractExtension
     /**
      * Format a time in the user's timezone
      */
-    public function formatUserTime(?DateTimeInterface $date, ?User $user = null, string $format = 'H:i'): string
+    public function formatUserTime(?DateTimeInterface $date, string $format = 'H:i', ?User $user = null): string
     {
         if (!$date) {
             return '';
