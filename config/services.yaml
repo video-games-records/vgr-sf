@@ -39,6 +39,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
     App\SharedKernel\Infrastructure\Messenger\Middleware\UniquenessMiddleware:
         arguments:
             $cache: '@cache.app'
@@ -59,7 +60,7 @@ services:
 
     App\SharedKernel\Presentation\Twig\Extension\StoragePictureExtension:
         arguments:
-            $storagePublicUrl: '%env(STORAGE_PUBLIC_URL)%'
+            $storagePublicUrl: '%env(PICTURE_PUBLIC_URL)%'
 
 when@dev:
     services:

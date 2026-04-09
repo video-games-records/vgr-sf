@@ -16,12 +16,12 @@ class AvatarManager
         'jpg' => 'image/jpeg'
     ];
 
-    private FilesystemOperator $appStorage;
+    private FilesystemOperator $pictureStorage;
     private string $projectDir;
 
-    public function __construct(FilesystemOperator $appStorage, string $projectDir)
+    public function __construct(FilesystemOperator $pictureStorage, string $projectDir)
     {
-        $this->appStorage = $appStorage;
+        $this->pictureStorage = $pictureStorage;
         $this->projectDir = $projectDir;
     }
 
@@ -30,7 +30,7 @@ class AvatarManager
      */
     public function write(string $path, string $contents): void
     {
-        $this->appStorage->write($path, $contents);
+        $this->pictureStorage->write($path, $contents);
     }
 
 
@@ -41,8 +41,8 @@ class AvatarManager
      */
     public function read(?string $path): StreamedResponse
     {
-        if ($path && $this->appStorage->fileExists($path)) {
-            $stream = $this->appStorage->readStream($path);
+        if ($path && $this->pictureStorage->fileExists($path)) {
+            $stream = $this->pictureStorage->readStream($path);
             return new StreamedResponse(function () use ($stream) {
                 fpassthru($stream);
                 exit();

@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 class GameMapper
 {
     public function __construct(
-        #[Autowire(env: 'STORAGE_PUBLIC_URL')]
+        #[Autowire(env: 'PICTURE_PUBLIC_URL')]
         private readonly string $storagePublicUrl,
     ) {
     }

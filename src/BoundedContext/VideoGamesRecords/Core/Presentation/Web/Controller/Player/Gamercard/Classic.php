@@ -24,14 +24,14 @@ class Classic extends AbstractController
     use GetOrdinalSuffixTrait;
     use NumberFormatTrait;
 
-    private FilesystemOperator $appStorage;
+    private FilesystemOperator $pictureStorage;
     private PlayerGameRepository $playerGameRepository;
 
     public function __construct(
-        FilesystemOperator $appStorage,
+        FilesystemOperator $pictureStorage,
         PlayerGameRepository $playerGameRepository
     ) {
-        $this->appStorage = $appStorage;
+        $this->pictureStorage = $pictureStorage;
         $this->playerGameRepository = $playerGameRepository;
     }
 
@@ -175,10 +175,10 @@ class Classic extends AbstractController
     public function getAvatar(Player $player): string
     {
         $path = 'user' . DIRECTORY_SEPARATOR . $player->getAvatar();
-        if (!$this->appStorage->fileExists($path)) {
+        if (!$this->pictureStorage->fileExists($path)) {
             $path = 'user' . DIRECTORY_SEPARATOR . 'default.png';
         }
-        return $this->appStorage->read($path);
+        return $this->pictureStorage->read($path);
     }
 
 
@@ -190,9 +190,9 @@ class Classic extends AbstractController
     public function getBadge(Badge $badge): string
     {
         $path = $badge->getType()->getDirectory() . DIRECTORY_SEPARATOR . $badge->getPicture();
-        if (!$this->appStorage->fileExists($path)) {
+        if (!$this->pictureStorage->fileExists($path)) {
             $path = 'badge' . DIRECTORY_SEPARATOR . 'default.gif';
         }
-        return $this->appStorage->read($path);
+        return $this->pictureStorage->read($path);
     }
 }

@@ -22,11 +22,11 @@ class Mini extends AbstractController
     use GetOrdinalSuffixTrait;
     use NumberFormatTrait;
 
-    private FilesystemOperator $appStorage;
+    private FilesystemOperator $pictureStorage;
 
-    public function __construct(FilesystemOperator $appStorage)
+    public function __construct(FilesystemOperator $pictureStorage)
     {
-        $this->appStorage = $appStorage;
+        $this->pictureStorage = $pictureStorage;
     }
 
     #[Route(
@@ -159,10 +159,10 @@ class Mini extends AbstractController
     public function getAvatar(Player $player): string
     {
         $path = 'user' . DIRECTORY_SEPARATOR . $player->getAvatar();
-        if (!$this->appStorage->fileExists($path)) {
+        if (!$this->pictureStorage->fileExists($path)) {
             $path = 'user' . DIRECTORY_SEPARATOR . 'default.png';
         }
-        return $this->appStorage->read($path);
+        return $this->pictureStorage->read($path);
     }
 
 
@@ -174,9 +174,9 @@ class Mini extends AbstractController
     public function getBadge(Badge $badge): string
     {
         $path = $badge->getType()->getDirectory() . DIRECTORY_SEPARATOR . $badge->getPicture();
-        if (!$this->appStorage->fileExists($path)) {
+        if (!$this->pictureStorage->fileExists($path)) {
             $path = 'badge' . DIRECTORY_SEPARATOR . 'default.gif';
         }
-        return $this->appStorage->read($path);
+        return $this->pictureStorage->read($path);
     }
 }
