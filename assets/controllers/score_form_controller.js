@@ -10,6 +10,12 @@ export default class extends Controller {
     connect() {
         this.modifiedCharts = new Set();
         this.updateCounter();
+        this.setupUnloadWarning();
+        this.setupLinkWarnings();
+    }
+
+    disconnect() {
+        this.removeUnloadWarning();
     }
 
     /**
@@ -178,5 +184,74 @@ export default class extends Controller {
                 this.summaryTarget.classList.remove('text-warning');
             }
         }
+    }
+
+    /**
+     * Setup beforeunload warning when leaving the page with unsaved changes
+     */
+    setupUnloadWarning() {
+        this.beforeUnloadHandler = (event) => {
+            if (this.hasUnsavedChanges()) {
+                const message = 'You have unsaved changes. Are you sure you want to leave this page?';
+                event.preventDefault();
+                event.returnValue = message;
+                return message;
+            }
+        };
+
+        window.addEventListener('beforeunload', this.beforeUnloadHandler);
+    }
+
+    /**
+     * Remove beforeunload warning
+     */
+    removeUnloadWarning() {
+        if (this.beforeUnloadHandler) {
+            window.removeEventListener('beforeunload', this.beforeUnloadHandler);
+        }
+    }
+
+    /**
+     * Setup warnings for navigation links
+     */
+    setupLinkWarnings() {
+        // Find all navigation links (but not form submission buttons)
+        const links = document.querySelectorAll('a[href]:not([href^="#"]):not([data-no-warning])');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
+                if (this.hasUnsavedChanges()) {
+                    // Temporarily disable beforeunload to avoid double popup
+                    this.removeUnloadWarning();
+                    
+                    const confirmed = confirm(
+                        'You have unsaved changes. Are you sure you want to leave this page without saving?'
+                    );
+                    
+                    if (!confirmed) {
+                        // Re-enable beforeunload if user cancels
+                        this.setupUnloadWarning();
+                        event.preventDefault();
+                        return false;
+                    }
+                    // If confirmed, let the navigation proceed (beforeunload stays disabled)
+                }
+            });
+        });
+
+        // Also handle form submission to disable warning
+        const form = this.element.querySelector('#score-form');
+        if (form) {
+            form.addEventListener('submit', () => {
+                this.removeUnloadWarning();
+            });
+        }
+    }
+
+    /**
+     * Check if there are unsaved changes
+     */
+    hasUnsavedChanges() {
+        return this.modifiedCharts.size > 0;
     }
 }
