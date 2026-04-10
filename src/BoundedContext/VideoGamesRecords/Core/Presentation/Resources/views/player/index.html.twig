@@ -88,14 +88,14 @@
                                 </td>
                                 <td class="text-center align-middle d-none d-md-table-cell">
                                     {% if player.createdAt %}
-                                        {{ player.createdAt|date('d/m/Y') }}
+                                        {{ player.createdAt|user_date('d/m/Y') }}
                                     {% else %}
                                         -
                                     {% endif %}
                                 </td>
                                 <td class="text-center align-middle d-none d-xl-table-cell">
                                     {% if player.lastLogin %}
-                                        {{ player.lastLogin|date('d/m/Y') }}
+                                        {{ player.lastLogin|user_date('d/m/Y') }}
                                     {% else %}
                                         -
                                     {% endif %}

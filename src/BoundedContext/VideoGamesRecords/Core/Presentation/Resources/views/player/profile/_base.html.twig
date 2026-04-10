@@ -54,14 +54,14 @@
                         {# Registration Date #}
                         <span>
                             <i class="bi bi-calendar-check"></i>
-                            {{ 'player.profile.header.member_since'|trans }} {{ player.createdAt|date('M Y') }}
+                            {{ 'player.profile.header.member_since'|trans }} {{ player.createdAt|user_date('M Y') }}
                         </span>
 
                         {# Last Login #}
                         {% if player.lastLogin %}
                             <span>
                                 <i class="bi bi-clock-history"></i>
-                                {{ 'player.profile.header.last_login'|trans }} {{ player.lastLogin|date('Y-m-d') }}
+                                {{ 'player.profile.header.last_login'|trans }} {{ player.lastLogin|user_date('Y-m-d') }}
                             </span>
                         {% endif %}
                     </div>

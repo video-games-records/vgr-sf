@@ -35,7 +35,7 @@
                                 <div class="request-date">
                                     <span class="label {% if request.getCreatedAt()|date_modify('+7 days') < date() %}label-danger{% elseif request.getCreatedAt()|date_modify('+3 days') < date() %}label-warning{% else %}label-info{% endif %}">
                                         <i class="fa fa-calendar"></i>
-                                        {{ request.getCreatedAt()|date('d/m/Y') }}
+                                        {{ request.getCreatedAt()|user_date('d/m/Y') }}
                                     </span>
                                 </div>
                             </div>

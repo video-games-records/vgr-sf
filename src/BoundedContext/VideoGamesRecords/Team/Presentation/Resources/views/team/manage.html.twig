@@ -82,7 +82,7 @@
                                 {% for teamRequest in requests %}
                                     <tr>
                                         <td class="align-middle">{{ teamRequest.player.pseudo }}</td>
-                                        <td class="align-middle">{{ teamRequest.createdAt|date('Y-m-d') }}</td>
+                                        <td class="align-middle">{{ teamRequest.createdAt|user_date('Y-m-d') }}</td>
                                         <td class="align-middle text-end">
                                             <form method="post" action="{{ path('vgr_team_request_accept', {id: teamRequest.id}) }}" class="d-inline">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('team-request-accept-' ~ teamRequest.id) }}">
@@ -206,7 +206,7 @@
                                                 [{{ teamRequest.team.tag }}] {{ teamRequest.team.libTeam }}
                                             </a>
                                         </td>
-                                        <td class="align-middle">{{ teamRequest.createdAt|date('Y-m-d') }}</td>
+                                        <td class="align-middle">{{ teamRequest.createdAt|user_date('Y-m-d') }}</td>
                                         <td class="align-middle text-center">
                                             {% if teamRequest.status == 'ACTIVE' %}
                                                 <span class="badge bg-primary">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>

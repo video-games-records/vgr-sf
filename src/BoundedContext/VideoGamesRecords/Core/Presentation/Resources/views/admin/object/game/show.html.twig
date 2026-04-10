@@ -19,7 +19,7 @@
                     {% if object.getCreatedAt() %}
                         <span class="label label-default">
                                 <i class="fa fa-calendar"></i>
-                                {{ object.getCreatedAt()|date('d/m/Y') }}
+                                {{ object.getCreatedAt()|user_date('d/m/Y') }}
                             </span>
                     {% endif %}
                 </div>
@@ -187,7 +187,7 @@
                         {% if object.getPublishedAt() %}
                             <tr>
                                 <td><strong>{% trans %}game.show.publishedAt{% endtrans %} :</strong></td>
-                                <td>{{ object.getPublishedAt()|date('d/m/Y') }}</td>
+                                <td>{{ object.getPublishedAt()|user_date('d/m/Y') }}</td>
                             </tr>
                         {% endif %}
                         {% if object.getDownloadUrl() %}
@@ -323,12 +323,12 @@
                                 {% for row in playerHistory %}
                                 <tr class="{{ row.endedAt is null ? 'success' : '' }}">
                                     <td>{{ row.pseudo }}</td>
-                                    <td>{{ row.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ row.createdAt|user_date('d/m/Y') }}</td>
                                     <td>
                                         {% if row.endedAt is null %}
                                             <span class="label label-success">{% trans %}game.show.badge_history.history.active{% endtrans %}</span>
                                         {% else %}
-                                            {{ row.endedAt|date('d/m/Y') }}
+                                            {{ row.endedAt|user_date('d/m/Y') }}
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -363,12 +363,12 @@
                                 {% for row in teamHistory %}
                                 <tr class="{{ row.endedAt is null ? 'success' : '' }}">
                                     <td>{{ row.libTeam }}</td>
-                                    <td>{{ row.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ row.createdAt|user_date('d/m/Y') }}</td>
                                     <td>
                                         {% if row.endedAt is null %}
                                             <span class="label label-success">{% trans %}game.show.badge_history.history.active{% endtrans %}</span>
                                         {% else %}
-                                            {{ row.endedAt|date('d/m/Y') }}
+                                            {{ row.endedAt|user_date('d/m/Y') }}
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -423,7 +423,7 @@
                                     {% endif %}
                                 </td>
                                 <td>{{ entry.username ?? '-' }}</td>
-                                <td>{{ entry.createdAt ? entry.createdAt|date('d/m/Y H:i') : '-' }}</td>
+                                <td>{{ entry.createdAt ? entry.createdAt|user_datetime('d/m/Y H:i') : '-' }}</td>
                                 <td>
                                     {% set diffs = entry.getDiffs() %}
                                     {% if diffs %}

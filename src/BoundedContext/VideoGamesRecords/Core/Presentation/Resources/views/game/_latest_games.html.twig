@@ -8,7 +8,7 @@
                 <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between align-items-center">
                         <span class="text-truncate me-2">{{ game.name }}</span>
-                        <small class="text-muted text-nowrap">{{ game.publishedAt|date('M d') }}</small>
+                        <small class="text-muted text-nowrap">{{ game.publishedAt|user_date('M d') }}</small>
                     </div>
                 </a>
             {% else %}

@@ -111,7 +111,7 @@
                                 {% trans %}proof.validated.by{% endtrans %} {{ object.getPlayerResponding().getPseudo() }}
                             {% endif %}
                             {% if object.getCheckedAt() %}
-                                <br>{{ object.getCheckedAt()|date('d/m/Y H:i') }}
+                                <br>{{ object.getCheckedAt()|user_datetime('d/m/Y H:i') }}
                             {% endif %}
                         </p>
                     {% elseif object.getStatus().getValue() == 'REFUSED' %}
@@ -122,7 +122,7 @@
                                 {% trans %}proof.refused.by{% endtrans %} {{ object.getPlayerResponding().getPseudo() }}
                             {% endif %}
                             {% if object.getCheckedAt() %}
-                                <br>{{ object.getCheckedAt()|date('d/m/Y H:i') }}
+                                <br>{{ object.getCheckedAt()|user_datetime('d/m/Y H:i') }}
                             {% endif %}
                         </p>
                     {% else %}
@@ -206,7 +206,7 @@
                             <p><strong>{% trans %}proof.request.requested.by{% endtrans %} :</strong> {{ object.getProofRequest().getPlayerRequesting().getPseudo() }}</p>
                         {% endif %}
                         {% if object.getProofRequest().getCreatedAt() %}
-                            <p><strong>{% trans %}proof.request.date{% endtrans %} :</strong> {{ object.getProofRequest().getCreatedAt()|date('d/m/Y H:i') }}</p>
+                            <p><strong>{% trans %}proof.request.date{% endtrans %} :</strong> {{ object.getProofRequest().getCreatedAt()|user_datetime('d/m/Y H:i') }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -227,12 +227,12 @@
                         <table class="table table-condensed">
                             <tr>
                                 <td><strong>{% trans %}proof.creation.date{% endtrans %} :</strong></td>
-                                <td>{{ object.getCreatedAt()|date('d/m/Y H:i') }}</td>
+                                <td>{{ object.getCreatedAt()|user_datetime('d/m/Y H:i') }}</td>
                             </tr>
                             {% if object.getUpdatedAt() %}
                                 <tr>
                                     <td><strong>{% trans %}proof.last.update{% endtrans %} :</strong></td>
-                                    <td>{{ object.getUpdatedAt()|date('d/m/Y H:i') }}</td>
+                                    <td>{{ object.getUpdatedAt()|user_datetime('d/m/Y H:i') }}</td>
                                 </tr>
                             {% endif %}
                         </table>

@@ -27,7 +27,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Master - {{ gameName }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="Master - {{ gameName }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/Master', badge.badgePicture) }}"
                          alt="{{ gameName }}"
                          width="40"
@@ -55,7 +55,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Serie - {{ badge.name }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="Serie - {{ badge.name }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/Serie', badge.badgePicture) }}"
                          alt="{{ badge.name }}"
                          width="40"
@@ -83,7 +83,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Platform - {{ badge.name }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="Platform - {{ badge.name }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/Platform', badge.badgePicture) }}"
                          alt="{{ badge.name }}"
                          width="40"
@@ -112,7 +112,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Country - {{ countryName }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="Country - {{ countryName }} | {{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/VgrSpecialCountry', badge.badgePicture) }}"
                          alt="{{ countryName }}"
                          width="40"
@@ -140,7 +140,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/Forum', badge.badgePicture) }}"
                          alt="Forum Badge"
                          width="40"
@@ -168,7 +168,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/Connexion', badge.badgePicture) }}"
                          alt="Connection Badge"
                          width="40"
@@ -196,7 +196,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/VgrChart', badge.badgePicture) }}"
                          alt="Records Badge"
                          width="40"
@@ -224,7 +224,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/VgrProof', badge.badgePicture) }}"
                          alt="Proof Badge"
                          width="40"
@@ -252,7 +252,7 @@
                 <span class="badge-item"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                      title="{{ 'player.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'player.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                     <img src="{{ badge_picture_url('badge/Don', badge.badgePicture) }}"
                          alt="Donation Badge"
                          width="40"

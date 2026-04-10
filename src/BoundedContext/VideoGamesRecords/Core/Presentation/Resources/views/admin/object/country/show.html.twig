@@ -87,12 +87,12 @@
                                 {% for row in playerHistory %}
                                 <tr class="{{ row.endedAt is null ? 'success' : '' }}">
                                     <td>{{ row.pseudo }}</td>
-                                    <td>{{ row.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ row.createdAt|user_date('d/m/Y') }}</td>
                                     <td>
                                         {% if row.endedAt is null %}
                                             <span class="label label-success">{% trans %}game.show.badge_history.history.active{% endtrans %}</span>
                                         {% else %}
-                                            {{ row.endedAt|date('d/m/Y') }}
+                                            {{ row.endedAt|user_date('d/m/Y') }}
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -127,12 +127,12 @@
                                 {% for row in teamHistory %}
                                 <tr class="{{ row.endedAt is null ? 'success' : '' }}">
                                     <td>{{ row.libTeam }}</td>
-                                    <td>{{ row.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ row.createdAt|user_date('d/m/Y') }}</td>
                                     <td>
                                         {% if row.endedAt is null %}
                                             <span class="label label-success">{% trans %}game.show.badge_history.history.active{% endtrans %}</span>
                                         {% else %}
-                                            {{ row.endedAt|date('d/m/Y') }}
+                                            {{ row.endedAt|user_date('d/m/Y') }}
                                         {% endif %}
                                     </td>
                                 </tr>

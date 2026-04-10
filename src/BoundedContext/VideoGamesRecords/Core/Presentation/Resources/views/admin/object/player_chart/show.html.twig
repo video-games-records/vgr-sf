@@ -46,7 +46,7 @@
                                 <dt>{% trans %}player_chart.show.lastUpdate{% endtrans %}</dt>
                                 <dd>
                                     {% if object.lastUpdate %}
-                                        <span class="text-muted">{{ object.lastUpdate|date('Y-m-d H:i:s') }}</span>
+                                        <span class="text-muted">{{ object.lastUpdate|user_datetime('Y-m-d H:i:s') }}</span>
                                     {% else %}
                                         <span class="text-muted">Never</span>
                                     {% endif %}
@@ -55,7 +55,7 @@
                                 <dt>{% trans %}player_chart.show.dateInvestigation{% endtrans %}</dt>
                                 <dd>
                                     {% if object.dateInvestigation %}
-                                        <span class="text-warning">{{ object.dateInvestigation|date('Y-m-d H:i:s') }}</span>
+                                        <span class="text-warning">{{ object.dateInvestigation|user_datetime('Y-m-d H:i:s') }}</span>
                                     {% else %}
                                         <span class="text-muted">N/A</span>
                                     {% endif %}
@@ -201,11 +201,11 @@
                         </dd>
 
                         <dt>Created</dt>
-                        <dd>{{ object.proof.createdAt|date('Y-m-d H:i:s') }}</dd>
+                        <dd>{{ object.proof.createdAt|user_datetime('Y-m-d H:i:s') }}</dd>
 
                         {% if object.proof.checkedAt %}
                         <dt>Checked</dt>
-                        <dd>{{ object.proof.checkedAt|date('Y-m-d H:i:s') }}</dd>
+                        <dd>{{ object.proof.checkedAt|user_datetime('Y-m-d H:i:s') }}</dd>
                         {% endif %}
                     </dl>
                 </div>

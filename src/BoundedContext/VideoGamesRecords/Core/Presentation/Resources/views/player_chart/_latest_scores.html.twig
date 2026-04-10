@@ -35,7 +35,7 @@
                                 {% endfor %}
                             </td>
                             <td class="text-muted text-nowrap text-end">
-                                {{ playerChart.lastUpdate|date('M d') }}
+                                {{ playerChart.lastUpdate|user_date('M d') }}
                             </td>
                         </tr>
                     {% else %}

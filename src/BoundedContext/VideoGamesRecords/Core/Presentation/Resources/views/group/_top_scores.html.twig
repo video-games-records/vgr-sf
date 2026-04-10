@@ -101,7 +101,7 @@
                                 }) }}
                                 {% if playerChart1.lastUpdate %}
                                     <br>
-                                    <small class="text-muted">{{ playerChart1.lastUpdate|date('F j, Y') }}</small>
+                                    <small class="text-muted">{{ playerChart1.lastUpdate|user_date('F j, Y') }}</small>
                                 {% endif %}
                             {% else %}
                                 <span class="text-muted">-</span>
