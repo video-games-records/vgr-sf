@@ -108,7 +108,7 @@
 
                             {# Date #}
                             <td class="text-muted text-nowrap text-end">
-                                {{ playerChart.lastUpdate|date('M d, H:i') }}
+                                {{ playerChart.lastUpdate|user_datetime('M d, H:i') }}
                             </td>
                         </tr>
                     {% else %}
