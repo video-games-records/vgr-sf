@@ -26,7 +26,7 @@
                     <span class="badge-item"
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
-                          title="Master - {{ gameName }} | {{ 'team.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'team.profile.badges.obtained'|trans }}: {{ badge.createdAt|date('d/m/Y') }}">
+                          title="Master - {{ gameName }} | {{ 'team.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'team.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
                         <img src="{{ badge_picture_url('badge/Master', badge.badgePicture) }}"
                              alt="{{ gameName }}"
                              width="40"

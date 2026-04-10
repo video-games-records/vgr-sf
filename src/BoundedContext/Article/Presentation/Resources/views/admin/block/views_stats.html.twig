@@ -166,7 +166,7 @@
             </div>
             <div class="col-sm-6 text-right">
                 <small class="text-muted">
-                    {{ 'dashboard.views_stats.last_update'|trans }}: {{ "now"|date("d/m/Y H:i") }}
+                    {{ 'dashboard.views_stats.last_update'|trans }}: {{ "now"|date|user_datetime("d/m/Y H:i") }}
                 </small>
             </div>
         </div>

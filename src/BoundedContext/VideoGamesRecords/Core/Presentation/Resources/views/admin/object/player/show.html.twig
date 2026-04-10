@@ -19,7 +19,7 @@
                         {% if object.getCreatedAt() %}
                             <span class="label label-default">
                                 <i class="fa fa-calendar"></i>
-                                {{ object.getCreatedAt()|date('d/m/Y') }}
+                                {{ object.getCreatedAt()|user_date('d/m/Y') }}
                             </span>
                         {% endif %}
                     </div>

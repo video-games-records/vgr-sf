@@ -145,7 +145,7 @@
                                             {# Last Update #}
                                             {% if playerChart.lastUpdate %}
                                                 <div class="small text-muted mt-1">
-                                                    {{ 'chart.show.last_update'|trans }}: {{ playerChart.lastUpdate|date('M d, Y, h:i A') }}
+                                                    {{ 'chart.show.last_update'|trans }}: {{ playerChart.lastUpdate|user_datetime('M d, Y, h:i A') }}
                                                 </div>
                                             {% endif %}
                                         </td>

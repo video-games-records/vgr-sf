@@ -69,7 +69,7 @@
                                                         S{{ trend.week }}/{{ trend.year }}
                                                         <br>
                                                         <small class="text-muted">
-                                                            {{ trend.start_date|date('d/m') }} - {{ trend.end_date|date('d/m') }}
+                                                            {{ trend.start_date|user_date('d/m') }} - {{ trend.end_date|user_date('d/m') }}
                                                         </small>
                                                     </td>
                                                     <td>
@@ -100,7 +100,7 @@
                                                         <th class="text-center">
                                                             S{{ trend.week }}
                                                             <br>
-                                                            <small>{{ trend.start_date|date('d/m') }}</small>
+                                                            <small>{{ trend.start_date|user_date('d/m') }}</small>
                                                         </th>
                                                     {% endfor %}
                                                     <th class="text-center"><strong>{{ 'statistics.total'|trans }}</strong></th>
