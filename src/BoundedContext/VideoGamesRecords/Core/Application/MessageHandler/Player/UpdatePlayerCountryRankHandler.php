@@ -31,7 +31,7 @@ readonly class UpdatePlayerCountryRankHandler
         }
 
         $players = $this->em->getRepository(Player::class)
-            ->findBy(['country' => $country], ['rankPointChart' => 'ASC']);
+            ->findBy(['country' => $country], ['rankPointGame' => 'ASC']);
         RankingTools::addObjectRank($players, 'rankCountry', ['rankPointGame']);
         $this->em->flush();
 
