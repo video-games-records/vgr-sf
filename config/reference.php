@@ -996,7 +996,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             use_underscore?: bool|Param, // Default: true
  *             unordered_list_markers?: list<scalar|Param|null>,
  *         },
- *         ...<mixed>
+ *         ...<string, mixed>
  *     },
  * }
  * @psalm-type SecurityConfig = array{
@@ -1742,7 +1742,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             cast_fn?: mixed,
  *             default?: mixed,
  *             filter_class?: mixed,
- *             ...<mixed>
+ *             ...<string, mixed>
  *         }>,
  *         strict_query_parameter_validation?: mixed,
  *         hide_hydra_operation?: mixed,
@@ -1762,7 +1762,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         name?: mixed,
  *         allow_create?: mixed,
  *         item_uri_template?: mixed,
- *         ...<mixed>
+ *         ...<string, mixed>
  *     },
  * }
  * @psalm-type LexikJwtAuthenticationConfig = array{
@@ -2337,7 +2337,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         name?: scalar|Param|null, // The pretty name to show for these log files
  *         finder?: array{
  *             in?: scalar|Param|null, // The symfony/finder pattern to iterate through directories. Example: %kernel.logs_dir%
- *             name?: scalar|Param|null, // The symfony/finder pattern to filter files. Example: *.log // Default: null
+ *             name?: scalar|Param|null, // The symfony/finder pattern to filter files. Example: *.log or [*.log, *.log.gz] // Default: null
  *             depth?: scalar|Param|null, // The symfony/finder directory depth to search files for. Example: '> 0' // Default: null
  *             ignoreUnreadableDirs?: scalar|Param|null, // Whether to ignore unreadable directories // Default: true
  *             followLinks?: scalar|Param|null, // Whether to follow symlinks // Default: false
