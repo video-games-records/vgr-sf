@@ -40,10 +40,6 @@ class PersonalInfoFormType extends AbstractType
                         minMessage: 'profile.personal_info.form.error.username_too_short',
                         maxMessage: 'profile.personal_info.form.error.username_too_long',
                     ),
-                    new Assert\Regex(
-                        pattern: '/^[a-zA-Z0-9_-]+$/',
-                        message: 'profile.personal_info.form.error.username_invalid_format',
-                    ),
                 ],
                 'attr' => [
                     'placeholder' => 'profile.personal_info.form.username.placeholder',
