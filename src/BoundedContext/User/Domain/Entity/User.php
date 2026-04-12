@@ -272,9 +272,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->timezone;
     }
 
-    public function setTimezone(string $timezone): static
+    public function setTimezone(?string $timezone): static
     {
-        $this->timezone = $timezone;
+        $this->timezone = $timezone ?? 'UTC';
         return $this;
     }
 
