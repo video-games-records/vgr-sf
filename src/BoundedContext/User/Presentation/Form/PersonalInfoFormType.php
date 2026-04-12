@@ -81,9 +81,9 @@ class PersonalInfoFormType extends AbstractType
             ])
             ->add('timezone', ChoiceType::class, [
                 'label' => 'profile.personal_info.form.timezone.label',
-                'required' => false,
+                'required' => true,
                 'choices' => $this->getTimezoneChoices(),
-                'placeholder' => 'profile.personal_info.form.timezone.placeholder',
+                'empty_data' => 'UTC',
                 'attr' => [
                     'class' => 'form-select',
                 ],

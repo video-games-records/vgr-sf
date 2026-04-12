@@ -35,12 +35,19 @@ class PersonalInfo extends AbstractController
         $form = $this->createForm(PersonalInfoFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->entityManager->flush();
 
-            $this->addFlash('success', $this->translator->trans('profile.personal_info.message.success', [], 'User'));
+                $this->addFlash('success', $this->translator->trans('profile.personal_info.message.success', [], 'User'));
 
-            return $this->redirectToRoute('app_profile_personal_info');
+                return $this->redirectToRoute('app_profile_personal_info');
+            } else {
+                // Log form errors for debugging
+                foreach ($form->getErrors(true) as $error) {
+                    $this->addFlash('error', $error->getMessage());
+                }
+            }
         }
 
         return $this->render('@User/profile/personal_info.html.twig', [
