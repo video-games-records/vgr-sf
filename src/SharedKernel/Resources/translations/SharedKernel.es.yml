@@ -24,6 +24,7 @@ navigation:
     cups: "Copas"
     badges: "Insignias"
     proofs: "Pruebas"
+    score_search: "Búsqueda de puntuaciones"
     country: "País"
     top_ranking: "Top clasificación"
 
