@@ -19,19 +19,19 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 #[Route('/{_locale}', requirements: ['_locale' => 'en|fr|de|it|ja|es|pt_BR|zh_CN'], defaults: ['_locale' => 'en'])]
 class Search extends AbstractLocalizedController
 {
-    private const SESSION_KEY_GAME_IDS = 'player_chart_search_game_ids';
-    private const SESSION_KEY_GAME_DATA = 'player_chart_search_game_data';
-    private const SESSION_KEY_PLAYER_IDS = 'player_chart_search_player_ids';
-    private const SESSION_KEY_PLAYER_DATA = 'player_chart_search_player_data';
-    private const SESSION_KEY_PLATFORM_IDS = 'player_chart_search_platform_ids';
-    private const SESSION_KEY_PLATFORM_DATA = 'player_chart_search_platform_data';
-    private const SESSION_KEY_STATUSES = 'player_chart_search_statuses';
-    private const SESSION_KEY_RANK_OPERATOR = 'player_chart_search_rank_operator';
-    private const SESSION_KEY_RANK_VALUE = 'player_chart_search_rank_value';
-    private const SESSION_KEY_POINTS_OPERATOR = 'player_chart_search_points_operator';
-    private const SESSION_KEY_POINTS_VALUE = 'player_chart_search_points_value';
-    private const SESSION_KEY_PLATINUM_ONLY = 'player_chart_search_platinum_only';
-    private const ITEMS_PER_PAGE = 20;
+    private const string SESSION_KEY_GAME_IDS = 'player_chart_search_game_ids';
+    private const string SESSION_KEY_GAME_DATA = 'player_chart_search_game_data';
+    private const string SESSION_KEY_PLAYER_IDS = 'player_chart_search_player_ids';
+    private const string SESSION_KEY_PLAYER_DATA = 'player_chart_search_player_data';
+    private const string SESSION_KEY_PLATFORM_IDS = 'player_chart_search_platform_ids';
+    private const string SESSION_KEY_PLATFORM_DATA = 'player_chart_search_platform_data';
+    private const string SESSION_KEY_STATUSES = 'player_chart_search_statuses';
+    private const string SESSION_KEY_RANK_OPERATOR = 'player_chart_search_rank_operator';
+    private const string SESSION_KEY_RANK_VALUE = 'player_chart_search_rank_value';
+    private const string SESSION_KEY_POINTS_OPERATOR = 'player_chart_search_points_operator';
+    private const string SESSION_KEY_POINTS_VALUE = 'player_chart_search_points_value';
+    private const string SESSION_KEY_PLATINUM_ONLY = 'player_chart_search_platinum_only';
+    private const int ITEMS_PER_PAGE = 20;
 
     public function __construct(
         private readonly PlayerChartRepository $playerChartRepository,

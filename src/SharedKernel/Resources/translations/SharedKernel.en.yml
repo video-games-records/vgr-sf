@@ -32,6 +32,7 @@ navigation:
     cups: "Cups"
     badges: "Badges"
     proofs: "Proofs"
+    score_search: "Score Search"
     country: "Country"
     top_ranking: "Top Ranking"
 

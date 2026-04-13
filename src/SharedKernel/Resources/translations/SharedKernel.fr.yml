@@ -32,6 +32,7 @@ navigation:
     cups: "Coupes"
     badges: "Badges"
     proofs: "Preuves"
+    score_search: "Recherche de scores"
     country: "Pays"
     top_ranking: "Top Classement"
 
