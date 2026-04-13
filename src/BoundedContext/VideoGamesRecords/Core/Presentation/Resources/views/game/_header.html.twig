@@ -36,7 +36,7 @@
         <div class="row align-items-center">
             {# Game Cover Image #}
             <div class="col-auto">
-                <a href="{{ path('vgr_core_game_show', {'id': game.id, 'slug': game.slug}) }}">
+                <a href="{{ path('vgr_game_show', {'id': game.id, 'slug': game.slug}) }}">
                     <img
                         src="{{ game_picture_url(game.picture) }}"
                         alt="{{ game.name }}"
