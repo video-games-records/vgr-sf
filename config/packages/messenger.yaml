@@ -128,7 +128,7 @@ framework:
                 middleware:
                     - App\SharedKernel\Infrastructure\Messenger\Middleware\UniquenessMiddleware
                     - validation
-                    - doctrine_transaction
+                    # - doctrine_transaction  # Disabled to prevent transaction conflicts with Doctrine transport
                     - router_context
 
         routing:
