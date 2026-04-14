@@ -1,6 +1,6 @@
 <div class="card border shadow-sm h-100">
     <div class="card-header border-bottom">
-        <h5 class="mb-0"><i class="bi bi-trophy"></i> Game of the Day</h5>
+        <h5 class="mb-0"><i class="bi bi-trophy"></i> {{ 'game.game_of_day.title'|trans({}, 'VgrCore') }}</h5>
     </div>
     {% if game %}
         <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}" class="card-body p-0 text-decoration-none text-body">
@@ -13,7 +13,7 @@
         </a>
     {% else %}
         <div class="card-body text-center text-muted py-4">
-            No game of the day
+            {{ 'game.game_of_day.no_game'|trans({}, 'VgrCore') }}
         </div>
     {% endif %}
 </div>

@@ -23,6 +23,10 @@ game:
     no_games: No games found
     card_title: Latest Games
     no_games_card: No recent games
+  
+  game_of_day:
+    title: Game of the Day
+    no_game: No game of the day
 
   show:
     title: "World Records & Rankings | Video Games Records"
@@ -82,6 +86,7 @@ player_chart:
   latest:
     card_title: Latest Scores
     no_scores_card: No recent scores
+    see_all: See all
   show:
     meta_description: "Score of %player% on %chart% - %game%"
     score_detail: Score Detail
@@ -357,6 +362,29 @@ top_ranking:
     change: Change
   posts: posts
   no_rankings: No rankings found for this period
+
+ranking:
+  top_players:
+    player: Player
+    points: Points
+    games: Games
+    records: Records
+    total: Total
+    pts: Pts
+    master_badges: Master Badges
+    no_players: No players found
+    game_points:
+      title: Game Points
+    record_points:
+      title: Record Points
+    cups:
+      title: Cups
+    medals:
+      title: Medals
+    badges:
+      title: Badges
+    proofs:
+      title: Proofs
 
 country:
   show:
