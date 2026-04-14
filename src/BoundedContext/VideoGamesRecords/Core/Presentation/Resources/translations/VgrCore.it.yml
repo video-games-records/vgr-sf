@@ -49,3 +49,6 @@ player:
     info:
       presentation: Presentazione
       collection: Collezione
+
+my_proofs:
+  click_to_view_game: Clicca per vedere il gioco
