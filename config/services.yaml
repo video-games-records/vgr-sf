@@ -39,7 +39,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    
+
     App\SharedKernel\Infrastructure\Messenger\Middleware\UniquenessMiddleware:
         arguments:
             $cache: '@cache.app'
@@ -56,6 +56,7 @@ services:
 
     App\SharedKernel\Infrastructure\Monolog\DiscordHandler:
         arguments:
+            $httpClient: '@http_client'
             $webhookUrl: '%env(DISCORD_WEBHOOK_URL)%'
             $cache: '@cache.app'
 
