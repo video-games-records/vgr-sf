@@ -57,6 +57,7 @@ services:
     App\SharedKernel\Infrastructure\Monolog\DiscordHandler:
         arguments:
             $webhookUrl: '%env(DISCORD_WEBHOOK_URL)%'
+            $cache: '@cache.app'
 
     App\SharedKernel\Presentation\Twig\Extension\StoragePictureExtension:
         arguments:
