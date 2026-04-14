@@ -1,6 +1,6 @@
 <div class="card border shadow-sm h-100">
     <div class="card-header border-bottom">
-        <h5 class="mb-0"><i class="bi bi-graph-up-arrow"></i> Record Points</h5>
+        <h5 class="mb-0"><i class="bi bi-graph-up-arrow"></i> {{ 'ranking.top_players.record_points.title'|trans({}, 'VgrCore') }}</h5>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
@@ -8,10 +8,10 @@
                 <thead>
                     <tr>
                         <th scope="col" class="text-center" style="width: 50px;">#</th>
-                        <th scope="col">Player</th>
-                        <th scope="col" class="text-end">Points</th>
+                        <th scope="col">{{ 'ranking.top_players.player'|trans({}, 'VgrCore') }}</th>
+                        <th scope="col" class="text-end">{{ 'ranking.top_players.points'|trans({}, 'VgrCore') }}</th>
                         {% if showNbChart|default(false) %}
-                            <th scope="col" class="text-center">Records</th>
+                            <th scope="col" class="text-center">{{ 'ranking.top_players.records'|trans({}, 'VgrCore') }}</th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@
                     {% else %}
                         <tr>
                             <td colspan="{{ showNbChart|default(false) ? 4 : 3 }}" class="text-center text-muted py-4">
-                                No players found
+                                {{ 'ranking.top_players.no_players'|trans({}, 'VgrCore') }}
                             </td>
                         </tr>
                     {% endfor %}

@@ -23,6 +23,10 @@ game:
     no_games: Aucun jeu trouvé
     card_title: Derniers jeux
     no_games_card: Aucun jeu récent
+  
+  game_of_day:
+    title: Jeu du jour
+    no_game: Aucun jeu du jour
 
   show:
     title: "Records Mondiaux & Classements | Video Games Records"
@@ -82,6 +86,7 @@ player_chart:
   latest:
     card_title: Derniers scores
     no_scores_card: Aucun score récent
+    see_all: Voir tout
   show:
     meta_description: "Score de %player% sur %chart% - %game%"
     score_detail: Détail du Score
@@ -357,6 +362,29 @@ top_ranking:
     change: Évolution
   posts: posts
   no_rankings: Aucun classement trouvé pour cette période
+
+ranking:
+  top_players:
+    player: Joueur
+    points: Points
+    games: Jeux
+    records: Records
+    total: Total
+    pts: Pts
+    master_badges: Badges Master
+    no_players: Aucun joueur trouvé
+    game_points:
+      title: Points de Jeu
+    record_points:
+      title: Points de Record
+    cups:
+      title: Coupes
+    medals:
+      title: Médailles
+    badges:
+      title: Badges
+    proofs:
+      title: Preuves
 
 country:
   show:
