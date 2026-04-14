@@ -217,6 +217,16 @@
                                 <td><strong>{% trans %}proof.filter.playerChartStatus{% endtrans %} :</strong></td>
                                 <td>{{ object.getPlayerChart().getStatus().getLabel() }}</td>
                             </tr>
+                            <tr>
+                                <td><strong>{% trans %}proof.edit.score.title{% endtrans %} :</strong></td>
+                                <td>
+                                    <a href="{{ path('vgrcorebundle_admin_player_chart_edit', {'id': object.getPlayerChart().getId()}) }}" 
+                                       target="_blank" 
+                                       class="btn btn-xs btn-primary">
+                                        <i class="fa fa-edit"></i> {% trans %}proof.edit.score.link{% endtrans %}
+                                    </a>
+                                </td>
+                            </tr>
                         </table>
                     {% else %}
                         <div class="alert alert-danger">

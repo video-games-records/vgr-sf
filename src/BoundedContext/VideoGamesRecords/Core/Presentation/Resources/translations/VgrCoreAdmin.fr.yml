@@ -570,5 +570,11 @@ discord:
     updatedAt: Modifié le
 
 
+proof:
+  edit:
+    score:
+      title: Modifier le score
+      link: Modifier le score
+
 list:
   label__action: 'Action'

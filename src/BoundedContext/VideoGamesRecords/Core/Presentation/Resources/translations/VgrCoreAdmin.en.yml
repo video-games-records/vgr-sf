@@ -540,6 +540,9 @@ proof:
   edit:
     for:
       validation: Edit for Validation
+    score:
+      title: Edit Score
+      link: Edit Score
   score:
     information: Score Information
   request:
