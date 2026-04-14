@@ -44,6 +44,11 @@ class Platform
     #[Orm\ManyToMany(targetEntity: Game::class, mappedBy: 'platforms')]
     private Collection $games;
 
+    /**
+     * @var Collection<int, PlayerPlatform>
+     */
+    #[ORM\OneToMany(targetEntity: PlayerPlatform::class, mappedBy: 'platform')]
+    private Collection $playerPlatform;
 
     #[ORM\OneToOne(targetEntity: PlatformBadge::class, cascade: ['persist'], inversedBy: 'platform')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
@@ -52,6 +57,7 @@ class Platform
     public function __construct()
     {
         $this->games = new ArrayCollection();
+        $this->playerPlatform = new ArrayCollection();
     }
 
 
@@ -115,6 +121,14 @@ class Platform
     public function getGames(): Collection
     {
         return $this->games;
+    }
+
+    /**
+     * @return Collection<int, PlayerPlatform>
+     */
+    public function getPlayerPlatform(): Collection
+    {
+        return $this->playerPlatform;
     }
 
     public function setBadge(?PlatformBadge $badge = null): static
