@@ -49,3 +49,6 @@ player:
     info:
       presentation: 介绍
       collection: 收藏
+
+my_proofs:
+  click_to_view_game: 点击查看游戏

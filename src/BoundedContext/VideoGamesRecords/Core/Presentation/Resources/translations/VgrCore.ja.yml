@@ -49,3 +49,6 @@ player:
     info:
       presentation: プレゼンテーション
       collection: コレクション
+
+my_proofs:
+  click_to_view_game: ゲームを見るにはクリック
