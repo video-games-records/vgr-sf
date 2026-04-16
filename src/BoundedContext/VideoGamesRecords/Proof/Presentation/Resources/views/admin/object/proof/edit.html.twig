@@ -58,7 +58,7 @@
                                         <h5><i class="fa fa-picture-o"></i> {% trans %}proof.image.evidence{% endtrans %}</h5>
                                         <div class="proof-media">
                                             <a target="_blank" href="{{ path('vgr_proof_picture_show',{'id': object.picture.id}) }}" class="thumbnail">
-                                                <img src="{{ path('vgr_proof_picture_show',{'id': object.picture.id}) }}" alt="{% trans %}proof.image.alt{% endtrans %}" class="img-responsive" style="max-height: 350px;" />
+                                                <img src="{{ path('vgr_proof_picture_show',{'id': object.picture.id}) }}?v={{ 'now'|date('U') }}" alt="{% trans %}proof.image.alt{% endtrans %}" class="img-responsive" style="max-height: 350px;" />
                                             </a>
                                         </div>
                                         <div class="mt-2">
