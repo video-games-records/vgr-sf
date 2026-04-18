@@ -61,7 +61,7 @@ class GameMapper
             nbTeam: $game->getNbTeam(),
             releaseDate: $game->getReleaseDate(),
             slug: $game->getSlug(),
-            downloadUrl: $game->getDownloadUrl(),
+            downloadUrl: null,
             lastUpdate: $game->getLastUpdate(),
             serie: $serie,
             platforms: $platforms,

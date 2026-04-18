@@ -9,6 +9,7 @@ game:
       fr: Name [FR]
     picture: Picture
     downloadUrl: Download URL
+    downloadUrls: Download URLs
     status: Status
     publishedAt: Published At
     boolRanking: Ranking
@@ -52,6 +53,7 @@ game:
     nbChart: Charts Count
     nbVideo: Videos Count
     downloadUrl: Download URL
+    downloadUrls: Download URLs
     picture: Picture
     badge: Badge
     status: Status
@@ -815,3 +817,6 @@ tag:
 
 list:
   label__action: 'Action'
+
+game_download_url:
+  label: Download URLs

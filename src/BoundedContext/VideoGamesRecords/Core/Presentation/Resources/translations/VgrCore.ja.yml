@@ -52,3 +52,21 @@ player:
 
 my_proofs:
   click_to_view_game: ゲームを見るにはクリック
+
+sidebar:
+  title: リンク
+  forum: フォーラム
+  forum_description: このゲームについて議論する
+  serie: シリーズ
+  serie_description: このシリーズの全ゲームを見る
+  download: ダウンロード
+  download_description: このゲームを入手する
+  rules: ルール
+  rules_description: サイトのルールとガイドライン
+  game_rules_title: ゲームルール
+  group_switcher_title: グループ切り替え
+  group_prev: 前へ
+  group_next: 次へ
+  chart_switcher_title: チャート切り替え
+  chart_prev: 前へ
+  chart_next: 次へ

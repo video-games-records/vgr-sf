@@ -9,6 +9,7 @@ game:
       fr: Nom [FR]
     picture: Image
     downloadUrl: URL de téléchargement
+    downloadUrls: URLs de téléchargement
     status: Statut
     publishedAt: Publié le
     boolRanking: Classé
@@ -52,6 +53,7 @@ game:
     nbChart: Nombre de records
     nbVideo: Nombre de vidéos
     downloadUrl: URL de téléchargement
+    downloadUrls: URLs de téléchargement
     picture: Image
     badge: Badge
     status: Statut
@@ -578,3 +580,6 @@ proof:
 
 list:
   label__action: 'Action'
+
+game_download_url:
+  label: URLs de téléchargement

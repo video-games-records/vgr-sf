@@ -56,9 +56,6 @@ class Game implements GameInfoInterface
     #[ORM\Column(length: 255, nullable: false)]
     private string $libGameFr = '';
 
-    #[Assert\Length(max: 255)]
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $downloadUrl = null;
 
     #[ORM\Column(length: 30, nullable: false, options: ['default' => GameStatus::CREATED])]
     private string $status = GameStatus::CREATED;
@@ -130,6 +127,12 @@ class Game implements GameInfoInterface
     #[ORM\ManyToMany(targetEntity: Discord::class, mappedBy: 'games')]
     private Collection $discords;
 
+    /**
+     * @var Collection<int, GameDownloadUrl>
+     */
+    #[ORM\OneToMany(targetEntity: GameDownloadUrl::class, mappedBy: 'game', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $downloadUrls;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -138,6 +141,7 @@ class Game implements GameInfoInterface
         $this->playerGame = new ArrayCollection();
         $this->teamGame = new ArrayCollection();
         $this->discords = new ArrayCollection();
+        $this->downloadUrls = new ArrayCollection();
     }
 
     public function __toString()
@@ -197,16 +201,6 @@ class Game implements GameInfoInterface
         return $this->libGameFr;
     }
 
-    public function setDownloadurl(?string $downloadUrl = null): static
-    {
-        $this->downloadUrl = $downloadUrl;
-        return $this;
-    }
-
-    public function getDownloadUrl(): ?string
-    {
-        return $this->downloadUrl;
-    }
 
     public function setStatus(string $status): static
     {
@@ -406,6 +400,37 @@ class Game implements GameInfoInterface
         if ($this->discords->removeElement($discord)) {
             $discord->removeGame($this);
         }
+    }
+
+    public function addDownloadUrl(GameDownloadUrl $downloadUrl): void
+    {
+        if (!$this->downloadUrls->contains($downloadUrl)) {
+            $this->downloadUrls->add($downloadUrl);
+            $downloadUrl->setGame($this);
+        }
+    }
+
+    public function removeDownloadUrl(GameDownloadUrl $downloadUrl): void
+    {
+        $this->downloadUrls->removeElement($downloadUrl);
+    }
+
+    /**
+     * @return Collection<int, GameDownloadUrl>
+     */
+    public function getDownloadUrls(): Collection
+    {
+        return $this->downloadUrls;
+    }
+
+    public function getDownloadUrlByPlatform(Platform $platform): ?GameDownloadUrl
+    {
+        foreach ($this->downloadUrls as $downloadUrl) {
+            if ($downloadUrl->getPlatform() === $platform) {
+                return $downloadUrl;
+            }
+        }
+        return null;
     }
 
     public function getGenres(): Collection
