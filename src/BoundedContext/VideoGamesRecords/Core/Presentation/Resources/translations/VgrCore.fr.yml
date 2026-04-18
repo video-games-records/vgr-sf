@@ -235,6 +235,8 @@ sidebar:
   forum_description: Discuter de ce jeu
   serie: Série
   serie_description: Voir tous les jeux de cette série
+  download: Télécharger pour
+  download_description: Obtenir ce jeu
   rules: Règlement
   rules_description: Règles et directives du site
   game_rules_title: Règles du jeu

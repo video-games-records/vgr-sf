@@ -102,23 +102,53 @@ class GameTest extends TestCase
         $this->assertSame('Super Mario Bros', $this->game->getLibGameFr());
     }
 
-    public function testDownloadUrlDefaultsToNull(): void
+    public function testDownloadUrlsDefaultsToEmptyCollection(): void
     {
-        $this->assertNull($this->game->getDownloadUrl());
+        $this->assertEmpty($this->game->getDownloadUrls());
     }
 
-    public function testSetAndGetDownloadUrl(): void
+    public function testAddAndRemoveDownloadUrl(): void
     {
-        $result = $this->game->setDownloadurl('https://example.com/download');
-        $this->assertSame('https://example.com/download', $this->game->getDownloadUrl());
-        $this->assertSame($this->game, $result);
+        $platform = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform();
+        $platform->setName('iOS');
+
+        $downloadUrl = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\GameDownloadUrl();
+        $downloadUrl->setPlatform($platform);
+        $downloadUrl->setUrl('https://example.com/download');
+
+        $this->game->addDownloadUrl($downloadUrl);
+        $this->assertCount(1, $this->game->getDownloadUrls());
+        $this->assertSame($this->game, $downloadUrl->getGame());
+
+        $this->game->removeDownloadUrl($downloadUrl);
+        $this->assertEmpty($this->game->getDownloadUrls());
     }
 
-    public function testSetDownloadUrlToNull(): void
+    public function testGetDownloadUrlByPlatform(): void
     {
-        $this->game->setDownloadurl('https://example.com/download');
-        $this->game->setDownloadurl(null);
-        $this->assertNull($this->game->getDownloadUrl());
+        $platformIos = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform();
+        $platformIos->setName('iOS');
+
+        $platformAndroid = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform();
+        $platformAndroid->setName('Android');
+
+        $platformWeb = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform();
+        $platformWeb->setName('Web');
+
+        $downloadUrlIos = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\GameDownloadUrl();
+        $downloadUrlIos->setPlatform($platformIos);
+        $downloadUrlIos->setUrl('https://example.com/ios-download');
+
+        $downloadUrlAndroid = new \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\GameDownloadUrl();
+        $downloadUrlAndroid->setPlatform($platformAndroid);
+        $downloadUrlAndroid->setUrl('https://example.com/android-download');
+
+        $this->game->addDownloadUrl($downloadUrlIos);
+        $this->game->addDownloadUrl($downloadUrlAndroid);
+
+        $this->assertSame($downloadUrlIos, $this->game->getDownloadUrlByPlatform($platformIos));
+        $this->assertSame($downloadUrlAndroid, $this->game->getDownloadUrlByPlatform($platformAndroid));
+        $this->assertNull($this->game->getDownloadUrlByPlatform($platformWeb));
     }
 
     public function testStatusDefaultsToCreated(): void

@@ -171,3 +171,16 @@ services:
         label: "discord.label"
     calls:
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+
+  # Game Download URL Admin
+  vgrcorebundle_admin_game_download_url:
+    class: App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin\GameDownloadUrlAdmin
+    tags:
+      - name: sonata.admin
+        model_class: App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\GameDownloadUrl
+        manager_type: orm
+        group: "group.games"
+        label: "game_download_url.label"
+        show_in_dashboard: false
+    calls:
+      - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]

@@ -52,3 +52,21 @@ player:
 
 my_proofs:
   click_to_view_game: Haz clic para ver el juego
+
+sidebar:
+  title: Enlaces
+  forum: Foro
+  forum_description: Discutir sobre este juego
+  serie: Serie
+  serie_description: Ver todos los juegos de esta serie
+  download: Descargar para
+  download_description: Obtener este juego
+  rules: Reglas
+  rules_description: Reglas y directrices del sitio
+  game_rules_title: Reglas del juego
+  group_switcher_title: Cambiar grupo
+  group_prev: Anterior
+  group_next: Siguiente
+  chart_switcher_title: Cambiar gráfico
+  chart_prev: Anterior
+  chart_next: Siguiente

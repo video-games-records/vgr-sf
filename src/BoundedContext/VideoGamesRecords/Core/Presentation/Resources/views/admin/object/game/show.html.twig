@@ -190,10 +190,17 @@
                                 <td>{{ object.getPublishedAt()|user_date('d/m/Y') }}</td>
                             </tr>
                         {% endif %}
-                        {% if object.getDownloadUrl() %}
+                        {% if object.downloadUrls|length > 0 %}
                             <tr>
-                                <td><strong>{% trans %}game.show.downloadUrl{% endtrans %} :</strong></td>
-                                <td><a href="{{ object.getDownloadUrl() }}" target="_blank">{{ object.getDownloadUrl() }}</a></td>
+                                <td><strong>{% trans %}game.show.downloadUrls{% endtrans %} :</strong></td>
+                                <td>
+                                    {% for downloadUrl in object.downloadUrls %}
+                                        <div class="mb-1">
+                                            <strong>{{ downloadUrl.platform.name }}:</strong>
+                                            <a href="{{ downloadUrl.url }}" target="_blank" rel="noopener">{{ downloadUrl.url }}</a>
+                                        </div>
+                                    {% endfor %}
+                                </td>
                             </tr>
                         {% endif %}
                     </table>

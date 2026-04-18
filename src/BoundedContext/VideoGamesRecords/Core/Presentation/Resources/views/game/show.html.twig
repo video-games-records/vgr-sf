@@ -137,11 +137,11 @@
             </div>
 
             {# Additional Game Information #}
-            {% if game.storyline or game.downloadUrl %}
+            {% if game.storyline or game.downloadUrls|length > 0 %}
                 <div class="row mt-4">
                     {# Storyline #}
                     {% if game.storyline %}
-                        <div class="col-md-8">
+                        <div class="{% if game.downloadUrls|length > 0 %}col-md-8{% else %}col-md-12{% endif %}">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">
@@ -153,17 +153,21 @@
                         </div>
                     {% endif %}
 
-                    {# Download Link #}
-                    {% if game.downloadUrl %}
-                        <div class="col-md-4">
+                    {# Download Links #}
+                    {% if game.downloadUrls|length > 0 %}
+                        <div class="{% if game.storyline %}col-md-4{% else %}col-md-12{% endif %}">
                             <div class="card">
-                                <div class="card-body text-center">
+                                <div class="card-body">
                                     <h5 class="card-title">
                                         <i class="bi bi-download"></i> {{ 'game.show.download'|trans }}
                                     </h5>
-                                    <a href="{{ game.downloadUrl }}" class="btn btn-primary" target="_blank" rel="noopener">
-                                        <i class="bi bi-box-arrow-up-right"></i> {{ 'game.show.download_button'|trans }}
-                                    </a>
+                                    <div class="d-grid gap-2">
+                                        {% for downloadUrl in game.downloadUrls %}
+                                            <a href="{{ downloadUrl.url }}" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener">
+                                                <i class="bi bi-box-arrow-up-right"></i> {{ downloadUrl.platform.name }}
+                                            </a>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>

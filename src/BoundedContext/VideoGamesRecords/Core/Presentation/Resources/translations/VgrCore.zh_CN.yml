@@ -52,3 +52,21 @@ player:
 
 my_proofs:
   click_to_view_game: 点击查看游戏
+
+sidebar:
+  title: 链接
+  forum: 论坛
+  forum_description: 讨论这个游戏
+  serie: 系列
+  serie_description: 查看这个系列的所有游戏
+  download: 下载用于
+  download_description: 获取这个游戏
+  rules: 规则
+  rules_description: 网站规则和指导方针
+  game_rules_title: 游戏规则
+  group_switcher_title: 切换分组
+  group_prev: 上一个
+  group_next: 下一个
+  chart_switcher_title: 切换榜单
+  chart_prev: 上一个
+  chart_next: 下一个

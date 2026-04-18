@@ -160,6 +160,22 @@
             </a>
         {% endif %}
 
+        {# Download Links #}
+        {% if game.downloadUrls|length > 0 %}
+            {% for downloadUrl in game.downloadUrls %}
+                <a href="{{ downloadUrl.url }}" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-download me-3 fs-5 text-info"></i>
+                        <div class="flex-grow-1">
+                            <div class="fw-bold">{{ 'sidebar.download'|trans }} {{ downloadUrl.platform.name }}</div>
+                            <small class="text-muted">{{ 'sidebar.download_description'|trans }}</small>
+                        </div>
+                        <i class="bi bi-box-arrow-up-right text-muted"></i>
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
+
         {# General Rules Link #}
         <a href="{{ path('static_rules') }}" class="list-group-item list-group-item-action">
             <div class="d-flex align-items-center">

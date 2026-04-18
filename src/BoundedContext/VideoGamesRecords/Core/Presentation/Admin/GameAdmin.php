@@ -113,9 +113,17 @@ class GameAdmin extends BaseAdmin
                 'label' => 'game.form.picture',
                 'required' => false,
             ])
-            ->add('downloadUrl', TextType::class, [
-                'label' => 'game.form.downloadUrl',
+            ->add('downloadUrls', CollectionType::class, [
+                'label' => 'game.form.downloadUrls',
                 'required' => false,
+                'by_reference' => false,
+                'type_options' => [
+                    'delete' => true,
+                ]
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'admin_code' => 'vgrcorebundle_admin_game_download_url',
             ])
             ->add(
                 'status',
@@ -354,7 +362,7 @@ class GameAdmin extends BaseAdmin
             ->add('platforms', null, ['label' => 'game.show.platforms'])
             ->add('nbChart', null, ['label' => 'game.show.nbChart'])
             ->add('nbVideo', null, ['label' => 'game.show.nbVideo'])
-            ->add('downloadUrl', null, ['label' => 'game.show.downloadUrl'])
+            ->add('downloadUrls', null, ['label' => 'game.show.downloadUrls'])
             ->add('picture', null, ['label' => 'game.show.picture'])
             ->add('badge', null, ['label' => 'game.show.badge'])
             ->add('status', null, ['label' => 'game.show.status'])
