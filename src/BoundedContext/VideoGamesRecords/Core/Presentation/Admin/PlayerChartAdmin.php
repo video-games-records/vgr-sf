@@ -277,6 +277,6 @@ class PlayerChartAdmin extends BaseAdmin
         parent::postUpdate($object);
 
         $this->getEventDispatcher()->dispatch(new AdminPlayerChartUpdated($object));
-        $this->getMessageBus()->dispatch(new UpdatePlayerChartRank((int) $object->getId()));
+        $this->getMessageBus()->dispatch(new UpdatePlayerChartRank((int) $object->getChart()->getId()));
     }
 }
