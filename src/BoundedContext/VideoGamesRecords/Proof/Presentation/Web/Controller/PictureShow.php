@@ -35,23 +35,22 @@ class PictureShow extends AbstractController
     #[Cache(maxage: 3600 * 24, public: true, mustRevalidate: true)]
     public function __invoke(Picture $picture): StreamedResponse
     {
-        if ($this->proofStorage->fileExists($picture->getPath())) {
+        try {
             $stream = $this->proofStorage->readStream($picture->getPath());
             return new StreamedResponse(function () use ($stream) {
                 fpassthru($stream);
-                exit();
+                fclose($stream); // manquait aussi
             }, 200, ['Content-Type' => $this->getMimeType($picture->getPath())]);
+        } catch (\League\Flysystem\UnableToReadFile $e) {
+            $defaultPath = $this->projectDir . '/assets/img/default/proof.png';
+            return new StreamedResponse(function () use ($defaultPath) {
+                $handle = fopen($defaultPath, 'rb');
+                if ($handle !== false) {
+                    fpassthru($handle);
+                    fclose($handle);
+                }
+            }, 404, ['Content-Type' => 'image/png']); // 404 pour éviter la mise en cache navigateur
         }
-
-        $defaultPath = $this->projectDir . '/assets/img/default/proof.png';
-        return new StreamedResponse(function () use ($defaultPath) {
-            $handle = fopen($defaultPath, 'rb');
-            if ($handle !== false) {
-                fpassthru($handle);
-                fclose($handle);
-            }
-            exit();
-        }, 200, ['Content-Type' => 'image/png']);
     }
 
     private function getMimeType(string $file): string
