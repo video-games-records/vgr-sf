@@ -1,5 +1,5 @@
-{# templates/admin/layout.html.twig #}
-{% extends '@SonataAdmin/standard_layout.html.twig' %}
+{# templates/admin/layout_with_translation.html.twig #}
+{% extends '@SonataTranslation/standard_layout.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -60,23 +60,17 @@
             to { opacity: 1; }
         }
         
-        /* Force dropdown menu items to display vertically one below another */
-        .navbar-custom-menu .dropdown-menu {
-            min-width: 150px;
+        /* Force language switcher visibility */
+        .navbar-custom-menu .dropdown > a {
+            color: #333 !important;
+            padding: 10px 15px !important;
+            background-color: #f4f4f4 !important;
+            border: 1px solid #ddd !important;
+            margin: 5px !important;
         }
         
-        .navbar-custom-menu .dropdown-menu a {
-            display: block !important;
-            width: 100% !important;
-            padding: 8px 15px !important;
-            clear: both !important;
-            white-space: nowrap !important;
-            text-align: left !important;
-            line-height: 1.4 !important;
-        }
-        
-        .navbar-custom-menu .dropdown-menu a:hover {
-            background-color: #f5f5f5 !important;
+        .navbar-custom-menu .dropdown > a:hover {
+            background-color: #e7e7e7 !important;
         }
     </style>
 {% endblock %}
@@ -110,65 +104,40 @@
 {% block sonata_top_nav_menu %}
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-            {# Language Switcher using the existing component style #}
+            {# Language Switcher #}
+            {% set current_locale = app.request.locale %}
+            {% set locales = {
+                'en': 'English',
+                'fr': 'Français',
+                'de': 'Deutsch',
+                'it': 'Italiano',
+                'ja': '日本語',
+                'es': 'Español',
+                'pt_BR': 'Português',
+                'zh_CN': '中文'
+            } %}
+            
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #333; padding: 10px 15px;">
-                    {% if app.request.locale == 'fr' %}
-                        🇫🇷 Français
-                    {% elseif app.request.locale == 'de' %}
-                        🇩🇪 Deutsch
-                    {% elseif app.request.locale == 'it' %}
-                        🇮🇹 Italiano
-                    {% elseif app.request.locale == 'ja' %}
-                        🇯🇵 日本語
-                    {% elseif app.request.locale == 'es' %}
-                        🇪🇸 Español
-                    {% elseif app.request.locale == 'pt_BR' %}
-                        🇧🇷 Português
-                    {% elseif app.request.locale == 'zh_CN' %}
-                        🇨🇳 中文
-                    {% else %}
-                        🇬🇧 English
-                    {% endif %}
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    <i class="fas fa-flag fa-fw" aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline">{{ locales[current_locale] ?? current_locale }}</span>
                     <i class="fas fa-caret-down" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item {{ app.request.locale == 'en' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'en'}) }}">
-                        🇬🇧 English
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'fr' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'fr'}) }}">
-                        🇫🇷 Français
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'de' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'de'}) }}">
-                        🇩🇪 Deutsch
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'it' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'it'}) }}">
-                        🇮🇹 Italiano
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'ja' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'ja'}) }}">
-                        🇯🇵 日本語
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'es' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'es'}) }}">
-                        🇪🇸 Español
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'pt_BR' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'pt_BR'}) }}">
-                        🇧🇷 Português
-                    </a>
-                    <a class="dropdown-item {{ app.request.locale == 'zh_CN' ? 'active' : '' }}" 
-                       href="{{ path('admin_locale_switch', {locale: 'zh_CN'}) }}">
-                        🇨🇳 中文
-                    </a>
+                    <div class="dropdown-header">
+                        <i class="fas fa-language"></i> Languages
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    {% for locale_code, locale_name in locales %}
+                        <a class="dropdown-item {% if locale_code == current_locale %}active{% endif %}" 
+                           href="{{ path('admin_locale_switch', {locale: locale_code}) }}">
+                            {{ locale_name }}
+                        </a>
+                    {% endfor %}
                 </div>
             </li>
             
-            {# Original Sonata Blocks #}
+            {# Add Block #}
             {% block sonata_top_nav_menu_add_block %}
                 {% set addBlock = include(get_global_template('add_block')) %}
                 {% if addBlock|trim is not empty %}
@@ -180,6 +149,8 @@
                     </li>
                 {% endif %}
             {% endblock %}
+            
+            {# User Block #}
             {% if app.user %}
                 {% block sonata_top_nav_menu_user_block %}
                     {% set userBlock = include(get_global_template('user_block')) %}

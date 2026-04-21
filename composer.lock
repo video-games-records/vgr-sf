@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac3375774326a674ecae8632050b9917",
+    "content-hash": "eb7939fd7ef635f6ed34fd84a809ddd0",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -7226,6 +7226,99 @@
                 }
             ],
             "time": "2025-11-23T16:45:01+00:00"
+        },
+        {
+            "name": "sonata-project/intl-bundle",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataIntlBundle.git",
+                "reference": "008f1a1e2fe95c6b80e4dd27e641370353862d4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/008f1a1e2fe95c6b80e4dd27e641370353862d4b",
+                "reference": "008f1a1e2fe95c6b80e4dd27e641370353862d4b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2",
+                "symfony/config": "^6.4 || ^7.3 || ^8.0",
+                "symfony/dependency-injection": "^6.4 || ^7.3 || ^8.0",
+                "symfony/http-foundation": "^6.4 || ^7.3 || ^8.0",
+                "symfony/http-kernel": "^6.4 || ^7.3 || ^8.0",
+                "symfony/intl": "^6.4 || ^7.3 || ^8.0",
+                "symfony/translation-contracts": "^2.5 || ^3.0",
+                "twig/twig": "^3.0"
+            },
+            "conflict": {
+                "sonata-project/user-bundle": "<3.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.4",
+                "matthiasnoback/symfony-config-test": "^6.1",
+                "matthiasnoback/symfony-dependency-injection-test": "dev-ci-updates as 6.1.0.1",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.0 || ^2.0",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+                "phpstan/phpstan-strict-rules": "^1.0 || ^2.0",
+                "phpstan/phpstan-symfony": "^1.0 || ^2.0",
+                "phpunit/phpunit": "^11.5.38 || ^12.3.10",
+                "rector/rector": "^1.1 || ^2.0",
+                "symfony/security-core": "^6.4 || ^7.3 || ^8.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\IntlBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataIntlBundle/contributors"
+                }
+            ],
+            "description": "Symfony SonataIntlBundle",
+            "homepage": "https://docs.sonata-project.org/projects/SonataIntlBundle",
+            "keywords": [
+                "date",
+                "intl",
+                "number",
+                "sonata",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/sonata-project/SonataIntlBundle/issues",
+                "source": "https://github.com/sonata-project/SonataIntlBundle/tree/3.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/OskarStark",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/VincentLanglet",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/greg0ire",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/jordisala1991",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-11-25T17:46:21+00:00"
         },
         {
             "name": "sonata-project/translation-bundle",

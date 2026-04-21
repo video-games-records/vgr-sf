@@ -1,0 +1,27 @@
+{% set current_locale = app.request.locale %}
+{% set locales = {
+    'en': 'English',
+    'fr': 'Français',
+    'de': 'Deutsch',
+    'it': 'Italiano',
+    'ja': '日本語',
+    'es': 'Español',
+    'pt_BR': 'Português',
+    'zh_CN': '中文'
+} %}
+
+<div class="dropdown">
+    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="localeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-globe"></i> {{ locales[current_locale] ?? current_locale }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="localeDropdown">
+        {% for locale_code, locale_name in locales %}
+            <li>
+                <a class="dropdown-item {% if locale_code == current_locale %}active{% endif %}" 
+                   href="{{ path('admin_locale_switch', {locale: locale_code}) }}">
+                    {{ locale_name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

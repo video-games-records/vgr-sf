@@ -2404,6 +2404,15 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     extra_data_provider?: scalar|Param|null, // Default: null
  *     providers?: array<string, mixed>,
  * }
+ * @psalm-type SonataIntlConfig = array{
+ *     locale?: scalar|Param|null, // Default: null
+ *     timezone?: array{
+ *         service?: scalar|Param|null,
+ *         detectors?: list<scalar|Param|null>,
+ *         default?: scalar|Param|null, // Default: "UTC"
+ *         locales?: array<string, scalar|Param|null>,
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2439,6 +2448,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     fd_log_viewer?: FdLogViewerConfig,
  *     nelmio_cors?: NelmioCorsConfig,
  *     dh_auditor?: DhAuditorConfig,
+ *     sonata_intl?: SonataIntlConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2478,6 +2488,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         fd_log_viewer?: FdLogViewerConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         dh_auditor?: DhAuditorConfig,
+ *         sonata_intl?: SonataIntlConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2514,6 +2525,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         fd_log_viewer?: FdLogViewerConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         dh_auditor?: DhAuditorConfig,
+ *         sonata_intl?: SonataIntlConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2553,6 +2565,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         dama_doctrine_test?: DamaDoctrineTestConfig,
  *         nelmio_cors?: NelmioCorsConfig,
  *         dh_auditor?: DhAuditorConfig,
+ *         sonata_intl?: SonataIntlConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
