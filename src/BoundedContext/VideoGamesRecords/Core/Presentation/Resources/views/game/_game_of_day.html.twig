@@ -8,7 +8,17 @@
                 <img src="{{ game_picture_url(game.picture) }}" alt="{{ game.name }}" class="img-fluid" style="max-height: 180px;">
             </div>
             <div class="p-3 pt-0">
-                <h6 class="mb-0 text-center">{{ game.name }}</h6>
+                <h6 class="mb-2 text-center">{{ game.name }}</h6>
+                {% if game.platforms|length > 0 %}
+                    <div class="text-center">
+                        <small class="text-muted d-block mb-1">{{ 'game.platforms'|trans({}, 'VgrCore') }}</small>
+                        <div class="d-flex flex-wrap justify-content-center gap-1">
+                            {% for platform in game.platforms %}
+                                <span class="badge bg-secondary text-white small">{{ platform.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </a>
     {% else %}
