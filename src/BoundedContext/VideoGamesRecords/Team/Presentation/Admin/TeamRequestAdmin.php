@@ -7,6 +7,7 @@ namespace App\BoundedContext\VideoGamesRecords\Team\Presentation\Admin;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
@@ -19,6 +20,15 @@ class TeamRequestAdmin extends BaseAdmin
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'vgrcorebundle_admin_team_request';
+    }
+
+    public function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $query = parent::configureQuery($query);
+        $query->leftJoin($query->getRootAliases()[0] . '.team', 't')
+              ->leftJoin($query->getRootAliases()[0] . '.player', 'p')
+              ->addSelect('t', 'p');
+        return $query;
     }
 
     /**

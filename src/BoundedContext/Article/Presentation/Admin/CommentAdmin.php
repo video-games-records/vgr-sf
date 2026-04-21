@@ -6,6 +6,7 @@ namespace App\BoundedContext\Article\Presentation\Admin;
 
 use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -21,6 +22,15 @@ class CommentAdmin extends AbstractAdmin
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'comment_admin';
+    }
+
+    public function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $query = parent::configureQuery($query);
+        $query->leftJoin($query->getRootAliases()[0] . '.article', 'a')
+              ->leftJoin($query->getRootAliases()[0] . '.user', 'u')
+              ->addSelect('a', 'u');
+        return $query;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
