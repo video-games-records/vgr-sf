@@ -59,6 +59,9 @@ class Scheduler implements ScheduleProviderInterface
             // Purge messenger processed messages older than 1 month (daily at 3am)
             ->add(RecurringMessage::cron('0 3 * * *', new RunCommandMessage('messenger:monitor:purge --older-than=1-month')))
 
+            // Generate sitemap.xml (daily at 4am)
+            ->add(RecurringMessage::cron('0 4 * * *', new RunCommandMessage('app:generate-sitemap')))
+
             // Core Bundle Messages (keeping original schedule)
         /*
             ->add(RecurringMessage::cron('00 8 * * 1', new UpdateYoutubeData()))

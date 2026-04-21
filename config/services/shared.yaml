@@ -13,6 +13,11 @@ services:
 
     # Discord Monolog Handler - explicit config in services.yaml (overrides resource scan)
 
+    # Sitemap Command
+    App\SharedKernel\Application\Command\GenerateSitemapCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
 
 
 
