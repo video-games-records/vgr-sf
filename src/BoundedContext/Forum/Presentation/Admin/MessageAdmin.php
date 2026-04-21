@@ -10,12 +10,14 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MessageAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'pnf_admin_message';
+    protected int $maxPerPage = 50;
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
@@ -45,6 +47,21 @@ class MessageAdmin extends AbstractAdmin
             ->add('position', null, ['label' => 'label.position'])
             ->add('createdAt', null, ['label' => 'label.createdAt'])
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => []]]);
+    }
+
+    public function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $query = parent::configureQuery($query);
+        $query->leftJoin($query->getRootAliases()[0] . '.topic', 't')
+              ->leftJoin($query->getRootAliases()[0] . '.user', 'u')
+              ->addSelect('t', 'u');
+        return $query;
+    }
+
+    protected function configureDefaultSortValues(array &$sortValues): void
+    {
+        $sortValues['_sort_by'] = 'id';
+        $sortValues['_sort_order'] = 'DESC';
     }
 
     protected function configureShowFields(ShowMapper $show): void
