@@ -14,7 +14,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class PictureAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_picture';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_picture';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

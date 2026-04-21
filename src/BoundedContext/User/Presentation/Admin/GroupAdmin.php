@@ -14,7 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class GroupAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'pnu_admin_group';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'pnu_admin_group';
+    }
 
     /**
      * @param FormMapper $form

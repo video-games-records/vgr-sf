@@ -22,7 +22,10 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GroupOrderBy;
 
 final class GroupAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_group';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_group';
+    }
 
     /**
      * @return string

@@ -23,7 +23,10 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 
 class GameAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_game';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_game';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

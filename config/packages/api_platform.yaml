@@ -24,6 +24,7 @@ api_platform:
         extra_properties:
             standard_put: false
             rfc_7807_compliant_errors: true
+            deduplicate_resource_short_names: true
         normalization_context:
             skip_null_values: false
         pagination_client_enabled: true

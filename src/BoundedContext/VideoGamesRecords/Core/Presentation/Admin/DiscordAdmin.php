@@ -18,7 +18,10 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class DiscordAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_discord';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_discord';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

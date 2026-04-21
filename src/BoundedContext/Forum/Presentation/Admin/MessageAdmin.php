@@ -16,8 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MessageAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'pnf_admin_message';
     protected int $maxPerPage = 50;
+
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'pnf_admin_message';
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

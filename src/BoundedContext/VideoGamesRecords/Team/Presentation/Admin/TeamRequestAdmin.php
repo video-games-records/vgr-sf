@@ -16,7 +16,10 @@ use App\BoundedContext\VideoGamesRecords\Team\Domain\ValueObject\TeamRequestStat
 
 class TeamRequestAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_team_request';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_team_request';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

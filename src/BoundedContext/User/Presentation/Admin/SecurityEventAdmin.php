@@ -24,8 +24,15 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
  */
 class SecurityEventAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'pnu_admin_security_event';
-    protected $baseRoutePattern = 'security-event';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'pnu_admin_security_event';
+    }
+
+    protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+    {
+        return 'security-event';
+    }
 
     /**
      * Configure route collection

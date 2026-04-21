@@ -20,7 +20,10 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
  */
 class BadgeAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_badge';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_badge';
+    }
 
     /**
      * @param RouteCollectionInterface $collection
