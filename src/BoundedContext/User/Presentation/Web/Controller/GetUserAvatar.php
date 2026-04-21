@@ -21,7 +21,7 @@ class GetUserAvatar extends AbstractController
     /**
      * @throws FilesystemException
      */
-    #[Route('/{id}/avatar', name: 'pn_user_avatar_show', requirements: ['page' => '\d+'], stateless: false)]
+    #[Route('/{id}/avatar', name: 'pn_user_avatar_show', requirements: ['id' => '\d+'], stateless: false)]
     public function download(User $user): StreamedResponse
     {
         return $this->avatarManager->read('user/' . $user->getAvatar());
