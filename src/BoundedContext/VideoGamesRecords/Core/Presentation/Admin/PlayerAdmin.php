@@ -17,7 +17,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PlayerAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_player';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_player';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

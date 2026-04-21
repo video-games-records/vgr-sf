@@ -14,7 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 final class GameDownloadUrlAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_game_download_url';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_game_download_url';
+    }
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues[DatagridInterface::PAGE] = 1;

@@ -48,12 +48,12 @@ class PlayerGame
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Player::class, inversedBy: 'playerGame')]
-    #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Player $player;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'playerGame', fetch: 'EAGER')]
-    #[ORM\JoinColumn(name:'game_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'game_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Game $game;
 
     #[ORM\Column(nullable: false, options: ['default' => 0])]

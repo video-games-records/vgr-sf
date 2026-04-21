@@ -20,7 +20,10 @@ use App\BoundedContext\VideoGamesRecords\Video\Domain\ValueObject\VideoType;
 
 class VideoAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_video';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_video';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

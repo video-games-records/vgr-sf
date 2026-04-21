@@ -14,7 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class TopicAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'pnf_admin_topic';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'pnf_admin_topic';
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

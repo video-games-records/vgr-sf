@@ -25,7 +25,10 @@ use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofRequestSt
 
 class ProofRequestAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_proofrequest';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_proofrequest';
+    }
 
 
     /**

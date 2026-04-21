@@ -25,7 +25,10 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Event\Admin\AdminPlayerChar
 
 class PlayerChartAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_player_chart';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_player_chart';
+    }
 
 
     /**

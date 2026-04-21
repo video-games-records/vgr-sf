@@ -18,7 +18,10 @@ use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
 
 class MessageAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'message_admin';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'message_admin';
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

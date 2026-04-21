@@ -16,7 +16,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategoryAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'pnf_admin_category';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'pnf_admin_category';
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

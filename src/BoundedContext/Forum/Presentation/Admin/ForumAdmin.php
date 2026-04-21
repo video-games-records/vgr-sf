@@ -19,7 +19,10 @@ use App\BoundedContext\Forum\Domain\Entity\Forum;
 
 class ForumAdmin extends AbstractAdmin
 {
-    protected $baseRouteName = 'pnf_admin_forum';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'pnf_admin_forum';
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

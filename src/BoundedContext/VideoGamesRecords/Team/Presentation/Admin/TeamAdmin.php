@@ -17,7 +17,10 @@ use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 
 class TeamAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_team';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_team';
+    }
 
     /**
      * @param RouteCollectionInterface $collection

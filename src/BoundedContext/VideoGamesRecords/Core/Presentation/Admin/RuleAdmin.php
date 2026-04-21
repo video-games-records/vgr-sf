@@ -18,7 +18,10 @@ use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
 
 class RuleAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'vgrcorebundle_admin_rule';
+    protected function generateBaseRouteName(bool $isChildAdmin = false): string
+    {
+        return 'vgrcorebundle_admin_rule';
+    }
 
     /**
      * @param RouteCollectionInterface $collection
