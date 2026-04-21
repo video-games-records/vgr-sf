@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\SharedKernel\Infrastructure\EventSubscriber;
 
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\ChartRepository;
+use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\ForumRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -32,6 +33,10 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
      * @var array<string, string>
      */
     private const RULES = [
+        // /{locale}/{game-slug}-game-g{id}/index
+        // → vgr_game_show
+        '~^/(?P<_locale>[a-z]{2})/(?P<slug>.+)-game-g(?P<id>\d+)/index/?$~' => 'vgr_game_show',
+
         // /{locale}/{game-slug}-game-g{id}/{group-slug}-group-g{groupId}/index
         // → vgr_group_show
         '~^/(?P<_locale>[a-z]{2})/(?P<slug>.+)-game-g(?P<id>\d+)/(?P<groupSlug>.+)-group-g(?P<groupId>\d+)/index/?$~' => 'vgr_group_show',
@@ -48,6 +53,10 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
         // /{locale}/team/{id}-{slug}/{garbage}  (lien social/externe collé après l'URL équipe)
         // → vgr_team_profile_overview
         '~^/(?P<_locale>[a-z]{2})/team/(?P<id>\d+)-(?P<slug>[^/]+)/.+$~' => 'vgr_team_profile_overview',
+
+        // /{locale}/{player-slug}-player-p{id}/profile
+        // → vgr_player_profile_overview
+        '~^/(?P<_locale>[a-z]{2}(-[a-z]{2})?)/(?P<slug>.+)-player-p(?P<id>\d+)/profile/?$~' => 'vgr_player_profile_overview',
     ];
 
     /**
@@ -62,11 +71,29 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
         // /{slug}-j{gameId}-m{playerId}-r{n}.html  (j = jeu)
         // → vgr_game_show (requires DB lookup for the game slug)
         '~^/.*-j(?P<gameId>\d+)-m\d+-r\d+\.html$~' => 'resolveGame',
+
+        // /{slug}-jeu-j{gameId}.html
+        // → vgr_game_show (requires DB lookup for the game slug)
+        '~^/.*-jeu-j(?P<gameId>\d+)\.html/?$~' => 'resolveGame',
+
+        // /{slug}-forum-f{forumId}-p{page}.html
+        // → forum routes (requires DB lookup for the forum)
+        '~^/.*-forum-f(?P<forumId>\d+)-p(?P<page>\d+)\.html/?$~' => 'resolveForum',
+
+        // /{slug}-record-r{chartId}.html
+        // → chart show (requires DB lookup for the chart)
+        '~^/.*-record-r(?P<chartId>\d+)\.html/?$~' => 'resolveChart',
+
+        // /game/{gameId}/picture
+        // → https://picture.videogamesrecords.net/game/{game-slug}.jpg
+        '~^/game/(?P<gameId>\d+)/picture/?$~' => 'resolveGamePicture',
     ];
 
     public function __construct(
         private readonly RouterInterface $router,
         private readonly GameRepository $gameRepository,
+        private readonly ForumRepository $forumRepository,
+        private readonly ChartRepository $chartRepository,
     ) {
     }
 
@@ -128,6 +155,69 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
             'id'      => $game->getId(),
             'slug'    => $game->getSlug(),
         ]);
+    }
+
+    /**
+     * Resolves a legacy forum URL to vgr_forum_show.
+     *
+     * Legacy pattern: /{slug}-forum-f{forumId}-p{page}.html
+     *
+     * @param array<int|string, string> $matches
+     */
+    private function resolveForum(array $matches): ?string
+    {
+        $forum = $this->forumRepository->find((int) $matches['forumId']);
+
+        if ($forum === null) {
+            return null;
+        }
+
+        return $this->router->generate('vgr_forum_show', [
+            '_locale' => 'en',
+            'id'      => $forum->getId(),
+            'slug'    => $forum->getSlug(),
+            'page'    => (int) $matches['page'],
+        ]);
+    }
+
+    /**
+     * Resolves a legacy chart URL to vgr_chart_show.
+     *
+     * Legacy pattern: /{slug}-record-r{chartId}.html
+     *
+     * @param array<int|string, string> $matches
+     */
+    private function resolveChart(array $matches): ?string
+    {
+        $chart = $this->chartRepository->find((int) $matches['chartId']);
+
+        if ($chart === null) {
+            return null;
+        }
+
+        return $this->router->generate('vgr_chart_show', [
+            '_locale' => 'en',
+            'id' => $chart->getId(),
+            'slug' => $chart->getSlug(),
+        ]);
+    }
+
+    /**
+     * Resolves a legacy game picture URL to the new picture domain.
+     *
+     * Legacy pattern: /game/{gameId}/picture
+     *
+     * @param array<int|string, string> $matches
+     */
+    private function resolveGamePicture(array $matches): ?string
+    {
+        $game = $this->gameRepository->find((int) $matches['gameId']);
+
+        if ($game === null) {
+            return null;
+        }
+
+        return 'https://picture.videogamesrecords.net/game/' . $game->getPicture();
     }
 
     public static function getSubscribedEvents(): array
