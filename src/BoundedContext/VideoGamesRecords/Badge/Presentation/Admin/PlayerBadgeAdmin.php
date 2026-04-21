@@ -7,6 +7,7 @@ namespace App\BoundedContext\VideoGamesRecords\Badge\Presentation\Admin;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
@@ -21,6 +22,15 @@ class PlayerBadgeAdmin extends BaseAdmin
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'vgrcorebundle_admin_player_badge';
+    }
+
+    public function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $query = parent::configureQuery($query);
+        $query->leftJoin($query->getRootAliases()[0] . '.player', 'p')
+              ->leftJoin($query->getRootAliases()[0] . '.badge', 'b')
+              ->addSelect('p', 'b');
+        return $query;
     }
 
     /**

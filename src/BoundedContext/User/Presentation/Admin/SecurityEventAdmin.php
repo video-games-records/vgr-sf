@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeFilter;
@@ -32,6 +33,14 @@ class SecurityEventAdmin extends AbstractAdmin
     protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
     {
         return 'security-event';
+    }
+
+    public function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $query = parent::configureQuery($query);
+        $query->leftJoin($query->getRootAliases()[0] . '.user', 'u')
+              ->addSelect('u');
+        return $query;
     }
 
     /**
