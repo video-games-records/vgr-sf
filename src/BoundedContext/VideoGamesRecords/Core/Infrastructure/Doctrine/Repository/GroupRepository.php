@@ -23,13 +23,15 @@ class GroupRepository extends DefaultRepository
     /**
      * @return Group[]
      */
-    public function findByGameId(int $gameId): array
+    public function findByGameId(int $gameId, string $locale = 'en'): array
     {
+        $orderField = $locale === 'fr' ? 'g.libGroupFr' : 'g.libGroupEn';
+
         $query = $this->createQueryBuilder('g');
         $query
             ->where('g.game = :gameId')
             ->setParameter('gameId', $gameId)
-            ->orderBy('g.libGroupEn', 'ASC');
+            ->orderBy($orderField, 'ASC');
 
         return $query->getQuery()->getResult();
     }

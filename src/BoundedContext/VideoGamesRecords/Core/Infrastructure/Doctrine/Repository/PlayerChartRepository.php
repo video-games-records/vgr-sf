@@ -8,6 +8,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GroupOrderBy;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -303,8 +304,9 @@ class PlayerChartRepository extends DefaultRepository
     /**
      * @return array<array{group: \App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group, playerCharts: array<PlayerChart>}>
      */
-    public function findByPlayerAndGameGroupedByGroup(Player $player, Game $game): array
+    public function findByPlayerAndGameGroupedByGroup(Player $player, Game $game, string $locale = 'en'): array
     {
+        // Récupération des données sans tri spécifique, on triera après groupage
         $playerCharts = $this->createQueryBuilder('pc')
             ->join('pc.chart', 'c')
             ->join('c.group', 'g')
@@ -319,8 +321,6 @@ class PlayerChartRepository extends DefaultRepository
             ->andWhere('g.game = :game')
             ->setParameter('player', $player)
             ->setParameter('game', $game)
-            ->orderBy('g.libGroupEn', 'ASC')
-            ->addOrderBy('c.libChartEn', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -335,6 +335,36 @@ class PlayerChartRepository extends DefaultRepository
                 ];
             }
             $grouped[$groupId]['playerCharts'][] = $pc;
+        }
+
+        // Tri des groupes par ordre alphabétique selon la langue
+        uasort($grouped, function ($a, $b) use ($locale) {
+            $nameA = $locale === 'fr' ? $a['group']->getLibGroupFr() : $a['group']->getLibGroupEn();
+            $nameB = $locale === 'fr' ? $b['group']->getLibGroupFr() : $b['group']->getLibGroupEn();
+
+            return strcasecmp($nameA, $nameB);
+        });
+
+        // Tri des charts dans chaque groupe selon group.orderBy
+        foreach ($grouped as &$groupData) {
+            $group = $groupData['group'];
+            $orderBy = $group->getOrderBy();
+
+            usort($groupData['playerCharts'], function ($a, $b) use ($orderBy, $locale) {
+                $chartA = $a->getChart();
+                $chartB = $b->getChart();
+
+                if ($orderBy === GroupOrderBy::ID) {
+                    // Trier par ID du chart
+                    return $chartA->getId() <=> $chartB->getId();
+                } else {
+                    // Trier par libellé selon la langue (NAME ou CUSTOM)
+                    $nameA = $locale === 'fr' ? $chartA->getLibChartFr() : $chartA->getLibChartEn();
+                    $nameB = $locale === 'fr' ? $chartB->getLibChartFr() : $chartB->getLibChartEn();
+
+                    return strcasecmp($nameA, $nameB);
+                }
+            });
         }
 
         return array_values($grouped);

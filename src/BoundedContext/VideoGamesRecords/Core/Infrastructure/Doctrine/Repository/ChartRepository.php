@@ -34,11 +34,12 @@ class ChartRepository extends DefaultRepository
             ->where('ch.group = :groupId')
             ->setParameter('groupId', $groupId);
 
-        if ($orderBy === GroupOrderBy::NAME) {
+        if ($orderBy === GroupOrderBy::ID) {
+            $query->orderBy('ch.id', 'ASC');
+        } else {
+            // Par défaut (NAME, CUSTOM ou toute autre valeur), trier par nom selon la langue
             $column = ($locale === 'fr') ? 'ch.libChartFr' : 'ch.libChartEn';
             $query->orderBy($column, 'ASC');
-        } else {
-            $query->orderBy('ch.id', 'ASC');
         }
 
         return $query->getQuery()->getResult();

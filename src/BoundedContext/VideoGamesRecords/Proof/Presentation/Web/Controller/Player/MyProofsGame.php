@@ -8,6 +8,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
@@ -29,7 +30,7 @@ class MyProofsGame extends AbstractController
         requirements: ['gameId' => '\d+']
     )]
     #[IsGranted('ROLE_USER')]
-    public function __invoke(int $gameId, string $gameSlug): Response
+    public function __invoke(int $gameId, string $gameSlug, Request $request): Response
     {
         $player = $this->userProvider->getPlayer();
 
@@ -42,7 +43,7 @@ class MyProofsGame extends AbstractController
             throw new NotFoundHttpException('Game not found');
         }
 
-        $groupedByGroup = $this->playerChartRepository->findByPlayerAndGameGroupedByGroup($player, $game);
+        $groupedByGroup = $this->playerChartRepository->findByPlayerAndGameGroupedByGroup($player, $game, $request->getLocale());
 
         return $this->render('@VideoGamesRecordsProof/player/my_proofs_game.html.twig', [
             'game' => $game,
