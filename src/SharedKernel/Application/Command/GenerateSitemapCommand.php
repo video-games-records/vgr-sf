@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace App\SharedKernel\Application\Command;
 
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\CountryRepository;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\SerieRepository;
-use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\ForumRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,10 +21,6 @@ class GenerateSitemapCommand extends Command
 {
     public function __construct(
         private readonly GameRepository $gameRepository,
-        private readonly PlayerRepository $playerRepository,
-        private readonly CountryRepository $countryRepository,
-        private readonly SerieRepository $serieRepository,
-        private readonly ForumRepository $forumRepository,
         private readonly UrlGeneratorInterface $urlGenerator,
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
@@ -57,7 +49,7 @@ class GenerateSitemapCommand extends Command
             $this->addUrl(
                 $xml,
                 $urlset,
-                $this->urlGenerator->generate($page['route'], $page['params'] ?? [], UrlGeneratorInterface::ABSOLUTE_URL),
+                $this->urlGenerator->generate($page['route'], $page['params'], UrlGeneratorInterface::ABSOLUTE_URL),
                 $page['priority'],
                 $page['changefreq']
             );
@@ -81,10 +73,6 @@ class GenerateSitemapCommand extends Command
         }
 
         // TODO: Add other sections when routes are available
-        // - Players
-        // - Series
-        // - Countries
-        // - Forums
 
         // Save sitemap
         $sitemapPath = $this->projectDir . '/public/sitemap.xml';
