@@ -8,11 +8,11 @@ use Webmozart\Assert\Assert;
 
 class GroupOrderBy
 {
-    public const NAME = 'NAME';
-    public const ID = 'ID';
-    public const CUSTOM = 'CUSTOM';
+    public const string NAME = 'NAME';
+    public const string ID = 'ID';
+    public const string CUSTOM = 'CUSTOM';
 
-    public const VALUES = [
+    public const array VALUES = [
         self::NAME,
         self::ID,
         self::CUSTOM,

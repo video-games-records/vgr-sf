@@ -8,6 +8,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Player\Profile\AbstractProfileController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
@@ -28,7 +29,7 @@ class ProofsGame extends AbstractProfileController
         name: 'vgr_player_profile_proofs_game',
         requirements: ['id' => '\d+', 'gameId' => '\d+']
     )]
-    public function __invoke(int $id, string $slug, int $gameId, string $gameSlug): Response
+    public function __invoke(int $id, string $slug, int $gameId, string $gameSlug, Request $request): Response
     {
         $player = $this->getPlayer($id, $slug);
 
@@ -37,7 +38,7 @@ class ProofsGame extends AbstractProfileController
             throw new NotFoundHttpException('Game not found');
         }
 
-        $groupedByGroup = $this->playerChartRepository->findByPlayerAndGameGroupedByGroup($player, $game);
+        $groupedByGroup = $this->playerChartRepository->findByPlayerAndGameGroupedByGroup($player, $game, $request->getLocale());
 
         return $this->render('@VideoGamesRecordsProof/player/profile/proofs_game.html.twig', [
             'player' => $player,
