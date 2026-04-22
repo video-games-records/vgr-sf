@@ -57,6 +57,14 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
         // /{locale}/{player-slug}-player-p{id}/profile
         // → vgr_player_profile_overview
         '~^/(?P<_locale>[a-z]{2}(-[a-z]{2})?)/(?P<slug>.+)-player-p(?P<id>\d+)/profile/?$~' => 'vgr_player_profile_overview',
+
+        // /{locale}/{player-slug}-player-p{id}/presentation
+        // → vgr_player_profile_overview
+        '~^/(?P<_locale>[a-z]{2}(-[a-z]{2})?)/(?P<slug>.+)-player-p(?P<id>\d+)/presentation/?$~' => 'vgr_player_profile_overview',
+
+        // /{locale}/{game-slug}-game-g{id}/{group-slug}-group-g{groupId}/{chart-slug}-chart-c{chartId}/index
+        // → vgr_chart_show
+        '~^/(?P<_locale>[a-z]{2})/(?P<slug>.+)-game-g(?P<id>\d+)/(?P<groupSlug>.+)-group-g(?P<groupId>\d+)/(?P<chartSlug>.+)-chart-c(?P<chartId>\d+)/index/?$~' => 'vgr_chart_show',
     ];
 
     /**
@@ -87,6 +95,10 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
         // /game/{gameId}/picture
         // → https://picture.videogamesrecords.net/game/{game-slug}.jpg
         '~^/game/(?P<gameId>\d+)/picture/?$~' => 'resolveGamePicture',
+
+        // /picture-p{pictureId}.html
+        // → https://picture.videogamesrecords.net/proof/{pictureId}.jpg
+        '~^/picture-p(?P<pictureId>\d+)\.html/?$~' => 'resolveProofPicture',
     ];
 
     public function __construct(
@@ -172,11 +184,10 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
             return null;
         }
 
-        return $this->router->generate('vgr_forum_show', [
+        return $this->router->generate('forum_show', [
             '_locale' => 'en',
             'id'      => $forum->getId(),
             'slug'    => $forum->getSlug(),
-            'page'    => (int) $matches['page'],
         ]);
     }
 
@@ -195,10 +206,17 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
             return null;
         }
 
+        $group = $chart->getGroup();
+        $game = $group->getGame();
+
         return $this->router->generate('vgr_chart_show', [
             '_locale' => 'en',
-            'id' => $chart->getId(),
-            'slug' => $chart->getSlug(),
+            'id' => $game->getId(),
+            'slug' => $game->getSlug(),
+            'groupId' => $group->getId(),
+            'groupSlug' => $group->getSlug(),
+            'chartId' => $chart->getId(),
+            'chartSlug' => $chart->getSlug(),
         ]);
     }
 
@@ -218,6 +236,18 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
         }
 
         return 'https://picture.videogamesrecords.net/game/' . $game->getPicture();
+    }
+
+    /**
+     * Resolves a legacy proof picture URL to the new picture domain.
+     *
+     * Legacy pattern: /picture-p{pictureId}.html
+     *
+     * @param array<int|string, string> $matches
+     */
+    private function resolveProofPicture(array $matches): ?string
+    {
+        return 'https://picture.videogamesrecords.net/proof/' . $matches['pictureId'] . '.jpg';
     }
 
     public static function getSubscribedEvents(): array
