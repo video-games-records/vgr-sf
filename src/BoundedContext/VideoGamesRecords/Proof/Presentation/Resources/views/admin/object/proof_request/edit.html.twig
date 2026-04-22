@@ -55,14 +55,18 @@
                         <tr class="sonata-ba-view-container">
                             <th>LINK</th>
                             <td>
-                                <a target="_blank" href="{{ path('vgr_chart_show', {
-                                    'id': object.getPlayerChart().getChart().getGroup().getGame().getId(),
-                                    'slug': object.getPlayerChart().getChart().getGroup().getGame().getSlug(),
-                                    'groupId': object.getPlayerChart().getChart().getGroup().getId(),
-                                    'groupSlug': object.getPlayerChart().getChart().getGroup().getSlug(),
-                                    'chartId': object.getPlayerChart().getChart().getId(),
-                                    'chartSlug': object.getPlayerChart().getChart().getSlug()
-                                }) }}">({% trans %}link.front.chart{% endtrans %})</a>
+                                {% if object.getPlayerChart() %}
+                                    <a target="_blank" href="{{ path('vgr_chart_show', {
+                                        'id': object.getPlayerChart().getChart().getGroup().getGame().getId(),
+                                        'slug': object.getPlayerChart().getChart().getGroup().getGame().getSlug(),
+                                        'groupId': object.getPlayerChart().getChart().getGroup().getId(),
+                                        'groupSlug': object.getPlayerChart().getChart().getGroup().getSlug(),
+                                        'chartId': object.getPlayerChart().getChart().getId(),
+                                        'chartSlug': object.getPlayerChart().getChart().getSlug()
+                                    }) }}">({% trans %}link.front.chart{% endtrans %})</a>
+                                {% else %}
+                                    <span class="text-muted">({% trans %}no.link.available{% endtrans %})</span>
+                                {% endif %}
                             </td>
                         </tr>
                     </tbody>
