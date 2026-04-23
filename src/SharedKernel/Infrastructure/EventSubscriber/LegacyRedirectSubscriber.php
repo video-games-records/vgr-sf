@@ -245,7 +245,7 @@ final class LegacyRedirectSubscriber implements EventSubscriberInterface
      *
      * @param array<int|string, string> $matches
      */
-    private function resolveProofPicture(array $matches): ?string
+    private function resolveProofPicture(array $matches): string
     {
         return 'https://picture.videogamesrecords.net/proof/' . $matches['pictureId'] . '.jpg';
     }

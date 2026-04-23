@@ -10,6 +10,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
 use Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp;
 use Symfony\Component\Messenger\Stamp\SentStamp;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Mailer\Messenger\SendEmailMessage;
 
 class UniquenessMiddleware implements MiddlewareInterface
 {
@@ -25,6 +26,13 @@ class UniquenessMiddleware implements MiddlewareInterface
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
         $message = $envelope->getMessage();
+
+        // Use shorter TTL for emails (15 minutes instead of 1 hour)
+        $ttl = $this->ttl;
+        if ($message instanceof SendEmailMessage) {
+            $ttl = 900; // 15 minutes
+        }
+
         $messageHash = $this->generateMessageHash($message);
         $cacheKey = 'messenger_message_' . $messageHash;
 
@@ -39,7 +47,7 @@ class UniquenessMiddleware implements MiddlewareInterface
 
             // Marquer le message comme en cours de traitement
             $cacheItem->set(true);
-            $cacheItem->expiresAfter($this->ttl);
+            $cacheItem->expiresAfter($ttl);
             $this->cache->save($cacheItem);
         }
 
