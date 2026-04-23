@@ -17,9 +17,24 @@ class RankingTools
      */
     public static function order(array $array, array $columns): array
     {
+        if (empty($array)) {
+            return $array;
+        }
+
         $arrayMultisortParameters = [];
+        $arrayCount = count($array);
+        
         foreach ($columns as $column => $order) {
-            $arrayMultisortParameters[] = array_column($array, $column);
+            $columnData = array_column($array, $column);
+            
+            // Verify array sizes are consistent
+            if (count($columnData) !== $arrayCount) {
+                throw new \InvalidArgumentException(
+                    sprintf('Column "%s" has %d values but array has %d elements', $column, count($columnData), $arrayCount)
+                );
+            }
+            
+            $arrayMultisortParameters[] = $columnData;
             $arrayMultisortParameters[] = $order;
         }
         $arrayMultisortParameters[] = &$array;
