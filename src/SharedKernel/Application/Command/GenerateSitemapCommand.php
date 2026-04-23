@@ -19,6 +19,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 )]
 class GenerateSitemapCommand extends Command
 {
+    private const SUPPORTED_LOCALES = ['en', 'fr', 'de', 'it', 'ja', 'es', 'pt_BR', 'zh_CN'];
+
     public function __construct(
         private readonly GameRepository $gameRepository,
         private readonly UrlGeneratorInterface $urlGenerator,
@@ -37,36 +39,29 @@ class GenerateSitemapCommand extends Command
 
         $urlset = $xml->createElement('urlset');
         $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+        $urlset->setAttribute('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
         $xml->appendChild($urlset);
 
-        // Static pages
-        $staticPages = [
-            ['route' => 'home', 'params' => ['_locale' => 'en'], 'priority' => '1.0', 'changefreq' => 'daily'],
-            ['route' => 'home', 'params' => ['_locale' => 'fr'], 'priority' => '1.0', 'changefreq' => 'daily'],
-        ];
-
-        foreach ($staticPages as $page) {
-            $this->addUrl(
-                $xml,
-                $urlset,
-                $this->urlGenerator->generate($page['route'], $page['params'], UrlGeneratorInterface::ABSOLUTE_URL),
-                $page['priority'],
-                $page['changefreq']
-            );
-        }
+        // Static pages - Homepage for all locales
+        $io->info('Adding homepage for all locales...');
+        $this->addMultilingualUrl(
+            $xml,
+            $urlset,
+            'home',
+            [],
+            '1.0',
+            'daily'
+        );
 
         // Games
         $io->info('Adding games to sitemap...');
         $games = $this->gameRepository->findAll();
         foreach ($games as $game) {
-            $this->addUrl(
+            $this->addMultilingualUrl(
                 $xml,
                 $urlset,
-                $this->urlGenerator->generate(
-                    'vgr_game_show',
-                    ['_locale' => 'en', 'id' => $game->getId(), 'slug' => $game->getSlug()],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                ),
+                'vgr_game_show',
+                ['id' => $game->getId(), 'slug' => $game->getSlug()],
                 '0.8',
                 'weekly'
             );
@@ -87,27 +82,61 @@ class GenerateSitemapCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function addUrl(
+    /**
+     * Add URLs for all supported locales with hreflang attributes
+     */
+    private function addMultilingualUrl(
         \DOMDocument $xml,
         \DOMElement $urlset,
-        string $loc,
+        string $route,
+        array $routeParams,
         string $priority,
         string $changefreq
     ): void {
-        $url = $xml->createElement('url');
+        foreach (self::SUPPORTED_LOCALES as $locale) {
+            $url = $xml->createElement('url');
 
-        $locElement = $xml->createElement('loc', htmlspecialchars($loc));
-        $url->appendChild($locElement);
+            // Generate main URL for this locale
+            $params = array_merge($routeParams, ['_locale' => $locale]);
+            $mainUrl = $this->urlGenerator->generate($route, $params, UrlGeneratorInterface::ABSOLUTE_URL);
+            
+            $locElement = $xml->createElement('loc', htmlspecialchars($mainUrl));
+            $url->appendChild($locElement);
 
-        $lastmodElement = $xml->createElement('lastmod', date('Y-m-d'));
-        $url->appendChild($lastmodElement);
+            $lastmodElement = $xml->createElement('lastmod', date('Y-m-d'));
+            $url->appendChild($lastmodElement);
 
-        $changefreqElement = $xml->createElement('changefreq', $changefreq);
-        $url->appendChild($changefreqElement);
+            $changefreqElement = $xml->createElement('changefreq', $changefreq);
+            $url->appendChild($changefreqElement);
 
-        $priorityElement = $xml->createElement('priority', $priority);
-        $url->appendChild($priorityElement);
+            $priorityElement = $xml->createElement('priority', $priority);
+            $url->appendChild($priorityElement);
 
-        $urlset->appendChild($url);
+            // Add hreflang links for all other locales
+            foreach (self::SUPPORTED_LOCALES as $hreflangLocale) {
+                $hreflangParams = array_merge($routeParams, ['_locale' => $hreflangLocale]);
+                $hreflangUrl = $this->urlGenerator->generate($route, $hreflangParams, UrlGeneratorInterface::ABSOLUTE_URL);
+                
+                $linkElement = $xml->createElementNS('http://www.w3.org/1999/xhtml', 'xhtml:link');
+                $linkElement->setAttribute('rel', 'alternate');
+                $linkElement->setAttribute('hreflang', $this->formatHreflangCode($hreflangLocale));
+                $linkElement->setAttribute('href', htmlspecialchars($hreflangUrl));
+                $url->appendChild($linkElement);
+            }
+
+            $urlset->appendChild($url);
+        }
+    }
+
+    /**
+     * Convert locale code to proper hreflang format
+     */
+    private function formatHreflangCode(string $locale): string
+    {
+        return match($locale) {
+            'pt_BR' => 'pt-BR',
+            'zh_CN' => 'zh-CN',
+            default => $locale
+        };
     }
 }
