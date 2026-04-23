@@ -84,6 +84,7 @@ class GenerateSitemapCommand extends Command
 
     /**
      * Add URLs for all supported locales with hreflang attributes
+     * @param array<string, mixed> $routeParams
      */
     private function addMultilingualUrl(
         \DOMDocument $xml,
@@ -99,7 +100,7 @@ class GenerateSitemapCommand extends Command
             // Generate main URL for this locale
             $params = array_merge($routeParams, ['_locale' => $locale]);
             $mainUrl = $this->urlGenerator->generate($route, $params, UrlGeneratorInterface::ABSOLUTE_URL);
-            
+
             $locElement = $xml->createElement('loc', htmlspecialchars($mainUrl));
             $url->appendChild($locElement);
 
@@ -116,7 +117,7 @@ class GenerateSitemapCommand extends Command
             foreach (self::SUPPORTED_LOCALES as $hreflangLocale) {
                 $hreflangParams = array_merge($routeParams, ['_locale' => $hreflangLocale]);
                 $hreflangUrl = $this->urlGenerator->generate($route, $hreflangParams, UrlGeneratorInterface::ABSOLUTE_URL);
-                
+
                 $linkElement = $xml->createElementNS('http://www.w3.org/1999/xhtml', 'xhtml:link');
                 $linkElement->setAttribute('rel', 'alternate');
                 $linkElement->setAttribute('hreflang', $this->formatHreflangCode($hreflangLocale));
@@ -133,7 +134,7 @@ class GenerateSitemapCommand extends Command
      */
     private function formatHreflangCode(string $locale): string
     {
-        return match($locale) {
+        return match ($locale) {
             'pt_BR' => 'pt-BR',
             'zh_CN' => 'zh-CN',
             default => $locale
