@@ -37,6 +37,7 @@ navigation:
     profile: "プロフィール"
     team: "マイチーム"
     my_proofs: "マイ証拠"
+    game_history: "ゲーム履歴"
     messages: "メッセージ"
     lost_positions: "失った順位"
     friends: "フレンド"

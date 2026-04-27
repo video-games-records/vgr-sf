@@ -53,6 +53,14 @@ player:
 my_proofs:
   click_to_view_game: ゲームを見るにはクリック
 
+game_history:
+  title: ゲーム履歴
+  no_games: まだゲームをプレイしていません
+  view_game: ゲームを見る
+  my_scores: 私のスコア
+  scores: スコア
+  showing_recent: "最新の%count%ゲームを表示中"
+
 sidebar:
   title: リンク
   forum: フォーラム

@@ -53,6 +53,14 @@ player:
 my_proofs:
   click_to_view_game: Clique para ver o jogo
 
+game_history:
+  title: Histórico de Jogos
+  no_games: Você ainda não jogou nenhum jogo
+  view_game: Ver Jogo
+  my_scores: Minhas Pontuações
+  scores: pontuações
+  showing_recent: "Mostrando os %count% jogos mais recentes"
+
 sidebar:
   title: Links
   forum: Fórum
