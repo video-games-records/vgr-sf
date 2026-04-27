@@ -335,6 +335,14 @@ my_proofs:
   delete_confirm: Confirm?
   delete_sending: Deleting...
   delete_success: Proof deleted successfully
+
+game_history:
+  title: Game History
+  no_games: You haven't played any games yet
+  view_game: View Game
+  my_scores: My Scores
+  scores: scores
+  showing_recent: "Showing the %count% most recent games"
   delete_error: Error deleting proof
   delete_not_allowed: Cannot delete proof for this score
   click_to_view_game: Click to view game

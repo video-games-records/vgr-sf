@@ -37,6 +37,7 @@ navigation:
     profile: "个人资料"
     team: "我的战队"
     my_proofs: "我的证明"
+    game_history: "游戏历史"
     messages: "消息"
     lost_positions: "失去的名次"
     friends: "好友"

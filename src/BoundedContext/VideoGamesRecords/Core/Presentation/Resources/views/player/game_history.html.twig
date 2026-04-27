@@ -1,0 +1,101 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'game_history.title'|trans }} - Video Games Records{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-clock-history"></i> {{ 'game_history.title'|trans }}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    {% if recentGames is empty %}
+                        <div class="text-center py-5">
+                            <i class="bi bi-controller display-1 text-muted"></i>
+                            <p class="text-muted mt-3 mb-0">{{ 'game_history.no_games'|trans }}</p>
+                        </div>
+                    {% else %}
+                        <div class="row g-3">
+                            {% for playerGame in recentGames %}
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-shrink-0 me-3">
+                                                    {% if playerGame.game.picture %}
+                                                        <img src="{{ game_picture_url(playerGame.game.picture) }}" 
+                                                             alt="{{ playerGame.game.getName(app.request.locale) }}" 
+                                                             class="img-thumbnail"
+                                                             style="width: 60px; height: 60px; object-fit: cover;">
+                                                    {% else %}
+                                                        <div class="bg-light border rounded d-flex align-items-center justify-content-center"
+                                                             style="width: 60px; height: 60px;">
+                                                            <i class="bi bi-controller text-muted"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="flex-grow-1 min-width-0">
+                                                    <h6 class="card-title mb-2">
+                                                        <a href="{{ path('vgr_game_show', {id: playerGame.game.id, slug: playerGame.game.slug}) }}" 
+                                                           class="text-decoration-none text-truncate d-block">
+                                                            {{ playerGame.game.getName(app.request.locale) }}
+                                                        </a>
+                                                    </h6>
+                                                    <div class="d-flex align-items-center text-muted small mb-2">
+                                                        <i class="bi bi-calendar3 me-1"></i>
+                                                        <span>{{ playerGame.lastUpdate|date('d/m/Y H:i') }}</span>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap gap-2 small">
+                                                        {% if playerGame.chartRank0 > 0 %}
+                                                            <span class="badge bg-warning text-dark">
+                                                                <i class="bi bi-trophy"></i> {{ playerGame.chartRank0 }}
+                                                            </span>
+                                                        {% endif %}
+                                                        {% if playerGame.pointChart > 0 %}
+                                                            <span class="badge bg-primary">
+                                                                {{ playerGame.pointChart }} pts
+                                                            </span>
+                                                        {% endif %}
+                                                        {% if playerGame.nbChart > 0 %}
+                                                            <span class="badge bg-secondary">
+                                                                {{ playerGame.nbChart }} {{ 'game_history.scores'|trans }}
+                                                            </span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-light">
+                                            <div class="d-flex gap-2">
+                                                <a href="{{ path('vgr_game_show', {id: playerGame.game.id, slug: playerGame.game.slug}) }}" 
+                                                   class="btn btn-outline-primary btn-sm flex-fill">
+                                                    <i class="bi bi-eye"></i> {{ 'game_history.view_game'|trans }}
+                                                </a>
+                                                <a href="{{ path('vgr_my_proofs_game', {gameId: playerGame.game.id, gameSlug: playerGame.game.slug}) }}" 
+                                                   class="btn btn-outline-secondary btn-sm flex-fill">
+                                                    <i class="bi bi-camera"></i> {{ 'game_history.my_scores'|trans }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        {% if recentGames|length == 20 %}
+                            <div class="text-center mt-4">
+                                <p class="text-muted small mb-0">{{ 'game_history.showing_recent'|trans({'%count%': 20}) }}</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

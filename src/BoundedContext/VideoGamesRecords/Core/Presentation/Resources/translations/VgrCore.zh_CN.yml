@@ -53,6 +53,14 @@ player:
 my_proofs:
   click_to_view_game: 点击查看游戏
 
+game_history:
+  title: 游戏历史
+  no_games: 您还没有玩过任何游戏
+  view_game: 查看游戏
+  my_scores: 我的分数
+  scores: 分数
+  showing_recent: "显示最近的%count%个游戏"
+
 sidebar:
   title: 链接
   forum: 论坛

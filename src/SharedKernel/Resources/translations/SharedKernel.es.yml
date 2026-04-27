@@ -37,6 +37,7 @@ navigation:
     profile: "Perfil"
     team: "Mi equipo"
     my_proofs: "Mis pruebas"
+    game_history: "Historial de Juegos"
     messages: "Mensajes"
     lost_positions: "Posiciones perdidas"
     friends: "Amigos"
