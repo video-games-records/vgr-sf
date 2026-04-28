@@ -118,3 +118,15 @@ filter:
 pagination:
     label: 'Paginação de mensagens'
     showing: 'Exibindo %start% a %end% de %total% mensagens'
+
+bulk_select:
+    select_all: 'Selecionar tudo'
+
+bulk_delete:
+    button: 'Excluir seleção'
+    confirm: 'Tem certeza de que deseja excluir %count% mensagem(ns)?'
+    success: '%count% mensagem(ns) excluída(s) com sucesso.'
+    error:
+        no_messages: 'Selecione pelo menos uma mensagem para excluir.'
+    warning:
+        no_messages: 'Nenhuma mensagem pôde ser excluída.'

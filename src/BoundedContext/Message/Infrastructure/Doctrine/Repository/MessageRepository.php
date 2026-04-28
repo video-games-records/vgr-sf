@@ -186,4 +186,21 @@ class MessageRepository extends ServiceEntityRepository implements MessageReposi
 
         return $qb;
     }
+
+    /**
+     * @param array<int> $ids
+     * @return array<Message>
+     */
+    public function findByIds(array $ids): array
+    {
+        if (empty($ids)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('m')
+            ->where('m.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+    }
 }

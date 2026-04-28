@@ -118,3 +118,15 @@ filter:
 pagination:
     label: '消息分页导航'
     showing: '显示第 %start% 至 %end% 条，共 %total% 条消息'
+
+bulk_select:
+    select_all: '全选'
+
+bulk_delete:
+    button: '删除选中项'
+    confirm: '您确定要删除 %count% 条消息吗？'
+    success: '成功删除了 %count% 条消息。'
+    error:
+        no_messages: '请至少选择一条消息进行删除。'
+    warning:
+        no_messages: '没有消息被删除。'
