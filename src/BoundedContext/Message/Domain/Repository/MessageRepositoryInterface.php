@@ -33,4 +33,10 @@ interface MessageRepositoryInterface
      * @param array<string, mixed> $filters
      */
     public function getOutboxMessages(User $user, array $filters = []): QueryBuilder;
+
+    /**
+     * @param array<int> $ids
+     * @return array<Message>
+     */
+    public function findByIds(array $ids): array;
 }

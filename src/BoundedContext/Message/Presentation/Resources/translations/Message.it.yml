@@ -118,3 +118,15 @@ filter:
 pagination:
     label: 'Navigazione messaggi'
     showing: 'Visualizzazione da %start% a %end% di %total% messaggi'
+
+bulk_select:
+    select_all: 'Seleziona tutto'
+
+bulk_delete:
+    button: 'Elimina selezione'
+    confirm: 'Sei sicuro di voler eliminare %count% messaggio/i?'
+    success: '%count% messaggio/i eliminato/i con successo.'
+    error:
+        no_messages: 'Seleziona almeno un messaggio da eliminare.'
+    warning:
+        no_messages: 'Nessun messaggio è stato eliminato.'

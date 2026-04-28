@@ -118,3 +118,15 @@ filter:
 pagination:
     label: 'メッセージのページナビゲーション'
     showing: '%total%件中%start%〜%end%件を表示'
+
+bulk_select:
+    select_all: 'すべて選択'
+
+bulk_delete:
+    button: '選択項目を削除'
+    confirm: '%count%件のメッセージを削除してもよろしいですか？'
+    success: '%count%件のメッセージが正常に削除されました。'
+    error:
+        no_messages: '削除するメッセージを少なくとも1件選択してください。'
+    warning:
+        no_messages: 'メッセージを削除できませんでした。'

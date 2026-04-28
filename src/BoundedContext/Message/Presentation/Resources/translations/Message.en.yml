@@ -118,3 +118,15 @@ filter:
 pagination:
     label: 'Message pagination'
     showing: 'Showing %start% to %end% of %total% messages'
+
+bulk_select:
+    select_all: 'Select all'
+
+bulk_delete:
+    button: 'Delete selected'
+    confirm: 'Are you sure you want to delete %count% message(s)?'
+    success: '%count% message(s) deleted successfully.'
+    error:
+        no_messages: 'Please select at least one message to delete.'
+    warning:
+        no_messages: 'No messages could be deleted.'

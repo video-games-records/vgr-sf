@@ -238,7 +238,59 @@ class MessageController extends AbstractLocalizedController
 
         $this->entityManager->flush();
 
-        return $this->redirectToRoute($redirect);
+        return $this->redirectToRoute($redirect, ['_locale' => $request->getLocale()]);
+    }
+
+    #[Route('/messages/bulk-delete', name: 'message_bulk_delete', methods: ['POST'])]
+    public function bulkDelete(Request $request): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // Verify CSRF token
+        if (!$this->isCsrfTokenValid('bulk-delete-messages', $request->request->getString('_token'))) {
+            $this->addFlash('error', 'Invalid CSRF token');
+            $type = $request->request->get('type', 'inbox');
+            return $this->redirectToRoute($type === 'inbox' ? 'message_inbox' : 'message_outbox');
+        }
+
+        $type = $request->request->get('type', 'inbox');
+
+        $messageIds = $request->request->all('message_ids');
+
+        if (empty($messageIds)) {
+            $this->addFlash('error', $this->translator->trans('bulk_delete.error.no_messages', [], 'Message'));
+            return $this->redirectToRoute($type === 'inbox' ? 'message_inbox' : 'message_outbox');
+        }
+
+        $deletedCount = 0;
+        $messages = $this->messageRepository->findByIds(array_map('intval', $messageIds));
+
+        foreach ($messages as $message) {
+            $isRecipient = $message->getRecipient()->getId() === $user->getId();
+            $isSender = $message->getSender()?->getId() === $user->getId();
+
+            if (!$isRecipient && !$isSender) {
+                continue;
+            }
+
+            if ($type === 'inbox' && $isRecipient) {
+                $message->setIsDeletedRecipient(true);
+                $deletedCount++;
+            } elseif ($type === 'outbox' && $isSender) {
+                $message->setIsDeletedSender(true);
+                $deletedCount++;
+            }
+        }
+
+        if ($deletedCount > 0) {
+            $this->entityManager->flush();
+            $this->addFlash('success', $this->translator->trans('bulk_delete.success', ['%count%' => $deletedCount], 'Message'));
+        } else {
+            $this->addFlash('warning', $this->translator->trans('bulk_delete.warning.no_messages', [], 'Message'));
+        }
+
+        return $this->redirectToRoute($type === 'inbox' ? 'message_inbox' : 'message_outbox');
     }
 
     /**

@@ -118,3 +118,15 @@ filter:
 pagination:
     label: 'Nachrichten-Navigation'
     showing: 'Zeige %start% bis %end% von %total% Nachrichten'
+
+bulk_select:
+    select_all: 'Alle auswählen'
+
+bulk_delete:
+    button: 'Auswahl löschen'
+    confirm: 'Sind Sie sicher, dass Sie %count% Nachricht(en) löschen möchten?'
+    success: '%count% Nachricht(en) erfolgreich gelöscht.'
+    error:
+        no_messages: 'Bitte wählen Sie mindestens eine Nachricht zum Löschen aus.'
+    warning:
+        no_messages: 'Keine Nachrichten konnten gelöscht werden.'
