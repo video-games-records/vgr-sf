@@ -21,6 +21,7 @@ navigation:
     by_letter: "Per lettera"
     by_platform: "Per piattaforma"
     by_series: "Per serie"
+    downloads: "Download"
     featured_games: "Prossimi giochi"
     latest_games: "Ultimi giochi"
 
@@ -143,7 +144,7 @@ time:
   just_now: "Proprio ora"
   time_ago: "%count% %unit% fa"
   time_in: "Tra %count% %unit%"
-  
+
   # Time unit translations
   units:
     year: "anno"

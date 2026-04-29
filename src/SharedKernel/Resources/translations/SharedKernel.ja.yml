@@ -14,6 +14,7 @@ navigation:
     by_letter: "文字別"
     by_platform: "プラットフォーム別"
     by_series: "シリーズ別"
+    downloads: "ダウンロード"
     featured_games: "注目ゲーム"
     latest_games: "最新ゲーム"
 
@@ -131,7 +132,7 @@ time:
   just_now: "たった今"
   time_ago: "%count%%unit%前"
   time_in: "%count%%unit%後"
-  
+
   # Time unit translations
   units:
     year: "年"
