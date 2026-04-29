@@ -1,0 +1,76 @@
+comment:
+  form:
+    content:
+      placeholder: "Schreiben Sie hier Ihren Kommentar..."
+      label: "Einen Kommentar hinzufügen..."
+  flash:
+    created: "Ihr Kommentar wurde erfolgreich veröffentlicht!"
+    updated: "Ihr Kommentar wurde erfolgreich aktualisiert!"
+    error: "Es gab einen Fehler mit Ihrem Kommentar. Bitte versuchen Sie es erneut."
+  validation:
+    content_required: "Kommentarinhalt ist erforderlich."
+    content_min_length: "Kommentar muss mindestens {{ limit }} Zeichen lang sein."
+    content_max_length: "Kommentar darf nicht länger als {{ limit }} Zeichen sein."
+  actions:
+    post: "Kommentar posten"
+    edit: "Bearbeiten"
+    save: "Speichern"
+    cancel: "Abbrechen"
+  messages:
+    no_comments: "Noch keine Kommentare. Seien Sie der Erste, der kommentiert!"
+    login_required: "Melden Sie sich an, um einen Kommentar hinzuzufügen."
+    pagination: "Kommentar-Paginierung"
+    previous: "Vorherige"
+    next: "Nächste"
+video:
+  card:
+    views: "Aufrufe"
+    watch: "Ansehen"
+  sidebar:
+    related_videos: "Ähnliche Videos"
+    no_related_videos: "Keine ähnlichen Videos gefunden."
+my_videos:
+  page:
+    title: "Meine Videos"
+    subtitle: "Verwalten Sie Ihre %count% Videos"
+  back_to_videos: "Zurück zu Videos"
+  filter:
+    game: "Nach Spiel filtern"
+    all_games: "Alle Spiele"
+    apply: "Filtern"
+    clear: "Löschen"
+  actions:
+    watch: "Ansehen"
+    edit: "Bearbeiten"
+  empty:
+    title: "Noch keine Videos"
+    message: "Sie haben noch keine Videos hochgeladen."
+  pagination:
+    previous: "Vorherige"
+    next: "Nächste"
+  edit_modal:
+    title: "Video bearbeiten"
+  form:
+    title:
+      label: "Titel"
+      placeholder: "Video-Titel eingeben"
+      help: "Geben Sie Ihrem Video einen klaren, beschreibenden Titel"
+      required: "Titel ist erforderlich"
+    url:
+      label: "Video-URL"
+      required: "Video-URL ist erforderlich"
+    game:
+      label: "Spiel"
+    tags:
+      label: "Tags"
+      help: "Fügen Sie Tags für dieses Video hinzu oder entfernen Sie sie"
+    save: "Änderungen speichern"
+    cancel: "Abbrechen"
+  edit:
+    title: "Video Bearbeiten"
+    save: "Änderungen Speichern"
+    cancel: "Zurück zu Meine Videos"
+    success: "Video erfolgreich aktualisiert!"
+  delete:
+    success: "Video erfolgreich gelöscht!"
+    confirm: "Sind Sie sicher, dass Sie dieses Video löschen möchten?"

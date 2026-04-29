@@ -8,6 +8,7 @@ navigation:
   games: "Juegos"
   leaderboards: "Clasificaciones"
   community: "Comunidad"
+  videos: "Videos"
   admin: "Admin"
 
   games_dropdown:
@@ -38,6 +39,7 @@ navigation:
     profile: "Perfil"
     team: "Mi equipo"
     my_proofs: "Mis pruebas"
+    my_videos: "Mis Videos"
     game_history: "Historial de Juegos"
     messages: "Mensajes"
     lost_positions: "Posiciones perdidas"

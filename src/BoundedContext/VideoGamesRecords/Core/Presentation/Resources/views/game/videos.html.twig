@@ -1,0 +1,42 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ game.name }} - Videos{% endblock %}
+
+{% block meta_description %}
+    Découvrez les vidéos du jeu {{ game.name }}. {{ total_videos }} vidéos disponibles avec gameplay, records et preuves de la communauté Video Games Records.
+{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Include common game header with breadcrumbs #}
+    {% include '@VideoGamesRecordsCore/game/_header.html.twig' with {
+        'game': game,
+        'breadcrumbs': [
+            {
+                'url': path('vgr_game_show', {id: game.id, slug: game.slug}),
+                'label': game.name
+            },
+            {
+                'label': 'Videos'
+            }
+        ]
+    } %}
+
+    {# Videos Content #}
+    <div class="row">
+        <div class="col-12">
+            {% include '@VideoGamesRecordsVideo/shared/videos_grid.html.twig' with {
+                videos: videos,
+                total_videos: total_videos,
+                has_more: has_more,
+                api_url: api_url,
+                title: game.name ~ ' Videos',
+                grid_container_id: 'game-videos-container',
+                load_more_btn_id: 'game-load-more-btn'
+            } %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

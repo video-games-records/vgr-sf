@@ -8,6 +8,7 @@ navigation:
   games: "ゲーム"
   leaderboards: "ランキング"
   community: "コミュニティ"
+  videos: "動画"
   admin: "管理"
 
   games_dropdown:
@@ -38,6 +39,7 @@ navigation:
     profile: "プロフィール"
     team: "マイチーム"
     my_proofs: "マイ証拠"
+    my_videos: "マイ動画"
     game_history: "ゲーム履歴"
     messages: "メッセージ"
     lost_positions: "失った順位"

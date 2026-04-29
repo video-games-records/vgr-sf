@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\SharedKernel\Application\Command;
 
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
+use App\BoundedContext\VideoGamesRecords\Video\Infrastructure\Doctrine\Repository\VideoRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,6 +24,7 @@ class GenerateSitemapCommand extends Command
 
     public function __construct(
         private readonly GameRepository $gameRepository,
+        private readonly VideoRepository $videoRepository,
         private readonly UrlGeneratorInterface $urlGenerator,
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
@@ -67,7 +69,38 @@ class GenerateSitemapCommand extends Command
             );
         }
 
-        // TODO: Add other sections when routes are available
+        // Videos list page
+        $io->info('Adding videos list page to sitemap...');
+        $this->addMultilingualUrl(
+            $xml,
+            $urlset,
+            'vgr_video_list',
+            [],
+            '0.7',
+            'daily'
+        );
+
+        // Individual videos
+        $io->info('Adding videos to sitemap...');
+        $videos = $this->videoRepository
+            ->createQueryBuilder('v')
+            ->where('v.isActive = :active')
+            ->setParameter('active', true)
+            ->orderBy('v.createdAt', 'DESC')
+            ->setMaxResults(1000) // Limite pour éviter des sitemaps trop volumineux
+            ->getQuery()
+            ->getResult();
+
+        foreach ($videos as $video) {
+            $this->addMultilingualUrl(
+                $xml,
+                $urlset,
+                'vgr_video_show',
+                ['id' => $video->getId(), 'slug' => $video->getSlug()],
+                '0.6',
+                'weekly'
+            );
+        }
 
         // Save sitemap
         $sitemapPath = $this->projectDir . '/public/sitemap.xml';

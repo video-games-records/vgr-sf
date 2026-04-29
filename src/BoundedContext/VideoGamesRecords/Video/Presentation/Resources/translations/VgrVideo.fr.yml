@@ -1,0 +1,94 @@
+comment:
+  form:
+    content:
+      placeholder: "Écrivez votre commentaire ici..."
+      label: "Ajouter un commentaire..."
+  flash:
+    created: "Votre commentaire a été publié avec succès !"
+    updated: "Votre commentaire a été mis à jour avec succès !"
+    error: "Il y a eu une erreur avec votre commentaire. Veuillez réessayer."
+  validation:
+    content_required: "Le contenu du commentaire est requis."
+    content_min_length: "Le commentaire doit contenir au moins {{ limit }} caractères."
+    content_max_length: "Le commentaire ne peut pas dépasser {{ limit }} caractères."
+  actions:
+    post: "Publier le commentaire"
+    edit: "Modifier"
+    save: "Enregistrer"
+    cancel: "Annuler"
+  messages:
+    no_comments: "Aucun commentaire pour le moment. Soyez le premier à commenter !"
+    login_required: "Connectez-vous pour ajouter un commentaire."
+    pagination: "Pagination des commentaires"
+    previous: "Précédent"
+    next: "Suivant"
+video:
+  card:
+    views: "vues"
+    watch: "Regarder"
+  sidebar:
+    related_videos: "Vidéos similaires"
+    no_related_videos: "Aucune vidéo similaire trouvée."
+my_videos:
+  page:
+    title: "Mes Vidéos"
+    subtitle: "Gérer vos %count% vidéos"
+  back_to_videos: "Retour aux Vidéos"
+  filter:
+    game: "Filtrer par Jeu"
+    all_games: "Tous les Jeux"
+    apply: "Filtrer"
+    clear: "Effacer"
+  actions:
+    watch: "Regarder"
+    edit: "Modifier"
+  empty:
+    title: "Aucune vidéo"
+    message: "Vous n'avez pas encore téléchargé de vidéos."
+  pagination:
+    previous: "Précédent"
+    next: "Suivant"
+  edit_modal:
+    title: "Modifier les Tags"
+  form:
+    video_info: "Informations de la vidéo"
+    title:
+      label: "Titre"
+      placeholder: "Saisissez le titre de la vidéo"
+      help: "Donnez un titre clair et descriptif à votre vidéo"
+      required: "Le titre est requis"
+      min_length: "Le titre doit contenir au moins %limit% caractères"
+      max_length: "Le titre ne peut dépasser %limit% caractères"
+    description:
+      label: "Description"
+      placeholder: "Description optionnelle de votre vidéo"
+      help: "Ajoutez une description pour aider les spectateurs à comprendre votre vidéo"
+      max_length: "La description ne peut dépasser %limit% caractères"
+    url:
+      label: "URL de la Vidéo"
+      placeholder: "https://youtube.com/watch?v=..."
+      required: "L'URL de la vidéo est requise"
+      invalid: "Veuillez saisir une URL valide"
+      help: "URL YouTube, Twitch ou autre plateforme vidéo"
+    game:
+      label: "Jeu"
+      placeholder: "Sélectionner un jeu (optionnel)"
+    tags:
+      label: "Tags"
+      placeholder: "Sélectionner des tags"
+      help: "Ajoutez ou supprimez des tags pour cette vidéo"
+    save: "Enregistrer les Tags"
+    saving: "Enregistrement..."
+    cancel: "Annuler"
+  edit:
+    title: "Modifier la Vidéo"
+    save: "Enregistrer les Modifications"
+    cancel: "Retour à Mes Vidéos"
+    success: "Vidéo mise à jour avec succès !"
+  delete:
+    success: "Vidéo supprimée avec succès !"
+    confirm: "Êtes-vous sûr de vouloir supprimer cette vidéo ?"
+  error:
+    loading_form: "Erreur lors du chargement du formulaire"
+    save_failed: "Échec de l'enregistrement"
+    delete_failed: "Échec de la suppression"

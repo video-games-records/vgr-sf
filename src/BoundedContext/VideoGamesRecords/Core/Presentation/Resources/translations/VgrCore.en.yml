@@ -23,7 +23,7 @@ game:
     no_games: No games found
     card_title: Latest Games
     no_games_card: No recent games
-  
+
   game_of_day:
     title: Game of the Day
     no_game: No game of the day
@@ -123,6 +123,7 @@ player:
       overview: Overview
       badges: Badges
       games: Games
+      videos: Videos
       proofs: Proofs
 
     header:
@@ -145,6 +146,25 @@ player:
       medals_over_time: Medals Over Time
       positions_distribution: Positions Distribution
       about: About
+
+    sidebar:
+      title: Links
+      forum: Forum
+      forum_description: Discuss about this game
+      serie_description: Explore other games in this series
+      download: Download
+      download_description: Get the game
+      rules: General Rules
+      rules_description: Read the competition rules
+      videos: Videos
+      videos_description: "{1} %count% video available|]1,Inf[ %count% videos available"
+      group_switcher_title: Switch Group
+      group_prev: Previous
+      group_next: Next
+      chart_switcher_title: Switch Chart
+      chart_prev: Previous
+      chart_next: Next
+      game_rules_title: Game Rules
 
     rankings:
       game_points_rank: Game Points Rank

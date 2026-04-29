@@ -1,0 +1,78 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrVideo' %}
+
+{% block title %}{{ 'my_videos.edit.title'|trans }} - {{ video.title }}{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h4 mb-0">
+                        <i class="fas fa-edit me-2"></i>
+                        {{ 'my_videos.edit.title'|trans }}
+                    </h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            {% if video.thumbnail %}
+                                <img src="{{ video.thumbnail }}" alt="{{ video.title }}" class="img-fluid rounded">
+                            {% else %}
+                                <div class="bg-light rounded d-flex align-items-center justify-content-center ratio ratio-16x9">
+                                    <i class="bi bi-camera-video text-muted fs-3"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="h5 mb-2">{{ video.title }}</h2>
+                            <p class="text-muted mb-1">
+                                <i class="fas fa-gamepad me-1"></i>
+                                {{ video.game.libGameEn }}
+                            </p>
+                            <p class="text-muted mb-1">
+                                <i class="fas fa-user me-1"></i>
+                                {{ video.player.pseudo }}
+                            </p>
+                            <p class="text-muted">
+                                <i class="fas fa-calendar me-1"></i>
+                                {{ video.createdAt|date('d/m/Y') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+                    
+                    <div class="mb-3">
+                        {{ form_label(form.title, null, {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                        {{ form_widget(form.title) }}
+                        {{ form_help(form.title) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+                    
+                    <div class="mb-4">
+                        {{ form_label(form.tags, null, {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                        {{ form_widget(form.tags, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_help(form.tags) }}
+                        {{ form_errors(form.tags) }}
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>
+                            {{ 'my_videos.edit.save'|trans }}
+                        </button>
+                        <a href="{{ path('vgr_my_videos') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            {{ 'my_videos.edit.cancel'|trans }}
+                        </a>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

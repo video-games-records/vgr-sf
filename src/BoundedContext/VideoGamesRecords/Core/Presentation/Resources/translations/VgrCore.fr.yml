@@ -123,6 +123,7 @@ player:
       overview: Vue d'ensemble
       badges: Badges
       games: Jeux
+      videos: Vidéos
       proofs: Preuves
 
     header:
@@ -239,6 +240,8 @@ sidebar:
   download_description: Obtenir ce jeu
   rules: Règlement
   rules_description: Règles et directives du site
+  videos: Vidéos
+  videos_description: "{1} %count% vidéo disponible|]1,Inf[ %count% vidéos disponibles"
   game_rules_title: Règles du jeu
   group_switcher_title: Changer de groupe
   group_prev: Précédent

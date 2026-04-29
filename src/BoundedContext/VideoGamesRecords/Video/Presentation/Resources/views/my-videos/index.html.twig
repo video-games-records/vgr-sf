@@ -1,0 +1,168 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrVideo' %}
+
+{% block title %}{{ 'my_videos.page.title'|trans }} - Video Games Records{% endblock %}
+
+{% block meta_description %}Manage your {{ total_videos }} gaming videos on Video Games Records. Edit titles, descriptions, tags and organize your video collection.{% endblock %}
+
+{% block meta_keywords %}my videos, manage videos, edit videos, gaming videos, video management, video games records{% endblock %}
+
+{% block og_title %}{{ 'my_videos.page.title'|trans }} - {{ player.pseudo }}{% endblock %}
+{% block og_description %}Manage your {{ total_videos }} gaming videos on Video Games Records. Edit and organize your video collection.{% endblock %}
+{% block og_image %}{{ absolute_url(asset('build/images/vgr-social-share.jpg')) }}{% endblock %}
+
+{% block canonical_url %}{{ absolute_url(path('vgr_my_videos', {'_locale': app.request.locale})) }}{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        {# Header #}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h2 mb-1">{{ 'my_videos.page.title'|trans }}</h1>
+                <p class="text-muted mb-0">{{ 'my_videos.page.subtitle'|trans({'%count%': total_videos}) }}</p>
+            </div>
+            <a href="{{ path('vgr_video_list') }}" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-2"></i>{{ 'my_videos.back_to_videos'|trans }}
+            </a>
+        </div>
+
+        {# Flash messages #}
+        {% for flash_error in app.session.flashbag.get('danger') %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ flash_error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ flash_message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+
+        {# Filters #}
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="GET" class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label for="game" class="form-label">{{ 'my_videos.filter.game'|trans }}</label>
+                        <select name="game" id="game" class="form-select">
+                            <option value="">{{ 'my_videos.filter.all_games'|trans }}</option>
+                            {% for game in player_games %}
+                                <option value="{{ game.id }}" {% if selected_game and selected_game.id == game.id %}selected{% endif %}>
+                                    {{ game.getName(app.request.locale) }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-funnel me-1"></i>{{ 'my_videos.filter.apply'|trans }}
+                        </button>
+                        {% if selected_game %}
+                            <a href="{{ path('vgr_my_videos') }}" class="btn btn-outline-secondary ms-2">
+                                <i class="bi bi-x"></i>{{ 'my_videos.filter.clear'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {# Videos List #}
+        {% if videos|length > 0 %}
+            <div class="list-group">
+                {% for video in videos %}
+                    <div class="list-group-item d-flex justify-content-between align-items-center" id="video-{{ video.id }}">
+                        <div class="flex-grow-1">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">
+                                    <a href="{{ path('vgr_video_show', {id: video.id, slug: video.slug}) }}" class="text-decoration-none">
+                                        {{ video.title }}
+                                    </a>
+                                </h6>
+                                <small class="text-muted">{{ video.createdAt|date('M j, Y') }}</small>
+                            </div>
+                            {% if video.game %}
+                                <p class="mb-1 text-muted">
+                                    <i class="bi bi-controller me-1"></i>{{ video.game.getName(app.request.locale) }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <a href="{{ path('vgr_my_videos_edit', {'id': video.id}) }}" class="btn btn-outline-warning btn-sm ms-3" 
+                           data-bs-toggle="tooltip" 
+                           title="{{ 'my_videos.actions.edit'|trans }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {# Pagination #}
+            {% if total_pages > 1 %}
+                <nav aria-label="Videos pagination" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        {% if current_page > 1 %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('vgr_my_videos', app.request.query.all|merge({page: current_page - 1})) }}">
+                                    <i class="bi bi-chevron-left"></i> {{ 'my_videos.pagination.previous'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% for page in 1..total_pages %}
+                            {% if page == current_page %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ page }}</span>
+                                </li>
+                            {% elseif page == 1 or page == total_pages or (page >= current_page - 2 and page <= current_page + 2) %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ path('vgr_my_videos', app.request.query.all|merge({page: page})) }}">{{ page }}</a>
+                                </li>
+                            {% elseif page == 2 or page == total_pages - 1 %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if current_page < total_pages %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('vgr_my_videos', app.request.query.all|merge({page: current_page + 1})) }}">
+                                    {{ 'my_videos.pagination.next'|trans }} <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+
+        {% else %}
+            <div class="text-center py-5">
+                <div class="alert alert-info">
+                    <i class="bi bi-camera-video fs-1 text-muted d-block mb-3"></i>
+                    <h4 class="alert-heading">{{ 'my_videos.empty.title'|trans }}</h4>
+                    <p class="mb-0">{{ 'my_videos.empty.message'|trans }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function initializeTooltips() {
+                if (typeof window.bootstrap !== 'undefined' && window.bootstrap.Tooltip) {
+                    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (el) {
+                        new window.bootstrap.Tooltip(el);
+                    });
+                } else {
+                    setTimeout(initializeTooltips, 100);
+                }
+            }
+            initializeTooltips();
+        });
+    </script>
+{% endblock %}

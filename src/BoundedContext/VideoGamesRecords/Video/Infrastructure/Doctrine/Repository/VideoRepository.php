@@ -177,6 +177,55 @@ class VideoRepository extends DefaultRepository
             ->getResult();
     }
 
+    public function findActiveByIdWithRelations(int $id): ?Video
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v, p, g')
+            ->leftJoin('v.player', 'p')
+            ->leftJoin('v.game', 'g')
+            ->where('v.id = :id')
+            ->andWhere('v.isActive = :active')
+            ->setParameter('id', $id)
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @return Video[]
+     */
+    public function findLatestActive(int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v, p, g')
+            ->leftJoin('v.player', 'p')
+            ->leftJoin('v.game', 'g')
+            ->where('v.isActive = :active')
+            ->setParameter('active', true)
+            ->orderBy('v.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Video[]
+     */
+    public function findMostPopularActive(int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v, p, g')
+            ->leftJoin('v.player', 'p')
+            ->leftJoin('v.game', 'g')
+            ->where('v.isActive = :active')
+            ->setParameter('active', true)
+            ->orderBy('v.viewCount', 'DESC')
+            ->addOrderBy('v.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @return array<array{id: int, pseudo: string, slug: string, nbVideo: int}>
      */

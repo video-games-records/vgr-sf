@@ -1,0 +1,43 @@
+comment:
+  form:
+    content:
+      placeholder: "在此写下您的评论..."
+      label: "添加评论..."
+  flash:
+    created: "您的评论已成功发布！"
+    updated: "您的评论已成功更新！"
+    error: "您的评论发生错误。请重试。"
+  validation:
+    content_required: "评论内容是必需的。"
+    content_min_length: "评论必须至少包含{{ limit }}个字符。"
+    content_max_length: "评论不能超过{{ limit }}个字符。"
+  actions:
+    post: "发布评论"
+    edit: "编辑"
+    save: "保存"
+    cancel: "取消"
+  messages:
+    no_comments: "还没有评论。成为第一个评论的人吧！"
+    login_required: "登录以添加评论。"
+    pagination: "评论分页"
+    previous: "上一页"
+    next: "下一页"
+video:
+  card:
+    views: "次观看"
+    watch: "观看"
+  sidebar:
+    related_videos: "相关视频"
+    no_related_videos: "未找到相关视频。"
+my_videos:
+  edit:
+    title: "编辑视频"
+    save: "保存更改"
+    cancel: "返回我的视频"
+  form:
+    title:
+      label: "标题"
+      help: "给你的视频一个清晰描述性的标题"
+    tags:
+      label: "标签"
+      help: "为此视频添加或移除标签"

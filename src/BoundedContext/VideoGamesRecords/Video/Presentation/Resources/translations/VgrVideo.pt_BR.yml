@@ -1,0 +1,43 @@
+comment:
+  form:
+    content:
+      placeholder: "Escreva seu comentário aqui..."
+      label: "Adicionar um comentário..."
+  flash:
+    created: "Seu comentário foi publicado com sucesso!"
+    updated: "Seu comentário foi atualizado com sucesso!"
+    error: "Houve um erro com seu comentário. Tente novamente."
+  validation:
+    content_required: "O conteúdo do comentário é obrigatório."
+    content_min_length: "O comentário deve ter pelo menos {{ limit }} caracteres."
+    content_max_length: "O comentário não pode ter mais de {{ limit }} caracteres."
+  actions:
+    post: "Publicar comentário"
+    edit: "Editar"
+    save: "Salvar"
+    cancel: "Cancelar"
+  messages:
+    no_comments: "Nenhum comentário ainda. Seja o primeiro a comentar!"
+    login_required: "Faça login para adicionar um comentário."
+    pagination: "Paginação de comentários"
+    previous: "Anterior"
+    next: "Próximo"
+video:
+  card:
+    views: "visualizações"
+    watch: "Assistir"
+  sidebar:
+    related_videos: "Vídeos relacionados"
+    no_related_videos: "Nenhum vídeo relacionado encontrado."
+my_videos:
+  edit:
+    title: "Editar Vídeo"
+    save: "Salvar Alterações"
+    cancel: "Voltar para Meus Vídeos"
+  form:
+    title:
+      label: "Título"
+      help: "Dê ao seu vídeo um título claro e descritivo"
+    tags:
+      label: "Tags"
+      help: "Adicionar ou remover tags para este vídeo"

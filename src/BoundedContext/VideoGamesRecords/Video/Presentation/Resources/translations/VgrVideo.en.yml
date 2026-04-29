@@ -1,0 +1,94 @@
+comment:
+  form:
+    content:
+      placeholder: "Write your comment here..."
+      label: "Add a comment..."
+  flash:
+    created: "Your comment has been posted successfully!"
+    updated: "Your comment has been updated successfully!"
+    error: "There was an error with your comment. Please try again."
+  validation:
+    content_required: "Comment content is required."
+    content_min_length: "Comment must be at least {{ limit }} characters long."
+    content_max_length: "Comment cannot be longer than {{ limit }} characters."
+  actions:
+    post: "Post Comment"
+    edit: "Edit"
+    save: "Save"
+    cancel: "Cancel"
+  messages:
+    no_comments: "No comments yet. Be the first to comment!"
+    login_required: "Login to add a comment."
+    pagination: "Comments pagination"
+    previous: "Previous"
+    next: "Next"
+video:
+  card:
+    views: "views"
+    watch: "Watch"
+  sidebar:
+    related_videos: "Related Videos"
+    no_related_videos: "No related videos found."
+my_videos:
+  page:
+    title: "My Videos"
+    subtitle: "Manage your %count% videos"
+  back_to_videos: "Back to Videos"
+  filter:
+    game: "Filter by Game"
+    all_games: "All Games"
+    apply: "Filter"
+    clear: "Clear"
+  actions:
+    watch: "Watch"
+    edit: "Edit"
+  empty:
+    title: "No videos yet"
+    message: "You haven't uploaded any videos yet."
+  pagination:
+    previous: "Previous"
+    next: "Next"
+  edit_modal:
+    title: "Edit Tags"
+  form:
+    video_info: "Video Information"
+    title:
+      label: "Title"
+      placeholder: "Enter video title"
+      help: "Give your video a clear, descriptive title"
+      required: "Title is required"
+      min_length: "Title must be at least %limit% characters"
+      max_length: "Title cannot exceed %limit% characters"
+    description:
+      label: "Description"
+      placeholder: "Optional description of your video"
+      help: "Add a description to help viewers understand your video"
+      max_length: "Description cannot exceed %limit% characters"
+    url:
+      label: "Video URL"
+      placeholder: "https://youtube.com/watch?v=..."
+      required: "Video URL is required"
+      invalid: "Please enter a valid URL"
+      help: "YouTube, Twitch or other video platform URL"
+    game:
+      label: "Game"
+      placeholder: "Select a game (optional)"
+    tags:
+      label: "Tags"
+      placeholder: "Select tags"
+      help: "Add or remove tags for this video"
+    save: "Save Tags"
+    saving: "Saving..."
+    cancel: "Cancel"
+  edit:
+    title: "Edit Video"
+    save: "Save Changes"
+    cancel: "Back to My Videos"
+    success: "Video updated successfully!"
+  delete:
+    success: "Video deleted successfully!"
+    confirm: "Are you sure you want to delete this video?"
+  error:
+    loading_form: "Error loading edit form"
+    save_failed: "Failed to save changes"
+    delete_failed: "Failed to delete video"

@@ -1,0 +1,72 @@
+{#
+    Template réutilisable pour afficher une grille de vidéos avec scroll infini
+    
+    Variables requises:
+    - videos: Collection de vidéos à afficher
+    - has_more: boolean indiquant s'il y a plus de vidéos à charger
+    - api_url: URL pour charger plus de vidéos via AJAX
+    
+    Variables optionnelles:
+    - title: Titre de la section (par défaut: "Videos")
+    - total_videos: Nombre total de vidéos (pour affichage dans le titre)
+    - show_empty_message: boolean pour afficher un message si pas de vidéos (par défaut: true)
+    - grid_container_id: ID du conteneur de grille (par défaut: "videos-container")
+    - load_more_btn_id: ID du bouton "Load more" (par défaut: "load-more-btn")
+#}
+
+{% set title = title|default('Videos') %}
+{% set show_empty_message = show_empty_message|default(true) %}
+{% set grid_container_id = grid_container_id|default('videos-container') %}
+{% set load_more_btn_id = load_more_btn_id|default('load-more-btn') %}
+
+<div class="videos-section">
+    {% if title and total_videos is defined %}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>{{ title }} <small class="text-muted">({{ total_videos }} videos)</small></h2>
+        </div>
+    {% elseif title %}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>{{ title }}</h2>
+        </div>
+    {% endif %}
+    
+    {% if videos|length > 0 %}
+        <div 
+            class="row g-4" 
+            id="{{ grid_container_id }}"
+            data-infinite-scroll 
+            data-url="{{ api_url }}"
+            data-locale="{{ app.request.locale }}"
+        >
+            {% for video in videos %}
+                {% include '@VideoGamesRecordsVideo/shared/video_card.html.twig' with {video: video} %}
+            {% endfor %}
+        </div>
+
+        {# Bouton "Load more" pour le scroll infini #}
+        {% if has_more %}
+            <div class="text-center mt-5">
+                <button id="{{ load_more_btn_id }}" class="btn btn-outline-primary btn-lg" data-load-more>
+                    <span class="load-text">
+                        <i class="bi bi-arrow-down-circle me-2"></i>Load more videos
+                    </span>
+                    <span class="loading-text d-none">
+                        <div class="spinner-border spinner-border-sm me-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Loading...
+                    </span>
+                </button>
+            </div>
+        {% endif %}
+    {% elseif show_empty_message %}
+        <div class="text-center py-5">
+            <div class="alert alert-info">
+                <h4 class="alert-heading">No videos available</h4>
+                <p class="mb-0">No videos are currently available.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{# Le script JavaScript sera inclus automatiquement par la classe InfiniteScrollVideos #}

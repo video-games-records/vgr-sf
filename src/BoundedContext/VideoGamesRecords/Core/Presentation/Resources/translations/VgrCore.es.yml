@@ -4,6 +4,7 @@ player:
       overview: Resumen
       badges: Insignias
       games: Juegos
+      videos: Videos
       proofs: Pruebas
 
     header:
@@ -71,6 +72,8 @@ sidebar:
   download_description: Obtener este juego
   rules: Reglas
   rules_description: Reglas y directrices del sitio
+  videos: Vídeos
+  videos_description: "{1} %count% vídeo disponible|]1,Inf[ %count% vídeos disponibles"
   game_rules_title: Reglas del juego
   group_switcher_title: Cambiar grupo
   group_prev: Anterior

@@ -14,6 +14,7 @@ navigation:
   games: "Games"
   leaderboards: "Leaderboards"
   community: "Community"
+  videos: "Videos"
   admin: "Admin"
 
   # Dropdown Games
@@ -48,6 +49,7 @@ navigation:
     profile: "Profile"
     team: "My Team"
     my_proofs: "My Proofs"
+    my_videos: "My Videos"
     game_history: "Game History"
     messages: "Messages"
     lost_positions: "Lost Positions"

@@ -4,6 +4,7 @@ player:
       overview: Übersicht
       badges: Abzeichen
       games: Spiele
+      videos: Videos
       proofs: Beweise
 
     header:
@@ -71,6 +72,8 @@ sidebar:
   download_description: Dieses Spiel herunterladen
   rules: Regeln
   rules_description: Seitenregeln und Richtlinien
+  videos: Videos
+  videos_description: "{1} %count% Video verfügbar|]1,Inf[ %count% Videos verfügbar"
   game_rules_title: Spielregeln
   group_switcher_title: Gruppe wechseln
   group_prev: Vorherige

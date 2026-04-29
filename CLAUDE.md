@@ -200,6 +200,141 @@ Chaque bounded context peut avoir sa propre documentation CLAUDE.md :
 
 ---
 
+# Internationalisation (i18n)
+
+## Langues Supportées
+
+Le projet supporte **8 langues** avec codes de locale spécifiques :
+
+| Langue | Code Locale | Exemple Route |
+|--------|-------------|---------------|
+| 🇬🇧 Anglais | `en` | `/en/videos` |
+| 🇫🇷 Français | `fr` | `/fr/videos` |
+| 🇩🇪 Allemand | `de` | `/de/videos` |
+| 🇪🇸 Espagnol | `es` | `/es/videos` |
+| 🇮🇹 Italien | `it` | `/it/videos` |
+| 🇯🇵 Japonais | `ja` | `/ja/videos` |
+| 🇧🇷 Portugais (Brésil) | `pt_BR` | `/pt_BR/videos` |
+| 🇨🇳 Chinois (Simplifié) | `zh_CN` | `/zh_CN/videos` |
+
+## 🚨 RÈGLE IMPORTANTE : Traductions Obligatoires
+
+**⚠️ QUAND TU AJOUTES UNE NOUVELLE TRADUCTION, TU DOIS LA METTRE DANS TOUS LES FICHIERS DE LANGUES !**
+
+### Fichiers de Traduction par Contexte
+
+**VideoGamesRecords.Core :**
+```
+src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/translations/
+├── VgrCore.en.yml          # Anglais
+├── VgrCore.fr.yml          # Français  
+├── VgrCore.de.yml          # Allemand
+├── VgrCore.es.yml          # Espagnol
+├── VgrCore.it.yml          # Italien
+├── VgrCore.ja.yml          # Japonais
+├── VgrCore.pt_BR.yml       # Portugais (Brésil)
+└── VgrCore.zh_CN.yml       # Chinois (Simplifié)
+```
+
+**Autres Contextes :**
+- Chaque contexte a ses propres fichiers de traduction
+- Suivre la même convention de nommage
+- Toujours inclure les 8 langues
+
+### Processus d'Ajout de Traduction
+
+1. **Identifier la nouvelle clé** (ex: `player.profile.tabs.videos`)
+2. **Ajouter dans EN** avec la valeur anglaise
+3. **🚨 OBLIGATOIRE : Ajouter dans les 7 autres langues :**
+   - `fr` : Traduction française
+   - `de` : Traduction allemande  
+   - `es` : Traduction espagnole
+   - `it` : Traduction italienne
+   - `ja` : Traduction japonaise
+   - `pt_BR` : Traduction portugaise (Brésil)
+   - `zh_CN` : Traduction chinoise (Simplifié)
+
+### Exemple Complet
+
+```yaml
+# VgrCore.en.yml
+player:
+  profile:
+    tabs:
+      videos: Videos
+
+# VgrCore.fr.yml  
+player:
+  profile:
+    tabs:
+      videos: Vidéos
+
+# VgrCore.de.yml
+player:
+  profile:
+    tabs:
+      videos: Videos
+
+# VgrCore.es.yml
+player:
+  profile:
+    tabs:
+      videos: Videos
+
+# VgrCore.it.yml
+player:
+  profile:
+    tabs:
+      videos: Video
+
+# VgrCore.ja.yml
+player:
+  profile:
+    tabs:
+      videos: 動画
+
+# VgrCore.pt_BR.yml
+player:
+  profile:
+    tabs:
+      videos: Vídeos
+
+# VgrCore.zh_CN.yml
+player:
+  profile:
+    tabs:
+      videos: 视频
+```
+
+### Routes Localisées
+
+Toutes les routes utilisent le préfixe locale obligatoire :
+
+```php
+#[Route('/{_locale}', requirements: ['_locale' => 'en|fr|de|it|ja|es|pt_BR|zh_CN'], defaults: ['_locale' => 'en'])]
+```
+
+### Utilisation dans les Templates
+
+```twig
+{{ 'player.profile.tabs.videos'|trans }}
+```
+
+### ✅ Checklist Traductions
+
+Avant de terminer une feature qui ajoute des traductions :
+
+- [ ] ✅ Traduction ajoutée dans VgrCore.en.yml
+- [ ] ✅ Traduction ajoutée dans VgrCore.fr.yml  
+- [ ] ✅ Traduction ajoutée dans VgrCore.de.yml
+- [ ] ✅ Traduction ajoutée dans VgrCore.es.yml
+- [ ] ✅ Traduction ajoutée dans VgrCore.it.yml
+- [ ] ✅ Traduction ajoutée dans VgrCore.ja.yml
+- [ ] ✅ Traduction ajoutée dans VgrCore.pt_BR.yml
+- [ ] ✅ Traduction ajoutée dans VgrCore.zh_CN.yml
+
+---
+
 # Bonnes Pratiques de Développement Frontend
 
 ## CSS et Styling
