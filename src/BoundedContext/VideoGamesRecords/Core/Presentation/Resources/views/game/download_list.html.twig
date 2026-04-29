@@ -1,0 +1,100 @@
+{% extends '@SharedKernel/base.html.twig' %}
+
+{% block title %}Game Downloads{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Game Downloads</h1>
+
+                {% if gamesWithDownloads|length > 0 %}
+                    <div class="row">
+                        {% for gameData in gamesWithDownloads %}
+                            {% set game = gameData.game %}
+                            <div class="col-12 col-lg-6 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            {% if game.picture %}
+                                                <img src="{{ game_picture_url(game.picture) }}"
+                                                     class="img-fluid h-100 object-fit-cover rounded-start"
+                                                     alt="{{ game.getName(app.request.locale) }}"
+                                                     style="min-height: 150px;">
+                                            {% else %}
+                                                <div class="bg-light h-100 d-flex align-items-center justify-content-center rounded-start"
+                                                     style="min-height: 150px;">
+                                                    <i class="bi bi-controller fs-1 text-muted"></i>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ game.getName(app.request.locale) }}</h5>
+                                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                                    {% for download in gameData.downloads %}
+                                                        <div class="d-flex align-items-center gap-1">
+                                                            <span class="badge bg-primary">{{ download.platform.name }}</span>
+                                                            <a href="{{ download.url }}"
+                                                               class="btn btn-success btn-sm"
+                                                               target="_blank"
+                                                               rel="noopener noreferrer"
+                                                               title="Download {{ game.getName(app.request.locale) }} for {{ download.platform.name }}">
+                                                                <i class="bi bi-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <small class="text-muted">{{ gameData.downloads|length }} download{{ gameData.downloads|length > 1 ? 's' : '' }} available</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {# Pagination #}
+                    {% if pagination.total_pages > 1 %}
+                        <div class="d-flex justify-content-center mt-4">
+                            <nav aria-label="Game downloads pagination">
+                                <ul class="pagination">
+                                    {% if pagination.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ path('vgr_core_game_download_list', {page: pagination.previous_page}) }}">Previous</a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    {% for page_num in 1..pagination.total_pages %}
+                                        {% if page_num == pagination.current_page %}
+                                            <li class="page-item active">
+                                                <span class="page-link">{{ page_num }}</span>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ path('vgr_core_game_download_list', {page: page_num}) }}">{{ page_num }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if pagination.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ path('vgr_core_game_download_list', {page: pagination.next_page}) }}">Next</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <div class="alert alert-info">
+                            <h4 class="alert-heading">No downloads available</h4>
+                            <p class="mb-0">No game downloads are currently available.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
