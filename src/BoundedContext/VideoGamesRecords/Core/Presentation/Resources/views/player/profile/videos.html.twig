@@ -1,0 +1,15 @@
+{% extends '@VideoGamesRecordsCore/player/profile/_base.html.twig' %}
+{% set current_tab = 'videos' %}
+
+{% block profile_content %}
+    {% include '@VideoGamesRecordsVideo/shared/videos_grid.html.twig' with {
+        videos: videos,
+        total_videos: total_videos,
+        has_more: has_more,
+        api_url: api_url,
+        title: player.pseudo ~ "'s Videos",
+        grid_container_id: 'player-videos-container',
+        load_more_btn_id: 'player-load-more-btn'
+    } %}
+{% endblock %}
+

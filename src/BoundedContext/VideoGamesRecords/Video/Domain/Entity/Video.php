@@ -196,6 +196,22 @@ class Video
     }
 
     /**
+     * @param Collection<int, Tag> $tags
+     */
+    public function setTags(Collection $tags): self
+    {
+        // Clear existing tags
+        $this->tags->clear();
+
+        // Add new tags
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
+
+        return $this;
+    }
+
+    /**
      *
      */
     public function majTypeAndVideoId(): void

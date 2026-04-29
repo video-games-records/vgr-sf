@@ -176,6 +176,19 @@
             {% endfor %}
         {% endif %}
 
+        {# Videos Link - Only if the game has videos #}
+        {% if game_video_count is defined and game_video_count > 0 %}
+            <a href="{{ path('vgr_game_videos', {id: game.id, slug: game.slug}) }}" class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-play-circle me-3 fs-5 text-danger"></i>
+                    <div>
+                        <div class="fw-bold">{{ 'sidebar.videos'|trans }}</div>
+                        <small class="text-muted">{{ 'sidebar.videos_description'|trans({'%count%': game_video_count}, 'VgrCore', null, game_video_count) }}</small>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+
         {# General Rules Link #}
         <a href="{{ path('static_rules') }}" class="list-group-item list-group-item-action">
             <div class="d-flex align-items-center">

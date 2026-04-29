@@ -1,0 +1,43 @@
+comment:
+  form:
+    content:
+      placeholder: "ここにコメントを書いてください..."
+      label: "コメントを追加..."
+  flash:
+    created: "コメントが正常に投稿されました！"
+    updated: "コメントが正常に更新されました！"
+    error: "コメントでエラーが発生しました。もう一度お試しください。"
+  validation:
+    content_required: "コメント内容は必須です。"
+    content_min_length: "コメントは最低{{ limit }}文字必要です。"
+    content_max_length: "コメントは{{ limit }}文字を超えることはできません。"
+  actions:
+    post: "コメントを投稿"
+    edit: "編集"
+    save: "保存"
+    cancel: "キャンセル"
+  messages:
+    no_comments: "まだコメントはありません。最初のコメントを投稿しませんか！"
+    login_required: "コメントを追加するにはログインしてください。"
+    pagination: "コメントのページネーション"
+    previous: "前へ"
+    next: "次へ"
+video:
+  card:
+    views: "回視聴"
+    watch: "視聴する"
+  sidebar:
+    related_videos: "関連動画"
+    no_related_videos: "関連動画が見つかりませんでした。"
+my_videos:
+  edit:
+    title: "動画編集"
+    save: "変更を保存"
+    cancel: "マイ動画に戻る"
+  form:
+    title:
+      label: "タイトル"
+      help: "動画に明確で説明的なタイトルを付けてください"
+    tags:
+      label: "タグ"
+      help: "この動画のタグを追加または削除する"

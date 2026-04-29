@@ -14,6 +14,7 @@ navigation:
   games: "Giochi"
   leaderboards: "Classifiche"
   community: "Community"
+  videos: "Video"
   admin: "Admin"
 
   # Dropdown Games
@@ -48,6 +49,7 @@ navigation:
     profile: "Profilo"
     team: "La mia squadra"
     my_proofs: "Le mie prove"
+    my_videos: "I miei Video"
     game_history: "Cronologia dei Giochi"
     messages: "Messaggi"
     lost_positions: "Posizioni perse"

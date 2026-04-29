@@ -1,0 +1,63 @@
+comment:
+  form:
+    content:
+      placeholder: "Escribe tu comentario aquí..."
+      label: "Añadir un comentario..."
+  flash:
+    created: "¡Tu comentario ha sido publicado exitosamente!"
+    updated: "¡Tu comentario ha sido actualizado exitosamente!"
+    error: "Hubo un error con tu comentario. Por favor inténtalo de nuevo."
+  validation:
+    content_required: "El contenido del comentario es requerido."
+    content_min_length: "El comentario debe tener al menos {{ limit }} caracteres."
+    content_max_length: "El comentario no puede tener más de {{ limit }} caracteres."
+  actions:
+    post: "Publicar comentario"
+    edit: "Editar"
+    save: "Guardar"
+    cancel: "Cancelar"
+  messages:
+    no_comments: "Aún no hay comentarios. ¡Sé el primero en comentar!"
+    login_required: "Inicia sesión para añadir un comentario."
+    pagination: "Paginación de comentarios"
+    previous: "Anterior"
+    next: "Siguiente"
+video:
+  card:
+    views: "vistas"
+    watch: "Ver"
+  sidebar:
+    related_videos: "Videos relacionados"
+    no_related_videos: "No se encontraron videos relacionados."
+my_videos:
+  page:
+    title: "Mis Videos"
+    subtitle: "Gestiona tus %count% videos"
+  back_to_videos: "Volver a Videos"
+  filter:
+    game: "Filtrar por Juego"
+    all_games: "Todos los Juegos"
+    apply: "Filtrar"
+    clear: "Limpiar"
+  actions:
+    watch: "Ver"
+    edit: "Editar"
+  empty:
+    title: "Aún no hay videos"
+    message: "Aún no has subido ningún video."
+  pagination:
+    previous: "Anterior"
+    next: "Siguiente"
+  form:
+    title:
+      label: "Título"
+      placeholder: "Introduce el título del video"
+      help: "Dale a tu video un título claro y descriptivo"
+    tags:
+      label: "Etiquetas"
+      help: "Añade o quita etiquetas para este video"
+  edit:
+    title: "Editar Video"
+    save: "Guardar Cambios"
+    cancel: "Volver a Mis Videos"
+    success: "¡Video actualizado exitosamente!"

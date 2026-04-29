@@ -10,6 +10,9 @@ import './styles/themes/themes.css';
 // Import Stimulus
 import './bootstrap.js';
 
+// Import components
+import './js/components/infinite-scroll-videos.js';
+
 console.log('This log comes from assets/app.js - welcome to Webpack Encore! 🎉');
 
 // ============================================

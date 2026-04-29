@@ -4,6 +4,7 @@ player:
       overview: 概要
       badges: バッジ
       games: ゲーム
+      videos: 動画
       proofs: 証明
 
     header:
@@ -71,6 +72,8 @@ sidebar:
   download_description: このゲームを入手する
   rules: ルール
   rules_description: サイトのルールとガイドライン
+  videos: 動画
+  videos_description: "%count%本の動画が利用可能"
   game_rules_title: ゲームルール
   group_switcher_title: グループ切り替え
   group_prev: 前へ

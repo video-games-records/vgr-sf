@@ -4,6 +4,7 @@ player:
       overview: Panoramica
       badges: Distintivi
       games: Giochi
+      videos: Video
       proofs: Prove
 
     header:
@@ -71,6 +72,8 @@ sidebar:
   download_description: Ottieni questo gioco
   rules: Regole
   rules_description: Regole e linee guida del sito
+  videos: Video
+  videos_description: "{1} %count% video disponibile|]1,Inf[ %count% video disponibili"
   game_rules_title: Regole del gioco
   group_switcher_title: Cambia gruppo
   group_prev: Precedente

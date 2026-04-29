@@ -1,0 +1,63 @@
+comment:
+  form:
+    content:
+      placeholder: "Scrivi il tuo commento qui..."
+      label: "Aggiungi un commento..."
+  flash:
+    created: "Il tuo commento è stato pubblicato con successo!"
+    updated: "Il tuo commento è stato aggiornato con successo!"
+    error: "C'è stato un errore con il tuo commento. Riprova."
+  validation:
+    content_required: "Il contenuto del commento è richiesto."
+    content_min_length: "Il commento deve essere lungo almeno {{ limit }} caratteri."
+    content_max_length: "Il commento non può essere più lungo di {{ limit }} caratteri."
+  actions:
+    post: "Pubblica commento"
+    edit: "Modifica"
+    save: "Salva"
+    cancel: "Annulla"
+  messages:
+    no_comments: "Nessun commento ancora. Sii il primo a commentare!"
+    login_required: "Accedi per aggiungere un commento."
+    pagination: "Paginazione commenti"
+    previous: "Precedente"
+    next: "Successivo"
+video:
+  card:
+    views: "visualizzazioni"
+    watch: "Guarda"
+  sidebar:
+    related_videos: "Video correlati"
+    no_related_videos: "Nessun video correlato trovato."
+my_videos:
+  page:
+    title: "I Miei Video"
+    subtitle: "Gestisci i tuoi %count% video"
+  back_to_videos: "Torna ai Video"
+  filter:
+    game: "Filtra per Gioco"
+    all_games: "Tutti i Giochi"
+    apply: "Filtra"
+    clear: "Pulisci"
+  actions:
+    watch: "Guarda"
+    edit: "Modifica"
+  empty:
+    title: "Nessun video ancora"
+    message: "Non hai ancora caricato nessun video."
+  pagination:
+    previous: "Precedente"
+    next: "Successivo"
+  form:
+    title:
+      label: "Titolo"
+      placeholder: "Inserisci il titolo del video"
+      help: "Dai al tuo video un titolo chiaro e descrittivo"
+    tags:
+      label: "Tag"
+      help: "Aggiungi o rimuovi tag per questo video"
+  edit:
+    title: "Modifica Video"
+    save: "Salva Modifiche"
+    cancel: "Torna ai Miei Video"
+    success: "Video aggiornato con successo!"

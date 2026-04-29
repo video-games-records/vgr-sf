@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game;
 
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
+use App\BoundedContext\VideoGamesRecords\Video\Application\Service\VideoListService;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,7 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class Show extends AbstractLocalizedController
 {
     public function __construct(
-        private readonly GameRepository $gameRepository
+        private readonly GameRepository $gameRepository,
+        private readonly VideoListService $videoListService
     ) {
     }
 
@@ -26,8 +28,11 @@ class Show extends AbstractLocalizedController
             throw $this->createNotFoundException('Game not found');
         }
 
+        $videoCount = $this->videoListService->countVideosByGame($game);
+
         return $this->render('@VideoGamesRecordsCore/game/show.html.twig', [
             'game' => $game,
+            'game_video_count' => $videoCount,
         ]);
     }
 }
