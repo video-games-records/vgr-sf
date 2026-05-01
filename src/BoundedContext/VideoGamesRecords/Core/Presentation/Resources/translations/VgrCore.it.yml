@@ -81,3 +81,7 @@ sidebar:
   chart_switcher_title: Cambia classifica
   chart_prev: Precedente
   chart_next: Successivo
+
+player_game:
+  close_to_master_badge:
+    card_title: "Vicino al Master Badge"

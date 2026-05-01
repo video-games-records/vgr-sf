@@ -18,6 +18,17 @@ class UserParameterService
     ) {
     }
 
+    public function getHomeDashboard(User $user): string
+    {
+        $parameter = $this->repository->findOneByUserAndKey($user, UserParameterKeyEnum::HOME_DASHBOARD);
+
+        if ($parameter === null) {
+            return UserParameterKeyEnum::HOME_DASHBOARD->getDefault();
+        }
+
+        return $parameter->getValue();
+    }
+
     public function getScoreFormPerPage(User $user): int
     {
         $parameter = $this->repository->findOneByUserAndKey($user, UserParameterKeyEnum::SCORE_FORM_PER_PAGE);

@@ -21,6 +21,31 @@ class PlayerRepository extends DefaultRepository
         parent::__construct($registry, Player::class);
     }
 
+    /**
+     * @return array<int, Player>
+     */
+    public function findByPlayerSince(int $playerId, \DateTime $since): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.date >= :since')
+            ->setParameter('id', $playerId)
+            ->setParameter('since', $since)
+            ->orderBy('p.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findLatestForPlayer(int $playerId): ?Player
+    {
+        return $this->findOneBy(['id' => $playerId], ['date' => 'DESC']);
+    }
+
+    public function findForPlayerAtDate(int $playerId, string $date): ?Player
+    {
+        return $this->findOneBy(['id' => $playerId, 'date' => $date]);
+    }
+
     /** @return array<int, array<string, mixed>> */
     public function getTop(DateTime $begin, DateTime $end, int $limit = 20): array
     {

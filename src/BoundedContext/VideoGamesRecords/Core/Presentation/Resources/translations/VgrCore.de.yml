@@ -81,3 +81,7 @@ sidebar:
   chart_switcher_title: Chart wechseln
   chart_prev: Vorherige
   chart_next: Nächste
+
+player_game:
+  close_to_master_badge:
+    card_title: "Nah am Master Badge"

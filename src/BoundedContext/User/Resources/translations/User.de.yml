@@ -110,6 +110,12 @@ profile:
     title: "Einstellungen"
     description: "Passen Sie Ihre Anzeigeeinstellungen für die Seite an."
     form:
+      home_dashboard:
+        label: "Startseite"
+        help: "Wählen Sie, was auf der Startseite angezeigt wird, wenn Sie eingeloggt sind."
+        choices:
+          community: "Community (Ranglisten, Neuigkeiten...)"
+          player: "Mein Dashboard (persönliche Statistiken)"
       score_form_per_page:
         label: "Scores pro Seite (Einreichungsformular)"
         help: "Anzahl der angezeigten Ranglisten pro Seite beim Einreichen von Scores."

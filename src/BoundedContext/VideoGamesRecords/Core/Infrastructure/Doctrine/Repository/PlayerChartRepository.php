@@ -77,6 +77,55 @@ class PlayerChartRepository extends DefaultRepository
     /**
      * @return array<PlayerChart>
      */
+    public function findLatestByPlayer(Player $player, int $limit = 10): array
+    {
+        $ids = $this->createQueryBuilder('pc')
+            ->select('pc.id')
+            ->where('pc.player = :player')
+            ->setParameter('player', $player)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->setMaxResults($limit * 50)
+            ->getQuery()
+            ->getSingleColumnResult();
+
+        if (empty($ids)) {
+            return [];
+        }
+
+        $results = $this->createQueryBuilder('pc')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'ga')
+            ->leftJoin('pc.platform', 'plt')
+            ->leftJoin('pc.libs', 'libs')
+            ->leftJoin('libs.libChart', 'lc')
+            ->leftJoin('lc.type', 'ct')
+            ->addSelect('c', 'g', 'ga', 'plt', 'libs', 'lc', 'ct')
+            ->where('pc.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $seen = [];
+        $unique = [];
+        foreach ($results as $playerChart) {
+            $gameId = $playerChart->getChart()->getGroup()->getGame()->getId();
+            if (!isset($seen[$gameId])) {
+                $seen[$gameId] = true;
+                $unique[] = $playerChart;
+                if (count($unique) === $limit) {
+                    break;
+                }
+            }
+        }
+
+        return $unique;
+    }
+
+    /**
+     * @return array<PlayerChart>
+     */
     public function findLatestBySerie(Serie $serie, int $limit = 3): array
     {
         $ids = $this->createQueryBuilder('pc')

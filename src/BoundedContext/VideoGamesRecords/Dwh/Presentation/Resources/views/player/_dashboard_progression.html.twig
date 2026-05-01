@@ -1,0 +1,54 @@
+{% trans_default_domain 'SharedKernel' %}
+<div class="card mb-3">
+    <div class="card-header border-bottom">
+        <h6 class="mb-0"><i class="bi bi-graph-up-arrow"></i> {{ 'dashboard.progression.card_title'|trans }}</h6>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-sm mb-0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center text-nowrap">{{ 'dashboard.progression.current'|trans }}</th>
+                    {% if snapshot7 %}
+                    <th class="text-center text-nowrap">{{ 'dashboard.progression.delta_7'|trans }}</th>
+                    {% endif %}
+                    {% if snapshot30 %}
+                    <th class="text-center text-nowrap">{{ 'dashboard.progression.delta_30'|trans }}</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% set medals = [
+                    {key: 'platinum', icon: 'bi-trophy-fill text-platinum', rank: 0},
+                    {key: 'gold',     icon: 'bi-trophy-fill text-gold',     rank: 1},
+                    {key: 'silver',   icon: 'bi-trophy-fill text-silver',   rank: 2},
+                    {key: 'bronze',   icon: 'bi-trophy-fill text-bronze',   rank: 3},
+                ] %}
+                {% for medal in medals %}
+                {% set currentVal = attribute(latest, 'chartRank' ~ medal.rank) %}
+                <tr>
+                    <td class="text-nowrap"><i class="bi {{ medal.icon }} small"></i> {{ ('dashboard.progression.medal.' ~ medal.key)|trans }}</td>
+                    <td class="text-center fw-semibold">{{ currentVal }}</td>
+                    {% if snapshot7 %}
+                    {% set ref7Val = attribute(snapshot7, 'chartRank' ~ medal.rank) %}
+                    {% set delta7 = currentVal - ref7Val %}
+                    <td class="text-center {% if delta7 > 0 %}text-success{% elseif delta7 < 0 %}text-danger{% else %}text-muted{% endif %}">
+                        {% if delta7 > 0 %}+{% endif %}{{ delta7 != 0 ? delta7 : '—' }}
+                    </td>
+                    {% endif %}
+                    {% if snapshot30 %}
+                    {% set ref30Val = attribute(snapshot30, 'chartRank' ~ medal.rank) %}
+                    {% set delta30 = currentVal - ref30Val %}
+                    <td class="text-center {% if delta30 > 0 %}text-success{% elseif delta30 < 0 %}text-danger{% else %}text-muted{% endif %}">
+                        {% if delta30 > 0 %}+{% endif %}{{ delta30 != 0 ? delta30 : '—' }}
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted small text-end">
+        {{ 'dashboard.progression.as_of'|trans }} {{ latest.date|date('d/m/Y') }}
+    </div>
+</div>

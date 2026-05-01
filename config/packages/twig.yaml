@@ -13,6 +13,7 @@ twig:
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Proof/Presentation/Resources/views': 'VideoGamesRecordsProof'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Video/Presentation/Resources/views': 'VideoGamesRecordsVideo'
         '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Igdb/Presentation/Resources/views': 'VideoGamesRecordsIgdb'
+        '%kernel.project_dir%/src/BoundedContext/VideoGamesRecords/Dwh/Presentation/Resources/views': 'VideoGamesRecordsDwh'
     form_themes:
         - 'bootstrap_5_layout.html.twig'
         - '@A2lixTranslationForm/bootstrap_5_layout.html.twig'

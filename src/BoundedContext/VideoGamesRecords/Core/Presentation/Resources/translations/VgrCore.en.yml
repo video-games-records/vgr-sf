@@ -423,3 +423,7 @@ country:
     select_country: Select a country
     ranking_points: Points Ranking
 
+
+player_game:
+  close_to_master_badge:
+    card_title: "Close to Master Badge"

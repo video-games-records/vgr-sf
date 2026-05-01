@@ -147,3 +147,22 @@ time:
     hours: "時間"
     minute: "分"
     minutes: "分"
+
+# === DASHBOARD ===
+dashboard:
+  title: "マイダッシュボード"
+  switch_to_community: "コミュニティビューに切り替え"
+  badges:
+    recently_gained: "最近獲得したマスターバッジ"
+    recently_lost: "最近失ったマスターバッジ"
+  progression:
+    card_title: "進歩"
+    current: "現在"
+    delta_7: "過去7日間"
+    delta_30: "過去30日間"
+    as_of: "データ基準日"
+    medal:
+      platinum: "プラチナ"
+      gold: "ゴールド"
+      silver: "シルバー"
+      bronze: "ブロンズ"

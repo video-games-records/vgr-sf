@@ -110,6 +110,12 @@ profile:
     title: "Parametri"
     description: "Personalizza le tue preferenze di visualizzazione del sito."
     form:
+      home_dashboard:
+        label: "Pagina iniziale"
+        help: "Scegli cosa visualizzare nella pagina iniziale quando sei connesso."
+        choices:
+          community: "Comunità (classifiche, notizie...)"
+          player: "La mia dashboard (statistiche personali)"
       score_form_per_page:
         label: "Punteggi per pagina (modulo di invio)"
         help: "Numero di classifiche visualizzate per pagina durante l'invio dei punteggi."

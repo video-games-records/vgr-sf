@@ -81,3 +81,7 @@ sidebar:
   chart_switcher_title: 切换榜单
   chart_prev: 上一个
   chart_next: 下一个
+
+player_game:
+  close_to_master_badge:
+    card_title: "接近大师徽章"

@@ -81,3 +81,7 @@ sidebar:
   chart_switcher_title: チャート切り替え
   chart_prev: 前へ
   chart_next: 次へ
+
+player_game:
+  close_to_master_badge:
+    card_title: "マスターバッジまであと少し"

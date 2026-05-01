@@ -405,3 +405,7 @@ country:
     meta_description: "Classement des joueurs pour %country%"
     select_country: Sélectionner un pays
     ranking_points: Classement par points
+
+player_game:
+  close_to_master_badge:
+    card_title: "Proche du Master Badge"

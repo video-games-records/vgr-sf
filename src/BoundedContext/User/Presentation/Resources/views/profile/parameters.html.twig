@@ -33,7 +33,12 @@
 
                 {{ form_start(form) }}
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
+                            {{ form_label(form.home_dashboard) }}
+                            {{ form_widget(form.home_dashboard) }}
+                            <div class="form-text text-muted">{{ 'profile.parameters.form.home_dashboard.help'|trans }}</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             {{ form_row(form.score_form_per_page) }}
                             <div class="form-text text-muted">{{ 'profile.parameters.form.score_form_per_page.help'|trans }}</div>
                         </div>

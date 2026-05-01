@@ -110,6 +110,12 @@ profile:
     title: "パラメータ設定"
     description: "サイトの表示設定をカスタマイズします。"
     form:
+      home_dashboard:
+        label: "ホームページ"
+        help: "ログイン時にホームページに表示するものを選択してください。"
+        choices:
+          community: "コミュニティ（ランキング、ニュース...）"
+          player: "マイダッシュボード（個人統計）"
       score_form_per_page:
         label: "スコアフォームの1ページあたりの表示数（提出フォーム）"
         help: "スコアを提出する際に1ページあたりに表示されるランキング数。"

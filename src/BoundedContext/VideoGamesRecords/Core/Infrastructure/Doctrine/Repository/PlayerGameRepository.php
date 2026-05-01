@@ -70,6 +70,48 @@ class PlayerGameRepository extends DefaultRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return PlayerGame[]
+     */
+    public function findWherePlayerIsSecond(Player $player, int $limit = 5): array
+    {
+        return $this->createQueryBuilder('pg')
+            ->where('pg.player = :player')
+            ->andWhere('pg.rankPointChart = 2')
+            ->andWhere('pg.pointChart > 0')
+            ->setParameter('player', $player)
+            ->orderBy('pg.pointChart', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param int[] $gameIds
+     * @return array<int, int>
+     */
+    public function findLeaderPointsByGames(array $gameIds): array
+    {
+        if (empty($gameIds)) {
+            return [];
+        }
+
+        $rows = $this->createQueryBuilder('pg')
+            ->select('IDENTITY(pg.game) as gameId, pg.pointChart as points')
+            ->where('pg.game IN (:gameIds)')
+            ->andWhere('pg.rankPointChart = 1')
+            ->setParameter('gameIds', $gameIds)
+            ->getQuery()
+            ->getArrayResult();
+
+        $map = [];
+        foreach ($rows as $row) {
+            $map[(int) $row['gameId']] = (int) $row['points'];
+        }
+
+        return $map;
+    }
+
     public function countByPlayer(Player $player): int
     {
         return (int) $this->createQueryBuilder('pg')

@@ -134,6 +134,12 @@ profile:
     title: "Parameters"
     description: "Customize your display preferences for the site."
     form:
+      home_dashboard:
+        label: "Home page"
+        help: "Choose what to display on the home page when you are logged in."
+        choices:
+          community: "Community (leaderboards, news...)"
+          player: "My dashboard (personal stats)"
       score_form_per_page:
         label: "Scores per page (submission form)"
         help: "Number of charts displayed per page when submitting scores."
