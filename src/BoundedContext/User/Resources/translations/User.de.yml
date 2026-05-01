@@ -24,6 +24,7 @@ profile:
     picture: "Profilbild"
     player: "Spielerprofil"
     password: "Passwort"
+    parameters: "Parameter"
 
   personal_info:
     title: "Persönliche Informationen"
@@ -105,6 +106,16 @@ profile:
     message:
       success: "Ihr Passwort wurde erfolgreich geändert"
       error: "Beim Ändern Ihres Passworts ist ein Fehler aufgetreten"
+  parameters:
+    title: "Einstellungen"
+    description: "Passen Sie Ihre Anzeigeeinstellungen für die Seite an."
+    form:
+      score_form_per_page:
+        label: "Scores pro Seite (Einreichungsformular)"
+        help: "Anzahl der angezeigten Ranglisten pro Seite beim Einreichen von Scores."
+      submit: "Speichern"
+    message:
+      success: "Ihre Einstellungen wurden gespeichert."
 
 # === ACCOUNT (Gestion du compte) ===
 account:

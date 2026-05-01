@@ -24,6 +24,7 @@ profile:
     picture: "Foto de perfil"
     player: "Perfil de jugador"
     password: "Contraseña"
+    parameters: "Parámetros"
 
   personal_info:
     title: "Información personal"
@@ -105,6 +106,16 @@ profile:
     message:
       success: "Tu contraseña ha sido cambiada con éxito"
       error: "Se ha producido un error al cambiar tu contraseña"
+  parameters:
+    title: "Parámetros"
+    description: "Personalice sus preferencias de visualización del sitio."
+    form:
+      score_form_per_page:
+        label: "Puntuaciones por página (formulario de envío)"
+        help: "Número de clasificaciones mostradas por página al enviar puntuaciones."
+      submit: "Guardar"
+    message:
+      success: "Sus parámetros han sido guardados."
 
 # === ACCOUNT ===
 account:

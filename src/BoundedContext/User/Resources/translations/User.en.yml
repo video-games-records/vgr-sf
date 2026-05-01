@@ -44,6 +44,7 @@ profile:
     picture: "Profile Picture"
     player: "Player Profile"
     password: "Password"
+    parameters: "Parameters"
 
   # Section : Informations personnelles
   personal_info:
@@ -129,6 +130,16 @@ profile:
     message:
       success: "Your password has been changed successfully"
       error: "An error occurred while changing your password"
+  parameters:
+    title: "Parameters"
+    description: "Customize your display preferences for the site."
+    form:
+      score_form_per_page:
+        label: "Scores per page (submission form)"
+        help: "Number of charts displayed per page when submitting scores."
+      submit: "Save"
+    message:
+      success: "Your parameters have been saved."
 
 # === ACCOUNT (Gestion du compte) ===
 account:
@@ -293,3 +304,4 @@ flash:
     processing: "Your request is being processed..."
   warning:
     unsaved_changes: "You have unsaved changes. Are you sure you want to leave?"
+

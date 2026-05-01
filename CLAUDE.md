@@ -156,6 +156,23 @@ Utilisation :
 - Templates transversaux dans SharedKernel
 - Utiliser les namespaces Twig appropriés
 
+### 5. Web Controllers — Préfixe Locale Obligatoire
+
+Tout Web Controller (hors API) doit porter le préfixe `/{_locale}` au niveau de la **classe**, et la route spécifique au niveau de la **méthode** :
+
+```php
+#[AsController]
+#[IsGranted('ROLE_USER')]
+#[Route('/{_locale}', requirements: ['_locale' => 'en|fr|de|it|ja|es|pt_BR|zh_CN'], defaults: ['_locale' => 'en'])]
+class MyController extends AbstractController
+{
+    #[Route('/my-path', name: 'app_my_route', methods: ['GET', 'POST'])]
+    public function __invoke(Request $request): Response { ... }
+}
+```
+
+Sans ce préfixe, la route ne correspond pas aux URLs localisées (`/fr/...`) et Symfony redirige vers la home page.
+
 ## Ajout d'un Nouveau Contexte
 
 Pour ajouter un nouveau contexte (ex: Product) :
