@@ -44,6 +44,7 @@ profile:
     picture: "Photo de profil"
     player: "Profil joueur"
     password: "Mot de passe"
+    parameters: "Paramètres"
 
   # Section : Informations personnelles
   personal_info:
@@ -129,6 +130,16 @@ profile:
     message:
       success: "Votre mot de passe a été changé avec succès"
       error: "Une erreur s'est produite lors du changement de votre mot de passe"
+  parameters:
+    title: "Paramètres"
+    description: "Personnalisez vos préférences d'affichage sur le site."
+    form:
+      score_form_per_page:
+        label: "Scores par page (formulaire de soumission)"
+        help: "Nombre de classements affichés par page lors de la soumission des scores."
+      submit: "Enregistrer"
+    message:
+      success: "Vos paramètres ont été enregistrés."
 
 # === ACCOUNT (Gestion du compte) ===
 account:

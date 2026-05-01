@@ -24,6 +24,7 @@ profile:
     picture: "Foto de perfil"
     player: "Perfil de jogador"
     password: "Senha"
+    parameters: "Parâmetros"
 
   personal_info:
     title: "Informações pessoais"
@@ -105,6 +106,16 @@ profile:
     message:
       success: "Sua senha foi alterada com sucesso"
       error: "Ocorreu um erro ao alterar sua senha"
+  parameters:
+    title: "Parâmetros"
+    description: "Personalize suas preferências de exibição no site."
+    form:
+      score_form_per_page:
+        label: "Pontuações por página (formulário de envio)"
+        help: "Número de classificações exibidas por página ao enviar pontuações."
+      submit: "Salvar"
+    message:
+      success: "Seus parâmetros foram salvos."
 
 # === ACCOUNT ===
 account:

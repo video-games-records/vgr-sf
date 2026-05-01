@@ -64,10 +64,9 @@ class MigratePlayerBbCodeCommand extends Command
         $updated = 0;
 
         foreach ($ids as $id) {
-            /** @var Player $player */
             $player = $this->em->find(Player::class, (int) $id);
 
-            if (!$player) {
+            if (!$player instanceof Player) {
                 continue;
             }
 
@@ -79,7 +78,7 @@ class MigratePlayerBbCodeCommand extends Command
                     $io->section(sprintf('Player #%d — presentation', $id));
                     $io->text('<fg=red>Before:</> ' . OutputFormatter::escape(substr($player->getPresentation(), 0, 300)));
                     $io->text('<fg=green>After:</>  ' . OutputFormatter::escape(substr($html, 0, 300)));
-                } else if ($html !== $player->getPresentation()) {
+                } elseif ($html !== $player->getPresentation()) {
                     $player->setPresentation($html);
                     $changed = true;
                 }
@@ -91,7 +90,7 @@ class MigratePlayerBbCodeCommand extends Command
                     $io->section(sprintf('Player #%d — collection', $id));
                     $io->text('<fg=red>Before:</> ' . OutputFormatter::escape(substr($player->getCollection(), 0, 300)));
                     $io->text('<fg=green>After:</>  ' . OutputFormatter::escape(substr($html, 0, 300)));
-                } else if ($html !== $player->getCollection()) {
+                } elseif ($html !== $player->getCollection()) {
                     $player->setCollection($html);
                     $changed = true;
                 }

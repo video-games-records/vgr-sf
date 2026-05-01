@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Score;
 
+use App\BoundedContext\User\Application\Service\UserParameterService;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Service\PlayerScoreFormService;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
@@ -12,6 +13,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GroupRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
+use App\BoundedContext\User\Domain\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,6 +29,7 @@ class ScoreFormController extends AbstractLocalizedController
         private readonly GroupRepository $groupRepository,
         private readonly UserProvider $userProvider,
         private readonly PlayerScoreFormService $playerScoreFormService,
+        private readonly UserParameterService $userParameterService,
     ) {
     }
 
@@ -63,7 +66,11 @@ class ScoreFormController extends AbstractLocalizedController
             $search['term'] = $searchTerm;
         }
 
-        $paginator = $this->chartRepository->getList($player, $page, $search, $_locale, 20);
+        /** @var User $user */
+        $user = $this->getUser();
+        $perPage = $this->userParameterService->getScoreFormPerPage($user);
+
+        $paginator = $this->chartRepository->getList($player, $page, $search, $_locale, $perPage);
 
         // Prepare chart data for template
         $chartsData = $this->prepareChartsData($paginator, $player);
@@ -114,7 +121,11 @@ class ScoreFormController extends AbstractLocalizedController
 
         $page = max(1, (int) $request->query->get('page', 1));
 
-        $paginator = $this->chartRepository->getList($player, $page, ['group' => $group], $_locale, 20);
+        /** @var User $user */
+        $user = $this->getUser();
+        $perPage = $this->userParameterService->getScoreFormPerPage($user);
+
+        $paginator = $this->chartRepository->getList($player, $page, ['group' => $group], $_locale, $perPage);
 
         // Prepare chart data for template
         $chartsData = $this->prepareChartsData($paginator, $player);

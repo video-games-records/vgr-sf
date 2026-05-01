@@ -26,6 +26,12 @@
             <i class="bi bi-key"></i> {{ 'profile.navigation.password'|trans }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'app_profile_parameters' %} active{% endif %}"
+           href="{{ path('app_profile_parameters') }}">
+            <i class="bi bi-sliders"></i> {{ 'profile.navigation.parameters'|trans }}
+        </a>
+    </li>
 </ul>
 
 <style>
