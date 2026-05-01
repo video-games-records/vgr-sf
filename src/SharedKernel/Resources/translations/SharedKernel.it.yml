@@ -159,3 +159,22 @@ time:
     hours: "ore"
     minute: "minuto"
     minutes: "minuti"
+
+# === DASHBOARD ===
+dashboard:
+  title: "La mia dashboard"
+  switch_to_community: "Passa alla vista comunità"
+  badges:
+    recently_gained: "Ultimi badge master ottenuti"
+    recently_lost: "Ultimi badge master persi"
+  progression:
+    card_title: "Progressione"
+    current: "Attuale"
+    delta_7: "Ultimi 7 giorni"
+    delta_30: "Ultimi 30 giorni"
+    as_of: "Dati al"
+    medal:
+      platinum: "Platino"
+      gold: "Oro"
+      silver: "Argento"
+      bronze: "Bronzo"

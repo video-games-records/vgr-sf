@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Player;
+namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\PlayerChart;
 
 use App\BoundedContext\User\Domain\Entity\User;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerGameRepository;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomeRecentGames extends AbstractController
+class DashboardLatestScores extends AbstractController
 {
     public function __construct(
         private readonly Security $security,
         private readonly PlayerRepository $playerRepository,
-        private readonly PlayerGameRepository $playerGameRepository,
+        private readonly PlayerChartRepository $playerChartRepository,
     ) {
     }
 
@@ -34,11 +34,8 @@ class HomeRecentGames extends AbstractController
             return new Response('');
         }
 
-        $playerGames = $this->playerGameRepository->findAllByPlayerOrderedByLastUpdate($player, 8);
-
-        return $this->render('@VideoGamesRecordsCore/player/_home_recent_games.html.twig', [
-            'player' => $player,
-            'playerGames' => $playerGames,
+        return $this->render('@VideoGamesRecordsCore/player_chart/_dashboard_latest_scores.html.twig', [
+            'playerCharts' => $this->playerChartRepository->findLatestByPlayer($player, 10),
         ]);
     }
 }

@@ -18,6 +18,17 @@ class UserParametersFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('home_dashboard', ChoiceType::class, [
+                'label' => 'profile.parameters.form.home_dashboard.label',
+                'translation_domain' => 'User',
+                'choices' => [
+                    'profile.parameters.form.home_dashboard.choices.community' => 'community',
+                    'profile.parameters.form.home_dashboard.choices.player' => 'player',
+                ],
+                'choice_translation_domain' => 'User',
+                'expanded' => true,
+                'multiple' => false,
+            ])
             ->add('score_form_per_page', ChoiceType::class, [
                 'label' => 'profile.parameters.form.score_form_per_page.label',
                 'translation_domain' => 'User',

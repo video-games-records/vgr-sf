@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Dwh\Presentation\Api\Controller\P
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\BoundedContext\VideoGamesRecords\Dwh\Infrastructure\Doctrine\Repository\PlayerRepository;
 
@@ -17,9 +18,16 @@ class GetMedalsByTimeController extends AbstractController
     }
 
     #[Route('/api/dwh/player/{id}/medals-by-time', name: 'vgr_dwh_player_medals_by_time', methods: ['GET'])]
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id, Request $request): JsonResponse
     {
-        $list = $this->playerRepository->findBy(['id' => $id], ['date' => 'ASC']);
+        $months = $request->query->getInt('months', 0);
+
+        if ($months > 0) {
+            $since = new \DateTime("-{$months} months");
+            $list = $this->playerRepository->findByPlayerSince($id, $since);
+        } else {
+            $list = $this->playerRepository->findBy(['id' => $id], ['date' => 'ASC']);
+        }
 
         if (empty($list)) {
             return $this->json([

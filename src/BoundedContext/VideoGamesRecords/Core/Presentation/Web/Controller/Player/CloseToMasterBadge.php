@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomeRecentGames extends AbstractController
+class CloseToMasterBadge extends AbstractController
 {
     public function __construct(
         private readonly Security $security,
@@ -34,11 +34,33 @@ class HomeRecentGames extends AbstractController
             return new Response('');
         }
 
-        $playerGames = $this->playerGameRepository->findAllByPlayerOrderedByLastUpdate($player, 8);
+        $playerGames = $this->playerGameRepository->findWherePlayerIsSecond($player, 5);
 
-        return $this->render('@VideoGamesRecordsCore/player/_home_recent_games.html.twig', [
-            'player' => $player,
-            'playerGames' => $playerGames,
+        if (empty($playerGames)) {
+            return new Response('');
+        }
+
+        $gameIds = [];
+        foreach ($playerGames as $pg) {
+            $gameId = $pg->getGame()->getId();
+            if ($gameId !== null) {
+                $gameIds[] = $gameId;
+            }
+        }
+
+        $leaderPoints = $this->playerGameRepository->findLeaderPointsByGames($gameIds);
+
+        $rows = [];
+        foreach ($playerGames as $pg) {
+            $gameId = $pg->getGame()->getId();
+            $rows[] = [
+                'playerGame' => $pg,
+                'leaderPoints' => $gameId !== null ? ($leaderPoints[$gameId] ?? 0) : 0,
+            ];
+        }
+
+        return $this->render('@VideoGamesRecordsCore/player_game/_close_to_master_badge.html.twig', [
+            'rows' => $rows,
         ]);
     }
 }

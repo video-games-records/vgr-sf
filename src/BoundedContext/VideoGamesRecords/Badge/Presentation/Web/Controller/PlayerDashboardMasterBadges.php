@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Player;
+namespace App\BoundedContext\VideoGamesRecords\Badge\Presentation\Web\Controller;
 
 use App\BoundedContext\User\Domain\Entity\User;
-use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerGameRepository;
+use App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\PlayerBadgeRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomeRecentGames extends AbstractController
+class PlayerDashboardMasterBadges extends AbstractController
 {
     public function __construct(
         private readonly Security $security,
         private readonly PlayerRepository $playerRepository,
-        private readonly PlayerGameRepository $playerGameRepository,
+        private readonly PlayerBadgeRepository $playerBadgeRepository,
     ) {
     }
 
@@ -34,11 +34,9 @@ class HomeRecentGames extends AbstractController
             return new Response('');
         }
 
-        $playerGames = $this->playerGameRepository->findAllByPlayerOrderedByLastUpdate($player, 8);
-
-        return $this->render('@VideoGamesRecordsCore/player/_home_recent_games.html.twig', [
-            'player' => $player,
-            'playerGames' => $playerGames,
+        return $this->render('@VideoGamesRecordsBadge/player/_dashboard_master_badges.html.twig', [
+            'gained' => $this->playerBadgeRepository->getRecentlyGainedMasterBadges($player),
+            'lost' => $this->playerBadgeRepository->getRecentlyLostMasterBadges($player),
         ]);
     }
 }

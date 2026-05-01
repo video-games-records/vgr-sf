@@ -110,6 +110,12 @@ profile:
     title: "参数设置"
     description: "自定义您在网站上的显示偏好。"
     form:
+      home_dashboard:
+        label: "主页"
+        help: "选择登录后在主页显示的内容。"
+        choices:
+          community: "社区（排行榜、新闻...）"
+          player: "我的仪表板（个人统计）"
       score_form_per_page:
         label: "每页分数数量（提交表单）"
         help: "提交分数时每页显示的排行榜数量。"

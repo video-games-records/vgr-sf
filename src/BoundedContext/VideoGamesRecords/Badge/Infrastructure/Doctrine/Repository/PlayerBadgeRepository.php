@@ -90,6 +90,44 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
+     * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, nameEn: string, nameFr: string}>
+     */
+    public function getRecentlyGainedMasterBadges(Player $player, int $limit = 5): array
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT mb.id as badgeId, mb.picture as badgePicture, mb.value as badgeValue, pb.createdAt, g.libGameEn as nameEn, g.libGameFr as nameFr
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
+            JOIN mb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NULL
+            ORDER BY pb.createdAt DESC
+        ")
+        ->setParameter('player', $player)
+        ->setMaxResults($limit)
+        ->getResult();
+    }
+
+    /**
+     * @return array<array{badgeId: int, badgeValue: int, endedAt: \DateTime, nameEn: string, nameFr: string}>
+     */
+    public function getRecentlyLostMasterBadges(Player $player, int $limit = 5): array
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT mb.id as badgeId, mb.picture as badgePicture, mb.value as badgeValue, pb.endedAt, g.libGameEn as nameEn, g.libGameFr as nameFr
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge mb
+            JOIN mb.game g
+            JOIN App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb WITH pb.badge = mb
+            WHERE pb.player = :player
+            AND pb.endedAt IS NOT NULL
+            ORDER BY pb.endedAt DESC
+        ")
+        ->setParameter('player', $player)
+        ->setMaxResults($limit)
+        ->getResult();
+    }
+
+    /**
      * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime, nameEn: string, nameFr: string, mbOrder: int|null}>
      */
     public function getMasterBadgesDataForPlayer(Player $player): array

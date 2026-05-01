@@ -1,0 +1,16 @@
+{% if articles|length > 0 %}
+<div class="card h-100">
+    <div class="card-header border-bottom">
+        <h6 class="mb-0"><i class="bi bi-newspaper"></i> {{ 'news.latest_news'|trans({}, 'Article') }}</h6>
+    </div>
+    <div class="card-body p-2 d-flex flex-column gap-2">
+        {% for article in articles %}
+        <a href="{{ path('article_show', {id: article.id, slug: article.slug}) }}" class="text-decoration-none">
+            <div class="small fw-semibold">{{ article.title }}</div>
+            <div class="text-muted dashboard-game-thumb__date">{{ article.publishedAt|user_date('d/m/Y') }}</div>
+        </a>
+        {% if not loop.last %}<hr class="my-1">{% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

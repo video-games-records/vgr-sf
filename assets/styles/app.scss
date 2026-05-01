@@ -252,6 +252,27 @@ footer {
     }
 }
 
+// Dashboard recent games grid
+.dashboard-game-thumb {
+    width: 90px;
+    flex-shrink: 0;
+
+    img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+    }
+
+    .dashboard-game-thumb__name {
+        font-size: 0.65rem;
+        line-height: 1.2;
+    }
+
+    .dashboard-game-thumb__date {
+        font-size: 0.6rem;
+    }
+}
+
 // Mobile bottom navigation bar
 .mobile-bottom-nav {
     height: 48px;

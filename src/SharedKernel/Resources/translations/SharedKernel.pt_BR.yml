@@ -147,3 +147,22 @@ time:
     hours: "horas"
     minute: "minuto"
     minutes: "minutos"
+
+# === DASHBOARD ===
+dashboard:
+  title: "Meu painel"
+  switch_to_community: "Mudar para visão comunidade"
+  badges:
+    recently_gained: "Últimas insígnias mestre obtidas"
+    recently_lost: "Últimas insígnias mestre perdidas"
+  progression:
+    card_title: "Progressão"
+    current: "Atual"
+    delta_7: "Últimos 7 dias"
+    delta_30: "Últimos 30 dias"
+    as_of: "Dados em"
+    medal:
+      platinum: "Platina"
+      gold: "Ouro"
+      silver: "Prata"
+      bronze: "Bronze"

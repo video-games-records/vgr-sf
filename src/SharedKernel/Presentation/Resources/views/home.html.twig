@@ -60,15 +60,6 @@
 {% endblock %}
 
 {% block body %}
-{# Mobile only: recent games for logged-in player #}
-{% if app.user %}
-<div class="d-lg-none mb-4">
-    {{ render(controller(
-        'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Player\\HomeRecentGames'
-    )) }}
-</div>
-{% endif %}
-
 {# Hero Header Content - Hidden on mobile #}
 <div class="d-none d-lg-block">
 {{ render(controller(

@@ -1,0 +1,147 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ player.pseudo }} - {{ 'dashboard.title'|trans({}, 'SharedKernel') }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+{# Player header #}
+<div class="d-flex align-items-center gap-3 mb-4">
+    <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}">
+        <img src="{{ player_avatar_url(player.avatar) }}"
+             alt="{{ player.pseudo }}"
+             class="rounded-circle border"
+             width="64" height="64">
+    </a>
+    <div>
+        <h1 class="h4 mb-0">
+            <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}" class="text-decoration-none">
+                {{ player.pseudo }}
+            </a>
+        </h1>
+        {% if player.country %}
+        <span class="text-muted small me-2">
+            <i class="bi bi-flag"></i> {{ player.country.name }}
+        </span>
+        {% endif %}
+        <div class="d-flex flex-wrap gap-2 mt-1">
+            <span class="badge bg-secondary" title="{{ 'player.profile.rankings.chart_points_rank'|trans }}">
+                <i class="bi bi-star-fill"></i> #{{ player.rankPointChart|number_format }}
+            </span>
+            <span class="badge bg-secondary" title="{{ 'player.profile.rankings.medal_rank'|trans }}">
+                <i class="bi bi-trophy-fill text-gold"></i> #{{ player.rankMedal|number_format }}
+            </span>
+            <span class="badge bg-secondary" title="{{ 'player.profile.rankings.cup_rank'|trans }}">
+                <i class="bi bi-award-fill"></i> #{{ player.rankCup|number_format }}
+            </span>
+            <span class="badge bg-secondary" title="{{ 'player.profile.rankings.badge_rank'|trans }}">
+                <i class="bi bi-patch-check-fill"></i> #{{ player.rankBadge|number_format }}
+            </span>
+        </div>
+    </div>
+</div>
+
+{# Recent games + latest news + close to master badge #}
+<div class="row g-3 align-items-start mb-3">
+    <div class="col-lg-6">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Player\\HomeRecentGames'
+        )) }}
+    </div>
+    <div class="col-lg-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Player\\CloseToMasterBadge'
+        )) }}
+    </div>
+    <div class="col-lg-3">
+        {{ render(controller(
+            'App\\BoundedContext\\Article\\Presentation\\Web\\Controller\\TopNewsController::dashboardLatest',
+            {ttl: 3600}
+        )) }}
+    </div>
+</div>
+
+{# Latest scores + game of the day #}
+<div class="row g-3 align-items-start mb-3">
+    <div class="col-lg-9">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\PlayerChart\\DashboardLatestScores'
+        )) }}
+    </div>
+    <div class="col-lg-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Core\\Presentation\\Web\\Controller\\Game\\GameOfDay'
+        )) }}
+    </div>
+</div>
+
+{# Master badges recently gained / lost + medals chart + progression #}
+<div class="row g-3 align-items-start">
+    <div class="col-lg-5">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Badge\\Presentation\\Web\\Controller\\PlayerDashboardMasterBadges'
+        )) }}
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header border-bottom">
+                <h6 class="mb-0"><i class="bi bi-graph-up"></i> {{ 'player.profile.sections.medals_over_time'|trans }}</h6>
+            </div>
+            <div class="card-body p-2">
+                <div data-controller="medals-chart"
+                     data-medals-chart-url-value="{{ path('vgr_dwh_player_medals_by_time', {id: player.id}) }}?months=12"
+                     class="chart-container">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        {{ render(controller(
+            'App\\BoundedContext\\VideoGamesRecords\\Dwh\\Presentation\\Web\\Controller\\PlayerDashboardProgressionController'
+        )) }}
+    </div>
+</div>
+
+{# AdSense Block #}
+<div class="mt-4 d-none d-lg-block text-center">
+    {% include '@SharedKernel/components/_adsense.html.twig' with {ad_slot: '9314775557'} %}
+</div>
+
+{# Donation Banner #}
+<div class="row mt-4">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <div class="card border-warning text-center">
+            <div class="card-body py-3">
+                <h2 class="h5 mb-1 text-warning"><i class="bi bi-heart-fill me-2"></i>{{ 'home.donate.title'|trans({}, 'SharedKernel') }}</h2>
+                <p class="mb-2 small">{{ 'home.donate.description'|trans({}, 'SharedKernel') }}</p>
+                <a href="https://paypal.me/videogamesrecords" class="btn btn-warning btn-sm" target="_blank" rel="noopener noreferrer">
+                    <i class="bi bi-gift me-1"></i>{{ 'home.donate.button'|trans({}, 'SharedKernel') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Partners Section #}
+<div class="text-center mt-5 pt-4 border-top d-none d-lg-block">
+    <h2 class="h5 mb-4">{{ 'home.partners.title'|trans({}, 'SharedKernel') }}</h2>
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
+        <a href="https://www.culture-games.com/" target="_blank" rel="noopener noreferrer">
+            <img src="{{ asset('img/partner/culture-games.webp') }}" alt="Culture Games" class="rounded" width="257" height="120" style="max-height: 60px; width: auto;">
+        </a>
+        <a href="https://www.nintendo64ever.com/" target="_blank" rel="noopener noreferrer">
+            <img src="{{ asset('img/partner/nintendo-64-ever.webp') }}" alt="Nintendo64ever" class="rounded" width="347" height="120" style="max-height: 60px; width: auto;">
+        </a>
+    </div>
+</div>
+
+{# Affiliate Links #}
+<div class="text-center mt-5 pt-4 border-top d-none d-lg-block">
+    <a href="https://video-games-records.myspreadshop.fr/" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Shop"><i class="bi bi-cart3"></i></a>
+    <a href="https://discord.com/invite/nYsRzsZ" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Discord"><i class="bi bi-discord"></i></a>
+    <a href="https://www.twitch.tv/videogamesrecords/" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Twitch"><i class="bi bi-twitch"></i></a>
+    <a href="https://www.youtube.com/channel/UC_b4IOPqkN9uOsk-vktl8eA" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="YouTube"><i class="bi bi-youtube"></i></a>
+    <a href="https://steamcommunity.com/groups/vgrr" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Steam"><i class="bi bi-steam"></i></a>
+    <a href="https://x.com/VGRecords" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+    <a href="https://www.linkedin.com/company/video-games-records/" class="text-primary fs-4 mx-2" target="_blank" rel="noopener" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+</div>
+{% endblock %}

@@ -110,6 +110,12 @@ profile:
     title: "Parámetros"
     description: "Personalice sus preferencias de visualización del sitio."
     form:
+      home_dashboard:
+        label: "Página de inicio"
+        help: "Elija qué mostrar en la página de inicio cuando esté conectado."
+        choices:
+          community: "Comunidad (clasificaciones, noticias...)"
+          player: "Mi panel (estadísticas personales)"
       score_form_per_page:
         label: "Puntuaciones por página (formulario de envío)"
         help: "Número de clasificaciones mostradas por página al enviar puntuaciones."

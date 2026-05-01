@@ -147,3 +147,22 @@ time:
     hours: "小时"
     minute: "分钟"
     minutes: "分钟"
+
+# === DASHBOARD ===
+dashboard:
+  title: "我的仪表板"
+  switch_to_community: "切换到社区视图"
+  badges:
+    recently_gained: "最近获得的大师徽章"
+    recently_lost: "最近失去的大师徽章"
+  progression:
+    card_title: "进展"
+    current: "当前"
+    delta_7: "过去7天"
+    delta_30: "过去30天"
+    as_of: "数据截至"
+    medal:
+      platinum: "白金"
+      gold: "黄金"
+      silver: "白银"
+      bronze: "青铜"

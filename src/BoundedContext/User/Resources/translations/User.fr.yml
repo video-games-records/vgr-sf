@@ -134,6 +134,12 @@ profile:
     title: "Paramètres"
     description: "Personnalisez vos préférences d'affichage sur le site."
     form:
+      home_dashboard:
+        label: "Page d'accueil"
+        help: "Choisissez ce qui s'affiche sur la page d'accueil lorsque vous êtes connecté."
+        choices:
+          community: "Communauté (classements, actualités...)"
+          player: "Mon tableau de bord (stats personnelles)"
       score_form_per_page:
         label: "Scores par page (formulaire de soumission)"
         help: "Nombre de classements affichés par page lors de la soumission des scores."

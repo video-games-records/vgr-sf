@@ -22,6 +22,30 @@ class TopNewsController extends AbstractController
     ) {
     }
 
+    public function dashboardLatest(int $ttl = 0): Response
+    {
+        if ($ttl > 0) {
+            $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';
+            $cacheKey = self::CACHE_KEY . '_dashboard_' . $locale;
+            $html = $this->cache->get($cacheKey, function (ItemInterface $item) use ($ttl) {
+                $item->expiresAfter($ttl);
+                $articles = $this->articleRepository->findLatestPublished(2);
+
+                return $this->renderView('@Article/news/_dashboard_latest_news.html.twig', [
+                    'articles' => $articles,
+                ]);
+            });
+
+            return new Response($html);
+        }
+
+        $articles = $this->articleRepository->findLatestPublished(2);
+
+        return $this->render('@Article/news/_dashboard_latest_news.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
     public function latest(int $ttl = 0): Response
     {
         if ($ttl > 0) {

@@ -1,0 +1,47 @@
+{% trans_default_domain 'VgrCore' %}
+{% if playerCharts|length > 0 %}
+<div class="card mb-3">
+    <div class="card-header border-bottom">
+        <h6 class="mb-0"><i class="bi bi-trophy"></i> {{ 'player_chart.latest.card_title'|trans }}</h6>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-sm table-hover mb-0">
+                <tbody>
+                    {% for playerChart in playerCharts %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('vgr_game_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug}) }}" class="text-decoration-none fw-semibold">
+                                {{ playerChart.chart.group.game.name }}
+                            </a>
+                        </td>
+                        <td class="text-muted small">{{ playerChart.chart.group.name }}</td>
+                        <td>
+                            <a href="{{ path('vgr_chart_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug, groupId: playerChart.chart.group.id, groupSlug: playerChart.chart.group.slug, chartId: playerChart.chart.id, chartSlug: playerChart.chart.slug}) }}" class="text-decoration-none small">
+                                {{ playerChart.chart.name }}
+                            </a>
+                        </td>
+                        <td class="text-nowrap">
+                            {% for lib in playerChart.libs %}
+                                <span class="badge bg-primary">{{ lib.formatValue }}</span>
+                            {% endfor %}
+                        </td>
+                        <td class="text-nowrap text-center">
+                            {% if playerChart.rank == 1 %}
+                                <span class="badge text-bg-warning">#1</span>
+                            {% elseif playerChart.rank <= 3 %}
+                                <span class="badge text-bg-secondary">#{{ playerChart.rank }}</span>
+                            {% else %}
+                                <span class="text-muted small">#{{ playerChart.rank }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-muted text-nowrap text-end small">{{ playerChart.lastUpdate|user_date('d/m/Y') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endif %}
