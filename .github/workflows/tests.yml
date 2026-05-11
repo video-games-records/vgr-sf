@@ -1,8 +1,6 @@
 name: Tests
 
 on:
-  schedule:
-    - cron: '0 6 * * 1'  # Tous les lundis à 6h UTC
   workflow_dispatch:
 
 env:
