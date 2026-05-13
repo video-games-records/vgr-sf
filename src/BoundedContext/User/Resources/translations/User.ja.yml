@@ -25,6 +25,7 @@ profile:
     player: "プレイヤープロフィール"
     password: "パスワード"
     parameters: "パラメータ"
+    security: "セキュリティ"
 
   personal_info:
     title: "個人情報"
@@ -122,6 +123,51 @@ profile:
       submit: "保存"
     message:
       success: "パラメータが保存されました。"
+
+  # セキュリティ (2FA)
+  security:
+    title: "セキュリティ"
+    description: "二要素認証を含む、アカウントのセキュリティ設定を管理します。"
+    navigation_label: "セキュリティ"
+    totp:
+      status:
+        enabled: "二要素認証が有効です"
+        enabled_desc: "あなたのアカウントは認証アプリで保護されています。"
+        disabled: "二要素認証が無効です"
+        disabled_desc: "二要素認証を有効にして、セキュリティをさらに強化してください。"
+      badge:
+        active: "有効"
+        inactive: "無効"
+      action:
+        enable: "二要素認証を有効にする"
+        disable: "二要素認証を無効にする"
+      setup:
+        instructions: "認証アプリ（Google Authenticator、Authyなど）で以下のQRコードをスキャンし、6桁のコードを入力して有効化を確認してください。"
+        code_label: "確認コード"
+        code_help: "認証アプリに表示されている6桁のコードを入力してください。"
+        confirm: "確認"
+      disable:
+        title: "二要素認証を無効にする"
+        description: "二要素認証を無効にするには、現在のパスワードを入力してください。"
+        password_label: "現在のパスワード"
+        confirm: "二要素認証を無効にしてもよろしいですか？"
+    flash:
+      enabled: "二要素認証が正常に有効になりました。"
+      disabled: "二要素認証が無効になりました。"
+      invalid_code: "コードが無効または期限切れです。もう一度お試しください。"
+      invalid_password: "パスワードが正しくありません。"
+      no_secret: "シークレットキーが設定されていません。設定を最初からやり直してください。"
+
+# === TWO-FACTOR ===
+two_factor:
+  title: "二要素認証"
+  subtitle: "認証アプリの6桁のコードを入力してください。"
+  form:
+    code:
+      label: "確認コード"
+      help: "認証アプリを開いて6桁のコードを入力してください。"
+    submit: "確認"
+    cancel: "キャンセルしてログアウト"
 
 # === ACCOUNT ===
 account:

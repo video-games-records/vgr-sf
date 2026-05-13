@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\User\Presentation\Admin;
 
+use App\BoundedContext\User\Domain\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -62,6 +63,11 @@ class UserAdmin extends AbstractAdmin
             ->add('comment', TextareaType::class, [
                 'required' => false,
                 'label' => 'user.form.comment'
+            ])
+            ->add('totpEnabled', CheckboxType::class, [
+                'required' => false,
+                'label' => 'user.form.totp_enabled',
+                'help' => 'user.form.totp_enabled_help',
             ]);
     }
 
@@ -97,6 +103,16 @@ class UserAdmin extends AbstractAdmin
     }
 
     /**
+     * @param User $object
+     */
+    protected function preUpdate(object $object): void
+    {
+        if (!$object->isTotpEnabled()) {
+            $object->setTotpSecret(null);
+        }
+    }
+
+    /**
      * @param ShowMapper $show
      */
     protected function configureShowFields(ShowMapper $show): void
@@ -117,6 +133,10 @@ class UserAdmin extends AbstractAdmin
             ->add('password', null, ['label' => 'user.show.password'])
             ->add('confirmationToken', null, ['label' => 'user.show.confirmation_token'])
             ->add('passwordRequestedAt', 'datetime', ['label' => 'user.show.password_requested_at'])
+            ->end()
+            ->with('user.show.section_security', ['class' => 'col-md-6'])
+            ->add('totpEnabled', null, ['label' => 'user.show.totp_enabled'])
+            ->add('totpSecret', null, ['label' => 'user.show.totp_secret'])
             ->end();
     }
 }

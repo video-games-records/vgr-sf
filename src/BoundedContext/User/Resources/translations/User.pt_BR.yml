@@ -25,6 +25,7 @@ profile:
     player: "Perfil de jogador"
     password: "Senha"
     parameters: "Parâmetros"
+    security: "Segurança"
 
   personal_info:
     title: "Informações pessoais"
@@ -122,6 +123,51 @@ profile:
       submit: "Salvar"
     message:
       success: "Seus parâmetros foram salvos."
+
+  # Segurança (2FA)
+  security:
+    title: "Segurança"
+    description: "Gerencie as configurações de segurança da sua conta, incluindo a autenticação de dois fatores."
+    navigation_label: "Segurança"
+    totp:
+      status:
+        enabled: "A autenticação de dois fatores está ativada"
+        enabled_desc: "Sua conta está protegida com um aplicativo de autenticação."
+        disabled: "A autenticação de dois fatores está desativada"
+        disabled_desc: "Ative a autenticação de dois fatores para adicionar uma camada extra de segurança."
+      badge:
+        active: "Ativo"
+        inactive: "Inativo"
+      action:
+        enable: "Ativar a autenticação de dois fatores"
+        disable: "Desativar a autenticação de dois fatores"
+      setup:
+        instructions: "Escaneie o QR code abaixo com seu aplicativo de autenticação (Google Authenticator, Authy, etc.) e insira o código de 6 dígitos para confirmar a ativação."
+        code_label: "Código de verificação"
+        code_help: "Insira o código de 6 dígitos exibido no seu aplicativo de autenticação."
+        confirm: "Confirmar"
+      disable:
+        title: "Desativar a autenticação de dois fatores"
+        description: "Para desativar a autenticação de dois fatores, insira sua senha atual."
+        password_label: "Senha atual"
+        confirm: "Tem certeza de que deseja desativar a autenticação de dois fatores?"
+    flash:
+      enabled: "A autenticação de dois fatores foi ativada com sucesso."
+      disabled: "A autenticação de dois fatores foi desativada."
+      invalid_code: "O código é inválido ou expirou. Por favor, tente novamente."
+      invalid_password: "Senha incorreta."
+      no_secret: "Nenhuma chave secreta configurada. Por favor, reinicie a configuração."
+
+# === TWO-FACTOR ===
+two_factor:
+  title: "Autenticação de dois fatores"
+  subtitle: "Insira o código de 6 dígitos do seu aplicativo de autenticação."
+  form:
+    code:
+      label: "Código de verificação"
+      help: "Abra seu aplicativo de autenticação e insira o código de 6 dígitos."
+    submit: "Verificar"
+    cancel: "Cancelar e sair"
 
 # === ACCOUNT ===
 account:

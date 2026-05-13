@@ -25,6 +25,7 @@ profile:
     player: "Profilo giocatore"
     password: "Password"
     parameters: "Parametri"
+    security: "Sicurezza"
 
   personal_info:
     title: "Informazioni personali"
@@ -122,6 +123,51 @@ profile:
       submit: "Salva"
     message:
       success: "I tuoi parametri sono stati salvati."
+
+  # Sicurezza (2FA)
+  security:
+    title: "Sicurezza"
+    description: "Gestisci le impostazioni di sicurezza del tuo account, inclusa l'autenticazione a due fattori."
+    navigation_label: "Sicurezza"
+    totp:
+      status:
+        enabled: "L'autenticazione a due fattori è attiva"
+        enabled_desc: "Il tuo account è protetto da un'app di autenticazione."
+        disabled: "L'autenticazione a due fattori è disattivata"
+        disabled_desc: "Attiva l'autenticazione a due fattori per aggiungere un ulteriore livello di sicurezza."
+      badge:
+        active: "Attivo"
+        inactive: "Inattivo"
+      action:
+        enable: "Attiva l'autenticazione a due fattori"
+        disable: "Disattiva l'autenticazione a due fattori"
+      setup:
+        instructions: "Scansiona il codice QR qui sotto con la tua app di autenticazione (Google Authenticator, Authy, ecc.), quindi inserisci il codice a 6 cifre per confermare l'attivazione."
+        code_label: "Codice di verifica"
+        code_help: "Inserisci il codice a 6 cifre mostrato nella tua app di autenticazione."
+        confirm: "Conferma"
+      disable:
+        title: "Disattiva l'autenticazione a due fattori"
+        description: "Per disattivare l'autenticazione a due fattori, inserisci la tua password attuale."
+        password_label: "Password attuale"
+        confirm: "Sei sicuro di voler disattivare l'autenticazione a due fattori?"
+    flash:
+      enabled: "L'autenticazione a due fattori è stata attivata con successo."
+      disabled: "L'autenticazione a due fattori è stata disattivata."
+      invalid_code: "Il codice non è valido o è scaduto. Riprova."
+      invalid_password: "Password errata."
+      no_secret: "Nessuna chiave segreta configurata. Ricomincia la configurazione."
+
+# === TWO-FACTOR ===
+two_factor:
+  title: "Autenticazione a due fattori"
+  subtitle: "Inserisci il codice a 6 cifre dalla tua app di autenticazione."
+  form:
+    code:
+      label: "Codice di verifica"
+      help: "Apri la tua app di autenticazione e inserisci il codice a 6 cifre."
+    submit: "Verifica"
+    cancel: "Annulla e disconnetti"
 
 # === ACCOUNT ===
 account:

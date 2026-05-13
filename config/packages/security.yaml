@@ -30,6 +30,9 @@ security:
                 check_path: app_login
                 default_target_path: sonata_admin_dashboard
                 enable_csrf: true
+            two_factor:
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
             logout:
                 path: app_logout
                 target: app_login
@@ -66,6 +69,9 @@ security:
                 check_path: app_login
                 default_target_path: /
                 enable_csrf: true
+            two_factor:
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
             logout:
                 path: app_logout
                 target: app_login
@@ -88,6 +94,7 @@ security:
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/2fa, roles: PUBLIC_ACCESS }
         - { path: ^/admin/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin/logout, roles: PUBLIC_ACCESS }
         - { path: ^/admin/logs, roles: ROLE_SUPER_ADMIN }

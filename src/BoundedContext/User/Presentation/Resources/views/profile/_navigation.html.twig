@@ -32,35 +32,10 @@
             <i class="bi bi-sliders"></i> {{ 'profile.navigation.parameters'|trans }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'app_profile_security' %} active{% endif %}"
+           href="{{ path('app_profile_security') }}">
+            <i class="bi bi-shield-lock"></i> {{ 'profile.navigation.security'|trans }}
+        </a>
+    </li>
 </ul>
-
-<style>
-    .profile-settings .nav-tabs {
-        border-bottom: 2px solid #dee2e6;
-    }
-
-    .profile-settings .nav-tabs .nav-item .nav-link {
-        color: #6c757d;
-        border: none;
-        padding: 1rem 1.5rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .profile-settings .nav-tabs .nav-item .nav-link:hover {
-        color: #495057;
-        border-color: transparent;
-        background-color: #f8f9fa;
-    }
-
-    .profile-settings .nav-tabs .nav-item .nav-link.active {
-        color: #0d6efd;
-        border-bottom: 3px solid #0d6efd;
-        background-color: #e7f1ff;
-    }
-
-    .profile-settings .nav-tabs .nav-item .nav-link i {
-        margin-right: 0.5rem;
-    }
-</style>

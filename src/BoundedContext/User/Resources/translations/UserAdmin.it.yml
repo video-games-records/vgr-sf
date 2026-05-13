@@ -87,6 +87,8 @@ user:
         groups: Gruppi
         enabled: Attivo?
         comment: Commento
+        totp_enabled: "Autenticazione a due fattori (2FA)"
+        totp_enabled_help: "Deselezionare per disabilitare il 2FA e cancellare la chiave segreta di questo utente."
     filter:
         username: Username
         email: Email
@@ -107,6 +109,9 @@ user:
         password: Password
         confirmation_token: Token
         password_requested_at: Password richiesta il
+        section_security: Sicurezza
+        totp_enabled: "2FA abilitato"
+        totp_secret: "Chiave segreta TOTP"
 
 group:
     label: Gruppo

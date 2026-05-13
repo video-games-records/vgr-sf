@@ -87,6 +87,8 @@ user:
         groups: 组
         enabled: 已启用？
         comment: 备注
+        totp_enabled: "双重认证（2FA）"
+        totp_enabled_help: "取消勾选以禁用此用户的2FA并清除密钥。"
     filter:
         username: 用户名
         email: 邮箱
@@ -107,6 +109,9 @@ user:
         password: 密码
         confirmation_token: 令牌
         password_requested_at: 密码请求时间
+        section_security: 安全
+        totp_enabled: "2FA已启用"
+        totp_secret: "TOTP密钥"
 
 group:
     label: 组

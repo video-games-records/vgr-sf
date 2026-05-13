@@ -40,4 +40,5 @@ return [
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     DH\AuditorBundle\DHAuditorBundle::class => ['all' => true],
     Sonata\IntlBundle\SonataIntlBundle::class => ['all' => true],
+    Scheb\TwoFactorBundle\SchebTwoFactorBundle::class => ['all' => true],
 ];
