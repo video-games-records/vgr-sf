@@ -25,6 +25,7 @@ profile:
     player: "Perfil de jugador"
     password: "Contraseña"
     parameters: "Parámetros"
+    security: "Seguridad"
 
   personal_info:
     title: "Información personal"
@@ -122,6 +123,51 @@ profile:
       submit: "Guardar"
     message:
       success: "Sus parámetros han sido guardados."
+
+  # Seguridad (2FA)
+  security:
+    title: "Seguridad"
+    description: "Gestione la configuración de seguridad de su cuenta, incluida la autenticación de dos factores."
+    navigation_label: "Seguridad"
+    totp:
+      status:
+        enabled: "La autenticación de dos factores está activada"
+        enabled_desc: "Su cuenta está protegida con una aplicación de autenticación."
+        disabled: "La autenticación de dos factores está desactivada"
+        disabled_desc: "Active la autenticación de dos factores para añadir una capa adicional de seguridad."
+      badge:
+        active: "Activo"
+        inactive: "Inactivo"
+      action:
+        enable: "Activar la autenticación de dos factores"
+        disable: "Desactivar la autenticación de dos factores"
+      setup:
+        instructions: "Escanee el código QR de abajo con su aplicación de autenticación (Google Authenticator, Authy, etc.) y luego ingrese el código de 6 dígitos para confirmar la activación."
+        code_label: "Código de verificación"
+        code_help: "Ingrese el código de 6 dígitos que aparece en su aplicación de autenticación."
+        confirm: "Confirmar"
+      disable:
+        title: "Desactivar la autenticación de dos factores"
+        description: "Para desactivar la autenticación de dos factores, ingrese su contraseña actual."
+        password_label: "Contraseña actual"
+        confirm: "¿Está seguro de que desea desactivar la autenticación de dos factores?"
+    flash:
+      enabled: "La autenticación de dos factores se ha activado correctamente."
+      disabled: "La autenticación de dos factores ha sido desactivada."
+      invalid_code: "El código no es válido o ha caducado. Por favor, inténtelo de nuevo."
+      invalid_password: "Contraseña incorrecta."
+      no_secret: "No hay clave secreta configurada. Por favor, comience la configuración de nuevo."
+
+# === TWO-FACTOR ===
+two_factor:
+  title: "Autenticación de dos factores"
+  subtitle: "Ingrese el código de 6 dígitos de su aplicación de autenticación."
+  form:
+    code:
+      label: "Código de verificación"
+      help: "Abra su aplicación de autenticación e ingrese el código de 6 dígitos."
+    submit: "Verificar"
+    cancel: "Cancelar y cerrar sesión"
 
 # === ACCOUNT ===
 account:

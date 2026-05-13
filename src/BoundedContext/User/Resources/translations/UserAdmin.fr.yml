@@ -87,6 +87,8 @@ user:
         groups: Groupes
         enabled: Actif ?
         comment: Commentaire
+        totp_enabled: "Double authentification (2FA)"
+        totp_enabled_help: "Décocher pour désactiver le 2FA et effacer la clé secrète de cet utilisateur."
     filter:
         username: Username
         email: Email
@@ -107,6 +109,9 @@ user:
         password: Mot de passe
         confirmation_token: Token
         password_requested_at: Demande de mot de passe le
+        section_security: Sécurité
+        totp_enabled: "2FA activé"
+        totp_secret: "Clé secrète TOTP"
 
 group:
     label: Groupe

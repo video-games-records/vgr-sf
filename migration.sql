@@ -19,3 +19,8 @@ CREATE TABLE pnu_user_parameter (
 
 -- V1 : score_form_per_page (default 20 — stored only when user overrides)
 -- V2 candidates : forum_topics_per_page, forum_messages_per_page, leaderboard_limit
+
+-- Feature: 2fa-totp
+ALTER TABLE pnu_user
+    ADD COLUMN totp_secret VARCHAR(255) DEFAULT NULL,
+    ADD COLUMN totp_enabled TINYINT(1) NOT NULL DEFAULT 0;

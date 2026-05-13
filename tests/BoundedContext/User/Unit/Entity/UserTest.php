@@ -461,6 +461,90 @@ class UserTest extends TestCase
     }
 
     // ------------------------------------------------------------------
+    // TOTP (Two-factor authentication)
+    // ------------------------------------------------------------------
+
+    public function testTotpSecretDefaultsToNull(): void
+    {
+        $this->assertNull($this->user->getTotpSecret());
+    }
+
+    public function testSetAndGetTotpSecret(): void
+    {
+        $result = $this->user->setTotpSecret('BASE32SECRET');
+
+        $this->assertSame('BASE32SECRET', $this->user->getTotpSecret());
+        $this->assertSame($this->user, $result);
+    }
+
+    public function testSetTotpSecretToNull(): void
+    {
+        $this->user->setTotpSecret('SECRET');
+        $result = $this->user->setTotpSecret(null);
+
+        $this->assertNull($this->user->getTotpSecret());
+        $this->assertSame($this->user, $result);
+    }
+
+    public function testTotpEnabledDefaultsToFalse(): void
+    {
+        $this->assertFalse($this->user->isTotpEnabled());
+    }
+
+    public function testSetAndGetTotpEnabled(): void
+    {
+        $result = $this->user->setTotpEnabled(true);
+
+        $this->assertTrue($this->user->isTotpEnabled());
+        $this->assertSame($this->user, $result);
+    }
+
+    public function testIsTotpAuthenticationEnabledReturnsTrueWhenSecretSetAndEnabled(): void
+    {
+        $this->user->setTotpSecret('BASE32SECRET');
+        $this->user->setTotpEnabled(true);
+
+        $this->assertTrue($this->user->isTotpAuthenticationEnabled());
+    }
+
+    public function testIsTotpAuthenticationEnabledReturnsFalseWhenSecretIsNull(): void
+    {
+        $this->user->setTotpEnabled(true);
+
+        $this->assertFalse($this->user->isTotpAuthenticationEnabled());
+    }
+
+    public function testIsTotpAuthenticationEnabledReturnsFalseWhenNotEnabled(): void
+    {
+        $this->user->setTotpSecret('BASE32SECRET');
+        $this->user->setTotpEnabled(false);
+
+        $this->assertFalse($this->user->isTotpAuthenticationEnabled());
+    }
+
+    public function testGetTotpAuthenticationUsernameReturnsUsername(): void
+    {
+        $this->user->setUsername('alice');
+
+        $this->assertSame('alice', $this->user->getTotpAuthenticationUsername());
+    }
+
+    public function testGetTotpAuthenticationConfigurationReturnsNullWhenNoSecret(): void
+    {
+        $this->assertNull($this->user->getTotpAuthenticationConfiguration());
+    }
+
+    public function testGetTotpAuthenticationConfigurationReturnsTotpConfigurationWhenSecretSet(): void
+    {
+        $this->user->setTotpSecret('BASE32SECRET');
+
+        $config = $this->user->getTotpAuthenticationConfiguration();
+
+        $this->assertNotNull($config);
+        $this->assertSame('BASE32SECRET', $config->getSecret());
+    }
+
+    // ------------------------------------------------------------------
     // getUserIdentifier
     // ------------------------------------------------------------------
 

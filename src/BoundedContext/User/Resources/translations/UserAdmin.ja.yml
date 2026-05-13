@@ -86,6 +86,8 @@ user:
         groups: グループ
         enabled: 有効？
         comment: コメント
+        totp_enabled: "二要素認証（2FA）"
+        totp_enabled_help: "チェックを外すと、このユーザーの2FAを無効にし、シークレットキーを削除します。"
     filter:
         username: ユーザー名
         email: メール
@@ -106,6 +108,9 @@ user:
         password: パスワード
         confirmation_token: トークン
         password_requested_at: パスワード要求日時
+        section_security: セキュリティ
+        totp_enabled: "2FA有効"
+        totp_secret: "TOTPシークレットキー"
 
 group:
     label: グループ

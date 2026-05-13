@@ -88,6 +88,8 @@ user:
         groups: Groups
         enabled: Enabled?
         comment: Comment
+        totp_enabled: "Two-factor authentication (2FA)"
+        totp_enabled_help: "Uncheck to disable 2FA and clear the secret key for this user."
     filter:
         username: Username
         email: Email
@@ -108,6 +110,9 @@ user:
         password: Password
         confirmation_token: Token
         password_requested_at: Password requested on
+        section_security: Security
+        totp_enabled: "2FA enabled"
+        totp_secret: "TOTP secret"
 
 group:
     label: Group

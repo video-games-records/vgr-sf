@@ -87,6 +87,8 @@ user:
         groups: Grupos
         enabled: Ativo?
         comment: Comentário
+        totp_enabled: "Autenticação de dois fatores (2FA)"
+        totp_enabled_help: "Desmarque para desativar o 2FA e apagar a chave secreta deste usuário."
     filter:
         username: Nome de usuário
         email: Email
@@ -107,6 +109,9 @@ user:
         password: Senha
         confirmation_token: Token
         password_requested_at: Senha solicitada em
+        section_security: Segurança
+        totp_enabled: "2FA ativado"
+        totp_secret: "Chave secreta TOTP"
 
 group:
     label: Grupo

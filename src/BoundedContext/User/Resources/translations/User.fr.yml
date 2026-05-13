@@ -45,6 +45,7 @@ profile:
     player: "Profil joueur"
     password: "Mot de passe"
     parameters: "Paramètres"
+    security: "Sécurité"
 
   # Section : Informations personnelles
   personal_info:
@@ -146,6 +147,51 @@ profile:
       submit: "Enregistrer"
     message:
       success: "Vos paramètres ont été enregistrés."
+
+  # Section : Sécurité (2FA)
+  security:
+    title: "Sécurité"
+    description: "Gérez les paramètres de sécurité de votre compte, y compris l'authentification à deux facteurs."
+    navigation_label: "Sécurité"
+    totp:
+      status:
+        enabled: "L'authentification à deux facteurs est activée"
+        enabled_desc: "Votre compte est protégé par une application d'authentification."
+        disabled: "L'authentification à deux facteurs est désactivée"
+        disabled_desc: "Activez l'authentification à deux facteurs pour ajouter une couche de sécurité supplémentaire."
+      badge:
+        active: "Actif"
+        inactive: "Inactif"
+      action:
+        enable: "Activer l'authentification à deux facteurs"
+        disable: "Désactiver l'authentification à deux facteurs"
+      setup:
+        instructions: "Scannez le QR code ci-dessous avec votre application d'authentification (Google Authenticator, Authy, etc.), puis entrez le code à 6 chiffres pour confirmer l'activation."
+        code_label: "Code de vérification"
+        code_help: "Entrez le code à 6 chiffres affiché dans votre application d'authentification."
+        confirm: "Confirmer"
+      disable:
+        title: "Désactiver l'authentification à deux facteurs"
+        description: "Pour désactiver l'authentification à deux facteurs, entrez votre mot de passe actuel."
+        password_label: "Mot de passe actuel"
+        confirm: "Êtes-vous sûr de vouloir désactiver l'authentification à deux facteurs ?"
+    flash:
+      enabled: "L'authentification à deux facteurs a été activée avec succès."
+      disabled: "L'authentification à deux facteurs a été désactivée."
+      invalid_code: "Le code est invalide ou a expiré. Veuillez réessayer."
+      invalid_password: "Mot de passe incorrect."
+      no_secret: "Aucune clé secrète configurée. Veuillez recommencer la configuration."
+
+# === TWO-FACTOR (Page de vérification au login) ===
+two_factor:
+  title: "Authentification à deux facteurs"
+  subtitle: "Entrez le code à 6 chiffres de votre application d'authentification."
+  form:
+    code:
+      label: "Code de vérification"
+      help: "Ouvrez votre application d'authentification et entrez le code à 6 chiffres."
+    submit: "Vérifier"
+    cancel: "Annuler et se déconnecter"
 
 # === ACCOUNT (Gestion du compte) ===
 account:

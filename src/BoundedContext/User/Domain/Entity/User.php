@@ -12,6 +12,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use App\SharedKernel\Domain\Entity\TimestampableTrait;
 use App\BoundedContext\User\Infrastructure\Persistence\Doctrine\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfiguration;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfigurationInterface;
+use Scheb\TwoFactorBundle\Model\Totp\TwoFactorInterface as TotpTwoFactorInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 #[DoctrineAssert\UniqueEntity(["email"])]
 #[DoctrineAssert\UniqueEntity(["username"])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, TotpTwoFactorInterface
 {
     use TimestampableTrait;
 
@@ -82,6 +85,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 128)]
     #[Gedmo\Slug(fields: ['username'])]
     protected string $slug;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $totpSecret = null;
+
+    #[ORM\Column(options: ['default' => false])]
+    private bool $totpEnabled = false;
 
     /** @var Collection<int, Group> */
     #[ORM\JoinTable(name: 'pnu_user_group')]
@@ -393,5 +402,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         assert($this->email !== '', 'Email cannot be empty');
         return $this->email;
+    }
+
+    public function isTotpAuthenticationEnabled(): bool
+    {
+        return $this->totpEnabled && $this->totpSecret !== null;
+    }
+
+    public function getTotpAuthenticationUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getTotpAuthenticationConfiguration(): TotpConfigurationInterface|null
+    {
+        if ($this->totpSecret === null) {
+            return null;
+        }
+        return new TotpConfiguration($this->totpSecret, TotpConfiguration::ALGORITHM_SHA1, 30, 6);
+    }
+
+    public function getTotpSecret(): ?string
+    {
+        return $this->totpSecret;
+    }
+
+    public function setTotpSecret(?string $totpSecret): static
+    {
+        $this->totpSecret = $totpSecret;
+        return $this;
+    }
+
+    public function isTotpEnabled(): bool
+    {
+        return $this->totpEnabled;
+    }
+
+    public function setTotpEnabled(bool $totpEnabled): static
+    {
+        $this->totpEnabled = $totpEnabled;
+        return $this;
     }
 }

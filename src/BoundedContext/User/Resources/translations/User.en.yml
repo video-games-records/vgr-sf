@@ -45,6 +45,7 @@ profile:
     player: "Player Profile"
     password: "Password"
     parameters: "Parameters"
+    security: "Security"
 
   # Section : Informations personnelles
   personal_info:
@@ -146,6 +147,51 @@ profile:
       submit: "Save"
     message:
       success: "Your parameters have been saved."
+
+  # Section : Sécurité (2FA)
+  security:
+    title: "Security"
+    description: "Manage your account security settings, including two-factor authentication."
+    navigation_label: "Security"
+    totp:
+      status:
+        enabled: "Two-factor authentication is enabled"
+        enabled_desc: "Your account is protected with an authenticator app."
+        disabled: "Two-factor authentication is disabled"
+        disabled_desc: "Enable two-factor authentication to add an extra layer of security."
+      badge:
+        active: "Active"
+        inactive: "Inactive"
+      action:
+        enable: "Enable two-factor authentication"
+        disable: "Disable two-factor authentication"
+      setup:
+        instructions: "Scan the QR code below with your authenticator app (Google Authenticator, Authy, etc.), then enter the 6-digit code to confirm activation."
+        code_label: "Verification code"
+        code_help: "Enter the 6-digit code displayed in your authenticator app."
+        confirm: "Confirm"
+      disable:
+        title: "Disable two-factor authentication"
+        description: "To disable two-factor authentication, enter your current password."
+        password_label: "Current password"
+        confirm: "Are you sure you want to disable two-factor authentication?"
+    flash:
+      enabled: "Two-factor authentication has been enabled successfully."
+      disabled: "Two-factor authentication has been disabled."
+      invalid_code: "The code is invalid or has expired. Please try again."
+      invalid_password: "Incorrect password."
+      no_secret: "No secret key configured. Please start the setup again."
+
+# === TWO-FACTOR (Page de vérification au login) ===
+two_factor:
+  title: "Two-factor authentication"
+  subtitle: "Enter the 6-digit code from your authenticator app."
+  form:
+    code:
+      label: "Verification code"
+      help: "Open your authenticator app and enter the 6-digit code."
+    submit: "Verify"
+    cancel: "Cancel and log out"
 
 # === ACCOUNT (Gestion du compte) ===
 account:
