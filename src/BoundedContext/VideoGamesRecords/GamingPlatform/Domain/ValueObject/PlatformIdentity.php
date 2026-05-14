@@ -9,6 +9,7 @@ readonly class PlatformIdentity
     public function __construct(
         public string $externalId,
         public ?string $username,
+        public ?string $tokenData = null,
     ) {
     }
 }

@@ -12,6 +12,8 @@ interface PlatformConnectionRepositoryInterface
 {
     public function findByPlayerAndPlatform(Player $player, PlatformEnum $platform): ?PlatformConnection;
 
+    public function findByPlatformAndExternalId(PlatformEnum $platform, string $externalId): ?PlatformConnection;
+
     /** @return list<PlatformConnection> */
     public function findByPlayer(Player $player): array;
 

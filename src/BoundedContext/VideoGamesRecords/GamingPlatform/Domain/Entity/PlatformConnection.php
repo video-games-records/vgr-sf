@@ -33,6 +33,9 @@ class PlatformConnection
     #[ORM\Column]
     private \DateTimeImmutable $linkedAt;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $tokenData = null;
+
     public function __construct(
         Player $player,
         PlatformEnum $platform,
@@ -79,5 +82,15 @@ class PlatformConnection
     public function updateUsername(?string $username): void
     {
         $this->username = $username;
+    }
+
+    public function getTokenData(): ?string
+    {
+        return $this->tokenData;
+    }
+
+    public function setTokenData(?string $tokenData): void
+    {
+        $this->tokenData = $tokenData;
     }
 }

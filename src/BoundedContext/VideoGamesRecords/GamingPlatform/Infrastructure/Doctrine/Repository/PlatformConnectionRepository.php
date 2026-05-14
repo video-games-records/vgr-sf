@@ -26,6 +26,11 @@ class PlatformConnectionRepository extends ServiceEntityRepository implements Pl
         return $this->findOneBy(['player' => $player, 'platform' => $platform]);
     }
 
+    public function findByPlatformAndExternalId(PlatformEnum $platform, string $externalId): ?PlatformConnection
+    {
+        return $this->findOneBy(['platform' => $platform, 'externalId' => $externalId]);
+    }
+
     /** @return list<PlatformConnection> */
     public function findByPlayer(Player $player): array
     {

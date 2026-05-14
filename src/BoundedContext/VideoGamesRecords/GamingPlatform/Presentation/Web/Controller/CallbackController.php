@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/{_locale}', requirements: ['_locale' => 'en|fr|de|it|ja|es|pt_BR|zh_CN'], defaults: ['_locale' => 'en'])]
 class CallbackController extends AbstractLocalizedController
 {
     public function __construct(
@@ -27,7 +26,7 @@ class CallbackController extends AbstractLocalizedController
     ) {
     }
 
-    #[Route('/platform/{platform}/callback', name: 'vgr_gaming_platform_callback')]
+    #[Route('/platform/{platform}/callback', name: 'vgr_gaming_platform_callback', methods: ['GET'])]
     public function __invoke(string $platform, Request $request): Response
     {
         $user = $this->security->getUser();

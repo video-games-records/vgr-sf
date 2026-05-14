@@ -36,3 +36,6 @@ CREATE TABLE player_platform_connection (
     UNIQUE KEY uq_player_platform (player_id, platform),
     CONSTRAINT fk_platform_connection_player FOREIGN KEY (player_id) REFERENCES vgr_player(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Feature: context-gaming-platform / Xbox Live (OAuth token storage)
+ALTER TABLE player_platform_connection ADD COLUMN token_data TEXT NULL;
