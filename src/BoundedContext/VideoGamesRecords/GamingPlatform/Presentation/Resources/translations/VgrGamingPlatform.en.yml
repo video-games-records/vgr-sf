@@ -1,0 +1,18 @@
+platform:
+  connections:
+    title: Connected Platforms
+    description: Link your gaming accounts to display your profiles on VGR.
+  connect: Connect
+  disconnect:
+    label: Disconnect
+    confirm: 'Disconnect your %platform% account?'
+  not_linked: Not linked
+  linked_as: 'Linked as %username%'
+  linked_on: 'Linked on %date%'
+  connection:
+    success: Platform account successfully linked.
+    error: Platform authentication failed. Please try again.
+  disconnection:
+    success: Platform account successfully unlinked.
+  profile:
+    recent_games: Recent games

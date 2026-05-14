@@ -1,0 +1,53 @@
+{#
+    Variables:
+      - connections: list<PlatformConnection> (player's existing connections)
+      - allPlatforms: list<PlatformEnum> (all supported platforms)
+      - isOwner: bool (true = viewing own profile)
+#}
+<div class="card mb-3">
+    <div class="card-header">
+        <h5 class="card-title mb-0">{{ 'platform.connections.title'|trans({}, 'VgrGamingPlatform') }}</h5>
+    </div>
+    <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+            {% for platform in allPlatforms %}
+                {% set connection = connections[platform.value] ?? null %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                        <strong>{{ platform.label }}</strong>
+                        {% if connection %}
+                            <span class="badge bg-success">
+                                {{ 'platform.linked_as'|trans({'%username%': connection.username ?? connection.externalId}, 'VgrGamingPlatform') }}
+                            </span>
+                        {% else %}
+                            <span class="text-muted small">
+                                {{ 'platform.not_linked'|trans({}, 'VgrGamingPlatform') }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    {% if isOwner %}
+                        <div>
+                            {% if connection %}
+                                <form method="post"
+                                      action="{{ path('vgr_gaming_platform_disconnect', {'platform': platform.value}) }}"
+                                      onsubmit="return confirm('Disconnect {{ platform.label }}?')">
+                                    <input type="hidden" name="_token"
+                                           value="{{ csrf_token('platform_disconnect_' ~ platform.value) }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        {{ 'platform.disconnect'|trans({}, 'VgrGamingPlatform') }}
+                                    </button>
+                                </form>
+                            {% else %}
+                                <a href="{{ path('vgr_gaming_platform_connect', {'platform': platform.value}) }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    {{ 'platform.connect'|trans({}, 'VgrGamingPlatform') }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

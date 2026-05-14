@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -32,6 +33,10 @@ class EditProfile extends AbstractController
         $user = $this->getUser();
 
         $player = $this->playerRepository->getPlayerFromUser($user);
+
+        if ($player === null) {
+            throw new NotFoundHttpException('Player not found.');
+        }
 
         $form = $this->createForm(PlayerProfileFormType::class, $player);
         $form->handleRequest($request);

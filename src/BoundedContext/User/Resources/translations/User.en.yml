@@ -46,6 +46,7 @@ profile:
     password: "Password"
     parameters: "Parameters"
     security: "Security"
+    platforms: "Linked Accounts"
 
   # Section : Informations personnelles
   personal_info:

@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\BoundedContext\VideoGamesRecords\GamingPlatform\:
+        resource: '../../../src/BoundedContext/VideoGamesRecords/GamingPlatform/*'
+
+    App\BoundedContext\VideoGamesRecords\GamingPlatform\Infrastructure\Provider\SteamProvider:
+        arguments:
+            $apiKey: '%env(STEAM_API_KEY)%'
+        tags:
+            - { name: 'vgr.gaming_platform.provider' }
+
+    App\BoundedContext\VideoGamesRecords\GamingPlatform\Application\Service\PlatformProviderRegistry:
+        arguments:
+            $providers: !tagged_iterator vgr.gaming_platform.provider
+
+    App\BoundedContext\VideoGamesRecords\GamingPlatform\Domain\Repository\PlatformConnectionRepositoryInterface:
+        alias: App\BoundedContext\VideoGamesRecords\GamingPlatform\Infrastructure\Doctrine\Repository\PlatformConnectionRepository

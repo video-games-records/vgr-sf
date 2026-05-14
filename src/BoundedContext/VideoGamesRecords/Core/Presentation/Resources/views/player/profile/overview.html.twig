@@ -248,6 +248,20 @@
     </div>
 </div>
 
+{# Platform Gamercards #}
+{% if platformProfiles is not empty %}
+<div class="row g-2 mb-3">
+    {% for platformValue, profile in platformProfiles %}
+        <div class="col-md-6 col-lg-4">
+            {% include '@VideoGamesRecordsGamingPlatform/player/_gamercard.html.twig' with {
+                platform: constant('App\\BoundedContext\\VideoGamesRecords\\GamingPlatform\\Domain\\ValueObject\\PlatformEnum::' ~ platformValue|upper),
+                profile: profile
+            } %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 {# Additional Info #}
 {% if player.presentation or player.collection %}
 <div class="row g-3">
