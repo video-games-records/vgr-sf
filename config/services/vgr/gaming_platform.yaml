@@ -12,6 +12,13 @@ services:
         tags:
             - { name: 'vgr.gaming_platform.provider' }
 
+    App\BoundedContext\VideoGamesRecords\GamingPlatform\Infrastructure\Provider\XboxProvider:
+        arguments:
+            $clientId: '%env(XBOX_CLIENT_ID)%'
+            $clientSecret: '%env(XBOX_CLIENT_SECRET)%'
+        tags:
+            - { name: 'vgr.gaming_platform.provider' }
+
     App\BoundedContext\VideoGamesRecords\GamingPlatform\Application\Service\PlatformProviderRegistry:
         arguments:
             $providers: !tagged_iterator vgr.gaming_platform.provider

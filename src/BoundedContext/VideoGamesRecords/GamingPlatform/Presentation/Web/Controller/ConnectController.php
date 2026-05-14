@@ -38,7 +38,7 @@ class ConnectController extends AbstractLocalizedController
 
         $callbackUrl = $this->generateUrl(
             'vgr_gaming_platform_callback',
-            ['_locale' => $request->getLocale(), 'platform' => $platform],
+            ['platform' => $platform],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 

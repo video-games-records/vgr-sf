@@ -23,6 +23,9 @@ readonly class LinkPlatformService
 
         if ($existing !== null) {
             $existing->updateUsername($identity->username);
+            if ($identity->tokenData !== null) {
+                $existing->setTokenData($identity->tokenData);
+            }
             $this->repository->save($existing);
 
             return $existing;
@@ -34,6 +37,7 @@ readonly class LinkPlatformService
             externalId: $identity->externalId,
             username: $identity->username,
         );
+        $connection->setTokenData($identity->tokenData);
 
         $this->repository->save($connection);
 

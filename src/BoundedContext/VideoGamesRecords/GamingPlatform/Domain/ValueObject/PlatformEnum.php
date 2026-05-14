@@ -32,7 +32,7 @@ enum PlatformEnum: string
     public function isSupported(): bool
     {
         return match ($this) {
-            self::STEAM => true,
+            self::STEAM, self::XBOX => true,
             default => false,
         };
     }
