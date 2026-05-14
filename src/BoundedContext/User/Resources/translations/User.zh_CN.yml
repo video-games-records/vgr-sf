@@ -26,6 +26,7 @@ profile:
     password: "密码"
     parameters: "参数设置"
     security: "安全"
+    platforms: "关联账号"
 
   personal_info:
     title: "个人信息"

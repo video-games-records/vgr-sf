@@ -1,0 +1,18 @@
+platform:
+  connections:
+    title: 已连接平台
+    description: 关联您的游戏账号，在VGR上展示您的资料。
+  connect: 连接
+  disconnect:
+    label: 断开连接
+    confirm: '断开您的 %platform% 账号连接？'
+  not_linked: 未连接
+  linked_as: '以 %username% 身份连接'
+  linked_on: '连接于 %date%'
+  connection:
+    success: 平台账号连接成功。
+    error: 身份验证失败，请重试。
+  disconnection:
+    success: 平台账号断开连接成功。
+  profile:
+    recent_games: 最近游戏

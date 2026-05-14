@@ -1,0 +1,18 @@
+platform:
+  connections:
+    title: Piattaforme collegate
+    description: Collega i tuoi account di gioco per mostrare i tuoi profili su VGR.
+  connect: Collega
+  disconnect:
+    label: Scollega
+    confirm: 'Scollegare il tuo account %platform%?'
+  not_linked: Non collegato
+  linked_as: 'Collegato come %username%'
+  linked_on: 'Collegato il %date%'
+  connection:
+    success: Account della piattaforma collegato con successo.
+    error: Autenticazione fallita. Per favore riprova.
+  disconnection:
+    success: Account della piattaforma scollegato con successo.
+  profile:
+    recent_games: Giochi recenti

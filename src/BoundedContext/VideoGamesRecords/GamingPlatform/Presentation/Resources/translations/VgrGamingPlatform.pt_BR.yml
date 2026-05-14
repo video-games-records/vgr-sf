@@ -1,0 +1,18 @@
+platform:
+  connections:
+    title: Plataformas conectadas
+    description: Vincule suas contas de jogos para exibir seus perfis no VGR.
+  connect: Conectar
+  disconnect:
+    label: Desconectar
+    confirm: 'Desconectar sua conta do %platform%?'
+  not_linked: Não vinculado
+  linked_as: 'Vinculado como %username%'
+  linked_on: 'Vinculado em %date%'
+  connection:
+    success: Conta da plataforma vinculada com sucesso.
+    error: Falha na autenticação. Por favor, tente novamente.
+  disconnection:
+    success: Conta da plataforma desvinculada com sucesso.
+  profile:
+    recent_games: Jogos recentes

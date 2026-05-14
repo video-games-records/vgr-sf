@@ -1,0 +1,18 @@
+platform:
+  connections:
+    title: Verbundene Plattformen
+    description: Verknüpfe deine Gaming-Konten, um deine Profile auf VGR anzuzeigen.
+  connect: Verbinden
+  disconnect:
+    label: Trennen
+    confirm: '%platform%-Konto trennen?'
+  not_linked: Nicht verbunden
+  linked_as: 'Verbunden als %username%'
+  linked_on: 'Verbunden am %date%'
+  connection:
+    success: Plattformkonto erfolgreich verbunden.
+    error: Authentifizierung fehlgeschlagen. Bitte erneut versuchen.
+  disconnection:
+    success: Plattformkonto erfolgreich getrennt.
+  profile:
+    recent_games: Zuletzt gespielte Spiele

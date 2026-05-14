@@ -214,6 +214,7 @@ Chaque bounded context peut avoir sa propre documentation CLAUDE.md :
 |----------|---------------|
 | VideoGamesRecords.Core | [src/BoundedContext/VideoGamesRecords/Core/CLAUDE.md](src/BoundedContext/VideoGamesRecords/Core/CLAUDE.md) |
 | VideoGamesRecords.Igdb | [src/BoundedContext/VideoGamesRecords/Igdb/CLAUDE.md](src/BoundedContext/VideoGamesRecords/Igdb/CLAUDE.md) |
+| VideoGamesRecords.GamingPlatform | [src/BoundedContext/VideoGamesRecords/GamingPlatform/CLAUDE.md](src/BoundedContext/VideoGamesRecords/GamingPlatform/CLAUDE.md) |
 
 ---
 

@@ -26,6 +26,7 @@ profile:
     password: "Passwort"
     parameters: "Parameter"
     security: "Sicherheit"
+    platforms: "Verknüpfte Konten"
 
   personal_info:
     title: "Persönliche Informationen"

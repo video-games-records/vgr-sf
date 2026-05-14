@@ -1,0 +1,18 @@
+platform:
+  connections:
+    title: 連携済みプラットフォーム
+    description: ゲームアカウントを連携してVGRにプロフィールを表示しましょう。
+  connect: 連携する
+  disconnect:
+    label: 連携解除
+    confirm: '%platform% アカウントの連携を解除しますか？'
+  not_linked: 未連携
+  linked_as: '%username% として連携中'
+  linked_on: '%date% に連携'
+  connection:
+    success: プラットフォームアカウントを連携しました。
+    error: 認証に失敗しました。もう一度お試しください。
+  disconnection:
+    success: プラットフォームアカウントの連携を解除しました。
+  profile:
+    recent_games: 最近プレイしたゲーム

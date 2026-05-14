@@ -26,6 +26,7 @@ profile:
     password: "パスワード"
     parameters: "パラメータ"
     security: "セキュリティ"
+    platforms: "連携アカウント"
 
   personal_info:
     title: "個人情報"

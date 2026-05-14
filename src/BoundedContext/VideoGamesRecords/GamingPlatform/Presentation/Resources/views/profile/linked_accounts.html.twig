@@ -1,0 +1,74 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrGamingPlatform' %}
+
+{% block title %}{{ 'platform.connections.title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+<div class="profile-settings">
+    <div class="mb-4">
+        <h1>{{ 'profile.title.main'|trans({}, 'User') }}</h1>
+        <p class="text-muted">{{ 'profile.title.subtitle'|trans({}, 'User') }}</p>
+    </div>
+
+    {% for label, messages in app.flashes() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message|trans({}, 'VgrGamingPlatform') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'common.close'|trans({}, 'User') }}"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            {% include '@User/profile/_navigation.html.twig' %}
+
+            <div class="profile-section">
+                <h3 class="mb-4">{{ 'platform.connections.title'|trans }}</h3>
+                <p class="text-muted mb-4">{{ 'platform.connections.description'|trans }}</p>
+
+                <ul class="list-group">
+                    {% for platform in allPlatforms %}
+                        {% set connection = connections[platform.value] ?? null %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ platform.label }}</strong>
+                                {% if connection %}
+                                    <br>
+                                    <span class="text-success small">
+                                        <i class="bi bi-check-circle"></i>
+                                        {{ 'platform.linked_as'|trans({'%username%': connection.username ?? connection.externalId}) }}
+                                    </span>
+                                {% else %}
+                                    <br>
+                                    <span class="text-muted small">{{ 'platform.not_linked'|trans }}</span>
+                                {% endif %}
+                            </div>
+                            <div>
+                                {% if connection %}
+                                    <form method="post"
+                                          action="{{ path('vgr_gaming_platform_disconnect', {'platform': platform.value}) }}"
+                                          onsubmit="return confirm('{{ 'platform.disconnect.confirm'|trans({'%platform%': platform.label}) }}')">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('platform_disconnect_' ~ platform.value) }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-x-circle"></i> {{ 'platform.disconnect.label'|trans }}
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <a href="{{ path('vgr_gaming_platform_connect', {'platform': platform.value}) }}"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-link-45deg"></i> {{ 'platform.connect'|trans }}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

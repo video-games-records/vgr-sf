@@ -15,6 +15,7 @@ imports:
     - { resource: services/vgr/proof.yaml }
     - { resource: services/vgr/video.yaml }
     - { resource: services/vgr/dwh.yaml }
+    - { resource: services/vgr/gaming_platform.yaml }
     - { resource: admin/user.yml }
     - { resource: admin/article.yml }
     - { resource: admin/forum.yml }

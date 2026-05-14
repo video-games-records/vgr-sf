@@ -138,3 +138,6 @@ serve-stop: ## Arrête le serveur Symfony
 
 serve-log: ## Affiche les logs du serveur
 	symfony server:log
+
+ngrok: ## Expose le serveur local via ngrok (port 8000) pour tester les OAuth (Steam, etc.)
+	ngrok http 8000
