@@ -14,7 +14,22 @@
 
         <div class="card shadow-sm">
             <div class="card-header">
-                <h2 class="h5 mb-0">{{ game.name }}</h2>
+                <div class="d-flex align-items-center gap-3">
+                    <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}" class="flex-shrink-0">
+                        <img src="{{ game_picture_url(game.picture) }}"
+                             alt="{{ game.name }}"
+                             width="64" height="64"
+                             class="rounded border">
+                    </a>
+                    <div>
+                        <h2 class="h5 mb-1">
+                            <a href="{{ path('vgr_game_show', {id: game.id, slug: game.slug}) }}" class="text-decoration-none">
+                                {{ game.name }}
+                            </a>
+                        </h2>
+                        <small class="text-muted">{{ 'my_proofs.click_to_view_game'|trans }}</small>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 {% if groupedByGroup is empty %}
