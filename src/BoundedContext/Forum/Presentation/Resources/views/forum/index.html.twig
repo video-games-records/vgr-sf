@@ -146,6 +146,12 @@
                                                 {% if topic.type %}
                                                     <span class="badge topic-type--{{ topic.type.name|lower }} ms-1">{{ topic.type.name }}</span>
                                                 {% endif %}
+                                                {% set topicPages = ((topic.nbMessage - 1) / 20)|round(0, 'floor') + 1 %}
+                                                {% if topicPages > 1 %}
+                                                    <a href="{{ path('topic_show', {id: topic.id, slug: topic.slug, forumId: topic.forum.id, forumSlug: topic.forum.slug, page: topicPages}) }}{% if topic.lastMessage %}#message-{{ topic.lastMessage.id }}{% endif %}" class="badge bg-secondary text-decoration-none ms-1" title="{{ 'forum.show.go_to_last_page'|trans }}">
+                                                        {{ topicPages }}
+                                                    </a>
+                                                {% endif %}
                                                 <br>
                                                 <small class="text-muted">
                                                     {{ 'forum.show.started_by'|trans }}
