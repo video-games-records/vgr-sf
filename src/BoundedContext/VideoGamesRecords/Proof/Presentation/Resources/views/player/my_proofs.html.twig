@@ -20,6 +20,7 @@
                                 <thead>
                                     <tr>
                                         <th>{{ 'my_proofs.column_game'|trans }}</th>
+                                        <th>{{ 'my_proofs.column_platforms'|trans }}</th>
                                         <th>{{ 'my_proofs.column_statuses'|trans }}</th>
                                     </tr>
                                 </thead>
@@ -30,6 +31,13 @@
                                                 <a href="{{ path('vgr_my_proofs_game', {gameId: entry.game.id, gameSlug: entry.game.slug}) }}" class="text-decoration-none">
                                                     {{ entry.game.name }}
                                                 </a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-wrap gap-1">
+                                                    {% for platform in entry.game.platforms %}
+                                                        {{ component('platform_badge', {platform: platform}) }}
+                                                    {% endfor %}
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">

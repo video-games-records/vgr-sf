@@ -25,6 +25,13 @@
                                              class="card-img-top object-fit-cover"
                                              style="height: 140px;">
                                         <div class="card-body p-2">
+                                            {% if entry.game.platforms|length > 0 %}
+                                                <div class="d-flex flex-wrap gap-1 mb-1">
+                                                    {% for platform in entry.game.platforms %}
+                                                        {{ component('platform_badge', {platform: platform}) }}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
                                             <div class="d-flex flex-wrap gap-1">
                                                 {% for status in statuses %}
                                                     {% set count = entry.statuses[status.value] ?? 0 %}

@@ -53,6 +53,7 @@ player:
 
 my_proofs:
   click_to_view_game: Clique para ver o jogo
+  column_platforms: Plataformas
 
 game_history:
   title: Histórico de Jogos

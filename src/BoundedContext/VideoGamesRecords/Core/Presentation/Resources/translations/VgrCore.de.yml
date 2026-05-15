@@ -53,6 +53,7 @@ player:
 
 my_proofs:
   click_to_view_game: Klicken um das Spiel anzusehen
+  column_platforms: Plattformen
 
 game_history:
   title: Spielverlauf
