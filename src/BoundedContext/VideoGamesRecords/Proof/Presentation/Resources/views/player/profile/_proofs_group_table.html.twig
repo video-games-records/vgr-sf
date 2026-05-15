@@ -10,7 +10,13 @@
                 </div>
                 <div class="card-body p-2">
                     <div class="d-flex gap-3 small text-muted mb-2">
-                        <span>{{ 'player.profile.proofs.column_score'|trans }}: <strong class="text-body">{{ pc.valuesAsString }}</strong></span>
+                        <span>{{ 'player.profile.proofs.column_score'|trans }}:
+                            {% set scoreValues = [] %}
+                            {% for lib in pc.libs %}
+                                {% set scoreValues = scoreValues|merge([lib.value|format_score(lib.libChart.type.mask)]) %}
+                            {% endfor %}
+                            <strong class="text-body">{{ scoreValues|join(' / ') }}</strong>
+                        </span>
                         <span>{{ 'player.profile.proofs.column_rank'|trans }}: <strong class="text-body">{{ pc.rank }}</strong></span>
                     </div>
                     {% if pc.proof %}
