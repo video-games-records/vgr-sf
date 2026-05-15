@@ -16,3 +16,7 @@ platform:
     success: Plattformkonto erfolgreich getrennt.
   profile:
     recent_games: Zuletzt gespielte Spiele
+  ra:
+    username_placeholder: RA-Benutzername
+    username_required: Bitte einen RetroAchievements-Benutzernamen eingeben.
+    username_not_found: RetroAchievements-Benutzername nicht gefunden. Schreibweise prüfen und erneut versuchen.

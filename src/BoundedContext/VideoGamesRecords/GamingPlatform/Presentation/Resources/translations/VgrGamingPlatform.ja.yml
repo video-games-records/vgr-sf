@@ -16,3 +16,7 @@ platform:
     success: プラットフォームアカウントの連携を解除しました。
   profile:
     recent_games: 最近プレイしたゲーム
+  ra:
+    username_placeholder: RAユーザー名
+    username_required: RetroAchievementsのユーザー名を入力してください。
+    username_not_found: RetroAchievementsのユーザー名が見つかりません。スペルを確認してもう一度お試しください。
