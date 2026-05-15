@@ -41,6 +41,7 @@ pagination:
     showing: "%total%件中%start%〜%end%件を表示"
 
 message:
+    edited_at: "%date% に編集済み"
     edit:
         title: "メッセージを編集"
         submit: "変更を保存"

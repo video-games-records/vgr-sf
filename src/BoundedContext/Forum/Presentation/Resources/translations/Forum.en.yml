@@ -41,6 +41,7 @@ pagination:
     showing: "Showing %start% to %end% of %total% items"
 
 message:
+    edited_at: "Edited on %date%"
     edit:
         title: "Edit message"
         submit: "Save changes"
