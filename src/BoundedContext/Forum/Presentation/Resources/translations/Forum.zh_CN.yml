@@ -41,6 +41,7 @@ pagination:
     showing: "显示第 %start% 至 %end% 条，共 %total% 条"
 
 message:
+    edited_at: "编辑于 %date%"
     edit:
         title: "编辑消息"
         submit: "保存更改"
