@@ -5,7 +5,14 @@
         <div class="col">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center py-2">
-                    <span class="fw-semibold text-truncate me-2">{{ pc.chart.name }}</span>
+                    <a href="{{ path('vgr_chart_show', {
+                        id: pc.chart.group.game.id,
+                        slug: pc.chart.group.game.slug,
+                        groupId: pc.chart.group.id,
+                        groupSlug: pc.chart.group.slug,
+                        chartId: pc.chart.id,
+                        chartSlug: pc.chart.slug
+                    }) }}" class="fw-semibold text-truncate me-2 text-decoration-none">{{ pc.chart.name }}</a>
                     <span class="proof--{{ pc.status.cssClass }}" data-bs-toggle="tooltip" title="{{ pc.status.label }}"></span>
                 </div>
                 <div class="card-body p-2">
