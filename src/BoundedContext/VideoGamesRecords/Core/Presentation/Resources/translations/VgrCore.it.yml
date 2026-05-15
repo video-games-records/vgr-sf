@@ -53,6 +53,7 @@ player:
 
 my_proofs:
   click_to_view_game: Clicca per vedere il gioco
+  column_platforms: Piattaforme
 
 game_history:
   title: Cronologia dei Giochi

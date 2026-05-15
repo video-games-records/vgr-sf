@@ -321,6 +321,7 @@ my_proofs:
   title: Mes Preuves
   column_game: Jeu
   column_statuses: Statuts
+  column_platforms: Plateformes
   no_games: Aucun jeu pour le moment
   back_to_games: Retour aux jeux
   no_scores_for_game: Aucun score pour ce jeu

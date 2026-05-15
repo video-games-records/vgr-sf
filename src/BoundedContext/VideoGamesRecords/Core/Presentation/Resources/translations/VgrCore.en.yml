@@ -338,6 +338,7 @@ my_proofs:
   title: My Proofs
   column_game: Game
   column_statuses: Statuses
+  column_platforms: Platforms
   no_games: No games yet
   back_to_games: Back to games
   no_scores_for_game: No scores for this game

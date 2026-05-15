@@ -53,6 +53,7 @@ player:
 
 my_proofs:
   click_to_view_game: ゲームを見るにはクリック
+  column_platforms: プラットフォーム
 
 game_history:
   title: ゲーム履歴
