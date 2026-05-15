@@ -9,7 +9,7 @@ use App\BoundedContext\VideoGamesRecords\GamingPlatform\Domain\ValueObject\Platf
 use App\BoundedContext\VideoGamesRecords\GamingPlatform\Infrastructure\Doctrine\Repository\PlatformConnectionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'player_platform_connection')]
+#[ORM\Table(name: 'vgr_player_platform_connection')]
 #[ORM\Entity(repositoryClass: PlatformConnectionRepository::class)]
 #[ORM\UniqueConstraint(name: 'uq_player_platform', columns: ['player_id', 'platform'])]
 class PlatformConnection

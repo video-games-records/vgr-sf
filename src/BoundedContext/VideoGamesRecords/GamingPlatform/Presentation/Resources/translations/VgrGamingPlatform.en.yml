@@ -16,3 +16,7 @@ platform:
     success: Platform account successfully unlinked.
   profile:
     recent_games: Recent games
+  ra:
+    username_placeholder: RA username
+    username_required: Please enter a RetroAchievements username.
+    username_not_found: RetroAchievements username not found. Check the spelling and try again.

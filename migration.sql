@@ -26,16 +26,14 @@ ALTER TABLE pnu_user
     ADD COLUMN totp_enabled TINYINT(1) NOT NULL DEFAULT 0;
 
 -- Feature: context-gaming-platform
-CREATE TABLE player_platform_connection (
+CREATE TABLE vgr_player_platform_connection (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     player_id   INT NOT NULL,
     platform    VARCHAR(50) NOT NULL,
     external_id VARCHAR(255) NOT NULL,
     username    VARCHAR(255) DEFAULT NULL,
     linked_at   DATETIME NOT NULL,
+    token_data  TEXT NULL,
     UNIQUE KEY uq_player_platform (player_id, platform),
     CONSTRAINT fk_platform_connection_player FOREIGN KEY (player_id) REFERENCES vgr_player(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Feature: context-gaming-platform / Xbox Live (OAuth token storage)
-ALTER TABLE player_platform_connection ADD COLUMN token_data TEXT NULL;

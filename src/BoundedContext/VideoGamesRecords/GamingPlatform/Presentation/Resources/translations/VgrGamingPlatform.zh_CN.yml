@@ -16,3 +16,7 @@ platform:
     success: 平台账号断开连接成功。
   profile:
     recent_games: 最近游戏
+  ra:
+    username_placeholder: RA用户名
+    username_required: 请输入RetroAchievements用户名。
+    username_not_found: 未找到RetroAchievements用户名，请检查拼写后重试。

@@ -16,3 +16,7 @@ platform:
     success: Compte de plateforme délié avec succès.
   profile:
     recent_games: Derniers jeux
+  ra:
+    username_placeholder: Pseudo RA
+    username_required: Veuillez saisir un pseudo RetroAchievements.
+    username_not_found: Pseudo RetroAchievements introuvable. Vérifiez l'orthographe et réessayez.

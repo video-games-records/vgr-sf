@@ -16,3 +16,7 @@ platform:
     success: Cuenta de plataforma desvinculada con éxito.
   profile:
     recent_games: Juegos recientes
+  ra:
+    username_placeholder: Usuario RA
+    username_required: Por favor, introduce un nombre de usuario de RetroAchievements.
+    username_not_found: Nombre de usuario de RetroAchievements no encontrado. Verifica la ortografía e inténtalo de nuevo.
