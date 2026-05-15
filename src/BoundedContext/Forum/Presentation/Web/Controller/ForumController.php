@@ -30,7 +30,7 @@ class ForumController extends AbstractLocalizedController
 {
     private const int TOPICS_PER_PAGE = 20;
     private const int DEFAULT_TOPIC_TYPE_ID = 3;
-    private const int RECENT_ACTIVITY_DAYS = 15;
+    private const int RECENT_ACTIVITY_DAYS = 30;
     private const int RECENT_TOPICS_LIMIT = 50;
 
     public function __construct(
