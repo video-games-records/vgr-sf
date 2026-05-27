@@ -349,6 +349,7 @@ my_proofs:
   upload_error: Error uploading proof
   upload_invalid_file: "Invalid file. Accepted formats: JPEG, PNG (max 5MB)"
   upload_not_allowed: Cannot upload proof for this score
+  upload_disabled: Proof upload is temporarily disabled for maintenance
   upload_drag_drop: Drag and drop your image here
   upload_or_click: or click to select a file
   upload_sending: Sending...

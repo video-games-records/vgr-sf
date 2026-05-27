@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Intervention\Image\ImageManager;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,9 @@ class MyProofsUpload extends AbstractController
         private readonly FilesystemOperator $proofStorage,
         private readonly UserProvider $userProvider,
         private readonly EntityManagerInterface $em,
-        private readonly PlayerChartRepository $playerChartRepository
+        private readonly PlayerChartRepository $playerChartRepository,
+        #[Autowire('%env(bool:PROOF_UPLOAD_ENABLED)%')]
+        private readonly bool $proofUploadEnabled,
     ) {
     }
 
@@ -42,6 +45,14 @@ class MyProofsUpload extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function __invoke(int $id, Request $request): Response
     {
+        if (!$this->proofUploadEnabled) {
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(['error' => 'my_proofs.upload_disabled'], Response::HTTP_SERVICE_UNAVAILABLE);
+            }
+            $this->addFlash('error', 'my_proofs.upload_disabled');
+            return $this->redirectToRoute('vgr_my_proofs');
+        }
+
         $playerChart = $this->playerChartRepository->find($id);
 
         if (!$playerChart) {

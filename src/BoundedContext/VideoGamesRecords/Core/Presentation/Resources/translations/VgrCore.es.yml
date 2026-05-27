@@ -54,6 +54,7 @@ player:
 my_proofs:
   click_to_view_game: Haz clic para ver el juego
   column_platforms: Plataformas
+  upload_disabled: La subida de pruebas está temporalmente desactivada por mantenimiento
 
 game_history:
   title: Historial de Juegos

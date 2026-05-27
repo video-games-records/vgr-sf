@@ -54,6 +54,7 @@ player:
 my_proofs:
   click_to_view_game: ゲームを見るにはクリック
   column_platforms: プラットフォーム
+  upload_disabled: メンテナンスのため、証拠のアップロードは一時的に無効になっています
 
 game_history:
   title: ゲーム履歴
