@@ -315,13 +315,13 @@ class ProofAdmin extends BaseAdmin
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
 
         // Cant change status final (CLOSED & REFUSED)
-        if (in_array($originalObject['status'], [ProofStatus::CLOSED, ProofStatus::REFUSED], true)) {
+        if (in_array($originalObject['status'], [ProofStatus::CLOSED->value, ProofStatus::REFUSED->value], true)) {
             $object->setStatus($originalObject['status']);
         }
 
 
         if ($object->getPlayerChart() == null) {
-            $object->setStatus(ProofStatus::CLOSED);
+            $object->setStatus(ProofStatus::CLOSED->value);
         }
     }
 

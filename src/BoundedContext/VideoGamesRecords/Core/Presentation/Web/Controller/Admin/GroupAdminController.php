@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin;
 
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,7 +66,7 @@ class GroupAdminController extends AbstractCRUDController
         /** @var Group $group */
         $group = $this->admin->getSubject();
 
-        if ($group->getGame()->getGameStatus()->isActive()) {
+        if ($group->getGame()->getStatus() === GameStatus::ACTIVE->value) {
             $this->addFlash('sonata_flash_error', 'Game is already activated');
             return new RedirectResponse(
                 $this->admin->generateUrl(

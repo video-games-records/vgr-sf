@@ -149,7 +149,7 @@ class VideoRepository extends DefaultRepository
         return $this->createQueryBuilder('v')
             ->where('v.isActive = true')
             ->andWhere('v.type = :type')
-            ->setParameter('type', VideoType::YOUTUBE)
+            ->setParameter('type', VideoType::YOUTUBE->value)
             ->orderBy('v.id', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()

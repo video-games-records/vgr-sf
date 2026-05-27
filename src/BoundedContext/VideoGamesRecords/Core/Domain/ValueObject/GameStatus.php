@@ -4,58 +4,23 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject;
 
-use Webmozart\Assert\Assert;
-
-class GameStatus
+enum GameStatus: string
 {
-    public const string ACTIVE = 'ACTIVE';
-    public const string INACTIVE = 'INACTIVE';
-    public const string CREATED = 'CREATED';
-    public const string ADD_PICTURE = 'ADD_PICTURE';
-    public const string ADD_SCORE = 'ADD_SCORE';
-    public const string COMPLETED = 'COMPLETED';
-
-    public const array VALUES = [
-        self::CREATED,
-        self::ADD_SCORE,
-        self::ADD_PICTURE,
-        self::COMPLETED,
-        self::ACTIVE,
-        self::INACTIVE,
-    ];
-
-    private string $value;
-
-    public function __construct(string $value)
-    {
-        self::inArray($value);
-
-        $this->value = $value;
-    }
-
-    public static function inArray(string $value): void
-    {
-        Assert::inArray($value, self::VALUES);
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
+    case ACTIVE = 'ACTIVE';
+    case INACTIVE = 'INACTIVE';
+    case CREATED = 'CREATED';
+    case ADD_PICTURE = 'ADD_PICTURE';
+    case ADD_SCORE = 'ADD_SCORE';
+    case COMPLETED = 'COMPLETED';
 
     public function isActive(): bool
     {
-        return self::ACTIVE === $this->value;
+        return $this === self::ACTIVE;
     }
 
     public function isInactive(): bool
     {
-        return self::INACTIVE === $this->value;
+        return $this === self::INACTIVE;
     }
 
     /**
@@ -64,12 +29,12 @@ class GameStatus
     public static function getStatusChoices(): array
     {
         return [
-            self::CREATED . ' (1)' => self::CREATED,
-            self::ADD_SCORE . ' (2)' => self::ADD_SCORE,
-            self::ADD_PICTURE . ' (3)' => self::ADD_PICTURE,
-            self::COMPLETED . ' (4)' => self::COMPLETED,
-            self::ACTIVE . ' (5)' => self::ACTIVE,
-            self::INACTIVE => self::INACTIVE,
+            self::CREATED->value . ' (1)' => self::CREATED->value,
+            self::ADD_SCORE->value . ' (2)' => self::ADD_SCORE->value,
+            self::ADD_PICTURE->value . ' (3)' => self::ADD_PICTURE->value,
+            self::COMPLETED->value . ' (4)' => self::COMPLETED->value,
+            self::ACTIVE->value . ' (5)' => self::ACTIVE->value,
+            self::INACTIVE->value => self::INACTIVE->value,
         ];
     }
 
@@ -79,12 +44,12 @@ class GameStatus
     public static function getReverseStatusChoices(): array
     {
         return [
-            self::CREATED => self::CREATED . ' (1)',
-            self::ADD_SCORE => self::ADD_SCORE . ' (2)',
-            self::ADD_PICTURE => self::ADD_PICTURE . ' (3)',
-            self::COMPLETED => self::COMPLETED . ' (4)',
-            self::ACTIVE => self::ACTIVE . ' (5)',
-            self::INACTIVE => self::INACTIVE,
+            self::CREATED->value => self::CREATED->value . ' (1)',
+            self::ADD_SCORE->value => self::ADD_SCORE->value . ' (2)',
+            self::ADD_PICTURE->value => self::ADD_PICTURE->value . ' (3)',
+            self::COMPLETED->value => self::COMPLETED->value . ' (4)',
+            self::ACTIVE->value => self::ACTIVE->value . ' (5)',
+            self::INACTIVE->value => self::INACTIVE->value,
         ];
     }
 }

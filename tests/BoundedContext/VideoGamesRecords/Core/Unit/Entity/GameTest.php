@@ -153,28 +153,26 @@ class GameTest extends TestCase
 
     public function testStatusDefaultsToCreated(): void
     {
-        $this->assertSame(GameStatus::CREATED, $this->game->getStatus());
+        $this->assertSame(GameStatus::CREATED->value, $this->game->getStatus());
     }
 
     public function testSetAndGetStatus(): void
     {
-        $result = $this->game->setStatus(GameStatus::ACTIVE);
-        $this->assertSame(GameStatus::ACTIVE, $this->game->getStatus());
+        $result = $this->game->setStatus(GameStatus::ACTIVE->value);
+        $this->assertSame(GameStatus::ACTIVE->value, $this->game->getStatus());
         $this->assertSame($this->game, $result);
     }
 
-    public function testGetGameStatus(): void
+    public function testGetGameStatusFromString(): void
     {
-        $this->game->setStatus(GameStatus::ACTIVE);
-        $gameStatus = $this->game->getGameStatus();
-        $this->assertInstanceOf(GameStatus::class, $gameStatus);
-        $this->assertSame(GameStatus::ACTIVE, $gameStatus->getValue());
+        $this->game->setStatus(GameStatus::ACTIVE->value);
+        $this->assertSame(GameStatus::ACTIVE, GameStatus::from($this->game->getStatus()));
     }
 
     public function testGetStatusAsString(): void
     {
-        $this->game->setStatus(GameStatus::COMPLETED);
-        $this->assertSame(GameStatus::COMPLETED, $this->game->getStatusAsString());
+        $this->game->setStatus(GameStatus::COMPLETED->value);
+        $this->assertSame(GameStatus::COMPLETED->value, $this->game->getStatusAsString());
     }
 
     public function testPublishedAtDefaultsToNull(): void

@@ -35,8 +35,8 @@ class Forum
     #[ORM\Column(nullable: false, options: ['default' => 0])]
     private int $position = 0;
 
-    #[ORM\Column(length: 20, nullable: false)]
-    private string $status = ForumStatus::PUBLIC;
+    #[ORM\Column(length: 20, nullable: false, options: ['default' => 'public'])]
+    private string $status = 'public';
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $role = null;
@@ -130,6 +130,7 @@ class Forum
 
     public function setStatus(string $status): static
     {
+        ForumStatus::from($status);
         $this->status = $status;
         return $this;
     }

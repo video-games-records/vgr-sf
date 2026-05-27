@@ -57,7 +57,7 @@ class GameRepository extends DefaultRepository
         return $this->createQueryBuilder('game')
             ->select('game.id')
             ->where('game.status = :status')
-            ->setParameter('status', GameStatus::ACTIVE)
+            ->setParameter('status', GameStatus::ACTIVE->value)
             ->getQuery()
             ->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
@@ -70,7 +70,7 @@ class GameRepository extends DefaultRepository
     public function countStatusCreated(): mixed
     {
         $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::CREATED);
+        $this->whereStatus($qb, GameStatus::CREATED->value);
         return $qb->getQuery()
             ->getSingleScalarResult();
     }
@@ -83,7 +83,7 @@ class GameRepository extends DefaultRepository
     public function countStatusAddPicture(): mixed
     {
         $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::ADD_PICTURE);
+        $this->whereStatus($qb, GameStatus::ADD_PICTURE->value);
         return $qb->getQuery()
             ->getSingleScalarResult();
     }
@@ -96,7 +96,7 @@ class GameRepository extends DefaultRepository
     public function countStatusAddScore(): mixed
     {
         $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::ADD_SCORE);
+        $this->whereStatus($qb, GameStatus::ADD_SCORE->value);
         return $qb->getQuery()
             ->getSingleScalarResult();
     }
@@ -109,7 +109,7 @@ class GameRepository extends DefaultRepository
     public function countStatusCompleted(): mixed
     {
         $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::COMPLETED);
+        $this->whereStatus($qb, GameStatus::COMPLETED->value);
         return $qb->getQuery()
             ->getSingleScalarResult();
     }
@@ -122,7 +122,7 @@ class GameRepository extends DefaultRepository
     public function countStatusActive(): mixed
     {
         $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::ACTIVE);
+        $this->whereStatus($qb, GameStatus::ACTIVE->value);
         return $qb->getQuery()
             ->getSingleScalarResult();
     }
@@ -135,7 +135,7 @@ class GameRepository extends DefaultRepository
     public function countStatusInactive(): mixed
     {
         $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::INACTIVE);
+        $this->whereStatus($qb, GameStatus::INACTIVE->value);
         return $qb->getQuery()
             ->getSingleScalarResult();
     }
@@ -150,7 +150,7 @@ class GameRepository extends DefaultRepository
         $qb = $this->createQueryBuilder('game')
             ->select('COUNT(game.id)');
         $qb->where('game.status = :status')
-            ->setParameter('status', GameStatus::ACTIVE);
+            ->setParameter('status', GameStatus::ACTIVE->value);
 
         return $qb->getQuery()
             ->getOneOrNullResult();
@@ -196,7 +196,7 @@ class GameRepository extends DefaultRepository
         $ids = $this->createQueryBuilder('g')
             ->select('g.id')
             ->where('g.status = :status')
-            ->setParameter('status', GameStatus::ACTIVE)
+            ->setParameter('status', GameStatus::ACTIVE->value)
             ->orderBy('g.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
@@ -328,7 +328,7 @@ class GameRepository extends DefaultRepository
     {
         $query
             ->andWhere('g.status = :status')
-            ->setParameter('status', GameStatus::ACTIVE);
+            ->setParameter('status', GameStatus::ACTIVE->value);
     }
 
     /**

@@ -195,11 +195,11 @@ class ProofAdminController extends AbstractCRUDController
         foreach ($formData as $key => $data) {
             if (is_array($data) && isset($data['status'])) {
                 $newStatus = $data['status'];
-                $currentStatus = $proof->getStatus()->getValue();
+                $currentStatus = $proof->getStatus();
 
                 // Vérifie si c'est un changement de IN_PROGRESS vers ACCEPTED ou REFUSED
                 return $currentStatus === ProofStatus::IN_PROGRESS &&
-                    in_array($newStatus, [ProofStatus::ACCEPTED, ProofStatus::REFUSED]);
+                    in_array($newStatus, [ProofStatus::ACCEPTED->value, ProofStatus::REFUSED->value]);
             }
         }
 
@@ -228,9 +228,9 @@ class ProofAdminController extends AbstractCRUDController
 
         try {
             // Logique spécifique selon le statut
-            if ($newStatus === ProofStatus::ACCEPTED) {
+            if ($newStatus === ProofStatus::ACCEPTED->value) {
                 $this->handleProofAccepted($proof);
-            } elseif ($newStatus === ProofStatus::REFUSED) {
+            } elseif ($newStatus === ProofStatus::REFUSED->value) {
                 $this->handleProofRefused($proof);
             }
         } catch (\Exception $e) {
@@ -270,7 +270,7 @@ class ProofAdminController extends AbstractCRUDController
      */
     private function getProofValidationMessage(Proof $proof): string
     {
-        $status = $proof->getStatus()->getValue();
+        $status = $proof->getStatus();
         $playerName = $proof->getPlayerChart()?->getPlayer()->getPseudo() ?? 'Unknown';
 
         switch ($status) {

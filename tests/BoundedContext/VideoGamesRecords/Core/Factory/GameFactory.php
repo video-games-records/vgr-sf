@@ -29,7 +29,7 @@ final class GameFactory extends PersistentObjectFactory
             'libGameFr' => self::faker()->unique()->words(3, true),
             'picture' => 'default.png',
             'downloadUrl' => self::faker()->optional()->url(),
-            'status' => GameStatus::CREATED,
+            'status' => GameStatus::CREATED->value,
             'publishedAt' => null,
             // Traits defaults
             'nbChart' => 0,
@@ -49,7 +49,7 @@ final class GameFactory extends PersistentObjectFactory
     {
         return $this->with([
             // Consider a published game as ACTIVE in our domain
-            'status' => GameStatus::ACTIVE,
+            'status' => GameStatus::ACTIVE->value,
             'publishedAt' => $date ?? self::faker()->dateTimeBetween('-6 months'),
         ]);
     }
@@ -60,7 +60,7 @@ final class GameFactory extends PersistentObjectFactory
     public function draft(): static
     {
         return $this->with([
-            'status' => GameStatus::CREATED,
+            'status' => GameStatus::CREATED->value,
             'publishedAt' => null,
         ]);
     }

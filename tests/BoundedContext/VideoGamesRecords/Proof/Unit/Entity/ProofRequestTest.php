@@ -32,7 +32,7 @@ class ProofRequestTest extends TestCase
 
     public function testStatusDefaultsToInProgress(): void
     {
-        $this->assertSame(ProofRequestStatus::IN_PROGRESS, $this->proofRequest->getStatus());
+        $this->assertSame(ProofRequestStatus::IN_PROGRESS->value, $this->proofRequest->getStatus());
     }
 
     public function testResponseDefaultsToNull(): void
@@ -80,9 +80,9 @@ class ProofRequestTest extends TestCase
     public static function statusValuesProvider(): array
     {
         return [
-            'IN_PROGRESS' => [ProofRequestStatus::IN_PROGRESS],
-            'REFUSED'     => [ProofRequestStatus::REFUSED],
-            'ACCEPTED'    => [ProofRequestStatus::ACCEPTED],
+            'IN_PROGRESS' => [ProofRequestStatus::IN_PROGRESS->value],
+            'REFUSED'     => [ProofRequestStatus::REFUSED->value],
+            'ACCEPTED'    => [ProofRequestStatus::ACCEPTED->value],
         ];
     }
 

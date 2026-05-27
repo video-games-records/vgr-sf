@@ -84,14 +84,14 @@ class ProofRequestListener
     private function isAccepted(): bool
     {
         return array_key_exists('status', $this->changeSet)
-           && $this->changeSet['status'][0] === ProofRequestStatus::IN_PROGRESS
-           && $this->changeSet['status'][1] === ProofRequestStatus::ACCEPTED;
+           && $this->changeSet['status'][0] === ProofRequestStatus::IN_PROGRESS->value
+           && $this->changeSet['status'][1] === ProofRequestStatus::ACCEPTED->value;
     }
 
     private function isRefused(): bool
     {
         return array_key_exists('status', $this->changeSet)
-            && $this->changeSet['status'][0] === ProofRequestStatus::IN_PROGRESS
-            && $this->changeSet['status'][1] === ProofRequestStatus::REFUSED;
+            && $this->changeSet['status'][0] === ProofRequestStatus::IN_PROGRESS->value
+            && $this->changeSet['status'][1] === ProofRequestStatus::REFUSED->value;
     }
 }

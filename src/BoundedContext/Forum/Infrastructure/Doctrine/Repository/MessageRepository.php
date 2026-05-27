@@ -50,12 +50,12 @@ class MessageRepository extends ServiceEntityRepository
         if (empty($userRoles)) {
             // Anonyme : forums publics uniquement
             $qb->andWhere('f.status = :status')
-                ->setParameter('status', ForumStatus::PUBLIC);
+                ->setParameter('status', ForumStatus::PUBLIC->value);
         } else {
             // Authentifié : forums publics + forums privés accessibles via rôle
             $qb->andWhere('f.status = :status OR (f.status = :private AND f.role IN (:roles))')
-                ->setParameter('status', ForumStatus::PUBLIC)
-                ->setParameter('private', ForumStatus::PRIVATE)
+                ->setParameter('status', ForumStatus::PUBLIC->value)
+                ->setParameter('private', ForumStatus::PRIVATE->value)
                 ->setParameter('roles', $userRoles);
         }
 

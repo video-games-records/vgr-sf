@@ -22,7 +22,7 @@ class TeamRequest
 
     #[Assert\Length(max: 30)]
     #[ORM\Column(length: 30, nullable: false)]
-    private string $status = TeamRequestStatus::ACTIVE;
+    private string $status = 'ACTIVE';
 
     #[ORM\ManyToOne(targetEntity: Team::class)]
     #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:false, onDelete: 'CASCADE')]
@@ -50,8 +50,8 @@ class TeamRequest
 
     public function setStatus(string $status): static
     {
-        $value = new TeamRequestStatus($status);
-        $this->status = $value->getValue();
+        TeamRequestStatus::from($status);
+        $this->status = $status;
         return $this;
     }
 
@@ -62,7 +62,7 @@ class TeamRequest
 
     public function getTeamRequestStatus(): TeamRequestStatus
     {
-        return new TeamRequestStatus($this->status);
+        return TeamRequestStatus::from($this->status);
     }
 
     public function setPlayer(Player $player): static

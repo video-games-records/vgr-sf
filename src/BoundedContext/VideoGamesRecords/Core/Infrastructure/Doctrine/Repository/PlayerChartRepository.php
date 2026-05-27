@@ -403,7 +403,7 @@ class PlayerChartRepository extends DefaultRepository
                 $chartA = $a->getChart();
                 $chartB = $b->getChart();
 
-                if ($orderBy === GroupOrderBy::ID) {
+                if ($orderBy === GroupOrderBy::ID->value) {
                     // Trier par ID du chart
                     return $chartA->getId() <=> $chartB->getId();
                 } else {

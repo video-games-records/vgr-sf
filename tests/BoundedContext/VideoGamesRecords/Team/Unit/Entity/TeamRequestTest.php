@@ -31,7 +31,7 @@ class TeamRequestTest extends TestCase
 
     public function testStatusDefaultsToActive(): void
     {
-        $this->assertSame(TeamRequestStatus::ACTIVE, $this->teamRequest->getStatus());
+        $this->assertSame(TeamRequestStatus::ACTIVE->value, $this->teamRequest->getStatus());
     }
 
     // ------------------------------------------------------------------
@@ -67,16 +67,16 @@ class TeamRequestTest extends TestCase
     public static function validStatusProvider(): array
     {
         return [
-            TeamRequestStatus::ACTIVE   => [TeamRequestStatus::ACTIVE],
-            TeamRequestStatus::ACCEPTED => [TeamRequestStatus::ACCEPTED],
-            TeamRequestStatus::REFUSED  => [TeamRequestStatus::REFUSED],
-            TeamRequestStatus::CANCELED => [TeamRequestStatus::CANCELED],
+            TeamRequestStatus::ACTIVE->value   => [TeamRequestStatus::ACTIVE->value],
+            TeamRequestStatus::ACCEPTED->value => [TeamRequestStatus::ACCEPTED->value],
+            TeamRequestStatus::REFUSED->value  => [TeamRequestStatus::REFUSED->value],
+            TeamRequestStatus::CANCELED->value => [TeamRequestStatus::CANCELED->value],
         ];
     }
 
     public function testSetStatusReturnsStatic(): void
     {
-        $result = $this->teamRequest->setStatus(TeamRequestStatus::ACTIVE);
+        $result = $this->teamRequest->setStatus(TeamRequestStatus::ACTIVE->value);
         $this->assertSame($this->teamRequest, $result);
     }
 
@@ -92,11 +92,11 @@ class TeamRequestTest extends TestCase
 
     public function testGetTeamRequestStatusReturnsValueObject(): void
     {
-        $this->teamRequest->setStatus(TeamRequestStatus::ACCEPTED);
+        $this->teamRequest->setStatus(TeamRequestStatus::ACCEPTED->value);
         $vo = $this->teamRequest->getTeamRequestStatus();
 
         $this->assertInstanceOf(TeamRequestStatus::class, $vo);
-        $this->assertSame(TeamRequestStatus::ACCEPTED, $vo->getValue());
+        $this->assertSame(TeamRequestStatus::ACCEPTED, $vo);
     }
 
     public function testGetTeamRequestStatusIsActiveByDefault(): void
@@ -107,19 +107,19 @@ class TeamRequestTest extends TestCase
 
     public function testGetTeamRequestStatusIsAccepted(): void
     {
-        $this->teamRequest->setStatus(TeamRequestStatus::ACCEPTED);
+        $this->teamRequest->setStatus(TeamRequestStatus::ACCEPTED->value);
         $this->assertTrue($this->teamRequest->getTeamRequestStatus()->isAccepted());
     }
 
     public function testGetTeamRequestStatusIsRefused(): void
     {
-        $this->teamRequest->setStatus(TeamRequestStatus::REFUSED);
+        $this->teamRequest->setStatus(TeamRequestStatus::REFUSED->value);
         $this->assertTrue($this->teamRequest->getTeamRequestStatus()->isRefused());
     }
 
     public function testGetTeamRequestStatusIsCanceled(): void
     {
-        $this->teamRequest->setStatus(TeamRequestStatus::CANCELED);
+        $this->teamRequest->setStatus(TeamRequestStatus::CANCELED->value);
         $this->assertTrue($this->teamRequest->getTeamRequestStatus()->isCanceled());
     }
 

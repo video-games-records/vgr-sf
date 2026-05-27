@@ -51,7 +51,7 @@ class ProofTest extends TestCase
 
     public function testStatusDefaultsToInProgress(): void
     {
-        $this->assertSame(ProofStatus::IN_PROGRESS, $this->proof->getStatus()->getValue());
+        $this->assertSame(ProofStatus::IN_PROGRESS, $this->proof->getStatus());
     }
 
     public function testResponseDefaultsToNull(): void
@@ -172,7 +172,7 @@ class ProofTest extends TestCase
     public function testSetStatusStoresCorrectValue(string $statusValue): void
     {
         $this->proof->setStatus($statusValue);
-        $this->assertSame($statusValue, $this->proof->getStatus()->getValue());
+        $this->assertSame($statusValue, $this->proof->getStatus()->value);
     }
 
     /**
@@ -181,20 +181,20 @@ class ProofTest extends TestCase
     public static function statusValuesProvider(): array
     {
         return [
-            'IN_PROGRESS' => [ProofStatus::IN_PROGRESS],
-            'REFUSED'     => [ProofStatus::REFUSED],
-            'ACCEPTED'    => [ProofStatus::ACCEPTED],
-            'CLOSED'      => [ProofStatus::CLOSED],
-            'DELETED'     => [ProofStatus::DELETED],
+            'IN_PROGRESS' => [ProofStatus::IN_PROGRESS->value],
+            'REFUSED'     => [ProofStatus::REFUSED->value],
+            'ACCEPTED'    => [ProofStatus::ACCEPTED->value],
+            'CLOSED'      => [ProofStatus::CLOSED->value],
+            'DELETED'     => [ProofStatus::DELETED->value],
         ];
     }
 
     public function testGetStatusReturnsProofStatusValueObject(): void
     {
-        $this->proof->setStatus(ProofStatus::ACCEPTED);
+        $this->proof->setStatus(ProofStatus::ACCEPTED->value);
         $status = $this->proof->getStatus();
         $this->assertInstanceOf(ProofStatus::class, $status);
-        $this->assertSame(ProofStatus::ACCEPTED, $status->getValue());
+        $this->assertSame(ProofStatus::ACCEPTED, $status);
     }
 
     // ------------------------------------------------------------------

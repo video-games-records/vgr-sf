@@ -43,8 +43,8 @@ class Group
     #[ORM\Column(length: 255, nullable: false)]
     private string $libGroupFr = '';
 
-    #[ORM\Column(length: 30, nullable: false, options: ['default' => GroupOrderBy::NAME])]
-    private string $orderBy = GroupOrderBy::NAME;
+    #[ORM\Column(length: 30, nullable: false, options: ['default' => 'NAME'])]
+    private string $orderBy = 'NAME';
 
     #[ORM\Column(length: 128)]
     #[Gedmo\Slug(fields: ['libGroupEn'])]
@@ -124,7 +124,7 @@ class Group
 
     public function getGroupOrderBy(): GroupOrderBy
     {
-        return new GroupOrderBy($this->orderBy);
+        return GroupOrderBy::from($this->orderBy);
     }
 
     public function getOrderBy(): string
@@ -134,8 +134,8 @@ class Group
 
     public function setOrderBy(string $orderBy): static
     {
-        $value = new GroupOrderBy($orderBy);
-        $this->orderBy = $value->getValue();
+        GroupOrderBy::from($orderBy);
+        $this->orderBy = $orderBy;
         return $this;
     }
 

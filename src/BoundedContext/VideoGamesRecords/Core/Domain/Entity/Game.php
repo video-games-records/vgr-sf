@@ -22,7 +22,6 @@ use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPostTrait
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbTeamTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbVideoTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\PictureTrait;
-use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Game as IgdbGame;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame;
@@ -57,8 +56,8 @@ class Game implements GameInfoInterface
     private string $libGameFr = '';
 
 
-    #[ORM\Column(length: 30, nullable: false, options: ['default' => GameStatus::CREATED])]
-    private string $status = GameStatus::CREATED;
+    #[ORM\Column(length: 30, nullable: false, options: ['default' => 'CREATED'])]
+    private string $status = 'CREATED';
 
     #[ORM\Column(nullable: true)]
     private ?DateTime $publishedAt = null;
@@ -211,11 +210,6 @@ class Game implements GameInfoInterface
     public function getStatus(): string
     {
         return $this->status;
-    }
-
-    public function getGameStatus(): GameStatus
-    {
-        return new GameStatus($this->status);
     }
 
     public function getStatusAsString(): string
