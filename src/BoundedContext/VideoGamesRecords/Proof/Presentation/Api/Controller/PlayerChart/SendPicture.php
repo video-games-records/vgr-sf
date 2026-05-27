@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Intervention\Image\ImageManager;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,9 @@ class SendPicture extends AbstractController
         private readonly FilesystemOperator $proofStorage,
         private readonly UserProvider $userProvider,
         private readonly EntityManagerInterface $em,
-        private readonly PlayerChartRepository $playerChartRepository
+        private readonly PlayerChartRepository $playerChartRepository,
+        #[Autowire('%env(bool:PROOF_UPLOAD_ENABLED)%')]
+        private readonly bool $proofUploadEnabled,
     ) {
     }
 
@@ -40,6 +43,10 @@ class SendPicture extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function __invoke(int $id, Request $request): Response
     {
+        if (!$this->proofUploadEnabled) {
+            return new JsonResponse(['error' => 'Proof upload is temporarily disabled'], Response::HTTP_SERVICE_UNAVAILABLE);
+        }
+
         $playerChart = $this->playerChartRepository->find($id);
 
         if (!$playerChart) {

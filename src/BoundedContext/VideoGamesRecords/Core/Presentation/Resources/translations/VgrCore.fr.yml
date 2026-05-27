@@ -332,6 +332,7 @@ my_proofs:
   upload_error: Erreur lors de l'envoi de la preuve
   upload_invalid_file: "Fichier invalide. Formats acceptés : JPEG, PNG (max 5Mo)"
   upload_not_allowed: Impossible d'envoyer une preuve pour ce score
+  upload_disabled: L'envoi de preuves est temporairement désactivé pour maintenance
   upload_drag_drop: Glissez-déposez votre image ici
   upload_or_click: ou cliquez pour sélectionner un fichier
   upload_sending: Envoi en cours...

@@ -54,6 +54,7 @@ player:
 my_proofs:
   click_to_view_game: 点击查看游戏
   column_platforms: 平台
+  upload_disabled: 由于维护，证明上传暂时禁用
 
 game_history:
   title: 游戏历史
