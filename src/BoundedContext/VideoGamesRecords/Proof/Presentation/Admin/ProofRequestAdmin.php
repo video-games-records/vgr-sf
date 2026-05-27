@@ -277,7 +277,7 @@ class ProofRequestAdmin extends BaseAdmin
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
 
         // Cant change status final
-        if (in_array($originalObject['status'], [ProofRequestStatus::ACCEPTED, ProofRequestStatus::REFUSED], true)) {
+        if (in_array($originalObject['status'], [ProofRequestStatus::ACCEPTED->value, ProofRequestStatus::REFUSED->value], true)) {
             $object->setStatus($originalObject['status']);
         }
     }

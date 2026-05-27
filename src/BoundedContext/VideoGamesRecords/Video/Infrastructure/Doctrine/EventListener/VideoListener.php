@@ -47,7 +47,7 @@ class VideoListener
             );
 
         // Set youtube data
-        if ($video->getVideoType()->getValue() === VideoType::YOUTUBE) {
+        if ($video->getVideoType() === VideoType::YOUTUBE) {
             $response = $this->youtubeProvider->getVideo($video->getExternalId());
 
             if (count($response->getItems()) == 0) {

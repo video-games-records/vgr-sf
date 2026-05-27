@@ -69,7 +69,7 @@ class MyProofsDelete extends AbstractController
         $playerChart->setStatus(PlayerChartStatusEnum::NONE);
 
         if ($proof !== null) {
-            $proof->setStatus(ProofStatus::DELETED);
+            $proof->setStatus(ProofStatus::DELETED->value);
         }
 
         $this->em->flush();

@@ -9,7 +9,6 @@ use App\BoundedContext\Article\Domain\Entity\Article;
 use App\BoundedContext\Article\Domain\ValueObject\ArticleStatus;
 use App\BoundedContext\Article\Presentation\Form\Type\ArticleTranslationType;
 use App\BoundedContext\User\Domain\Entity\User;
-use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;

@@ -98,7 +98,7 @@ class PlayerChartListener
 
         if ($playerChart->getStatus() === PlayerChartStatusEnum::NONE) {
             $proof = $playerChart->getProof();
-            $proof?->setStatus(ProofStatus::CLOSED);
+            $proof?->setStatus(ProofStatus::CLOSED->value);
             $playerChart->setProof(null);
         }
 

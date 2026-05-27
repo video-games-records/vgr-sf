@@ -26,7 +26,7 @@ class YoutubeDataHandler
      */
     public function process(Video $video): void
     {
-        if ($video->getVideoType()->getValue() !== VideoType::YOUTUBE) {
+        if ($video->getVideoType() !== VideoType::YOUTUBE) {
             throw new \InvalidArgumentException();
         }
 

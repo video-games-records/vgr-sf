@@ -4,50 +4,19 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject;
 
-use Webmozart\Assert\Assert;
-
-class SerieStatus
+enum SerieStatus: string
 {
-    public const ACTIVE = 'ACTIVE';
-    public const INACTIVE = 'INACTIVE';
-
-    public const VALUES = [
-        self::ACTIVE,
-        self::INACTIVE,
-    ];
-
-    private string $value;
-
-    public function __construct(string $value)
-    {
-        self::inArray($value);
-
-        $this->value = $value;
-    }
-
-    public static function inArray(string $value): void
-    {
-        Assert::inArray($value, self::VALUES);
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
+    case ACTIVE = 'ACTIVE';
+    case INACTIVE = 'INACTIVE';
 
     public function isActive(): bool
     {
-        return self::ACTIVE === $this->value;
+        return $this === self::ACTIVE;
     }
 
     public function isInactive(): bool
     {
-        return self::INACTIVE === $this->value;
+        return $this === self::INACTIVE;
     }
 
     /**
@@ -56,8 +25,8 @@ class SerieStatus
     public static function getStatusChoices(): array
     {
         return [
-            self::ACTIVE => self::ACTIVE,
-            self::INACTIVE => self::INACTIVE,
+            self::ACTIVE->value => self::ACTIVE->value,
+            self::INACTIVE->value => self::INACTIVE->value,
         ];
     }
 }

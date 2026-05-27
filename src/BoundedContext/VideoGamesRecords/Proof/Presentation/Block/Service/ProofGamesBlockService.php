@@ -46,7 +46,7 @@ class ProofGamesBlockService extends AbstractBlockService
             ->innerJoin('grp.charts', 'chr')
             ->innerJoin('chr.proofs', 'proof')
             ->where('proof.status = :status')
-            ->setParameter('status', ProofStatus::IN_PROGRESS)
+            ->setParameter('status', ProofStatus::IN_PROGRESS->value)
             ->groupBy('gam.id')
             ->orderBy('nb', 'DESC');
 
@@ -56,7 +56,7 @@ class ProofGamesBlockService extends AbstractBlockService
             ->from(\App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof::class, 'proof')
             ->select('COUNT(proof.id)')
             ->where('proof.status = :status')
-            ->setParameter('status', ProofStatus::IN_PROGRESS);
+            ->setParameter('status', ProofStatus::IN_PROGRESS->value);
 
         $totalProofs = (int) $totalProofsQuery->getQuery()->getSingleScalarResult();
 

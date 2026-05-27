@@ -23,22 +23,22 @@ class Featured extends AbstractLocalizedController
     {
         // Get games grouped by status (non-active statuses only)
         $gamesCreated = $this->gameRepository->findBy(
-            ['status' => GameStatus::CREATED],
+            ['status' => GameStatus::CREATED->value],
             ['libGameEn' => 'ASC']
         );
 
         $gamesAddScore = $this->gameRepository->findBy(
-            ['status' => GameStatus::ADD_SCORE],
+            ['status' => GameStatus::ADD_SCORE->value],
             ['libGameEn' => 'ASC']
         );
 
         $gamesAddPicture = $this->gameRepository->findBy(
-            ['status' => GameStatus::ADD_PICTURE],
+            ['status' => GameStatus::ADD_PICTURE->value],
             ['libGameEn' => 'ASC']
         );
 
         $gamesCompleted = $this->gameRepository->findBy(
-            ['status' => GameStatus::COMPLETED],
+            ['status' => GameStatus::COMPLETED->value],
             ['libGameEn' => 'ASC']
         );
 

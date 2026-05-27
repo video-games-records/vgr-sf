@@ -23,7 +23,7 @@ final class DefaultGroupStory extends Story
         // Groupes pour Super Mario Odyssey
         GroupFactory::new()
             ->withNames('Main Game', 'Jeu Principal')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($mario)
             ->ranked()
             ->create([
@@ -32,7 +32,7 @@ final class DefaultGroupStory extends Story
 
         GroupFactory::new()
             ->withNames('Moon Rocks', 'Roches Lunaires')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($mario)
             ->dlc()
             ->create([
@@ -42,7 +42,7 @@ final class DefaultGroupStory extends Story
         // Groupes pour The Legend of Zelda: Breath of the Wild
         GroupFactory::new()
             ->withNames('Main Quest', 'Quête Principale')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($zelda)
             ->ranked()
             ->create([
@@ -51,7 +51,7 @@ final class DefaultGroupStory extends Story
 
         GroupFactory::new()
             ->withNames('Side Quests', 'Quêtes Secondaires')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($zelda)
             ->create([
                 'id' => 4,
@@ -59,7 +59,7 @@ final class DefaultGroupStory extends Story
 
         GroupFactory::new()
             ->withNames('DLC - The Master Trials', 'DLC - Les Épreuves Légendaires')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($zelda)
             ->dlc()
             ->create([
@@ -68,7 +68,7 @@ final class DefaultGroupStory extends Story
 
         GroupFactory::new()
             ->withNames('DLC - The Champions\' Ballad', 'DLC - L\'Ode aux Prodiges')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($zelda)
             ->dlc()
             ->create([
@@ -78,7 +78,7 @@ final class DefaultGroupStory extends Story
         // Groupes pour Hollow Knight
         GroupFactory::new()
             ->withNames('Base Game', 'Jeu de Base')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($hollowKnight)
             ->ranked()
             ->create([
@@ -87,7 +87,7 @@ final class DefaultGroupStory extends Story
 
         GroupFactory::new()
             ->withNames('Steel Soul Mode', 'Mode Âme d\'Acier')
-            ->withOrderBy(GroupOrderBy::NAME)
+            ->withOrderBy(GroupOrderBy::NAME->value)
             ->forGame($hollowKnight)
             ->create([
                 'id' => 8,

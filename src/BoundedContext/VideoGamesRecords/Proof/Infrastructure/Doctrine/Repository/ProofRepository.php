@@ -32,7 +32,7 @@ class ProofRepository extends DefaultRepository
         $qb = $this->createQueryBuilder('proof')
             ->select('COUNT(proof.id)')
             ->where('proof.status = :status')
-            ->setParameter('status', ProofStatus::IN_PROGRESS);
+            ->setParameter('status', ProofStatus::IN_PROGRESS->value);
 
         return $qb->getQuery()
             ->getSingleScalarResult();
@@ -50,7 +50,7 @@ class ProofRepository extends DefaultRepository
             ->where('p.status = :status')
             ->andWhere('game.id = :gameId')
             ->andWhere('p.id != :excludeId')
-            ->setParameter('status', ProofStatus::IN_PROGRESS)
+            ->setParameter('status', ProofStatus::IN_PROGRESS->value)
             ->setParameter('gameId', $game->getId())
             ->setParameter('excludeId', $excludeId)
             ->orderBy('p.createdAt', 'ASC') // Plus ancienne en premier
@@ -71,7 +71,7 @@ class ProofRepository extends DefaultRepository
             ->join('g.game', 'game')
             ->where('p.status = :status')
             ->andWhere('game.id = :gameId')
-            ->setParameter('status', ProofStatus::IN_PROGRESS)
+            ->setParameter('status', ProofStatus::IN_PROGRESS->value)
             ->setParameter('gameId', $game->getId())
             ->getQuery()
             ->getSingleScalarResult();
@@ -92,7 +92,7 @@ class ProofRepository extends DefaultRepository
             ->innerJoin('grp.charts', 'chr')
             ->innerJoin('chr.proofs', 'proof')
             ->where('proof.status = :status')
-            ->setParameter('status', ProofStatus::IN_PROGRESS)
+            ->setParameter('status', ProofStatus::IN_PROGRESS->value)
             ->groupBy('gam.id')
             ->orderBy('nb', 'DESC');
 

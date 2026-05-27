@@ -43,7 +43,7 @@ class Video
 
     #[Assert\Length(max: 50)]
     #[ORM\Column(length: 50, nullable: false)]
-    private string $type = VideoType::YOUTUBE;
+    private string $type = 'Youtube';
 
     #[ORM\Column(length: 50, nullable: false)]
     private string $externalId;
@@ -114,7 +114,7 @@ class Video
 
     public function getVideoType(): VideoType
     {
-        return new VideoType($this->type);
+        return VideoType::from($this->type);
     }
 
     public function setExternalId(string $externalId): static
@@ -217,11 +217,11 @@ class Video
     public function majTypeAndVideoId(): void
     {
         if (strpos($this->getUrl(), 'youtube')) {
-            $this->setType(VideoType::YOUTUBE);
+            $this->setType(VideoType::YOUTUBE->value);
             $explode = explode('=', $this->getUrl());
             $this->setExternalId($explode[1]);
         } elseif (strpos($this->getUrl(), 'youtu.be')) {
-            $this->setType(VideoType::YOUTUBE);
+            $this->setType(VideoType::YOUTUBE->value);
             $this->setExternalId(
                 substr(
                     $this->getUrl(),
@@ -230,19 +230,19 @@ class Video
                 )
             );
         } elseif (strpos($this->getUrl(), 'twitch')) {
-            $this->setType(VideoType::TWITCH);
+            $this->setType(VideoType::TWITCH->value);
             $explode = explode('/', $this->getUrl());
             $this->setExternalId($explode[count($explode) - 1]);
         } else {
-            $this->setType(VideoType::UNKNOWN);
+            $this->setType(VideoType::UNKNOWN->value);
         }
     }
 
     public function getEmbeddedUrl(): string
     {
-        if ($this->getVideoType()->getValue() == VideoType::YOUTUBE) {
+        if ($this->getVideoType() === VideoType::YOUTUBE) {
             return 'https://www.youtube.com/embed/' . $this->getExternalid();
-        } elseif ($this->getVideoType()->getValue() == VideoType::TWITCH) {
+        } elseif ($this->getVideoType() === VideoType::TWITCH) {
             return 'https://player.twitch.tv/?autoplay=false&video=v' . $this->getExternalId(
             ) . '&parent=' . $_SERVER['SERVER_NAME'];
         } else {

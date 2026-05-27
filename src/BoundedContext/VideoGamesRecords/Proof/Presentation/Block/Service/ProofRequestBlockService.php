@@ -50,7 +50,7 @@ class ProofRequestBlockService extends AbstractBlockService
             ->leftJoin('pr.playerRequesting', 'requesting')
             ->leftJoin('pr.playerResponding', 'responding')
             ->where('pr.status = :status')
-            ->setParameter('status', ProofRequestStatus::IN_PROGRESS)
+            ->setParameter('status', ProofRequestStatus::IN_PROGRESS->value)
             ->orderBy('pr.createdAt', 'DESC');
 
         $proofRequests = $proofRequestsQuery->getQuery()->getResult();
@@ -60,7 +60,7 @@ class ProofRequestBlockService extends AbstractBlockService
             ->from(\App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\ProofRequest::class, 'pr')
             ->select('COUNT(pr.id)')
             ->where('pr.status = :status')
-            ->setParameter('status', ProofRequestStatus::IN_PROGRESS);
+            ->setParameter('status', ProofRequestStatus::IN_PROGRESS->value);
 
         $totalRequests = (int) $totalRequestsQuery->getQuery()->getSingleScalarResult();
 

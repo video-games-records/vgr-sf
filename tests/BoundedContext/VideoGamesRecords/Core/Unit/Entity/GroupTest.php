@@ -80,22 +80,22 @@ class GroupTest extends TestCase
 
     public function testOrderByDefaultsToName(): void
     {
-        $this->assertSame(GroupOrderBy::NAME, $this->group->getOrderBy());
+        $this->assertSame(GroupOrderBy::NAME->value, $this->group->getOrderBy());
     }
 
     public function testSetAndGetOrderBy(): void
     {
-        $result = $this->group->setOrderBy(GroupOrderBy::ID);
-        $this->assertSame(GroupOrderBy::ID, $this->group->getOrderBy());
+        $result = $this->group->setOrderBy(GroupOrderBy::ID->value);
+        $this->assertSame(GroupOrderBy::ID->value, $this->group->getOrderBy());
         $this->assertSame($this->group, $result);
     }
 
     public function testGetGroupOrderByReturnsValueObject(): void
     {
-        $this->group->setOrderBy(GroupOrderBy::CUSTOM);
+        $this->group->setOrderBy(GroupOrderBy::CUSTOM->value);
         $orderBy = $this->group->getGroupOrderBy();
         $this->assertInstanceOf(GroupOrderBy::class, $orderBy);
-        $this->assertSame(GroupOrderBy::CUSTOM, $orderBy->getValue());
+        $this->assertSame(GroupOrderBy::CUSTOM, $orderBy);
     }
 
     // ------------------------------------------------------------------

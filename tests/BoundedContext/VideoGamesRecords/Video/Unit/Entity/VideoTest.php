@@ -47,7 +47,7 @@ class VideoTest extends TestCase
 
     public function testTypeDefaultsToYoutube(): void
     {
-        $this->assertSame(VideoType::YOUTUBE, $this->video->getType());
+        $this->assertSame(VideoType::YOUTUBE->value, $this->video->getType());
     }
 
     public function testNbCommentDefaultsToZero(): void
@@ -103,17 +103,17 @@ class VideoTest extends TestCase
 
     public function testSetAndGetType(): void
     {
-        $result = $this->video->setType(VideoType::TWITCH);
-        $this->assertSame(VideoType::TWITCH, $this->video->getType());
+        $result = $this->video->setType(VideoType::TWITCH->value);
+        $this->assertSame(VideoType::TWITCH->value, $this->video->getType());
         $this->assertSame($this->video, $result);
     }
 
     public function testGetVideoTypeReturnsValueObject(): void
     {
-        $this->video->setType(VideoType::YOUTUBE);
+        $this->video->setType(VideoType::YOUTUBE->value);
         $videoType = $this->video->getVideoType();
         $this->assertInstanceOf(VideoType::class, $videoType);
-        $this->assertSame(VideoType::YOUTUBE, $videoType->getValue());
+        $this->assertSame(VideoType::YOUTUBE, $videoType);
     }
 
     public function testSetAndGetExternalId(): void
@@ -232,28 +232,28 @@ class VideoTest extends TestCase
     public function testSetUrlDetectsYoutubeWatchUrl(): void
     {
         $this->video->setUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        $this->assertSame(VideoType::YOUTUBE, $this->video->getType());
+        $this->assertSame(VideoType::YOUTUBE->value, $this->video->getType());
         $this->assertSame('dQw4w9WgXcQ', $this->video->getExternalId());
     }
 
     public function testSetUrlDetectsYoutubeShortUrl(): void
     {
         $this->video->setUrl('https://youtu.be/dQw4w9WgXcQ');
-        $this->assertSame(VideoType::YOUTUBE, $this->video->getType());
+        $this->assertSame(VideoType::YOUTUBE->value, $this->video->getType());
         $this->assertSame('dQw4w9WgXcQ', $this->video->getExternalId());
     }
 
     public function testSetUrlDetectsTwitchUrl(): void
     {
         $this->video->setUrl('https://www.twitch.tv/videos/123456789');
-        $this->assertSame(VideoType::TWITCH, $this->video->getType());
+        $this->assertSame(VideoType::TWITCH->value, $this->video->getType());
         $this->assertSame('123456789', $this->video->getExternalId());
     }
 
     public function testSetUrlSetsUnknownTypeForOtherUrls(): void
     {
         $this->video->setUrl('https://example.com/video/xyz');
-        $this->assertSame(VideoType::UNKNOWN, $this->video->getType());
+        $this->assertSame(VideoType::UNKNOWN->value, $this->video->getType());
     }
 
     // ------------------------------------------------------------------

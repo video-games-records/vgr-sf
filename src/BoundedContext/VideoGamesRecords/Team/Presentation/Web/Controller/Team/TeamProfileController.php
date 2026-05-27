@@ -172,7 +172,7 @@ class TeamProfileController extends AbstractLocalizedController
         }
 
         // 1. Accept the request => triggers TeamRequestListener (sets player.team)
-        $teamRequest->setStatus(TeamRequestStatus::ACCEPTED);
+        $teamRequest->setStatus(TeamRequestStatus::ACCEPTED->value);
         $this->entityManager->flush();
 
         // 2. Cancel all other active requests for this player
@@ -214,7 +214,7 @@ class TeamProfileController extends AbstractLocalizedController
             return $this->redirectToRoute('vgr_team_manage');
         }
 
-        $teamRequest->setStatus(TeamRequestStatus::REFUSED);
+        $teamRequest->setStatus(TeamRequestStatus::REFUSED->value);
         $this->entityManager->flush();
         $this->addFlash('success', $this->translator->trans('team.manage.requests.refuse_success', [], 'VgrTeam'));
 
@@ -252,7 +252,7 @@ class TeamProfileController extends AbstractLocalizedController
             return $this->redirectToRoute('vgr_team_manage');
         }
 
-        $teamRequest->setStatus(TeamRequestStatus::CANCELED);
+        $teamRequest->setStatus(TeamRequestStatus::CANCELED->value);
         $this->entityManager->flush();
         $this->addFlash('success', $this->translator->trans('team.manage.requests.cancel_success', [], 'VgrTeam'));
 

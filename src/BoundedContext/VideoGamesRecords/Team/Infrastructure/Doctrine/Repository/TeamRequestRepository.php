@@ -30,7 +30,7 @@ class TeamRequestRepository extends DefaultRepository
             ->where('tr.team = :team')
             ->andWhere('tr.status = :status')
             ->setParameter('team', $team)
-            ->setParameter('status', TeamRequestStatus::ACTIVE)
+            ->setParameter('status', TeamRequestStatus::ACTIVE->value)
             ->orderBy('tr.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
@@ -57,7 +57,7 @@ class TeamRequestRepository extends DefaultRepository
             ->andWhere('tr.status = :status')
             ->setParameter('team', $team)
             ->setParameter('player', $player)
-            ->setParameter('status', TeamRequestStatus::ACTIVE)
+            ->setParameter('status', TeamRequestStatus::ACTIVE->value)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -69,9 +69,9 @@ class TeamRequestRepository extends DefaultRepository
             ->set('tr.status', ':newStatus')
             ->where('tr.player = :player')
             ->andWhere('tr.status = :activeStatus')
-            ->setParameter('newStatus', TeamRequestStatus::CANCELED)
+            ->setParameter('newStatus', TeamRequestStatus::CANCELED->value)
             ->setParameter('player', $player)
-            ->setParameter('activeStatus', TeamRequestStatus::ACTIVE)
+            ->setParameter('activeStatus', TeamRequestStatus::ACTIVE->value)
             ->getQuery()
             ->execute();
     }

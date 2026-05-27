@@ -38,7 +38,7 @@ class Proof
 
     #[Assert\Length(max: 30)]
     #[ORM\Column(length: 30, nullable: false)]
-    private string $status = ProofStatus::IN_PROGRESS;
+    private string $status = 'IN PROGRESS';
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $response = null;
@@ -118,7 +118,7 @@ class Proof
 
     public function getStatus(): ProofStatus
     {
-        return new ProofStatus($this->status);
+        return ProofStatus::from($this->status);
     }
 
     public function setResponse(string $response): static

@@ -13,6 +13,7 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game\LatestGames;
 use Symfony\Contracts\Cache\CacheInterface;
 
@@ -51,7 +52,7 @@ class GameListener
     {
         $this->changeSet = $event->getEntityChangeSet();
 
-        if ($game->getGameStatus()->isActive() && ($game->getPublishedAt() == null)) {
+        if ($game->getStatus() === GameStatus::ACTIVE->value && ($game->getPublishedAt() == null)) {
             $game->setPublishedAt(new DateTime());
             $this->cache->delete(LatestGames::CACHE_KEY);
         }

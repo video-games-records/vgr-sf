@@ -54,7 +54,7 @@ class Overview extends AbstractProfileController
         $teamRequest = new TeamRequest();
         $teamRequest->setTeam($team);
         $teamRequest->setPlayer($player);
-        $teamRequest->setStatus(TeamRequestStatus::ACTIVE);
+        $teamRequest->setStatus(TeamRequestStatus::ACTIVE->value);
 
         $entityManager->persist($teamRequest);
         $entityManager->flush();

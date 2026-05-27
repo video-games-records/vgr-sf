@@ -24,7 +24,7 @@ class ProofRequest
 
     #[Assert\Length(max: 50)]
     #[ORM\Column(length: 50, nullable: false)]
-    private string $status = ProofRequestStatus::IN_PROGRESS;
+    private string $status = 'IN PROGRESS';
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $response = null;

@@ -27,7 +27,7 @@ final class GroupFactory extends PersistentObjectFactory
         return [
             'libGroupEn' => self::faker()->unique()->words(2, true),
             'libGroupFr' => self::faker()->unique()->words(2, true),
-            'orderBy' => GroupOrderBy::NAME,
+            'orderBy' => GroupOrderBy::NAME->value,
             'game' => GameFactory::new(),
         ];
     }

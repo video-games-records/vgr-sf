@@ -42,7 +42,7 @@ class Serie
     private string $libSerie;
 
     #[ORM\Column(nullable: false)]
-    private string $status = SerieStatus::INACTIVE;
+    private string $status = 'INACTIVE';
 
 
     #[ORM\Column(length: 128)]
@@ -128,7 +128,7 @@ class Serie
 
     public function getSerieStatus(): SerieStatus
     {
-        return new SerieStatus($this->status);
+        return SerieStatus::from($this->status);
     }
 
     public function getSlug(): string

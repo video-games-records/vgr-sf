@@ -25,7 +25,7 @@ final class SerieFactory extends PersistentObjectFactory
     {
         return [
             'libSerie' => self::faker()->unique()->words(2, true),
-            'status' => SerieStatus::INACTIVE,
+            'status' => SerieStatus::INACTIVE->value,
         ];
     }
 
@@ -34,7 +34,7 @@ final class SerieFactory extends PersistentObjectFactory
      */
     public function active(): static
     {
-        return $this->with(['status' => SerieStatus::ACTIVE]);
+        return $this->with(['status' => SerieStatus::ACTIVE->value]);
     }
 
     /**
@@ -42,7 +42,7 @@ final class SerieFactory extends PersistentObjectFactory
      */
     public function inactive(): static
     {
-        return $this->with(['status' => SerieStatus::INACTIVE]);
+        return $this->with(['status' => SerieStatus::INACTIVE->value]);
     }
 
     /**

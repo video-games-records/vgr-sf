@@ -21,7 +21,7 @@ class Index extends AbstractLocalizedController
     #[Route('/series', name: 'vgr_serie_index')]
     public function index(): Response
     {
-        $series = $this->serieRepository->findBy(['status' => SerieStatus::ACTIVE], ['libSerie' => 'ASC']);
+        $series = $this->serieRepository->findBy(['status' => SerieStatus::ACTIVE->value], ['libSerie' => 'ASC']);
 
         return $this->render('@VideoGamesRecordsCore/serie/index.html.twig', [
             'series' => $series,

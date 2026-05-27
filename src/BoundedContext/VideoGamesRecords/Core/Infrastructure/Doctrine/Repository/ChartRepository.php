@@ -27,14 +27,14 @@ class ChartRepository extends DefaultRepository
     /**
      * @return Chart[]
      */
-    public function findByGroupId(int $groupId, string $orderBy = GroupOrderBy::NAME, string $locale = 'en'): array
+    public function findByGroupId(int $groupId, string $orderBy = 'NAME', string $locale = 'en'): array
     {
         $query = $this->createQueryBuilder('ch');
         $query
             ->where('ch.group = :groupId')
             ->setParameter('groupId', $groupId);
 
-        if ($orderBy === GroupOrderBy::ID) {
+        if ($orderBy === GroupOrderBy::ID->value) {
             $query->orderBy('ch.id', 'ASC');
         } else {
             // Par défaut (NAME, CUSTOM ou toute autre valeur), trier par nom selon la langue
