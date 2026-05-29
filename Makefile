@@ -63,6 +63,18 @@ db-rollback: ## Annule la dernière migration
 db-fixtures: ## Charge les fixtures
 	php bin/console doctrine:fixtures:load --no-interaction
 
+db-import: ## Importe var/database/dump.sql dans la base de données locale
+	@test -f var/database/dump.sql || (echo "Fichier var/database/dump.sql introuvable" && exit 1)
+	@DB_URL=$$(grep -E "^DATABASE_URL=" .env.local 2>/dev/null | head -1 | sed 's/^DATABASE_URL=//;s/"//g') && \
+	DB_USER=$$(echo "$$DB_URL" | sed -E 's|.*://([^:]+):.*|\1|') && \
+	DB_PASS=$$(echo "$$DB_URL" | sed -E 's|.*://[^:]+:([^@]+)@.*|\1|') && \
+	DB_HOST=$$(echo "$$DB_URL" | sed -E 's|.*@([^:/]+).*|\1|') && \
+	DB_PORT=$$(echo "$$DB_URL" | sed -E 's|.*:([0-9]+)/.*|\1|') && \
+	DB_NAME=$$(echo "$$DB_URL" | sed -E 's|.*/([^?]+).*|\1|') && \
+	echo "Importation de var/database/dump.sql dans $$DB_NAME..." && \
+	mysql -u"$$DB_USER" -p"$$DB_PASS" -h"$$DB_HOST" -P"$$DB_PORT" "$$DB_NAME" < var/database/dump.sql && \
+	echo "Import terminé."
+
 db-reset: db-drop db-create db-migrate db-fixtures ## Réinitialise complètement la base de données
 
 ##@ Database

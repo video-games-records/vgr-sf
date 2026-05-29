@@ -1,6 +1,8 @@
 aws:
     version: latest
-    region: eu-west-3
+    region: '%env(AWS_REGION)%'
+    endpoint: '%env(AWS_S3_ENDPOINT)%'
+    use_path_style_endpoint: true
     credentials:
         key: "%env(AWS_KEY)%"
         secret: "%env(AWS_SECRET)%"
