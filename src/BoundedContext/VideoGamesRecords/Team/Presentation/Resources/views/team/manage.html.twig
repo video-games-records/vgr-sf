@@ -208,18 +208,18 @@
                                         </td>
                                         <td class="align-middle">{{ teamRequest.createdAt|user_date('Y-m-d') }}</td>
                                         <td class="align-middle text-center">
-                                            {% if teamRequest.status == 'ACTIVE' %}
-                                                <span class="badge bg-primary">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
-                                            {% elseif teamRequest.status == 'ACCEPTED' %}
-                                                <span class="badge bg-success">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
-                                            {% elseif teamRequest.status == 'REFUSED' %}
-                                                <span class="badge bg-danger">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
+                                            {% if teamRequest.status.value == 'ACTIVE' %}
+                                                <span class="badge bg-primary">{{ ('team.manage.status.' ~ teamRequest.status.value)|trans }}</span>
+                                            {% elseif teamRequest.status.value == 'ACCEPTED' %}
+                                                <span class="badge bg-success">{{ ('team.manage.status.' ~ teamRequest.status.value)|trans }}</span>
+                                            {% elseif teamRequest.status.value == 'REFUSED' %}
+                                                <span class="badge bg-danger">{{ ('team.manage.status.' ~ teamRequest.status.value)|trans }}</span>
                                             {% else %}
-                                                <span class="badge bg-secondary">{{ ('team.manage.status.' ~ teamRequest.status)|trans }}</span>
+                                                <span class="badge bg-secondary">{{ ('team.manage.status.' ~ teamRequest.status.value)|trans }}</span>
                                             {% endif %}
                                         </td>
                                         <td class="align-middle text-end">
-                                            {% if teamRequest.status == 'ACTIVE' %}
+                                            {% if teamRequest.status.value == 'ACTIVE' %}
                                                 <form method="post" action="{{ path('vgr_team_request_cancel', {id: teamRequest.id}) }}" class="d-inline" onsubmit="return confirm('{{ 'team.manage.requests.cancel_confirm'|trans }}');">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('team-request-cancel-' ~ teamRequest.id) }}">
                                                     <button type="submit" class="btn btn-outline-secondary btn-sm">

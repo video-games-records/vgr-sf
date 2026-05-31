@@ -99,6 +99,7 @@ class ProofRequestAdmin extends BaseAdmin
                 [
                     'label' => 'proof_request.form.status',
                     'choices' => ProofRequestStatus::getStatusChoices(),
+                    'choice_value' => fn ($choice) => $choice instanceof \BackedEnum ? $choice->value : (string) $choice,
                 ]
             )
             ->add('message', RichTextEditorType::class, [
@@ -202,12 +203,10 @@ class ProofRequestAdmin extends BaseAdmin
             ])
             ->add(
                 'status',
-                'choice',
+                null,
                 [
                     'label' => 'proof_request.list.status',
-                    'editable' => true,
-                    'choices' => ProofRequestStatus::getStatusChoices(),
-                    'choice_translation_domain' => false,
+                    'template' => '@VideoGamesRecordsProof/admin/list/proof_request_status.html.twig',
                 ]
             )
             ->add('_action', 'actions', [
@@ -231,7 +230,7 @@ class ProofRequestAdmin extends BaseAdmin
             ->add('playerResponding', null, ['label' => 'proof_request.show.playerResponding'])
             ->add('playerChart', null, ['label' => 'proof_request.show.playerChart'])
             ->add('message', null, ['label' => 'proof_request.show.message'])
-            ->add('status', null, ['label' => 'proof_request.show.status']);
+            ->add('status', null, ['label' => 'proof_request.show.status', 'template' => '@VideoGamesRecordsProof/admin/show/proof_request_status.html.twig']);
     }
 
     /**
@@ -277,7 +276,7 @@ class ProofRequestAdmin extends BaseAdmin
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
 
         // Cant change status final
-        if (in_array($originalObject['status'], [ProofRequestStatus::ACCEPTED->value, ProofRequestStatus::REFUSED->value], true)) {
+        if (in_array($originalObject['status'], [ProofRequestStatus::ACCEPTED, ProofRequestStatus::REFUSED], true)) {
             $object->setStatus($originalObject['status']);
         }
     }

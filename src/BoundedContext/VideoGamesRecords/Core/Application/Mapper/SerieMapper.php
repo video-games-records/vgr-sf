@@ -15,7 +15,7 @@ class SerieMapper
             id: (int) $serie->getId(),
             name: $serie->getName(),
             picture: $serie->getPicture(),
-            status: $serie->getStatus(),
+            status: $serie->getStatus()->value,
             nbChart: $serie->getNbChart(),
             nbGame: $serie->getNbGame(),
             nbPlayer: $serie->getNbPlayer(),

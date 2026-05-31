@@ -53,6 +53,7 @@ class SerieAdmin extends BaseAdmin
                 [
                     'label' => 'serie.form.status',
                     'choices' => SerieStatus::getStatusChoices(),
+                    'choice_value' => fn ($choice) => $choice instanceof \BackedEnum ? $choice->value : (string) $choice,
                 ]
             )
             ->add('picture', TextType::class, [
@@ -107,7 +108,7 @@ class SerieAdmin extends BaseAdmin
         $list->addIdentifier('id', null, ['label' => 'serie.list.id'])
             ->add('createdAt', null, ['label' => 'serie.list.createdAt'])
             ->add('libSerie', null, ['label' => 'serie.list.name'])
-            ->add('status', null, ['label' => 'serie.list.status'])
+            ->add('status', null, ['label' => 'serie.list.status', 'template' => '@VideoGamesRecordsCore/admin/list/serie_status.html.twig'])
             ->add('picture', null, ['label' => 'serie.list.picture', 'editable' => true])
             ->add('badge.picture', null, ['label' => 'serie.list.badge', 'editable' => true])
             ->add('nbGame', null, ['label' => 'serie.list.nbGame'])

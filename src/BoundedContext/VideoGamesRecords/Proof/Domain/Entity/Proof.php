@@ -36,9 +36,8 @@ class Proof
     #[ORM\JoinColumn(name:'proof_request_id', referencedColumnName:'id', nullable:true)]
     private ?ProofRequest $proofRequest = null;
 
-    #[Assert\Length(max: 30)]
-    #[ORM\Column(length: 30, nullable: false)]
-    private string $status = 'IN PROGRESS';
+    #[ORM\Column(length: 30, nullable: false, enumType: ProofStatus::class)]
+    private ProofStatus $status = ProofStatus::IN_PROGRESS;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $response = null;
@@ -110,15 +109,18 @@ class Proof
         return $this->proofRequest;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(ProofStatus|string $status): static
     {
+        if (is_string($status)) {
+            $status = ProofStatus::from($status);
+        }
         $this->status = $status;
         return $this;
     }
 
     public function getStatus(): ProofStatus
     {
-        return ProofStatus::from($this->status);
+        return $this->status;
     }
 
     public function setResponse(string $response): static

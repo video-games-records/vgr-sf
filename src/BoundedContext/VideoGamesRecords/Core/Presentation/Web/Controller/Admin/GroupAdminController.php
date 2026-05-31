@@ -66,7 +66,7 @@ class GroupAdminController extends AbstractCRUDController
         /** @var Group $group */
         $group = $this->admin->getSubject();
 
-        if ($group->getGame()->getStatus() === GameStatus::ACTIVE->value) {
+        if ($group->getGame()->getStatus() === GameStatus::ACTIVE) {
             $this->addFlash('sonata_flash_error', 'Game is already activated');
             return new RedirectResponse(
                 $this->admin->generateUrl(

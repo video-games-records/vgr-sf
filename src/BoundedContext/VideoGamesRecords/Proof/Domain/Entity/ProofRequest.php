@@ -22,9 +22,8 @@ class ProofRequest
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
 
-    #[Assert\Length(max: 50)]
-    #[ORM\Column(length: 50, nullable: false)]
-    private string $status = 'IN PROGRESS';
+    #[ORM\Column(length: 50, nullable: false, enumType: ProofRequestStatus::class)]
+    private ProofRequestStatus $status = ProofRequestStatus::IN_PROGRESS;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $response = null;
@@ -63,13 +62,16 @@ class ProofRequest
         return $this->id;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(ProofRequestStatus|string $status): static
     {
+        if (is_string($status)) {
+            $status = ProofRequestStatus::from($status);
+        }
         $this->status = $status;
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ProofRequestStatus
     {
         return $this->status;
     }

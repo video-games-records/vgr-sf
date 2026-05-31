@@ -1,0 +1,15 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% set status_classes = {
+        'IN PROGRESS': 'label label-warning',
+        'ACCEPTED': 'label label-success',
+        'REFUSED': 'label label-danger'
+    } %}
+
+    {% set status_value = value.value %}
+
+    <span class="{{ status_classes[status_value] | default('label label-default') }}">
+        {{ status_value }}
+    </span>
+{% endblock %}

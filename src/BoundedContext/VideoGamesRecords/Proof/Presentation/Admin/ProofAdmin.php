@@ -129,6 +129,7 @@ class ProofAdmin extends BaseAdmin
                 [
                     'label' => 'proof.form.status',
                     'choices' => ProofStatus::getStatusChoices(),
+                    'choice_value' => fn ($choice) => $choice instanceof \BackedEnum ? $choice->value : (string) $choice,
                     'choice_translation_domain' => false,
                 ]
             )
@@ -315,13 +316,13 @@ class ProofAdmin extends BaseAdmin
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
 
         // Cant change status final (CLOSED & REFUSED)
-        if (in_array($originalObject['status'], [ProofStatus::CLOSED->value, ProofStatus::REFUSED->value], true)) {
+        if (in_array($originalObject['status'], [ProofStatus::CLOSED, ProofStatus::REFUSED], true)) {
             $object->setStatus($originalObject['status']);
         }
 
 
         if ($object->getPlayerChart() == null) {
-            $object->setStatus(ProofStatus::CLOSED->value);
+            $object->setStatus(ProofStatus::CLOSED);
         }
     }
 

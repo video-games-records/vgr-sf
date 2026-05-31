@@ -10,8 +10,8 @@
             <div class="box-header with-border">
                 <h3 class="box-title">
                     <i class="fa fa-gamepad"></i> {{ object.getName() }}
-                    <span class="label {% if object.getStatus() == 'COMPLETED' %}label-success{% elseif object.getStatus() == 'CREATED' %}label-danger{% else %}label-warning{% endif %}">
-                            {{ object.getStatus() }}
+                    <span class="label {% if object.getStatus().value == 'COMPLETED' %}label-success{% elseif object.getStatus().value == 'CREATED' %}label-danger{% else %}label-warning{% endif %}">
+                            {{ object.getStatus().value }}
                         </span>
                 </h3>
                 <div class="box-tools pull-right">
@@ -146,7 +146,7 @@
                                     <i class="fa fa-flag-checkered"></i>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-number">{{ object.getStatus() }}</div>
+                                    <div class="stat-number">{{ object.getStatus().value }}</div>
                                     <div class="stat-label">{% trans %}game.show.status{% endtrans %}</div>
                                 </div>
                             </div>

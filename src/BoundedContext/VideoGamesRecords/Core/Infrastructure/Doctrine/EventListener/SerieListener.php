@@ -59,7 +59,7 @@ class SerieListener
 
         if (
             array_key_exists('status', $this->changeSet)
-            && $this->changeSet['status'][1] === SerieStatus::ACTIVE->value
+            && $this->changeSet['status'][1] === SerieStatus::ACTIVE
         ) {
             $this->bus->dispatch(new UpdatePlayerSerieRank((int) $serie->getId()));
         }

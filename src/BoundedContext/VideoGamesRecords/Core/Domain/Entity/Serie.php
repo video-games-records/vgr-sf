@@ -41,8 +41,8 @@ class Serie
     #[ORM\Column(name: 'libSerie', length: 255, nullable: false)]
     private string $libSerie;
 
-    #[ORM\Column(nullable: false)]
-    private string $status = 'INACTIVE';
+    #[ORM\Column(nullable: false, enumType: SerieStatus::class)]
+    private SerieStatus $status = SerieStatus::INACTIVE;
 
 
     #[ORM\Column(length: 128)]
@@ -115,20 +115,18 @@ class Serie
         return $this->id;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(SerieStatus|string $status): static
     {
+        if (is_string($status)) {
+            $status = SerieStatus::from($status);
+        }
         $this->status = $status;
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): SerieStatus
     {
         return $this->status;
-    }
-
-    public function getSerieStatus(): SerieStatus
-    {
-        return SerieStatus::from($this->status);
     }
 
     public function getSlug(): string

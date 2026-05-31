@@ -26,6 +26,7 @@ use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Game as IgdbGame;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\TeamGame;
 use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Contracts\GameInfoInterface;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 
 #[ORM\Table(name:'vgr_game')]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
@@ -56,8 +57,8 @@ class Game implements GameInfoInterface
     private string $libGameFr = '';
 
 
-    #[ORM\Column(length: 30, nullable: false, options: ['default' => 'CREATED'])]
-    private string $status = 'CREATED';
+    #[ORM\Column(length: 30, nullable: false, enumType: GameStatus::class, options: ['default' => 'CREATED'])]
+    private GameStatus $status = GameStatus::CREATED;
 
     #[ORM\Column(nullable: true)]
     private ?DateTime $publishedAt = null;
@@ -201,18 +202,16 @@ class Game implements GameInfoInterface
     }
 
 
-    public function setStatus(string $status): static
+    public function setStatus(GameStatus|string $status): static
     {
+        if (is_string($status)) {
+            $status = GameStatus::from($status);
+        }
         $this->status = $status;
         return $this;
     }
 
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function getStatusAsString(): string
+    public function getStatus(): GameStatus
     {
         return $this->status;
     }

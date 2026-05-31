@@ -23,7 +23,7 @@
         'CLOSED': 'proof.status.closed'|trans
     } %}
 
-    {% set status_value = value.getValue() %}
+    {% set status_value = value.value %}
 
     <span class="{{ status_classes[status_value] | default('badge badge-info') }}">
         <i class="{{ status_icons[status_value] | default('fa fa-question') }}"></i>

@@ -79,6 +79,7 @@ class TeamRequestAdmin extends BaseAdmin
                 [
                     'label' => 'team_request.form.status',
                     'choices' => TeamRequestStatus::getStatusChoices(),
+                    'choice_value' => fn ($choice) => $choice instanceof \BackedEnum ? $choice->value : (string) $choice,
                 ]
             );
     }
@@ -110,11 +111,10 @@ class TeamRequestAdmin extends BaseAdmin
             ])
             ->add(
                 'status',
-                'choice',
+                null,
                 [
                     'label' => 'team_request.list.status',
-                    'editable' => false,
-                    'choices' => TeamRequestStatus::getStatusChoices(),
+                    'template' => '@VideoGamesRecordsTeam/admin/list/team_request_status.html.twig',
                 ]
             )
             ->add('_action', 'actions', [
@@ -140,6 +140,6 @@ class TeamRequestAdmin extends BaseAdmin
                 'associated_property' => 'pseudo',
                 'label' => 'team_request.show.player',
             ])
-            ->add('status', null, ['label' => 'team_request.show.status']);
+            ->add('status', null, ['label' => 'team_request.show.status', 'template' => '@VideoGamesRecordsTeam/admin/show/team_request_status.html.twig']);
     }
 }

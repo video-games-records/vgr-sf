@@ -52,7 +52,7 @@ class GameMapper
             id: (int) $game->getId(),
             name: $game->getName(),
             picture: $this->storagePublicUrl . '/game/' . ($game->getPicture() ?: 'default.png'),
-            status: $game->getStatus(),
+            status: $game->getStatus()->value,
             publishedAt: $game->getPublishedAt(),
             isRank: $game->getIsRank(),
             nbChart: $game->getNbChart(),

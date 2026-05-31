@@ -101,8 +101,8 @@ class ProofListener
     private function isAccepted(): bool
     {
         return array_key_exists('status', $this->changeSet)
-            && $this->changeSet['status'][0] === ProofStatus::IN_PROGRESS->value
-            && $this->changeSet['status'][1] === ProofStatus::ACCEPTED->value;
+            && $this->changeSet['status'][0] === ProofStatus::IN_PROGRESS
+            && $this->changeSet['status'][1] === ProofStatus::ACCEPTED;
     }
 
     private function isRefused(): bool
@@ -110,8 +110,8 @@ class ProofListener
         return array_key_exists('status', $this->changeSet)
             && in_array(
                 $this->changeSet['status'][0],
-                [ProofStatus::IN_PROGRESS->value, ProofStatus::ACCEPTED->value]
+                [ProofStatus::IN_PROGRESS, ProofStatus::ACCEPTED]
             )
-            && $this->changeSet['status'][1] === ProofStatus::REFUSED->value;
+            && $this->changeSet['status'][1] === ProofStatus::REFUSED;
     }
 }

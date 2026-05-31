@@ -72,9 +72,8 @@ class SerieTest extends TestCase
     public function testGetSerieStatus(): void
     {
         $this->serie->setStatus(SerieStatus::ACTIVE->value);
-        $serieStatus = $this->serie->getSerieStatus();
-        $this->assertInstanceOf(SerieStatus::class, $serieStatus);
-        $this->assertSame(SerieStatus::ACTIVE, $serieStatus);
+        $this->assertInstanceOf(SerieStatus::class, $this->serie->getStatus());
+        $this->assertSame(SerieStatus::ACTIVE, $this->serie->getStatus());
     }
 
     // ------------------------------------------------------------------

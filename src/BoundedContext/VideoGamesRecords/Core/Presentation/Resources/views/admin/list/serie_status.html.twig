@@ -1,0 +1,8 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% set status_value = value.value %}
+    <span class="label {% if status_value == 'ACTIVE' %}label-success{% else %}label-default{% endif %}">
+        {{ status_value }}
+    </span>
+{% endblock %}
