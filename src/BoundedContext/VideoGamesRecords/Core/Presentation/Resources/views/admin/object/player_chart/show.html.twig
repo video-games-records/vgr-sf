@@ -196,8 +196,8 @@
                     <dl class="dl-horizontal">
                         <dt>Status</dt>
                         <dd>
-                            {% set proof_status_class = object.proof.status == 'ACCEPTED' ? 'success' : (object.proof.status == 'REFUSED' ? 'danger' : 'warning') %}
-                            <span class="label label-{{ proof_status_class }}">{{ object.proof.status }}</span>
+                            {% set proof_status_class = object.proof.status.value == 'ACCEPTED' ? 'success' : (object.proof.status.value == 'REFUSED' ? 'danger' : 'warning') %}
+                            <span class="label label-{{ proof_status_class }}">{{ object.proof.status.value }}</span>
                         </dd>
 
                         <dt>Created</dt>

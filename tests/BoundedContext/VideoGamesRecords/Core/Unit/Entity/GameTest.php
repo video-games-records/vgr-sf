@@ -166,13 +166,13 @@ class GameTest extends TestCase
     public function testGetGameStatusFromString(): void
     {
         $this->game->setStatus(GameStatus::ACTIVE->value);
-        $this->assertSame(GameStatus::ACTIVE, GameStatus::from($this->game->getStatus()));
+        $this->assertSame(GameStatus::ACTIVE, $this->game->getStatus());
     }
 
-    public function testGetStatusAsString(): void
+    public function testGetStatusValue(): void
     {
         $this->game->setStatus(GameStatus::COMPLETED->value);
-        $this->assertSame(GameStatus::COMPLETED->value, $this->game->getStatusAsString());
+        $this->assertSame(GameStatus::COMPLETED->value, $this->game->getStatus()->value);
     }
 
     public function testPublishedAtDefaultsToNull(): void

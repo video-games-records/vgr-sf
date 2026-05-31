@@ -41,6 +41,7 @@ class ForumAdmin extends AbstractAdmin
                 [
                     'label' => 'label.status',
                     'choices' => ForumStatus::getStatusChoices(),
+                    'choice_value' => fn ($choice) => $choice instanceof \BackedEnum ? $choice->value : (string) $choice,
                 ]
             )
             ->add('position', TextType::class, ['label' => 'label.position', 'required' => true]);
@@ -60,7 +61,7 @@ class ForumAdmin extends AbstractAdmin
         $list->addIdentifier('id', null, ['label' => 'label.id'])
             ->add('category', null, ['label' => 'label.category'])
             ->add('libForum', null, ['label' => 'label.forum'])
-            ->add('status', null, ['label' => 'label.status'])
+            ->add('status', null, ['label' => 'label.status', 'template' => '@Forum/admin/list/forum_status.html.twig'])
             ->add('position', null, ['label' => 'label.position'])
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => []]]);
     }

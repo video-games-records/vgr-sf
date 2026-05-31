@@ -20,9 +20,8 @@ class TeamRequest
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
 
-    #[Assert\Length(max: 30)]
-    #[ORM\Column(length: 30, nullable: false)]
-    private string $status = 'ACTIVE';
+    #[ORM\Column(length: 30, nullable: false, enumType: TeamRequestStatus::class)]
+    private TeamRequestStatus $status = TeamRequestStatus::ACTIVE;
 
     #[ORM\ManyToOne(targetEntity: Team::class)]
     #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:false, onDelete: 'CASCADE')]
@@ -48,21 +47,23 @@ class TeamRequest
         return $this->id;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(TeamRequestStatus|string $status): static
     {
-        TeamRequestStatus::from($status);
+        if (is_string($status)) {
+            $status = TeamRequestStatus::from($status);
+        }
         $this->status = $status;
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): TeamRequestStatus
     {
         return $this->status;
     }
 
     public function getTeamRequestStatus(): TeamRequestStatus
     {
-        return TeamRequestStatus::from($this->status);
+        return $this->status;
     }
 
     public function setPlayer(Player $player): static

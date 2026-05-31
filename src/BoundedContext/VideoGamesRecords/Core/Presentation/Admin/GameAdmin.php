@@ -134,6 +134,7 @@ class GameAdmin extends BaseAdmin
                 [
                     'label' => 'game.form.status',
                     'choices' => GameStatus::getStatusChoices(),
+                    'choice_value' => fn ($choice) => $choice instanceof \BackedEnum ? $choice->value : (string) $choice,
                 ]
             )
             ->add('publishedAt', DateType::class, [
@@ -331,11 +332,10 @@ class GameAdmin extends BaseAdmin
             )
             ->add(
                 'status',
-                'choice',
+                null,
                 [
                     'label' => 'game.list.status',
-                    'editable' => true,
-                    'choices' => GameStatus::getReverseStatusChoices(),
+                    'template' => '@VideoGamesRecordsCore/admin/list/game_status.html.twig',
                 ]
             )
             ->add('_action', 'actions', [

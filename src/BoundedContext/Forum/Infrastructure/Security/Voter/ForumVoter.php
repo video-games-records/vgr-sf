@@ -28,7 +28,7 @@ class ForumVoter extends Voter
         $forum = $subject;
 
         // Forum public sans rôle requis → tout le monde
-        if ($forum->getStatus() === ForumStatus::PUBLIC->value) {
+        if ($forum->getStatus() === ForumStatus::PUBLIC) {
             return true;
         }
 

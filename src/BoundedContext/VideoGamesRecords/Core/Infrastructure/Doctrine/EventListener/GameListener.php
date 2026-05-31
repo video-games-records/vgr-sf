@@ -52,7 +52,7 @@ class GameListener
     {
         $this->changeSet = $event->getEntityChangeSet();
 
-        if ($game->getStatus() === GameStatus::ACTIVE->value && ($game->getPublishedAt() == null)) {
+        if ($game->getStatus() === GameStatus::ACTIVE && ($game->getPublishedAt() == null)) {
             $game->setPublishedAt(new DateTime());
             $this->cache->delete(LatestGames::CACHE_KEY);
         }
