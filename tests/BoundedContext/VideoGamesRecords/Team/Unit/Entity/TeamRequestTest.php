@@ -31,7 +31,7 @@ class TeamRequestTest extends TestCase
 
     public function testStatusDefaultsToActive(): void
     {
-        $this->assertSame(TeamRequestStatus::ACTIVE->value, $this->teamRequest->getStatus());
+        $this->assertSame(TeamRequestStatus::ACTIVE, $this->teamRequest->getStatus());
     }
 
     // ------------------------------------------------------------------
@@ -58,7 +58,7 @@ class TeamRequestTest extends TestCase
     public function testSetStatusAcceptsValidValues(string $status): void
     {
         $this->teamRequest->setStatus($status);
-        $this->assertSame($status, $this->teamRequest->getStatus());
+        $this->assertSame(TeamRequestStatus::from($status), $this->teamRequest->getStatus());
     }
 
     /**
@@ -82,7 +82,7 @@ class TeamRequestTest extends TestCase
 
     public function testSetStatusRejectsInvalidValue(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(\ValueError::class);
         $this->teamRequest->setStatus('INVALID_STATUS');
     }
 

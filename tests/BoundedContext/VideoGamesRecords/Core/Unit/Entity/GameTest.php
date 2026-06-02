@@ -153,13 +153,13 @@ class GameTest extends TestCase
 
     public function testStatusDefaultsToCreated(): void
     {
-        $this->assertSame(GameStatus::CREATED->value, $this->game->getStatus());
+        $this->assertSame(GameStatus::CREATED, $this->game->getStatus());
     }
 
     public function testSetAndGetStatus(): void
     {
         $result = $this->game->setStatus(GameStatus::ACTIVE->value);
-        $this->assertSame(GameStatus::ACTIVE->value, $this->game->getStatus());
+        $this->assertSame(GameStatus::ACTIVE, $this->game->getStatus());
         $this->assertSame($this->game, $result);
     }
 

@@ -32,7 +32,7 @@ class ProofRequestTest extends TestCase
 
     public function testStatusDefaultsToInProgress(): void
     {
-        $this->assertSame(ProofRequestStatus::IN_PROGRESS->value, $this->proofRequest->getStatus());
+        $this->assertSame(ProofRequestStatus::IN_PROGRESS, $this->proofRequest->getStatus());
     }
 
     public function testResponseDefaultsToNull(): void
@@ -70,7 +70,7 @@ class ProofRequestTest extends TestCase
     public function testSetAndGetStatus(string $status): void
     {
         $result = $this->proofRequest->setStatus($status);
-        $this->assertSame($status, $this->proofRequest->getStatus());
+        $this->assertSame(ProofRequestStatus::from($status), $this->proofRequest->getStatus());
         $this->assertSame($this->proofRequest, $result);
     }
 

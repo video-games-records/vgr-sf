@@ -6,6 +6,7 @@ namespace App\Tests\BoundedContext\User\Functional\Web;
 
 use App\BoundedContext\User\Domain\Entity\User;
 use App\Tests\BoundedContext\User\Factory\UserFactory;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -31,12 +32,20 @@ abstract class AbstractWebFunctionalTestCase extends WebTestCase
         $unique = uniqid();
         $username = $overrides['username'] ?? "testuser{$unique}";
 
-        return UserFactory::new()
+        $proxy = UserFactory::new()
             ->withCredentials(
                 $overrides['email'] ?? "{$username}@test.com",
                 $username,
                 $overrides['password'] ?? 'password'
             )
             ->create();
+
+        /** @var EntityManagerInterface $em */
+        $em = static::getContainer()->get(EntityManagerInterface::class);
+
+        /** @var User $user */
+        $user = $em->find(User::class, $proxy->getId());
+
+        return $user;
     }
 }

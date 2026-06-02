@@ -102,13 +102,13 @@ class ForumTest extends TestCase
 
     public function testStatusDefaultsToPublic(): void
     {
-        $this->assertSame(ForumStatus::PUBLIC->value, $this->forum->getStatus());
+        $this->assertSame(ForumStatus::PUBLIC, $this->forum->getStatus());
     }
 
     public function testSetAndGetStatus(): void
     {
         $this->forum->setStatus(ForumStatus::PRIVATE->value);
-        $this->assertSame(ForumStatus::PRIVATE->value, $this->forum->getStatus());
+        $this->assertSame(ForumStatus::PRIVATE, $this->forum->getStatus());
     }
 
     public function testSetStatusReturnsSelf(): void

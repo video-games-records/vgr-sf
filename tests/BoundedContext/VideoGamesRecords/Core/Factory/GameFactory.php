@@ -28,7 +28,6 @@ final class GameFactory extends PersistentObjectFactory
             'libGameEn' => self::faker()->unique()->words(3, true),
             'libGameFr' => self::faker()->unique()->words(3, true),
             'picture' => 'default.png',
-            'downloadUrl' => self::faker()->optional()->url(),
             'status' => GameStatus::CREATED->value,
             'publishedAt' => null,
             // Traits defaults

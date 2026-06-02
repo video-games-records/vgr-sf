@@ -7,7 +7,6 @@ namespace App\Tests\BoundedContext\User\Functional\Web;
 use App\BoundedContext\User\Domain\Entity\User;
 use App\Tests\BoundedContext\User\Factory\UserFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
 {
@@ -26,7 +25,7 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
     public function testSecurityPageIsAccessibleWhenLoggedIn(): void
     {
         $user = $this->createUser();
-        $this->client->loginUser($user, 'main');
+        $this->client->loginUser($user, 'user');
 
         $this->client->request('GET', '/en/profile/security');
 
@@ -40,7 +39,7 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
     public function testEnableGeneratesSecretAndRedirects(): void
     {
         $user = $this->createUser();
-        $this->client->loginUser($user, 'main');
+        $this->client->loginUser($user, 'user');
 
         $this->client->request('POST', '/en/profile/security/enable', [
             '_token' => $this->getCsrfToken('totp_enable'),
@@ -50,7 +49,8 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
 
         /** @var EntityManagerInterface $em */
         $em = static::getContainer()->get(EntityManagerInterface::class);
-        $em->refresh($user);
+        /** @var User $user */
+        $user = $em->find(User::class, $user->getId());
 
         $this->assertNotNull($user->getTotpSecret());
         $this->assertFalse($user->isTotpEnabled());
@@ -59,7 +59,7 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
     public function testEnableWithInvalidCsrfThrowsAccessDenied(): void
     {
         $user = $this->createUser();
-        $this->client->loginUser($user, 'main');
+        $this->client->loginUser($user, 'user');
 
         $this->client->request('POST', '/en/profile/security/enable', [
             '_token' => 'invalid-token',
@@ -75,7 +75,7 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
     public function testConfirmWithInvalidCodeKeepsTotpDisabled(): void
     {
         $user = $this->setupUserWithPendingTotp();
-        $this->client->loginUser($user, 'main');
+        $this->client->loginUser($user, 'user');
 
         $this->client->request('POST', '/en/profile/security/confirm', [
             '_token' => $this->getCsrfToken('totp_confirm'),
@@ -86,7 +86,8 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
 
         /** @var EntityManagerInterface $em */
         $em = static::getContainer()->get(EntityManagerInterface::class);
-        $em->refresh($user);
+        /** @var User $user */
+        $user = $em->find(User::class, $user->getId());
 
         $this->assertFalse($user->isTotpEnabled());
     }
@@ -98,7 +99,7 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
     public function testDisableWithInvalidPasswordKeepsTotpEnabled(): void
     {
         $user = $this->setupUserWithTotpEnabled();
-        $this->client->loginUser($user, 'main');
+        $this->client->loginUser($user, 'user');
 
         $this->client->request('POST', '/en/profile/security/disable', [
             '_token' => $this->getCsrfToken('totp_disable'),
@@ -109,7 +110,8 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
 
         /** @var EntityManagerInterface $em */
         $em = static::getContainer()->get(EntityManagerInterface::class);
-        $em->refresh($user);
+        /** @var User $user */
+        $user = $em->find(User::class, $user->getId());
 
         $this->assertTrue($user->isTotpEnabled());
         $this->assertNotNull($user->getTotpSecret());
@@ -118,7 +120,7 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
     public function testDisableWithValidPasswordClearsTotp(): void
     {
         $user = $this->setupUserWithTotpEnabled();
-        $this->client->loginUser($user, 'main');
+        $this->client->loginUser($user, 'user');
 
         $this->client->request('POST', '/en/profile/security/disable', [
             '_token' => $this->getCsrfToken('totp_disable'),
@@ -129,7 +131,8 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
 
         /** @var EntityManagerInterface $em */
         $em = static::getContainer()->get(EntityManagerInterface::class);
-        $em->refresh($user);
+        /** @var User $user */
+        $user = $em->find(User::class, $user->getId());
 
         $this->assertFalse($user->isTotpEnabled());
         $this->assertNull($user->getTotpSecret());
@@ -141,9 +144,20 @@ class TwoFactorAuthTest extends AbstractWebFunctionalTestCase
 
     private function getCsrfToken(string $intention): string
     {
-        /** @var CsrfTokenManagerInterface $manager */
-        $manager = static::getContainer()->get('security.csrf.token_manager');
-        return $manager->getToken($intention)->getValue();
+        $actionFragment = match ($intention) {
+            'totp_enable'   => 'security/enable',
+            'totp_confirm'  => 'security/confirm',
+            'totp_disable'  => 'security/disable',
+            default         => $intention,
+        };
+
+        $crawler = $this->client->request('GET', '/en/profile/security');
+
+        $token = $crawler
+            ->filter(sprintf('form[action*="%s"] input[name="_token"]', $actionFragment))
+            ->attr('value');
+
+        return $token ?? '';
     }
 
     private function setupUserWithPendingTotp(): User
