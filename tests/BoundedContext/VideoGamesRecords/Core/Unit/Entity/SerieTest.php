@@ -59,13 +59,13 @@ class SerieTest extends TestCase
 
     public function testStatusDefaultsToInactive(): void
     {
-        $this->assertSame(SerieStatus::INACTIVE->value, $this->serie->getStatus());
+        $this->assertSame(SerieStatus::INACTIVE, $this->serie->getStatus());
     }
 
     public function testSetAndGetStatus(): void
     {
         $result = $this->serie->setStatus(SerieStatus::ACTIVE->value);
-        $this->assertSame(SerieStatus::ACTIVE->value, $this->serie->getStatus());
+        $this->assertSame(SerieStatus::ACTIVE, $this->serie->getStatus());
         $this->assertSame($this->serie, $result);
     }
 

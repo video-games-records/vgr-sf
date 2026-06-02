@@ -33,6 +33,10 @@ class LocaleSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if (!$request->hasPreviousSession()) {
+            return;
+        }
+
         // Try to get locale from session
         $locale = $request->getSession()->get('_locale');
 

@@ -8,3 +8,7 @@ scheb_two_factor:
         issuer: "VideoGamesRecords"
         server_name: "VideoGamesRecords"
         template: "@User/2fa_login.html.twig"
+
+when@test:
+    scheb_two_factor:
+        security_tokens: []
