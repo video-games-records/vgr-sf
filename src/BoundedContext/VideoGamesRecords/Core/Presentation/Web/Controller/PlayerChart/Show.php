@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\PlayerChart;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlayerChartRepository;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
+use App\BoundedContext\VideoGamesRecords\Proof\Application\DataProvider\CanAskProofProvider;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,7 +16,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class Show extends AbstractLocalizedController
 {
     public function __construct(
-        private readonly PlayerChartRepository $playerChartRepository
+        private readonly PlayerChartRepository $playerChartRepository,
+        private readonly UserProvider $userProvider,
+        private readonly CanAskProofProvider $canAskProofProvider,
     ) {
     }
 
@@ -52,11 +57,26 @@ class Show extends AbstractLocalizedController
             throw $this->createNotFoundException('Group does not belong to this game');
         }
 
+        $canAskProof = false;
+        $isStatusNone = $playerChart->getStatus() === PlayerChartStatusEnum::NONE;
+
+        if ($isStatusNone && $this->isGranted('ROLE_USER')) {
+            $currentPlayer = $this->userProvider->getPlayer();
+            if ($currentPlayer !== null && $currentPlayer->getId() !== $playerChart->getPlayer()->getId()) {
+                if ($this->isGranted('ROLE_ADMIN')) {
+                    $canAskProof = true;
+                } else {
+                    $canAskProof = $this->canAskProofProvider->load($currentPlayer);
+                }
+            }
+        }
+
         return $this->render('@VideoGamesRecordsCore/player_chart/show.html.twig', [
             'game' => $game,
             'group' => $group,
             'chart' => $chart,
             'playerChart' => $playerChart,
+            'canAskProof' => $canAskProof,
         ]);
     }
 }

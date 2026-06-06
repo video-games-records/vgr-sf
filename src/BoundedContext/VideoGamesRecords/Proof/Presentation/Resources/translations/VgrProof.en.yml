@@ -1,0 +1,6 @@
+proof_request:
+  success: Your proof request has been submitted successfully.
+  error:
+    status_not_allowed: This score already has a pending proof request.
+    daily_limit: You have reached your daily limit of 5 proof requests.
+    invalid_token: Invalid security token. Please try again.

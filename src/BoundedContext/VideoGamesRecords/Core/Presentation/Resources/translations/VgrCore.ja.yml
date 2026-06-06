@@ -51,39 +51,15 @@ player:
       presentation: プレゼンテーション
       collection: コレクション
 
+player_chart:
+  show:
+    request_proof_title: 証拠を要求する
+    request_proof_message_label: "メッセージ（任意）"
+    request_proof_message_placeholder: リクエストを説明するメッセージを追加してください...
+    request_proof_submit: 証拠を要求する
+    request_proof_daily_limit_reached: 1日5件の証拠リクエスト上限に達しました。
+
 my_proofs:
   click_to_view_game: ゲームを見るにはクリック
   column_platforms: プラットフォーム
   upload_disabled: メンテナンスのため、証拠のアップロードは一時的に無効になっています
-
-game_history:
-  title: ゲーム履歴
-  no_games: まだゲームをプレイしていません
-  view_game: ゲームを見る
-  my_scores: 私のスコア
-  scores: スコア
-  showing_recent: "最新の%count%ゲームを表示中"
-
-sidebar:
-  title: リンク
-  forum: フォーラム
-  forum_description: このゲームについて議論する
-  serie: シリーズ
-  serie_description: このシリーズの全ゲームを見る
-  download: ダウンロード
-  download_description: このゲームを入手する
-  rules: ルール
-  rules_description: サイトのルールとガイドライン
-  videos: 動画
-  videos_description: "%count%本の動画が利用可能"
-  game_rules_title: ゲームルール
-  group_switcher_title: グループ切り替え
-  group_prev: 前へ
-  group_next: 次へ
-  chart_switcher_title: チャート切り替え
-  chart_prev: 前へ
-  chart_next: 次へ
-
-player_game:
-  close_to_master_badge:
-    card_title: "マスターバッジまであと少し"

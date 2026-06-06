@@ -1,0 +1,6 @@
+proof_request:
+  success: Sua solicitação de prova foi enviada com sucesso.
+  error:
+    status_not_allowed: Este placar já possui uma solicitação de prova pendente.
+    daily_limit: Você atingiu seu limite diário de 5 solicitações de prova.
+    invalid_token: Token de segurança inválido. Por favor, tente novamente.

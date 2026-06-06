@@ -1,0 +1,6 @@
+proof_request:
+  success: Votre demande de preuve a été soumise avec succès.
+  error:
+    status_not_allowed: Ce score a déjà une demande de preuve en cours.
+    daily_limit: Vous avez atteint votre limite journalière de 5 demandes de preuves.
+    invalid_token: Jeton de sécurité invalide. Veuillez réessayer.

@@ -1,0 +1,6 @@
+proof_request:
+  success: La tua richiesta di prova è stata inviata con successo.
+  error:
+    status_not_allowed: Questo punteggio ha già una richiesta di prova in sospeso.
+    daily_limit: Hai raggiunto il limite giornaliero di 5 richieste di prova.
+    invalid_token: Token di sicurezza non valido. Si prega di riprovare.
