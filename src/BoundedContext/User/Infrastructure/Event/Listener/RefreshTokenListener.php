@@ -10,10 +10,9 @@ use App\SharedKernel\Domain\Security\SecurityEventTypeEnum;
 use App\BoundedContext\User\Domain\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Gesdinet\JWTRefreshTokenBundle\Event\RefreshEvent;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
-/**
- * Listener pour les rafraîchissements de tokens JWT
- */
+#[AsEventListener(event: 'gesdinet.refresh_token', method: 'onRefreshToken')]
 class RefreshTokenListener
 {
     public function __construct(
