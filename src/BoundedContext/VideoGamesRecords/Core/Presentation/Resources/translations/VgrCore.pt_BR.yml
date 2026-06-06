@@ -51,39 +51,15 @@ player:
       presentation: Apresentação
       collection: Coleção
 
+player_chart:
+  show:
+    request_proof_title: Solicitar uma Prova
+    request_proof_message_label: "Mensagem (opcional)"
+    request_proof_message_placeholder: Adicione uma mensagem para explicar seu pedido...
+    request_proof_submit: Solicitar Prova
+    request_proof_daily_limit_reached: Você atingiu seu limite diário de 5 solicitações de prova.
+
 my_proofs:
   click_to_view_game: Clique para ver o jogo
   column_platforms: Plataformas
   upload_disabled: O envio de provas está temporariamente desativado para manutenção
-
-game_history:
-  title: Histórico de Jogos
-  no_games: Você ainda não jogou nenhum jogo
-  view_game: Ver Jogo
-  my_scores: Minhas Pontuações
-  scores: pontuações
-  showing_recent: "Mostrando os %count% jogos mais recentes"
-
-sidebar:
-  title: Links
-  forum: Fórum
-  forum_description: Discutir sobre este jogo
-  serie: Série
-  serie_description: Ver todos os jogos desta série
-  download: Download para
-  download_description: Obter este jogo
-  rules: Regras
-  rules_description: Regras e diretrizes do site
-  videos: Vídeos
-  videos_description: "{1} %count% vídeo disponível|]1,Inf[ %count% vídeos disponíveis"
-  game_rules_title: Regras do jogo
-  group_switcher_title: Mudar grupo
-  group_prev: Anterior
-  group_next: Próximo
-  chart_switcher_title: Mudar ranking
-  chart_prev: Anterior
-  chart_next: Próximo
-
-player_game:
-  close_to_master_badge:
-    card_title: "Próximo do Master Badge"

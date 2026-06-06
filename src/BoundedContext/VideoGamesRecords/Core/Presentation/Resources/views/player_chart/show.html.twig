@@ -304,6 +304,44 @@
                 </div>
             {% endif %}
 
+            {# Proof Request Form - Only show for connected users, NONE status, not the score owner #}
+            {% if is_granted('ROLE_USER') and playerChart.status.value == 'none' and app.user and playerChart.player.userId != app.user.id %}
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">
+                            <i class="bi bi-question-circle"></i> {{ 'player_chart.show.request_proof_title'|trans }}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% if canAskProof %}
+                            <form method="post" action="{{ path('vgr_proof_request_create', {id: playerChart.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('proof_request_' ~ playerChart.id) }}">
+                                <div class="mb-3">
+                                    <label for="proof_request_message" class="form-label">
+                                        {{ 'player_chart.show.request_proof_message_label'|trans }}
+                                    </label>
+                                    <textarea
+                                        id="proof_request_message"
+                                        name="message"
+                                        class="form-control"
+                                        rows="3"
+                                        placeholder="{{ 'player_chart.show.request_proof_message_placeholder'|trans }}"></textarea>
+                                </div>
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="bi bi-send"></i> {{ 'player_chart.show.request_proof_submit'|trans }}
+                                    </button>
+                                </div>
+                            </form>
+                        {% else %}
+                            <div class="alert alert-info mb-0">
+                                <i class="bi bi-info-circle me-2"></i>{{ 'player_chart.show.request_proof_daily_limit_reached'|trans }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
             {# Back Button #}
             <div class="mt-4">
                 <a href="{{ path('vgr_chart_show', {id: game.id, slug: game.slug, groupId: group.id, groupSlug: group.slug, chartId: chart.id, chartSlug: chart.slug}) }}" class="btn btn-outline-secondary">

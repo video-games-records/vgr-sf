@@ -51,39 +51,15 @@ player:
       presentation: Präsentation
       collection: Sammlung
 
+player_chart:
+  show:
+    request_proof_title: Beweis anfordern
+    request_proof_message_label: "Nachricht (optional)"
+    request_proof_message_placeholder: Fügen Sie eine Nachricht hinzu, um Ihre Anfrage zu erklären...
+    request_proof_submit: Beweis anfordern
+    request_proof_daily_limit_reached: Sie haben Ihr tägliches Limit von 5 Beweisanfragen erreicht.
+
 my_proofs:
   click_to_view_game: Klicken um das Spiel anzusehen
   column_platforms: Plattformen
   upload_disabled: Der Upload von Beweisen ist vorübergehend für Wartungsarbeiten deaktiviert
-
-game_history:
-  title: Spielverlauf
-  no_games: Sie haben noch keine Spiele gespielt
-  view_game: Spiel anzeigen
-  my_scores: Meine Scores
-  scores: scores
-  showing_recent: "Anzeige der %count% neuesten Spiele"
-
-sidebar:
-  title: Links
-  forum: Forum
-  forum_description: Über dieses Spiel diskutieren
-  serie: Serie
-  serie_description: Alle Spiele dieser Serie anzeigen
-  download: Download für
-  download_description: Dieses Spiel herunterladen
-  rules: Regeln
-  rules_description: Seitenregeln und Richtlinien
-  videos: Videos
-  videos_description: "{1} %count% Video verfügbar|]1,Inf[ %count% Videos verfügbar"
-  game_rules_title: Spielregeln
-  group_switcher_title: Gruppe wechseln
-  group_prev: Vorherige
-  group_next: Nächste
-  chart_switcher_title: Chart wechseln
-  chart_prev: Vorherige
-  chart_next: Nächste
-
-player_game:
-  close_to_master_badge:
-    card_title: "Nah am Master Badge"

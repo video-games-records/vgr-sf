@@ -1,0 +1,6 @@
+proof_request:
+  success: 您的证明请求已成功提交。
+  error:
+    status_not_allowed: 此分数已有待处理的证明请求。
+    daily_limit: 您已达到每天5次证明请求的上限。
+    invalid_token: 安全令牌无效。请重试。

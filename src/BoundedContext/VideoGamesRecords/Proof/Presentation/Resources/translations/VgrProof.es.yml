@@ -1,0 +1,6 @@
+proof_request:
+  success: Tu solicitud de prueba ha sido enviada con éxito.
+  error:
+    status_not_allowed: Este marcador ya tiene una solicitud de prueba pendiente.
+    daily_limit: Has alcanzado tu límite diario de 5 solicitudes de prueba.
+    invalid_token: Token de seguridad inválido. Por favor, inténtalo de nuevo.

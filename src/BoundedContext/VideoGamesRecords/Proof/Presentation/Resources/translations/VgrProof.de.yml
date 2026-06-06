@@ -1,0 +1,6 @@
+proof_request:
+  success: Ihre Beweisanfrage wurde erfolgreich eingereicht.
+  error:
+    status_not_allowed: Dieser Score hat bereits eine ausstehende Beweisanfrage.
+    daily_limit: Sie haben Ihr tägliches Limit von 5 Beweisanfragen erreicht.
+    invalid_token: Ungültiges Sicherheitstoken. Bitte versuchen Sie es erneut.

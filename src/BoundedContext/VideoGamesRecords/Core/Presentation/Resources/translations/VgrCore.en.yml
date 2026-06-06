@@ -104,6 +104,11 @@ player_chart:
     proof_picture: Picture
     proof_video: Video
     back_to_chart: Back to Chart
+    request_proof_title: Request a Proof
+    request_proof_message_label: "Message (optional)"
+    request_proof_message_placeholder: Add a message to explain your request...
+    request_proof_submit: Request Proof
+    request_proof_daily_limit_reached: You have reached your daily limit of 5 proof requests.
     upload_proof: Upload Proof
     upload_drag_drop: Drag and drop your image here
     upload_or_click: or click to select a file
@@ -357,75 +362,3 @@ my_proofs:
   delete_confirm: Confirm?
   delete_sending: Deleting...
   delete_success: Proof deleted successfully
-
-game_history:
-  title: Game History
-  no_games: You haven't played any games yet
-  view_game: View Game
-  my_scores: My Scores
-  scores: scores
-  showing_recent: "Showing the %count% most recent games"
-  delete_error: Error deleting proof
-  delete_not_allowed: Cannot delete proof for this score
-  click_to_view_game: Click to view game
-
-site_stats:
-  description: "Video Games Records is a video game records website, created in 2003. You can enter the competition and challenge hundreds of players on a wide choice of games, available on a significant number of platforms."
-  summary: "Our <strong>%nbPlayers% members</strong> have posted <strong>%nbScores% records</strong> on <strong>%nbGames% games</strong>."
-
-top_ranking:
-  title: Top Ranking
-  page_title: Top Ranking - Video Games Records
-  meta_description: Top games and players by posts
-  filter:
-    type: Type
-    value: Value
-    submit: Load Rankings
-    week: Week
-    month: Month
-    year: Year
-  top_games: Top Games
-  top_players: Top Players
-  columns:
-    rank: Rank
-    game: Game
-    player: Player
-    posts: Posts
-    change: Change
-  posts: posts
-  no_rankings: No rankings found for this period
-
-ranking:
-  top_players:
-    player: Player
-    points: Points
-    games: Games
-    records: Records
-    total: Total
-    pts: Pts
-    master_badges: Master Badges
-    no_players: No players found
-    game_points:
-      title: Game Points
-    record_points:
-      title: Record Points
-    cups:
-      title: Cups
-    medals:
-      title: Medals
-    badges:
-      title: Badges
-    proofs:
-      title: Proofs
-
-country:
-  show:
-    title: Country Ranking
-    meta_description: "Player rankings for %country%"
-    select_country: Select a country
-    ranking_points: Points Ranking
-
-
-player_game:
-  close_to_master_badge:
-    card_title: "Close to Master Badge"

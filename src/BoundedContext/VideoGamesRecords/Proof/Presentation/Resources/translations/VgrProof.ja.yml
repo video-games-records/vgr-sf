@@ -1,0 +1,6 @@
+proof_request:
+  success: 証拠リクエストが正常に送信されました。
+  error:
+    status_not_allowed: このスコアにはすでに保留中の証拠リクエストがあります。
+    daily_limit: 1日5件の証拠リクエスト上限に達しました。
+    invalid_token: セキュリティトークンが無効です。もう一度お試しください。

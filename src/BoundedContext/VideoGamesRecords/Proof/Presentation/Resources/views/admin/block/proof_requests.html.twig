@@ -80,12 +80,12 @@
                         </div>
 
                         <div class="request-actions">
-                            <a href="/admin/videogamesrecords/core/proofrequest/{{ request.getId() }}/edit"
+                            <a href="{{ path('vgrcorebundle_admin_proofrequest_edit', {id: request.getId()}) }}"
                                class="btn btn-primary btn-sm"
                                title="{% trans %}common.edit{% endtrans %}">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a href="/admin/videogamesrecords/core/proofrequest/{{ request.getId() }}/show"
+                            <a href="{{ path('vgrcorebundle_admin_proofrequest_show', {id: request.getId()}) }}"
                                class="btn btn-info btn-sm"
                                title="{% trans %}common.view{% endtrans %}">
                                 <i class="fa fa-eye"></i>
@@ -98,7 +98,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <a href="/admin/videogamesrecords/core/proofrequest/list?filter%5Bstatus%5D%5Bvalue%5D=IN+PROGRESS"
+                        <a href="{{ path('vgrcorebundle_admin_proofrequest_list') }}?filter%5Bstatus%5D%5Bvalue%5D=IN+PROGRESS"
                            class="btn btn-warning btn-sm">
                             <i class="fa fa-list"></i>
                             {% trans %}proof_request.dashboard.view.all{% endtrans %}
