@@ -61,7 +61,7 @@
                         {% if player.lastLogin %}
                             <span>
                                 <i class="bi bi-clock-history"></i>
-                                {{ 'player.profile.header.last_login'|trans }} {{ player.lastLogin|user_date('Y-m-d') }}
+                                {{ 'player.profile.header.last_login'|trans }} {{ player.lastLogin|user_datetime }}
                             </span>
                         {% endif %}
                     </div>
