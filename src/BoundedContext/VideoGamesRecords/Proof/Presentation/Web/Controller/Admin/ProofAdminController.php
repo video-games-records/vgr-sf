@@ -27,32 +27,21 @@ class ProofAdminController extends AbstractCRUDController
     ) {
     }
 
-    /**
-     * @return Response
-     */
     public function statsAction(): Response
     {
         $stats = $this->em->getRepository(Player::class)->getProofStats();
 
-        // Formatage
         $months = [];
-
-        // MONTH
         foreach ($stats as $row) {
             $months[$row['month']][] = $row;
         }
 
         return $this->render(
             '@VideoGamesRecordsProof/admin/object/proof/stats.html.twig',
-            [
-                'stats' => $months,
-            ]
+            ['stats' => $months]
         );
     }
 
-    /**
-     * Rotate the proof picture 90° clockwise.
-     */
     public function rotatePictureAction(Request $request): RedirectResponse
     {
         /** @var Proof $proof */
@@ -75,7 +64,7 @@ class ProofAdminController extends AbstractCRUDController
         $imageData = $this->proofStorage->read($path);
 
         $image = ImageManager::gd()->read($imageData);
-        $image->rotate(-90); // 90° clockwise
+        $image->rotate(-90);
 
         $encoded = match ($extension) {
             'png' => $image->toPng(),
@@ -95,9 +84,6 @@ class ProofAdminController extends AbstractCRUDController
         return new RedirectResponse($this->admin->generateUrl('edit', ['id' => $proof->getId()]));
     }
 
-    /**
-     * Action d'édition personnalisée pour gérer la validation des preuves
-     */
     public function editAction(Request $request): Response
     {
         /** @var Proof $object */
@@ -119,12 +105,6 @@ class ProofAdminController extends AbstractCRUDController
         if ($form->isSubmitted()) {
             $isFormValid = $form->isValid();
 
-            // Gestion spéciale pour la validation des preuves
-            if ($isFormValid && $this->isProofValidationSubmission($request, $object)) {
-                $this->handleProofValidation($object, $request);
-            }
-
-            // Validation et redirection si tout est OK
             if ($isFormValid) {
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);
@@ -136,28 +116,18 @@ class ProofAdminController extends AbstractCRUDController
                         return $this->handleXmlHttpRequestSuccessResponse($request, $submittedObject);
                     }
 
-                    $this->addFlash(
-                        'sonata_flash_success',
-                        $this->getProofValidationMessage($submittedObject)
-                    );
+                    $this->addFlash('sonata_flash_success', $this->getSuccessMessage($submittedObject));
 
-                    // Redirection après succès vers la prochaine preuve
                     return $this->getNextProofRedirect($submittedObject);
                 } catch (ModelManagerThrowable $e) {
                     $this->handleModelManagerThrowable($e);
-
                     $isFormValid = false;
                 } catch (\Throwable $e) {
-                    $this->addFlash(
-                        'sonata_flash_error',
-                        $e->getMessage()
-                    );
-
+                    $this->addFlash('sonata_flash_error', $e->getMessage());
                     $isFormValid = false;
                 }
             }
 
-            // Message d'erreur si la validation a échoué
             if (!$isFormValid) { // @phpstan-ignore booleanNot.alwaysTrue
                 $this->addFlash(
                     'sonata_flash_error',
@@ -184,139 +154,31 @@ class ProofAdminController extends AbstractCRUDController
         );
     }
 
-    /**
-     * Vérifie si la soumission concerne une validation de preuve
-     */
-    private function isProofValidationSubmission(Request $request, Proof $proof): bool
+    private function getSuccessMessage(Proof $proof): string
     {
-        $formData = $request->request->all();
-
-        // Cherche le champ status dans les données du formulaire
-        foreach ($formData as $key => $data) {
-            if (is_array($data) && isset($data['status'])) {
-                $newStatus = $data['status'];
-                $currentStatus = $proof->getStatus();
-
-                // Vérifie si c'est un changement de IN_PROGRESS vers ACCEPTED ou REFUSED
-                return $currentStatus === ProofStatus::IN_PROGRESS &&
-                    in_array($newStatus, [ProofStatus::ACCEPTED->value, ProofStatus::REFUSED->value]);
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Gère la logique de validation de preuve
-     */
-    private function handleProofValidation(Proof $proof, Request $request): void
-    {
-        // Récupère le nouveau statut depuis la requête
-        $formData = $request->request->all();
-        $newStatus = null;
-
-        foreach ($formData as $key => $data) {
-            if (is_array($data) && isset($data['status'])) {
-                $newStatus = $data['status'];
-                break;
-            }
-        }
-
-        if (!$newStatus) {
-            return;
-        }
-
-        try {
-            // Logique spécifique selon le statut
-            if ($newStatus === ProofStatus::ACCEPTED->value) {
-                $this->handleProofAccepted($proof);
-            } elseif ($newStatus === ProofStatus::REFUSED->value) {
-                $this->handleProofRefused($proof);
-            }
-        } catch (\Exception $e) {
-            $this->addFlash(
-                'sonata_flash_error',
-                'Erreur lors de la validation de la preuve : ' . $e->getMessage()
-            );
-        }
-    }
-
-    /**
-     * Logique à exécuter quand une preuve est acceptée
-     */
-    private function handleProofAccepted(Proof $proof): void
-    {
-        // La logique est déjà gérée dans ProofListener::postUpdate()
-        // Mais vous pouvez ajouter ici des traitements supplémentaires comme :
-        // - Logging spécifique
-        // - Notifications custom
-        // - Mise à jour de statistiques
-
-        // Le statut du PlayerChart sera automatiquement mis à jour par le listener
-        // à PlayerChartStatusEnum::PROVED
-    }
-
-    /**
-     * Logique à exécuter quand une preuve est refusée
-     */
-    private function handleProofRefused(Proof $proof): void
-    {
-        // La logique est déjà gérée dans ProofListener::postUpdate()
-        // Le statut du PlayerChart sera automatiquement ajusté par le listener
-    }
-
-    /**
-     * Génère le message de confirmation selon le statut
-     */
-    private function getProofValidationMessage(Proof $proof): string
-    {
-        $status = $proof->getStatus();
         $playerName = $proof->getPlayerChart()?->getPlayer()->getPseudo() ?? 'Unknown';
 
-        switch ($status) {
-            case ProofStatus::ACCEPTED:
-                return $this->trans(
-                    'proof.success.accepted',
-                    ['%player%' => $playerName],
-                    'VgrCoreAdmin'
-                );
-            case ProofStatus::REFUSED:
-                return $this->trans(
-                    'proof.success.refused',
-                    ['%player%' => $playerName],
-                    'VgrCoreAdmin'
-                );
-            default:
-                return $this->trans(
-                    'flash_edit_success',
-                    ['%name%' => $this->escapeHtml($this->admin->toString($proof))],
-                    'SonataAdminBundle'
-                );
-        }
+        return match ($proof->getStatus()) {
+            ProofStatus::ACCEPTED => $this->trans('proof.success.accepted', ['%player%' => $playerName], 'VgrCoreAdmin'),
+            ProofStatus::REFUSED  => $this->trans('proof.success.refused', ['%player%' => $playerName], 'VgrCoreAdmin'),
+            default               => $this->trans('flash_edit_success', ['%name%' => $this->escapeHtml($this->admin->toString($proof))], 'SonataAdminBundle'),
+        };
     }
 
-    /**
-     * Trouve la prochaine preuve à valider dans le même jeu
-     */
     private function getNextProofRedirect(Proof $currentProof): RedirectResponse
     {
-        // Récupère le jeu de la preuve actuelle
         $currentGame = $currentProof->getChart()->getGroup()->getGame();
 
-        $proofRepository = $this->em->getRepository(\App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof::class);
+        $proofRepository = $this->em->getRepository(Proof::class);
 
         $proofId = $currentProof->getId();
         if ($proofId === null) {
             return new RedirectResponse($this->admin->generateUrl('list'));
         }
 
-        $nextProof = $proofRepository->findNextInProgressByGame(
-            $currentGame,
-            $proofId
-        );
+        $nextProof = $proofRepository->findNextInProgressByGame($currentGame, $proofId);
 
         if ($nextProof) {
-            // Message informatif sur le nombre de preuves restantes
             $remainingCount = $proofRepository->countInProgressByGame($currentGame);
             $this->addFlash(
                 'sonata_flash_info',
@@ -324,22 +186,18 @@ class ProofAdminController extends AbstractCRUDController
                     'proof.next.redirect.info',
                     [
                         '%game%' => $currentGame->getName(),
-                        '%count%' => $remainingCount - 1, // -1 car on vient de traiter une preuve
+                        '%count%' => $remainingCount - 1,
                         '%next_id%' => $nextProof->getId()
                     ],
                     'VgrCoreAdmin'
                 )
             );
 
-            // Redirection vers la prochaine preuve
             return new RedirectResponse(
                 $this->admin->generateUrl('edit', ['id' => $nextProof->getId()])
             );
         }
 
-        // Aucune autre preuve dans le même jeu, redirection vers la liste
-        return new RedirectResponse(
-            $this->admin->generateUrl('list')
-        );
+        return new RedirectResponse($this->admin->generateUrl('list'));
     }
 }

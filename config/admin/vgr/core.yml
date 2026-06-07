@@ -12,6 +12,7 @@ services:
     calls:
       - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/serie/show.html.twig' ] ]
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+      - [ setMessageBus, [ '@messenger.default_bus' ] ]
 
   # Platform Admin
   sonata.admin.vgr.platform:
@@ -41,6 +42,7 @@ services:
       - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/game/show.html.twig' ] ]
       - [ setSecurity, [ '@security.helper' ] ]
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+      - [ setCache, [ '@cache.app' ] ]
 
   # Group Admin
   sonata.admin.vgr.group:

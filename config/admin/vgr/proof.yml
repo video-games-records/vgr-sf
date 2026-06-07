@@ -13,6 +13,7 @@ services:
       - [ setSecurity, [ '@security.helper' ] ]
       - [ setRequestStack, [ '@request_stack' ] ]
       - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+      - [ setEventDispatcher, [ '@event_dispatcher' ] ]
 
   # Proof Admin
   sonata.admin.vgr.proof:
@@ -30,6 +31,7 @@ services:
       - [ setRequestStack, [ '@request_stack' ] ]
       - [ setSecurity, [ '@security.helper' ] ]
       - [ setTranslationDomain, [ 'VgrProofAdmin' ] ]
+      - [ setEventDispatcher, [ '@event_dispatcher' ] ]
 
   # Picture Admin
   sonata.admin.vgr.picture:

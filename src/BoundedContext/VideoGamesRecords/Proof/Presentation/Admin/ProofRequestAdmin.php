@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin;
 
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -15,34 +16,31 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ChoiceFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Intl\Locale;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
 use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
+use App\BoundedContext\VideoGamesRecords\Proof\Domain\Event\ProofRequestAccepted;
+use App\BoundedContext\VideoGamesRecords\Proof\Domain\Event\ProofRequestRefused;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofRequestStatus;
 
 class ProofRequestAdmin extends BaseAdmin
 {
+    private ?object $pendingEvent = null;
+
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'vgrcorebundle_admin_proofrequest';
     }
 
-
-    /**
-     * @return string
-     */
     private function getLibGame(): string
     {
         $locale = Locale::getDefault();
         return ($locale == 'fr') ? 'libGameFr' : 'libGameEn';
     }
 
-    /**
-     * @return string
-     */
     private function getLibChart(): string
     {
         $locale = Locale::getDefault();
@@ -59,7 +57,6 @@ class ProofRequestAdmin extends BaseAdmin
             ->remove('delete')
             ->remove('export');
     }
-
 
     /**
      * @param FormMapper $form
@@ -264,10 +261,8 @@ class ProofRequestAdmin extends BaseAdmin
         }
     }
 
-
     /**
      * @param $object
-     * @throws ORMException
      */
     public function preUpdate($object): void
     {
@@ -275,15 +270,40 @@ class ProofRequestAdmin extends BaseAdmin
         $em = $this->getModelManager()->getEntityManager($this->getClass());
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
 
-        // Cant change status final
+        // Statuts finaux non modifiables
         if (in_array($originalObject['status'], [ProofRequestStatus::ACCEPTED, ProofRequestStatus::REFUSED], true)) {
             $object->setStatus($originalObject['status']);
+            return;
+        }
+
+        if ($originalObject['status'] !== ProofRequestStatus::IN_PROGRESS) {
+            return;
+        }
+
+        $playerChart = $object->getPlayerChart();
+
+        if ($object->getStatus() === ProofRequestStatus::ACCEPTED) {
+            $playerChart->setStatus(PlayerChartStatusEnum::REQUEST_VALIDATED);
+            $object->setDateAcceptance(new DateTime());
+            $this->pendingEvent = new ProofRequestAccepted($object);
+        } elseif ($object->getStatus() === ProofRequestStatus::REFUSED) {
+            $playerChart->setStatus(PlayerChartStatusEnum::NONE);
+            $object->setDateAcceptance(new DateTime());
+            $this->pendingEvent = new ProofRequestRefused($object);
         }
     }
 
     /**
-     * @return Player
+     * @param $object
      */
+    public function postUpdate($object): void
+    {
+        if ($this->pendingEvent !== null) {
+            $this->getEventDispatcher()->dispatch($this->pendingEvent);
+            $this->pendingEvent = null;
+        }
+    }
+
     private function getPlayer(): Player
     {
         /** @var EntityManager $em */

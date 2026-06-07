@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Proof\Presentation\Admin;
 
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\NotSupported;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
@@ -23,38 +24,33 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Intl\Locale;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerChartStatusEnum;
 use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
+use App\BoundedContext\VideoGamesRecords\Proof\Domain\Event\ProofAccepted;
+use App\BoundedContext\VideoGamesRecords\Proof\Domain\Event\ProofRefused;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\ValueObject\ProofStatus;
 
 class ProofAdmin extends BaseAdmin
 {
+    private ?object $pendingEvent = null;
+
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'vgrcorebundle_admin_proof';
     }
 
-
-    /**
-     * @return string
-     */
     private function getLibGame(): string
     {
         $locale = Locale::getDefault();
         return ($locale == 'fr') ? 'libGameFr' : 'libGameEn';
     }
 
-    /**
-     * @return string
-     */
     private function getLibGroup(): string
     {
         $locale = Locale::getDefault();
         return ($locale == 'fr') ? 'libGroupFr' : 'libGroupEn';
     }
 
-    /**
-     * @return string
-     */
     private function getLibChart(): string
     {
         $locale = Locale::getDefault();
@@ -89,7 +85,6 @@ class ProofAdmin extends BaseAdmin
             ->add('stats', 'stats')
             ->add('rotate_picture', $this->getRouterIdParameter() . '/rotate-picture');
     }
-
 
     /**
      * @param FormMapper $form
@@ -182,7 +177,6 @@ class ProofAdmin extends BaseAdmin
             ->add('picture', NullFilter::class, ['label' => 'proof.filter.pictureIsNull'])
         ;
     }
-
 
     /**
      * @param ListMapper $list
@@ -307,28 +301,64 @@ class ProofAdmin extends BaseAdmin
 
     /**
      * @param $object
-     * @return void
      */
     public function preUpdate($object): void
     {
         /** @var EntityManager $em */
         $em = $this->getModelManager()->getEntityManager($this->getClass());
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
+        $originalStatus = $originalObject['status'];
 
-        // Cant change status final (CLOSED & REFUSED)
-        if (in_array($originalObject['status'], [ProofStatus::CLOSED, ProofStatus::REFUSED], true)) {
-            $object->setStatus($originalObject['status']);
+        // Statuts finaux non modifiables
+        if (in_array($originalStatus, [ProofStatus::CLOSED, ProofStatus::REFUSED], true)) {
+            $object->setStatus($originalStatus);
+            return;
         }
 
-
-        if ($object->getPlayerChart() == null) {
+        if ($object->getPlayerChart() === null) {
             $object->setStatus(ProofStatus::CLOSED);
+            return;
+        }
+
+        if ($originalStatus !== ProofStatus::IN_PROGRESS) {
+            return;
+        }
+
+        $playerChart = $object->getPlayerChart();
+
+        if ($object->getStatus() === ProofStatus::ACCEPTED) {
+            $playerChart->setStatus(PlayerChartStatusEnum::PROVED);
+            $object->setPlayerResponding($this->getPlayer());
+            $object->setCheckedAt(new DateTime());
+            $this->pendingEvent = new ProofAccepted($object);
+        } elseif ($object->getStatus() === ProofStatus::REFUSED) {
+            if ($playerChart->getStatus() === PlayerChartStatusEnum::PROVED) {
+                $playerChart->setStatus(PlayerChartStatusEnum::NONE);
+            } else {
+                $playerChart->setStatus(
+                    $playerChart->getStatus() === PlayerChartStatusEnum::PROOF_SENT
+                        ? PlayerChartStatusEnum::NONE
+                        : PlayerChartStatusEnum::REQUEST_VALIDATED
+                );
+            }
+            $playerChart->setProof(null);
+            $object->setPlayerResponding($this->getPlayer());
+            $object->setCheckedAt(new DateTime());
+            $this->pendingEvent = new ProofRefused($object);
         }
     }
 
     /**
-     * @return Player
+     * @param $object
      */
+    public function postUpdate($object): void
+    {
+        if ($this->pendingEvent !== null) {
+            $this->getEventDispatcher()->dispatch($this->pendingEvent);
+            $this->pendingEvent = null;
+        }
+    }
+
     private function getPlayer(): Player
     {
         /** @var EntityManager $em */
