@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin;
 
+use DateTime;
+use Doctrine\ORM\EntityManager;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -19,13 +21,73 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Contracts\Cache\CacheInterface;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
+use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game\LatestGames;
 
 class GameAdmin extends BaseAdmin
 {
+    private CacheInterface $cache;
+    /** @var array<Serie> */
+    private array $pendingSeries = [];
+
+    public function setCache(CacheInterface $cache): static
+    {
+        $this->cache = $cache;
+        return $this;
+    }
+
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'vgrcorebundle_admin_game';
+    }
+
+    public function preUpdate($object): void
+    {
+        /** @var EntityManager $em */
+        $em = $this->getModelManager()->getEntityManager($this->getClass());
+        $originalData = $em->getUnitOfWork()->getOriginalEntityData($object);
+
+        if (null == $object->getLibGameFr()) {
+            $object->setLibGameFr($object->getLibGameEn());
+        }
+
+        if ($object->getStatus() === GameStatus::ACTIVE && $object->getPublishedAt() === null) {
+            $object->setPublishedAt(new DateTime());
+            $this->cache->delete(LatestGames::CACHE_KEY);
+        }
+
+        $originalSerie = $originalData['serie'] ?? null;
+        $newSerie = $object->getSerie();
+        if ($originalSerie !== $newSerie) {
+            $this->pendingSeries = array_values(array_filter([$originalSerie, $newSerie]));
+        }
+    }
+
+    public function postUpdate($object): void
+    {
+        if (empty($this->pendingSeries)) {
+            return;
+        }
+
+        /** @var EntityManager $em */
+        $em = $this->getModelManager()->getEntityManager($this->getClass());
+        foreach ($this->pendingSeries as $serie) {
+            $this->majSerie($serie);
+        }
+        $em->flush();
+        $this->pendingSeries = [];
+    }
+
+    private function majSerie(Serie $serie): void
+    {
+        $serie->setNbGame(count($serie->getGames()));
+        $nbChart = 0;
+        foreach ($serie->getGames() as $game) {
+            $nbChart += $game->getNbChart();
+        }
+        $serie->setNbChart($nbChart);
     }
 
     /**

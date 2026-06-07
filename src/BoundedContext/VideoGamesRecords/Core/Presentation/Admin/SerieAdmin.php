@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Doctrine\ORM\EntityManager;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -15,11 +16,45 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ChoiceFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Messenger\MessageBusInterface;
 use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
+use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Player\UpdatePlayerSerieRank;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\SerieStatus;
 
 class SerieAdmin extends BaseAdmin
 {
+    private MessageBusInterface $bus;
+    private ?UpdatePlayerSerieRank $pendingMessage = null;
+
+    public function setMessageBus(MessageBusInterface $bus): static
+    {
+        $this->bus = $bus;
+        return $this;
+    }
+
+    public function preUpdate($object): void
+    {
+        /** @var EntityManager $em */
+        $em = $this->getModelManager()->getEntityManager($this->getClass());
+        $originalData = $em->getUnitOfWork()->getOriginalEntityData($object);
+
+        if (
+            isset($originalData['status'])
+            && $originalData['status'] !== SerieStatus::ACTIVE
+            && $object->getStatus() === SerieStatus::ACTIVE
+        ) {
+            $this->pendingMessage = new UpdatePlayerSerieRank((int) $object->getId());
+        }
+    }
+
+    public function postUpdate($object): void
+    {
+        if ($this->pendingMessage !== null) {
+            $this->bus->dispatch($this->pendingMessage);
+            $this->pendingMessage = null;
+        }
+    }
+
     /**
      * @param RouteCollectionInterface $collection
      */
