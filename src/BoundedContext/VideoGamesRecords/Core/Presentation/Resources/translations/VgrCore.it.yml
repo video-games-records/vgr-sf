@@ -63,3 +63,91 @@ my_proofs:
   click_to_view_game: Clicca per vedere il gioco
   column_platforms: Piattaforme
   upload_disabled: Il caricamento delle prove è temporaneamente disabilitato per manutenzione
+
+game_history:
+  title: Cronologia dei Giochi
+  no_games: Non hai ancora giocato a nessun gioco
+  view_game: Visualizza Gioco
+  my_scores: I Miei Punteggi
+  scores: punteggi
+  showing_recent: "Mostrando i %count% giochi più recenti"
+
+sidebar:
+  title: Collegamenti
+  forum: Forum
+  forum_description: Discuti di questo gioco
+  serie: Serie
+  serie_description: Vedi tutti i giochi di questa serie
+  download: Scarica per
+  download_description: Ottieni questo gioco
+  rules: Regole
+  rules_description: Regole e linee guida del sito
+  videos: Video
+  videos_description: "{1} %count% video disponibile|]1,Inf[ %count% video disponibili"
+  game_rules_title: Regole del gioco
+  group_switcher_title: Cambia gruppo
+  group_prev: Precedente
+  group_next: Successivo
+  chart_switcher_title: Cambia classifica
+  chart_prev: Precedente
+  chart_next: Successivo
+
+player_game:
+  close_to_master_badge:
+    card_title: "Vicino al Master Badge"
+
+site_stats:
+  description: "Video Games Records è un sito web di record di videogiochi, creato nel 2003. Puoi entrare nella competizione e sfidare centinaia di giocatori su un'ampia scelta di giochi, disponibili su un numero significativo di piattaforme."
+  summary: "I nostri <strong>%nbPlayers% membri</strong> hanno pubblicato <strong>%nbScores% record</strong> su <strong>%nbGames% giochi</strong>."
+
+top_ranking:
+  title: Top Classifica
+  page_title: Top Classifica - Video Games Records
+  meta_description: Top giochi e giocatori per post
+  filter:
+    type: Tipo
+    value: Valore
+    submit: Carica classifiche
+    week: Settimana
+    month: Mese
+    year: Anno
+  top_games: Top Giochi
+  top_players: Top Giocatori
+  columns:
+    rank: Classifica
+    game: Gioco
+    player: Giocatore
+    posts: Post
+    change: Variazione
+  posts: post
+  no_rankings: Nessuna classifica trovata per questo periodo
+
+ranking:
+  top_players:
+    player: Giocatore
+    points: Punti
+    games: Giochi
+    records: Record
+    total: Totale
+    pts: Pts
+    master_badges: Badge Master
+    no_players: Nessun giocatore trovato
+    game_points:
+      title: Punti Gioco
+    record_points:
+      title: Punti Record
+    cups:
+      title: Coppe
+    medals:
+      title: Medaglie
+    badges:
+      title: Badge
+    proofs:
+      title: Prove
+
+country:
+  show:
+    title: Classifica per Paese
+    meta_description: "Classifiche giocatori per %country%"
+    select_country: Seleziona un paese
+    ranking_points: Classifica punti

@@ -63,3 +63,91 @@ my_proofs:
   click_to_view_game: 点击查看游戏
   column_platforms: 平台
   upload_disabled: 由于维护，证明上传暂时禁用
+
+game_history:
+  title: 游戏历史
+  no_games: 您还没有玩过任何游戏
+  view_game: 查看游戏
+  my_scores: 我的分数
+  scores: 分数
+  showing_recent: "显示最近的%count%个游戏"
+
+sidebar:
+  title: 链接
+  forum: 论坛
+  forum_description: 讨论这个游戏
+  serie: 系列
+  serie_description: 查看这个系列的所有游戏
+  download: 下载用于
+  download_description: 获取这个游戏
+  rules: 规则
+  rules_description: 网站规则和指导方针
+  videos: 视频
+  videos_description: "%count%个视频可用"
+  game_rules_title: 游戏规则
+  group_switcher_title: 切换分组
+  group_prev: 上一个
+  group_next: 下一个
+  chart_switcher_title: 切换榜单
+  chart_prev: 上一个
+  chart_next: 下一个
+
+player_game:
+  close_to_master_badge:
+    card_title: "接近大师徽章"
+
+site_stats:
+  description: "Video Games Records是一个视频游戏记录网站，创建于2003年。您可以参与竞争，在众多平台上提供的各种游戏中挑战数百名玩家。"
+  summary: "我们的<strong>%nbPlayers%名会员</strong>在<strong>%nbGames%个游戏</strong>上发布了<strong>%nbScores%条记录</strong>。"
+
+top_ranking:
+  title: 顶级排名
+  page_title: 顶级排名 - Video Games Records
+  meta_description: 按发布量排名的顶级游戏和玩家
+  filter:
+    type: 类型
+    value: 值
+    submit: 加载排名
+    week: 周
+    month: 月
+    year: 年
+  top_games: 顶级游戏
+  top_players: 顶级玩家
+  columns:
+    rank: 排名
+    game: 游戏
+    player: 玩家
+    posts: 发布
+    change: 变化
+  posts: 发布
+  no_rankings: 未找到该时期的排名
+
+ranking:
+  top_players:
+    player: 玩家
+    points: 积分
+    games: 游戏
+    records: 记录
+    total: 总计
+    pts: 分
+    master_badges: 大师徽章
+    no_players: 未找到玩家
+    game_points:
+      title: 游戏积分
+    record_points:
+      title: 记录积分
+    cups:
+      title: 奖杯
+    medals:
+      title: 奖牌
+    badges:
+      title: 徽章
+    proofs:
+      title: 证明
+
+country:
+  show:
+    title: 国家排名
+    meta_description: "%country%的玩家排名"
+    select_country: 选择国家
+    ranking_points: 积分排名
