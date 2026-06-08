@@ -63,3 +63,91 @@ my_proofs:
   click_to_view_game: ゲームを見るにはクリック
   column_platforms: プラットフォーム
   upload_disabled: メンテナンスのため、証拠のアップロードは一時的に無効になっています
+
+game_history:
+  title: ゲーム履歴
+  no_games: まだゲームをプレイしていません
+  view_game: ゲームを見る
+  my_scores: 私のスコア
+  scores: スコア
+  showing_recent: "最新の%count%ゲームを表示中"
+
+sidebar:
+  title: リンク
+  forum: フォーラム
+  forum_description: このゲームについて議論する
+  serie: シリーズ
+  serie_description: このシリーズの全ゲームを見る
+  download: ダウンロード
+  download_description: このゲームを入手する
+  rules: ルール
+  rules_description: サイトのルールとガイドライン
+  videos: 動画
+  videos_description: "%count%本の動画が利用可能"
+  game_rules_title: ゲームルール
+  group_switcher_title: グループ切り替え
+  group_prev: 前へ
+  group_next: 次へ
+  chart_switcher_title: チャート切り替え
+  chart_prev: 前へ
+  chart_next: 次へ
+
+player_game:
+  close_to_master_badge:
+    card_title: "マスターバッジまであと少し"
+
+site_stats:
+  description: "Video Games Recordsは2003年に作られたビデオゲームの記録サイトです。多数のプラットフォームで利用可能な幅広いゲームで、何百人ものプレイヤーと競い合うことができます。"
+  summary: "私たちの<strong>%nbPlayers%人のメンバー</strong>が<strong>%nbGames%のゲーム</strong>に<strong>%nbScores%件の記録</strong>を投稿しています。"
+
+top_ranking:
+  title: トップランキング
+  page_title: トップランキング - Video Games Records
+  meta_description: 投稿数によるゲームとプレイヤーのトップ
+  filter:
+    type: タイプ
+    value: 値
+    submit: ランキングを読み込む
+    week: 週
+    month: 月
+    year: 年
+  top_games: トップゲーム
+  top_players: トッププレイヤー
+  columns:
+    rank: 順位
+    game: ゲーム
+    player: プレイヤー
+    posts: 投稿
+    change: 変動
+  posts: 投稿
+  no_rankings: この期間のランキングは見つかりませんでした
+
+ranking:
+  top_players:
+    player: プレイヤー
+    points: ポイント
+    games: ゲーム
+    records: 記録
+    total: 合計
+    pts: ポイント
+    master_badges: マスターバッジ
+    no_players: プレイヤーが見つかりません
+    game_points:
+      title: ゲームポイント
+    record_points:
+      title: 記録ポイント
+    cups:
+      title: カップ
+    medals:
+      title: メダル
+    badges:
+      title: バッジ
+    proofs:
+      title: 証拠
+
+country:
+  show:
+    title: 国別ランキング
+    meta_description: "%country%のプレイヤーランキング"
+    select_country: 国を選択
+    ranking_points: ポイントランキング
