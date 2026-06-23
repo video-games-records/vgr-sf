@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ChoiceFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\DateRangeFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\NullFilter;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -173,6 +174,7 @@ class ProofAdmin extends BaseAdmin
                 'field_options' => ['property' => 'pseudo'],
                 'label' => 'proof.filter.playerResponding'
             ])
+            ->add('checkedAt', DateRangeFilter::class, ['label' => 'proof.filter.checkedAt'])
             ->add('video', NullFilter::class, ['label' => 'proof.filter.videoIsNull'])
             ->add('picture', NullFilter::class, ['label' => 'proof.filter.pictureIsNull'])
         ;
@@ -231,6 +233,7 @@ class ProofAdmin extends BaseAdmin
                 'associated_property' => 'pseudo',
                 'label' => 'proof.list.playerResponding',
             ])
+            ->add('checkedAt', 'datetime', ['label' => 'proof.list.checkedAt'])
             ->add('created_at', 'datetime', ['label' => 'proof.list.createdAt'])
             ->add('_action', 'actions', [
                 'actions' => [
