@@ -1,0 +1,16 @@
+# Copier ce fichier en backup.conf et renseigner les valeurs réelles
+# Ce fichier est commité — backup.conf est gitignored
+
+PROD_SSH_USER=
+PROD_SSH_HOST=
+PROD_SSH_PORT=22
+PROD_BACKUP_REMOTE_DIR=
+PROD_BACKUP_PREFIX=day-vgr
+PROD_BACKUP_LOCAL_DIR=/tmp
+
+# Base de données locale (cible de l'import)
+LOCAL_DB_HOST=127.0.0.1
+LOCAL_DB_PORT=3306
+LOCAL_DB_USER=
+LOCAL_DB_PASSWORD=
+LOCAL_DB_NAME=

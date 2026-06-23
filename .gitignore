@@ -34,6 +34,10 @@ phpstan.neon
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+###> scripts backup ###
+/scripts/backup.conf
+###< scripts backup ###
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
