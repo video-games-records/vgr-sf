@@ -69,7 +69,6 @@ class CommentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('article', null, ['label' => 'comment.filter.article'])
             ->add('article.translations.title', null, ['label' => 'comment.filter.title'])
             ->add('user', ModelFilter::class, [
                 'label' => 'comment.filter.user',

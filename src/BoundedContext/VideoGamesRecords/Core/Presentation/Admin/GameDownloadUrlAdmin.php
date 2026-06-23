@@ -9,7 +9,9 @@ use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 final class GameDownloadUrlAdmin extends AbstractAdmin
@@ -28,7 +30,13 @@ final class GameDownloadUrlAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('game')
+            ->add('game', ModelFilter::class, [
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => [
+                    'property' => 'libGameEn',
+                    'admin_code' => 'vgrcorebundle_admin_game',
+                ],
+            ])
             ->add('platform')
         ;
     }
