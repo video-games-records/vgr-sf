@@ -62,6 +62,9 @@ class Scheduler implements ScheduleProviderInterface
             // Generate sitemap.xml (daily at 4am)
             ->add(RecurringMessage::cron('0 4 * * *', new RunCommandMessage('app:generate-sitemap')))
 
+            // Player-chart integrity check (weekly, Monday at 7am)
+            ->add(RecurringMessage::cron('0 7 * * 1', new RunCommandMessage('vgr:player-chart:integrity-check')))
+
             // Core Bundle Messages (keeping original schedule)
         /*
             ->add(RecurringMessage::cron('00 8 * * 1', new UpdateYoutubeData()))
