@@ -11,6 +11,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use App\SharedKernel\Presentation\Form\Type\RichTextEditorType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -39,8 +41,16 @@ class MessageAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('topic', null, ['label' => 'label.topic'])
-            ->add('user', null, ['label' => 'label.user']);
+            ->add('topic', ModelFilter::class, [
+                'label' => 'label.topic',
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => ['property' => 'name'],
+            ])
+            ->add('user', ModelFilter::class, [
+                'label' => 'label.user',
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => ['property' => 'username'],
+            ]);
     }
 
     protected function configureListFields(ListMapper $list): void
