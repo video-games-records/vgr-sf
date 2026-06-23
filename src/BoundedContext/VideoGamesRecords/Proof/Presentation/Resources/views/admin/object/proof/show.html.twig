@@ -106,28 +106,28 @@
                     {% elseif object.getStatus().value == 'ACCEPTED' %}
                         <i class="fa fa-check-circle text-green" style="font-size: 48px;"></i>
                         <h4 class="text-green">{% trans %}proof.status.accepted{% endtrans %}</h4>
-                        <p class="text-muted" style="font-size: 12px;">
-                            {% if object.getPlayerResponding() %}
-                                {% trans %}proof.validated.by{% endtrans %} {{ object.getPlayerResponding().getPseudo() }}
-                            {% endif %}
-                            {% if object.getCheckedAt() %}
-                                <br>{{ object.getCheckedAt()|user_datetime('d/m/Y H:i') }}
-                            {% endif %}
-                        </p>
                     {% elseif object.getStatus().value == 'REFUSED' %}
                         <i class="fa fa-times-circle text-red" style="font-size: 48px;"></i>
                         <h4 class="text-red">{% trans %}proof.status.refused{% endtrans %}</h4>
-                        <p class="text-muted" style="font-size: 12px;">
-                            {% if object.getPlayerResponding() %}
-                                {% trans %}proof.refused.by{% endtrans %} {{ object.getPlayerResponding().getPseudo() }}
-                            {% endif %}
-                            {% if object.getCheckedAt() %}
-                                <br>{{ object.getCheckedAt()|user_datetime('d/m/Y H:i') }}
-                            {% endif %}
-                        </p>
                     {% else %}
                         <i class="fa fa-archive text-gray" style="font-size: 48px;"></i>
                         <h4 class="text-gray">{{ object.getStatus().value }}</h4>
+                    {% endif %}
+                    {% if object.getPlayerResponding() or object.getCheckedAt() %}
+                        <table class="table table-condensed table-striped text-left" style="margin-top: 10px;">
+                            {% if object.getPlayerResponding() %}
+                                <tr>
+                                    <td><strong>{% trans %}proof.show.playerResponding{% endtrans %} :</strong></td>
+                                    <td>{{ object.getPlayerResponding().getPseudo() }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if object.getCheckedAt() %}
+                                <tr>
+                                    <td><strong>{% trans %}proof.show.checkedAt{% endtrans %} :</strong></td>
+                                    <td>{{ object.getCheckedAt()|user_datetime('d/m/Y H:i') }}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
                     {% endif %}
                 </div>
             </div>

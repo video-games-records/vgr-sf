@@ -498,6 +498,7 @@ proof:
     status: Status
     playerChartStatus: PlayerChart Status
     playerResponding: Player Responding
+    checkedAt: Checked At
     videoIsNull: Video (null)
     pictureIsNull: Picture (null)
   list:
@@ -509,6 +510,7 @@ proof:
     status: Status
     type: Type
     playerResponding: Player Responding
+    checkedAt: Checked At
     createdAt: Created At
   show:
     id: ID

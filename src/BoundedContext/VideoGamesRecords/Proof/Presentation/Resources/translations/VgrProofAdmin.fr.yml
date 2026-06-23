@@ -16,6 +16,7 @@ proof:
     status: Statut
     playerChartStatus: Statut du score
     playerResponding: Joueur vérifiant
+    checkedAt: Vérifié le
     videoIsNull: Vidéo (vide)
     pictureIsNull: Image (vide)
   list:
@@ -27,6 +28,7 @@ proof:
     status: Statut
     type: Type
     playerResponding: Joueur vérifiant
+    checkedAt: Vérifié le
     createdAt: Créé le
   show:
     id: ID
