@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\PlatformRepository;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlatformBadge;
+use App\BoundedContext\VideoGamesRecords\Igdb\Domain\Entity\Platform as IgdbPlatform;
 
 #[ORM\Table(name:'vgr_platform')]
 #[ORM\Entity(repositoryClass: PlatformRepository::class)]
@@ -49,6 +50,10 @@ class Platform
      */
     #[ORM\OneToMany(targetEntity: PlayerPlatform::class, mappedBy: 'platform')]
     private Collection $playerPlatform;
+
+    #[ORM\ManyToOne(targetEntity: IgdbPlatform::class)]
+    #[ORM\JoinColumn(name: 'igdb_platform_id', referencedColumnName: 'id', nullable: true)]
+    private ?IgdbPlatform $igdbPlatform = null;
 
     #[ORM\OneToOne(targetEntity: PlatformBadge::class, cascade: ['persist'], inversedBy: 'platform')]
     #[ORM\JoinColumn(name:'badge_id', referencedColumnName:'id', nullable:true)]
@@ -129,6 +134,17 @@ class Platform
     public function getPlayerPlatform(): Collection
     {
         return $this->playerPlatform;
+    }
+
+    public function getIgdbPlatform(): ?IgdbPlatform
+    {
+        return $this->igdbPlatform;
+    }
+
+    public function setIgdbPlatform(?IgdbPlatform $igdbPlatform): static
+    {
+        $this->igdbPlatform = $igdbPlatform;
+        return $this;
     }
 
     public function setBadge(?PlatformBadge $badge = null): static

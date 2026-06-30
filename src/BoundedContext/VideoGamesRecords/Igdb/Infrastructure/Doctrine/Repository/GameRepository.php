@@ -38,6 +38,22 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find IGDB game candidates matching a name (exact, case-insensitive), with platforms eagerly loaded.
+     *
+     * @return array<Game>
+     */
+    public function findCandidatesByName(string $name): array
+    {
+        return $this->createQueryBuilder('g')
+            ->leftJoin('g.platforms', 'p')
+            ->addSelect('p')
+            ->where('LOWER(g.name) = LOWER(:name)')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param array<string, mixed> $data
      */
     public function updateFromIgdbData(Game $game, array $data): void

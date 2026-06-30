@@ -55,6 +55,17 @@ class PlatformAdmin extends BaseAdmin
             ], [
                 'admin_code' => 'sonata.admin.vgr.badge',
             ])
+            ->add('igdbPlatform', ModelListType::class, [
+                'btn_add' => false,
+                'btn_list' => true,
+                'btn_edit' => false,
+                'btn_delete' => true,
+                'btn_catalogue' => true,
+                'label' => 'platform.form.igdb_platform',
+                'required' => false,
+            ], [
+                'admin_code' => 'sonata.admin.vgr.igdb.platform',
+            ])
             ->add(
                 'status',
                 ChoiceType::class,
@@ -85,6 +96,7 @@ class PlatformAdmin extends BaseAdmin
         $list
             ->addIdentifier('id', null, ['label' => 'platform.list.id'])
             ->add('name', null, ['editable' => false, 'label' => 'platform.list.name'])
+            ->add('igdbPlatform', null, ['label' => 'platform.list.igdb_platform'])
             ->add('slug', null, ['label' => 'platform.list.slug'])
             ->add(
                 'picture',
@@ -130,6 +142,7 @@ class PlatformAdmin extends BaseAdmin
         $show
             ->add('id', null, ['label' => 'platform.show.id'])
             ->add('name', null, ['label' => 'platform.show.name'])
+            ->add('igdbPlatform', null, ['label' => 'platform.show.igdb_platform'])
             ->add('picture', null, ['label' => 'platform.show.picture'])
             ->add('status', null, ['label' => 'platform.show.status'])
             ->add('badge', null, ['label' => 'platform.show.badge']);

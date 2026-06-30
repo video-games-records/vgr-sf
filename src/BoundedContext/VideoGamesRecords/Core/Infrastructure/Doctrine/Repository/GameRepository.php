@@ -365,6 +365,32 @@ class GameRepository extends DefaultRepository
     // IGDB Mapping Methods
 
     /**
+     * Find VGR games to process for IGDB matching, with platforms and igdbPlatform eagerly loaded.
+     *
+     * @param array<int>|null $gameIds
+     * @return array<Game>
+     */
+    public function findForIgdbMatching(bool $withoutIgdbOnly, ?array $gameIds, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('g')
+            ->leftJoin('g.platforms', 'p')
+            ->addSelect('p')
+            ->leftJoin('p.igdbPlatform', 'ip')
+            ->addSelect('ip')
+            ->setMaxResults($limit);
+
+        if ($withoutIgdbOnly) {
+            $qb->andWhere('g.igdbGame IS NULL');
+        }
+
+        if (!empty($gameIds)) {
+            $qb->andWhere('g.id IN (:ids)')->setParameter('ids', $gameIds);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Find IGDB Game entity for a VGR Game ID
      */
     public function findIgdbGame(int $vgrGameId): ?IgdbGame
