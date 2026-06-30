@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Application\Command;
 
+use App\BoundedContext\VideoGamesRecords\Core\Application\Service\GameMatchingService;
+use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,22 +13,18 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-// TODO: Migrate GameMatchingService to Core context
-// use App\BoundedContext\VideoGamesRecords\Core\Domain\Service\GameMatchingService;
-
 #[AsCommand(
     name: 'vgr:core:igdb:match-games',
-    description: 'Automatically match Core Bundle games with IGDB games'
+    description: 'Automatically match Core VGR games with IGDB games by name and platform'
 )]
 class IgdbGameMatchingCommand extends Command
 {
-    // TODO: Inject dependencies once GameMatchingService is migrated
-    // public function __construct(
-    //     private readonly EntityManagerInterface $entityManager,
-    //     private readonly GameMatchingService $gameMatchingService
-    // ) {
-    //     parent::__construct();
-    // }
+    public function __construct(
+        private readonly GameRepository $gameRepository,
+        private readonly GameMatchingService $gameMatchingService,
+    ) {
+        parent::__construct();
+    }
 
     protected function configure(): void
     {
@@ -51,13 +49,6 @@ class IgdbGameMatchingCommand extends Command
                 100
             )
             ->addOption(
-                'batch-size',
-                'b',
-                InputOption::VALUE_OPTIONAL,
-                'Number of games to process in each batch before flushing',
-                10
-            )
-            ->addOption(
                 'without-igdb-only',
                 'w',
                 InputOption::VALUE_NONE,
@@ -69,10 +60,72 @@ class IgdbGameMatchingCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->title('IGDB Game Matching Service');
+        $dryRun = (bool) $input->getOption('dry-run');
+        $withoutIgdbOnly = (bool) $input->getOption('without-igdb-only');
+        $limit = (int) $input->getOption('limit');
 
-        // TODO: Remove this check once GameMatchingService is migrated
-        $io->error('GameMatchingService needs to be migrated to Core context before this command can be used.');
-        return Command::FAILURE;
+        /** @var array<string> $gameIdsOption */
+        $gameIdsOption = $input->getOption('game-id');
+        $gameIds = !empty($gameIdsOption) ? array_map('intval', $gameIdsOption) : null;
+
+        $io->title('IGDB Game Matching');
+
+        if ($dryRun) {
+            $io->note('Dry-run mode — no changes will be written to the database.');
+        }
+
+        $games = $this->gameRepository->findForIgdbMatching($withoutIgdbOnly, $gameIds, $limit);
+
+        if (empty($games)) {
+            $io->warning('No games found matching the given criteria.');
+            return Command::SUCCESS;
+        }
+
+        $io->writeln(sprintf('Processing <info>%d</info> game(s)…', count($games)));
+
+        $matched = 0;
+        $ambiguous = 0;
+        $noResult = 0;
+
+        foreach ($games as $game) {
+            $result = $this->gameMatchingService->match($game, $dryRun);
+
+            $igdbGame = $result->igdbGame;
+            if ($igdbGame !== null) {
+                $matched++;
+                $io->writeln(sprintf(
+                    '  <fg=green>✓</> [%d] %s → IGDB #%d (%s)',
+                    $game->getId(),
+                    $game->getLibGameEn(),
+                    $igdbGame->getId(),
+                    $igdbGame->getName()
+                ));
+            } elseif ($result->isAmbiguous()) {
+                $ambiguous++;
+                $io->writeln(sprintf(
+                    '  <fg=yellow>~</> [%d] %s — %d candidates, ambiguous',
+                    $game->getId(),
+                    $game->getLibGameEn(),
+                    $result->candidatesCount
+                ));
+            } else {
+                $noResult++;
+                $io->writeln(sprintf(
+                    '  <fg=gray>✗</> [%d] %s — no match',
+                    $game->getId(),
+                    $game->getLibGameEn()
+                ));
+            }
+        }
+
+        $io->newLine();
+        $io->success(sprintf(
+            'Done — matched: %d | ambiguous: %d | no result: %d',
+            $matched,
+            $ambiguous,
+            $noResult
+        ));
+
+        return Command::SUCCESS;
     }
 }

@@ -103,12 +103,14 @@ platform:
     name: Name
     picture: Picture
     badge: Badge
+    igdb_platform: IGDB Platform
     status: Status
   filter:
     name: Name
   list:
     id: ID
     name: Name
+    igdb_platform: IGDB Platform
     slug: Slug
     picture: Picture
     badge: Badge
@@ -116,6 +118,7 @@ platform:
   show:
     id: ID
     name: Name
+    igdb_platform: IGDB Platform
     picture: Picture
     status: Status
     badge: Badge

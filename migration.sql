@@ -20,3 +20,8 @@ CREATE TABLE vgr_player_platform_connection (
     UNIQUE KEY uq_player_platform (player_id, platform),
     CONSTRAINT fk_platform_connection_player FOREIGN KEY (player_id) REFERENCES vgr_player(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Feature: map-igdb-game
+ALTER TABLE vgr_platform
+    ADD COLUMN igdb_platform_id INT NULL,
+    ADD CONSTRAINT fk_vgr_platform_igdb FOREIGN KEY (igdb_platform_id) REFERENCES igdb_platform(id) ON DELETE SET NULL;
