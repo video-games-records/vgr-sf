@@ -14,6 +14,7 @@ class Autocomplete extends AbstractController
 {
     public function __construct(
         private readonly GameRepository $gameRepository,
+        private readonly string $storagePublicUrl,
     ) {
     }
 
@@ -29,6 +30,14 @@ class Autocomplete extends AbstractController
             'id' => $game->getId(),
             'text' => $game->getName($locale),
             'slug' => $game->getSlug(),
+            'picture' => $this->storagePublicUrl . '/game/' . ($game->getPicture() ?: 'default.png'),
+            'platforms' => array_map(
+                fn($platform) => [
+                    'id' => $platform->getId(),
+                    'name' => $platform->getName(),
+                ],
+                $game->getPlatforms()->toArray()
+            ),
         ], $games);
 
         return $this->json($results);

@@ -100,6 +100,7 @@ search:
   teams: "Times"
   no_results: "Nenhum resultado encontrado"
   min_chars: "Digite pelo menos 2 caracteres para buscar"
+  see_all: "Ver todos os resultados para"
 
 # === HOME ===
 home:

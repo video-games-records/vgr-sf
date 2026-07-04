@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Presentation\Web\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -11,8 +12,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class SearchController extends AbstractLocalizedController
 {
     #[Route('/search', name: 'global_search')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return $this->render('@SharedKernel/search/index.html.twig');
+        return $this->render('@SharedKernel/search/index.html.twig', [
+            'q' => $request->query->get('q', ''),
+        ]);
     }
 }

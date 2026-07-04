@@ -100,6 +100,7 @@ search:
   teams: "战队"
   no_results: "未找到结果"
   min_chars: "请输入至少2个字符进行搜索"
+  see_all: "查看所有结果："
 
 # === HOME ===
 home:

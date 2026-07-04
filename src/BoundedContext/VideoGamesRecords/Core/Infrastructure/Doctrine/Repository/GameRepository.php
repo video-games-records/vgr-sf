@@ -220,19 +220,33 @@ class GameRepository extends DefaultRepository
     /**
      * @param string $q
      * @param string $locale
-     * @return mixed
+     * @return array<Game>
      */
-    public function autocomplete(string $q, string $locale = 'en'): mixed
+    public function autocomplete(string $q, string $locale = 'en'): array
     {
         $column = ($locale == 'fr') ? 'libGameFr' : 'libGameEn';
-        $query = $this->createQueryBuilder('g');
 
-        $query
+        $ids = $this->createQueryBuilder('g')
+            ->select('g.id')
             ->where("g.$column LIKE :q")
             ->setParameter('q', '%' . $q . '%')
-            ->orderBy("g.$column", 'ASC');
+            ->orderBy("g.$column", 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getSingleColumnResult();
 
-        return $query->getQuery()->getResult();
+        if (empty($ids)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('g')
+            ->leftJoin('g.platforms', 'p')
+            ->addSelect('p')
+            ->where('g.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->orderBy("g.$column", 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

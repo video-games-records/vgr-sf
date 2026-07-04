@@ -100,6 +100,7 @@ search:
   teams: "チーム"
   no_results: "結果が見つかりません"
   min_chars: "検索するには2文字以上入力してください"
+  see_all: "すべての結果を表示："
 
 # === HOME ===
 home:
