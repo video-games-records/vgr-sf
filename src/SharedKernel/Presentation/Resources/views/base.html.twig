@@ -147,11 +147,37 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        {# Search #}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('global_search') }}" aria-label="{{ 'common.search'|trans }}">
-                                <i class="bi bi-search"></i>
-                            </a>
+                        {# Search inline dropdown #}
+                        <li class="nav-item position-relative"
+                            data-controller="global-search"
+                            data-global-search-games-url-value="{{ path('vgr_api_game_autocomplete') }}"
+                            data-global-search-players-url-value="{{ path('vgr_api_player_autocomplete') }}"
+                            data-global-search-teams-url-value="{{ path('vgr_api_team_autocomplete') }}"
+                            data-global-search-search-url-value="{{ path('global_search') }}"
+                            data-global-search-locale-value="{{ app.request.locale }}"
+                            data-global-search-game-label-value="{{ 'search.games'|trans({}, 'SharedKernel') }}"
+                            data-global-search-player-label-value="{{ 'search.players'|trans({}, 'SharedKernel') }}"
+                            data-global-search-team-label-value="{{ 'search.teams'|trans({}, 'SharedKernel') }}"
+                            data-global-search-no-results-label-value="{{ 'search.no_results'|trans({}, 'SharedKernel') }}"
+                            data-global-search-see-all-label-value="{{ 'search.see_all'|trans({}, 'SharedKernel') }}"
+                            data-global-search-max-results-value="5"
+                        >
+                            <div class="input-group input-group-sm navbar-search-group">
+                                <span class="input-group-text navbar-search-icon"><i class="bi bi-search"></i></span>
+                                <input
+                                    type="text"
+                                    class="form-control navbar-search-input"
+                                    placeholder="{{ 'common.search'|trans }}"
+                                    autocomplete="off"
+                                    data-global-search-target="input"
+                                    data-action="input->global-search#onInput keydown->global-search#onKeydown focus->global-search#onFocus"
+                                >
+                            </div>
+                            <div class="navbar-search-dropdown d-none"
+                                 data-global-search-target="dropdown"
+                            >
+                                <div class="p-2" data-global-search-target="results"></div>
+                            </div>
                         </li>
 
                         {# Language Switcher #}

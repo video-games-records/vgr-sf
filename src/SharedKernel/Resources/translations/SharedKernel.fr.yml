@@ -112,6 +112,7 @@ search:
   teams: "Équipes"
   no_results: "Aucun résultat trouvé"
   min_chars: "Tapez au moins 2 caractères pour rechercher"
+  see_all: "Voir tous les résultats pour"
 
 # === HOME ===
 home:

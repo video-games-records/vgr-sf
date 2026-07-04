@@ -14,6 +14,7 @@ class Autocomplete extends AbstractController
 {
     public function __construct(
         private readonly PlayerRepository $playerRepository,
+        private readonly string $storagePublicUrl,
     ) {
     }
 
@@ -28,6 +29,7 @@ class Autocomplete extends AbstractController
             'id' => $player->getId(),
             'text' => $player->getPseudo(),
             'slug' => $player->getSlug(),
+            'avatar' => $this->storagePublicUrl . '/user/' . $player->getAvatar(),
         ], $players);
 
         return $this->json($results);

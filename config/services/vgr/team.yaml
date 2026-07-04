@@ -2,6 +2,8 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
+    bind:
+      $storagePublicUrl: '%env(PICTURE_PUBLIC_URL)%'
 
   App\BoundedContext\VideoGamesRecords\Team\:
     resource: '../../../src/BoundedContext/VideoGamesRecords/Team/*'
