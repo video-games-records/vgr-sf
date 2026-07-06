@@ -6,6 +6,7 @@ player:
       games: Jogos
       videos: Vídeos
       proofs: Provas
+      messages: Mensagens do Fórum
 
     header:
       member_since: Membro desde
@@ -50,6 +51,12 @@ player:
     info:
       presentation: Apresentação
       collection: Coleção
+
+    messages:
+      title: Mensagens do Fórum
+      no_messages: Ainda não há mensagens no fórum
+      no_results: Nenhuma mensagem corresponde à sua pesquisa
+      search_placeholder: Pesquisar tópico ou mensagem...
 
 player_chart:
   show:

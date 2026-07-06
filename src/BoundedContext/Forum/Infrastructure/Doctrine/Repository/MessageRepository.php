@@ -89,4 +89,28 @@ class MessageRepository extends ServiceEntityRepository
             ->orderBy('m.position', 'ASC')
             ->getQuery();
     }
+
+    /**
+     * Messages postés par un utilisateur, restreints aux forums publics.
+     */
+    public function getMessagesByUserQueryBuilder(int $userId, ?string $search = null): \Doctrine\ORM\QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->addSelect('t', 'f', 'u')
+            ->join('m.topic', 't')
+            ->join('t.forum', 'f')
+            ->join('m.user', 'u')
+            ->where('u.id = :userId')
+            ->andWhere('f.status = :status')
+            ->setParameter('userId', $userId)
+            ->setParameter('status', ForumStatus::PUBLIC->value)
+            ->orderBy('m.createdAt', 'DESC');
+
+        if ($search !== null && $search !== '') {
+            $qb->andWhere('t.name LIKE :search OR m.message LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $qb;
+    }
 }

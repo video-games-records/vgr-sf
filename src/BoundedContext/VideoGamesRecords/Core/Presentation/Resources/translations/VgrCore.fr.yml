@@ -130,6 +130,7 @@ player:
       games: Jeux
       videos: Vidéos
       proofs: Preuves
+      messages: Messages du forum
 
     header:
       member_since: Membre depuis
@@ -213,6 +214,12 @@ player:
       no_proofs: Aucune preuve pour le moment
       no_scores_for_game: Aucun score pour ce jeu
       back_to_games: Retour aux jeux
+
+    messages:
+      title: Messages du forum
+      no_messages: Aucun message de forum pour le moment
+      no_results: Aucun message ne correspond à votre recherche
+      search_placeholder: Rechercher un sujet ou un message...
 
   badges:
     manage:

@@ -112,6 +112,14 @@
                 <i class="bi bi-camera-video"></i> {{ 'player.profile.tabs.proofs'|trans }}
             </a>
         </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ current_tab == 'messages' ? 'active' : '' }}"
+                href="{{ path('vgr_player_profile_messages', {id: player.id, slug: player.slug}) }}"
+            >
+                <i class="bi bi-chat-dots"></i> {{ 'player.profile.tabs.messages'|trans }}
+            </a>
+        </li>
     </ul>
 
     {# Tab Content #}
