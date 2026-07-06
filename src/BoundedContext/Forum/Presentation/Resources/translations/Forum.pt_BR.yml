@@ -28,6 +28,17 @@ topic:
         description: "%count% mensagem(ns)"
         messages_count: "%count% mensagens"
         no_message: "Ainda não há mensagens neste tópico"
+    edit:
+        title: "Editar título"
+        form:
+            name: "Título"
+        submit: "Salvar alterações"
+        cancel: "Cancelar"
+        success: "O título do tópico foi atualizado."
+        validation:
+            name_required: "Por favor, insira um título para o seu tópico."
+            name_too_short: "O título deve ter pelo menos 3 caracteres."
+            name_too_long: "O título não pode exceder 255 caracteres."
 
 breadcrumb:
     home: "Início"
