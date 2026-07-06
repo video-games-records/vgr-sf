@@ -28,6 +28,17 @@ topic:
         description: "%count% 条帖子"
         messages_count: "%count% 条帖子"
         no_message: "本主题暂无帖子"
+    edit:
+        title: "编辑标题"
+        form:
+            name: "标题"
+        submit: "保存更改"
+        cancel: "取消"
+        success: "主题标题已更新。"
+        validation:
+            name_required: "请输入主题标题。"
+            name_too_short: "标题长度至少为3个字符。"
+            name_too_long: "标题长度不能超过255个字符。"
 
 breadcrumb:
     home: "首页"

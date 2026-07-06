@@ -36,11 +36,36 @@
         </ol>
     </nav>
 
-    <div class="mb-4">
-        <h1 class="h3">
-            <i class="bi bi-chat-dots"></i> {{ topic.name }}
-        </h1>
-        <p class="text-muted">
+    <div class="mb-4" data-controller="comment-edit">
+        <div class="d-flex justify-content-between align-items-start gap-2">
+            <h1 class="h3 mb-0" data-comment-edit-target="display">
+                <i class="bi bi-chat-dots"></i> {{ topic.name }}
+            </h1>
+            {% if editTopicForm %}
+                <button type="button" class="btn btn-sm btn-outline-secondary bg-body flex-shrink-0" data-action="comment-edit#toggle">
+                    <i class="bi bi-pencil"></i> {{ 'topic.edit.title'|trans }}
+                </button>
+            {% endif %}
+        </div>
+        {% if editTopicForm %}
+            <div class="d-none mt-2" data-comment-edit-target="form">
+                {{ form_start(editTopicForm) }}
+                    <div class="mb-2">
+                        {{ form_widget(editTopicForm.name, {'value': topic.name}) }}
+                        {{ form_errors(editTopicForm.name) }}
+                    </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-secondary" data-action="comment-edit#toggle">
+                            {{ 'topic.edit.cancel'|trans }}
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg"></i> {{ 'topic.edit.submit'|trans }}
+                        </button>
+                    </div>
+                {{ form_end(editTopicForm) }}
+            </div>
+        {% endif %}
+        <p class="text-muted mt-2">
             {{ 'topic.show.description'|trans({'%count%': totalMessages}) }}
             {% if topic.type %}
                 <span class="badge topic-type--{{ topic.type.name|lower }} ms-2">{{ topic.type.name }}</span>

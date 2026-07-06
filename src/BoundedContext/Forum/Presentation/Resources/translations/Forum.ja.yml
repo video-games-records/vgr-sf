@@ -28,6 +28,17 @@ topic:
         description: "%count%件のメッセージ"
         messages_count: "%count%件のメッセージ"
         no_message: "まだメッセージはありません"
+    edit:
+        title: "タイトルを編集"
+        form:
+            name: "タイトル"
+        submit: "変更を保存"
+        cancel: "キャンセル"
+        success: "トピックのタイトルが更新されました。"
+        validation:
+            name_required: "トピックのタイトルを入力してください。"
+            name_too_short: "タイトルは3文字以上で入力してください。"
+            name_too_long: "タイトルは255文字以内で入力してください。"
 
 breadcrumb:
     home: "ホーム"

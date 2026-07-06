@@ -10,6 +10,8 @@ use App\BoundedContext\Forum\Domain\Entity\Topic;
 use App\BoundedContext\Forum\Infrastructure\Doctrine\Repository\MessageRepository;
 use App\BoundedContext\Forum\Infrastructure\Security\Voter\ForumVoter;
 use App\BoundedContext\Forum\Infrastructure\Security\Voter\MessageVoter;
+use App\BoundedContext\Forum\Infrastructure\Security\Voter\TopicVoter;
+use App\BoundedContext\Forum\Presentation\Form\EditTopicType;
 use App\BoundedContext\Forum\Presentation\Form\ReplyType;
 use App\BoundedContext\User\Domain\Entity\User;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
@@ -63,6 +65,7 @@ class TopicController extends AbstractLocalizedController
 
         $replyForm = null;
         $editForms = [];
+        $editTopicForm = null;
 
         if ($this->isGranted('ROLE_USER')) {
             /** @var User $user */
@@ -77,6 +80,12 @@ class TopicController extends AbstractLocalizedController
                     'forumSlug' => $forum->getSlug(),
                 ]),
             ]);
+
+            if ($this->isGranted(TopicVoter::EDIT, $topic)) {
+                $editTopicForm = $this->createForm(EditTopicType::class, null, [
+                    'action' => $this->generateUrl('topic_edit', ['id' => $topic->getId()]),
+                ])->createView();
+            }
 
             foreach ($paginator as $message) {
                 if ($message->getUser()->getId() === $user->getId()) {
@@ -96,6 +105,7 @@ class TopicController extends AbstractLocalizedController
             'totalMessages' => $totalMessages,
             'replyForm' => $replyForm?->createView(),
             'editForms' => $editForms,
+            'editTopicForm' => $editTopicForm,
         ]);
     }
 
@@ -179,6 +189,32 @@ class TopicController extends AbstractLocalizedController
             'forumSlug' => $forum->getSlug(),
             'page' => $message->getPage(),
             '_fragment' => 'message-' . $message->getId(),
+        ], 303);
+    }
+
+    #[Route('/forum/topic/{id}/edit', name: 'topic_edit', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function editTopicName(Request $request, Topic $topic): Response
+    {
+        $this->denyAccessUnlessGranted(TopicVoter::EDIT, $topic);
+
+        $forum = $topic->getForum();
+
+        $form = $this->createForm(EditTopicType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $topic->setName($form->get('name')->getData());
+            $this->entityManager->flush();
+
+            $this->addFlash('success', $this->translator->trans('topic.edit.success', [], 'Forum'));
+        }
+
+        return $this->redirectToRoute('topic_show', [
+            'id' => $topic->getId(),
+            'slug' => $topic->getSlug(),
+            'forumId' => $forum->getId(),
+            'forumSlug' => $forum->getSlug(),
         ], 303);
     }
 }

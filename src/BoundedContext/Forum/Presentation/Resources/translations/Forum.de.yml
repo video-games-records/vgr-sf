@@ -28,6 +28,17 @@ topic:
         description: "%count% Nachricht(en)"
         messages_count: "%count% Nachrichten"
         no_message: "Noch keine Nachrichten in diesem Thema"
+    edit:
+        title: "Titel bearbeiten"
+        form:
+            name: "Titel"
+        submit: "Änderungen speichern"
+        cancel: "Abbrechen"
+        success: "Der Themen-Titel wurde aktualisiert."
+        validation:
+            name_required: "Bitte geben Sie einen Titel für Ihr Thema ein."
+            name_too_short: "Der Titel muss mindestens 3 Zeichen lang sein."
+            name_too_long: "Der Titel darf 255 Zeichen nicht überschreiten."
 
 breadcrumb:
     home: "Startseite"

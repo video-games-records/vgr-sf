@@ -28,6 +28,17 @@ topic:
         description: "%count% message(s)"
         messages_count: "%count% messages"
         no_message: "No messages in this topic yet"
+    edit:
+        title: "Edit title"
+        form:
+            name: "Title"
+        submit: "Save changes"
+        cancel: "Cancel"
+        success: "The topic title has been updated."
+        validation:
+            name_required: "Please enter a title for your topic."
+            name_too_short: "The title must be at least 3 characters long."
+            name_too_long: "The title cannot exceed 255 characters."
 
 breadcrumb:
     home: "Home"

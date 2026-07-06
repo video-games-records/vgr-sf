@@ -28,6 +28,17 @@ topic:
         description: "%count% message(s)"
         messages_count: "%count% messages"
         no_message: "Aucun message dans ce sujet"
+    edit:
+        title: "Modifier le titre"
+        form:
+            name: "Titre"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+        success: "Le titre du sujet a été modifié."
+        validation:
+            name_required: "Veuillez saisir un titre pour votre sujet."
+            name_too_short: "Le titre doit contenir au moins 3 caractères."
+            name_too_long: "Le titre ne peut pas dépasser 255 caractères."
 
 breadcrumb:
     home: "Accueil"
