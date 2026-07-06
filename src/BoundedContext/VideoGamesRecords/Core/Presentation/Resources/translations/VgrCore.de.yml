@@ -6,6 +6,7 @@ player:
       games: Spiele
       videos: Videos
       proofs: Beweise
+      messages: Forumsbeiträge
 
     header:
       member_since: Mitglied seit
@@ -50,6 +51,12 @@ player:
     info:
       presentation: Präsentation
       collection: Sammlung
+
+    messages:
+      title: Forumsbeiträge
+      no_messages: Noch keine Forumsbeiträge
+      no_results: Keine Nachrichten entsprechen Ihrer Suche
+      search_placeholder: Thema oder Nachricht suchen...
 
 player_chart:
   show:

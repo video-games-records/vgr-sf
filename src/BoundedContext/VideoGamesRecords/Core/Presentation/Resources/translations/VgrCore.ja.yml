@@ -6,6 +6,7 @@ player:
       games: ゲーム
       videos: 動画
       proofs: 証明
+      messages: フォーラムメッセージ
 
     header:
       member_since: 登録日
@@ -50,6 +51,12 @@ player:
     info:
       presentation: プレゼンテーション
       collection: コレクション
+
+    messages:
+      title: フォーラムメッセージ
+      no_messages: フォーラムメッセージはまだありません
+      no_results: 検索条件に一致するメッセージがありません
+      search_placeholder: トピックまたはメッセージを検索...
 
 player_chart:
   show:

@@ -1,0 +1,69 @@
+{% extends '@VideoGamesRecordsCore/player/profile/_base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block meta_robots %}noimageindex{% endblock %}
+
+{% block profile_content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <h2 class="h5 mb-0">{{ 'player.profile.messages.title'|trans }}</h2>
+                <form method="get" class="d-flex" role="search">
+                    <input type="hidden" name="page" value="1">
+                    <input
+                        type="search"
+                        name="q"
+                        value="{{ search }}"
+                        class="form-control form-control-sm me-2"
+                        style="max-width: 220px;"
+                        placeholder="{{ 'player.profile.messages.search_placeholder'|trans }}"
+                    >
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="card-body p-0">
+                {% if messages|length == 0 %}
+                    <p class="text-muted text-center py-4 mb-0">
+                        {{ (search is not empty ? 'player.profile.messages.no_results' : 'player.profile.messages.no_messages')|trans }}
+                    </p>
+                {% else %}
+                    <div class="list-group list-group-flush">
+                        {% for message in messages %}
+                            <a href="{{ path('topic_show', {id: message.topic.id, slug: message.topic.slug, forumId: message.topic.forum.id, forumSlug: message.topic.forum.slug, page: (message.position / 20)|round(0, 'ceil')}) }}#message-{{ message.id }}"
+                               class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                                    <span class="fw-semibold text-truncate me-2">{{ message.topic.name|u.truncate(60) }}</span>
+                                    <small class="text-muted text-nowrap">{{ message.createdAt|user_date('M d, Y') }}</small>
+                                </div>
+                                <p class="mb-1 text-muted small text-truncate">{{ message.message|striptags|u.truncate(140)|raw }}</p>
+                                <small class="text-muted">
+                                    <i class="bi bi-folder2"></i>
+                                    {% if app.request.locale == 'fr' and message.topic.forum.libForumFr %}
+                                        {{ message.topic.forum.libForumFr }}
+                                    {% else %}
+                                        {{ message.topic.forum.libForum }}
+                                    {% endif %}
+                                </small>
+                            </a>
+                        {% endfor %}
+                    </div>
+
+                    <div class="py-3">
+                        {% include '@Forum/forum/_pagination.html.twig' with {
+                            route: 'vgr_player_profile_messages',
+                            routeParams: search is not empty ? {id: player.id, slug: player.slug, q: search} : {id: player.id, slug: player.slug},
+                            currentPage: currentPage,
+                            totalPages: totalPages,
+                            totalItems: totalMessages,
+                            perPage: 20
+                        } %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -6,6 +6,7 @@ player:
       games: 游戏
       videos: 视频
       proofs: 证明
+      messages: 论坛消息
 
     header:
       member_since: 注册时间
@@ -50,6 +51,12 @@ player:
     info:
       presentation: 介绍
       collection: 收藏
+
+    messages:
+      title: 论坛消息
+      no_messages: 暂无论坛消息
+      no_results: 没有符合搜索条件的消息
+      search_placeholder: 搜索主题或消息...
 
 player_chart:
   show:
