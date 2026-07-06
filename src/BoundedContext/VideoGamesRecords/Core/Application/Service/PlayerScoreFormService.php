@@ -76,7 +76,10 @@ readonly class PlayerScoreFormService
                 $platform = $this->platformRepository->find((int) $platformId);
                 $playerChart->setPlatform($platform);
             } else {
-                $playerChart->setPlatform(null);
+                // If the game has a single platform, default to it instead of leaving it empty
+                $gamePlatforms = $chart->getGroup()->getGame()->getPlatforms();
+                $singlePlatform = count($gamePlatforms) === 1 ? $gamePlatforms->first() : false;
+                $playerChart->setPlatform($singlePlatform instanceof Platform ? $singlePlatform : null);
             }
 
             // Reset status to NONE when score is posted/updated

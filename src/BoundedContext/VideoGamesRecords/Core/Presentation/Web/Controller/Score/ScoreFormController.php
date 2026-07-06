@@ -8,6 +8,7 @@ use App\BoundedContext\User\Application\Service\UserParameterService;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Service\PlayerScoreFormService;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerChart;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Platform;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\ChartRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GroupRepository;
@@ -261,9 +262,19 @@ class ScoreFormController extends AbstractLocalizedController
             // Prepare existing values for each lib
             /** @var array<int|string, array<int|string, string>> $existingValues */
             $existingValues = [];
+
+            $platformId = $playerChart?->getPlatform()?->getId();
+            if ($platformId === null) {
+                $gamePlatforms = $chart->getGroup()->getGame()->getPlatforms();
+                if (count($gamePlatforms) === 1) {
+                    $singlePlatform = $gamePlatforms->first();
+                    $platformId = $singlePlatform instanceof Platform ? $singlePlatform->getId() : null;
+                }
+            }
+
             /** @var array<string, mixed> $originalData */
             $originalData = [
-                'platform' => $playerChart?->getPlatform()?->getId(),
+                'platform' => $platformId,
                 'hasProof' => $playerChart && $playerChart->getProof() !== null,
                 'libs' => [],
             ];
