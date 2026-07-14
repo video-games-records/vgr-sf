@@ -23,4 +23,22 @@ Disallow: /api/
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: /sitemap.xml
+Sitemap: https://www.videogamesrecords.net/sitemap.xml
+
+
+# Bots SEO commerciaux : rien pour eux ici
+User-agent: AhrefsBot
+User-agent: SERankingBacklinksBot
+User-agent: DataForSeoBot
+User-agent: DotBot
+Disallow: /
+
+# Bots IA : le contenu oui, les images/assets/API non
+User-agent: ClaudeBot
+User-agent: GPTBot
+User-agent: Amazonbot
+Disallow: /picture/
+Disallow: /build/
+Disallow: /api/
+Disallow: /*?page=
+Crawl-delay: 10

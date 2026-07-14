@@ -52,9 +52,6 @@ jobs:
               env:
                   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-            - name: Prepare robots.txt
-              run: cp public/robots.${{ inputs.environment || 'staging' }}.txt public/robots.txt
-
             - name: Deploy
               env:
                   SSH_AUTH_SOCK: /tmp/ssh_agent.sock
