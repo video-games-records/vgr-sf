@@ -13,21 +13,40 @@ use App\BoundedContext\VideoGamesRecords\Igdb\Infrastructure\Client\Endpoint\Pla
 
 class IgdbClient
 {
-    private IGDB $api;
+    private ?IGDB $api = null;
     private Client $client;
-    private AccessConfig $accessConfig;
+    private ?AccessConfig $accessConfig = null;
 
     public function __construct(
         private readonly string $clientId,
         private readonly string $clientSecret
     ) {
         $this->client = new Client();
-        $authConfig = new AuthConfig($this->clientId, $this->clientSecret);
-        $authentication = new Authentication($this->client, $authConfig);
-        $token = $authentication->obtainToken();
+    }
 
-        $this->accessConfig = new AccessConfig($this->clientId, $token->getAccessToken());
-        $this->api = new IGDB($this->client, $this->accessConfig);
+    /**
+     * Authentication is lazy so that injecting the client never triggers a network call.
+     */
+    private function api(): IGDB
+    {
+        if ($this->api === null) {
+            $this->api = new IGDB($this->client, $this->accessConfig());
+        }
+
+        return $this->api;
+    }
+
+    private function accessConfig(): AccessConfig
+    {
+        if ($this->accessConfig === null) {
+            $authConfig = new AuthConfig($this->clientId, $this->clientSecret);
+            $authentication = new Authentication($this->client, $authConfig);
+            $token = $authentication->obtainToken();
+
+            $this->accessConfig = new AccessConfig($this->clientId, $token->getAccessToken());
+        }
+
+        return $this->accessConfig;
     }
 
     /**
@@ -36,7 +55,7 @@ class IgdbClient
     public function getAllGenres(int $limit = 500): array
     {
         $genres = [];
-        $collection = $this->api->genre()->list(0, $limit, ['id', 'name', 'slug', 'url', 'created_at', 'updated_at']);
+        $collection = $this->api()->genre()->list(0, $limit, ['id', 'name', 'slug', 'url', 'created_at', 'updated_at']);
 
         foreach ($collection as $genre) {
             $genres[] = (array) $genre;
@@ -51,7 +70,7 @@ class IgdbClient
     public function getAllPlatformTypes(int $limit = 500): array
     {
         $platformTypes = [];
-        $platformTypeEndpoint = new PlatformTypeEndpoint($this->client, $this->accessConfig);
+        $platformTypeEndpoint = new PlatformTypeEndpoint($this->client, $this->accessConfig());
         $collection = $platformTypeEndpoint->list(
             0,
             $limit,
@@ -71,7 +90,7 @@ class IgdbClient
     public function getAllPlatforms(int $limit = 500, int $offset = 0): array
     {
         $platforms = [];
-        $collection = $this->api->platform()->list(
+        $collection = $this->api()->platform()->list(
             $offset,
             $limit,
             [
@@ -94,7 +113,7 @@ class IgdbClient
     public function getAllPlatformLogos(int $limit = 500): array
     {
         $platformLogos = [];
-        $collection = $this->api->platformLogo()->list(
+        $collection = $this->api()->platformLogo()->list(
             0,
             $limit,
             [
@@ -116,7 +135,7 @@ class IgdbClient
     public function getAllGames(int $limit = 500, int $offset = 0): array
     {
         $games = [];
-        $collection = $this->api->game()->list(
+        $collection = $this->api()->game()->list(
             $offset,
             $limit,
             [
@@ -142,7 +161,7 @@ class IgdbClient
         $games = [];
 
         // Use the search method which returns results directly
-        $searchResults = $this->api->game()->search($gameName);
+        $searchResults = $this->api()->game()->search($gameName);
 
         $count = 0;
         foreach ($searchResults as $game) {
@@ -178,6 +197,32 @@ class IgdbClient
     }
 
     /**
+     * Fetch ALL games whose name matches exactly (case-insensitive).
+     *
+     * The search endpoint may omit same-named entries (IGDB splits some games
+     * into one entry per platform); this where-query returns the complete set.
+     *
+     * @return array<mixed>
+     */
+    public function getGamesByExactName(string $name, int $limit = 50): array
+    {
+        $query = sprintf(
+            'fields id, name, slug, storyline, summary, url, checksum, first_release_date, '
+                . 'version_parent, genres, platforms, created_at, updated_at; '
+                . 'where name ~ "%s"; limit %d;',
+            addcslashes($name, "\\\""),
+            $limit
+        );
+
+        $games = [];
+        foreach ($this->api()->game()->query($query) as $game) {
+            $games[] = (array) $game;
+        }
+
+        return $games;
+    }
+
+    /**
      * @param array<string> $gameNames
      * @return array<mixed>
      */
@@ -186,7 +231,7 @@ class IgdbClient
         $games = [];
 
         foreach ($gameNames as $gameName) {
-            $searchResults = $this->api->game()->search($gameName);
+            $searchResults = $this->api()->game()->search($gameName);
 
             foreach ($searchResults as $game) {
                 $gameData = (array) $game;
@@ -216,7 +261,7 @@ class IgdbClient
         foreach (array_chunk($gameIds, 10) as $batch) {
             foreach ($batch as $gameId) {
                 try {
-                    $collection = $this->api->game()->list(
+                    $collection = $this->api()->game()->list(
                         0,
                         1,
                         [

@@ -53,6 +53,12 @@ class IgdbGameMatchingCommand extends Command
                 'w',
                 InputOption::VALUE_NONE,
                 'Process only games that do not have an IGDB association yet'
+            )
+            ->addOption(
+                'local-only',
+                null,
+                InputOption::VALUE_NONE,
+                'Match only against the local igdb_game table, without querying the IGDB API'
             );
     }
 
@@ -62,6 +68,7 @@ class IgdbGameMatchingCommand extends Command
 
         $dryRun = (bool) $input->getOption('dry-run');
         $withoutIgdbOnly = (bool) $input->getOption('without-igdb-only');
+        $localOnly = (bool) $input->getOption('local-only');
         $limit = (int) $input->getOption('limit');
 
         /** @var array<string> $gameIdsOption */
@@ -86,19 +93,32 @@ class IgdbGameMatchingCommand extends Command
         $matched = 0;
         $ambiguous = 0;
         $noResult = 0;
+        $errors = 0;
 
         foreach ($games as $game) {
-            $result = $this->gameMatchingService->match($game, $dryRun);
+            try {
+                $result = $this->gameMatchingService->match($game, $dryRun, $localOnly);
+            } catch (\Throwable $e) {
+                $errors++;
+                $io->writeln(sprintf(
+                    '  <fg=red>!</> [%d] %s — error: %s',
+                    $game->getId(),
+                    $game->getLibGameEn(),
+                    $e->getMessage()
+                ));
+                continue;
+            }
 
             $igdbGame = $result->igdbGame;
             if ($igdbGame !== null) {
                 $matched++;
                 $io->writeln(sprintf(
-                    '  <fg=green>✓</> [%d] %s → IGDB #%d (%s)',
+                    '  <fg=green>✓</> [%d] %s → IGDB #%d (%s)%s',
                     $game->getId(),
                     $game->getLibGameEn(),
                     $igdbGame->getId(),
-                    $igdbGame->getName()
+                    $igdbGame->getName(),
+                    $result->fromApi ? ' <fg=cyan>[API]</>' : ''
                 ));
             } elseif ($result->isAmbiguous()) {
                 $ambiguous++;
@@ -120,10 +140,11 @@ class IgdbGameMatchingCommand extends Command
 
         $io->newLine();
         $io->success(sprintf(
-            'Done — matched: %d | ambiguous: %d | no result: %d',
+            'Done — matched: %d | ambiguous: %d | no result: %d | errors: %d',
             $matched,
             $ambiguous,
-            $noResult
+            $noResult,
+            $errors
         ));
 
         return Command::SUCCESS;

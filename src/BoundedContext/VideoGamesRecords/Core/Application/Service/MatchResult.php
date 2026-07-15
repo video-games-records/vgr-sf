@@ -11,6 +11,7 @@ readonly class MatchResult
     public function __construct(
         public ?IgdbGame $igdbGame,
         public int $candidatesCount,
+        public bool $fromApi = false,
     ) {
     }
 
