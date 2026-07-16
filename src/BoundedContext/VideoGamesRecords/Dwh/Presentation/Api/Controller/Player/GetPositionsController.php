@@ -26,9 +26,15 @@ class GetPositionsController extends AbstractController
         }
 
         $positions = [];
-        for ($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= 19; $i++) {
             $positions[] = $object->getChartRank($i);
         }
+
+        $rank20AndBeyond = 0;
+        for ($i = 20; $i <= 30; $i++) {
+            $rank20AndBeyond += $object->getChartRank($i);
+        }
+        $positions[] = $rank20AndBeyond;
 
         return $this->json($positions);
     }

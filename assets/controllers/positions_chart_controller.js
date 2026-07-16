@@ -29,10 +29,10 @@ export default class extends Controller {
             }
 
             const labels = [];
-            for (let i = 1; i <= 29; i++) {
+            for (let i = 1; i <= 19; i++) {
                 labels.push(String(i));
             }
-            labels.push('30+');
+            labels.push('20+');
 
             const canvas = document.createElement('canvas');
             this.element.appendChild(canvas);
