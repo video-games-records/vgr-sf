@@ -40,9 +40,6 @@ class Show extends AbstractLocalizedController
         $locale = $request->getLocale();
         $orderBy = $group->getOrderBy();
 
-        // Debug temporaire
-        error_log("DEBUG Group Show - GroupId: $groupId, OrderBy: $orderBy, Locale: $locale");
-
         $charts = $this->chartRepository->findByGroupId($groupId, $orderBy, $locale);
 
         return $this->render('@VideoGamesRecordsCore/group/show.html.twig', [
