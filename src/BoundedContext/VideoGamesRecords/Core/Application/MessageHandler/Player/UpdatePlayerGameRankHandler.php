@@ -48,6 +48,16 @@ readonly class UpdatePlayerGameRankHandler
             throw new EntityNotFoundException('Player', $updatePlayerGameRank->getGameId());
         }
 
+        //----- players with a PlayerGame before the rebuild (to detect players leaving the game)
+        $previousPlayerIdsQuery = $this->em->createQuery(
+            'SELECT p.id
+            FROM App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGame pg
+            JOIN pg.player p
+            WHERE pg.game = :game'
+        );
+        $previousPlayerIdsQuery->setParameter('game', $game);
+        $previousPlayerIds = array_column($previousPlayerIdsQuery->getResult(), 'id');
+
         //----- delete
         $query = $this->em->createQuery(
             'DELETE App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGame pg WHERE pg.game = :game'
@@ -224,6 +234,20 @@ readonly class UpdatePlayerGameRankHandler
                 [
                     new DescriptionStamp(
                         sprintf('Update player-data for player [%d]', $playerGame->getPlayer()->getId())
+                    )
+                ]
+            );
+        }
+
+        //----- players who left the game (had a PlayerGame before, none after the rebuild)
+        $currentPlayerIds = array_column($list, 'id');
+        $leavingPlayerIds = array_diff($previousPlayerIds, $currentPlayerIds);
+        foreach ($leavingPlayerIds as $playerId) {
+            $this->bus->dispatch(
+                new UpdatePlayerData((int) $playerId),
+                [
+                    new DescriptionStamp(
+                        sprintf('Update player-data for player [%d] leaving game [%d]', $playerId, $game->getId())
                     )
                 ]
             );

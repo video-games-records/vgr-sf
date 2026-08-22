@@ -55,13 +55,13 @@ readonly class UpdatePlayerDataHandler
         $query->setParameter('player', $player);
         $row = $query->getOneOrNullResult();
 
-        $player->setAverageGameRank((float) $row['averageGameRank']);
-        $player->setChartRank0((int) $row['chartRank0']);
-        $player->setChartRank1((int) $row['chartRank1']);
-        $player->setChartRank2((int) $row['chartRank2']);
-        $player->setChartRank3((int) $row['chartRank3']);
-        $player->setPointChart((int) $row['pointChart']);
-        $player->setPointGame((int) $row['pointGame']);
+        $player->setAverageGameRank((float) ($row['averageGameRank'] ?? 0));
+        $player->setChartRank0((int) ($row['chartRank0'] ?? 0));
+        $player->setChartRank1((int) ($row['chartRank1'] ?? 0));
+        $player->setChartRank2((int) ($row['chartRank2'] ?? 0));
+        $player->setChartRank3((int) ($row['chartRank3'] ?? 0));
+        $player->setPointChart((int) ($row['pointChart'] ?? 0));
+        $player->setPointGame((int) ($row['pointGame'] ?? 0));
 
         $query = $this->em->createQuery("
             SELECT
@@ -78,9 +78,9 @@ readonly class UpdatePlayerDataHandler
         $query->setParameter('player', $player);
         $row = $query->getOneOrNullResult();
 
-        $player->setNbChartMax((int) $row['nbChartMax']);
-        $player->setNbChart((int) $row['nbChart']);
-        $player->setNbChartProven((int) $row['nbChartProven']);
+        $player->setNbChartMax((int) ($row['nbChartMax'] ?? 0));
+        $player->setNbChart((int) ($row['nbChart'] ?? 0));
+        $player->setNbChartProven((int) ($row['nbChartProven'] ?? 0));
         $player->setNbGame($row['nbGame'] ?? 0);
 
         // 2 game Ranking
