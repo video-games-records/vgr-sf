@@ -2,7 +2,7 @@ Nouvelle feature démarrée : $ARGUMENTS
 
 On part de zéro sur cette feature. Règles pour toute la session :
 
-- Ne jamais exécuter de commande Git, quelle que soit la situation
+- Les commandes Git sont autorisées, mais demande toujours confirmation avant d'en exécuter une (commit, push, etc.)
 - Ne PAS utiliser les migrations Doctrine
 - Tout changement de schéma SQL doit être écrit directement dans `migration.sql` à la racine du projet
 
