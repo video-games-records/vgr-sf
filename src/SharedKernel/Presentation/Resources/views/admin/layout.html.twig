@@ -98,10 +98,32 @@
                 tabElement.style.cursor = 'pointer';
                 tabElement.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const tab = new bootstrap.Tab(tabElement);
-                    tab.show();
+                    activateTranslationTab(tabElement);
                 });
             });
+        }
+
+        function activateTranslationTab(tabElement) {
+            const targetPane = document.querySelector(tabElement.getAttribute('data-bs-target'));
+            if (!targetPane) {
+                return;
+            }
+
+            const navContainer = tabElement.closest('.nav');
+            if (navContainer) {
+                navContainer.querySelectorAll('.nav-link.active').forEach(function(el) {
+                    el.classList.remove('active');
+                });
+            }
+            tabElement.classList.add('active');
+
+            const tabContent = targetPane.closest('.tab-content');
+            if (tabContent) {
+                tabContent.querySelectorAll('.tab-pane.active').forEach(function(el) {
+                    el.classList.remove('show', 'active');
+                });
+            }
+            targetPane.classList.add('show', 'active');
         }
     </script>
 {% endblock %}
