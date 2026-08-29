@@ -28,6 +28,8 @@ use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game\L
 
 class GameAdmin extends BaseAdmin
 {
+    private const array LOCALES = ['en', 'fr', 'de', 'it', 'ja', 'es', 'pt_BR', 'zh_CN'];
+
     private CacheInterface $cache;
     /** @var array<Serie> */
     private array $pendingSeries = [];
@@ -55,7 +57,7 @@ class GameAdmin extends BaseAdmin
 
         if ($object->getStatus() === GameStatus::ACTIVE && $object->getPublishedAt() === null) {
             $object->setPublishedAt(new DateTime());
-            $this->cache->delete(LatestGames::CACHE_KEY);
+            $this->invalidateLatestGamesCache();
         }
 
         $originalSerie = $originalData['serie'] ?? null;
@@ -78,6 +80,13 @@ class GameAdmin extends BaseAdmin
         }
         $em->flush();
         $this->pendingSeries = [];
+    }
+
+    private function invalidateLatestGamesCache(): void
+    {
+        foreach (self::LOCALES as $locale) {
+            $this->cache->delete(LatestGames::CACHE_KEY . '_' . $locale);
+        }
     }
 
     private function majSerie(Serie $serie): void

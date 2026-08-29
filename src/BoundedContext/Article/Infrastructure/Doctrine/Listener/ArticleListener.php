@@ -15,6 +15,8 @@ use Symfony\Contracts\Cache\CacheInterface;
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Article::class)]
 readonly class ArticleListener
 {
+    private const array LOCALES = ['en', 'fr', 'de', 'it', 'ja', 'es', 'pt_BR', 'zh_CN'];
+
     public function __construct(
         private SluggerInterface $slugger,
         private CacheInterface $cache,
@@ -27,7 +29,7 @@ readonly class ArticleListener
             if ($article->getPublishedAt() === null) {
                 $article->setPublishedAt(new \DateTime());
             }
-            $this->cache->delete(TopNewsController::CACHE_KEY);
+            $this->invalidateNewsCache();
         }
 
         $this->updateSlug($article);
@@ -40,10 +42,18 @@ readonly class ArticleListener
         }
 
         if ($article->getArticleStatus()->isPublished()) {
-            $this->cache->delete(TopNewsController::CACHE_KEY);
+            $this->invalidateNewsCache();
         }
 
         $this->updateSlug($article);
+    }
+
+    private function invalidateNewsCache(): void
+    {
+        foreach (self::LOCALES as $locale) {
+            $this->cache->delete(TopNewsController::CACHE_KEY . '_' . $locale);
+            $this->cache->delete(TopNewsController::CACHE_KEY . '_dashboard_' . $locale);
+        }
     }
 
     private function updateSlug(Article $article): void
