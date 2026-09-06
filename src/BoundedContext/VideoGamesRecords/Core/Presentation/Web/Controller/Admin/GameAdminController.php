@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Chart;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
@@ -22,6 +23,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\ImportCsv;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\VideoProofOnly;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Manager\GameManager;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Dispatcher\RankingUpdateDispatcher;
+use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Game\CopyGame;
 
 /**
  * @extends AbstractCRUDController<Game>
@@ -30,7 +32,8 @@ class GameAdminController extends AbstractCRUDController
 {
     public function __construct(
         private readonly GameManager $gameManager,
-        private readonly RankingUpdateDispatcher $rankingUpdateDispatcher
+        private readonly RankingUpdateDispatcher $rankingUpdateDispatcher,
+        private readonly MessageBusInterface $bus
     ) {
     }
 
@@ -52,8 +55,8 @@ class GameAdminController extends AbstractCRUDController
         $form = $this->createForm(DefaultForm::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->gameManager->copy($game);
-            $this->addFlash('sonata_flash_success', 'The game was successfully copied.');
+            $this->bus->dispatch(new CopyGame((int) $game->getId()));
+            $this->addFlash('sonata_flash_success', 'The game copy has been queued and will be available shortly.');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
         }
 

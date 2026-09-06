@@ -10,17 +10,24 @@ use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\CopyGroupForm;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\Type\ChartTypeType;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\VideoProofOnly;
+use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Group\CopyGroup;
 
 /**
  * @extends AbstractCRUDController<Group>
  */
 class GroupAdminController extends AbstractCRUDController
 {
+    public function __construct(
+        private readonly MessageBusInterface $bus
+    ) {
+    }
+
     /**
      * @param int $id
      * @param Request $request
@@ -31,15 +38,13 @@ class GroupAdminController extends AbstractCRUDController
         /** @var Group $group */
         $group = $this->admin->getSubject();
 
-        $em = $this->getEntityManager();
-
         $form = $this->createForm(CopyGroupForm::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $em->getRepository(Group::class)->copy($group, $data['withLibs'] ?? true);
+            $this->bus->dispatch(new CopyGroup((int) $group->getId(), (bool) ($data['withLibs'] ?? true)));
 
-            $this->addFlash('sonata_flash_success', 'Group was successfully copied.');
+            $this->addFlash('sonata_flash_success', 'The group copy has been queued and will be available shortly.');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $group->getId()]));
         }
 
