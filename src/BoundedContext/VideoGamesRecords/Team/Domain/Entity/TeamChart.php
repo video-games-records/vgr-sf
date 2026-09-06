@@ -28,12 +28,12 @@ class TeamChart
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Team::class)]
-    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Team $team;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Chart::class)]
-    #[ORM\JoinColumn(name:'chart_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'chart_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Chart $chart;
 
 

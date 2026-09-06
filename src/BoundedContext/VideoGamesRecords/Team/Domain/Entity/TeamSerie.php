@@ -33,12 +33,12 @@ class TeamSerie
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Team::class)]
-    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', onDelete: 'CASCADE')]
     private Team $team;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Serie::class)]
-    #[ORM\JoinColumn(name:'serie_id', referencedColumnName:'id', nullable:false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name:'serie_id', referencedColumnName:'id', onDelete: 'CASCADE')]
     private Serie $serie;
 
     public function setSerie(Serie $serie): static

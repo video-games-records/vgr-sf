@@ -38,12 +38,12 @@ class PlayerGroup
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Player::class)]
-    #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Player $player;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Group::class, fetch: 'EAGER')]
-    #[ORM\JoinColumn(name:'group_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'group_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Group $group;
 
     public function setGroup(Group $group): static

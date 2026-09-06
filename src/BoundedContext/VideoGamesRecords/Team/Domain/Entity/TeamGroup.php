@@ -29,12 +29,12 @@ class TeamGroup
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Team::class)]
-    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Team $team;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Group::class)]
-    #[ORM\JoinColumn(name:'group_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'group_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Group $group;
 
     public function setGroup(Group $group): static

@@ -36,13 +36,13 @@ class TeamGame
     #[ApiProperty(identifier: false)]
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'teamGame')]
-    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Team $team;
 
     #[ApiProperty(identifier: false)]
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'teamGame', fetch: 'EAGER')]
-    #[ORM\JoinColumn(name:'game_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'game_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Game $game;
 
     public function setGame(Game $game): static

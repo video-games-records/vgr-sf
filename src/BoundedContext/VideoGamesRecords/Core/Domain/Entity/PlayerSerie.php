@@ -42,12 +42,12 @@ class PlayerSerie
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Player::class)]
-    #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'player_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Player $player;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Serie::class)]
-    #[ORM\JoinColumn(name:'serie_id', referencedColumnName:'id', nullable:false, onDelete:'CASCADE')]
+    #[ORM\JoinColumn(name:'serie_id', referencedColumnName:'id', onDelete:'CASCADE')]
     private Serie $serie;
 
     #[ORM\Column(nullable: false, options: ['default' => 0])]
