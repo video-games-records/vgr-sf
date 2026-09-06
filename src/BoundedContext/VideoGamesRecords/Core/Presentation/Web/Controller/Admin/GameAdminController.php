@@ -44,7 +44,7 @@ class GameAdminController extends AbstractCRUDController
         /** @var Game $game */
         $game = $this->admin->getSubject();
 
-        if (!$this->isGranted(self::ROLE_SUPER_ADMIN)) {
+        if (!$this->isGranted(self::ROLE_GAME_COPY)) {
             $this->addFlash('sonata_flash_error', 'The game was not copied.');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
         }

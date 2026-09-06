@@ -115,7 +115,7 @@ class GameAdmin extends BaseAdmin
     public function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
     {
         if (in_array($action, ['show', 'edit', 'acl']) && $object) {
-            if ($this->getSecurity()->isGranted(self::ROLE_SUPER_ADMIN)) {
+            if ($this->getSecurity()->isGranted(self::ROLE_GAME_COPY)) {
                 $buttonList['copy'] = [
                     'template' => '@VideoGamesRecordsCore/admin/action_button/btn.copy.html.twig',
                 ];
@@ -367,7 +367,7 @@ class GameAdmin extends BaseAdmin
             ],
         ];
         if ($this->hasAccess('create')) {
-            if ($this->getSecurity()->isGranted(self::ROLE_SUPER_ADMIN)) {
+            if ($this->getSecurity()->isGranted(self::ROLE_GAME_COPY)) {
                 $btns['copy'] = [
                     'template' => '@VideoGamesRecordsCore/admin/object/game/link.copy.html.twig'
                 ];
