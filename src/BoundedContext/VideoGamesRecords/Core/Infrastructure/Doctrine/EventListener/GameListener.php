@@ -18,8 +18,10 @@ class GameListener
             $game->setLibGameFr($game->getLibGameEn());
         }
 
-        $badge = new MasterBadge();
-        $badge->setPicture('master_default.gif');
-        $game->setBadge($badge);
+        if (null === $game->getBadge()) {
+            $badge = new MasterBadge();
+            $badge->setPicture('master_default.gif');
+            $game->setBadge($badge);
+        }
     }
 }
