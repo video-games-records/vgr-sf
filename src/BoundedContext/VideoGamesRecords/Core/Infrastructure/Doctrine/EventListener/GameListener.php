@@ -6,7 +6,6 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Even
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
-use App\BoundedContext\Forum\Domain\Entity\Forum;
 use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\MasterBadge;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 
@@ -23,12 +22,6 @@ class GameListener
             $badge = new MasterBadge();
             $badge->setPicture('master_default.gif');
             $game->setBadge($badge);
-        }
-
-        if (!$this->isInitialized($game, 'forum')) {
-            $forum = new Forum();
-            $forum->setLibForum($game->getLibGameEn());
-            $game->setForum($forum);
         }
     }
 
