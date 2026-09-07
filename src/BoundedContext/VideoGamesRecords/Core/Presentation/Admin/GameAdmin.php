@@ -22,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Contracts\Cache\CacheInterface;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game\LatestGames;
@@ -47,6 +48,12 @@ class GameAdmin extends BaseAdmin
 
     public function preUpdate($object): void
     {
+        if (!$object instanceof Game) {
+            // Sonata's inline "editable" list action for dotted fields (e.g. badge.picture)
+            // reassigns $object to the nested associated entity before calling $admin->update().
+            return;
+        }
+
         /** @var EntityManager $em */
         $em = $this->getModelManager()->getEntityManager($this->getClass());
         $originalData = $em->getUnitOfWork()->getOriginalEntityData($object);
@@ -398,7 +405,6 @@ class GameAdmin extends BaseAdmin
                 null,
                 [
                     'label' => 'game.list.badge',
-                    'editable' => true
                 ]
             )
             ->add(
