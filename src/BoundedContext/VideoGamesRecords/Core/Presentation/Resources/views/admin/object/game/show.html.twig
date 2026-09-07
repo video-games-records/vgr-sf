@@ -221,17 +221,23 @@
                             <tr>
                                 <td><strong>{% trans %}game.show.badge{% endtrans %} :</strong></td>
                                 <td>
-                                    {% if object.getBadge().getId() %}
-                                        <img src="{{ badge_picture_url(object.getBadge().type.directory, object.getBadge().picture) }}" alt="Badge" style="height: 32px; margin-right: 10px;">
-                                    {% endif %}
-                                    {{ object.getBadge() }}
+                                    <a href="{{ path('vgrcorebundle_admin_badge_show', {'id': object.getBadge().getId()}) }}">
+                                        {% if object.getBadge().getId() %}
+                                            <img src="{{ badge_picture_url(object.getBadge().type.directory, object.getBadge().picture) }}" alt="Badge" style="height: 32px; margin-right: 10px;">
+                                        {% endif %}
+                                        {{ object.getBadge() }}
+                                    </a>
                                 </td>
                             </tr>
                         {% endif %}
                         {% if object.getForum() %}
                             <tr>
                                 <td><strong>{% trans %}game.show.forum{% endtrans %} :</strong></td>
-                                <td>{{ object.getForum() }}</td>
+                                <td>
+                                    <a href="{{ path('pnf_admin_forum_show', {'id': object.getForum().getId()}) }}">
+                                        {{ object.getForum() }}
+                                    </a>
+                                </td>
                             </tr>
                         {% endif %}
                         {% if object.getRules()|length > 0 %}
