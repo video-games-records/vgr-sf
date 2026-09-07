@@ -26,7 +26,7 @@ class TopicAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class, ['label' => 'label.id', 'attr' => ['readonly' => true]])
+        $form->add('id', TextType::class, ['label' => 'label.id', 'disabled' => true])
             ->add('name', TextType::class, ['label' => 'label.name'])
             ->add('forum')
             ->add('type');

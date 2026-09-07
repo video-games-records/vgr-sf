@@ -43,7 +43,7 @@ class CommentAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->add('id', TextType::class, ['label' => 'comment.form.id', 'attr' => ['readonly' => true]])
+            ->add('id', TextType::class, ['label' => 'comment.form.id', 'disabled' => true])
             ->add('user', ModelListType::class, [
                 'btn_add' => false,
                 'btn_list' => false,

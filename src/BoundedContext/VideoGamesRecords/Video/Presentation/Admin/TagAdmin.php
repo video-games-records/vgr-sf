@@ -39,7 +39,7 @@ class TagAdmin extends BaseAdmin
      */
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class, ['label' => 'tag.form.id', 'attr' => ['readonly' => true]])
+        $form->add('id', TextType::class, ['label' => 'tag.form.id', 'disabled' => true])
             ->add('name', TextType::class, ['label' => 'tag.form.name', 'required' => true])
             ->add('category', TextType::class, ['label' => 'tag.form.category', 'required' => false])
             ->add('isOfficial', CheckboxType::class, ['label' => 'tag.form.is_official', 'required' => false]);

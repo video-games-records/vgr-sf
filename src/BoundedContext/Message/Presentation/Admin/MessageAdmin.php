@@ -31,7 +31,7 @@ class MessageAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class, ['label' => 'label.id', 'attr' => ['readonly' => true]])
+        $form->add('id', TextType::class, ['label' => 'label.id', 'disabled' => true])
             ->add('sender', ModelListType::class, [
                 'class' => 'App\BoundedContext\User\Domain\Entity\User',
                 'btn_add' => false,

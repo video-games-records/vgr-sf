@@ -31,7 +31,7 @@ class ForumAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class, ['label' => 'label.id', 'attr' => ['readonly' => true]])
+        $form->add('id', TextType::class, ['label' => 'label.id', 'disabled' => true])
             ->add('libForum', TextType::class, ['label' => 'label.forum'])
             ->add('libForumFr', TextType::class, ['label' => 'label.forumFr'])
             ->add('category')

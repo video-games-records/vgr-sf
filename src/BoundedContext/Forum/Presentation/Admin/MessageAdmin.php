@@ -32,7 +32,7 @@ class MessageAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class, ['label' => 'label.id', 'attr' => ['readonly' => true]])
+        $form->add('id', TextType::class, ['label' => 'label.id', 'disabled' => true])
             ->add('message', RichTextEditorType::class, ['label' => 'label.message'])
             ->add('topic')
             ->add('position', TextType::class, ['label' => 'label.position']);

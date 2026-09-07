@@ -38,7 +38,7 @@ class BadgeAdmin extends BaseAdmin
      */
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class, ['label' => 'badge.form.id', 'attr' => ['readonly' => true]])
+        $form->add('id', TextType::class, ['label' => 'badge.form.id', 'disabled' => true])
             ->add(
                 'type',
                 ChoiceType::class,
