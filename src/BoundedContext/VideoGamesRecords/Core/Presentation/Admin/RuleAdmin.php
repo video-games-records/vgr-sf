@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Rule;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -69,13 +70,14 @@ class RuleAdmin extends BaseAdmin
             )
             ->add('translations', TranslationsType::class, [
                 'label' => 'rule.form.translations',
-                'fields' => [
+                'translatable_class' => Rule::class,
+                'children' => [
                     'content' => [
-                        'field_type' => RichTextEditorType::class,
+                        'child_type' => RichTextEditorType::class,
                         'label' => 'rule.form.rules',
                         'required' => false,
-                     ]
-                ]
+                    ],
+                ],
             ]);
     }
 

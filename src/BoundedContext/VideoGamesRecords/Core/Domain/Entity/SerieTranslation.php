@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\Entity;
 
+use A2lix\TranslationFormBundle\Helper\OneLocaleInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\DescriptionTrait;
 
 #[ORM\Table(name:'vgr_serie_translation')]
 #[ORM\Entity]
 #[ORM\UniqueConstraint(name: 'serie_translation_unique', columns: ['translatable_id', 'locale'])]
-class SerieTranslation
+class SerieTranslation implements OneLocaleInterface
 {
     use DescriptionTrait;
 
@@ -49,5 +50,10 @@ class SerieTranslation
     {
         $this->locale = $locale;
         return $this;
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->description);
     }
 }

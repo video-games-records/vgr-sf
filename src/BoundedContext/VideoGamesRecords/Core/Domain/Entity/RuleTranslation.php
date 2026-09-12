@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\Entity;
 
+use A2lix\TranslationFormBundle\Helper\OneLocaleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name:'vgr_rule_translation')]
 #[ORM\Entity]
 #[ORM\UniqueConstraint(name: 'rule_translation_unique', columns: ['translatable_id', 'locale'])]
-class RuleTranslation
+class RuleTranslation implements OneLocaleInterface
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
@@ -60,5 +61,10 @@ class RuleTranslation
     {
         $this->content = $content;
         return $this;
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->content);
     }
 }

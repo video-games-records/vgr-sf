@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Country;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -63,6 +64,7 @@ class CountryAdmin extends BaseAdmin
             ])
             ->add('translations', TranslationsType::class, [
                 'label' => 'country.form.translations',
+                'translatable_class' => Country::class,
                 'required' => true,
             ]);
     }

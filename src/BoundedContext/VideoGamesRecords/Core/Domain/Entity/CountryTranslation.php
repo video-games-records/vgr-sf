@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Domain\Entity;
 
+use A2lix\TranslationFormBundle\Helper\OneLocaleInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name:'vgr_country_translation')]
 #[ORM\Entity]
-class CountryTranslation
+class CountryTranslation implements OneLocaleInterface
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
@@ -61,5 +62,10 @@ class CountryTranslation
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->name);
     }
 }
