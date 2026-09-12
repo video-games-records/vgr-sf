@@ -123,6 +123,14 @@ player:
     card_title: Mes derniers jeux
     no_games: Aucun jeu joué pour l'instant
 
+  staff:
+    title: Staff VGR
+    meta_description: Découvrez le staff de VGR - administrateurs, modérateurs et autres membres de l'équipe.
+    breadcrumb: Staff
+    header: Staff VGR
+    description: "%count% membres du staff"
+    no_staff: Aucun membre du staff trouvé
+
   profile:
     tabs:
       overview: Vue d'ensemble

@@ -1,4 +1,12 @@
 player:
+  staff:
+    title: VGRスタッフ
+    meta_description: VGRスタッフのご紹介 - 管理者、モデレーター、その他のチームメンバー。
+    breadcrumb: スタッフ
+    header: VGRスタッフ
+    description: "%count%人のスタッフ"
+    no_staff: スタッフが見つかりません
+
   profile:
     tabs:
       overview: 概要

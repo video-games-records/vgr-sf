@@ -43,6 +43,7 @@ navigation:
     forum: "Forum"
     players: "Giocatori"
     teams: "Squadre"
+    staff: "Staff"
 
   # User menu (when logged in)
   user_menu:

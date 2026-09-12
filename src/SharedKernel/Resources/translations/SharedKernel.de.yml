@@ -43,6 +43,7 @@ navigation:
     forum: "Forum"
     players: "Spieler"
     teams: "Teams"
+    staff: "Staff"
 
   # User menu (when logged in)
   user_menu:

@@ -123,6 +123,14 @@ player:
     card_title: My recent games
     no_games: No games played yet
 
+  staff:
+    title: VGR Staff
+    meta_description: Meet the VGR staff - administrators, moderators and other team members.
+    breadcrumb: Staff
+    header: VGR Staff
+    description: "%count% staff members"
+    no_staff: No staff members found
+
   profile:
     tabs:
       overview: Overview

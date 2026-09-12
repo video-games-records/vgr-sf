@@ -34,6 +34,7 @@ navigation:
     forum: "Foro"
     players: "Jugadores"
     teams: "Equipos"
+    staff: "Staff"
 
   user_menu:
     profile: "Perfil"

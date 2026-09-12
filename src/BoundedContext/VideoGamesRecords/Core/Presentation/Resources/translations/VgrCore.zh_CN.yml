@@ -1,4 +1,12 @@
 player:
+  staff:
+    title: VGR 工作人员
+    meta_description: 认识 VGR 的工作人员 - 管理员、版主和其他团队成员。
+    breadcrumb: 工作人员
+    header: VGR 工作人员
+    description: "%count% 名工作人员"
+    no_staff: 未找到工作人员
+
   profile:
     tabs:
       overview: 概览

@@ -1,0 +1,78 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block title %}{{ 'player.staff.title'|trans }}{% endblock %}
+
+{% block meta_description %}{{ 'player.staff.meta_description'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    {# Breadcrumb Navigation #}
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">
+                    <i class="bi bi-house"></i> {{ 'breadcrumb.home'|trans }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'player.staff.breadcrumb'|trans }}
+            </li>
+        </ol>
+    </nav>
+
+    {# Page Header #}
+    <div class="mb-4">
+        <h1 class="h3">
+            <i class="bi bi-person-badge"></i>
+            {{ 'player.staff.header'|trans }}
+        </h1>
+        <p class="text-muted">{{ 'player.staff.description'|trans({'%count%': staff|length}) }}</p>
+    </div>
+
+    {# Staff Grid #}
+    {% if staff|length > 0 %}
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+            {% for player in staff %}
+                <div class="col">
+                    <div class="card shadow-sm h-100 text-center">
+                        <div class="card-body p-3">
+                            <a href="{{ path('vgr_player_profile_overview', {id: player.id, slug: player.slug}) }}" class="text-decoration-none">
+                                <img src="{{ player_avatar_url(player.avatar) }}"
+                                     alt="{{ player.pseudo }}"
+                                     class="rounded-circle mb-2"
+                                     width="64" height="64">
+                                <h6 class="card-title mb-1 text-truncate">{{ player.pseudo }}</h6>
+                            </a>
+                            <div class="mb-2">
+                                <span class="badge {{ player.statusClass }}">
+                                    {{ player.statusLabel }}
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2 small text-muted">
+                                {% if player.team %}
+                                    <a href="{{ path('vgr_team_profile_overview', {id: player.team.id, slug: player.team.slug}) }}"
+                                       class="text-decoration-none text-muted"
+                                       title="{{ player.team.libTeam }}">[{{ player.team.tag }}]</a>
+                                {% endif %}
+                                {% if player.country %}
+                                    <img src="https://flagcdn.com/20x15/{{ player.country.codeIso2|lower }}.png"
+                                         alt="{{ player.country.name }}"
+                                         title="{{ player.country.name }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card shadow-sm">
+            <div class="card-body text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'player.staff.no_staff'|trans }}</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

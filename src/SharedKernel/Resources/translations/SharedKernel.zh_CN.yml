@@ -34,6 +34,7 @@ navigation:
     forum: "论坛"
     players: "玩家"
     teams: "战队"
+    staff: "工作人员"
 
   user_menu:
     profile: "个人资料"

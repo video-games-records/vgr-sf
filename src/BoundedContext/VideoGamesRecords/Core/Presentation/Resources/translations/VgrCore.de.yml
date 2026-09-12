@@ -1,4 +1,12 @@
 player:
+  staff:
+    title: VGR-Staff
+    meta_description: Lernen Sie das VGR-Staff kennen - Administratoren, Moderatoren und andere Teammitglieder.
+    breadcrumb: Staff
+    header: VGR-Staff
+    description: "%count% Staff-Mitglieder"
+    no_staff: Keine Staff-Mitglieder gefunden
+
   profile:
     tabs:
       overview: Übersicht

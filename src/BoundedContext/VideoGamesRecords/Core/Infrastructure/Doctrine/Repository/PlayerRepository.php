@@ -10,6 +10,7 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerStatusEnum;
 use App\BoundedContext\User\Domain\Entity\User;
 
 /**
@@ -149,5 +150,22 @@ class PlayerRepository extends DefaultRepository
             ->where('p.nbChart > 0');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return array<Player>
+     */
+    public function findStaff(): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.team', 't')
+            ->addSelect('t')
+            ->leftJoin('p.country', 'c')
+            ->addSelect('c')
+            ->where('p.status != :status')
+            ->setParameter('status', PlayerStatusEnum::MEMBER)
+            ->orderBy('p.pseudo', 'ASC');
+
+        return $qb->getQuery()->getResult();
     }
 }
