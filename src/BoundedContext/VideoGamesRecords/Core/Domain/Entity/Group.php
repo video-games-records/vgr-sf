@@ -77,14 +77,11 @@ class Group
         return $this->libGroupEn;
     }
 
-    public function getName(): ?string
+    public function getName(?string $locale = null): ?string
     {
-        $locale = Locale::getDefault();
-        if ($locale == 'fr') {
-            return $this->libGroupFr;
-        } else {
-            return $this->libGroupEn;
-        }
+        $locale = $locale ?? Locale::getDefault();
+
+        return $locale === 'fr' ? $this->libGroupFr : $this->libGroupEn;
     }
 
     public function setId(int $id): static
