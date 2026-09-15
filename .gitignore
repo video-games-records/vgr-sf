@@ -22,6 +22,14 @@
 /.idea/
 ###< IDE ###
 
+###> claude-code ###
+/.claude/feature-status/
+###< claude-code ###
+
+###> generated ###
+/public/sitemap.xml
+###< generated ###
+
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
