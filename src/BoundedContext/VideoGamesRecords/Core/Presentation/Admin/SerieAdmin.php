@@ -63,7 +63,18 @@ class SerieAdmin extends BaseAdmin
     {
         $collection
             ->remove('export')
-            ->add('maj', $this->getRouterIdParameter() . '/maj');
+            ->add('maj', $this->getRouterIdParameter() . '/maj')
+            ->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture');
+    }
+
+    public function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
+    {
+        if (in_array($action, ['show', 'edit'], true) && $object) {
+            $buttonList['upload-picture'] = [
+                'template' => '@VideoGamesRecordsCore/admin/action_button/btn.upload_picture_serie.html.twig',
+            ];
+        }
+        return $buttonList;
     }
 
     protected function configureDefaultSortValues(array &$sortValues): void

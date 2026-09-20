@@ -163,6 +163,8 @@ serie:
     description: Description
     nbPlayer: Nombre de joueurs
     nbTeam: Nombre d'équipes
+  action:
+    upload_picture: Uploader une image
 
 group:
   label: Groupes
