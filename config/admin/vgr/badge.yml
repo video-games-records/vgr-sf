@@ -5,6 +5,7 @@ services:
     tags:
       - name: sonata.admin
         model_class: App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge
+        controller: App\BoundedContext\VideoGamesRecords\Badge\Presentation\Web\Controller\Admin\BadgeAdminController
         manager_type: orm
         group: "group.badge"
         label: "badge.label"

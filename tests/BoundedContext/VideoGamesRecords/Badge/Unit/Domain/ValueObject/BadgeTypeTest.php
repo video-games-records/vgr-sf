@@ -71,7 +71,7 @@ class BadgeTypeTest extends TestCase
 
     public function testGetDirectoryForSerie(): void
     {
-        $this->assertSame('series/badge', BadgeType::SERIE->getDirectory());
+        $this->assertSame('badge' . DIRECTORY_SEPARATOR . 'Serie', BadgeType::SERIE->getDirectory());
     }
 
     public function testGetDirectoryForOtherTypesUsesBadgePrefix(): void
@@ -84,9 +84,6 @@ class BadgeTypeTest extends TestCase
     public function testGetDirectoryIsConsistentWithValue(): void
     {
         foreach (BadgeType::cases() as $case) {
-            if ($case === BadgeType::SERIE) {
-                continue;
-            }
             $this->assertStringStartsWith('badge', $case->getDirectory());
         }
     }

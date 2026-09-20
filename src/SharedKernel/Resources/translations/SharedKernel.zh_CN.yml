@@ -176,5 +176,5 @@ picture_upload:
     submit: "上传"
     error:
       file_required: "请选择一张图片。"
-      mime_type: "只允许 PNG 和 JPEG 图片。"
+      mime_type: "只允许 PNG、JPEG 和 GIF 图片。"
       max_size: "文件太大。最大大小：{{ limit }}。"

@@ -436,6 +436,8 @@ badge:
     picture: Picture
     value: Value
     nbPlayer: Players Count
+  action:
+    upload_picture: Upload picture
 
 player_badge:
   label: Player Badges

@@ -17,6 +17,7 @@ class PictureUploadManager
     private array $extensions = [
         'png' => 'image/png',
         'jpg' => 'image/jpeg',
+        'gif' => 'image/gif',
     ];
 
     public function __construct(private readonly FilesystemOperator $pictureStorage)
@@ -38,15 +39,20 @@ class PictureUploadManager
     {
         $extension = $this->getExtension($file->getMimeType() ?? 'image/png');
 
-        $manager = ImageManager::gd();
-        $image = $manager->read($file->getContent());
-        $image->scaleDown(width: 1200, height: 1200);
+        if ($extension === 'gif') {
+            // Kept as-is (no resize/re-encode) to preserve animated GIFs used for badges.
+            $contents = (string) $file->getContent();
+        } else {
+            $manager = ImageManager::gd();
+            $image = $manager->read($file->getContent());
+            $image->scaleDown(width: 1200, height: 1200);
 
-        $encoder = match ($extension) {
-            'jpg' => new JpegEncoder(quality: 90),
-            default => new PngEncoder(),
-        };
-        $contents = (string) $image->encode($encoder);
+            $encoder = match ($extension) {
+                'jpg' => new JpegEncoder(quality: 90),
+                default => new PngEncoder(),
+            };
+            $contents = (string) $image->encode($encoder);
+        }
 
         do {
             $filename = $filenamePrefix . '-' . uniqid() . '.' . $extension;

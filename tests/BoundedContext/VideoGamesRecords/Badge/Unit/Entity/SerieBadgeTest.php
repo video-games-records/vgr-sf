@@ -81,7 +81,7 @@ class SerieBadgeTest extends TestCase
 
     public function testSerieTypeDirectoryIsCorrect(): void
     {
-        $this->assertSame('series/badge', $this->badge->getType()->getDirectory());
+        $this->assertSame('badge' . DIRECTORY_SEPARATOR . 'Serie', $this->badge->getType()->getDirectory());
     }
 
     // ------------------------------------------------------------------

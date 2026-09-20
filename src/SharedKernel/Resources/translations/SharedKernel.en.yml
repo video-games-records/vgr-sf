@@ -189,5 +189,5 @@ picture_upload:
     submit: "Upload"
     error:
       file_required: "Please select an image."
-      mime_type: "Only PNG and JPEG images are allowed."
+      mime_type: "Only PNG, JPEG, and GIF images are allowed."
       max_size: "The file is too large. Maximum size: {{ limit }}."

@@ -66,18 +66,10 @@ enum BadgeType: string
     }
 
     /**
-     * Retourne les répertoires spécifiques pour certains types de badges
-     * @return array<string, string>
-     */
-    /**
      * Retourne le répertoire pour un type de badge spécifique
      */
     public function getDirectory(): string
     {
-        if ($this === self::SERIE) {
-            return 'series/badge';
-        }
-
         return self::getDefaultDirectory() . DIRECTORY_SEPARATOR . $this->value;
     }
 }

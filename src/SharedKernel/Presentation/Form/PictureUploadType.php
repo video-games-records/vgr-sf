@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Presentation\Form;
 
+use App\SharedKernel\Infrastructure\FileSystem\Manager\PictureUploadManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,6 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class PictureUploadType extends AbstractType
 {
+    public function __construct(private readonly PictureUploadManager $pictureUploadManager)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -28,7 +33,7 @@ class PictureUploadType extends AbstractType
                     ),
                     new Assert\File(
                         maxSize: '5M',
-                        mimeTypes: ['image/png', 'image/jpeg'],
+                        mimeTypes: $this->pictureUploadManager->getAllowedMimeTypes(),
                         mimeTypesMessage: 'picture_upload.form.error.mime_type',
                         maxSizeMessage: 'picture_upload.form.error.max_size',
                     ),

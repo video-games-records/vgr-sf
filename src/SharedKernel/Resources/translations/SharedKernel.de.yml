@@ -188,5 +188,5 @@ picture_upload:
     submit: "Hochladen"
     error:
       file_required: "Bitte wählen Sie ein Bild aus."
-      mime_type: "Es sind nur PNG- und JPEG-Bilder erlaubt."
+      mime_type: "Es sind nur PNG-, JPEG- und GIF-Bilder erlaubt."
       max_size: "Die Datei ist zu groß. Maximale Größe: {{ limit }}."

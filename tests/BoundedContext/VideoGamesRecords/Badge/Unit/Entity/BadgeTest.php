@@ -181,7 +181,7 @@ class BadgeTest extends TestCase
 
     public function testGetDirectoryForSerieType(): void
     {
-        $this->assertSame('series/badge', BadgeType::SERIE->getDirectory());
+        $this->assertSame('badge' . DIRECTORY_SEPARATOR . 'Serie', BadgeType::SERIE->getDirectory());
     }
 
     public function testGetDirectoryForMasterType(): void

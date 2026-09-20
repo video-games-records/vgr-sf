@@ -189,5 +189,5 @@ picture_upload:
     submit: "Envoyer"
     error:
       file_required: "Veuillez sélectionner une image."
-      mime_type: "Seules les images PNG et JPEG sont autorisées."
+      mime_type: "Seules les images PNG, JPEG et GIF sont autorisées."
       max_size: "Le fichier est trop volumineux. Taille maximale : {{ limit }}."

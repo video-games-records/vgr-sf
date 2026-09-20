@@ -31,6 +31,17 @@ class BadgeAdmin extends BaseAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('export');
+        $collection->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture');
+    }
+
+    public function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
+    {
+        if (in_array($action, ['show', 'edit'], true) && $object) {
+            $buttonList['upload-picture'] = [
+                'template' => '@VideoGamesRecordsBadge/admin/action_button/btn.upload_picture.html.twig',
+            ];
+        }
+        return $buttonList;
     }
 
     /**
