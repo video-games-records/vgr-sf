@@ -180,3 +180,14 @@ dashboard:
       gold: "Or"
       silver: "Argent"
       bronze: "Bronze"
+
+# === UPLOAD D'IMAGE (formulaire générique, réutilisé entre contextes) ===
+picture_upload:
+  form:
+    picture:
+      label: "Choisir une image"
+    submit: "Envoyer"
+    error:
+      file_required: "Veuillez sélectionner une image."
+      mime_type: "Seules les images PNG et JPEG sont autorisées."
+      max_size: "Le fichier est trop volumineux. Taille maximale : {{ limit }}."

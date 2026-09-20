@@ -168,3 +168,13 @@ dashboard:
       gold: "Ouro"
       silver: "Prata"
       bronze: "Bronze"
+
+picture_upload:
+  form:
+    picture:
+      label: "Escolher uma imagem"
+    submit: "Enviar"
+    error:
+      file_required: "Por favor, selecione uma imagem."
+      mime_type: "Apenas imagens PNG e JPEG são permitidas."
+      max_size: "O arquivo é muito grande. Tamanho máximo: {{ limit }}."

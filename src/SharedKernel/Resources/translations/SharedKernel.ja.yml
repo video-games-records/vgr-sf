@@ -168,3 +168,13 @@ dashboard:
       gold: "ゴールド"
       silver: "シルバー"
       bronze: "ブロンズ"
+
+picture_upload:
+  form:
+    picture:
+      label: "画像を選択"
+    submit: "アップロード"
+    error:
+      file_required: "画像を選択してください。"
+      mime_type: "PNGおよびJPEG画像のみ使用できます。"
+      max_size: "ファイルが大きすぎます。最大サイズ：{{ limit }}。"

@@ -18,7 +18,9 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartLib;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Group;
+use App\SharedKernel\Infrastructure\FileSystem\Manager\PictureUploadManager;
 use App\SharedKernel\Presentation\Form\DefaultForm;
+use App\SharedKernel\Presentation\Form\PictureUploadType;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\ImportCsv;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\VideoProofOnly;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Manager\GameManager;
@@ -33,7 +35,8 @@ class GameAdminController extends AbstractCRUDController
     public function __construct(
         private readonly GameManager $gameManager,
         private readonly RankingUpdateDispatcher $rankingUpdateDispatcher,
-        private readonly MessageBusInterface $bus
+        private readonly MessageBusInterface $bus,
+        private readonly PictureUploadManager $pictureUploadManager
     ) {
     }
 
@@ -121,6 +124,37 @@ class GameAdminController extends AbstractCRUDController
         );
     }
 
+
+    public function uploadPictureAction(int $id, Request $request): RedirectResponse|Response
+    {
+        /** @var Game $game */
+        $game = $this->admin->getSubject();
+
+        $form = $this->createForm(PictureUploadType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $file */
+            $file = $form->get('picture')->getData();
+
+            $filename = $this->pictureUploadManager->upload($file, 'game', (string) $game->getId());
+            $this->gameManager->updatePicture($game, $filename);
+
+            $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
+            return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
+        }
+
+        return $this->render(
+            '@VideoGamesRecordsCore/admin/form/form.default.html.twig',
+            [
+                'base_template' => '@SonataAdmin/standard_layout.html.twig',
+                'admin' => $this->admin,
+                'object' => $game,
+                'form' => $form,
+                'title' => $game->getName(),
+                'action' => 'edit'
+            ]
+        );
+    }
 
     /**
      * @throws ORMException

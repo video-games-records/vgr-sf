@@ -85,6 +85,8 @@ game:
   ranking:
     enabled: Activé
     disabled: Désactivé
+  action:
+    upload_picture: Uploader une image
 
 # Section labels for forms
 section:

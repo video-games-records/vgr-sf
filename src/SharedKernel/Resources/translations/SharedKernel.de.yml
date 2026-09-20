@@ -180,3 +180,13 @@ dashboard:
       gold: "Gold"
       silver: "Silber"
       bronze: "Bronze"
+
+picture_upload:
+  form:
+    picture:
+      label: "Bild auswählen"
+    submit: "Hochladen"
+    error:
+      file_required: "Bitte wählen Sie ein Bild aus."
+      mime_type: "Es sind nur PNG- und JPEG-Bilder erlaubt."
+      max_size: "Die Datei ist zu groß. Maximale Größe: {{ limit }}."

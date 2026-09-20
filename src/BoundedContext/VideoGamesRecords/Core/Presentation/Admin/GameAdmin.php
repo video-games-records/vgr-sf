@@ -116,7 +116,8 @@ class GameAdmin extends BaseAdmin
             ->add('copy', $this->getRouterIdParameter() . '/copy')
             ->add('maj', $this->getRouterIdParameter() . '/maj')
             ->add('set-video-proof-only', $this->getRouterIdParameter() . '/set-video-proof-only')
-            ->add('import-csv', $this->getRouterIdParameter() . '/import-csv');
+            ->add('import-csv', $this->getRouterIdParameter() . '/import-csv')
+            ->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture');
     }
 
     public function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
@@ -129,6 +130,9 @@ class GameAdmin extends BaseAdmin
             }
             $buttonList['set-video-proof-only'] = [
                 'template' => '@VideoGamesRecordsCore/admin/action_button/btn.set_video_proof_only.html.twig',
+            ];
+            $buttonList['upload-picture'] = [
+                'template' => '@VideoGamesRecordsCore/admin/action_button/btn.upload_picture.html.twig',
             ];
             $buttonList['add-group'] = [
                 'template' => '@VideoGamesRecordsCore/admin/object/game/btn.add_group.html.twig',

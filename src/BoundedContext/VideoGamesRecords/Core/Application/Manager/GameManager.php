@@ -82,4 +82,10 @@ readonly class GameManager
         }
         $this->em->flush();
     }
+
+    public function updatePicture(Game $game, string $filename): void
+    {
+        $game->setPicture($filename);
+        $this->em->flush();
+    }
 }
