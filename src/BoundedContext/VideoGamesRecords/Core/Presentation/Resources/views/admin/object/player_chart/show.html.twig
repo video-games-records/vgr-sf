@@ -87,21 +87,21 @@
                                'chartSlug': object.chart.slug
                            }) }}"
                            target="_blank"
-                           class="btn btn-primary">
+                           class="btn btn-default">
                             <i class="fa fa-chart-line"></i>
                             {% trans %}player_chart.links.viewChart{% endtrans %}
                         </a>
 
                         {% if object.proof %}
                             <a href="{{ path('vgrcorebundle_admin_proof_show', {'id': object.proof.id}) }}"
-                               class="btn btn-success">
+                               class="btn btn-default">
                                 <i class="fa fa-eye"></i>
                                 {% trans %}player_chart.links.viewProof{% endtrans %}
                             </a>
                         {% endif %}
 
                         <a href="{{ path('vgrcorebundle_admin_player_show', {'id': object.player.id}) }}"
-                           class="btn btn-info">
+                           class="btn btn-default">
                             <i class="fa fa-user"></i>
                             {% trans %}player_chart.links.viewPlayer{% endtrans %}
                         </a>

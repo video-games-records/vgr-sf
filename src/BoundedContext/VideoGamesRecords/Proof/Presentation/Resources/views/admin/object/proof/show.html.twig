@@ -136,7 +136,7 @@
             {% if object.getStatus().value == 'IN PROGRESS' %}
                 <div class="box box-default">
                     <div class="box-body text-center">
-                        <a href="{{ admin.generateUrl('edit', {'id': object.getId()}) }}" class="btn btn-primary btn-block">
+                        <a href="{{ admin.generateUrl('edit', {'id': object.getId()}) }}" class="btn btn-default btn-block">
                             <i class="fa fa-edit"></i> {% trans %}proof.edit.for.validation{% endtrans %}
                         </a>
                     </div>

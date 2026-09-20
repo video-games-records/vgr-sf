@@ -1,5 +1,5 @@
 {% if object.getPlayerChart() %}
-<a target="_blank" class="btn btn-sm btn-primary" href="{{ path('vgr_chart_show', {
+<a target="_blank" class="btn btn-sm btn-default" href="{{ path('vgr_chart_show', {
     'id': object.getPlayerChart().getChart().getGroup().getGame().getId(),
     'slug': object.getPlayerChart().getChart().getGroup().getGame().getSlug(),
     'groupId': object.getPlayerChart().getChart().getGroup().getId(),

@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="mt-2">
                                             <a href="{{ admin.generateObjectUrl('rotate_picture', object) }}"
-                                               class="btn btn-xs btn-warning"
+                                               class="btn btn-xs btn-default"
                                                onclick="return confirm('{% trans from 'VgrProofAdmin' %}proof.picture.rotate.confirm{% endtrans %}')">
                                                 <i class="fa fa-rotate-right"></i> {% trans from 'VgrProofAdmin' %}proof.picture.rotate.label{% endtrans %}
                                             </a>
@@ -222,7 +222,7 @@
                                 <td>
                                     <a href="{{ path('vgrcorebundle_admin_player_chart_edit', {'id': object.getPlayerChart().getId()}) }}" 
                                        target="_blank" 
-                                       class="btn btn-xs btn-primary">
+                                       class="btn btn-xs btn-default">
                                         <i class="fa fa-edit"></i> {% trans %}proof.edit.score.link{% endtrans %}
                                     </a>
                                 </td>
