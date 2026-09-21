@@ -57,8 +57,8 @@ class Game implements GameInfoInterface
     private string $libGameFr = '';
 
 
-    #[ORM\Column(length: 30, nullable: false, enumType: GameStatus::class, options: ['default' => 'CREATED'])]
-    private GameStatus $status = GameStatus::CREATED;
+    #[ORM\Column(length: 30, nullable: false, enumType: GameStatus::class, options: ['default' => 'ADD_SCORE'])]
+    private GameStatus $status = GameStatus::ADD_SCORE;
 
     #[ORM\Column(nullable: true)]
     private ?DateTime $publishedAt = null;

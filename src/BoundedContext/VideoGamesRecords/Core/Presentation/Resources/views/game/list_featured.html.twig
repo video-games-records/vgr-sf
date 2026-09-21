@@ -87,27 +87,8 @@
         </div>
     {% endif %}
 
-    {# CREATED - Just created #}
-    {% if gamesCreated|length > 0 %}
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-secondary text-white">
-                <h5 class="mb-0">
-                    <i class="bi bi-plus-circle"></i>
-                    {{ 'game.featured.status_created'|trans }}
-                    <span class="badge bg-light text-secondary ms-2">{{ gamesCreated|length }}</span>
-                </h5>
-                <small>{{ 'game.featured.status_created_desc'|trans }}</small>
-            </div>
-            <div class="list-group list-group-flush">
-                {% for game in gamesCreated %}
-                    {{ _self.game_item(game) }}
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-
     {# No games at all #}
-    {% if gamesCreated|length == 0 and gamesAddScore|length == 0 and gamesAddPicture|length == 0 and gamesCompleted|length == 0 %}
+    {% if gamesAddScore|length == 0 and gamesAddPicture|length == 0 and gamesCompleted|length == 0 %}
         <div class="card shadow-sm">
             <div class="card-body text-center text-muted py-5">
                 <i class="bi bi-inbox" style="font-size: 3rem;"></i>

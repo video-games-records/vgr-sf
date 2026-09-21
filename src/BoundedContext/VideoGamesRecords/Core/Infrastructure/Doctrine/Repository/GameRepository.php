@@ -67,19 +67,6 @@ class GameRepository extends DefaultRepository
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    public function countStatusCreated(): mixed
-    {
-        $qb = $this->getCountQueryBuilder();
-        $this->whereStatus($qb, GameStatus::CREATED->value);
-        return $qb->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    /**
-     * @return mixed
-     * @throws NonUniqueResultException
-     * @throws NoResultException
-     */
     public function countStatusAddPicture(): mixed
     {
         $qb = $this->getCountQueryBuilder();

@@ -21,12 +21,10 @@
             <div class="progress-group" style="margin-bottom: 20px;">
                 <span class="progress-text">{% trans %}game.dashboard.progress{% endtrans %}</span>
                 <div class="progress progress-sm">
-                    {% set createdPercent = (totalByStatus['CREATED'] / totalGames * 100)|round %}
                     {% set addScorePercent = (totalByStatus['ADD_SCORE'] / totalGames * 100)|round %}
                     {% set addPicturePercent = (totalByStatus['ADD_PICTURE'] / totalGames * 100)|round %}
                     {% set completedPercent = (totalByStatus['COMPLETED'] / totalGames * 100)|round %}
 
-                    <div class="progress-bar progress-bar-danger" style="width: {{ createdPercent }}%"></div>
                     <div class="progress-bar progress-bar-warning" style="width: {{ addScorePercent }}%"></div>
                     <div class="progress-bar progress-bar-info" style="width: {{ addPicturePercent }}%"></div>
                     <div class="progress-bar progress-bar-success" style="width: {{ completedPercent }}%"></div>
@@ -44,7 +42,7 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#statusAccordion" href="#collapse{{ status|replace({' ': ''}) }}">
                                         <span class="status-badge status-{{ status|lower|replace({' ': '-', '_': '-'}) }}">
-                                            <i class="fa {{ status == 'CREATED' ? 'fa-plus-circle' : (status == 'ADD_SCORE' ? 'fa-calculator' : (status == 'ADD_PICTURE' ? 'fa-picture-o' : 'fa-check-circle')) }}"></i>
+                                            <i class="fa {{ status == 'ADD_SCORE' ? 'fa-calculator' : (status == 'ADD_PICTURE' ? 'fa-picture-o' : 'fa-check-circle') }}"></i>
                                             {{ status|lower }}
                                         </span>
                                         <span class="badge pull-right">{{ count }}</span>
@@ -104,11 +102,6 @@
         font-size: 12px;
         font-weight: bold;
         margin-right: 5px;
-    }
-
-    .status-created {
-        background-color: #d9534f;
-        color: white;
     }
 
     .status-add-score {

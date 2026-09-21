@@ -39,7 +39,6 @@ class GameStatusBlockService extends AbstractBlockService
 
         // Statuts dans l'ordre demandé
         $statusOrder = [
-            GameStatus::CREATED->value,
             GameStatus::ADD_SCORE->value,
             GameStatus::ADD_PICTURE->value,
             GameStatus::COMPLETED->value,

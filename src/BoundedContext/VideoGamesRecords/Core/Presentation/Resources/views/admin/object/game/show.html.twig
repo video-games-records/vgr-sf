@@ -10,7 +10,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">
                     <i class="fa fa-gamepad"></i> {{ object.getName() }}
-                    <span class="label {% if object.getStatus().value == 'COMPLETED' %}label-success{% elseif object.getStatus().value == 'CREATED' %}label-danger{% else %}label-warning{% endif %}">
+                    <span class="label {% if object.getStatus().value == 'COMPLETED' %}label-success{% else %}label-warning{% endif %}">
                             {{ object.getStatus().value }}
                         </span>
                 </h3>

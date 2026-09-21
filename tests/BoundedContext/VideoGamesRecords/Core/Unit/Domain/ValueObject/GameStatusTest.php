@@ -13,22 +13,22 @@ class GameStatusTest extends TestCase
     {
         $this->assertTrue(GameStatus::ACTIVE->isActive());
         $this->assertFalse(GameStatus::INACTIVE->isActive());
-        $this->assertFalse(GameStatus::CREATED->isActive());
+        $this->assertFalse(GameStatus::ADD_SCORE->isActive());
     }
 
     public function testIsInactiveReturnsTrueOnlyForInactive(): void
     {
         $this->assertTrue(GameStatus::INACTIVE->isInactive());
         $this->assertFalse(GameStatus::ACTIVE->isInactive());
-        $this->assertFalse(GameStatus::CREATED->isInactive());
+        $this->assertFalse(GameStatus::ADD_SCORE->isInactive());
     }
 
     public function testGetStatusChoicesContainsAllCases(): void
     {
         $choices = GameStatus::getStatusChoices();
 
-        $this->assertCount(6, $choices);
-        $this->assertContains(GameStatus::CREATED->value, $choices);
+        $this->assertCount(5, $choices);
+        $this->assertContains(GameStatus::ADD_SCORE->value, $choices);
         $this->assertContains(GameStatus::ACTIVE->value, $choices);
         $this->assertContains(GameStatus::INACTIVE->value, $choices);
     }
@@ -37,10 +37,10 @@ class GameStatusTest extends TestCase
     {
         $choices = GameStatus::getReverseStatusChoices();
 
-        $this->assertCount(6, $choices);
+        $this->assertCount(5, $choices);
         $this->assertArrayHasKey(GameStatus::ACTIVE->value, $choices);
         $this->assertArrayHasKey(GameStatus::INACTIVE->value, $choices);
-        $this->assertArrayHasKey(GameStatus::CREATED->value, $choices);
+        $this->assertArrayHasKey(GameStatus::ADD_SCORE->value, $choices);
     }
 
     public function testGetStatusChoicesAndReverseAreInverted(): void

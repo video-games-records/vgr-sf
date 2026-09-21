@@ -25,3 +25,7 @@ CREATE TABLE vgr_player_platform_connection (
 ALTER TABLE vgr_platform
     ADD COLUMN igdb_platform_id INT NULL,
     ADD CONSTRAINT fk_vgr_platform_igdb FOREIGN KEY (igdb_platform_id) REFERENCES igdb_platform(id) ON DELETE SET NULL;
+
+-- Feature: remove-game-status-created
+UPDATE vgr_game SET status = 'ADD_SCORE' WHERE status = 'CREATED';
+ALTER TABLE vgr_game ALTER COLUMN status SET DEFAULT 'ADD_SCORE';

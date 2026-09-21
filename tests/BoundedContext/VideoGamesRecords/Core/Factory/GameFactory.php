@@ -28,7 +28,7 @@ final class GameFactory extends PersistentObjectFactory
             'libGameEn' => self::faker()->unique()->words(3, true),
             'libGameFr' => self::faker()->unique()->words(3, true),
             'picture' => 'default.png',
-            'status' => GameStatus::CREATED->value,
+            'status' => GameStatus::ADD_SCORE->value,
             'publishedAt' => null,
             // Traits defaults
             'nbChart' => 0,
@@ -59,7 +59,7 @@ final class GameFactory extends PersistentObjectFactory
     public function draft(): static
     {
         return $this->with([
-            'status' => GameStatus::CREATED->value,
+            'status' => GameStatus::ADD_SCORE->value,
             'publishedAt' => null,
         ]);
     }

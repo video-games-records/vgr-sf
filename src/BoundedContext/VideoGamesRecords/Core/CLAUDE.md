@@ -176,7 +176,7 @@ src/BoundedContext/VideoGamesRecords/Core/
 // Propriétés clés
 - id: Identifiant unique
 - libGameEn, libGameFr: Noms bilingues
-- status: GameStatus (CREATED, ADD_SCORE, ADD_PICTURE, COMPLETED, ACTIVE, INACTIVE)
+- status: GameStatus (ADD_SCORE, ADD_PICTURE, COMPLETED, ACTIVE, INACTIVE)
 - publishedAt: Date de publication
 - igdbGame: Relation avec IgdbGame (contexte Igdb)
 - slug: Généré automatiquement
@@ -271,8 +271,7 @@ src/BoundedContext/VideoGamesRecords/Core/
 
 ### GameStatus
 ```php
-// États d'un jeu
-- CREATED: Créé
+// États d'un jeu (statut initial : ADD_SCORE)
 - ADD_SCORE: Ajout de scores en cours
 - ADD_PICTURE: Ajout d'images en cours
 - COMPLETED: Complété

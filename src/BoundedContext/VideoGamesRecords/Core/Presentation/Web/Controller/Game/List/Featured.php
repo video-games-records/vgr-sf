@@ -22,11 +22,6 @@ class Featured extends AbstractLocalizedController
     public function list(): Response
     {
         // Get games grouped by status (non-active statuses only)
-        $gamesCreated = $this->gameRepository->findBy(
-            ['status' => GameStatus::CREATED->value],
-            ['libGameEn' => 'ASC']
-        );
-
         $gamesAddScore = $this->gameRepository->findBy(
             ['status' => GameStatus::ADD_SCORE->value],
             ['libGameEn' => 'ASC']
@@ -43,7 +38,6 @@ class Featured extends AbstractLocalizedController
         );
 
         return $this->render('@VideoGamesRecordsCore/game/list_featured.html.twig', [
-            'gamesCreated' => $gamesCreated,
             'gamesAddScore' => $gamesAddScore,
             'gamesAddPicture' => $gamesAddPicture,
             'gamesCompleted' => $gamesCompleted,

@@ -151,9 +151,9 @@ class GameTest extends TestCase
         $this->assertNull($this->game->getDownloadUrlByPlatform($platformWeb));
     }
 
-    public function testStatusDefaultsToCreated(): void
+    public function testStatusDefaultsToAddScore(): void
     {
-        $this->assertSame(GameStatus::CREATED, $this->game->getStatus());
+        $this->assertSame(GameStatus::ADD_SCORE, $this->game->getStatus());
     }
 
     public function testSetAndGetStatus(): void
