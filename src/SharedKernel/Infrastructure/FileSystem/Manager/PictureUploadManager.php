@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Infrastructure\FileSystem\Manager;
 
+use App\SharedKernel\Domain\Exception\PictureAlreadyExistsException;
 use Intervention\Image\Encoders\JpegEncoder;
 use Intervention\Image\Encoders\PngEncoder;
 use Intervention\Image\ImageManager;
@@ -34,10 +35,17 @@ class PictureUploadManager
 
     /**
      * @throws FilesystemException
+     * @throws PictureAlreadyExistsException
      */
-    public function upload(UploadedFile $file, string $directory, string $filenamePrefix): string
+    public function upload(UploadedFile $file, string $directory): string
     {
         $extension = $this->getExtension($file->getMimeType() ?? 'image/png');
+        $filename = $this->sanitizeFilename($file->getClientOriginalName()) . '.' . $extension;
+        $path = $directory . '/' . $filename;
+
+        if ($this->pictureStorage->fileExists($path)) {
+            throw new PictureAlreadyExistsException($filename);
+        }
 
         if ($extension === 'gif') {
             // Kept as-is (no resize/re-encode) to preserve animated GIFs used for badges.
@@ -54,11 +62,6 @@ class PictureUploadManager
             $contents = (string) $image->encode($encoder);
         }
 
-        do {
-            $filename = $filenamePrefix . '-' . uniqid() . '.' . $extension;
-            $path = $directory . '/' . $filename;
-        } while ($this->pictureStorage->fileExists($path));
-
         $this->pictureStorage->write($path, $contents);
 
         return $filename;
@@ -68,5 +71,14 @@ class PictureUploadManager
     {
         $types = array_flip($this->extensions);
         return $types[$mimeType] ?? 'png';
+    }
+
+    private function sanitizeFilename(string $originalName): string
+    {
+        $name = pathinfo($originalName, PATHINFO_FILENAME);
+        $name = preg_replace('/[^A-Za-z0-9_-]+/', '-', $name) ?? '';
+        $name = trim($name, '-');
+
+        return $name !== '' ? $name : 'picture';
     }
 }

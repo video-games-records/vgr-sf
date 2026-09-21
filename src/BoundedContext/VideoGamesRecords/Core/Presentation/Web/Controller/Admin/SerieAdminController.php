@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\
 
 use App\BoundedContext\VideoGamesRecords\Core\Application\Manager\SerieManager;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie;
+use App\SharedKernel\Domain\Exception\PictureAlreadyExistsException;
 use App\SharedKernel\Infrastructure\FileSystem\Manager\PictureUploadManager;
 use App\SharedKernel\Presentation\Form\PictureUploadType;
 use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
@@ -52,10 +53,14 @@ class SerieAdminController extends AbstractCRUDController
             /** @var UploadedFile $file */
             $file = $form->get('picture')->getData();
 
-            $filename = $this->pictureUploadManager->upload($file, 'series', (string) $serie->getId());
-            $this->serieManager->updatePicture($serie, $filename);
+            try {
+                $filename = $this->pictureUploadManager->upload($file, 'series');
+                $this->serieManager->updatePicture($serie, $filename);
+                $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
+            } catch (PictureAlreadyExistsException $e) {
+                $this->addFlash('sonata_flash_error', $e->getMessage());
+            }
 
-            $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $serie->getId()]));
         }
 

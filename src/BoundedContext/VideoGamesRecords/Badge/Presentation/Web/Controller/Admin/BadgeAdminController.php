@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\BoundedContext\VideoGamesRecords\Badge\Presentation\Web\Controller\Admin;
 
 use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
+use App\SharedKernel\Domain\Exception\PictureAlreadyExistsException;
 use App\SharedKernel\Infrastructure\FileSystem\Manager\PictureUploadManager;
 use App\SharedKernel\Presentation\Form\PictureUploadType;
 use App\BoundedContext\VideoGamesRecords\Badge\Application\Manager\BadgeManager;
@@ -36,14 +37,14 @@ class BadgeAdminController extends AbstractCRUDController
             /** @var UploadedFile $file */
             $file = $form->get('picture')->getData();
 
-            $filename = $this->pictureUploadManager->upload(
-                $file,
-                $badge->getType()->getDirectory(),
-                (string) $badge->getId()
-            );
-            $this->badgeManager->updatePicture($badge, $filename);
+            try {
+                $filename = $this->pictureUploadManager->upload($file, $badge->getType()->getDirectory());
+                $this->badgeManager->updatePicture($badge, $filename);
+                $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
+            } catch (PictureAlreadyExistsException $e) {
+                $this->addFlash('sonata_flash_error', $e->getMessage());
+            }
 
-            $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $badge->getId()]));
         }
 

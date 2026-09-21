@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Admin;
 
+use App\SharedKernel\Domain\Exception\PictureAlreadyExistsException;
 use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Doctrine\ORM\Exception\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -136,10 +137,14 @@ class GameAdminController extends AbstractCRUDController
             /** @var UploadedFile $file */
             $file = $form->get('picture')->getData();
 
-            $filename = $this->pictureUploadManager->upload($file, 'game', (string) $game->getId());
-            $this->gameManager->updatePicture($game, $filename);
+            try {
+                $filename = $this->pictureUploadManager->upload($file, 'game');
+                $this->gameManager->updatePicture($game, $filename);
+                $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
+            } catch (PictureAlreadyExistsException $e) {
+                $this->addFlash('sonata_flash_error', $e->getMessage());
+            }
 
-            $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
         }
 
