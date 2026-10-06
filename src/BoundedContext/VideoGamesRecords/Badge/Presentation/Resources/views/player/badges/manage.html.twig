@@ -84,43 +84,49 @@
     {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const container = document.getElementById('sortable-badges');
-        if (!container) return;
+    (function () {
+        function initManageBadges() {
+            const container = document.getElementById('sortable-badges');
+            if (!container) return;
 
-        new Sortable(container, {
-            animation: 150,
-            ghostClass: 'opacity-50',
-        });
-
-        document.getElementById('btn-save').addEventListener('click', function () {
-            const items = container.querySelectorAll('.badge-sortable-item');
-            const order = {};
-            items.forEach(function (item, index) {
-                order[item.dataset.pbId] = index + 1;
+            new Sortable(container, {
+                animation: 150,
+                ghostClass: 'opacity-50',
             });
 
-            const alertSaved = document.getElementById('alert-saved');
-            const alertError = document.getElementById('alert-error');
-            alertSaved.classList.add('d-none');
-            alertError.classList.add('d-none');
+            document.getElementById('btn-save').addEventListener('click', function () {
+                const items = container.querySelectorAll('.badge-sortable-item');
+                const order = {};
+                items.forEach(function (item, index) {
+                    order[item.dataset.pbId] = index + 1;
+                });
 
-            fetch('{{ path('vgr_player_badges_reorder') }}', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({order: order}),
-            })
-            .then(function (res) {
-                if (res.ok) {
-                    alertSaved.classList.remove('d-none');
-                } else {
+                const alertSaved = document.getElementById('alert-saved');
+                const alertError = document.getElementById('alert-error');
+                alertSaved.classList.add('d-none');
+                alertError.classList.add('d-none');
+
+                fetch('{{ path('vgr_player_badges_reorder') }}', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({order: order}),
+                })
+                .then(function (res) {
+                    if (res.ok) {
+                        alertSaved.classList.remove('d-none');
+                    } else {
+                        alertError.classList.remove('d-none');
+                    }
+                })
+                .catch(function () {
                     alertError.classList.remove('d-none');
-                }
-            })
-            .catch(function () {
-                alertError.classList.remove('d-none');
+                });
             });
-        });
-    });
+        }
+
+        // Support both initial load and Turbo navigation
+        document.addEventListener('DOMContentLoaded', initManageBadges);
+        document.addEventListener('turbo:load', initManageBadges);
+    })();
     </script>
 {% endblock %}
