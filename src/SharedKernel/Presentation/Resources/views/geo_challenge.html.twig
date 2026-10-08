@@ -1,0 +1,31 @@
+{% extends '@SharedKernel/base.html.twig' %}
+{% trans_default_domain 'SharedKernel' %}
+
+{% block title %}
+    {{ 'geo_challenge.title'|trans }} - Video Games Records
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body p-4 text-center">
+                    <i class="bi bi-shield-check fs-1 text-primary"></i>
+                    <h1 class="card-title mt-2">{{ 'geo_challenge.title'|trans }}</h1>
+                    <p class="text-muted">{{ 'geo_challenge.message'|trans }}</p>
+
+                    <form method="post" action="{{ path('app_geo_challenge', {redirect: redirect}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('geo_challenge') }}">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                {{ 'geo_challenge.button'|trans }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

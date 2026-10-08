@@ -178,3 +178,9 @@ picture_upload:
       file_required: "请选择一张图片。"
       mime_type: "只允许 PNG、JPEG 和 GIF 图片。"
       max_size: "文件太大。最大大小：{{ limit }}。"
+
+# === GEO CHALLENGE (反爬虫过滤的中间验证页) ===
+geo_challenge:
+  title: "快速验证"
+  message: "我们检测到来自您所在地区的异常流量。请确认您是真实访客以继续访问。"
+  button: "我不是机器人，继续"

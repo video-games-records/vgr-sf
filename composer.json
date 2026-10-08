@@ -21,6 +21,7 @@
         "doctrine/orm": "^3.6.8",
         "dragonmantank/cron-expression": "^3.6",
         "fdekker/log-viewer-bundle": "^2.10.2",
+        "geoip2/geoip2": "^3.4",
         "gesdinet/jwt-refresh-token-bundle": "^2.2.2@beta",
         "google/apiclient": "^2.19.4",
         "intervention/image": "^3.11.8",

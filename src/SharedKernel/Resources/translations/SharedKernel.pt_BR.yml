@@ -178,3 +178,9 @@ picture_upload:
       file_required: "Por favor, selecione uma imagem."
       mime_type: "Apenas imagens PNG, JPEG e GIF são permitidas."
       max_size: "O arquivo é muito grande. Tamanho máximo: {{ limit }}."
+
+# === GEO CHALLENGE (página intersticial de filtragem anti-bot) ===
+geo_challenge:
+  title: "Verificação rápida"
+  message: "Detectamos tráfego incomum da sua região. Confirme que você é um visitante real para continuar."
+  button: "Não sou um robô, continuar"
