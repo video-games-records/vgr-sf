@@ -12,9 +12,15 @@ player:
       overview: Übersicht
       badges: Abzeichen
       games: Spiele
+      last_scores: Letzte Scores
       videos: Videos
       proofs: Beweise
       messages: Forumsbeiträge
+
+    last_scores:
+      title: Letzte Scores
+      advanced_search: Erweiterte Suche
+      no_scores: Noch keine Scores
 
     header:
       member_since: Mitglied seit

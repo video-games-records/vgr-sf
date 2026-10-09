@@ -12,9 +12,15 @@ player:
       overview: Visão Geral
       badges: Emblemas
       games: Jogos
+      last_scores: Últimas Pontuações
       videos: Vídeos
       proofs: Provas
       messages: Mensagens do Fórum
+
+    last_scores:
+      title: Últimas Pontuações
+      advanced_search: Busca Avançada
+      no_scores: Ainda não há pontuações
 
     header:
       member_since: Membro desde

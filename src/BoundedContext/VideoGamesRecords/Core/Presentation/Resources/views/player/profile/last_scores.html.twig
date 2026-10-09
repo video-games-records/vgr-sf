@@ -1,0 +1,67 @@
+{% extends '@VideoGamesRecordsCore/player/profile/_base.html.twig' %}
+{% trans_default_domain 'VgrCore' %}
+
+{% block profile_content %}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0"><i class="bi bi-clock-history"></i> {{ 'player.profile.last_scores.title'|trans }}</h5>
+            <a href="{{ path('vgr_score_search', {player_id: player.id}) }}" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-search"></i> {{ 'player.profile.last_scores.advanced_search'|trans }}
+            </a>
+        </div>
+
+        {% if playerCharts|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{ 'player_chart.search.chart'|trans }}</th>
+                            <th class="text-nowrap">{{ 'player_chart.search.value'|trans }}</th>
+                            <th class="text-center">{{ 'player_chart.search.rank'|trans }}</th>
+                            <th class="text-end">{{ 'player_chart.search.last_update'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for playerChart in playerCharts %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('vgr_chart_show', {id: playerChart.chart.group.game.id, slug: playerChart.chart.group.game.slug, groupId: playerChart.chart.group.id, groupSlug: playerChart.chart.group.slug, chartId: playerChart.chart.id, chartSlug: playerChart.chart.slug}) }}" class="text-decoration-none">
+                                        {{ playerChart.chart.group.game.name }} - {{ playerChart.chart.group.name }} - {{ playerChart.chart.name }}
+                                    </a>
+                                </td>
+                                <td class="text-nowrap">
+                                    {% for lib in playerChart.libs %}
+                                        <span class="badge bg-primary">{{ lib.formatValue }}</span>
+                                    {% endfor %}
+                                </td>
+                                <td class="text-center">
+                                    {% if playerChart.rank == 1 %}
+                                        <span class="badge text-bg-warning">#1</span>
+                                    {% elseif playerChart.rank <= 3 %}
+                                        <span class="badge text-bg-secondary">#{{ playerChart.rank }}</span>
+                                    {% else %}
+                                        <span class="text-muted small">#{{ playerChart.rank }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-muted text-nowrap text-end small">
+                                    {% if playerChart.lastUpdate %}
+                                        {{ playerChart.lastUpdate|user_datetime }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center text-muted py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-3 mb-0">{{ 'player.profile.last_scores.no_scores'|trans }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

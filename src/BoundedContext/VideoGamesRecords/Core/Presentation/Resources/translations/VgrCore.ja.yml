@@ -12,9 +12,15 @@ player:
       overview: 概要
       badges: バッジ
       games: ゲーム
+      last_scores: 最新スコア
       videos: 動画
       proofs: 証明
       messages: フォーラムメッセージ
+
+    last_scores:
+      title: 最新スコア
+      advanced_search: 詳細検索
+      no_scores: まだスコアがありません
 
     header:
       member_since: 登録日

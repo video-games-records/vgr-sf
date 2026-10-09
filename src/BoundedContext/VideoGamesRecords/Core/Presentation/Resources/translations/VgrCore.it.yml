@@ -12,9 +12,15 @@ player:
       overview: Panoramica
       badges: Distintivi
       games: Giochi
+      last_scores: Ultimi Punteggi
       videos: Video
       proofs: Prove
       messages: Messaggi del Forum
+
+    last_scores:
+      title: Ultimi Punteggi
+      advanced_search: Ricerca Avanzata
+      no_scores: Nessun punteggio ancora
 
     header:
       member_since: Membro dal

@@ -50,8 +50,9 @@ class Search extends AbstractLocalizedController
         $page = max(1, (int) $request->query->get('page', 1));
 
         $sortBy = $request->query->get('sort');
-        $sortBy = in_array($sortBy, ['last_update'], true) ? $sortBy : null;
-        $sortDir = strtolower((string) $request->query->get('direction')) === 'desc' ? 'desc' : 'asc';
+        $sortBy = in_array($sortBy, ['last_update'], true) ? $sortBy : 'last_update';
+        $sortDir = strtolower((string) $request->query->get('direction', 'desc')) === 'asc' ? 'asc' : 'desc';
+        $presetPlayerId = $request->query->get('player_id');
 
         // Load statuses from session for form pre-fill
         $statusValues = $session->get(self::SESSION_KEY_STATUSES, []);
@@ -201,6 +202,28 @@ class Search extends AbstractLocalizedController
             // Handle platinum filter
             $platinumOnly = $data['platinum_only'] ?? false;
             $session->set(self::SESSION_KEY_PLATINUM_ONLY, $platinumOnly);
+
+            $page = 1;
+        } elseif ($presetPlayerId !== null) {
+            // Fresh scoped search from a profile page link: reset all filters except the preset player
+            $session->remove(self::SESSION_KEY_GAME_IDS);
+            $session->remove(self::SESSION_KEY_GAME_DATA);
+            $session->remove(self::SESSION_KEY_PLATFORM_IDS);
+            $session->remove(self::SESSION_KEY_PLATFORM_DATA);
+            $session->remove(self::SESSION_KEY_STATUSES);
+            $session->remove(self::SESSION_KEY_RANK_OPERATOR);
+            $session->remove(self::SESSION_KEY_RANK_VALUE);
+            $session->remove(self::SESSION_KEY_POINTS_OPERATOR);
+            $session->remove(self::SESSION_KEY_POINTS_VALUE);
+            $session->set(self::SESSION_KEY_PLATINUM_ONLY, false);
+
+            $presetPlayer = $this->playerRepository->find((int) $presetPlayerId);
+            if ($presetPlayer !== null) {
+                $playerIds = [$presetPlayer->getId()];
+                $playersData = [['id' => $presetPlayer->getId(), 'text' => $presetPlayer->getPseudo()]];
+                $session->set(self::SESSION_KEY_PLAYER_IDS, $playerIds);
+                $session->set(self::SESSION_KEY_PLAYER_DATA, $playersData);
+            }
 
             $page = 1;
         } else {

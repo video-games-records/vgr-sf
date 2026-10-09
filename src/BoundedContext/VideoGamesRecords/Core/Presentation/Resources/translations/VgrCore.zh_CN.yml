@@ -12,9 +12,15 @@ player:
       overview: 概览
       badges: 徽章
       games: 游戏
+      last_scores: 最新分数
       videos: 视频
       proofs: 证明
       messages: 论坛消息
+
+    last_scores:
+      title: 最新分数
+      advanced_search: 高级搜索
+      no_scores: 暂无分数
 
     header:
       member_since: 注册时间

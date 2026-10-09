@@ -138,6 +138,7 @@ player:
       overview: Overview
       badges: Badges
       games: Games
+      last_scores: Last Scores
       videos: Videos
       proofs: Proofs
       messages: Forum Messages
@@ -230,6 +231,11 @@ player:
       column_points: Points
       column_rank: Rank
       no_games: No games yet
+
+    last_scores:
+      title: Last Scores
+      advanced_search: Advanced Search
+      no_scores: No scores yet
 
     proofs:
       title: Proofs

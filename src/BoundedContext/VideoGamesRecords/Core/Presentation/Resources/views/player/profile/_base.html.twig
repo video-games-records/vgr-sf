@@ -98,6 +98,14 @@
         </li>
         <li class="nav-item">
             <a
+                class="nav-link {{ current_tab == 'last_scores' ? 'active' : '' }}"
+                href="{{ path('vgr_player_profile_last_scores', {id: player.id, slug: player.slug}) }}"
+            >
+                <i class="bi bi-clock-history"></i> {{ 'player.profile.tabs.last_scores'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
                 class="nav-link {{ current_tab == 'videos' ? 'active' : '' }}"
                 href="{{ path('vgr_player_profile_videos', {id: player.id, slug: player.slug}) }}"
             >

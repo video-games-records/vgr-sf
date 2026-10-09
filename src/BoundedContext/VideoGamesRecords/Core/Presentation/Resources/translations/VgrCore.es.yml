@@ -12,9 +12,15 @@ player:
       overview: Resumen
       badges: Insignias
       games: Juegos
+      last_scores: Últimas Puntuaciones
       videos: Videos
       proofs: Pruebas
       messages: Mensajes del Foro
+
+    last_scores:
+      title: Últimas Puntuaciones
+      advanced_search: Búsqueda Avanzada
+      no_scores: Aún no hay puntuaciones
 
     header:
       member_since: Miembro desde

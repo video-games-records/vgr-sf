@@ -124,6 +124,30 @@ class PlayerChartRepository extends DefaultRepository
     }
 
     /**
+     * Returns the player's most recently updated scores, without deduplication by game.
+     *
+     * @return array<PlayerChart>
+     */
+    public function findLastUpdatedByPlayer(Player $player, int $limit = 50): array
+    {
+        return $this->createQueryBuilder('pc')
+            ->join('pc.chart', 'c')
+            ->join('c.group', 'g')
+            ->join('g.game', 'ga')
+            ->leftJoin('pc.platform', 'plt')
+            ->leftJoin('pc.libs', 'libs')
+            ->leftJoin('libs.libChart', 'lc')
+            ->leftJoin('lc.type', 'ct')
+            ->addSelect('c', 'g', 'ga', 'plt', 'libs', 'lc', 'ct')
+            ->where('pc.player = :player')
+            ->setParameter('player', $player)
+            ->orderBy('pc.lastUpdate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return array<PlayerChart>
      */
     public function findLatestBySerie(Serie $serie, int $limit = 3): array

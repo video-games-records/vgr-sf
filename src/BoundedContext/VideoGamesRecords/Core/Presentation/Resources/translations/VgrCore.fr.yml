@@ -138,6 +138,7 @@ player:
       overview: Vue d'ensemble
       badges: Badges
       games: Jeux
+      last_scores: Derniers scores
       videos: Vidéos
       proofs: Preuves
       messages: Messages du forum
@@ -211,6 +212,11 @@ player:
       column_points: Points
       column_rank: Rang
       no_games: Aucun jeu pour le moment
+
+    last_scores:
+      title: Derniers scores
+      advanced_search: Recherche avancée
+      no_scores: Aucun score pour le moment
 
     proofs:
       title: Preuves
