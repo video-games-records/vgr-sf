@@ -87,6 +87,8 @@ player_chart:
     card_title: Derniers scores
     no_scores_card: Aucun score récent
     see_all: Voir tout
+  search:
+    last_update: Dernière mise à jour
   show:
     meta_description: "Score de %player% sur %chart% - %game%"
     score_detail: Détail du Score

@@ -67,6 +67,8 @@ player:
       search_placeholder: トピックまたはメッセージを検索...
 
 player_chart:
+  search:
+    last_update: 最終更新
   show:
     request_proof_title: 証拠を要求する
     request_proof_message_label: "メッセージ（任意）"

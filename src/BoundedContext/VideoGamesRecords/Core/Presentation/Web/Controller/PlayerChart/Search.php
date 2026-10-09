@@ -49,6 +49,10 @@ class Search extends AbstractLocalizedController
         $session = $request->getSession();
         $page = max(1, (int) $request->query->get('page', 1));
 
+        $sortBy = $request->query->get('sort');
+        $sortBy = in_array($sortBy, ['last_update'], true) ? $sortBy : null;
+        $sortDir = strtolower((string) $request->query->get('direction')) === 'desc' ? 'desc' : 'asc';
+
         // Load statuses from session for form pre-fill
         $statusValues = $session->get(self::SESSION_KEY_STATUSES, []);
         /** @var PlayerChartStatusEnum[] $initialStatuses */
@@ -219,7 +223,7 @@ class Search extends AbstractLocalizedController
         $hasPointsFilter = $pointsOperator !== null && $pointsValue !== null;
 
         if (!empty($gameIds) || !empty($playerIds) || !empty($platformIds) || !empty($statuses) || $hasRankFilter || $hasPointsFilter || $platinumOnly) {
-            $result = $this->playerChartRepository->search($gameIds, $playerIds, $platformIds, $statuses, $rankOperator, $rankValue, $pointsOperator, $pointsValue, $platinumOnly, $page, self::ITEMS_PER_PAGE);
+            $result = $this->playerChartRepository->search($gameIds, $playerIds, $platformIds, $statuses, $rankOperator, $rankValue, $pointsOperator, $pointsValue, $platinumOnly, $page, self::ITEMS_PER_PAGE, $sortBy, $sortDir);
         }
 
         return $this->render('@VideoGamesRecordsCore/player_chart/search.html.twig', [
@@ -229,6 +233,8 @@ class Search extends AbstractLocalizedController
             'platformsData' => $platformsData,
             'statuses' => $statuses,
             'playerCharts' => $result ? $result['items'] : null,
+            'sort' => $sortBy,
+            'direction' => $sortDir,
             'pagination' => $result ? [
                 'currentPage' => $page,
                 'totalPages' => $result['pages'],

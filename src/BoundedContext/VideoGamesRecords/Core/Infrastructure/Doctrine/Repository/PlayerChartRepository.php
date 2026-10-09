@@ -201,7 +201,7 @@ class PlayerChartRepository extends DefaultRepository
      * @param int $limit
      * @return array{items: array<PlayerChart>, total: int, pages: int}
      */
-    public function search(array $gameIds = [], array $playerIds = [], array $platformIds = [], array $statuses = [], ?string $rankOperator = null, ?int $rankValue = null, ?string $pointsOperator = null, ?int $pointsValue = null, bool $platinumOnly = false, int $page = 1, int $limit = 20): array
+    public function search(array $gameIds = [], array $playerIds = [], array $platformIds = [], array $statuses = [], ?string $rankOperator = null, ?int $rankValue = null, ?string $pointsOperator = null, ?int $pointsValue = null, bool $platinumOnly = false, int $page = 1, int $limit = 20, ?string $sortBy = null, string $sortDir = 'ASC'): array
     {
         $hasRankFilter = $rankOperator !== null && $rankValue !== null;
         $hasPointsFilter = $pointsOperator !== null && $pointsValue !== null;
@@ -272,11 +272,19 @@ class PlayerChartRepository extends DefaultRepository
                ->andWhere('pc.nbEqual = 1');
         }
 
-        $qb->orderBy('ga.id', 'ASC')
-           ->addOrderBy('g.id', 'ASC')
-           ->addOrderBy('c.id', 'ASC')
-           ->addOrderBy('pc.rank', 'ASC')
-           ->setFirstResult(($page - 1) * $limit)
+        $sortDir = strtoupper($sortDir) === 'DESC' ? 'DESC' : 'ASC';
+
+        if ($sortBy === 'last_update') {
+            $qb->orderBy('pc.lastUpdate', $sortDir)
+               ->addOrderBy('pc.id', $sortDir);
+        } else {
+            $qb->orderBy('ga.id', 'ASC')
+               ->addOrderBy('g.id', 'ASC')
+               ->addOrderBy('c.id', 'ASC')
+               ->addOrderBy('pc.rank', 'ASC');
+        }
+
+        $qb->setFirstResult(($page - 1) * $limit)
            ->setMaxResults($limit);
 
         $paginator = new Paginator($qb->getQuery(), fetchJoinCollection: true);

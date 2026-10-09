@@ -67,6 +67,8 @@ player:
       search_placeholder: 搜索主题或消息...
 
 player_chart:
+  search:
+    last_update: 最后更新
   show:
     request_proof_title: 请求证明
     request_proof_message_label: "消息（可选）"

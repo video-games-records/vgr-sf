@@ -67,6 +67,8 @@ player:
       search_placeholder: Cerca argomento o messaggio...
 
 player_chart:
+  search:
+    last_update: Ultimo aggiornamento
   show:
     request_proof_title: Richiedere una Prova
     request_proof_message_label: "Messaggio (opzionale)"
