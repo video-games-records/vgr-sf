@@ -19,7 +19,7 @@ class GameTest extends AbstractFunctionalTestCase
         $response = $this->apiClient->request('GET', '/api/games/' . $game->getId());
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json');
 
         $data = $response->toArray();
 
