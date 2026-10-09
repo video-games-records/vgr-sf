@@ -52,11 +52,18 @@ class ArticleListenerTest extends TestCase
     {
         $article = $this->buildArticle(ArticleStatus::PUBLISHED, null);
 
-        $this->cache->expects($this->once())
+        $deletedKeys = [];
+        $this->cache->expects($this->exactly(16))
             ->method('delete')
-            ->with(TopNewsController::CACHE_KEY);
+            ->willReturnCallback(function (string $key) use (&$deletedKeys): bool {
+                $deletedKeys[] = $key;
+
+                return true;
+            });
 
         $this->listener->prePersist($article);
+
+        $this->assertSame($this->expectedInvalidatedCacheKeys(), $deletedKeys);
     }
 
     public function testPrePersistDoesNotSetPublishedAtForDraftArticle(): void
@@ -113,11 +120,18 @@ class ArticleListenerTest extends TestCase
     {
         $article = $this->buildArticle(ArticleStatus::PUBLISHED, new DateTime());
 
-        $this->cache->expects($this->once())
+        $deletedKeys = [];
+        $this->cache->expects($this->exactly(16))
             ->method('delete')
-            ->with(TopNewsController::CACHE_KEY);
+            ->willReturnCallback(function (string $key) use (&$deletedKeys): bool {
+                $deletedKeys[] = $key;
+
+                return true;
+            });
 
         $this->listener->preUpdate($article);
+
+        $this->assertSame($this->expectedInvalidatedCacheKeys(), $deletedKeys);
     }
 
     public function testPreUpdateDoesNotDeleteCacheForDraftArticle(): void
@@ -159,5 +173,19 @@ class ArticleListenerTest extends TestCase
         $article->setTitle('My Article Title', 'en');
         $article->setSlug('old-slug');
         return $article;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function expectedInvalidatedCacheKeys(): array
+    {
+        $keys = [];
+        foreach (['en', 'fr', 'de', 'it', 'ja', 'es', 'pt_BR', 'zh_CN'] as $locale) {
+            $keys[] = TopNewsController::CACHE_KEY . '_' . $locale;
+            $keys[] = TopNewsController::CACHE_KEY . '_dashboard_' . $locale;
+        }
+
+        return $keys;
     }
 }
