@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -67,11 +66,10 @@ class SecurityHistoryManagerTest extends TestCase
     {
         $user = $this->createMock(User::class);
 
-        $request = $this->createMock(Request::class);
-        $request->method('getClientIp')->willReturn('192.168.1.1');
-        $headers = $this->createMock(HeaderBag::class);
-        $headers->method('get')->with('User-Agent')->willReturn('Mozilla/5.0');
-        $request->headers = $headers;
+        $request = Request::create('/', 'GET', [], [], [], [
+            'REMOTE_ADDR' => '192.168.1.1',
+            'HTTP_USER_AGENT' => 'Mozilla/5.0',
+        ]);
 
         $this->requestStack->method('getCurrentRequest')->willReturn($request);
 
