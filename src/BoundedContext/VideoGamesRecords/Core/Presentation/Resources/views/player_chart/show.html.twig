@@ -263,7 +263,8 @@
                                                 class="btn btn-success btn-lg"
                                                 disabled
                                                 data-proof-upload-target="pictureSubmit"
-                                                data-action="click->proof-upload#submitPicture">
+                                                data-action="click->proof-upload#submitPicture"
+                                                data-umami-event="proof_upload_picture">
                                             <i class="bi bi-upload me-2"></i>{{ 'player_chart.show.upload_submit'|trans }}
                                         </button>
                                     </div>
@@ -294,7 +295,8 @@
                                             class="btn btn-danger btn-lg"
                                             disabled
                                             data-proof-upload-target="videoSubmit"
-                                            data-action="click->proof-upload#submitVideo">
+                                            data-action="click->proof-upload#submitVideo"
+                                            data-umami-event="proof_upload_video">
                                         <i class="bi bi-send me-2"></i>{{ 'player_chart.show.video_submit'|trans }}
                                     </button>
                                 </div>
@@ -328,7 +330,7 @@
                                         placeholder="{{ 'player_chart.show.request_proof_message_placeholder'|trans }}"></textarea>
                                 </div>
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-warning">
+                                    <button type="submit" class="btn btn-warning" data-umami-event="proof_request_submit">
                                         <i class="bi bi-send"></i> {{ 'player_chart.show.request_proof_submit'|trans }}
                                     </button>
                                 </div>

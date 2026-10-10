@@ -18,7 +18,7 @@
                     <form method="post" action="{{ path('app_geo_challenge', {redirect: redirect}) }}">
                         <input type="hidden" name="_token" value="{{ csrf_token('geo_challenge') }}">
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" class="btn btn-primary btn-lg" data-umami-event="geo_challenge_pass">
                                 {{ 'geo_challenge.button'|trans }}
                             </button>
                         </div>
