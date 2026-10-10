@@ -72,6 +72,10 @@ services:
             $storagePublicUrl: '%env(PICTURE_PUBLIC_URL)%'
 
 when@dev:
+    parameters:
+        # Adds FR to the geo-blocking challenge so it can be tested locally without spoofing headers
+        app.geoip.blocked_countries: ['CN', 'SG', 'FR']
+
     services:
         _defaults:
             autowire: true
