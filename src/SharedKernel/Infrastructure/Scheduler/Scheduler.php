@@ -65,6 +65,9 @@ class Scheduler implements ScheduleProviderInterface
             // Player-chart integrity check (weekly, Monday at 7am)
             ->add(RecurringMessage::cron('0 7 * * 1', new RunCommandMessage('vgr:player-chart:integrity-check')))
 
+            // Update the GeoLite2-Country database used for geo-blocking (weekly, Monday at 5am)
+            ->add(RecurringMessage::cron('0 5 * * 1', new RunCommandMessage('app:geoip:update')))
+
             // Core Bundle Messages (keeping original schedule)
         /*
             ->add(RecurringMessage::cron('00 8 * * 1', new UpdateYoutubeData()))
