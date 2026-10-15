@@ -57,7 +57,7 @@ class GeoBlockSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $country = $this->countryResolver->resolveCountry((string) $request->getClientIp());
+        $country = $this->countryResolver->resolveCountry($request);
 
         if (null === $country || !in_array($country, $this->blockedCountries, true)) {
             return;

@@ -2,7 +2,6 @@
 # Files in the packages/ subdirectory configure your dependencies.
 
 parameters:
-    app.geoip.database_path: '%kernel.project_dir%/var/geoip/GeoLite2-Country.mmdb'
     app.geoip.blocked_countries: ['CN', 'SG']
     app.geoip.challenge_cookie_name: 'geo_ok'
     app.geoip.challenge_cookie_ttl: 2592000 # 30 days
