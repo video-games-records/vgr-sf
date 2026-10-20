@@ -41,7 +41,15 @@
 
         {# Umami Analytics - Production only #}
         {% if app.environment == 'prod' %}
-            <script defer src="https://analytics.vgr-magicbart.com/script.js" data-website-id="5f65ad9b-94af-4002-a58b-517e5d2266bb"></script>
+            <script>
+                function umamiBeforeSend(type, payload) {
+                    if (!payload.name && /\/geo-challenge(\/|\?|$)/.test(payload.url || '')) {
+                        return false;
+                    }
+                    return payload;
+                }
+            </script>
+            <script defer src="https://analytics.vgr-magicbart.com/script.js" data-website-id="5f65ad9b-94af-4002-a58b-517e5d2266bb" data-before-send="umamiBeforeSend"></script>
         {% endif %}
 
         {% block stylesheets %}
