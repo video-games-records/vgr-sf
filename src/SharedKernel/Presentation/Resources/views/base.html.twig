@@ -39,8 +39,8 @@
 
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
 
-        {# Umami Analytics - Production only #}
-        {% if app.environment == 'prod' %}
+        {# Umami Analytics - Production only, skipped on error pages (404/500/...) #}
+        {% if app.environment == 'prod' and skip_analytics is not defined %}
             <script>
                 function umamiBeforeSend(type, payload) {
                     if (!payload.name && /\/geo-challenge(\/|\?|$)/.test(payload.url || '')) {
