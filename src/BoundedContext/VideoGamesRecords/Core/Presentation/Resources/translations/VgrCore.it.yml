@@ -174,3 +174,15 @@ country:
     meta_description: "Classifiche giocatori per %country%"
     select_country: Seleziona un paese
     ranking_points: Classifica punti
+
+badge:
+  history:
+    title: Cronologia badge
+    tab_players: Giocatori
+    tab_teams: Squadre
+    player: Giocatore
+    team: Squadra
+    since: Da
+    until: Fino a
+    active: Attivo
+    no_history: Nessuna cronologia disponibile.

@@ -174,3 +174,15 @@ country:
     meta_description: "%country%のプレイヤーランキング"
     select_country: 国を選択
     ranking_points: ポイントランキング
+
+badge:
+  history:
+    title: バッジの履歴
+    tab_players: プレイヤー
+    tab_teams: チーム
+    player: プレイヤー
+    team: チーム
+    since: 取得日
+    until: 終了日
+    active: 保持中
+    no_history: 履歴はまだありません。

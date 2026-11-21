@@ -439,3 +439,15 @@ country:
 player_game:
   close_to_master_badge:
     card_title: "Proche du Master Badge"
+
+badge:
+  history:
+    title: Historique du badge
+    tab_players: Joueurs
+    tab_teams: Équipes
+    player: Joueur
+    team: Équipe
+    since: Depuis
+    until: Jusqu'au
+    active: Actif
+    no_history: Aucun historique disponible.

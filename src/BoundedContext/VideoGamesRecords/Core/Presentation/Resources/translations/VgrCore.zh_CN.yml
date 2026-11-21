@@ -174,3 +174,15 @@ country:
     meta_description: "%country%的玩家排名"
     select_country: 选择国家
     ranking_points: 积分排名
+
+badge:
+  history:
+    title: 徽章历史
+    tab_players: 玩家
+    tab_teams: 战队
+    player: 玩家
+    team: 战队
+    since: 起始
+    until: 结束
+    active: 持有中
+    no_history: 暂无历史记录。

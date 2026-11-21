@@ -23,10 +23,13 @@
                 {% for badge in badgesData %}
                     {% set game = games[badge.badgeId] ?? null %}
                     {% set gameName = game ? game.getName(app.request.locale) : 'Badge' %}
-                    <span class="badge-item"
+                    <span class="badge-item badge-item-clickable"
+                          role="button"
+                          tabindex="0"
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
-                          title="Master - {{ gameName }} | {{ 'team.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'team.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}">
+                          title="Master - {{ gameName }} | {{ 'team.profile.badges.value'|trans }}: {{ badge.badgeValue }} | {{ 'team.profile.badges.obtained'|trans }}: {{ badge.createdAt|user_date('d/m/Y') }}"
+                          onclick="openAjaxModal('{{ path('vgr_badge_history_ajax', {id: badge.badgeId}) }}')">
                         <img src="{{ badge_picture_url('badge/Master', badge.badgePicture) }}"
                              alt="{{ gameName }}"
                              width="40"

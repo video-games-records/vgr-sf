@@ -157,6 +157,11 @@ footer {
     }
 }
 
+// Clickable master badges (open history modal)
+.badge-item-clickable {
+    cursor: pointer;
+}
+
 // Theme picker swatch dot
 .theme-swatch {
     display: inline-block;

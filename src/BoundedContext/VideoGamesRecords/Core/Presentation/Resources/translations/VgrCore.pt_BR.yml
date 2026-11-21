@@ -174,3 +174,15 @@ country:
     meta_description: "Rankings de jogadores para %country%"
     select_country: Selecionar um país
     ranking_points: Ranking por pontos
+
+badge:
+  history:
+    title: Histórico do emblema
+    tab_players: Jogadores
+    tab_teams: Times
+    player: Jogador
+    team: Time
+    since: Desde
+    until: Até
+    active: Ativo
+    no_history: Nenhum histórico disponível ainda.

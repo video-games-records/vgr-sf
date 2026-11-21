@@ -1,0 +1,124 @@
+{% trans_default_domain 'VgrCore' %}
+{% set playerHistory = vgr_player_badge_history(badge) %}
+{% set teamHistory = vgr_team_badge_history(badge) %}
+{% set game = badge.game ?? null %}
+
+<div class="ajax-modal-header card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">
+        <i class="bi bi-patch-check"></i> {{ 'badge.history.title'|trans }}
+    </h5>
+    <button type="button" class="ajax-modal-close" onclick="closeAjaxModal()">&times;</button>
+</div>
+{% if game %}
+    <div class="p-3 border-bottom">
+        <div class="d-flex align-items-center gap-3">
+            <a href="{{ path('vgr_game_show', {'id': game.id, 'slug': game.slug}) }}">
+                <img src="{{ game_picture_url(game.picture) }}"
+                     alt="{{ game.getName(app.request.locale) }}"
+                     width="64"
+                     height="64"
+                     class="img-thumbnail">
+            </a>
+            <div>
+                <a href="{{ path('vgr_game_show', {'id': game.id, 'slug': game.slug}) }}" class="h6 d-block mb-1 text-decoration-none">
+                    {{ game.getName(app.request.locale) }}
+                </a>
+                {% if game.platforms|length > 0 %}
+                    <div class="d-flex flex-wrap gap-1">
+                        {% for platform in game.platforms %}
+                            {{ component('platform_badge', {platform: platform}) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div class="ajax-modal-body p-0">
+    {% if playerHistory|length > 0 or teamHistory|length > 0 %}
+        <ul class="nav nav-tabs px-3 pt-3" id="badgeHistoryTabs" role="tablist">
+            {% if playerHistory|length > 0 %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="badge-history-players-tab" data-bs-toggle="tab" data-bs-target="#badge-history-players-pane" type="button" role="tab">
+                        <i class="bi bi-person"></i> {{ 'badge.history.tab_players'|trans }}
+                        <span class="badge bg-secondary">{{ playerHistory|length }}</span>
+                    </button>
+                </li>
+            {% endif %}
+            {% if teamHistory|length > 0 %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link{{ playerHistory|length == 0 ? ' active' : '' }}" id="badge-history-teams-tab" data-bs-toggle="tab" data-bs-target="#badge-history-teams-pane" type="button" role="tab">
+                        <i class="bi bi-people"></i> {{ 'badge.history.tab_teams'|trans }}
+                        <span class="badge bg-secondary">{{ teamHistory|length }}</span>
+                    </button>
+                </li>
+            {% endif %}
+        </ul>
+
+        <div class="tab-content" id="badgeHistoryTabsContent">
+            {% if playerHistory|length > 0 %}
+                <div class="tab-pane fade show active" id="badge-history-players-pane" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'badge.history.player'|trans }}</th>
+                                    <th>{{ 'badge.history.since'|trans }}</th>
+                                    <th>{{ 'badge.history.until'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in playerHistory %}
+                                    <tr class="{{ row.endedAt is null ? 'table-success' : '' }}">
+                                        <td>{{ row.pseudo }}</td>
+                                        <td>{{ row.createdAt|user_date('d/m/Y') }}</td>
+                                        <td>
+                                            {% if row.endedAt is null %}
+                                                <span class="badge bg-success">{{ 'badge.history.active'|trans }}</span>
+                                            {% else %}
+                                                {{ row.endedAt|user_date('d/m/Y') }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if teamHistory|length > 0 %}
+                <div class="tab-pane fade{{ playerHistory|length == 0 ? ' show active' : '' }}" id="badge-history-teams-pane" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'badge.history.team'|trans }}</th>
+                                    <th>{{ 'badge.history.since'|trans }}</th>
+                                    <th>{{ 'badge.history.until'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in teamHistory %}
+                                    <tr class="{{ row.endedAt is null ? 'table-success' : '' }}">
+                                        <td>{{ row.libTeam }}</td>
+                                        <td>{{ row.createdAt|user_date('d/m/Y') }}</td>
+                                        <td>
+                                            {% if row.endedAt is null %}
+                                                <span class="badge bg-success">{{ 'badge.history.active'|trans }}</span>
+                                            {% else %}
+                                                {{ row.endedAt|user_date('d/m/Y') }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <p class="text-muted p-4 mb-0">{{ 'badge.history.no_history'|trans }}</p>
+    {% endif %}
+</div>

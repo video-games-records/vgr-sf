@@ -456,3 +456,15 @@ country:
 player_game:
   close_to_master_badge:
     card_title: "Close to Master Badge"
+
+badge:
+  history:
+    title: Badge History
+    tab_players: Players
+    tab_teams: Teams
+    player: Player
+    team: Team
+    since: Since
+    until: Until
+    active: Active
+    no_history: No history available yet.

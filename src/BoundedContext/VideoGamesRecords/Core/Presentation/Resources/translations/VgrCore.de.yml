@@ -174,3 +174,15 @@ country:
     meta_description: "Spieler-Rankings für %country%"
     select_country: Land auswählen
     ranking_points: Punkte-Rangliste
+
+badge:
+  history:
+    title: Abzeichen-Verlauf
+    tab_players: Spieler
+    tab_teams: Teams
+    player: Spieler
+    team: Team
+    since: Seit
+    until: Bis
+    active: Aktiv
+    no_history: Noch kein Verlauf verfügbar.

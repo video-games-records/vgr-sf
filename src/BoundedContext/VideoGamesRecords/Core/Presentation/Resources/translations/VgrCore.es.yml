@@ -174,3 +174,15 @@ country:
     meta_description: "Rankings de jugadores para %country%"
     select_country: Seleccionar un país
     ranking_points: Clasificación por puntos
+
+badge:
+  history:
+    title: Historial de la insignia
+    tab_players: Jugadores
+    tab_teams: Equipos
+    player: Jugador
+    team: Equipo
+    since: Desde
+    until: Hasta
+    active: Activo
+    no_history: Aún no hay historial disponible.
