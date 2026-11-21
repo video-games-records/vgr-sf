@@ -85,6 +85,9 @@
             "symfony/flex": true,
             "symfony/runtime": true
         },
+        "audit": {
+            "abandoned": "report"
+        },
         "bump-after-update": true,
         "sort-packages": true
     },
