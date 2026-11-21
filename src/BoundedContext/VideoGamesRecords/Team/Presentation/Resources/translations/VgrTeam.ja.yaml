@@ -97,6 +97,11 @@ team:
             tag:
                 label: 'タグ'
                 placeholder: 'タグを入力（2〜4文字）'
+            status:
+                label: 'チームステータス'
+                open: 'オープン'
+                closed: 'クローズ'
+                help: 'オープンの場合、他のプレイヤーがあなたのチームに参加リクエストを送ることができます。クローズの場合、参加リクエストは送れません。'
             create: '作成'
             save: '保存'
         create:

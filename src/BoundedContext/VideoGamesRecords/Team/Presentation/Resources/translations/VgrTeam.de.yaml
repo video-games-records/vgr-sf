@@ -97,6 +97,11 @@ team:
             tag:
                 label: 'Kürzel'
                 placeholder: 'Kürzel eingeben (2-4 Zeichen)'
+            status:
+                label: 'Teamstatus'
+                open: 'Offen'
+                closed: 'Geschlossen'
+                help: 'Wenn offen, können andere Spieler eine Anfrage senden, um deinem Team beizutreten. Wenn geschlossen, können keine Anfragen gesendet werden.'
             create: 'Erstellen'
             save: 'Speichern'
         create:

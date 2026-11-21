@@ -97,6 +97,11 @@ team:
             tag:
                 label: 'Etiqueta'
                 placeholder: 'Introduce la etiqueta (2-4 caracteres)'
+            status:
+                label: 'Estado del equipo'
+                open: 'Abierto'
+                closed: 'Cerrado'
+                help: 'Si está abierto, otros jugadores pueden enviar una solicitud para unirse a tu equipo. Si está cerrado, no se puede enviar ninguna solicitud.'
             create: 'Crear'
             save: 'Guardar'
         create:

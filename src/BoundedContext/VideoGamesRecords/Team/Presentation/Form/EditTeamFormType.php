@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Team\Presentation\Form;
 
 use App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,6 +31,16 @@ class EditTeamFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'team.manage.form.tag.placeholder',
                 ],
+            ])
+            ->add('status', ChoiceType::class, [
+                'label' => 'team.manage.form.status.label',
+                'help' => 'team.manage.form.status.help',
+                'choices' => [
+                    'team.manage.form.status.open' => Team::STATUS_OPENED,
+                    'team.manage.form.status.closed' => Team::STATUS_CLOSED,
+                ],
+                'expanded' => true,
+                'multiple' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'team.manage.form.save',

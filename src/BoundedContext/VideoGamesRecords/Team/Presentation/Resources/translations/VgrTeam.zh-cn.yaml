@@ -97,6 +97,11 @@ team:
             tag:
                 label: '标签'
                 placeholder: '输入标签（2-4个字符）'
+            status:
+                label: '战队状态'
+                open: '开放'
+                closed: '关闭'
+                help: '开放时，其他玩家可以发送申请加入你的战队。关闭时，无法发送任何申请。'
             create: '创建'
             save: '保存'
         create:

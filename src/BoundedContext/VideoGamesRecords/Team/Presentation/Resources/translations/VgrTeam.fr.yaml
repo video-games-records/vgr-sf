@@ -97,6 +97,11 @@ team:
             tag:
                 label: 'Tag'
                 placeholder: 'Entrez le tag (2-4 caractères)'
+            status:
+                label: 'Statut de l''équipe'
+                open: 'Ouvert'
+                closed: 'Fermé'
+                help: 'Si ouvert, les autres joueurs peuvent envoyer une demande pour rejoindre votre équipe. Si fermé, aucune demande ne peut être envoyée.'
             create: 'Créer'
             save: 'Enregistrer'
         create:

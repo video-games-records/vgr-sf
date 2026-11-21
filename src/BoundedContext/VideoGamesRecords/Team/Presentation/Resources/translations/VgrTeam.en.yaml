@@ -97,6 +97,11 @@ team:
             tag:
                 label: 'Tag'
                 placeholder: 'Enter tag (2-4 characters)'
+            status:
+                label: 'Team Status'
+                open: 'Open'
+                closed: 'Closed'
+                help: 'When open, other players can send a request to join your team. When closed, no join requests can be sent.'
             create: 'Create'
             save: 'Save'
         create:

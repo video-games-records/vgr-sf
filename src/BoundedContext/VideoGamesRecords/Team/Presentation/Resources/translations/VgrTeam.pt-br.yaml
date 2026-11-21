@@ -97,6 +97,11 @@ team:
             tag:
                 label: 'Tag'
                 placeholder: 'Digite a tag (2-4 caracteres)'
+            status:
+                label: 'Status do time'
+                open: 'Aberto'
+                closed: 'Fechado'
+                help: 'Se aberto, outros jogadores podem enviar um pedido para entrar no seu time. Se fechado, nenhum pedido pode ser enviado.'
             create: 'Criar'
             save: 'Salvar'
         create:
