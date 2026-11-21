@@ -8,6 +8,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
 use App\BoundedContext\VideoGamesRecords\Video\Application\Mapper\VideoMapper;
 use App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Video;
+use App\BoundedContext\VideoGamesRecords\Video\Infrastructure\Doctrine\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +21,7 @@ class CreateVideo extends AbstractController
         private readonly UserProvider $userProvider,
         private readonly EntityManagerInterface $em,
         private readonly VideoMapper $videoMapper,
+        private readonly VideoRepository $videoRepository,
     ) {
     }
 
@@ -41,6 +43,19 @@ class CreateVideo extends AbstractController
 
         $video = new Video();
         $video->setUrl($url);
+
+        $existingVideo = $this->videoRepository->findOneByTypeAndExternalId(
+            $video->getType(),
+            $video->getExternalId()
+        );
+
+        if ($existingVideo !== null) {
+            return new JsonResponse(
+                $this->videoMapper->toDTO($existingVideo),
+                Response::HTTP_OK
+            );
+        }
+
         $video->setPlayer($player);
 
         if (!empty($data['game_id'])) {

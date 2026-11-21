@@ -141,6 +141,17 @@ class VideoRepository extends DefaultRepository
             ->getSingleScalarResult();
     }
 
+    public function findOneByTypeAndExternalId(string $type, string $externalId): ?Video
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.type = :type')
+            ->andWhere('v.externalId = :externalId')
+            ->setParameter('type', $type)
+            ->setParameter('externalId', $externalId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     /**
      * @return Video[]
      */

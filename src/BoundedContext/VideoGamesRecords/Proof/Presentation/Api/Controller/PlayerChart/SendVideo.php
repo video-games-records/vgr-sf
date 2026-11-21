@@ -9,6 +9,7 @@ use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Security\UserProvider;
 use App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof;
 use App\BoundedContext\VideoGamesRecords\Video\Domain\Entity\Video;
+use App\BoundedContext\VideoGamesRecords\Video\Infrastructure\Doctrine\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +23,8 @@ class SendVideo extends AbstractController
     public function __construct(
         private readonly UserProvider $userProvider,
         private readonly EntityManagerInterface $em,
-        private readonly PlayerChartRepository $playerChartRepository
+        private readonly PlayerChartRepository $playerChartRepository,
+        private readonly VideoRepository $videoRepository,
     ) {
     }
 
@@ -63,13 +65,23 @@ class SendVideo extends AbstractController
             return new JsonResponse(['error' => 'Invalid YouTube URL'], Response::HTTP_BAD_REQUEST);
         }
 
-        // Create video
+        // Create or reuse video
         $video = new Video();
         $video->setUrl($url);
-        $video->setPlayer($player);
-        $video->setGame($playerChart->getChart()->getGroup()->getGame());
-        $video->setTitle($playerChart->getChart()->getDefaultName() . ' - ' . $player->getPseudo());
-        $this->em->persist($video);
+
+        $existingVideo = $this->videoRepository->findOneByTypeAndExternalId(
+            $video->getType(),
+            $video->getExternalId()
+        );
+
+        if ($existingVideo !== null) {
+            $video = $existingVideo;
+        } else {
+            $video->setPlayer($player);
+            $video->setGame($playerChart->getChart()->getGroup()->getGame());
+            $video->setTitle($playerChart->getChart()->getDefaultName() . ' - ' . $player->getPseudo());
+            $this->em->persist($video);
+        }
 
         // Create proof
         $proof = new Proof();
