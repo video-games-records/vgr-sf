@@ -20,9 +20,8 @@ class PlayerSerieRankingProvider extends AbstractRankingProvider
      */
     public function getRankingPoints(?int $id = null, array $options = []): array
     {
-        /** @var Serie $serie */
         $serie = $this->em->getRepository('App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Serie')->find($id);
-        if (null == $serie) {
+        if (null === $serie) {
             return [];
         }
 

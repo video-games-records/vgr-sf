@@ -43,13 +43,53 @@
         {% if app.environment == 'prod' and skip_analytics is not defined %}
             <script>
                 function umamiBeforeSend(type, payload) {
+                    if (navigator.webdriver) {
+                        return false;
+                    }
                     if (!payload.name && /\/geo-challenge(\/|\?|$)/.test(payload.url || '')) {
                         return false;
                     }
                     return payload;
                 }
+
+                // Bot filter: a real visitor stays on the page past ENGAGEMENT_DELAY_MS before
+                // the pageview is sent; a bot that fetches+closes instantly never triggers it.
+                (function () {
+                    var ENGAGEMENT_DELAY_MS = 1500;
+                    var settled = false;
+
+                    function cancel() {
+                        settled = true;
+                    }
+
+                    function trackPageview() {
+                        if (settled || document.hidden || navigator.webdriver) {
+                            return;
+                        }
+                        settled = true;
+                        window.umami.track();
+                    }
+
+                    document.addEventListener('visibilitychange', function () {
+                        if (document.hidden) {
+                            cancel();
+                        }
+                    });
+                    window.addEventListener('pagehide', cancel);
+
+                    setTimeout(function poll() {
+                        if (settled) {
+                            return;
+                        }
+                        if (window.umami && window.umami.track) {
+                            trackPageview();
+                        } else {
+                            setTimeout(poll, 200);
+                        }
+                    }, ENGAGEMENT_DELAY_MS);
+                })();
             </script>
-            <script defer src="https://analytics.vgr-magicbart.com/script.js" data-website-id="5f65ad9b-94af-4002-a58b-517e5d2266bb" data-before-send="umamiBeforeSend"></script>
+            <script defer src="https://analytics.vgr-magicbart.com/script.js" data-website-id="5f65ad9b-94af-4002-a58b-517e5d2266bb" data-before-send="umamiBeforeSend" data-auto-track="false"></script>
         {% endif %}
 
         {% block stylesheets %}
