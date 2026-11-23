@@ -1,0 +1,6 @@
+<a href="{{ connection.platform.profileUrl(connection.externalId) }}"
+   target="_blank" rel="noopener noreferrer"
+   class="gp-badge gp-badge--{{ connection.platform.value }}"
+   title="{{ connection.platform.label }}: {{ connection.username ?? connection.externalId }}">
+    {{ connection.platform.shortLabel }}
+</a>

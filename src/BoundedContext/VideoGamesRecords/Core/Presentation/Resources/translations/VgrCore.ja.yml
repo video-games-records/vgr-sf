@@ -1,4 +1,43 @@
 player:
+  index:
+    title: プレイヤー
+    meta_description: Video Games Recordsに登録されているすべてのプレイヤーを閲覧・絞り込みできます。
+    breadcrumb: プレイヤー
+    header: プレイヤー
+    description: "アクティブなプレイヤー %count% 人"
+    column_pseudo: プレイヤー
+    column_platforms: 連携アカウント
+    column_points: ポイント
+    column_games: ゲーム数
+    column_charts: 記録数
+    column_registered: 登録日
+    column_last_login: 最終ログイン
+    no_players: プレイヤーが見つかりません
+    no_players_hint: フィルターを調整するかリセットしてみてください。
+    showing_results: "%total% 人中 %start% - %end% 人を表示中"
+    filter:
+      title: フィルター
+      search: 検索
+      search_placeholder: ニックネームで検索...
+      platforms: 連携アカウント
+      country: 国
+      all_countries: すべての国
+      team: チーム
+      team_placeholder: チームを検索...
+      points: ポイント
+      points_min: 最小ポイント
+      points_max: 最大ポイント
+      last_active: 最終活動
+      last_active_any: いつでも
+      last_active_today: 今日
+      last_active_week: 過去7日間
+      last_active_month: 過去30日間
+      last_active_year: 今年
+      last_active_never: ログインしたことがない
+      has_badges: マスターバッジ保有
+      apply: フィルターを適用
+      reset: フィルターをリセット
+
   staff:
     title: VGRスタッフ
     meta_description: VGRスタッフのご紹介 - 管理者、モデレーター、その他のチームメンバー。

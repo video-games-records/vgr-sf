@@ -29,6 +29,21 @@ enum PlatformEnum: string
         };
     }
 
+    /** Short label for compact UI elements (list rows, badges) where the full name doesn't fit. */
+    public function getShortLabel(): string
+    {
+        return match ($this) {
+            self::STEAM => 'STM',
+            self::XBOX => 'XBX',
+            self::PSN => 'PSN',
+            self::EPIC => 'EPIC',
+            self::GOG => 'GOG',
+            self::BATTLENET => 'BNET',
+            self::NINTENDO => 'NIN',
+            self::RETRO_ACHIEVEMENTS => 'RA',
+        };
+    }
+
     public function isSupported(): bool
     {
         return match ($this) {

@@ -125,6 +125,45 @@ player:
     card_title: My recent games
     no_games: No games played yet
 
+  index:
+    title: Players
+    meta_description: Browse and filter all registered players on Video Games Records.
+    breadcrumb: Players
+    header: Players
+    description: "%count% active players"
+    column_pseudo: Player
+    column_platforms: Linked accounts
+    column_points: Points
+    column_games: Games
+    column_charts: Records
+    column_registered: Registered
+    column_last_login: Last login
+    no_players: No players found
+    no_players_hint: Try adjusting or clearing your filters.
+    showing_results: "Showing %start% - %end% of %total% players"
+    filter:
+      title: Filters
+      search: Search
+      search_placeholder: Search by pseudo...
+      platforms: Linked accounts
+      country: Country
+      all_countries: All countries
+      team: Team
+      team_placeholder: Search a team...
+      points: Points
+      points_min: Min points
+      points_max: Max points
+      last_active: Last active
+      last_active_any: Any time
+      last_active_today: Today
+      last_active_week: Last 7 days
+      last_active_month: Last 30 days
+      last_active_year: This year
+      last_active_never: Never logged in
+      has_badges: Has master badges
+      apply: Apply filters
+      reset: Reset filters
+
   staff:
     title: VGR Staff
     meta_description: Meet the VGR staff - administrators, moderators and other team members.

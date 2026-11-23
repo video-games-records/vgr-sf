@@ -1,4 +1,43 @@
 player:
+  index:
+    title: Giocatori
+    meta_description: Sfoglia e filtra tutti i giocatori registrati su Video Games Records.
+    breadcrumb: Giocatori
+    header: Giocatori
+    description: "%count% giocatori attivi"
+    column_pseudo: Giocatore
+    column_platforms: Account collegati
+    column_points: Punti
+    column_games: Giochi
+    column_charts: Record
+    column_registered: Registrato il
+    column_last_login: Ultimo accesso
+    no_players: Nessun giocatore trovato
+    no_players_hint: Prova a modificare o azzerare i tuoi filtri.
+    showing_results: "Visualizzazione di %start% - %end% su %total% giocatori"
+    filter:
+      title: Filtri
+      search: Ricerca
+      search_placeholder: Cerca per pseudonimo...
+      platforms: Account collegati
+      country: Paese
+      all_countries: Tutti i paesi
+      team: Team
+      team_placeholder: Cerca un team...
+      points: Punti
+      points_min: Punti min
+      points_max: Punti max
+      last_active: Ultima attività
+      last_active_any: In qualsiasi momento
+      last_active_today: Oggi
+      last_active_week: Ultimi 7 giorni
+      last_active_month: Ultimi 30 giorni
+      last_active_year: "Quest'anno"
+      last_active_never: Mai connesso
+      has_badges: Ha badge master
+      apply: Applica filtri
+      reset: Azzera filtri
+
   staff:
     title: Staff di VGR
     meta_description: Scopri lo staff di VGR - amministratori, moderatori e altri membri del team.

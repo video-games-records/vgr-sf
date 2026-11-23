@@ -1,0 +1,42 @@
+{% trans_default_domain 'VgrCore' %}
+{% set baseParams = app.request.query.all %}
+<div class="d-flex flex-wrap gap-2 mb-3">
+    {% if baseParams.q is defined and baseParams.q %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({q: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.search'|trans }}: {{ baseParams.q }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.platforms is defined and baseParams.platforms %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({platforms: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.platforms'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.country is defined and baseParams.country %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({country: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.country'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.team is defined and baseParams.team %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({team: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.team'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if (baseParams.pointsMin is defined and baseParams.pointsMin) or (baseParams.pointsMax is defined and baseParams.pointsMax) %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({pointsMin: null, pointsMax: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.points'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.lastActive is defined and baseParams.lastActive %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({lastActive: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.last_active'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.hasBadges is defined and baseParams.hasBadges %}
+        <a href="{{ path('vgr_player_index', baseParams|merge({hasBadges: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'player.index.filter.has_badges'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    <a href="{{ path('vgr_player_index', {sort: currentSort, order: currentOrder}) }}" class="badge rounded-pill text-bg-danger text-decoration-none">
+        {{ 'player.index.filter.reset'|trans }} <i class="bi bi-x-circle"></i>
+    </a>
+</div>

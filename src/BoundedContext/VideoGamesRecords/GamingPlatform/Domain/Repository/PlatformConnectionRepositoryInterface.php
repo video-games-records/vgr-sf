@@ -17,6 +17,12 @@ interface PlatformConnectionRepositoryInterface
     /** @return list<PlatformConnection> */
     public function findByPlayer(Player $player): array;
 
+    /**
+     * @param list<int> $playerIds
+     * @return array<int, list<PlatformConnection>> connections grouped by player id
+     */
+    public function findByPlayerIds(array $playerIds): array;
+
     public function save(PlatformConnection $connection): void;
 
     public function remove(PlatformConnection $connection): void;

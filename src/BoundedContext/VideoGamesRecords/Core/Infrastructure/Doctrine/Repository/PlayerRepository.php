@@ -8,10 +8,13 @@ use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use App\BoundedContext\VideoGamesRecords\Core\Application\DTO\Player\PlayerListFilter;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\PlayerStatusEnum;
 use App\BoundedContext\User\Domain\Entity\User;
+use App\BoundedContext\VideoGamesRecords\GamingPlatform\Domain\Entity\PlatformConnection;
 
 /**
  * @extends DefaultRepository<Player>
@@ -150,6 +153,100 @@ class PlayerRepository extends DefaultRepository
             ->where('p.nbChart > 0');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param string $sortBy
+     * @param string $order
+     * @param int $limit
+     * @param int $offset
+     * @return array<Player>
+     */
+    public function findForList(PlayerListFilter $filter, string $sortBy = 'pointGame', string $order = 'DESC', int $limit = 100, int $offset = 0): array
+    {
+        $validFields = ['pointGame', 'lastLogin', 'pseudo', 'createdAt', 'nbGame', 'nbChart', 'rankCup', 'rankMedal', 'pointChart', 'nbMasterBadge'];
+        if (!in_array($sortBy, $validFields, true)) {
+            $sortBy = 'pointGame';
+        }
+
+        $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';
+
+        $qb = $this->buildListQuery($filter)
+            ->addSelect('p')
+            ->orderBy('p.' . $sortBy, $order)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countForList(PlayerListFilter $filter): int
+    {
+        $qb = $this->buildListQuery($filter)
+            ->select('COUNT(p.id)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    private function buildListQuery(PlayerListFilter $filter): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.team', 't')
+            ->addSelect('t')
+            ->leftJoin('p.country', 'c')
+            ->addSelect('c')
+            ->where('p.nbChart > 0');
+
+        if ($filter->search !== null && $filter->search !== '') {
+            $qb->andWhere('LOWER(p.pseudo) LIKE LOWER(:search)')
+                ->setParameter('search', '%' . $filter->search . '%');
+        }
+
+        if ($filter->countryId !== null) {
+            $qb->andWhere('c.id = :countryId')
+                ->setParameter('countryId', $filter->countryId);
+        }
+
+        if ($filter->teamId !== null) {
+            $qb->andWhere('t.id = :teamId')
+                ->setParameter('teamId', $filter->teamId);
+        }
+
+        if ($filter->platforms !== []) {
+            // EXISTS (not a join) so matching several platforms never multiplies rows,
+            // which would otherwise silently break the LIMIT/OFFSET pagination above.
+            $sub = $this->getEntityManager()->createQueryBuilder()
+                ->select('1')
+                ->from(PlatformConnection::class, 'pc')
+                ->where('pc.player = p')
+                ->andWhere('pc.platform IN (:platforms)');
+
+            $qb->andWhere($qb->expr()->exists($sub->getDQL()))
+                ->setParameter('platforms', $filter->platforms);
+        }
+
+        if ($filter->pointsMin !== null) {
+            $qb->andWhere('p.pointGame >= :pointsMin')
+                ->setParameter('pointsMin', $filter->pointsMin);
+        }
+
+        if ($filter->pointsMax !== null) {
+            $qb->andWhere('p.pointGame <= :pointsMax')
+                ->setParameter('pointsMax', $filter->pointsMax);
+        }
+
+        if ($filter->neverActive) {
+            $qb->andWhere('p.lastLogin IS NULL');
+        } elseif ($filter->lastActiveSince !== null) {
+            $qb->andWhere('p.lastLogin >= :lastActiveSince')
+                ->setParameter('lastActiveSince', $filter->lastActiveSince);
+        }
+
+        if ($filter->hasBadges) {
+            $qb->andWhere('p.nbMasterBadge > 0');
+        }
+
+        return $qb;
     }
 
     /**

@@ -1,4 +1,43 @@
 player:
+  index:
+    title: 玩家
+    meta_description: 浏览并筛选 Video Games Records 上的所有注册玩家。
+    breadcrumb: 玩家
+    header: 玩家
+    description: "%count% 名活跃玩家"
+    column_pseudo: 玩家
+    column_platforms: 关联账号
+    column_points: 积分
+    column_games: 游戏数
+    column_charts: 记录数
+    column_registered: 注册日期
+    column_last_login: 最后登录
+    no_players: 未找到玩家
+    no_players_hint: 请尝试调整或重置筛选条件。
+    showing_results: "显示第 %start% - %end% 项，共 %total% 名玩家"
+    filter:
+      title: 筛选
+      search: 搜索
+      search_placeholder: 按昵称搜索...
+      platforms: 关联账号
+      country: 国家/地区
+      all_countries: 所有国家/地区
+      team: 战队
+      team_placeholder: 搜索战队...
+      points: 积分
+      points_min: 最低积分
+      points_max: 最高积分
+      last_active: 最后活跃
+      last_active_any: 不限
+      last_active_today: 今天
+      last_active_week: 最近7天
+      last_active_month: 最近30天
+      last_active_year: 今年
+      last_active_never: 从未登录
+      has_badges: 拥有大师徽章
+      apply: 应用筛选
+      reset: 重置筛选
+
   staff:
     title: VGR 工作人员
     meta_description: 认识 VGR 的工作人员 - 管理员、版主和其他团队成员。

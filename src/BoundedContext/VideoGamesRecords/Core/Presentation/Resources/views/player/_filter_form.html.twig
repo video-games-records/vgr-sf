@@ -1,0 +1,61 @@
+{% trans_default_domain 'VgrCore' %}
+{{ form_start(filterForm, {'attr': {'class': 'player-filter-form'}}) }}
+{{ form_widget(filterForm.sort) }}
+{{ form_widget(filterForm.order) }}
+
+<div class="mb-3">
+    {{ form_label(filterForm.q) }}
+    {{ form_widget(filterForm.q) }}
+</div>
+
+<div class="mb-3">
+    <label class="form-label">{{ 'player.index.filter.platforms'|trans }}</label>
+    <div class="d-flex flex-column gap-1">
+        {% for child in filterForm.platforms %}
+            <div class="form-check">
+                {{ form_widget(child, {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(child, null, {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="mb-3">
+    {{ form_label(filterForm.country) }}
+    {{ form_widget(filterForm.country) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(filterForm.team) }}
+    {{ form_widget(filterForm.team) }}
+</div>
+
+<div class="mb-3">
+    <label class="form-label">{{ 'player.index.filter.points'|trans }}</label>
+    <div class="d-flex gap-2">
+        {{ form_widget(filterForm.pointsMin, {'attr': {'placeholder': 'player.index.filter.points_min'|trans}}) }}
+        {{ form_widget(filterForm.pointsMax, {'attr': {'placeholder': 'player.index.filter.points_max'|trans}}) }}
+    </div>
+</div>
+
+<div class="mb-3">
+    {{ form_label(filterForm.lastActive) }}
+    {{ form_widget(filterForm.lastActive) }}
+</div>
+
+<div class="form-check mb-3">
+    {{ form_widget(filterForm.hasBadges, {'attr': {'class': 'form-check-input'}}) }}
+    {{ form_label(filterForm.hasBadges, null, {'label_attr': {'class': 'form-check-label'}}) }}
+</div>
+
+<div class="d-grid gap-2">
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-funnel"></i> {{ 'player.index.filter.apply'|trans }}
+    </button>
+    {% if hasActiveFilters %}
+        <a href="{{ path('vgr_player_index', {sort: currentSort, order: currentOrder}) }}" class="btn btn-outline-secondary">
+            {{ 'player.index.filter.reset'|trans }}
+        </a>
+    {% endif %}
+</div>
+{{ form_end(filterForm) }}

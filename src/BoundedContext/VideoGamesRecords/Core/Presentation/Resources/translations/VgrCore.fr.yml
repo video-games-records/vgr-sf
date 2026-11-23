@@ -125,6 +125,45 @@ player:
     card_title: Mes derniers jeux
     no_games: Aucun jeu joué pour l'instant
 
+  index:
+    title: Joueurs
+    meta_description: Parcourez et filtrez tous les joueurs inscrits sur Video Games Records.
+    breadcrumb: Joueurs
+    header: Joueurs
+    description: "%count% joueurs actifs"
+    column_pseudo: Joueur
+    column_platforms: Comptes liés
+    column_points: Points
+    column_games: Jeux
+    column_charts: Records
+    column_registered: Inscrit le
+    column_last_login: Dernière connexion
+    no_players: Aucun joueur trouvé
+    no_players_hint: Essayez d'ajuster ou de réinitialiser vos filtres.
+    showing_results: "Affichage de %start% - %end% sur %total% joueurs"
+    filter:
+      title: Filtres
+      search: Recherche
+      search_placeholder: Rechercher par pseudo...
+      platforms: Comptes liés
+      country: Pays
+      all_countries: Tous les pays
+      team: Équipe
+      team_placeholder: Rechercher une équipe...
+      points: Points
+      points_min: Points min
+      points_max: Points max
+      last_active: Dernière activité
+      last_active_any: "N'importe quand"
+      last_active_today: "Aujourd'hui"
+      last_active_week: 7 derniers jours
+      last_active_month: 30 derniers jours
+      last_active_year: Cette année
+      last_active_never: Jamais connecté
+      has_badges: Possède des badges master
+      apply: Appliquer les filtres
+      reset: Réinitialiser les filtres
+
   staff:
     title: Staff VGR
     meta_description: Découvrez le staff de VGR - administrateurs, modérateurs et autres membres de l'équipe.

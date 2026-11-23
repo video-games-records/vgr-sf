@@ -38,6 +38,30 @@ class PlatformConnectionRepository extends ServiceEntityRepository implements Pl
         return $this->findBy(['player' => $player]);
     }
 
+    /**
+     * @param list<int> $playerIds
+     * @return array<int, list<PlatformConnection>>
+     */
+    public function findByPlayerIds(array $playerIds): array
+    {
+        if ($playerIds === []) {
+            return [];
+        }
+
+        $connections = $this->createQueryBuilder('pc')
+            ->where('IDENTITY(pc.player) IN (:playerIds)')
+            ->setParameter('playerIds', $playerIds)
+            ->getQuery()
+            ->getResult();
+
+        $byPlayer = [];
+        foreach ($connections as $connection) {
+            $byPlayer[$connection->getPlayer()->getId()][] = $connection;
+        }
+
+        return $byPlayer;
+    }
+
     public function save(PlatformConnection $connection): void
     {
         $this->getEntityManager()->persist($connection);

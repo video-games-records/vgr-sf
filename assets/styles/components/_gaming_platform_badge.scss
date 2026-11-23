@@ -1,0 +1,28 @@
+// Components - Linked gaming platform account badges (Steam/Xbox/RetroAchievements/...)
+// Mirrors the by-id coloring convention of _platforms.scss, keyed by PlatformEnum value instead.
+
+.gp-badge {
+    display: inline-block;
+    padding: 0.15em 0.45em;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: #6c757d;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.gp-badge:hover {
+    color: #fff;
+    opacity: 0.85;
+}
+
+.gp-badge--steam             { background-color: #1b2838; }
+.gp-badge--xbox              { background-color: #107c10; }
+.gp-badge--retro_achievements{ background-color: #cc9900; color: #000; }
+.gp-badge--psn               { background-color: #003791; }
+.gp-badge--epic              { background-color: #2a2a2a; }
+.gp-badge--gog               { background-color: #86328a; }
+.gp-badge--battlenet         { background-color: #00aeff; color: #000; }
+.gp-badge--nintendo          { background-color: #e60012; }

@@ -36,6 +36,31 @@ class PlatformEnumTest extends TestCase
     }
 
     // ------------------------------------------------------------------
+    // getShortLabel
+    // ------------------------------------------------------------------
+
+    /** @return array<string, array{PlatformEnum, string}> */
+    public static function shortLabelProvider(): array
+    {
+        return [
+            'steam'               => [PlatformEnum::STEAM,              'STM'],
+            'xbox'                => [PlatformEnum::XBOX,               'XBX'],
+            'psn'                 => [PlatformEnum::PSN,                'PSN'],
+            'epic'                => [PlatformEnum::EPIC,               'EPIC'],
+            'gog'                 => [PlatformEnum::GOG,                'GOG'],
+            'battlenet'           => [PlatformEnum::BATTLENET,          'BNET'],
+            'nintendo'            => [PlatformEnum::NINTENDO,           'NIN'],
+            'retro_achievements'  => [PlatformEnum::RETRO_ACHIEVEMENTS, 'RA'],
+        ];
+    }
+
+    #[DataProvider('shortLabelProvider')]
+    public function testGetShortLabel(PlatformEnum $platform, string $expectedShortLabel): void
+    {
+        $this->assertSame($expectedShortLabel, $platform->getShortLabel());
+    }
+
+    // ------------------------------------------------------------------
     // isSupported
     // ------------------------------------------------------------------
 
