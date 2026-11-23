@@ -6,7 +6,9 @@ PROD_SSH_HOST=
 PROD_SSH_PORT=22
 PROD_BACKUP_REMOTE_DIR=
 PROD_BACKUP_PREFIX=day-vgr
-PROD_BACKUP_LOCAL_DIR=/tmp
+# Répertoire local des backups (ex: destination du pull nocturne via cron+rsync).
+# Les fichiers y sont attendus en .sql.gpg (chiffrés GPG), .sql.gz ou .sql.
+PROD_BACKUP_LOCAL_DIR=$HOME/backups-vps/vgr
 
 # Base de données locale (cible de l'import)
 LOCAL_DB_HOST=127.0.0.1

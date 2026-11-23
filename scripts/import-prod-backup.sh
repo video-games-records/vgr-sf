@@ -13,7 +13,7 @@ fi
 # shellcheck source=backup.conf.dist
 source "$CONF_FILE"
 
-: "${PROD_BACKUP_LOCAL_DIR:=/tmp}"
+: "${PROD_BACKUP_LOCAL_DIR:=$HOME/backups-vps/vgr}"
 : "${PROD_BACKUP_PREFIX:=day-vgr}"
 : "${LOCAL_DB_HOST:=127.0.0.1}"
 : "${LOCAL_DB_PORT:=3306}"
@@ -21,17 +21,17 @@ source "$CONF_FILE"
 : "${LOCAL_DB_PASSWORD:?Variable LOCAL_DB_PASSWORD non définie dans backup.conf}"
 : "${LOCAL_DB_NAME:?Variable LOCAL_DB_NAME non définie dans backup.conf}"
 
-# Fichier à importer : argument ou dernier téléchargé (hier)
+# Fichier à importer : argument, sinon le plus récent trouvé dans le répertoire
+# des backups rapatriés par le cron nocturne (rsync depuis le VPS, chiffrés GPG).
 if [[ $# -ge 1 ]]; then
     DUMP_FILE="$1"
 else
-    YESTERDAY=$(date -d "yesterday" +%Y%m%d)
-    DUMP_FILE="${PROD_BACKUP_LOCAL_DIR}/${YESTERDAY}-${PROD_BACKUP_PREFIX}.sql.gz"
+    DUMP_FILE="$(ls -t "${PROD_BACKUP_LOCAL_DIR}/"*"-${PROD_BACKUP_PREFIX}.sql."* 2>/dev/null | head -1 || true)"
 fi
 
-if [[ ! -f "$DUMP_FILE" ]]; then
-    echo "Erreur : fichier introuvable : $DUMP_FILE"
-    echo "Lancer d'abord scripts/download-prod-backup.sh ou passer le chemin en argument."
+if [[ -z "${DUMP_FILE:-}" || ! -f "$DUMP_FILE" ]]; then
+    echo "Erreur : aucun fichier de backup trouvé dans ${PROD_BACKUP_LOCAL_DIR}"
+    echo "Passer le chemin du dump en argument, ou vérifier que le pull nocturne (cron) a bien tourné."
     exit 1
 fi
 
@@ -44,22 +44,39 @@ if [[ "$CONFIRM" != "o" && "$CONFIRM" != "O" ]]; then
     exit 0
 fi
 
+read_source() {
+    if command -v pv &>/dev/null; then
+        pv "$DUMP_FILE"
+    else
+        cat "$DUMP_FILE"
+    fi
+}
+
+decompress() {
+    case "$DUMP_FILE" in
+        *.gpg)
+            gpg --quiet --decrypt
+            ;;
+        *.gz)
+            gunzip -c
+            ;;
+        *.sql)
+            cat
+            ;;
+        *)
+            echo "Erreur : extension non reconnue pour $DUMP_FILE (attendu .gpg, .gz ou .sql)" >&2
+            exit 1
+            ;;
+    esac
+}
+
 echo "Import en cours..."
 
-if command -v pv &>/dev/null; then
-    pv "$DUMP_FILE" | gunzip | mysql \
-        -h "$LOCAL_DB_HOST" \
-        -P "$LOCAL_DB_PORT" \
-        -u "$LOCAL_DB_USER" \
-        -p"$LOCAL_DB_PASSWORD" \
-        "$LOCAL_DB_NAME"
-else
-    gunzip -c "$DUMP_FILE" | mysql \
-        -h "$LOCAL_DB_HOST" \
-        -P "$LOCAL_DB_PORT" \
-        -u "$LOCAL_DB_USER" \
-        -p"$LOCAL_DB_PASSWORD" \
-        "$LOCAL_DB_NAME"
-fi
+read_source | decompress | mysql \
+    -h "$LOCAL_DB_HOST" \
+    -P "$LOCAL_DB_PORT" \
+    -u "$LOCAL_DB_USER" \
+    -p"$LOCAL_DB_PASSWORD" \
+    "$LOCAL_DB_NAME"
 
 echo "Import terminé."
