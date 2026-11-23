@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make qa)",
+      "Bash(npm info *)",
+      "Bash(npm view *)",
+      "Bash(lsusb)",
+      "mcp__chrome-devtools__list_console_messages"
+    ]
+  }
+}
