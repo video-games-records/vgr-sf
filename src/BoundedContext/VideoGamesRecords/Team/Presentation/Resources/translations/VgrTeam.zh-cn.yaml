@@ -16,6 +16,22 @@ team:
         column_players: '玩家'
         showing_results: '显示第 %start% - %end% 条，共 %total% 支战队'
         no_teams: '未找到战队'
+        no_teams_hint: '请尝试调整或重置筛选条件。'
+        filter:
+            title: '筛选'
+            search: '搜索'
+            search_placeholder: '按名称或标签搜索...'
+            status: '状态'
+            all_statuses: '所有状态'
+            status_open: '开放'
+            status_closed: '关闭'
+            min_players: '最少人数'
+            points: '积分'
+            points_min: '最低积分'
+            points_max: '最高积分'
+            has_badges: '拥有大师徽章'
+            apply: '应用筛选'
+            reset: '重置筛选'
     profile:
         title: '战队资料'
         header:

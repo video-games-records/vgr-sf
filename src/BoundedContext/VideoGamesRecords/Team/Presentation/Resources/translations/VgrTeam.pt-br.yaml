@@ -16,6 +16,22 @@ team:
         column_players: 'Jogadores'
         showing_results: 'Exibindo %start% - %end% de %total% times'
         no_teams: 'Nenhum time encontrado'
+        no_teams_hint: 'Tente ajustar ou limpar seus filtros.'
+        filter:
+            title: 'Filtros'
+            search: 'Pesquisar'
+            search_placeholder: 'Pesquisar por nome ou tag...'
+            status: 'Status'
+            all_statuses: 'Todos os status'
+            status_open: 'Aberto'
+            status_closed: 'Fechado'
+            min_players: 'Jogadores mín.'
+            points: 'Pontos'
+            points_min: 'Pontos mín.'
+            points_max: 'Pontos máx.'
+            has_badges: 'Possui master badges'
+            apply: 'Aplicar filtros'
+            reset: 'Limpar filtros'
     profile:
         title: 'Perfil do time'
         header:

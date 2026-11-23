@@ -16,6 +16,22 @@ team:
         column_players: 'Giocatori'
         showing_results: 'Visualizzazione %start% - %end% di %total% squadre'
         no_teams: 'Nessuna squadra trovata'
+        no_teams_hint: 'Prova a modificare o azzerare i tuoi filtri.'
+        filter:
+            title: 'Filtri'
+            search: 'Ricerca'
+            search_placeholder: 'Cerca per nome o tag...'
+            status: 'Stato'
+            all_statuses: 'Tutti gli stati'
+            status_open: 'Aperta'
+            status_closed: 'Chiusa'
+            min_players: 'Giocatori min'
+            points: 'Punti'
+            points_min: 'Punti min'
+            points_max: 'Punti max'
+            has_badges: 'Ha badge master'
+            apply: 'Applica filtri'
+            reset: 'Azzera filtri'
     profile:
         title: 'Profilo squadra'
         header:

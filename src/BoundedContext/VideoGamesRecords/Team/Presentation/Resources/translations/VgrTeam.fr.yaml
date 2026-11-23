@@ -16,6 +16,22 @@ team:
         column_players: 'Joueurs'
         showing_results: 'Affichage %start% - %end% sur %total% équipes'
         no_teams: 'Aucune équipe trouvée'
+        no_teams_hint: "Essayez d'ajuster ou de réinitialiser vos filtres."
+        filter:
+            title: 'Filtres'
+            search: 'Recherche'
+            search_placeholder: 'Rechercher par nom ou tag...'
+            status: 'Statut'
+            all_statuses: 'Tous les statuts'
+            status_open: 'Ouverte'
+            status_closed: 'Fermée'
+            min_players: 'Joueurs min'
+            points: 'Points'
+            points_min: 'Points min'
+            points_max: 'Points max'
+            has_badges: 'Possède des badges master'
+            apply: 'Appliquer les filtres'
+            reset: 'Réinitialiser les filtres'
     profile:
         title: 'Profil de l''Equipe'
         header:

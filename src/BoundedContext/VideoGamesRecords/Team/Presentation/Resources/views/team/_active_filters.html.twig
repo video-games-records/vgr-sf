@@ -1,0 +1,32 @@
+{% trans_default_domain 'VgrTeam' %}
+{% set baseParams = app.request.query.all %}
+<div class="d-flex flex-wrap gap-2 mb-3">
+    {% if baseParams.q is defined and baseParams.q %}
+        <a href="{{ path('vgr_team_index', baseParams|merge({q: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'team.index.filter.search'|trans }}: {{ baseParams.q }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.status is defined and baseParams.status %}
+        <a href="{{ path('vgr_team_index', baseParams|merge({status: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'team.index.filter.status'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.minPlayers is defined and baseParams.minPlayers %}
+        <a href="{{ path('vgr_team_index', baseParams|merge({minPlayers: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'team.index.filter.min_players'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if (baseParams.pointsMin is defined and baseParams.pointsMin) or (baseParams.pointsMax is defined and baseParams.pointsMax) %}
+        <a href="{{ path('vgr_team_index', baseParams|merge({pointsMin: null, pointsMax: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'team.index.filter.points'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    {% if baseParams.hasBadges is defined and baseParams.hasBadges %}
+        <a href="{{ path('vgr_team_index', baseParams|merge({hasBadges: null})) }}" class="badge rounded-pill text-bg-secondary text-decoration-none">
+            {{ 'team.index.filter.has_badges'|trans }} <i class="bi bi-x"></i>
+        </a>
+    {% endif %}
+    <a href="{{ path('vgr_team_index', {sort: currentSort, order: currentOrder}) }}" class="badge rounded-pill text-bg-danger text-decoration-none">
+        {{ 'team.index.filter.reset'|trans }} <i class="bi bi-x-circle"></i>
+    </a>
+</div>

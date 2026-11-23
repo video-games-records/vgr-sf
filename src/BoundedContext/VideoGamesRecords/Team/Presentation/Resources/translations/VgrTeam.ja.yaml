@@ -16,6 +16,22 @@ team:
         column_players: 'プレイヤー'
         showing_results: '%total%件中%start%〜%end%件を表示'
         no_teams: 'チームが見つかりません'
+        no_teams_hint: 'フィルターを調整するかリセットしてみてください。'
+        filter:
+            title: 'フィルター'
+            search: '検索'
+            search_placeholder: 'チーム名またはタグで検索...'
+            status: 'ステータス'
+            all_statuses: 'すべてのステータス'
+            status_open: '募集中'
+            status_closed: '非募集'
+            min_players: '最小人数'
+            points: 'ポイント'
+            points_min: '最小ポイント'
+            points_max: '最大ポイント'
+            has_badges: 'マスターバッジ保有'
+            apply: 'フィルターを適用'
+            reset: 'フィルターをリセット'
     profile:
         title: 'チームプロフィール'
         header:
