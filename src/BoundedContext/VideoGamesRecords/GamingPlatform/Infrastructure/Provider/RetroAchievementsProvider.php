@@ -77,8 +77,9 @@ class RetroAchievementsProvider implements PlatformProviderInterface
                 $recentGames[] = new RecentGame(
                     appId: (int) ($game['GameID'] ?? 0),
                     name: $game['Title'] ?? '',
-                    playtimeForeverMinutes: 0,
-                    playtime2WeeksMinutes: 0,
+                    // RetroAchievements tracks achievement progress, not playtime.
+                    playtimeForeverMinutes: null,
+                    playtime2WeeksMinutes: null,
                     iconUrl: isset($game['ImageIcon']) ? self::MEDIA_BASE_URL . $game['ImageIcon'] : '',
                 );
             }

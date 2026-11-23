@@ -21,8 +21,10 @@ class XboxProvider implements PlatformProviderInterface
     private const string XBL_AUTH_URL = 'https://user.auth.xboxlive.com/user/authenticate';
     private const string XSTS_AUTH_URL = 'https://xsts.auth.xboxlive.com/xsts/authorize';
     private const string PROFILE_URL = 'https://profile.xboxlive.com/users/me/profile/settings';
-    private const string TITLES_URL = 'https://achievements.xboxlive.com/users/xuid(%s)/history/titles?maxItems=25';
+    private const string TITLES_URL = 'https://achievements.xboxlive.com/users/xuid(%s)/history/titles?maxItems=1000';
     private const int RECENT_GAMES_LIMIT = 5;
+    /** titleType values that represent actual games (as opposed to apps like "LiveApp"). */
+    private const array GAME_TITLE_TYPES = ['Game', 'DGame'];
 
     public function __construct(
         private readonly HttpClientInterface $httpClient,
@@ -235,12 +237,15 @@ class XboxProvider implements PlatformProviderInterface
 
             $titles = array_filter(
                 $response->toArray()['titles'] ?? [],
-                static fn(array $t): bool => ($t['titleType'] ?? '') === 'Game',
+                static fn(array $t): bool => in_array($t['titleType'] ?? '', self::GAME_TITLE_TYPES, true),
             );
 
+            // The API returns titles in no particular order, so the full list must be
+            // sorted by recency ourselves. "lastUnlock" (last achievement earned) is the
+            // only recency signal this endpoint exposes — there is no last-played-session stat.
             usort($titles, static function (array $a, array $b): int {
-                $dateA = $a['achievement']['lastTitleGameplayTime'] ?? $a['lastUnlockTime'] ?? '';
-                $dateB = $b['achievement']['lastTitleGameplayTime'] ?? $b['lastUnlockTime'] ?? '';
+                $dateA = $a['lastUnlock'] ?? '';
+                $dateB = $b['lastUnlock'] ?? '';
 
                 return strcmp($dateB, $dateA);
             });
@@ -250,8 +255,9 @@ class XboxProvider implements PlatformProviderInterface
                 $recentGames[] = new RecentGame(
                     appId: 0,
                     name: $title['name'],
-                    playtimeForeverMinutes: 0,
-                    playtime2WeeksMinutes: 0,
+                    // Xbox Live has no title history stat for playtime (unlike Steam's playtime_forever).
+                    playtimeForeverMinutes: null,
+                    playtime2WeeksMinutes: null,
                     iconUrl: $title['displayImage'] ?? '',
                 );
             }

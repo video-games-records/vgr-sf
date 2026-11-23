@@ -39,12 +39,14 @@
                                      width="24" height="24" class="rounded-1">
                             {% endif %}
                             <span class="small flex-grow-1 text-truncate" title="{{ game.name }}">{{ game.name }}</span>
-                            <span class="text-muted small text-nowrap">
-                                {{ game.playtimeForeverHours }}h
-                                {% if game.playtime2WeeksMinutes > 0 %}
-                                    <span class="text-success">(+{{ game.playtime2WeeksHours }}h)</span>
-                                {% endif %}
-                            </span>
+                            {% if game.hasPlaytimeData() %}
+                                <span class="text-muted small text-nowrap">
+                                    {{ game.playtimeForeverHours }}h
+                                    {% if game.playtime2WeeksMinutes > 0 %}
+                                        <span class="text-success">(+{{ game.playtime2WeeksHours }}h)</span>
+                                    {% endif %}
+                                </span>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>

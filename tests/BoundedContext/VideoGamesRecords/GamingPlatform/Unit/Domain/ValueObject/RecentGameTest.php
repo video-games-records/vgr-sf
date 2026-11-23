@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class RecentGameTest extends TestCase
 {
-    private function makeGame(int $playtimeForever, int $playtime2Weeks): RecentGame
+    private function makeGame(?int $playtimeForever, ?int $playtime2Weeks): RecentGame
     {
         return new RecentGame(
             appId: 12345,
@@ -55,6 +55,30 @@ class RecentGameTest extends TestCase
         // 100 minutes = 1.666... → rounded to 1.7
         $game = $this->makeGame(0, 100);
         $this->assertSame(1.7, $game->getPlaytime2WeeksHours());
+    }
+
+    public function testHasPlaytimeDataReturnsTrueWhenMinutesProvided(): void
+    {
+        $game = $this->makeGame(125, 0);
+        $this->assertTrue($game->hasPlaytimeData());
+    }
+
+    public function testHasPlaytimeDataReturnsFalseWhenNull(): void
+    {
+        $game = $this->makeGame(null, null);
+        $this->assertFalse($game->hasPlaytimeData());
+    }
+
+    public function testGetPlaytimeForeverHoursReturnsNullWhenDataUnavailable(): void
+    {
+        $game = $this->makeGame(null, null);
+        $this->assertNull($game->getPlaytimeForeverHours());
+    }
+
+    public function testGetPlaytime2WeeksHoursReturnsNullWhenDataUnavailable(): void
+    {
+        $game = $this->makeGame(null, null);
+        $this->assertNull($game->getPlaytime2WeeksHours());
     }
 
     public function testConstructorStoresProperties(): void
