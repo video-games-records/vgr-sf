@@ -57,60 +57,14 @@ src/
 
 ## Exemples de Composants
 
-### Contexte User
-```php
-// Domain Layer
-src/BoundedContext/User/Domain/Entity/User.php
-src/BoundedContext/User/Domain/Entity/SecurityEvent.php
+Chaque couche garde le namespace du contexte, par exemple pour `User` :
+`Domain/Entity/User.php`, `Infrastructure/Doctrine/Repository/UserRepository.php`,
+`Application/Service/UserRegistrationService.php`, `Presentation/Admin/UserAdmin.php`.
+Le SharedKernel suit le même schéma sans préfixe de contexte
+(ex. `SharedKernel/Domain/Security/SecurityEventTypeEnum.php`).
 
-// Infrastructure Layer  
-src/BoundedContext/User/Infrastructure/Doctrine/Repository/UserRepository.php
-src/BoundedContext/User/Infrastructure/Admin/Extension/SecurityEventStatisticsExtension.php
-
-// Application Layer
-src/BoundedContext/User/Application/Service/UserRegistrationService.php
-
-// Presentation Layer
-src/BoundedContext/User/Presentation/Admin/UserAdmin.php
-src/BoundedContext/User/Presentation/Web/Controller/Admin/SecurityEventStatisticsController.php
-src/BoundedContext/User/Resources/views/admin/security_statistics.html.twig
-```
-
-### SharedKernel
-```php
-// Domaine partagé
-src/SharedKernel/Domain/Security/SecurityEventTypeEnum.php
-
-// Infrastructure partagée
-src/SharedKernel/Presentation/Web/Controller/LogReaderController.php
-src/SharedKernel/Resources/views/base.html.twig
-src/SharedKernel/Resources/views/admin/layout.html.twig
-```
-
-### Contexte VideoGamesRecords.Igdb
-```php
-// Domain Layer - Entités métier IGDB
-src/BoundedContext/VideoGamesRecords/Igdb/Domain/Entity/Game.php
-src/BoundedContext/VideoGamesRecords/Igdb/Domain/Entity/Genre.php
-src/BoundedContext/VideoGamesRecords/Igdb/Domain/Entity/Platform.php
-src/BoundedContext/VideoGamesRecords/Igdb/Domain/Entity/PlatformType.php
-src/BoundedContext/VideoGamesRecords/Igdb/Domain/Entity/PlatformLogo.php
-
-// Application Layer - Services et commandes d'import
-src/BoundedContext/VideoGamesRecords/Igdb/Application/Service/IgdbImportService.php
-src/BoundedContext/VideoGamesRecords/Igdb/Application/Command/ImportGamesCommand.php
-src/BoundedContext/VideoGamesRecords/Igdb/Application/Command/ImportGenresCommand.php
-
-// Infrastructure Layer - Client IGDB et repositories
-src/BoundedContext/VideoGamesRecords/Igdb/Infrastructure/Client/IgdbClient.php
-src/BoundedContext/VideoGamesRecords/Igdb/Infrastructure/Doctrine/Repository/GameRepository.php
-src/BoundedContext/VideoGamesRecords/Igdb/Infrastructure/Client/Endpoint/PlatformTypeEndpoint.php
-
-// Presentation Layer - Interfaces admin (lecture seule)
-src/BoundedContext/VideoGamesRecords/Igdb/Presentation/Admin/GameAdmin.php
-src/BoundedContext/VideoGamesRecords/Igdb/Presentation/Admin/GenreAdmin.php
-src/BoundedContext/VideoGamesRecords/Igdb/Presentation/Admin/PlatformAdmin.php
-```
+Voir la structure complète ci-dessus et les CLAUDE.md par contexte (section
+"Documentation par Contexte") pour le détail de chaque bounded context.
 
 ## Configuration Twig
 
@@ -272,7 +226,7 @@ src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/translations/
    - `pt_BR` : Traduction portugaise (Brésil)
    - `zh_CN` : Traduction chinoise (Simplifié)
 
-### Exemple Complet
+### Exemple
 
 ```yaml
 # VgrCore.en.yml
@@ -280,49 +234,11 @@ player:
   profile:
     tabs:
       videos: Videos
-
-# VgrCore.fr.yml  
-player:
-  profile:
-    tabs:
-      videos: Vidéos
-
-# VgrCore.de.yml
-player:
-  profile:
-    tabs:
-      videos: Videos
-
-# VgrCore.es.yml
-player:
-  profile:
-    tabs:
-      videos: Videos
-
-# VgrCore.it.yml
-player:
-  profile:
-    tabs:
-      videos: Video
-
-# VgrCore.ja.yml
-player:
-  profile:
-    tabs:
-      videos: 動画
-
-# VgrCore.pt_BR.yml
-player:
-  profile:
-    tabs:
-      videos: Vídeos
-
-# VgrCore.zh_CN.yml
-player:
-  profile:
-    tabs:
-      videos: 视频
 ```
+
+Répliquer la même clé avec sa traduction dans les 7 autres fichiers
+(`.fr.yml`, `.de.yml`, `.es.yml`, `.it.yml`, `.ja.yml`, `.pt_BR.yml`, `.zh_CN.yml`)
+— voir la checklist ci-dessous.
 
 ### Routes Localisées
 
@@ -363,56 +279,15 @@ Le projet utilise **Bootstrap 5** comme framework CSS. Toutes les interfaces doi
 
 #### ❌ À NE PAS FAIRE
 
-1. **NE PAS** ajouter de CSS inline dans les templates Twig
-   ```twig
-   {# MAUVAIS #}
-   <div style="color: red; margin: 20px;">Contenu</div>
-   ```
-
-2. **NE PAS** ajouter de balises `<style>` dans les templates
-   ```twig
-   {# MAUVAIS #}
-   {% block stylesheets %}
-       <style>
-           .my-class { color: blue; }
-       </style>
-   {% endblock %}
-   ```
-
-3. **NE PAS** créer de fichiers SCSS personnalisés pour des pages spécifiques (sauf exception validée)
-   ```scss
-   // MAUVAIS - Éviter de créer des fichiers comme _register.scss, _login.scss, etc.
-   ```
+- CSS inline dans les templates Twig (ex. `style="color: red;"`)
+- Balises `<style>` dans les templates (ex. dans `{% block stylesheets %}`)
+- Fichiers SCSS personnalisés par page sans exception validée (ex. `_register.scss`, `_login.scss`)
 
 #### ✅ À FAIRE
 
-1. **Utiliser les classes Bootstrap** pour tous les besoins de styling
-   ```twig
-   {# BON #}
-   <div class="text-danger mt-4">Contenu</div>
-   ```
-
-2. **Utiliser les composants Bootstrap** (cards, forms, alerts, etc.)
-   ```twig
-   {# BON #}
-   <div class="card shadow-sm">
-       <div class="card-body p-4">
-           <h1 class="card-title text-center mb-4">Title</h1>
-       </div>
-   </div>
-   ```
-
-3. **Utiliser les utilitaires Bootstrap** pour le spacing, les couleurs, la typographie, etc.
-   ```twig
-   {# BON #}
-   <div class="container py-5">
-       <div class="row justify-content-center">
-           <div class="col-md-6 col-lg-5">
-               <!-- Contenu -->
-           </div>
-       </div>
-   </div>
-   ```
+- Classes Bootstrap pour le styling (ex. `class="text-danger mt-4"`)
+- Composants Bootstrap (cards, forms, alerts, etc. — ex. `class="card shadow-sm"`)
+- Utilitaires Bootstrap pour spacing/couleurs/typographie (ex. `class="container py-5"`, `class="row justify-content-center"`)
 
 ### Ressources Bootstrap
 
