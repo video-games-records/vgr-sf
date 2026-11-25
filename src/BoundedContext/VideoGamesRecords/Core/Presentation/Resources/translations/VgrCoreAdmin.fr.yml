@@ -87,6 +87,18 @@ game:
     disabled: Désactivé
   action:
     upload_picture: Uploader une image
+  send_message:
+    button: Envoyer un message aux joueurs
+    form:
+      subject: Sujet
+      message: Message
+      submit: Envoyer
+    history:
+      title: Messages envoyés aux joueurs
+      sender: Envoyé par
+      subject: Sujet
+      recipients: Destinataires
+      date: Date
 
 # Section labels for forms
 section:

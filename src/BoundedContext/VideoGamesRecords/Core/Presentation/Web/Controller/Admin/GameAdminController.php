@@ -23,10 +23,13 @@ use App\SharedKernel\Infrastructure\FileSystem\Manager\PictureUploadManager;
 use App\SharedKernel\Presentation\Form\DefaultForm;
 use App\SharedKernel\Presentation\Form\PictureUploadType;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\ImportCsv;
+use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\SendGroupMessageType;
 use App\BoundedContext\VideoGamesRecords\Core\Presentation\Form\VideoProofOnly;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Manager\GameManager;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Dispatcher\RankingUpdateDispatcher;
 use App\BoundedContext\VideoGamesRecords\Core\Application\Message\Game\CopyGame;
+use App\BoundedContext\VideoGamesRecords\Core\Application\Service\SendGameGroupMessageService;
+use App\BoundedContext\User\Domain\Entity\User;
 
 /**
  * @extends AbstractCRUDController<Game>
@@ -37,7 +40,8 @@ class GameAdminController extends AbstractCRUDController
         private readonly GameManager $gameManager,
         private readonly RankingUpdateDispatcher $rankingUpdateDispatcher,
         private readonly MessageBusInterface $bus,
-        private readonly PictureUploadManager $pictureUploadManager
+        private readonly PictureUploadManager $pictureUploadManager,
+        private readonly SendGameGroupMessageService $sendGameGroupMessageService,
     ) {
     }
 
@@ -228,6 +232,56 @@ class GameAdminController extends AbstractCRUDController
                 'object' => $game,
                 'form' => $form,
                 'title' => $game->getName(),
+                'action' => 'edit'
+            ]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function sendMessageAction(int $id, Request $request): Response
+    {
+        /** @var Game $game */
+        $game = $this->admin->getSubject();
+
+        if (!$this->isGranted(self::ROLE_GAME_SEND_MESSAGE)) {
+            $this->addFlash('sonata_flash_error', 'You are not allowed to send a message to this group.');
+            return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
+        }
+
+        $form = $this->createForm(SendGroupMessageType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User $admin */
+            $admin = $this->getUser();
+            /** @var array<string, mixed> $data */
+            $data = $form->getData();
+
+            $recipientCount = $this->sendGameGroupMessageService->sendToPlayersOfGame(
+                $game,
+                $admin,
+                (string) $data['subject'],
+                (string) $data['message']
+            );
+
+            $this->addFlash(
+                'sonata_flash_success',
+                sprintf('Message sent to %d player(s).', $recipientCount)
+            );
+            return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
+        }
+
+        return $this->render(
+            '@VideoGamesRecordsCore/admin/form/form.default.html.twig',
+            [
+                'base_template' => '@SonataAdmin/standard_layout.html.twig',
+                'admin' => $this->admin,
+                'object' => $game,
+                'form' => $form,
+                'title' => 'Send message => ' . $game->getName(),
                 'action' => 'edit'
             ]
         );

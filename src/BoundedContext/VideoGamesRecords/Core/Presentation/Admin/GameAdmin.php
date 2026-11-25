@@ -117,7 +117,8 @@ class GameAdmin extends BaseAdmin
             ->add('maj', $this->getRouterIdParameter() . '/maj')
             ->add('set-video-proof-only', $this->getRouterIdParameter() . '/set-video-proof-only')
             ->add('import-csv', $this->getRouterIdParameter() . '/import-csv')
-            ->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture');
+            ->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture')
+            ->add('send-message', $this->getRouterIdParameter() . '/send-message');
     }
 
     public function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
@@ -137,6 +138,11 @@ class GameAdmin extends BaseAdmin
             $buttonList['add-group'] = [
                 'template' => '@VideoGamesRecordsCore/admin/object/game/btn.add_group.html.twig',
             ];
+            if ($this->getSecurity()->isGranted(self::ROLE_GAME_SEND_MESSAGE)) {
+                $buttonList['send-message'] = [
+                    'template' => '@VideoGamesRecordsCore/admin/action_button/btn.send_message.html.twig',
+                ];
+            }
         }
         return $buttonList;
     }

@@ -6,6 +6,7 @@ namespace App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repo
 
 use Doctrine\Persistence\ManagerRegistry;
 use App\SharedKernel\Infrastructure\Doctrine\Repository\DefaultRepository;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\PlayerGame;
 
@@ -110,6 +111,25 @@ class PlayerGameRepository extends DefaultRepository
         }
 
         return $map;
+    }
+
+    /**
+     * @return Player[]
+     */
+    public function findPlayersByGame(Game $game): array
+    {
+        $playerGames = $this->createQueryBuilder('pg')
+            ->addSelect('p')
+            ->join('pg.player', 'p')
+            ->where('pg.game = :game')
+            ->setParameter('game', $game)
+            ->getQuery()
+            ->getResult();
+
+        return array_map(
+            static fn (PlayerGame $playerGame): Player => $playerGame->getPlayer(),
+            $playerGames
+        );
     }
 
     public function countByPlayer(Player $player): int

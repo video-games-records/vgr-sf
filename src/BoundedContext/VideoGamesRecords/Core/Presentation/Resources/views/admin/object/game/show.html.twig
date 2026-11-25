@@ -396,6 +396,50 @@
         {% endif %}
     {% endif %}
 
+    {# Historique des messages envoyés aux joueurs #}
+    {% set broadcastHistory = vgr_game_message_broadcast_history(object) %}
+    {% if broadcastHistory|length > 0 %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default collapsed-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-envelope"></i> {% trans %}game.send_message.history.title{% endtrans %}
+                        <span class="badge badge-default">{{ broadcastHistory|length }}</span>
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans %}game.send_message.history.date{% endtrans %}</th>
+                                <th>{% trans %}game.send_message.history.sender{% endtrans %}</th>
+                                <th>{% trans %}game.send_message.history.subject{% endtrans %}</th>
+                                <th>{% trans %}game.send_message.history.recipients{% endtrans %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in broadcastHistory %}
+                            <tr>
+                                <td>{{ entry.createdAt|user_datetime('d/m/Y H:i') }}</td>
+                                <td>{{ entry.senderUsername }}</td>
+                                <td>{{ entry.subject }}</td>
+                                <td>{{ entry.recipientCount }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     {# Historique des modifications (audit) #}
     {% set auditEntries = vgr_audit_history('App\\BoundedContext\\VideoGamesRecords\\Core\\Domain\\Entity\\Game', object.getId()) %}
     {% if auditEntries|length > 0 %}

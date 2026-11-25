@@ -29,3 +29,19 @@ ALTER TABLE vgr_platform
 -- Feature: remove-game-status-created
 UPDATE vgr_game SET status = 'ADD_SCORE' WHERE status = 'CREATED';
 ALTER TABLE vgr_game ALTER COLUMN status SET DEFAULT 'ADD_SCORE';
+
+-- Feature: admin-send-group-messages
+-- group_type/group_id generic pair (no FK: polymorphic target, same convention as Player.user_id)
+-- so adding a new group type later (e.g. Team) does not require a new table.
+CREATE TABLE vgr_group_message_broadcast (
+    id               INT AUTO_INCREMENT PRIMARY KEY,
+    group_type       VARCHAR(20) NOT NULL,
+    group_id         INT NOT NULL,
+    sender_user_id   INT NOT NULL,
+    subject          VARCHAR(255) NOT NULL,
+    message          LONGTEXT NOT NULL,
+    recipient_count  INT NOT NULL,
+    created_at       DATETIME NOT NULL,
+    updated_at       DATETIME NOT NULL,
+    INDEX idx_group_message_broadcast_group (group_type, group_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
