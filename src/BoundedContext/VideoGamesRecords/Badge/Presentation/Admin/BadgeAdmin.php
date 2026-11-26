@@ -32,6 +32,7 @@ class BadgeAdmin extends BaseAdmin
     {
         $collection->remove('export');
         $collection->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture');
+        $collection->add('upload-picture-ajax', $this->getRouterIdParameter() . '/upload-picture-ajax');
     }
 
     public function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
@@ -83,7 +84,14 @@ class BadgeAdmin extends BaseAdmin
     {
         $list->addIdentifier('id', null, ['label' => 'badge.list.id'])
             ->add('type', null, ['label' => 'badge.list.type'])
-            ->add('picture', 'text', ['label' => 'badge.list.picture', 'editable' => true])
+            ->add(
+                'picture',
+                null,
+                [
+                    'label' => 'badge.list.picture',
+                    'template' => '@VideoGamesRecordsBadge/admin/list/badge_picture_upload.html.twig',
+                ]
+            )
             ->add('value', null, ['label' => 'badge.list.value'])
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => []]]);
     }

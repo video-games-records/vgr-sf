@@ -416,6 +416,7 @@ class GameAdmin extends BaseAdmin
                 null,
                 [
                     'label' => 'game.list.badge',
+                    'template' => '@VideoGamesRecordsCore/admin/list/game_badge_upload.html.twig',
                 ]
             )
             ->add(

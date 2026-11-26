@@ -446,6 +446,8 @@ badge:
     id: ID
     type: Type
     picture: Picture
+    picture_drop_hint: Drop image here
+    picture_upload_success: Picture uploaded successfully
     value: Value
   show:
     id: ID

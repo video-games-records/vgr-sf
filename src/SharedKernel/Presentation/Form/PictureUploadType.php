@@ -32,7 +32,7 @@ class PictureUploadType extends AbstractType
                         message: 'picture_upload.form.error.file_required',
                     ),
                     new Assert\File(
-                        maxSize: '5M',
+                        maxSize: PictureUploadManager::MAX_FILE_SIZE,
                         mimeTypes: $this->pictureUploadManager->getAllowedMimeTypes(),
                         mimeTypesMessage: 'picture_upload.form.error.mime_type',
                         maxSizeMessage: 'picture_upload.form.error.max_size',

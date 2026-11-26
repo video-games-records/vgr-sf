@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PictureUploadManager
 {
+    public const int MAX_FILE_SIZE = 5_000_000;
+
     /** @var array<string, string> */
     private array $extensions = [
         'png' => 'image/png',
@@ -31,6 +33,28 @@ class PictureUploadManager
     public function getAllowedMimeTypes(): array
     {
         return array_values($this->extensions);
+    }
+
+    /**
+     * Validates size/mime-type constraints outside of a Symfony Form (e.g. for an ajax endpoint).
+     * Returns an error message, or null if the file is valid.
+     */
+    public function validate(UploadedFile $file): ?string
+    {
+        if (!$file->isValid()) {
+            return 'Invalid upload.';
+        }
+
+        $size = $file->getSize();
+        if ($size === false || $size > self::MAX_FILE_SIZE) {
+            return 'File is too large (5MB max).';
+        }
+
+        if (!in_array($file->getMimeType(), $this->getAllowedMimeTypes(), true)) {
+            return 'Invalid file type.';
+        }
+
+        return null;
     }
 
     /**

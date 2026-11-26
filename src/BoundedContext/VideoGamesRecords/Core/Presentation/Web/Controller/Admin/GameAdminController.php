@@ -37,8 +37,6 @@ use App\BoundedContext\User\Domain\Entity\User;
  */
 class GameAdminController extends AbstractCRUDController
 {
-    private const int MAX_PICTURE_SIZE = 5 * 1024 * 1024;
-
     public function __construct(
         private readonly GameManager $gameManager,
         private readonly RankingUpdateDispatcher $rankingUpdateDispatcher,
@@ -169,8 +167,11 @@ class GameAdminController extends AbstractCRUDController
 
     public function uploadPictureAjaxAction(int $id, Request $request): JsonResponse
     {
-        /** @var Game $game */
-        $game = $this->admin->getSubject();
+        try {
+            $game = $this->admin->getSubject();
+        } catch (\LogicException) {
+            return new JsonResponse(['success' => false, 'message' => 'Game not found.'], Response::HTTP_NOT_FOUND);
+        }
 
         if (!$this->admin->hasAccess('edit', $game)) {
             return new JsonResponse(['success' => false, 'message' => 'Access denied.'], Response::HTTP_FORBIDDEN);
@@ -181,17 +182,13 @@ class GameAdminController extends AbstractCRUDController
         }
 
         $file = $request->files->get('picture');
-        if (!$file instanceof UploadedFile || !$file->isValid()) {
+        if (!$file instanceof UploadedFile) {
             return new JsonResponse(['success' => false, 'message' => 'No file provided.'], Response::HTTP_BAD_REQUEST);
         }
 
-        $size = $file->getSize();
-        if ($size === false || $size > self::MAX_PICTURE_SIZE) {
-            return new JsonResponse(['success' => false, 'message' => 'File is too large (5MB max).'], Response::HTTP_BAD_REQUEST);
-        }
-
-        if (!in_array($file->getMimeType(), $this->pictureUploadManager->getAllowedMimeTypes(), true)) {
-            return new JsonResponse(['success' => false, 'message' => 'Invalid file type.'], Response::HTTP_BAD_REQUEST);
+        $error = $this->pictureUploadManager->validate($file);
+        if ($error !== null) {
+            return new JsonResponse(['success' => false, 'message' => $error], Response::HTTP_BAD_REQUEST);
         }
 
         $result = $this->processPictureUpload($game, $file);
