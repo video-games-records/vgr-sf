@@ -118,6 +118,7 @@ class GameAdmin extends BaseAdmin
             ->add('set-video-proof-only', $this->getRouterIdParameter() . '/set-video-proof-only')
             ->add('import-csv', $this->getRouterIdParameter() . '/import-csv')
             ->add('upload-picture', $this->getRouterIdParameter() . '/upload-picture')
+            ->add('upload-picture-ajax', $this->getRouterIdParameter() . '/upload-picture-ajax')
             ->add('send-message', $this->getRouterIdParameter() . '/send-message');
     }
 
@@ -407,7 +408,7 @@ class GameAdmin extends BaseAdmin
                 null,
                 [
                     'label' => 'game.list.picture',
-                    'editable' => true
+                    'template' => '@VideoGamesRecordsCore/admin/list/game_picture_upload.html.twig',
                 ]
             )
             ->add(

@@ -9,6 +9,7 @@ use App\SharedKernel\Presentation\Web\Controller\Admin\AbstractCRUDController;
 use Doctrine\ORM\Exception\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,8 @@ use App\BoundedContext\User\Domain\Entity\User;
  */
 class GameAdminController extends AbstractCRUDController
 {
+    private const int MAX_PICTURE_SIZE = 5 * 1024 * 1024;
+
     public function __construct(
         private readonly GameManager $gameManager,
         private readonly RankingUpdateDispatcher $rankingUpdateDispatcher,
@@ -141,12 +144,11 @@ class GameAdminController extends AbstractCRUDController
             /** @var UploadedFile $file */
             $file = $form->get('picture')->getData();
 
-            try {
-                $filename = $this->pictureUploadManager->upload($file, 'game');
-                $this->gameManager->updatePicture($game, $filename);
+            $result = $this->processPictureUpload($game, $file);
+            if ($result['success']) {
                 $this->addFlash('sonata_flash_success', 'Picture uploaded successfully');
-            } catch (PictureAlreadyExistsException $e) {
-                $this->addFlash('sonata_flash_error', $e->getMessage());
+            } else {
+                $this->addFlash('sonata_flash_error', $result['message']);
             }
 
             return new RedirectResponse($this->admin->generateUrl('show', ['id' => $game->getId()]));
@@ -163,6 +165,55 @@ class GameAdminController extends AbstractCRUDController
                 'action' => 'edit'
             ]
         );
+    }
+
+    public function uploadPictureAjaxAction(int $id, Request $request): JsonResponse
+    {
+        /** @var Game $game */
+        $game = $this->admin->getSubject();
+
+        if (!$this->admin->hasAccess('edit', $game)) {
+            return new JsonResponse(['success' => false, 'message' => 'Access denied.'], Response::HTTP_FORBIDDEN);
+        }
+
+        if (!$this->isCsrfTokenValid('game_upload_picture_ajax', (string) $request->request->get('_token'))) {
+            return new JsonResponse(['success' => false, 'message' => 'Invalid CSRF token.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $file = $request->files->get('picture');
+        if (!$file instanceof UploadedFile || !$file->isValid()) {
+            return new JsonResponse(['success' => false, 'message' => 'No file provided.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $size = $file->getSize();
+        if ($size === false || $size > self::MAX_PICTURE_SIZE) {
+            return new JsonResponse(['success' => false, 'message' => 'File is too large (5MB max).'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (!in_array($file->getMimeType(), $this->pictureUploadManager->getAllowedMimeTypes(), true)) {
+            return new JsonResponse(['success' => false, 'message' => 'Invalid file type.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $result = $this->processPictureUpload($game, $file);
+
+        return new JsonResponse($result, $result['success'] ? Response::HTTP_OK : Response::HTTP_CONFLICT);
+    }
+
+    /**
+     * @return array{success: bool, filename?: string, message: string|null}
+     */
+    private function processPictureUpload(Game $game, UploadedFile $file): array
+    {
+        try {
+            $filename = $this->pictureUploadManager->upload($file, 'game');
+            $this->gameManager->updatePicture($game, $filename);
+
+            return ['success' => true, 'filename' => $filename, 'message' => null];
+        } catch (PictureAlreadyExistsException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        } catch (\Throwable) {
+            return ['success' => false, 'message' => 'Could not process the uploaded image.'];
+        }
     }
 
     /**

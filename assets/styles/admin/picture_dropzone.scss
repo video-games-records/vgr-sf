@@ -1,0 +1,62 @@
+// Exception au "Bootstrap only" : l'admin AdminLTE (Bootstrap 3) n'a pas d'utilitaire
+// de zone de dépôt de fichier, nécessaire pour l'upload drag & drop dans la liste des jeux.
+.vgr-picture-dropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 160px;
+
+    &__filename {
+        font-size: 11px;
+        word-break: break-all;
+        color: #777;
+    }
+
+    &__zone {
+        border: 2px dashed #ccc;
+        border-radius: 4px;
+        padding: 6px 4px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 11px;
+        color: #999;
+        transition: border-color 0.15s ease, background-color 0.15s ease;
+
+        &:hover {
+            border-color: #3c8dbc;
+            color: #3c8dbc;
+        }
+
+        &.is-dragover {
+            border-color: #3c8dbc;
+            background-color: #eef7fc;
+            color: #3c8dbc;
+        }
+
+        &.is-uploading {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        i {
+            display: block;
+            margin-bottom: 2px;
+        }
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__message {
+        font-size: 11px;
+
+        &.is-success {
+            color: #00a65a;
+        }
+
+        &.is-error {
+            color: #dd4b39;
+        }
+    }
+}

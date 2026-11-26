@@ -39,6 +39,8 @@ game:
     type: Type
     platforms: Plate-formes
     picture: Image
+    picture_drop_hint: Déposer une image ici
+    picture_upload_success: Image envoyée avec succès
     badge: Badge
     status: Statut
     igdb_game: Jeu IGDB

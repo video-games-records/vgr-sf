@@ -1,0 +1,22 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if admin.hasAccess('edit', object) %}
+        <div class="vgr-picture-dropzone"
+             data-vgr-picture-dropzone
+             data-upload-url="{{ admin.generateObjectUrl('upload-picture-ajax', object) }}"
+             data-csrf-token="{{ csrf_token('game_upload_picture_ajax') }}"
+             data-success-message="{{ 'game.list.picture_upload_success'|trans({}, 'VgrCoreAdmin') }}"
+        >
+            <span class="vgr-picture-dropzone__filename">{{ value ?: '—' }}</span>
+            <div class="vgr-picture-dropzone__zone">
+                <i class="fa fa-upload"></i>
+                <span class="vgr-picture-dropzone__hint">{{ 'game.list.picture_drop_hint'|trans({}, 'VgrCoreAdmin') }}</span>
+            </div>
+            <input type="file" class="vgr-picture-dropzone__input" accept="image/png,image/jpeg,image/gif" hidden>
+            <span class="vgr-picture-dropzone__message"></span>
+        </div>
+    {% else %}
+        {{ value }}
+    {% endif %}
+{% endblock %}
