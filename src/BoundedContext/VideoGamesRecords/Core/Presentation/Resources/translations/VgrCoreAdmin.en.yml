@@ -44,6 +44,7 @@ game:
     igdb_game: IGDB Game
   show:
     id: ID
+    view_on_site: View on site
     name:
       en: Name [EN]
       fr: Name [FR]

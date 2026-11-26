@@ -46,6 +46,12 @@
 
 {% block body %}
 <div class="container py-4">
+    {% if game_is_inactive_admin_preview %}
+        <div class="alert alert-warning" role="alert">
+            {{ 'game.show.inactive_admin_preview'|trans }}
+        </div>
+    {% endif %}
+
     {# Include common game header #}
     {% include '@VideoGamesRecordsCore/game/_header.html.twig' with {
         'game': game

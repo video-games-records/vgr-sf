@@ -15,6 +15,9 @@
                         </span>
                 </h3>
                 <div class="box-tools pull-right">
+                    <a href="{{ path('vgr_game_show', {'_locale': app.request.locale, 'id': object.getId(), 'slug': object.getSlug()}) }}" target="_blank" rel="noopener" class="btn btn-default btn-sm">
+                        <i class="fa fa-external-link"></i> {% trans %}game.show.view_on_site{% endtrans %}
+                    </a>
                     <span class="label label-info">ID: {{ object.getId() }}</span>
                     {% if object.getCreatedAt() %}
                         <span class="label label-default">

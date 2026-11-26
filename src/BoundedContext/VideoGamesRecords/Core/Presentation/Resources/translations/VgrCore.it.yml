@@ -1,3 +1,7 @@
+game:
+  show:
+    inactive_admin_preview: "Stai visualizzando questo gioco come amministratore. Non è ancora attivo e non è visibile agli altri giocatori."
+
 player:
   index:
     title: Giocatori

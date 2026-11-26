@@ -1,3 +1,7 @@
+game:
+  show:
+    inactive_admin_preview: "您正以管理员身份查看此游戏。该游戏尚未激活，其他玩家无法看到它。"
+
 player:
   index:
     title: 玩家

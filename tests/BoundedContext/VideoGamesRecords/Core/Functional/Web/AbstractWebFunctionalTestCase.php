@@ -41,4 +41,21 @@ abstract class AbstractWebFunctionalTestCase extends WebTestCase
 
         return $user;
     }
+
+    /**
+     * Returns the fixture admin user, with ROLE_ADMIN.
+     */
+    protected function getAdminUser(): User
+    {
+        $proxy = AdminUserStory::adminUser();
+
+        /** @var ManagerRegistry $doctrine */
+        $doctrine = self::getContainer()->get('doctrine');
+        $em = $doctrine->getManager();
+
+        /** @var User $user */
+        $user = $em->find(User::class, $proxy->getId());
+
+        return $user;
+    }
 }

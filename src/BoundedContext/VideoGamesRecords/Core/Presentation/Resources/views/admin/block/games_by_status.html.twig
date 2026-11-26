@@ -55,7 +55,7 @@
                                         {% for game in games %}
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="game-item">
-                                                    <a href="/admin/videogamesrecords/core/game/{{ game.getId }}/show" class="game-link">
+                                                    <a href="{{ path('vgrcorebundle_admin_game_show', {'id': game.getId}) }}" class="game-link">
                                                         <div class="game-info">
                                                             <div class="game-name">
                                                                 <i class="fa fa-gamepad text-primary"></i>

@@ -213,12 +213,15 @@ class GameRepository extends DefaultRepository
     {
         $column = ($locale == 'fr') ? 'libGameFr' : 'libGameEn';
 
-        $ids = $this->createQueryBuilder('g')
+        $idsQuery = $this->createQueryBuilder('g')
             ->select('g.id')
             ->where("g.$column LIKE :q")
             ->setParameter('q', '%' . $q . '%')
             ->orderBy("g.$column", 'ASC')
-            ->setMaxResults(50)
+            ->setMaxResults(50);
+        $this->onlyActive($idsQuery);
+
+        $ids = $idsQuery
             ->getQuery()
             ->getSingleColumnResult();
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Web\Controller\Game;
 
+use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\GameStatus;
 use App\BoundedContext\VideoGamesRecords\Core\Infrastructure\Doctrine\Repository\GameRepository;
 use App\BoundedContext\VideoGamesRecords\Video\Application\Service\VideoListService;
 use App\SharedKernel\Presentation\Web\Controller\AbstractLocalizedController;
@@ -28,11 +29,18 @@ class Show extends AbstractLocalizedController
             throw $this->createNotFoundException('Game not found');
         }
 
+        $isInactive = $game->getStatus() !== GameStatus::ACTIVE;
+
+        if ($isInactive && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createNotFoundException('Game not found');
+        }
+
         $videoCount = $this->videoListService->countVideosByGame($game);
 
         return $this->render('@VideoGamesRecordsCore/game/show.html.twig', [
             'game' => $game,
             'game_video_count' => $videoCount,
+            'game_is_inactive_admin_preview' => $isInactive,
         ]);
     }
 }

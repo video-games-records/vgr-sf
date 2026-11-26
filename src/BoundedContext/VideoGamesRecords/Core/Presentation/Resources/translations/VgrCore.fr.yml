@@ -33,6 +33,7 @@ game:
     meta_description: "Découvrez les records mondiaux et classements pour %game%. %nbPlayer% joueurs s'affrontent sur %nbChart% classements. Suivez vos scores et comparez-vous aux joueurs du monde entier sur Video Games Records."
     seo:
       keywords: "%game%, %game% records mondiaux, %game% classements, %game% meilleurs scores, %game% speedrun, records jeux vidéo"
+    inactive_admin_preview: "Vous consultez ce jeu en tant qu'administrateur. Il n'est pas encore actif et n'est pas visible par les autres joueurs."
     about: À propos
     groups_title: Groupes
     charts: records
