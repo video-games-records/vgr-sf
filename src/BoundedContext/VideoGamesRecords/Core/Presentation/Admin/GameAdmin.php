@@ -421,10 +421,12 @@ class GameAdmin extends BaseAdmin
             )
             ->add(
                 'status',
-                null,
+                'enum',
                 [
                     'label' => 'game.list.status',
-                    'template' => '@VideoGamesRecordsCore/admin/list/game_status.html.twig',
+                    'editable' => true,
+                    'class' => GameStatus::class,
+                    'choices' => GameStatus::getReverseStatusChoices(),
                 ]
             )
             ->add('_action', 'actions', [
