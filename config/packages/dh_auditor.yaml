@@ -14,12 +14,12 @@ dh_auditor:
                 App\BoundedContext\User\Domain\Entity\User:
                     ignored_columns:
                         - password
+                        - totpSecret
                         - lastLogin
                         - confirmationToken
                         - passwordRequestedAt
                         - nbConnexion
                         - nbForumMessage
-                        - extraData
                         - avatar
                 App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Game:
                     ignored_columns:
@@ -46,6 +46,37 @@ dh_auditor:
                         - picture
                 App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Rule:
                 App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType:
+                App\BoundedContext\User\Domain\Entity\Group:
+                App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\Proof:
+                App\BoundedContext\VideoGamesRecords\Proof\Domain\Entity\ProofRequest:
+                App\BoundedContext\VideoGamesRecords\Team\Domain\Entity\Team:
+                    ignored_columns:
+                        - logo
+                        - presentation
+                        # Computed stats / rankings (recalculated by background jobs, not meaningful changes)
+                        - nbPlayer
+                        - nbGame
+                        - nbMasterBadge
+                        - rankCup
+                        - rankMedal
+                        - rankPointBadge
+                        - pointBadge
+                        - rankPointGame
+                        - pointGame
+                        - rankPointChart
+                        - pointChart
+                        - averageChartRank
+                        - averageGameRank
+                        - chartRank0
+                        - chartRank1
+                        - chartRank2
+                        - chartRank3
+                        - chartRank4
+                        - chartRank5
+                        - gameRank0
+                        - gameRank1
+                        - gameRank2
+                        - gameRank3
                 App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player:
                     ignored_columns:
                         - avatar
