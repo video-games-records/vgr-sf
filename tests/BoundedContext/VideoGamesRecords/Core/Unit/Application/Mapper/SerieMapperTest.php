@@ -27,6 +27,7 @@ class SerieMapperTest extends TestCase
         int $nbGame = 10,
         int $nbPlayer = 50,
         int $nbTeam = 5,
+        int $nbPost = 200,
         string $slug = 'mario',
     ): Serie {
         $serie = $this->createMock(Serie::class);
@@ -38,6 +39,7 @@ class SerieMapperTest extends TestCase
         $serie->method('getNbGame')->willReturn($nbGame);
         $serie->method('getNbPlayer')->willReturn($nbPlayer);
         $serie->method('getNbTeam')->willReturn($nbTeam);
+        $serie->method('getNbPost')->willReturn($nbPost);
         $serie->method('getSlug')->willReturn($slug);
         return $serie;
     }
@@ -54,6 +56,7 @@ class SerieMapperTest extends TestCase
         $this->assertSame(10, $dto->nbGame);
         $this->assertSame(50, $dto->nbPlayer);
         $this->assertSame(5, $dto->nbTeam);
+        $this->assertSame(200, $dto->nbPost);
         $this->assertSame('mario', $dto->slug);
     }
 

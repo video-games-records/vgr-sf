@@ -165,6 +165,7 @@ serie:
     badge: Badge
     nbGame: Games Count
     nbChart: Charts Count
+    nbPost: Posts Count
   show:
     name: Name
     createdAt: Created At
@@ -172,6 +173,7 @@ serie:
     games: Games
     nbGame: Games Count
     nbChart: Charts Count
+    nbPost: Posts Count
     status: Status
     picture: Picture
     badge: Badge

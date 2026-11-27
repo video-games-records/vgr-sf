@@ -33,6 +33,7 @@ class SerieDTO
         public readonly int $nbGame,
         public readonly int $nbPlayer,
         public readonly int $nbTeam,
+        public readonly int $nbPost,
         public readonly string $slug
     ) {
     }

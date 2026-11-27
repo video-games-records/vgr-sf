@@ -20,6 +20,7 @@ class SerieMapper
             nbGame: $serie->getNbGame(),
             nbPlayer: $serie->getNbPlayer(),
             nbTeam: $serie->getNbTeam(),
+            nbPost: $serie->getNbPost(),
             slug: $serie->getSlug()
         );
     }

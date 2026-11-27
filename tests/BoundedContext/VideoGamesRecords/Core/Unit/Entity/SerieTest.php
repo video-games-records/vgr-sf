@@ -100,6 +100,18 @@ class SerieTest extends TestCase
         $this->assertSame(0, $this->serie->getNbTeam());
     }
 
+    public function testNbPostDefaultsToZero(): void
+    {
+        $this->assertSame(0, $this->serie->getNbPost());
+    }
+
+    public function testSetAndGetNbPost(): void
+    {
+        $result = $this->serie->setNbPost(5);
+        $this->assertSame(5, $this->serie->getNbPost());
+        $this->assertSame($this->serie, $result);
+    }
+
     // ------------------------------------------------------------------
     // Badge relation
     // ------------------------------------------------------------------

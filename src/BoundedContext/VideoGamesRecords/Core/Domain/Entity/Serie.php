@@ -16,6 +16,7 @@ use App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\SerieBadge;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbChartTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbGameTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPlayerTrait;
+use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbPostTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\NbTeamTrait;
 use App\BoundedContext\VideoGamesRecords\Shared\Domain\Traits\Entity\PictureTrait;
 use App\BoundedContext\VideoGamesRecords\Core\Domain\ValueObject\SerieStatus;
@@ -30,6 +31,7 @@ class Serie
     use PictureTrait;
     use NbPlayerTrait;
     use NbTeamTrait;
+    use NbPostTrait;
     use CurrentLocale;
 
     private const string DEFAULT_LOCALE = 'en';

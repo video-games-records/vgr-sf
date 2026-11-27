@@ -97,6 +97,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stat-box">
+                                <div class="stat-icon bg-red"><i class="fa fa-upload"></i></div>
+                                <div class="stat-content">
+                                    <div class="stat-number">{{ object.getNbPost() ?? 0 }}</div>
+                                    <div class="stat-label">{% trans %}serie.show.nbPost{% endtrans %}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -253,6 +262,7 @@
         .bg-purple { background-color: #605ca8; }
         .bg-green { background-color: #00a65a; }
         .bg-yellow { background-color: #f39c12; }
+        .bg-red { background-color: #dd4b39; }
     </style>
 
 {% endblock %}

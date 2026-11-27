@@ -213,6 +213,15 @@ src/BoundedContext/VideoGamesRecords/Core/Presentation/Resources/translations/
 - Suivre la même convention de nommage
 - Toujours inclure les 8 langues
 
+### ⚠️ Exception : Domaines Admin (Backoffice)
+
+Les fichiers de traduction du **backoffice Sonata Admin** (domaine `*Admin`, ex. `VgrCoreAdmin.*.yml`)
+ne suivent **pas** la règle des 8 langues : seuls `en` et `fr` existent pour ces domaines
+(ex. `VgrCoreAdmin.en.yml`, `VgrCoreAdmin.fr.yml`), car le backoffice n'est utilisé qu'en interne
+par l'équipe. La règle des 8 langues s'applique uniquement aux domaines **front public**
+(ex. `VgrCore.*.yml`). Quand tu ajoutes une clé de traduction dans un domaine `*Admin`,
+ajoute-la uniquement dans `en` et `fr`.
+
 ### Processus d'Ajout de Traduction
 
 1. **Identifier la nouvelle clé** (ex: `player.profile.tabs.videos`)

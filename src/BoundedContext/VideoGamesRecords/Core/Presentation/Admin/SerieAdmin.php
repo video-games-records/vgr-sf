@@ -161,6 +161,7 @@ class SerieAdmin extends BaseAdmin
             ->add('badge.picture', null, ['label' => 'serie.list.badge', 'editable' => true])
             ->add('nbGame', null, ['label' => 'serie.list.nbGame'])
             ->add('nbChart', null, ['label' => 'serie.list.nbChart'])
+            ->add('nbPost', null, ['label' => 'serie.list.nbPost'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
@@ -190,6 +191,7 @@ class SerieAdmin extends BaseAdmin
             ->add('games', null, ['label' => 'serie.show.games'])
             ->add('nbGame', null, ['label' => 'serie.show.nbGame'])
             ->add('nbChart', null, ['label' => 'serie.show.nbChart'])
+            ->add('nbPost', null, ['label' => 'serie.show.nbPost'])
             ->add('status', null, ['label' => 'serie.show.status'])
             ->add('picture', null, ['label' => 'serie.show.picture'])
             ->add('badge', null, ['label' => 'serie.show.badge'])

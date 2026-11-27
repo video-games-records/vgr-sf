@@ -213,6 +213,9 @@ class PlayerChartListener
         // Game
         $game = $group->getGame();
         $game->setNbPost($game->getNbPost() + 1);
+        // Serie
+        $serie = $game->getSerie();
+        $serie?->setNbPost($serie->getNbPost() + 1);
     }
 
     private function decrementeNbPost(Chart $chart): void
@@ -225,5 +228,8 @@ class PlayerChartListener
         // Game
         $game = $group->getGame();
         $game->setNbPost($game->getNbPost() - 1);
+        // Serie
+        $serie = $game->getSerie();
+        $serie?->setNbPost($serie->getNbPost() - 1);
     }
 }

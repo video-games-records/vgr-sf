@@ -42,6 +42,7 @@ dh_auditor:
                         - nbGame
                         - nbPlayer
                         - nbTeam
+                        - nbPost
                         - picture
                 App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Rule:
                 App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\ChartType:
