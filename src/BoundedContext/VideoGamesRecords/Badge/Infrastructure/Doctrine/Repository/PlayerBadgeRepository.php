@@ -295,6 +295,46 @@ class PlayerBadgeRepository extends DefaultRepository
     }
 
     /**
+     * Assigns to a player every badge of the given simple quantity-based type (Connexion, VgrChart,
+     * VgrProof, Don, ...) whose threshold is reached by $counterValue and that the player does not
+     * already hold. Idempotent: only ever adds, never revokes (these counters only increase).
+     *
+     * @return int Number of newly assigned badges
+     */
+    public function assignSimpleBadges(Player $player, BadgeType $badgeType, int $counterValue): int
+    {
+        $badges = $this->getEntityManager()->createQuery("
+            SELECT b
+            FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\Badge b
+            WHERE b.type = :badgeType
+            AND b.value <= :counterValue
+            AND b.id NOT IN (
+                SELECT IDENTITY(pb.badge)
+                FROM App\BoundedContext\VideoGamesRecords\Badge\Domain\Entity\PlayerBadge pb
+                WHERE pb.player = :player
+            )
+        ")
+            ->setParameter('badgeType', $badgeType)
+            ->setParameter('counterValue', $counterValue)
+            ->setParameter('player', $player)
+            ->getResult();
+
+        foreach ($badges as $badge) {
+            $playerBadge = new PlayerBadge();
+            $playerBadge->setPlayer($player);
+            $playerBadge->setBadge($badge);
+            $this->getEntityManager()->persist($playerBadge);
+            $badge->setNbPlayer($badge->getNbPlayer() + 1);
+        }
+
+        if (!empty($badges)) {
+            $this->getEntityManager()->flush();
+        }
+
+        return count($badges);
+    }
+
+    /**
      * @return array<array{badgeId: int, badgeValue: int, createdAt: \DateTime}>
      */
     private function getBadgesDataForPlayer(Player $player, BadgeType $badgeType): array

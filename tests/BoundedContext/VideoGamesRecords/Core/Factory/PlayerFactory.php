@@ -39,6 +39,7 @@ final class PlayerFactory extends PersistentObjectFactory
             'nbConnexion' => self::faker()->numberBetween(0, 1000),
             'boolMaj' => false,
             'hasDonate' => false,
+            'donation' => 0,
             'team' => null,
             'lastDisplayLostPosition' => null,
             'status' => self::faker()->randomElement(PlayerStatusEnum::cases()),

@@ -67,6 +67,13 @@ jobs:
                   ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
                     "cd ${{ secrets.DEPLOY_PATH }} && (rm -rf var/cache/prod || rm -rf var/cache/prod || rm -rf var/cache/prod || true) && php bin/console cache:clear && php bin/console cache:warmup"
 
+            - name: Update audit database schema
+              env:
+                  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+              run: |
+                  ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+                    "cd ${{ secrets.DEPLOY_PATH }} && php bin/console audit:schema:update --force"
+
             - name: Compile assets (production only)
               if: ${{ (inputs.environment || 'staging') == 'production' }}
               env:

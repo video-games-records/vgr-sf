@@ -1,0 +1,57 @@
+-- One-time data import: populate vgr_player.donation from legacy donation sums
+-- grouped by idUser (= vgr_player.user_id). Amounts rounded to the nearest
+-- integer euro (ROUND) since vgr_player.donation is INT.
+-- Feature: player-donation-maj-badges
+
+UPDATE vgr_player SET donation = ROUND(6.00) WHERE user_id = 1;
+UPDATE vgr_player SET donation = ROUND(420.00) WHERE user_id = 2;
+UPDATE vgr_player SET donation = ROUND(85.00) WHERE user_id = 11;
+UPDATE vgr_player SET donation = ROUND(35.00) WHERE user_id = 12;
+UPDATE vgr_player SET donation = ROUND(25.00) WHERE user_id = 17;
+UPDATE vgr_player SET donation = ROUND(74.00) WHERE user_id = 82;
+UPDATE vgr_player SET donation = ROUND(40.00) WHERE user_id = 169;
+UPDATE vgr_player SET donation = ROUND(4.00) WHERE user_id = 231;
+UPDATE vgr_player SET donation = ROUND(40.00) WHERE user_id = 291;
+UPDATE vgr_player SET donation = ROUND(34.02) WHERE user_id = 346;
+UPDATE vgr_player SET donation = ROUND(325.00) WHERE user_id = 395;
+UPDATE vgr_player SET donation = ROUND(100.00) WHERE user_id = 406;
+UPDATE vgr_player SET donation = ROUND(30.00) WHERE user_id = 552;
+UPDATE vgr_player SET donation = ROUND(20.00) WHERE user_id = 934;
+UPDATE vgr_player SET donation = ROUND(26.40) WHERE user_id = 996;
+UPDATE vgr_player SET donation = ROUND(419.00) WHERE user_id = 1132;
+UPDATE vgr_player SET donation = ROUND(8.00) WHERE user_id = 1170;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 1272;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 1362;
+UPDATE vgr_player SET donation = ROUND(55.00) WHERE user_id = 1429;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 1543;
+UPDATE vgr_player SET donation = ROUND(236.00) WHERE user_id = 1580;
+UPDATE vgr_player SET donation = ROUND(32.00) WHERE user_id = 1581;
+UPDATE vgr_player SET donation = ROUND(15.00) WHERE user_id = 1605;
+UPDATE vgr_player SET donation = ROUND(15.00) WHERE user_id = 1884;
+UPDATE vgr_player SET donation = ROUND(11.69) WHERE user_id = 2047;
+UPDATE vgr_player SET donation = ROUND(6.00) WHERE user_id = 2103;
+UPDATE vgr_player SET donation = ROUND(20.00) WHERE user_id = 2402;
+UPDATE vgr_player SET donation = ROUND(90.00) WHERE user_id = 2406;
+UPDATE vgr_player SET donation = ROUND(30.00) WHERE user_id = 2462;
+UPDATE vgr_player SET donation = ROUND(20.00) WHERE user_id = 2477;
+UPDATE vgr_player SET donation = ROUND(25.00) WHERE user_id = 2915;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 2934;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 3589;
+UPDATE vgr_player SET donation = ROUND(16.66) WHERE user_id = 3718;
+UPDATE vgr_player SET donation = ROUND(105.00) WHERE user_id = 3778;
+UPDATE vgr_player SET donation = ROUND(2.99) WHERE user_id = 3797;
+UPDATE vgr_player SET donation = ROUND(3.00) WHERE user_id = 3875;
+UPDATE vgr_player SET donation = ROUND(26.00) WHERE user_id = 3967;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 4055;
+UPDATE vgr_player SET donation = ROUND(3.00) WHERE user_id = 4363;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 4441;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 5855;
+UPDATE vgr_player SET donation = ROUND(0.06) WHERE user_id = 6081;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 6325;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 6514;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 7036;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 7364;
+UPDATE vgr_player SET donation = ROUND(30.00) WHERE user_id = 7877;
+UPDATE vgr_player SET donation = ROUND(5.00) WHERE user_id = 7942;
+UPDATE vgr_player SET donation = ROUND(19.00) WHERE user_id = 8044;
+UPDATE vgr_player SET donation = ROUND(10.00) WHERE user_id = 9548;

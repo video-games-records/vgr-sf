@@ -107,6 +107,7 @@ services:
     calls:
       - [ setTemplate, [ 'show', '@@VideoGamesRecordsCore/admin/object/player/show.html.twig' ] ]
       - [ setTranslationDomain, [ 'VgrCoreAdmin' ] ]
+      - [ setPlayerBadgeRepository, [ '@App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\PlayerBadgeRepository' ] ]
 
   # Player Chart Admin
   sonata.admin.vgr.playerchart:

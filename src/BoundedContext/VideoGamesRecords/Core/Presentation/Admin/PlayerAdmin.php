@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\BoundedContext\VideoGamesRecords\Core\Presentation\Admin;
 
+use App\BoundedContext\VideoGamesRecords\Badge\Domain\ValueObject\BadgeType;
+use App\BoundedContext\VideoGamesRecords\Badge\Infrastructure\Doctrine\Repository\PlayerBadgeRepository;
+use App\BoundedContext\VideoGamesRecords\Core\Domain\Entity\Player;
 use App\SharedKernel\Presentation\Admin\BaseAdmin;
+use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -13,13 +17,48 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\NullFilter;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PlayerAdmin extends BaseAdmin
 {
+    private PlayerBadgeRepository $playerBadgeRepository;
+
+    private ?int $originalDonation = null;
+
+    public function setPlayerBadgeRepository(PlayerBadgeRepository $playerBadgeRepository): static
+    {
+        $this->playerBadgeRepository = $playerBadgeRepository;
+        return $this;
+    }
+
     protected function generateBaseRouteName(bool $isChildAdmin = false): string
     {
         return 'vgrcorebundle_admin_player';
+    }
+
+    public function preUpdate($object): void
+    {
+        if (!$object instanceof Player) {
+            return;
+        }
+
+        /** @var EntityManager $em */
+        $em = $this->getModelManager()->getEntityManager($this->getClass());
+        $originalData = $em->getUnitOfWork()->getOriginalEntityData($object);
+        $this->originalDonation = $originalData['donation'] ?? null;
+    }
+
+    public function postUpdate($object): void
+    {
+        if (!$object instanceof Player) {
+            return;
+        }
+
+        if ($this->originalDonation !== null && $object->getDonation() > $this->originalDonation) {
+            $this->playerBadgeRepository->assignSimpleBadges($object, BadgeType::DON, $object->getDonation());
+        }
+        $this->originalDonation = null;
     }
 
     /**
@@ -62,6 +101,11 @@ class PlayerAdmin extends BaseAdmin
             ->add('hasDonate', CheckboxType::class, [
                 'label' => 'player.form.hasDonate',
                 'required' => false,
+            ])
+            ->add('donation', IntegerType::class, [
+                'label' => 'player.form.donation',
+                'required' => false,
+                'empty_data' => '0',
             ])
             ->add('team', ModelListType::class, [
                 'data_class' => null,
@@ -157,6 +201,7 @@ class PlayerAdmin extends BaseAdmin
                 ->add('nbChart', null, ['label' => 'player.show.nbChart'])
                 ->add('nbChartProven', null, ['label' => 'player.show.nbChartProven'])
                 ->add('nbChartDisabled', null, ['label' => 'player.show.nbChartDisabled'])
+                ->add('donation', null, ['label' => 'player.show.donation'])
             ->end()
             ->with('Medals', ['class' => 'col-md-6', 'label' => 'player.sections.medals'])
                 ->add('chartRank0', null, ['label' => 'player.show.chartRank0'])

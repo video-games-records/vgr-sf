@@ -124,6 +124,9 @@ class Player
     #[ORM\Column(nullable: false, options: ['default' => false])]
     private bool $hasDonate = false;
 
+    #[ORM\Column(nullable: false, options: ['default' => 0])]
+    private int $donation = 0;
+
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'players')]
     #[ORM\JoinColumn(name:'team_id', referencedColumnName:'id', nullable:true, onDelete: 'SET NULL')]
     private ?Team $team = null;
@@ -339,6 +342,17 @@ class Player
     public function setHasDonate(bool $hasDonate): static
     {
         $this->hasDonate = $hasDonate;
+        return $this;
+    }
+
+    public function getDonation(): int
+    {
+        return $this->donation;
+    }
+
+    public function setDonation(int $donation): static
+    {
+        $this->donation = $donation;
         return $this;
     }
 

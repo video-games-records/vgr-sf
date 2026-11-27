@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'vgr:badge:update-simple',
-    description: 'Assign simple quantity-based badges (Connexion, VgrChart, VgrProof) to players'
+    description: 'Assign simple quantity-based badges (Connexion, VgrChart, VgrProof, Don) to players'
 )]
 class UpdateSimpleBadgesCommand extends Command
 {
@@ -43,6 +43,7 @@ class UpdateSimpleBadgesCommand extends Command
             'Connexion' => 'nb_connexion',
             'VgrChart'  => 'nb_chart',
             'VgrProof'  => 'nb_chart_proven',
+            'Don'       => 'donation',
         ];
 
         foreach ($types as $type => $column) {

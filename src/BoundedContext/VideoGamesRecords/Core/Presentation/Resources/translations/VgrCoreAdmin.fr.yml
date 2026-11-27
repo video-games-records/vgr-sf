@@ -323,6 +323,7 @@ player:
     status: Statut
     boolMaj: Mise à jour requise
     hasDonate: A fait un don
+    donation: Don (montant)
     team: Équipe
     country: Pays
   filter:
@@ -367,6 +368,7 @@ player:
     nbChart: Nombre de records
     nbChartProven: Nombre de records prouvés
     nbChartDisabled: Nombre de records désactivés
+    donation: Don (montant)
     # Medals section
     chartRank0: Médailles d'or
     chartRank1: Médailles d'argent

@@ -33,6 +33,9 @@ ALTER TABLE vgr_game ALTER COLUMN status SET DEFAULT 'ADD_SCORE';
 -- Feature: serie-nbpost
 ALTER TABLE vgr_serie ADD COLUMN nb_post INT NOT NULL DEFAULT 0;
 
+-- Feature: player-donation-maj-badges
+ALTER TABLE vgr_player ADD COLUMN donation INT NOT NULL DEFAULT 0;
+
 -- Feature: admin-send-group-messages
 -- group_type/group_id generic pair (no FK: polymorphic target, same convention as Player.user_id)
 -- so adding a new group type later (e.g. Team) does not require a new table.

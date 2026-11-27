@@ -192,6 +192,17 @@ class PlayerTest extends TestCase
         $this->assertTrue($this->player->getHasDonate());
     }
 
+    public function testDonationDefaultsToZero(): void
+    {
+        $this->assertSame(0, $this->player->getDonation());
+    }
+
+    public function testSetAndGetDonation(): void
+    {
+        $this->player->setDonation(50);
+        $this->assertSame(50, $this->player->getDonation());
+    }
+
     public function testSetAndGetLastDisplayLostPosition(): void
     {
         $date = new DateTime('2025-06-01');

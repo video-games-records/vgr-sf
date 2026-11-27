@@ -323,6 +323,7 @@ player:
     status: Status
     boolMaj: Update Required
     hasDonate: Has Donate
+    donation: Donation
     team: Team
     country: Country
   filter:
@@ -367,6 +368,7 @@ player:
     nbChart: Charts Count
     nbChartProven: Proven Charts Count
     nbChartDisabled: Disabled Charts Count
+    donation: Donation
     # Medals section
     chartRank0: Gold Medals
     chartRank1: Silver Medals
